@@ -54,6 +54,16 @@ sequelize.define('colors', {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4
     },
+    color:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            len:{
+                args: [1, 20],
+                msg: 'Your field must have between 1 and 20 characters.'
+            }
+        }
+    },
   },
   { timestamps: false },
   );
