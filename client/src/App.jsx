@@ -1,10 +1,20 @@
 import './App.css';
+import Home from './views/home/Home';
+import Landing from './views/landing/Landing';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      <h1>Soy puebla</h1>
-    </div>
+    <Routes>
+      <Route
+        path='/'
+        element={<Landing />}
+      />
+      <Route
+        path='/home'
+        element={<Home />}
+      />
+    </Routes>
   );
 }
 
