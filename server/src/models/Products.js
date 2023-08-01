@@ -68,7 +68,7 @@ module.exports = (sequelize) => {
     },
     { timestamps: false }
   );
-  
+
   sequelize.define(
     "size",
     {
@@ -87,6 +87,50 @@ module.exports = (sequelize) => {
           },
         },
       },
+    },
+    { timestamps: false }
+  );
+  
+  sequelize.define(
+    "categories",
+    {
+        id: {
+            type: DataTypes.UUID,
+            primaryKey: true,
+            defaultValue: DataTypes.UUIDV4,
+        },
+        category: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+              len: {
+                args: [1, 20],
+                msg: "Your field must have between 1 and 20 characters.",
+              },
+            },
+        },
+    },
+    { timestamps: false }
+  );
+
+  sequelize.define(
+    "serie",
+    {
+        id: {
+            type: DataTypes.UUID,
+            primaryKey: true,
+            defaultValue: DataTypes.UUIDV4,
+        },
+        serie: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+              len: {
+                args: [1, 50],
+                msg: "Your field must have between 1 and 50 characters.",
+              },
+            },
+        },
     },
     { timestamps: false }
   );
