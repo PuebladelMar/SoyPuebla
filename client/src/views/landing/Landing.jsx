@@ -1,5 +1,5 @@
 import landing from '../../assets/images/landing.gif';
-import style from '../landing/Landig.css';
+import style from '../landing/Landing.css';
 import { NavLink } from 'react-router-dom';
 
 function Landing() {
