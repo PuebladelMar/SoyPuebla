@@ -32,21 +32,16 @@ module.exports = (sequelize) => {
           min: 0,
         },
       },
-      image: {
+      mainImage: {
         type: DataTypes.TEXT,
-      },
-      categories: {
-        type: DataTypes.ENUM("top", "calza", "medio", "buzo"),
         allowNull: false,
+      },
+      image: {
+        type: DataTypes.JSON,
       },
       sale: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-      },
-      serie: {
-        //averiguar que es "serie"
-        type: DataTypes.STRING,
-        allowNull: false,
       },
     },
     { timestamps: false }
@@ -73,6 +68,7 @@ module.exports = (sequelize) => {
     },
     { timestamps: false }
   );
+  
   sequelize.define(
     "size",
     {
