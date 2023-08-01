@@ -1,24 +1,20 @@
-import React from React;
-import './NavBar.css'
-
+import React from 'react';
+import './NavBar.css';
 
 const NavBar = () => {
-    return(
-        <div className='navbar'> 
-            <form 
-                onSubmit={''}
-            />
+  return (
+    <div className='navbar'>
+      <form onSubmit={''} />
 
-            <input
-                className='search-input'
-                type='text'
-                placeholder="Buscar"
-                onChange={''}
-            />
-            <button className='navbar-button'>Buscar</button>
+      <input
+        className='search-input'
+        type='text'
+        placeholder='Buscar'
+        onChange={''}
+      />
+      <button className='navbar-button'>Buscar</button>
+    </div>
+  );
+};
 
-        </div>
-    )
-}
-
-export default NavBar
+export default NavBar;
