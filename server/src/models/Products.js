@@ -32,7 +32,7 @@ module.exports = (sequelize) => {
           min: 0,
         },
       },
-      mainImage:{
+      mainImage: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
@@ -68,6 +68,7 @@ module.exports = (sequelize) => {
     },
     { timestamps: false }
   );
+  
   sequelize.define(
     "size",
     {
