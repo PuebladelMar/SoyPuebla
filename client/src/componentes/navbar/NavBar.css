@@ -12,7 +12,7 @@
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
-    background-color: #517f7f;
+    background-color: #b2cebf;
     color: #f2d5cf;
     font-weight: bold;
     cursor: pointer;
@@ -20,8 +20,8 @@
   }
 
   .navbar-button:hover {
-    background-color:  #b2cebf;
-    color: #f2d5cf;
+    background-color:  #f2d5cf;
+    color: #b2cebf;
   }
   
   .search-input {
@@ -30,6 +30,6 @@
     border: none;
     border-radius: 4px;
     margin-right: 5px;
-    background-color: #517f7f;
+    background-color: #b2cebf;
     color: #f2d5cf;
   }
