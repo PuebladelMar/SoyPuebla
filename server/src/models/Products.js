@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-  sequelize.define(
-    "product",
+  const Products = sequelize.define(
+    "Products",
     {
       id: {
         type: DataTypes.UUID,
@@ -47,8 +47,8 @@ module.exports = (sequelize) => {
     { timestamps: false }
   );
 
-  sequelize.define(
-    "color",
+  const Colors = sequelize.define(
+    "Colors",
     {
       id: {
         type: DataTypes.UUID,
@@ -69,8 +69,8 @@ module.exports = (sequelize) => {
     { timestamps: false }
   );
 
-  sequelize.define(
-    "size",
+  const Sizes = sequelize.define(
+    "Sizes",
     {
       id: {
         type: DataTypes.UUID,
@@ -90,48 +90,65 @@ module.exports = (sequelize) => {
     },
     { timestamps: false }
   );
-  
+
   sequelize.define(
-    "categories",
+    "Categories",
     {
-        id: {
-            type: DataTypes.UUID,
-            primaryKey: true,
-            defaultValue: DataTypes.UUIDV4,
+      id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      category: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: {
+            args: [1, 20],
+            msg: "Your field must have between 1 and 20 characters.",
+          },
         },
-        category: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-              len: {
-                args: [1, 20],
-                msg: "Your field must have between 1 and 20 characters.",
-              },
-            },
-        },
+      },
     },
     { timestamps: false }
   );
 
   sequelize.define(
-    "serie",
+    "Series",
     {
-        id: {
-            type: DataTypes.UUID,
-            primaryKey: true,
-            defaultValue: DataTypes.UUIDV4,
+      id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      serie: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: {
+            args: [1, 50],
+            msg: "Your field must have between 1 and 50 characters.",
+          },
         },
-        serie: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-              len: {
-                args: [1, 50],
-                msg: "Your field must have between 1 and 50 characters.",
-              },
-            },
-        },
+      },
     },
     { timestamps: false }
   );
+
+  const ProductColorSize = sequelize.define('ProductColorSize', {
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    stock: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        validate:{
+            min: 0
+        },
+    },
+    
+  }, { timestamps: false });
+
 };
