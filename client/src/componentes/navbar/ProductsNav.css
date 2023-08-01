@@ -1,0 +1,24 @@
+.productos-menu {
+    position: absolute;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    z-index: 1;
+    min-width: 120px;
+  }
+  
+  .productos-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .productos-menu li {
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .productos-menu li:hover {
+    background-color: #ddd;
+    cursor: pointer;
+  }
