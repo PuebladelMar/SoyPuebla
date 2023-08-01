@@ -30,13 +30,6 @@ module.exports = (sequelize) => {
             min: 0
         }
     },
-    stock:{
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-        validate:{
-            min: 0
-        }
-    },
     image:{
         type: DataTypes.TEXT
     },
@@ -54,4 +47,14 @@ module.exports = (sequelize) => {
         allowNull: false
     }
   }, {timestamps: false});
+  
+sequelize.define('colors', {
+    id:{
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4
+    },
+  },
+  { timestamps: false },
+  );
 };
