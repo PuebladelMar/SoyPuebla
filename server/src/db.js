@@ -39,17 +39,22 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Aca vendrian las relaciones
 const { Products, Colors, Sizes, Categories, Series, ProductColorSize } = sequelize.models;
 
-Products.belongsToMany(Colors, { through: ProductColorSize });
-Colors.belongsToMany(Products, { through: ProductColorSize });
+// Relación Products <-> Colors
+Products.belongsToMany(Colors, { through: ProductColorSize, foreignKey: 'ProductId' });
+Colors.belongsToMany(Products, { through: ProductColorSize, foreignKey: 'ColorId' });
 
-Products.belongsToMany(Sizes, { through: ProductColorSize });
-Sizes.belongsToMany(Products, { through: ProductColorSize });
+// Relación Products <-> Sizes
+Products.belongsToMany(Sizes, { through: ProductColorSize, foreignKey: 'ProductId' });
+Sizes.belongsToMany(Products, { through: ProductColorSize, foreignKey: 'SizeId' });
 
-Products.belongsToMany(Categories, { through: "ProductCategories"});
-Categories.belongsToMany(Products, { through: "ProductCategories"});
+// Relación Products <-> Categories
+Products.belongsToMany(Categories, { through: "ProductCategories", foreignKey: 'ProductId', otherKey: 'CategoryId' });
+Categories.belongsToMany(Products, { through: "ProductCategories", foreignKey: 'CategoryId', otherKey: 'ProductId' });
 
-Products.belongsToMany(Series, { through: "ProductSeries"});
-Series.belongsToMany(Products, { through: "ProductSeries"});
+// Relación Products <-> Series
+Products.belongsToMany(Series, { through: "ProductSeries", foreignKey: 'ProductId' });
+Series.belongsToMany(Products, { through: "ProductSeries", foreignKey: 'SeriesId' });
+
 
 module.exports = {
    ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

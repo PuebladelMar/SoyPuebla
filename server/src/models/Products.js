@@ -11,13 +11,13 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        set(value) {
-          const words = value.toLowerCase().split(" ");
-          const transformWords = words.map((word) =>
-            (word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
-          );
-          this.setDataValue("name", transformWords);
-        },
+        // set(value) {
+        //   const words = value.toLowerCase().split(" ");
+        //   const transformWords = words.map((word) =>
+        //     (word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
+        //   );
+        //   this.setDataValue("name", transformWords);
+        // },
         validate: {
           len: {
             args: [1, 50],
@@ -54,6 +54,7 @@ module.exports = (sequelize) => {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
+        unique: false,
       },
       name: {
         type: DataTypes.STRING,
