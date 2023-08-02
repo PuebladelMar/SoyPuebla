@@ -4,7 +4,7 @@ const createPostCategoryDB = async (category) => {
  
     // Create categoryx
     const [newCategory, created] = await Categories.findOrCreate({where: {category}});
-    if(!created)throw Error ("existing")
+    if(!created)throw Error ("category already existing")
   
 
     return newCategory
