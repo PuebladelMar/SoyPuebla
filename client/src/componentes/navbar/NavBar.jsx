@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ProductsNav from './ProductsNav';
+import { NavLink } from 'react-router-dom';
 import './NavBar.css';
 
 const NavBar = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleMouseEnter = () => {
+    setShowMenu(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowMenu(false);
+  };
+
   return (
     <div className='navbar'>
       <form onSubmit={''} />
@@ -9,10 +21,24 @@ const NavBar = () => {
       <input
         className='search-input'
         type='text'
-        placeholder='Buscar'
+        placeholder='BUSCAR'
         onChange={''}
       />
-      <button className='navbar-button'>Buscar</button>
+      <button className='navbar-button'>BUSCAR</button>
+      <button
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className='navbar-button-products'
+      >
+        PRODUCTOS {showMenu && <ProductsNav />}
+      </button>
+      <NavLink to='/login'>
+        <button className='navbar-button'>REGISTRATE</button>
+      </NavLink>
+
+      <NavLink to='/cart'>
+        <button className='navbar-button'>CARRITO</button>
+      </NavLink>
     </div>
   );
 };
