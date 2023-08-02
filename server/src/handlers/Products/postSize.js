@@ -6,7 +6,7 @@ const postSize = async(req,res)=>{
         const newSize = await controllPostSize(size);
         return res.status(201).json(newSize);
     } catch (error) {
-        res.status(500).json(error.message);
+        res.status(400).json(error.message);
     };
 };
 
