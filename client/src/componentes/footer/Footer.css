@@ -1,0 +1,27 @@
+
+footer {
+    background-color: #517f7f;
+    color: #f2d5cf;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .social-icons a {
+    margin-right: 20px;
+  }
+
+  .social-icons img {
+    width: 50px; /* Tamaño deseado del ancho de la imagen */
+    height: 50px; /* Tamaño deseado del alto de la imagen */
+  }
+
+  .footer-links a {
+    margin-right: 15px; /* Margen derecho entre enlaces */
+    margin-bottom: 10px; /* Margen inferior entre enlaces */
+    color:#f2d5cf ;
+  }
