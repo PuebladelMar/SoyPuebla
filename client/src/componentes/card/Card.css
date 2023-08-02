@@ -36,3 +36,12 @@
         /* align-items: center; */
         
     }
+
+
+    .heart{
+
+        font-size: 1.5rem;
+        background-color: rgba(0, 0, 0, 0);
+        border: .12em solid rgba(86, 86, 86, 0);
+        /* margin-left: auto;  */
+        }
