@@ -3,26 +3,46 @@
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem 10rem 1.5rem 10rem;
-    background-color: #517f7f;
+    background-color: whitesmoke;
     color: whitesmoke;
     margin-bottom: 1.5rem;
   }
   
+
   .navbar-button {
-    padding: 10px 20px;
+    padding: 7px 15px;
     border: none;
     border-radius: 4px;
-    background-color: #b2cebf;
-    color: #f2d5cf;
+    background-color: #517f7f;
+    color: white;
     font-weight: bold;
     cursor: pointer;
     transition: all ease .5s;
+    margin: 1rem 1rem 1rem 1rem;
   }
 
   .navbar-button:hover {
-    background-color:  #f2d5cf;
-    color: #b2cebf;
+    background-color:  #b2cebf;
+    color: #517f7f;
   }
+
+  .navbar-button-products {
+    padding: 7px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #517f7f;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all ease .5s;
+    margin: 1rem 1rem 1rem 1rem;
+  }
+
+  .navbar-button-products:hover {
+     background-color: #b2cebf;
+     color: #517f7f;
+  }
+  
   
   .search-input {
     width: 400px;
@@ -30,6 +50,6 @@
     border: none;
     border-radius: 4px;
     margin-right: 5px;
-    background-color: #b2cebf;
-    color: #f2d5cf;
+    background-color: white;
+    color: white;
   }

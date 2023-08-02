@@ -2,7 +2,7 @@ import React from 'react';
 import './ProductsNav.css';
 
 const ProductsNav = () => {
-  const products = ['Top', 'Calza', 'Pants'];
+  const products = ['TOPS', 'CALZAS', 'PANTS'];
 
   return (
     <div className='productos-menu'>

@@ -1,6 +1,6 @@
 .productos-menu {
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #b2cebf;
     padding: 10px;
     border: 1px solid #ccc;
     z-index: 1;
@@ -19,6 +19,6 @@
   }
   
   .productos-menu li:hover {
-    background-color: #ddd;
+    background-color: #d8f8e7;
     cursor: pointer;
   }
