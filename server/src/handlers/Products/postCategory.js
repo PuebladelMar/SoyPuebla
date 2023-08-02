@@ -7,7 +7,7 @@ const postCategory = async(req,res)=>{
     try {
       const {category} = req.body
      const response= await createPostCategoryDB(category)
-     res.status(200).json(response) 
+     res.status(201).json(response) 
    } catch (error) {
       res.status(400).send(error.message)
     }
