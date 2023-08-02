@@ -1,0 +1,42 @@
+const {
+  Products,
+  Colors,
+  Sizes,
+  Categories,
+  Series,
+  ProductColorSize,
+} = require("../../db");
+
+const productById = async (id) => {
+  let product = await Products.findByPk(id, {
+    include: {
+      model: Colors,
+      attributes: ["name", "codHex"],
+      through: { attributes: [] },
+    },
+    include: {
+      model: Sizes,
+      attributes: ["size"],
+      through: { attributes: [] },
+    },
+    include: {
+      model: Categories,
+      attributes: ["category"],
+      through: { attributes: [] },
+    },
+    include: {
+      model: Series,
+      attributes: ["serie"],
+      through: { attributes: [] },
+    },
+    include: {
+      model: ProductColorSize,
+      attributes: ["stock"],
+      through: { attributes: [] },
+    },
+  });
+
+  return product;
+};
+
+module.export = { productById };
