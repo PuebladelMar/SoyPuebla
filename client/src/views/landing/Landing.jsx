@@ -1,18 +1,18 @@
-import landing from '../../assets/landing.gif'
-import style from '../landing/Landig.css'
+import './Landing.css'
+// import style from '../landing/Landing.css';
 import { NavLink } from 'react-router-dom';
 
 function Landing() {
-    return (
-      <div>
-         <div>
-           <video src={landing} className={style.landing} autoPlay loop muted></video>
-         </div>
-          <NavLink to='/home'>
-            <button className={style.home}>Ingresar</button>
-          </NavLink>
-      </div>
-    );
-  }
-  
-  export default Landing;
+  return (
+    <div className='landing-container'>
+      {/* <img src='../../assets/images/landingGif.webp' alt="" className='' /> */}
+      <img src='src/assets/images/landingGif.webp' alt="" className='landing-image' />
+      
+      <NavLink to='/home'>
+        <button className='boton-landing'>Ingresar</button>
+      </NavLink>
+    </div>
+  );
+}
+
+export default Landing;
