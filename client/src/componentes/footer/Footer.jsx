@@ -35,15 +35,15 @@ const Footer = () => {
           <a href="/centro-ayuda">Centro de Ayuda</a>
           <a href="/preguntas-frecuentes">Preguntas Frecuentes</a>
           <a href="/suscripcion">Suscripción al Newsletter</a>
-          <a href="/centro-ayuda">Quienes somos</a>
-          <a href="/centro-ayuda">Cambios y Devoluciones</a>
-          <a href="/centro-ayuda">Medios de pago</a>
-          <a href="/centro-ayuda">Medios de envío</a>
+          <a href="/about">Quienes somos</a>
+          <a href="/cambios-devoluciones">Cambios y Devoluciones</a>
+          <a href="/medios-pago">Medios de pago</a>
+          <a href="/medios-envio">Medios de envío</a>
         </div>
 
         <div className="brand-info">
           <h3>Contactanos</h3>
-          <p>Email: info@xxxxxxxx.com</p>
+          <p>Email: info@xxxxxxxx</p>
           <p>Teléfono: +1 234 567 890</p>
         </div>
       </div>
