@@ -1,9 +1,9 @@
 const { Products, Colors, Sizes, Categories, Series, Stocks } = require('../../db.js');
 
 const controllPostProduct = async (req) => {
-  const { name, price, mainImage, image, sale, color, size, series, category } = req.body;
+  const { name, price, mainImage, image, sale, description, color, size, series, category } = req.body;
 
-  const newProduct = await Products.create({ name, price, mainImage, image, sale });
+  const newProduct = await Products.create({ name, price, mainImage, image, sale, description });
 
   const stockPromises = [];
 
