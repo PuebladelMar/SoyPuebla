@@ -19,7 +19,7 @@ function Reseñas(){
                 scrollbar={{ draggable: true }}
             >
                 <SwiperSlide className='swiperSlide'>
-                    <img className='imagen' src='./src/assets/mujer.jpeg' alt="Imagen 1" />
+                    <img className='imagen' src='./src/assets/imagesReseñas/mujer.jpeg' alt="Imagen 1" />
                     <div className="review">
                     <h2 className='th3'>Nombre:</h2>
                         <h3 className='th3'>Producto 1</h3>
@@ -30,7 +30,7 @@ function Reseñas(){
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='swiperSlide'>
-                    <img className='imagen' src='./src/assets/mujer2.png' alt="Imagen 2" />
+                    <img className='imagen' src='./src/assets/imagesReseñas/mujer2.png' alt="Imagen 2" />
                     <div className="review">
                     <h2 className='th3'>Nombre:</h2>
                         <h3 className='th3'>Producto 2</h3>
@@ -41,7 +41,7 @@ function Reseñas(){
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='swiperSlide'>
-                    <img className='imagen' src='./src/assets/mujer3.jpeg' alt="Imagen 3" />
+                    <img className='imagen' src='./src/assets/imagesReseñas/mujer3.jpeg' alt="Imagen 3" />
                     <div className="review">
                     <h2 className='th3'>Nombre:</h2>
                         <h3 className='th3'>Producto 3</h3>
