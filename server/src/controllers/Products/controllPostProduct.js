@@ -30,8 +30,8 @@ const controllPostProduct = async (req) => {
   const findedCategories  = await Categories.findAll({where: { name : category }} )
   await newProduct.setCategories(findedCategories); 
 
-  // const findedSeries  = await Series.findAll({where: { name : series }} )
-  // await newProduct.setSeries(findedSeries); 
+  const findedSeries  = await Series.findAll({where: { name : series }} )
+  await newProduct.setSeries(findedSeries); 
 
   return "Todo ok"
 };
