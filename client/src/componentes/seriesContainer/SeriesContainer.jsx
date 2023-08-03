@@ -8,19 +8,23 @@ import R6 from "../../assets/images/imagesSeries/R6 CLEAR.png";
 import R7 from "../../assets/images/imagesSeries/R7 FORCE.png";
 import R8 from "../../assets/images/imagesSeries/R8 PURE.png";
 import R10 from "../../assets/images/imagesSeries/R10 ZEN.png";
+import { Link } from "react-router-dom";
+
 
 function SeriesContainer() {
   return (
     <div>
       <h1>COLECCIONES</h1>
-
       <div className="seriesContainer">
+
+      <Link to={`/products`}>
         <div className="s1">
           <div className="image-container">
             <img className="serie-image" src={R1} alt="INDUSTRIAL" />
             <div className="image-text">INDUSTRIAL</div>
           </div>
         </div>
+        </Link>
 
         <div className="s2">
           <div className="image-container">
