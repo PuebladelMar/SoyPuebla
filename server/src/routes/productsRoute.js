@@ -13,8 +13,6 @@ const productsRouter = Router();
 
 productsRouter.get("/", getProducts);
 
-productsRouter.get("/:id", getProductsById);
-
 productsRouter.post("/", postProducts);
 
 productsRouter.post("/size", postSize);
@@ -28,5 +26,7 @@ productsRouter.get("/series", getSeries);
 productsRouter.post("/category", postCategory);
 
 productsRouter.post("/serie", postSerie);
+
+productsRouter.get("/:id", getProductsById);
 
 module.exports = productsRouter
