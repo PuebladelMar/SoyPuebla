@@ -1,6 +1,15 @@
-const { Products, Colors, Sizes, Categories, Series, Stocks } = require("../../db.js");
+const {
+  Products,
+  Colors,
+  Sizes,
+  Categories,
+  Series,
+  Stocks,
+} = require("../../db.js");
 
 const controllGetProducts = async (req) => {
+  const { color, sizes, categories, series, sale, price, order } = req.query;
+
   const products = await Products.findAll({
     include: [
       {
@@ -32,6 +41,19 @@ const controllGetProducts = async (req) => {
       stock: product.Stocks,
     };
   });
+
+  const response = [];
+
+  if (color) {
+    const findColor = await Colors.findOne({ where: { name: color } });
+    filterProducts.map((product) => {
+      const match = product.stock.find(stock => stock.ColorId === findColor.id)
+      if (match) {
+        response.push(product);
+      }
+    }) 
+    return response;
+  }
 
   return filterProducts;
 };
