@@ -4,7 +4,6 @@ const {
   Sizes,
   Categories,
   Series,
-  ProductColorSize,
 } = require("../../db");
 
 const productById = async (id) => {
