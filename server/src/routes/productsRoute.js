@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const getProducts = require('../handlers/Products/getProducts');
 const getProductsById = require('../handlers/Products/getProductById');
-const postProducts = require('../handlers/Products/postPoducts');
+const postProducts = require('../handlers/Products/postProducts');
 const postSize = require('../handlers/Products/postSize');
 const postColor = require('../handlers/Products/postColor');
 const getCategory = require('../handlers/Products/getCategory');
