@@ -1,0 +1,14 @@
+const {Categories}=require("../../db")
+
+const createPostCategoryDB = async (category) => {
+ 
+    // Create categoryx
+    const [newCategory, created] = await Categories.findOrCreate({where: {category}});
+    if(!created)throw Error ("category already existing")
+  
+
+    return newCategory
+ 
+};
+
+module.exports = { createPostCategoryDB}
