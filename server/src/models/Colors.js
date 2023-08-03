@@ -12,7 +12,12 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,   
+        unique: true, 
+        set(value) {
+          const words = value.toLowerCase().split(' ');
+          const wordFixed = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+          this.setDataValue('name', wordFixed);
+        }  
       },
       codHex: {
         type: DataTypes.STRING,
