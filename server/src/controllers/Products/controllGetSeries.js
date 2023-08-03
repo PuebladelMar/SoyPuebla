@@ -1,7 +1,7 @@
 const { Series } = require("../../db.js");
 
 const getAllSeries = async () => {
-  const seriesList = await Series.finAll();
+  const seriesList = await Series.findAll();
   return seriesList;
 };
 
