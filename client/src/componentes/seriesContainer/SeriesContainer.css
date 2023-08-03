@@ -16,6 +16,9 @@
     width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
     height: 100%; /* Asegura que la imagen ocupe todo el alto del contenedor */
     object-fit: cover; /* Ajusta la imagen para llenar el contenedor manteniendo la proporción */
+    display: block; /* Agrega display: block para centrar la imagen verticalmente */
+    margin: auto; /* Centra la imagen horizontalmente */
+
     transform: translateZ(0);
     transition: 500ms;
     
