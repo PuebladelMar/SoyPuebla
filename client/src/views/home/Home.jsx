@@ -11,6 +11,7 @@ import Reseñas from "../../componentes/reseñas/Reseñas"
 const Home = () => {
   return (
     <div>
+      
       <NavBar />
       <Slider />
       <SeriesContainer />
@@ -18,6 +19,7 @@ const Home = () => {
       <Reseñas />
       <Newsletter />
       <Footer />
+
     </div>
   );
 };
