@@ -1,10 +1,11 @@
 .productos-menu {
     position: absolute;
-    background-color: #b2cebf;
+    background-color: pink;
     padding: 10px;
     border: 1px solid #ccc;
     z-index: 1;
-    min-width: 120px;
+    min-width: 87.3%;
+    min-height: fit-content;
   }
   
   .productos-menu ul {
@@ -16,6 +17,8 @@
   .productos-menu li {
     padding: 5px;
     cursor: pointer;
+    color: black;
+    margin-left: 0rem;
   }
   
   .productos-menu li:hover {

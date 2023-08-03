@@ -16,29 +16,34 @@ const NavBar = () => {
 
   return (
     <div className='navbar'>
-      <form onSubmit={''} />
+      <div>
+        <form onSubmit={''} />
 
-      <input
-        className='search-input'
-        type='text'
-        placeholder='BUSCAR'
-        onChange={''}
-      />
-      <button className='navbar-button'>BUSCAR</button>
-      <button
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        className='navbar-button-products'
-      >
-        PRODUCTOS {showMenu && <ProductsNav />}
-      </button>
-      <NavLink to='/login'>
-        <button className='navbar-button'>REGISTRATE</button>
-      </NavLink>
+        <input
+          className='search-input'
+          type='text'
+          placeholder='BUSCAR'
+          onChange={''}
+        />
+        <button className='navbar-button'>BUSCAR</button>
+        <NavLink to='/login'>
+          <button className='navbar-button'>REGISTRATE</button>
+        </NavLink>
 
-      <NavLink to='/cart'>
-        <button className='navbar-button'>CARRITO</button>
-      </NavLink>
+        <NavLink to='/cart'>
+          <button className='navbar-button'>CARRITO</button>
+        </NavLink>
+      </div>
+
+      <div className='products'>
+        <button
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className='products-button'
+        >
+          PRODUCTOS {showMenu && <ProductsNav />}
+        </button>
+      </div>
     </div>
   );
 };
