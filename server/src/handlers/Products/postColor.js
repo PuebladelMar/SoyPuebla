@@ -5,7 +5,7 @@ const postColor = async(req,res)=>{
         const newColor = await controllerPostNewColor();
         res.status(201).send(newColor);
     }catch (error) {
-        res.status(400).send(error.message)
+        res.status(400).json({error: error.message});
     }
 };
 

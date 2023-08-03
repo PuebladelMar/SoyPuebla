@@ -1,6 +1,6 @@
 const { DataTypes, Sequelize } = require('sequelize');
 module.exports = (sequelize) => {
-  sequelize.define('user', {
+  sequelize.define('Users', {
 
   }, {timestamps: false});
 };

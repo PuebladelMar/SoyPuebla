@@ -2,11 +2,11 @@ const controllPostSize = require("../../controllers/Products/controllPostSize");
 
 const postSize = async(req,res)=>{
     try {
-        const { size } = req.body;
-        const newSize = await controllPostSize(size);
+        const { name } = req.body;
+        const newSize = await controllPostSize(name);
         return res.status(201).json(newSize);
     } catch (error) {
-        res.status(400).json(error.message);
+        res.status(400).json({error: error.message});
     };
 };
 

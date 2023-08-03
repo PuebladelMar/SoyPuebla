@@ -5,7 +5,7 @@ const getSeries = async (req, res) => {
     const allSeries = await getAllSeries();
     return res.status(200).json(allSeries);
   } catch (error) {
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(400).json({ error: error.message });
   }
 };
 

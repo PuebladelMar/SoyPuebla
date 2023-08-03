@@ -5,6 +5,4 @@ const getAllSeries = async () => {
   return seriesList;
 };
 
-module.exports = {
-  getAllSeries,
-};
+module.exports = getAllSeries;
