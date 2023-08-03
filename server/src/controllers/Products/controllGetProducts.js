@@ -1,8 +1,8 @@
-const {Products,Colors,Sizes,Categories,Series,Stocks} = require("../../db.js");
-const {Op}=require("sequelize")
+const { Products, Colors, Sizes, Categories, Series, Stocks } = require("../../db.js");
+const { Op } = require("sequelize");
 
 const controllGetProducts = async (req) => {
-  const { color, size, category, serie, sale, price, order, name } = req.query;
+  const { color, size, category, serie, sale, minPrice, maxPrice, order, name } = req.query;
   if (name) {
     const capitalizeString = (str) => {
       let string = str.toString();
@@ -18,12 +18,12 @@ const controllGetProducts = async (req) => {
     const productByName = await Products.findAll({
       where: {
         name: {
-          [Op.iLike]: `%${productWanted}%`, //Op.iLike de Sequelize para realizar una búsqueda insensible a mayúsculas y minúsculas.
+          [Op.iLike]: `%${productWanted}%`,
         },
       },
     });
-   
-    return productByName
+
+    return productByName;
   }
   const products = await Products.findAll({
     include: [
@@ -107,6 +107,26 @@ const controllGetProducts = async (req) => {
 
   if (sale) {
     const response = filterProducts.filter((product) => product.sale === true);
+    filterProducts = response;
+  }
+
+  if (minPrice && maxPrice) {
+    const response = filterProducts.filter(
+      (product) =>
+        Number(product.price) >= Number(minPrice) &&
+        Number(product.price) <= Number(maxPrice)
+    );
+    filterProducts = response;
+  }
+
+  if (order == "Precio Ascendente") {
+    const response = filterProducts.sort((a, b) => a.price - b.price);
+
+    filterProducts = response;
+  }
+  if (order == "Precio Descendente") {
+    const response = filterProducts.sort((a, b) => b.price - a.price);
+
     filterProducts = response;
   }
 
