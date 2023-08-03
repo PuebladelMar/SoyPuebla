@@ -26,6 +26,7 @@ function SeriesContainer() {
           <div className="image-container">
             <img className="serie-image" src={R6} alt="CLEAR" />
             <div className="image-text">CLEAR</div>
+
           </div>
         </div>
 
@@ -61,6 +62,7 @@ function SeriesContainer() {
         <div className="image-container">          
           <img className="serie-image" src={R3} alt="LIGHT" />
             <div className="image-text">LIGHT</div>
+
         </div>
         </div>
 
