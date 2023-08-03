@@ -24,8 +24,9 @@ function SeriesContainer() {
 
         <div className="s2">
           <div className="image-container">
-            <img className="serie-image" src={R6} alt="LIGHT" />
-            <div className="image-text">LIGHT</div>
+            <img className="serie-image" src={R6} alt="CLEAR" />
+            <div className="image-text">CLEAR</div>
+
           </div>
         </div>
 
@@ -59,8 +60,9 @@ function SeriesContainer() {
 
         <div className="s7">
         <div className="image-container">          
-          <img className="serie-image" src={R8} alt="PURE" />
-            <div className="image-text">PURE</div>
+          <img className="serie-image" src={R3} alt="LIGHT" />
+            <div className="image-text">LIGHT</div>
+
         </div>
         </div>
 
@@ -73,8 +75,8 @@ function SeriesContainer() {
 
         <div className="s9">
         <div className="image-container">
-          <img className="serie-image" src={R3} alt="LIGHT" />
-            <div className="image-text">LIGHT</div>
+          <img className="serie-image" src={R8} alt="PURE" />
+            <div className="image-text">PURE</div>
         </div>
         </div>
       </div>
