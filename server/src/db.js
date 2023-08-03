@@ -37,23 +37,23 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 // Aca vendrian las relaciones
-const { Products, Colors, Sizes, Categories, Series, ProductColorSize } = sequelize.models;
+const { Products, Colors, Sizes, Categories, Series, Stocks } = sequelize.models;
 
-// Relación Products <-> Colors
-Products.belongsToMany(Colors, { through: ProductColorSize, foreignKey: 'ProductId' });
-Colors.belongsToMany(Products, { through: ProductColorSize, foreignKey: 'ColorId' });
+Products.hasMany(Stocks);
+Colors.hasMany(Stocks);
+Sizes.hasMany(Stocks);
 
-// Relación Products <-> Sizes
-Products.belongsToMany(Sizes, { through: ProductColorSize, foreignKey: 'ProductId' });
-Sizes.belongsToMany(Products, { through: ProductColorSize, foreignKey: 'SizeId' });
+Stocks.belongsTo(Products);
+Stocks.belongsTo(Colors);
+Stocks.belongsTo(Sizes);
 
 // Relación Products <-> Categories
-Products.belongsToMany(Categories, { through: "ProductCategories", foreignKey: 'ProductId', otherKey: 'CategoryId' });
-Categories.belongsToMany(Products, { through: "ProductCategories", foreignKey: 'CategoryId', otherKey: 'ProductId' });
+Products.belongsToMany(Categories, { through: "ProductCategories" });
+Categories.belongsToMany(Products, { through: "ProductCategories" });
 
 // Relación Products <-> Series
-Products.belongsToMany(Series, { through: "ProductSeries", foreignKey: 'ProductId' });
-Series.belongsToMany(Products, { through: "ProductSeries", foreignKey: 'SeriesId' });
+Products.belongsToMany(Series, { through: "ProductSeries" });
+Series.belongsToMany(Products, { through: "ProductSeries" });
 
 
 module.exports = {
