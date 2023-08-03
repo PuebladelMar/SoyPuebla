@@ -27,13 +27,13 @@ const controllPostProduct = async (req) => {
 
   await Promise.all(stockPromises);
 
-  const findedCategories  = await Categories.findAll({where: { name : category }} )
+  const findedCategories  = await Categories.findAll({where: { name : category }} );
   await newProduct.setCategories(findedCategories); 
 
-  const findedSeries  = await Series.findAll({where: { name : series }} )
+  const findedSeries  = await Series.findAll({where: { name : series }} );
   await newProduct.setSeries(findedSeries); 
 
-  return "Todo ok"
+  return "product added successfully";
 };
 
 module.exports = controllPostProduct;
