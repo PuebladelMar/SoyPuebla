@@ -8,7 +8,7 @@ const {
 } = require("../../db.js");
 
 const controllGetProducts = async (req) => {
-  const { color, sizes, categories, series, sale, price, order } = req.query;
+  const { color, size, category, serie, sale, price, order } = req.query;
 
   const products = await Products.findAll({
     include: [
@@ -29,7 +29,7 @@ const controllGetProducts = async (req) => {
     ],
   });
 
-  const filterProducts = products.map((product) => {
+  let filterProducts = products.map((product) => {
     return {
       id: product.id,
       name: product.name,
@@ -42,18 +42,56 @@ const controllGetProducts = async (req) => {
     };
   });
 
-  const response = [];
-
-  if (color) {
+  if(color) {
+    const response = [];
     const findColor = await Colors.findOne({ where: { name: color } });
     filterProducts.map((product) => {
-      const match = product.stock.find(stock => stock.ColorId === findColor.id)
+      const match = product.stock.find(stock => stock.ColorId === findColor.id);
       if (match) {
         response.push(product);
-      }
-    }) 
-    return response;
-  }
+      };
+    });
+    filterProducts = response;
+  };
+
+  if(size){
+    const response = [];
+    const findSize = await Sizes.findOne({ where: { name: size } });
+    filterProducts.map((product) => {
+      const match = product.stock.find(stock => stock.SizeId === findSize.id);
+      if (match) {
+        response.push(product);
+      };
+    });
+    filterProducts = response;
+  };
+
+  if(category){
+    const response = [];
+    filterProducts.map((product) => {
+      const match = product.category.find(c => c.name === category);
+      if (match) {
+        response.push(product);
+      };
+    });
+    filterProducts = response;
+  };
+
+  if(serie){
+    const response = [];
+    filterProducts.map((product) => {
+      const match = product.series.find(s => s.name === serie);
+      if (match) {
+        response.push(product);
+      };
+    });
+    filterProducts = response;
+  };
+
+  if(sale){
+    const response = filterProducts.filter((product) => product.sale === true);
+    filterProducts = response;
+  };
 
   return filterProducts;
 };
