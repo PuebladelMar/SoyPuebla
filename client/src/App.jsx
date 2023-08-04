@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div>
-      {<NavBar />} {/* Renderizar NavBar en todas las rutas excepto "/" */}
+      {<NavBar />}
       <Routes>
         <Route
           path='/'
@@ -53,7 +53,8 @@ function App() {
         />
       </Routes>
       {pathname !== '/' && <Footer />}{' '}
-      {/* Renderizar Footer en todas las rutas excepto "/" */}
+     
+
     </div>
   );
 }
