@@ -1,13 +1,14 @@
-import Slider from "../../componentes/slider/Slider";
-import Newsletter from "../../componentes/newsletter/newsletter";
+import Slider from '../../componentes/slider/Slider';
+import Newsletter from '../../componentes/newsletter/newsletter';
 import SeriesContainer from '../../componentes/seriesContainer/SeriesContainer';
-import Reseñas from "../../componentes/reseñas/Reseñas"
-
+import Reseñas from '../../componentes/reseñas/Reseñas';
+import PopUpNews from '../../componentes/newsletter/popupNewsletter';
 
 const Home = () => {
   return (
     <div>
-    <br />
+      <PopUpNews />
+      <br />
       <Slider />
       <br />
       <SeriesContainer />
@@ -15,7 +16,6 @@ const Home = () => {
       <Reseñas />
       <br />
       <Newsletter />
-   
     </div>
   );
 };

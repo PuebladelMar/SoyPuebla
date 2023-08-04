@@ -8,7 +8,7 @@ import Footer from './componentes/footer/Footer';
 import Cart from './views/cart/Cart';
 import Pay from './views/cart/Pay';
 import Create from './views/create/Create';
-import Login from './views/login/Login'
+import Login from './views/login/Login';
 import { Routes, Route } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
@@ -17,15 +17,10 @@ function App() {
 
   return (
     <div>
-      {pathname !== '/' && <NavBar />}{' '}
-      {/* Renderizar NavBar en todas las rutas excepto "/" */}
+      {<NavBar />} {/* Renderizar NavBar en todas las rutas excepto "/" */}
       <Routes>
         <Route
           path='/'
-          element={<Landing />}
-        />
-        <Route
-          path='/home'
           element={<Home />}
         />
         <Route
