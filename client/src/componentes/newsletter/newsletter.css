@@ -2,27 +2,28 @@
     background-color:  #f2d5cf;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px; /* Ajusta el valor del padding según tus preferencias */
+    padding: 20px; 
     display: flex;
-    justify-content: center; /* Centra los elementos horizontalmente */
-    align-items: center; /* Centra los elementos verticalmente */
+    justify-content: center; 
+    align-items: center; 
+    object-fit: cover;
   }
   
   .newsletter h2 {
-    margin-right: 20px; /* Ajusta el margen entre el h2 y el formulario */
+    margin-right: 20px; 
     border-color: #517f7f;
     color: #517f7f;
   }
   
   .newsletter form {
-    display: flex; /* Ajusta el formulario para que los elementos internos estén en línea */
-    align-items: center; /* Centra los elementos verticalmente dentro del formulario */
+    display: flex; 
+    align-items: center; 
   }
   
   .newsletter input[type="email"] {
-    flex: 1; /* Permite que el campo de correo electrónico ocupe el espacio restante */
+    flex: 1; 
     padding: 8px;
-    margin-right: 10px; /* Ajusta el margen entre el campo de correo y el botón */
+    margin-right: 10px; 
   }
   
   .newsletter button {
