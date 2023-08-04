@@ -24,6 +24,10 @@ module.exports = (sequelize) => {
           this.setDataValue('name', wordFixed);
         }
       },
+      image: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      }
     },
     { timestamps: false }
   );
