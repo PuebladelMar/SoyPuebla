@@ -1,34 +1,40 @@
 /* Estilos base */
-.newsletter {
+.newsletter2 {
   background-color: #f2d5cf;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   display: flex;
+  flex-direction: column; 
   justify-content: center;
   align-items: center;
   object-fit: cover;
 }
 
-.newsletter h2 {
+.newsletter2 h2 {
   margin-right: 20px;
   border-color: #517f7f;
   color: #517f7f;
+  margin-bottom: 20px; 
+  text-align: center;
 }
 
-.newsletter form {
+.newsletter2 form {
   display: flex;
-  flex-direction: column; /* Cambiamos el flujo de los elementos a columna */
+  flex-wrap: wrap; 
   align-items: center;
+  width: 100%;
 }
 
-.newsletter input[type="email"] {
+.newsletter2 input[type="email"] {
   flex: 1;
   padding: 8px;
-  margin-right: 20px;
+  margin-right: 10px; 
+  max-width: 400px;
+  text-align: center;
 }
 
-.newsletter button {
+.newsletter2 button {
   background-color: #517f7f;
   color: #fff;
   padding: 8px 16px;
@@ -37,31 +43,21 @@
   cursor: pointer;
 }
 
-.newsletter button:hover {
+.newsletter2 button:hover {
   background-color: #b2cebf;
 }
 
-/* Estilos responsive */
+
 @media screen and (max-width: 600px) {
-  .newsletter {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .newsletter h2 {
-    margin-right: 0;
-    margin-bottom: 11px;
-  }
-
-  .newsletter input[type="email"],
-  .newsletter button {
+  .newsletter2 input[type="email"],
+  .newsletter2 button {
     margin-right: 0;
     margin-bottom: 10px;
     width: 100%;
-    max-width: 300px; /* Puedes ajustar este valor según tu preferencia */
+    max-width: 100%; 
   }
 
-  .newsletter input[type="email"] {
+  .newsletter2 input[type="email"] {
     padding: 10px;
   }
 }
