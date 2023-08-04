@@ -1,0 +1,63 @@
+/* Estilos base */
+.newsletter2 {
+  background-color: #f2d5cf;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+}
+
+.newsletter2 h2 {
+  margin-right: 20px;
+  border-color: #517f7f;
+  color: #517f7f;
+  margin-bottom: 20px; 
+  text-align: center;
+}
+
+.newsletter2 form {
+  display: flex;
+  flex-wrap: wrap; 
+  align-items: center;
+  width: 100%;
+}
+
+.newsletter2 input[type="email"] {
+  flex: 1;
+  padding: 8px;
+  margin-right: 10px; 
+  max-width: 400px;
+  text-align: center;
+}
+
+.newsletter2 button {
+  background-color: #517f7f;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.newsletter2 button:hover {
+  background-color: #b2cebf;
+}
+
+
+@media screen and (max-width: 600px) {
+  .newsletter2 input[type="email"],
+  .newsletter2 button {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 100%; 
+  }
+
+  .newsletter2 input[type="email"] {
+    padding: 10px;
+  }
+}

@@ -1,0 +1,23 @@
+.cart{
+    text-align: center;
+    margin: 10rem 10rem 10rem 10rem;
+    font-family: 'Courier New', Courier, monospace;
+    color: #517f7f;
+}
+
+.cart-button {
+    padding: 7px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #517f7f;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all ease .5s;
+    margin: 1rem 1rem 1rem 1rem;
+  }
+
+  .cart-button:hover {
+    background-color:  #b2cebf;
+    color: #517f7f;
+  }

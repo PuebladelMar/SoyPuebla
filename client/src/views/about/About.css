@@ -1,0 +1,45 @@
+.about-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .about-content {
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .about-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    margin-top: 2rem;
+    text-align: center;
+    color: #517f7f;
+    text-shadow: 2px 2px 4px #517f7f;
+  }
+  
+  .about-text {
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: justify;
+    justify-content: center;
+    margin: 2rem 5rem 5rem 5rem;
+    color:  rgb(81, 81, 81);
+  }
+  
+  /* Media Query para pantallas más pequeñas (por ejemplo, dispositivos móviles) */
+  @media screen and (max-width: 600px) {
+    .about-content {
+      padding: 10px;
+    }
+    
+    .about-title {
+      font-size: 28px;
+    }
+    
+    .about-text {
+      font-size: 16px;
+    }
+  }
+
+

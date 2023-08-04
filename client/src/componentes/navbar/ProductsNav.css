@@ -1,0 +1,27 @@
+.productos-menu {
+    position: absolute;
+    background-color: pink;
+    padding: 10px;
+    border: 1px solid #ccc;
+    z-index: 1;
+    min-width: 87.3%;
+    min-height: fit-content;
+  }
+  
+  .productos-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .productos-menu li {
+    padding: 5px;
+    cursor: pointer;
+    color: black;
+    margin-left: 0rem;
+  }
+  
+  .productos-menu li:hover {
+    background-color: #d8f8e7;
+    cursor: pointer;
+  }
