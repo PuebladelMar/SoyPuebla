@@ -9,7 +9,7 @@ function CardContainer() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="2560px" style={{ border: '2px solid #333', backgroundColor: '#f0f0f0' }}>
+      <Container className="card-container" maxWidth="2560px" style={{ backgroundColor: '#f0f0f0' }}>
         <Grid container spacing={3}>
 
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((cardId) => (
