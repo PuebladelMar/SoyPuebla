@@ -19,16 +19,23 @@ module.exports = (sequelize) => {
           },
         },
         set(value) {
-          const words = value.toLowerCase().split(' ');
-          const wordFixed = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-          this.setDataValue('name', wordFixed);
-        }
+          const words = value.toLowerCase().split(" ");
+          const wordFixed = words
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+          this.setDataValue("name", wordFixed);
+        },
       },
       image: {
         type: DataTypes.TEXT,
         allowNull: false,
+      },
+      deletedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: null,
       }
     },
-    { timestamps: false }
+    { timestamps: true, paranoid: true }
   );
 };

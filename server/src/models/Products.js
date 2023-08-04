@@ -45,8 +45,13 @@ module.exports = (sequelize) => {
       description: {
         type: DataTypes.TEXT,
         allowNull: false,
+      },
+      deletedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: null,
       }
     },
-    { timestamps: false }
+    { timestamps: true, paranoid: true }
   );
 };
