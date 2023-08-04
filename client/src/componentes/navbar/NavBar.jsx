@@ -85,7 +85,6 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
-    
   padding: theme.spacing(0, 2),
   height: '100%',
   position: 'absolute',
@@ -96,7 +95,6 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-   
   'color': 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
@@ -219,11 +217,12 @@ export default function NavBar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1  }}>
-      <AppBar position='static'sx={{ backgroundColor: ' #517f7F' }} >
-        
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position='static'
+        sx={{ backgroundColor: ' #517f7F' }}
+      >
         <Toolbar>
-           
           <IconButton
             size='large'
             edge='start'
@@ -232,41 +231,45 @@ export default function NavBar() {
             sx={{ mr: 2 }}
           >
             <IconButton>
-            <Link to="/home"><img src= 'src/assets/images/TORTUGA_ROSA_SINFONDO.png' alt="Cart Icon" style={{ width: '3.2rem', height: '2.8rem' }} /></Link>
-    </IconButton>
+              <Link to='/home'>
+                <img
+                  src='src/assets/images/TORTUGA_ROSA_SINFONDO.png'
+                  alt='Cart Icon'
+                  style={{ width: '3.2rem', height: '2.8rem' }}
+                />
+              </Link>
+            </IconButton>
             {/* <MenuIcon /> */}
           </IconButton>
           <ul style={{ display: 'flex', listStyle: 'none' }}>
-              <li style={{ margin: '0 1rem' }}>
-                
-                <Link to="/home">INICIO</Link>
-              </li>
-              <li style={{ margin: '0 1rem' }}>
-                
-                <Link to="/products">PRODUCTOS</Link>
-              </li>
-              <li style={{ margin: '0 1rem' }}>
-                
-                <Link to="/about">NOSOTRAS</Link>
-              </li>
-              <li style={{ margin: '0 1rem' }}>
-                
-                <Link to="/create">CREAR</Link>
-              </li>
-            </ul>
+            <li style={{ margin: '0 1rem' }}>
+              <Link to='/'>INICIO</Link>
+            </li>
+            <li style={{ margin: '0 1rem' }}>
+              <Link to='/products'>PRODUCTOS</Link>
+            </li>
+            <li style={{ margin: '0 1rem' }}>
+              <Link to='/about'>NOSOTRAS</Link>
+            </li>
+            <li style={{ margin: '0 1rem' }}>
+              <Link to='/create'>CREAR</Link>
+            </li>
+          </ul>
 
           <IconButton>
-      <img src= 'src/assets/images/PdM.png' alt="Cart Icon" style={{ width: '5rem', height: '3rem' }} />
-    </IconButton>
+            <img
+              src='src/assets/images/PdM.png'
+              alt='Cart Icon'
+              style={{ width: '5rem', height: '3rem' }}
+            />
+          </IconButton>
 
           <Typography
             variant='h6'
             noWrap
             component='div'
             sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            
-          </Typography>
+          ></Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -303,11 +306,16 @@ export default function NavBar() {
               </Badge>
             </IconButton> */}
 
-<IconButton>
-<Link to="/Cart"> <img src= 'src/assets/images/Cart.png' alt="Cart Icon" style={{ width: '3.2rem', height: '3.2rem' }}
-      
-      /></Link>
-    </IconButton>
+            <IconButton>
+              <Link to='/Cart'>
+                {' '}
+                <img
+                  src='src/assets/images/Cart.png'
+                  alt='Cart Icon'
+                  style={{ width: '3.2rem', height: '3.2rem' }}
+                />
+              </Link>
+            </IconButton>
             <IconButton
               size='small'
               edge='end'
@@ -316,8 +324,8 @@ export default function NavBar() {
               aria-haspopup='true'
               onClick={''}
               color='inherit'
-            ><Link to="/login">
-                Log in</Link>
+            >
+              <Link to='/login'>Log in</Link>
               {/* <AccountCircle /> */}
             </IconButton>
           </Box>
