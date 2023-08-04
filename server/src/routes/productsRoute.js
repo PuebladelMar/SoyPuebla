@@ -8,6 +8,10 @@ const getCategory = require('../handlers/Products/getCategory');
 const getSeries = require('../handlers/Products/getSeries');
 const postCategory = require('../handlers/Products/postCategory');
 const postSerie = require('../handlers/Products/postSerie');
+const deleteSeries=require("../handlers/Products/deleteSeries")
+const deleteCategory=require("../handlers/Products/deleteCategory")
+const deleteSize=require("../handlers/Products/deleteSize")
+const deleteProduct=require("../handlers/Products/deleteProduct.js")
 
 const productsRouter = Router();
 
@@ -25,7 +29,15 @@ productsRouter.get("/series", getSeries);
 
 productsRouter.post("/category", postCategory);
 
-productsRouter.post("/serie", postSerie);
+productsRouter.post("/series", postSerie);
+
+productsRouter.delete("/:id", deleteProduct)
+
+productsRouter.delete("/size/:id", deleteSize);
+
+productsRouter.delete("/category/:id", deleteCategory);
+
+productsRouter.delete("/series/:id", deleteSeries);
 
 productsRouter.get("/:id", getProductsById);
 

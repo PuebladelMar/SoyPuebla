@@ -24,7 +24,12 @@ sequelize.define(
           this.setDataValue('name', wordFixed);
         }
       },
+      deletedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: null,
+      }
     },
-    { timestamps: false }
+     { timestamps: true, paranoid: true }
   );
 };
