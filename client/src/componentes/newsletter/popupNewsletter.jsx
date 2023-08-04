@@ -17,18 +17,41 @@ const PopUpNews = () => {
   };
 
   return (
-    <Dialog open={isModalOpen} onClose={handleCloseModal}>
-      <DialogTitle>¡Bienvenida!</DialogTitle>
-      <DialogContent>
+    <Dialog
+      open={isModalOpen}
+      onClose={handleCloseModal}
+      sx={{ background: "#ffffff" }}
+    >
+      <DialogTitle
+        sx={{
+          fontSize: "32px",
+          textAlign: "center",
+          backgroundColor: "#dcaaa1",
+          color: "#ffffff",
+        }}
+      >
+        ¡Bienvenida!
+      </DialogTitle>
+      <DialogContent sx={{ backgroundColor: "#dcaaa1" }}>
         <img
-          src="src/assets/images/PopUp.png"
+          src="src/assets/images/bannerpop.png"
           alt="Encabezado"
-          style={{ width: "100%", height: "181px", marginBottom: "10px" }}
+          style={{ width: "100%", height: "100px", marginBottom: "0px" }}
         />
         <NewsletterPop />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleCloseModal} color="primary">
+      <DialogActions sx={{ backgroundColor: "#dcaaa1" }}>
+        <Button
+          onClick={handleCloseModal}
+          color="primary"
+          sx={{
+            backgroundColor: "#517f7f",
+            width: "10%",
+            color: "#f2d5cf",
+            fontSize: "8px",
+            textAlign: "center",
+          }}
+        >
           Cerrar
         </Button>
       </DialogActions>
