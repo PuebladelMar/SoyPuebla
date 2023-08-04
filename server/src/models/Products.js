@@ -10,19 +10,18 @@ module.exports = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false,
-        set(value) {
-          const words = value.toLowerCase().split(" ");
-          const transformWords = words.map((word) =>
-            (word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
-          );
-          this.setDataValue("name", transformWords);
-        },
         validate: {
           len: {
             args: [1, 50],
             msg: "Your field must have between 1 and 50 characters.",
           },
+          set(value) {
+            const words = value.toLowerCase().split(' ');
+            const wordFixed = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            this.setDataValue('name', wordFixed);
+          }
         },
       },
       price: {
@@ -43,112 +42,11 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
-    },
-    { timestamps: false }
-  );
-
-  const Colors = sequelize.define(
-    "Colors",
-    {
-      id: {
-        type: DataTypes.UUID,
-        primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
-      },
-      color: {
-        type: DataTypes.STRING,
+      description: {
+        type: DataTypes.TEXT,
         allowNull: false,
-        validate: {
-          len: {
-            args: [1, 20],
-            msg: "Your field must have between 1 and 20 characters.",
-          },
-        },
-      },
+      }
     },
     { timestamps: false }
   );
-
-  const Sizes = sequelize.define(
-    "Sizes",
-    {
-      id: {
-        type: DataTypes.UUID,
-        primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
-      },
-      size: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: {
-            args: [1, 5],
-            msg: "Your field must have between 1 and 5 characters.",
-          },
-        },
-      },
-    },
-    { timestamps: false }
-  );
-
-  sequelize.define(
-    "Categories",
-    {
-      id: {
-        type: DataTypes.UUID,
-        primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
-      },
-      category: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: {
-            args: [1, 20],
-            msg: "Your field must have between 1 and 20 characters.",
-          },
-        },
-      },
-    },
-    { timestamps: false }
-  );
-
-  sequelize.define(
-    "Series",
-    {
-      id: {
-        type: DataTypes.UUID,
-        primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
-      },
-      serie: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: {
-            args: [1, 50],
-            msg: "Your field must have between 1 and 50 characters.",
-          },
-        },
-      },
-    },
-    { timestamps: false }
-  );
-
-  const ProductColorSize = sequelize.define('ProductColorSize', {
-    id: {
-      type: DataTypes.UUID,
-      primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
-    },
-    stock: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-        validate:{
-            min: 0
-        },
-    },
-    
-  }, { timestamps: false });
-
 };
