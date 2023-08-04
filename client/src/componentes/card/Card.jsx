@@ -45,7 +45,11 @@ export default function Cardx() {
   
       <CardMedia
         component="img"
-        height="194"
+        style={{
+          width: 300,
+          height: 600,
+          objectFit: 'cover',
+        }}
         image={CardEx}
         alt="Item"
       />
