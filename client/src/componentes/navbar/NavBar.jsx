@@ -85,6 +85,7 @@ const Search = styled('div')(({ theme }) => ({
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
+    
   padding: theme.spacing(0, 2),
   height: '100%',
   position: 'absolute',
@@ -95,6 +96,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
+   
   'color': 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
@@ -217,7 +219,7 @@ export default function NavBar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1  }} border="2px solid #ecc">
+    <Box sx={{ flexGrow: 1  }}>
       <AppBar position='static'sx={{ backgroundColor: ' #517f7F' }} >
         
         <Toolbar>
@@ -230,22 +232,26 @@ export default function NavBar() {
             sx={{ mr: 2 }}
           >
             <IconButton>
-      <img src= 'src/assets/images/TORTUGA_ROSA_SINFONDO.png' alt="Cart Icon" style={{ width: '3.2rem', height: '2.8rem' }} />
+            <Link to="/home"><img src= 'src/assets/images/TORTUGA_ROSA_SINFONDO.png' alt="Cart Icon" style={{ width: '3.2rem', height: '2.8rem' }} /></Link>
     </IconButton>
             {/* <MenuIcon /> */}
           </IconButton>
           <ul style={{ display: 'flex', listStyle: 'none' }}>
               <li style={{ margin: '0 1rem' }}>
                 
-                <Link to="/">INICIO</Link>
+                <Link to="/home">INICIO</Link>
               </li>
               <li style={{ margin: '0 1rem' }}>
                 
-                <Link to="/productos">PRODUCTOS</Link>
+                <Link to="/products">PRODUCTOS</Link>
               </li>
               <li style={{ margin: '0 1rem' }}>
                 
-                <Link to="/nosotras">NOSOTRAS</Link>
+                <Link to="/about">NOSOTRAS</Link>
+              </li>
+              <li style={{ margin: '0 1rem' }}>
+                
+                <Link to="/create">CREAR</Link>
               </li>
             </ul>
 
@@ -261,12 +267,12 @@ export default function NavBar() {
           >
             
           </Typography>
-          <Search border="2px solid #ecc">
+          <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase border="2px solid #ecc" 
-              placeholder='Que productos buscas?'
+            <StyledInputBase
+              placeholder='Qué productos buscás?'
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
@@ -308,9 +314,10 @@ export default function NavBar() {
               aria-label='account of current user'
               aria-controls={menuId}
               aria-haspopup='true'
-              onClick={handleProfileMenuOpen}
+              onClick={''}
               color='inherit'
-            >Log in
+            ><Link to="/login">
+                Log in</Link>
               {/* <AccountCircle /> */}
             </IconButton>
           </Box>

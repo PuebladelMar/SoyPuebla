@@ -6,9 +6,8 @@ import PopUpNews from "../../componentes/newsletter/popupNewsletter";
 function Landing() {
   return (
     <div className="landing-container">
-      {/* <img src='../../assets/images/landingGif.webp' alt="" className='' /> */}
       <img
-        src="src/assets/images/landingGif.webp"
+        src="src/assets/images/1.png"
         alt=""
         className="landing-image"
       />
