@@ -11,9 +11,17 @@ import Create from './views/create/Create';
 import Login from './views/login/Login';
 import { Routes, Route } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getProducts } from "./redux/Actions";
 
 function App() {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
   return (
     <div>
