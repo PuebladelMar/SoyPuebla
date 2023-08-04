@@ -60,12 +60,13 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   'position': 'relative',
@@ -216,9 +217,11 @@ export default function NavBar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
+    <Box sx={{ flexGrow: 1  }} border="2px solid #ecc">
+      <AppBar position='static'sx={{ backgroundColor: ' #517f7F' }} >
+        
         <Toolbar>
+           
           <IconButton
             size='large'
             edge='start'
@@ -226,28 +229,50 @@ export default function NavBar() {
             aria-label='open drawer'
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <IconButton>
+      <img src= 'src/assets/images/TORTUGA_ROSA_SINFONDO.png' alt="Cart Icon" style={{ width: '3.2rem', height: '2.8rem' }} />
+    </IconButton>
+            {/* <MenuIcon /> */}
           </IconButton>
+          <ul style={{ display: 'flex', listStyle: 'none' }}>
+              <li style={{ margin: '0 1rem' }}>
+                
+                <Link to="/">INICIO</Link>
+              </li>
+              <li style={{ margin: '0 1rem' }}>
+                
+                <Link to="/productos">PRODUCTOS</Link>
+              </li>
+              <li style={{ margin: '0 1rem' }}>
+                
+                <Link to="/nosotras">NOSOTRAS</Link>
+              </li>
+            </ul>
+
+          <IconButton>
+      <img src= 'src/assets/images/PdM.png' alt="Cart Icon" style={{ width: '5rem', height: '3rem' }} />
+    </IconButton>
+
           <Typography
             variant='h6'
             noWrap
             component='div'
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            
           </Typography>
-          <Search>
+          <Search border="2px solid #ecc">
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
-              placeholder='Search…'
+            <StyledInputBase border="2px solid #ecc" 
+              placeholder='Que productos buscas?'
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ flexGrow: 2 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
+            {/* <IconButton
               size='large'
               aria-label='show 4 new mails'
               color='inherit'
@@ -258,8 +283,8 @@ export default function NavBar() {
               >
                 <MailIcon />
               </Badge>
-            </IconButton>
-            <IconButton
+            </IconButton> */}
+            {/* <IconButton
               size='large'
               aria-label='show 17 new notifications'
               color='inherit'
@@ -270,17 +295,23 @@ export default function NavBar() {
               >
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
+
+<IconButton>
+<Link to="/Cart"> <img src= 'src/assets/images/Cart.png' alt="Cart Icon" style={{ width: '3.2rem', height: '3.2rem' }}
+      
+      /></Link>
+    </IconButton>
             <IconButton
-              size='large'
+              size='small'
               edge='end'
               aria-label='account of current user'
               aria-controls={menuId}
               aria-haspopup='true'
               onClick={handleProfileMenuOpen}
               color='inherit'
-            >
-              <AccountCircle />
+            >Log in
+              {/* <AccountCircle /> */}
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
