@@ -4,7 +4,7 @@ const NewsletterPop = () => {
   return (
     <div className="newsletter">
       <h2>
-        Suscríbete a nuestro newsletter y mantenete al dia con todas nuestras
+        Suscribíte a nuestro newsletter y mantenete al dia con todas nuestras
         novedades
       </h2>
       <form id="newsletter-form">
