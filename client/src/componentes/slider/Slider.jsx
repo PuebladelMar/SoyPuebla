@@ -24,15 +24,15 @@ function Slider(){
        navigation
        pagination={{ clickable: true }}
        scrollbar={{ draggable: true }}
-       autoplay={{ delay: 3000 }} // Cambia el intervalo de tiempo según tus preferencias (en milisegundos)
-       loop={true} // Habilita el bucle continuo
+       autoplay={{ delay: 3000 }} 
+       loop={true} 
 
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
     >
       <SwiperSlide>
-        {/* <img src='./images/slider/calza1.webp' ></img> */}
-        <Card/>
+     
+        {/* <Card/> */}
         </SwiperSlide>
       <SwiperSlide><img src='/images/slider/calza2.webp' ></img></SwiperSlide>
       <SwiperSlide><img src='/images/slider/top1.jpeg' ></img></SwiperSlide>
