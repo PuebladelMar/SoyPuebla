@@ -34,10 +34,10 @@ function Slider(){
         {/* <img src='./images/slider/calza1.webp' ></img> */}
         <Card/>
         </SwiperSlide>
-      <SwiperSlide><img src='./images/slider/calza2.webp' ></img></SwiperSlide>
-      <SwiperSlide><img src='./images/slider/top1.jpeg' ></img></SwiperSlide>
-      <SwiperSlide><img src='./images/slider/top2.webp' ></img></SwiperSlide>
-      <SwiperSlide><img  src='./images/slider/top3.jpeg' ></img></SwiperSlide>
+      <SwiperSlide><img src='/images/slider/calza2.webp' ></img></SwiperSlide>
+      <SwiperSlide><img src='/images/slider/top1.jpeg' ></img></SwiperSlide>
+      <SwiperSlide><img src='/images/slider/top2.webp' ></img></SwiperSlide>
+      <SwiperSlide><img  src='/images/slider/top3.jpeg' ></img></SwiperSlide>
       ...
     </Swiper>
         </div>
