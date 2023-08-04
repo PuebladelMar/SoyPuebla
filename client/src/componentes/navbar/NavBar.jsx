@@ -243,7 +243,7 @@ export default function NavBar() {
           </IconButton>
           <ul style={{ display: 'flex', listStyle: 'none' }}>
             <li style={{ margin: '0 1rem' }}>
-              <Link to='/'>INICIO</Link>
+              <Link to='/home'>INICIO</Link>
             </li>
             <li style={{ margin: '0 1rem' }}>
               <Link to='/products'>PRODUCTOS</Link>
