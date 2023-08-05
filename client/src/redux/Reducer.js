@@ -1,25 +1,57 @@
 import {
-    GET_PRODUCTS
-  } from "./ActionsTypes";
+  POST_ALL_COLOR,
+  GET_PRODUCTS,
+  POST_PRODUCTS,
+  POST_ALL_SIZES,
+  GET_ALL_CATEGORIES,
+  GET_ALL_SERIES,
+} from './ActionsTypes';
 
 let initialState = {
-    allProducts: [],
-  };
+  allProducts: [],
+  colorList: [],
+  sizesList: [],
+  categories: [],
+  series: [],
+};
 function rootReducer(state = initialState, action) {
-    switch (action.type) {
-      case GET_PRODUCTS:
-        return {
-          ...state,
-          allProducts: action.payload,
-         
-        };
-      default:
-        return state;
-    }
+  switch (action.type) {
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+
+    case GET_ALL_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload,
+      };
+    case GET_ALL_SERIES:
+      return {
+        ...state,
+        series: action.payload,
+      };
+
+    case POST_PRODUCTS:
+      return {
+        ...state,
+        // allProducts: [...state.allProducts, action.payload],
+      };
+    case POST_ALL_COLOR:
+      return {
+        ...state,
+        colorList: action.payload,
+      };
+    case POST_ALL_SIZES:
+      return {
+        ...state,
+        sizesList: action.payload,
+      };
+
+    default:
+      return state;
   }
-  
-  export default rootReducer;
-  
-  
-  
-  
+}
+
+export default rootReducer;
