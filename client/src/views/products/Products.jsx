@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getProducts, getProductsByName } from "../../redux/Actions";
 import CardContainer from "../../componentes/cardContainer/CardContainer";
 import SearchBar from "../../componentes/searchBar/SearchBar";
+import SearchBarAside from "../../componentes/sidebar/SideBar";
 
 function Products() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function Products() {
         handlerSubmitSearch={handlerSubmitSearch}
       />
       {ShowNoResultsAlert && <h1>No se encontró el producto</h1>}
+      <SearchBarAside/>
       <CardContainer products={allProducts} />
     </div>
   );
