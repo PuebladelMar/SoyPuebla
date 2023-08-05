@@ -11,7 +11,8 @@ const postSerie = require('../handlers/Products/postSerie');
 const deleteSeries=require("../handlers/Products/deleteSeries")
 const deleteCategory=require("../handlers/Products/deleteCategory")
 const deleteSize=require("../handlers/Products/deleteSize")
-const deleteProduct=require("../handlers/Products/deleteProduct.js")
+const deleteProduct=require("../handlers/Products/deleteProduct.js");
+const getSize = require('../handlers/Products/getSize');
 
 const productsRouter = Router();
 
@@ -26,6 +27,8 @@ productsRouter.post("/color", postColor);
 productsRouter.get("/category", getCategory);
 
 productsRouter.get("/series", getSeries);
+
+productsRouter.get("/size", getSize);
 
 productsRouter.post("/category", postCategory);
 
