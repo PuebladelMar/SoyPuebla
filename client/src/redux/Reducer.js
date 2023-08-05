@@ -2,7 +2,7 @@ import {
   POST_ALL_COLOR,
   GET_PRODUCTS,
   POST_PRODUCTS,
-  POST_ALL_SIZES,
+  GET_ALL_SIZES,
   GET_ALL_CATEGORIES,
   GET_ALL_SERIES,
 } from './ActionsTypes';
@@ -43,7 +43,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         colorList: action.payload,
       };
-    case POST_ALL_SIZES:
+    case GET_ALL_SIZES:
       return {
         ...state,
         sizesList: action.payload,
