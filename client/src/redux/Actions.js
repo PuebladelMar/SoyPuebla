@@ -26,7 +26,7 @@ export function getProducts() {
 export function getCategories() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/products');
+      const response = await axios('http://localhost:3001/products/category');
       dispatch({
         type: GET_ALL_CATEGORIES,
         payload: response.data,
@@ -41,13 +41,13 @@ export function getCategories() {
 export function getSeries() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/products');
+      const response = await axios('http://localhost:3001/products/series');
       dispatch({
         type: GET_ALL_SERIES,
         payload: response.data,
       });
     } catch (error) {
-      alert('Error al obtener los series');
+      alert('Error al obtener las series');
       // console.error('Error al obtener los productos:', error);
     }
   };

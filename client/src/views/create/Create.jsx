@@ -2,12 +2,15 @@ import './Create.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { postProducts, postColor } from '../../redux/Actions';
+import { postProducts, postColor, getSizes, getCategories, getSeries } from '../../redux/Actions';
 
 const Create = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const color = useSelector((state) => state.colorList);
+  const size = useSelector((state) => state.sizesList);
+  const categories = useSelector((state) => state.categories);
+  const series = useSelector((state) => state.series);
 
   const [createProduct, setCreateProduct] = useState({
     name: '',
@@ -63,6 +66,25 @@ const Create = () => {
     }
   }, [dispatch, color, createProduct]);
 
+  useEffect(() => {
+    if (!size.length) {
+      dispatch(getSizes());
+    }
+  }, [dispatch, size, createProduct]);
+
+  useEffect(() => {
+    if (!series.length) {
+      dispatch(getSeries());
+    }
+  }, [dispatch, series, createProduct]);
+
+  useEffect(() => {
+    if (!categories.length) {
+      dispatch(getCategories());
+    }
+  }, [dispatch, categories, createProduct]);
+
+
   const handleSelect = (event) => {
     setCreateProduct((state) => {
       if (event.target.name === 'color') {
@@ -77,6 +99,52 @@ const Create = () => {
       }
     });
   };
+
+  const handleSelectSeries = (event) => {
+    setCreateProduct((state) => {
+      if (event.target.name === 'series') {
+        if (!createProduct.series.includes(event.target.value)) {
+          return {
+            ...state,
+            series: [...state.series, event.target.value],
+          };
+        } else {
+          return { ...state, series: [...state.series] };
+        }
+      }
+    });
+  };
+
+
+  const handleSelectCategories = (event) => {
+    setCreateProduct((state) => {
+      if (event.target.name === 'category') {
+        if (!createProduct.category.includes(event.target.value)) {
+          return {
+            ...state,
+            category: [...state.category, event.target.value],
+          };
+        } else {
+          return { ...state, category: [...state.category] };
+        }
+      }
+    });
+  };
+
+  // const handleSelectSize = (event) => {
+  //   setCreateProduct((state) => {
+  //     if (event.target.name === 'size') {
+  //       if (!createProduct.size.includes(event.target.value)) {
+  //         return {
+  //           ...state,
+  //           size: [...state.size, event.target.value],
+  //         };
+  //       } else {
+  //         return { ...state, size: [...state.size] };
+  //       }
+  //     }
+  //   });
+  // };
 
   return (
     <div className='create-container'>
@@ -188,39 +256,87 @@ const Create = () => {
         <p className='error'>Emulamos error</p>
 
         <label htmlFor='size'>Talle: </label>
-        <input
-          type='json'
+        {/* <select
           name='size'
-          value={createProduct.size}
-          placeholder='Talle'
-          // required
-          className='custom-input'
-          onChange={handleChange}
-        />
+          placeholder='Talles'
+          defaultValue='def'
+          onChange={handleSelectSize}
+          required
+        >
+          <option
+            value='def'
+            key='def'
+            disabled
+          >
+            Selecciona uno o varios talles.
+          </option>
+          {size.map((el) => {
+            return (
+              <option
+                value={el.id}
+                key={el.id}
+              >
+                {el.name}
+              </option>
+            );
+          })}
+        </select> */}
         <p className='error'>Emulamos error</p>
 
         <label htmlFor='series'>Coleccion: </label>
-        <input
-          type='json'
+        <select
           name='series'
-          value={createProduct.series}
           placeholder='Coleccion'
-          // required
-          className='custom-input'
-          onChange={handleChange}
-        />
+          defaultValue='def'
+          onChange={handleSelectSeries}
+          required
+        >
+          <option
+            value='def'
+            key='def'
+            disabled
+          >
+            Selecciona uno o varios talles.
+          </option>
+          {series.map((el) => {
+            return (
+              <option
+                value={el.id}
+                key={el.id}
+              >
+                {el.name}
+              </option>
+            );
+          })}
+        </select>
         <p className='error'>Emulamos error</p>
 
         <label htmlFor='category'>Categoria: </label>
-        <input
-          type='json'
+        <select
           name='category'
-          value={createProduct.category}
           placeholder='Categoria'
-          // required
-          className='custom-input'
-          onChange={handleChange}
-        />
+          defaultValue='def'
+          onChange={handleSelectCategories}
+          required
+        >
+          <option
+            value='def'
+            key='def'
+            disabled
+          >
+            Selecciona uno o varios talles.
+          </option>
+          {categories.map((el) => {
+            return (
+              <option
+                value={el.id}
+                key={el.id}
+              >
+                {el.name}
+              </option>
+            );
+          })}
+        </select>
         <p className='error'>Emulamos error</p>
 
         <label htmlFor='description'>Descripcion: </label>
