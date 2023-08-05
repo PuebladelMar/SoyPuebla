@@ -9,6 +9,7 @@ import Cart from './views/cart/Cart';
 import Pay from './views/cart/Pay';
 import Create from './views/create/Create';
 import Login from './views/login/Login';
+import Detail from './views/detail/Detail';
 import { Routes, Route } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from "react-redux";
@@ -58,6 +59,10 @@ function App() {
         <Route
           path='/login'
           element={<Login />}
+        />
+        <Route
+          path='/products/:id'
+          element={<Detail />}
         />
       </Routes>
       {pathname !== '/' && <Footer />}{' '}
