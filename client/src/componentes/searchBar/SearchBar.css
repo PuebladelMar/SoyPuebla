@@ -1,0 +1,27 @@
+/* Estilos de la barra de búsqueda */
+.search-container {
+    position: relative;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.15);
+    margin-right: 16px;
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .search-icon {
+    padding: 10px;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .search-input {
+    color: inherit;
+    padding: 8px 8px 8px calc(1em + 32px);
+    /* vertical padding + font size from searchIcon */
+    width: 100%;
+  }
+  

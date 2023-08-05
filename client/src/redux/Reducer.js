@@ -5,7 +5,8 @@ import {
   GET_ALL_SIZES,
   GET_ALL_CATEGORIES,
   GET_ALL_SERIES,
-} from './ActionsTypes';
+  GET_PRODUCTS_BY_NAME,
+} from "./ActionsTypes";
 
 let initialState = {
   allProducts: [],
@@ -47,6 +48,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         sizesList: action.payload,
+      };
+
+    case GET_PRODUCTS_BY_NAME:
+      return {
+        ...state,
+        allProducts: action.payload,
       };
 
     default:
