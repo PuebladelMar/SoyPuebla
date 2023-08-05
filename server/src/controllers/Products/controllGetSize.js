@@ -1,8 +1,8 @@
-const { Categories} = require("../../db.js");
+const { Sizes } = require("../../db.js");
 
 const controllGetSize = async () => {
-  const categoriesList = await Categories.findAll();
-  return categoriesList;
+  const sizeList = await Sizes.findAll();
+  return sizeList;
 };
 
 module.exports = controllGetSize;
