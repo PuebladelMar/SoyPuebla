@@ -6,6 +6,7 @@ import {
   POST_PRODUCTS,
   GET_ALL_CATEGORIES,
   GET_ALL_SERIES,
+  GET_PRODUCTS_BY_NAME,
 } from './ActionsTypes';
 
 export function getProducts() {
@@ -92,6 +93,23 @@ export function postProducts(createProduct) {
       });
     } catch (error) {
       console.log(error);
+    }
+  };
+}
+
+export function getProductsByName(name) {
+  return async function (dispatch) {
+    try {
+      const response = await axios(
+        `http://localhost:3001/products?name=${name}`
+      );
+      dispatch({
+        type: GET_PRODUCTS_BY_NAME,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert("Error al obtener las coincidencias");
+      console.error("Error al obtener las coincidencias:", error);
     }
   };
 }
