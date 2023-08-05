@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
+import { Link } from 'react-router-dom';
 
 
 
@@ -14,6 +15,7 @@ export default function Cardx({ product }) {
 
 
   const {
+    id,
     name,
     price,
     mainImage,
@@ -24,6 +26,9 @@ export default function Cardx({ product }) {
 
 
   return (
+
+    <Link to={`/products/${id}`}>
+         
     <Card sx={{ maxWidth: 345 }}>
   
       <CardMedia
@@ -35,7 +40,7 @@ export default function Cardx({ product }) {
         }}
         image={mainImage}
         alt="Item"
-      />
+        />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {name}
@@ -56,5 +61,6 @@ export default function Cardx({ product }) {
       </CardActions>
      
     </Card>
+        </Link>
   );
 }
