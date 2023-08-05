@@ -1,8 +1,14 @@
-import './Create.css';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-import { postProducts, postColor, getSizes, getCategories, getSeries } from '../../redux/Actions';
+import "./Create.css";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import {
+  postProducts,
+  postColor,
+  getSizes,
+  getCategories,
+  getSeries,
+} from "../../redux/Actions";
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -13,14 +19,14 @@ const Create = () => {
   const series = useSelector((state) => state.series);
 
   const [createProduct, setCreateProduct] = useState({
-    name: '',
+    name: "",
     price: 0,
-    mainImage: '',
+    mainImage: "",
     image: [],
     sale: false,
     color: [],
     size: [],
-    description: '',
+    description: "",
     series: [],
     category: [],
   });
@@ -41,19 +47,19 @@ const Create = () => {
       !createProduct.mainImage ||
       !createProduct.description
     ) {
-      alert('Debes llenar todos los campos');
+      alert("Debes llenar todos los campos");
     } else {
       dispatch(postProducts(createProduct));
-      alert('Su producto se creo correctamente');
+      alert("Su producto se creo correctamente");
       setCreateProduct({
-        name: '',
+        name: "",
         price: 0,
-        mainImage: '',
+        mainImage: "",
         image: [],
         sale: false,
         color: [],
         size: [],
-        description: '',
+        description: "",
         series: [],
         category: [],
       });
@@ -84,10 +90,9 @@ const Create = () => {
     }
   }, [dispatch, categories, createProduct]);
 
-
   const handleSelect = (event) => {
     setCreateProduct((state) => {
-      if (event.target.name === 'color') {
+      if (event.target.name === "color") {
         if (!createProduct.color.includes(event.target.value)) {
           return {
             ...state,
@@ -102,7 +107,7 @@ const Create = () => {
 
   const handleSelectSeries = (event) => {
     setCreateProduct((state) => {
-      if (event.target.name === 'series') {
+      if (event.target.name === "series") {
         if (!createProduct.series.includes(event.target.value)) {
           return {
             ...state,
@@ -115,10 +120,9 @@ const Create = () => {
     });
   };
 
-
   const handleSelectCategories = (event) => {
     setCreateProduct((state) => {
-      if (event.target.name === 'category') {
+      if (event.target.name === "category") {
         if (!createProduct.category.includes(event.target.value)) {
           return {
             ...state,
@@ -131,230 +135,187 @@ const Create = () => {
     });
   };
 
-  // const handleSelectSize = (event) => {
-  //   setCreateProduct((state) => {
-  //     if (event.target.name === 'size') {
-  //       if (!createProduct.size.includes(event.target.value)) {
-  //         return {
-  //           ...state,
-  //           size: [...state.size, event.target.value],
-  //         };
-  //       } else {
-  //         return { ...state, size: [...state.size] };
-  //       }
-  //     }
-  //   });
-  // };
+  const handleSelectSize = (event) => {
+    setCreateProduct((state) => {
+      if (event.target.name === "size") {
+        if (!createProduct.size.includes(event.target.value)) {
+          return {
+            ...state,
+            size: [...state.size, event.target.value],
+          };
+        } else {
+          return { ...state, size: [...state.size] };
+        }
+      }
+    });
+  };
 
   return (
-    <div className='create-container'>
-      {console.log(createProduct)}
-      <form
-        className='create-form'
-        // onSubmit={(event) => handleSubmit(event)}
-      >
-        <label htmlFor='name'>Nombre: </label>
+    <div className="create-container">
+      
+
+      <form className="create-form">
+        <label htmlFor="name">Nombre: </label>
         <input
-          type='string'
-          name='name'
+          type="string"
+          name="name"
           value={createProduct.name}
-          placeholder='Nombre'
+          placeholder="Nombre"
           required
-          className='custom-input'
+          className="custom-input"
           onChange={handleChange}
         />
-        <p className='error'>Emulamos error</p>
+        <p className="error">Emulamos error</p>
 
-        <label htmlFor='price'>Precio: </label>
+        <label htmlFor="price">Precio: </label>
         <input
-          type='decimal'
-          name='price'
+          type="decimal"
+          name="price"
           value={createProduct.price}
-          placeholder='Precio'
+          placeholder="Precio"
           // required
-          className='custom-input'
+          className="custom-input"
           onChange={handleChange}
         />
-        <p className='error'>Emulamos error</p>
+        <p className="error">Emulamos error</p>
 
-        <label htmlFor='mainImage'>Imagen Principal: </label>
+        <label htmlFor="mainImage">Imagen Principal: </label>
         <textarea
-          type='text'
-          name='mainImage'
+          type="text"
+          name="mainImage"
           value={createProduct.mainImage}
-          placeholder='Main Image'
+          placeholder="Main Image"
           required
-          className='custom-textarea'
+          className="custom-textarea"
           onChange={handleChange}
         />
-        <p className='error'>Emulamos error</p>
+        <p className="error">Emulamos error</p>
 
-        <label htmlFor='image'>Imagen: </label>
+        <label htmlFor="image">Imagen: </label>
         <input
-          type='json'
-          name='image'
+          type="json"
+          name="image"
           value={createProduct.image}
-          placeholder='Imagen'
+          placeholder="Imagen"
           // required
-          className='custom-input'
+          className="custom-input"
           onChange={handleChange}
         />
-        <p className='error'>Emulamos error</p>
+        <p className="error">Emulamos error</p>
 
-        <label htmlFor='sale'>Oferta: </label>
+        <label htmlFor="sale">Oferta: </label>
         <select
-          name='sale'
-          type='boolean'
-          // value={createProduct.sale}
-          placeholder='Oferta'
-          className='custom-select'
-          defaultValue='def'
+          name="sale"
+          className="custom-select"
+          defaultValue={createProduct.sale} // Establece el valor predeterminado correctamente
           onChange={handleChange}
         >
-          <option
-            value='def'
-            key='def'
-          >
+          <option value={false} key="def">
             False
           </option>
-          <option
-            value='def'
-            key='def1'
-          >
+          <option value={true} key="def1">
             True
           </option>
         </select>
-        <p className='error'>Emulamos error</p>
+        <p className="error">Emulamos error</p>
 
-        <label htmlFor='color'>Color: </label>
+        <label htmlFor="color">Color: </label>
 
         <select
-          name='color'
-          placeholder='Colores'
-          defaultValue='def'
+          name="color"
+          placeholder="Colores"
+          defaultValue="def"
           onChange={handleSelect}
           required
         >
-          <option
-            value='def'
-            key='def'
-            disabled
-          >
+          <option value="def" key="def" disabled>
             Selecciona uno o varios colores.
           </option>
           {color.map((el) => {
             return (
-              <option
-                value={el.id}
-                key={el.id}
-              >
+              <option value={el.name} key={el.id}>
                 {el.name}
               </option>
             );
           })}
         </select>
-        <p className='error'>Emulamos error</p>
+        <p className="error">Emulamos error</p>
 
-        <label htmlFor='size'>Talle: </label>
-        {/* <select
-          name='size'
-          placeholder='Talles'
-          defaultValue='def'
+        <label htmlFor="size">Talle: </label>
+        <select
+          name="size"
+          placeholder="Talles"
+          defaultValue="def"
           onChange={handleSelectSize}
           required
         >
-          <option
-            value='def'
-            key='def'
-            disabled
-          >
+          <option value="def" key="def" disabled>
             Selecciona uno o varios talles.
           </option>
           {size.map((el) => {
             return (
-              <option
-                value={el.id}
-                key={el.id}
-              >
+              <option value={el.name} key={el.id}>
                 {el.name}
               </option>
             );
           })}
-        </select> */}
-        <p className='error'>Emulamos error</p>
+        </select>
+        <p className="error">Emulamos error</p>
 
-        <label htmlFor='series'>Coleccion: </label>
+        <label htmlFor="series">Coleccion: </label>
         <select
-          name='series'
-          placeholder='Coleccion'
-          defaultValue='def'
+          name="series"
+          placeholder="Coleccion"
+          defaultValue="def"
           onChange={handleSelectSeries}
           required
         >
-          <option
-            value='def'
-            key='def'
-            disabled
-          >
+          <option value="def" key="def" disabled>
             Selecciona uno o varios talles.
           </option>
           {series.map((el) => {
             return (
-              <option
-                value={el.id}
-                key={el.id}
-              >
+              <option value={el.name} key={el.id}>
                 {el.name}
               </option>
             );
           })}
         </select>
-        <p className='error'>Emulamos error</p>
+        <p className="error">Emulamos error</p>
 
-        <label htmlFor='category'>Categoria: </label>
+        <label htmlFor="category">Categoria: </label>
         <select
-          name='category'
-          placeholder='Categoria'
-          defaultValue='def'
+          name="category"
+          placeholder="Categoria"
+          defaultValue="def"
           onChange={handleSelectCategories}
           required
         >
-          <option
-            value='def'
-            key='def'
-            disabled
-          >
+          <option value="def" key="def" disabled>
             Selecciona uno o varios talles.
           </option>
           {categories.map((el) => {
             return (
-              <option
-                value={el.id}
-                key={el.id}
-              >
+              <option value={el.name} key={el.id}>
                 {el.name}
               </option>
             );
           })}
         </select>
-        <p className='error'>Emulamos error</p>
+        <p className="error">Emulamos error</p>
 
-        <label htmlFor='description'>Descripcion: </label>
+        <label htmlFor="description">Descripcion: </label>
         <textarea
-          type='text'
-          name='description'
-          placeholder='Descripcion'
+          type="text"
+          name="description"
+          placeholder="Descripcion"
           required
-          className='custom-textarea'
+          className="custom-textarea"
           onChange={handleChange}
         />
-        <p className='error'>Emulamos error</p>
+        <p className="error">Emulamos error</p>
       </form>
-      <button
-        className='submit-button'
-        type='submit'
-        onClick={handleSubmit}
-      >
+      <button className="submit-button" type="submit" onClick={handleSubmit}>
         Crear
       </button>
     </div>
