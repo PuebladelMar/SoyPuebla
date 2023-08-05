@@ -16,13 +16,13 @@ const Create = () => {
     name: '',
     price: 0,
     mainImage: '',
-    image: [''],
+    image: [],
     sale: false,
-    color: [''],
-    size: [''],
+    color: [],
+    size: [],
     description: '',
-    series: [''],
-    category: [''],
+    series: [],
+    category: [],
   });
 
   const handleChange = (event) => {
@@ -49,13 +49,13 @@ const Create = () => {
         name: '',
         price: 0,
         mainImage: '',
-        image: [''],
+        image: [],
         sale: false,
-        color: [''],
-        size: [''],
+        color: [],
+        size: [],
         description: '',
-        series: [''],
-        category: [''],
+        series: [],
+        category: [],
       });
     }
   };
