@@ -12,6 +12,8 @@ const deleteSeries=require("../handlers/Products/deleteSeries")
 const deleteCategory=require("../handlers/Products/deleteCategory")
 const deleteSize=require("../handlers/Products/deleteSize")
 const deleteProduct=require("../handlers/Products/deleteProduct.js")
+const postReview = require("../handlers/Reviews/postReviews");
+const getReviewsById = require("../handlers/Reviews/getReviewsById");
 
 const productsRouter = Router();
 
@@ -31,6 +33,8 @@ productsRouter.post("/category", postCategory);
 
 productsRouter.post("/series", postSerie);
 
+productsRouter.post("/review", postReview);
+
 productsRouter.delete("/:id", deleteProduct)
 
 productsRouter.delete("/size/:id", deleteSize);
@@ -38,6 +42,8 @@ productsRouter.delete("/size/:id", deleteSize);
 productsRouter.delete("/category/:id", deleteCategory);
 
 productsRouter.delete("/series/:id", deleteSeries);
+
+productsRouter.get("/review/:id", getReviewsById);
 
 productsRouter.get("/:id", getProductsById);
 
