@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  POST_ALL_SIZES,
+  GET_ALL_SIZES,
   POST_ALL_COLOR,
   GET_PRODUCTS,
   POST_PRODUCTS,
@@ -53,12 +53,12 @@ export function getSeries() {
   };
 }
 
-export function postSizes() {
+export function getSizes() {
   return async function (dispatch) {
     try {
-      const response = await axios.post('http://localhost:3001/products/size');
+      const response = await axios('http://localhost:3001/products/size');
       dispatch({
-        type: POST_ALL_SIZES,
+        type: GET_ALL_SIZES,
         payload: response.data,
       });
     } catch (error) {
