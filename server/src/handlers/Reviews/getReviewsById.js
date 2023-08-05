@@ -1,4 +1,4 @@
-const { getReviewsById } = require("./../../controllers/Reviews/controllGetReviewsById")
+const getReviewsById = require("../../controllers/Reviews/controllGetReviewsById");
 
 const getReviews = async (req, res) => {
   const { id } = req.params;
