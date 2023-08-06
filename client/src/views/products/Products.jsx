@@ -12,14 +12,27 @@ function Products() {
   const [searchValue, setSearchValue] = useState();
   const [apllyFilters, setApllyFilters] = useState({});
   const [ShowNoResultsAlert, setShowNoResultsAlert] = useState(false);
+  const [filters, setFilters] = useState({
+    color: null,
+    size: null,
+    category: null,
+    serie: null,
+    sale: null,
+    minPrice: null,
+    maxPrice: null,
+    order: null,
+    name: null
+  });
 
   //Logica del paginado
 
   useEffect(() => {
     !searchValue ? dispatch(getProducts()) : dispatch(getProductsByName(searchValue));
-    !apllyFilters ? null : dispatch(filterProducts(apllyFilters.filterType, apllyFilters.name)); 
+  }, [dispatch, searchValue]);
 
-  }, [dispatch, searchValue, apllyFilters]);
+  useEffect(()=>{
+    dispatch(filterProducts(filters));
+  }, [filters]);
 
   useEffect(() => {
     setShowNoResultsAlert(allProducts.length === 0);
@@ -34,22 +47,39 @@ function Products() {
     event.preventDefault();
   };
 
-  const handlerEventSideBar = (event) => {
+  const handleChange = (event) => {
     event.preventDefault();
-    if (event.target.name === "limpiar Filtros") {
-      setApllyFilters({});
-    } else if (event.target.name === "sale") {
-      setApllyFilters({ filterType: event.target.name, name: true });
+    const { name, value } = event.target;
+    const nullOptions = ["null", "Todas las categorías", "Todos los colores", "Todos las tallas", "Todos las series"];
+    if (name === "sale") {
+      const newValue = filters.sale === true ? null : true;
+      setFilters({ ...filters, [name]: newValue });
     } else {
-      setApllyFilters({ filterType: event.target.name, name: event.target.value });
+      const newValue = nullOptions.includes(value) ? null : value;
+      setFilters({ ...filters, [name]: newValue });
     }
   };
+
+  const resetFilters = (event) => {
+    event.preventDefault();
+    setFilters({
+      color: null,
+      size: null,
+      category: null,
+      serie: null,
+      sale: null,
+      minPrice: null,
+      maxPrice: null,
+      order: null,
+      name: null
+    })
+  }
 
   return (
     <div>
       <SearchBar handlerEventSearch={handlerEventSearch} handlerSubmitSearch={handlerSubmitSearch}/>
       {ShowNoResultsAlert && <h1>No se encontró el producto</h1>}
-      <SideBar handlerEventSideBar={handlerEventSideBar} />
+      <SideBar handlerEventSideBar={handleChange} resetFilters={resetFilters} />
       <CardContainer products={allProducts} />
     </div>
   );

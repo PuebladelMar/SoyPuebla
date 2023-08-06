@@ -105,7 +105,7 @@ const controllGetProducts = async (req) => {
     filterProducts = response;
   }
 
-  if (sale) {
+  if (sale === 'true') {
     const response = filterProducts.filter((product) => product.sale === true);
     filterProducts = response;
   }

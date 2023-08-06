@@ -20,7 +20,6 @@ export function getProducts() {
       });
     } catch (error) {
       alert("Error al obtener los productos");
-      // console.error('Error al obtener los productos', error);
     }
   };
 }
@@ -35,7 +34,6 @@ export function getCategories() {
       });
     } catch (error) {
       alert("Error al obtener los categorias");
-      // console.error('Error al obtener los productos:', error);
     }
   };
 }
@@ -50,7 +48,6 @@ export function getSeries() {
       });
     } catch (error) {
       alert("Error al obtener las series");
-      // console.error('Error al obtener los productos:', error);
     }
   };
 }
@@ -65,7 +62,6 @@ export function getSizes() {
       });
     } catch (error) {
       alert("Error al obtener los talles");
-      // console.error('Error al obtener los productos:', error);
     }
   };
 }
@@ -80,7 +76,6 @@ export function postColor() {
       });
     } catch (error) {
       alert("Error al obtener los colores");
-      // console.error('Error al obtener los productos:', error);
     }
   };
 }
@@ -115,19 +110,27 @@ export function getProductsByName(name) {
   };
 }
 
-export function filterProducts(filterType, name) {
+export function filterProducts(filters) {
   return async function (dispatch) {
     try {
-      const response = await axios(
-        `http://localhost:3001/products?${filterType}=${name}`
-      );
+      const queryParams = Object.entries(filters)
+        .map(([key, value]) => {
+          if (value !== null && value !== "") {
+            return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+          }
+          return null;
+        })
+        .filter((query) => query !== null)
+        .join("&");
+      const response = await axios.get(`http://localhost:3001/products?${queryParams}`);
+
       dispatch({
         type: GET_FILTERED_PRODUCTS,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al filtrar ${filterType}");
-      console.error("Error al filtrar ${filterType}", error);
+      alert(`Error al filtrar ${filterType}`);
+      console.error(`Error al filtrar ${filterType}`, error);
     }
   };
 }
