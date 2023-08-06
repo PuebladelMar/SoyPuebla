@@ -90,15 +90,15 @@ function SideBar({ handlerEventSideBar }) {
           <h2>Filtrar por serie</h2>
           <select name="serie">
             <option value="">Todos las series</option>
-            {series.map((serie, index) => (
-              <option key={index} value={serie.name}>
-                {serie.name}
+            {series.map((series, index) => (
+              <option key={index} value={series.name}>
+                {series.name}
               </option>
             ))}
           </select>
         </li>
         <li>
-          <h2>ordenar por precio</h2>
+          <h2>Ordenar por precio</h2>
           <select name="order">
             <option value="">Todos los precios</option>
             <option value="Precio Ascendente">Precio ascendente</option>
@@ -107,14 +107,14 @@ function SideBar({ handlerEventSideBar }) {
         </li>
         <label>Precio máximo</label>
         <input
-          name="Precio Descendente"
+          name="maxPrice"
           placeholder="Precio máximo"
           value={maxPrice}
           onChange={handlePrecioMaximoChange}
         />
         <label>Precio mínimo</label>
         <input
-          name="Precio Ascendente"
+          name="minPrice"
           placeholder="Precio mínimo"
           value={minPrice}
           onChange={handlePrecioMinimoChange}

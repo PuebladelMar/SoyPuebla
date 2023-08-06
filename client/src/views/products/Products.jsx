@@ -8,7 +8,6 @@ import SideBar from "../../componentes/sidebar/SideBar";
 function Products() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
-  const fileredProducts = useSelector((state) => state.fileredProducts);
 
   const [searchValue, setSearchValue] = useState();
   const [apllyFilters, setApllyFilters] = useState({});
