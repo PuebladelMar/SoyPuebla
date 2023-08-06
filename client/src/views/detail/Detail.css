@@ -1,0 +1,76 @@
+.nameDetail{
+
+    color:rgb(50, 50, 50) ;
+    font-weight: bolder;
+    position: relative;
+    margin-top: 5px;
+    font-family: 'Courier New';
+    font-size: 2.3em;
+
+} 
+
+.cardImgDetail{
+
+    height: 700px;
+    /* width: 700px; */
+    overflow: hidden;
+    /* border-radius: 20px; */
+    object-fit: cover;
+    
+   
+}
+
+.containerDetail{
+
+    background: rgba(250, 250, 250, 0.647);
+    padding: 3rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
+    /* border-radius: 2rem; */
+    
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7rem;
+  
+    /* width: 1200px;  */
+    max-width: 100%;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.secContainer{
+
+  
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 7rem;
+  
+    
+}
+
+p {
+    text-align: justify;
+  }
+
+  .botonX{
+    background: rgba(131, 131, 131, 0.766);
+    color: white;
+    border: .12em solid rgb(86, 86, 86);
+    font-size: 1.1rem;
+    padding: .25em .65em;
+    border-radius: 50%;
+    cursor: pointer;
+    
+    
+}
+
+.botonX:hover, .botonX:focus {
+
+    background: rgba(224, 3, 3, 0.766);
+
+}
