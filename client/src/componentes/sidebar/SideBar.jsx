@@ -13,7 +13,7 @@ function SideBar({ handlerEventSideBar }) {
   // Estados para los precios máximo y mínimo
   const [maxPrice, setMaxPrice] = useState("");
   const [minPrice, setMinPrice] = useState("");
-  const [enOferta, setEnOferta] = useState(false); // Estado para la opción "en oferta"
+  // const [enOferta, setEnOferta] = useState(false); // Estado para la opción "en oferta"
 
   useEffect(() => {
     dispatch(actions.postColor());
@@ -34,7 +34,6 @@ function SideBar({ handlerEventSideBar }) {
 
   const handlePrecioMinimoChange = (event) => {
     const value = event.target.value;
-
     if (/^\d*$/.test(value)) {
       setMinPrice(value);
 
@@ -44,20 +43,32 @@ function SideBar({ handlerEventSideBar }) {
     }
   };
 
-  const handleEnOfertaChange = (event) => {
-    setEnOferta(event.target.checked);
-    // Aquí puedes hacer lo que necesites con el estado de la opción "en oferta"
-  };
+  // const handleEnOfertaChange = (event) => {
+  //   event.preventDefault()
+  //   setEnOferta(event.target.checked);
+  //   // Aquí puedes hacer lo que necesites con el estado de la opción "en oferta"
+  // };
 
   return (
     <aside className="search-bar-aside">
       <form className="search-form" onChange={handlerEventSideBar}>
         <li className="li-filtros">
+          <li>
+            <h2>Filtrar por categoria</h2>
+            <select name="category">
+              <option value="">Todos las categorias</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </li>
           <h2>Filtrar por color</h2>
-          <select>
+          <select name="color">
             <option value="">Todos los colores</option>
             {colorList.map((color, index) => (
-              <option key={index} value={color}>
+              <option key={index} value={color.name}>
                 {color.name}
               </option>
             ))}
@@ -65,7 +76,7 @@ function SideBar({ handlerEventSideBar }) {
         </li>
         <li>
           <h2>Filtrar por tallas</h2>
-          <select>
+          <select name="size">
             <option value="">Todos las tallas</option>
             <option value="S">S</option>
             <option value="M">M</option>
@@ -77,47 +88,54 @@ function SideBar({ handlerEventSideBar }) {
         </li>
         <li>
           <h2>Filtrar por serie</h2>
-          <select>
+          <select name="serie">
             <option value="">Todos las series</option>
             {series.map((serie, index) => (
-              <option key={index} value={serie}>
+              <option key={index} value={serie.name}>
                 {serie.name}
               </option>
             ))}
           </select>
         </li>
         <li>
-          <h2>Filtrar por categoria</h2>
-          <select>
-            <option value="">Todos las categorias</option>
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
-                {category.name}
-              </option>
-            ))}
+          <h2>ordenar por precio</h2>
+          <select name="order">
+            <option value="">Todos los precios</option>
+            <option value="Precio Ascendente">Precio ascendente</option>
+            <option value="Precio Descendente">Precio descendente</option>
           </select>
         </li>
         <label>Precio máximo</label>
         <input
+          name="Precio Descendente"
           placeholder="Precio máximo"
           value={maxPrice}
           onChange={handlePrecioMaximoChange}
         />
         <label>Precio mínimo</label>
         <input
+          name="Precio Ascendente"
           placeholder="Precio mínimo"
           value={minPrice}
           onChange={handlePrecioMinimoChange}
         />
         <li>
-          <h2>Filtrar por oferta</h2>
-          <input
-            type="checkbox"
-            checked={enOferta}
-            onChange={handleEnOfertaChange}
-          />
-          <label>en oferta</label>
+          <button
+            type="button"
+            name="sale"
+            className="onSaleButton"
+            onClick={handlerEventSideBar}
+          >
+            ver productos en oferta
+          </button>
         </li>
+        <button
+          name="limpiar Filtros"
+          onClick={handlerEventSideBar}
+          className="reloadButton"
+        >
+          LimpiarFiltros
+        </button>
       </form>
     </aside>
   );

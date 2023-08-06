@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   GET_ALL_SIZES,
   POST_ALL_COLOR,
@@ -7,18 +7,19 @@ import {
   GET_ALL_CATEGORIES,
   GET_ALL_SERIES,
   GET_PRODUCTS_BY_NAME,
-} from './ActionsTypes';
+  GET_FILTERED_PRODUCTS,
+} from "./ActionsTypes";
 
 export function getProducts() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/products');
+      const response = await axios("http://localhost:3001/products");
       dispatch({
         type: GET_PRODUCTS,
         payload: response.data,
       });
     } catch (error) {
-      alert('Error al obtener los productos');
+      alert("Error al obtener los productos");
       // console.error('Error al obtener los productos', error);
     }
   };
@@ -27,13 +28,13 @@ export function getProducts() {
 export function getCategories() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/products/category');
+      const response = await axios("http://localhost:3001/products/category");
       dispatch({
         type: GET_ALL_CATEGORIES,
         payload: response.data,
       });
     } catch (error) {
-      alert('Error al obtener los categorias');
+      alert("Error al obtener los categorias");
       // console.error('Error al obtener los productos:', error);
     }
   };
@@ -42,13 +43,13 @@ export function getCategories() {
 export function getSeries() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/products/series');
+      const response = await axios("http://localhost:3001/products/series");
       dispatch({
         type: GET_ALL_SERIES,
         payload: response.data,
       });
     } catch (error) {
-      alert('Error al obtener las series');
+      alert("Error al obtener las series");
       // console.error('Error al obtener los productos:', error);
     }
   };
@@ -57,13 +58,13 @@ export function getSeries() {
 export function getSizes() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/products/size');
+      const response = await axios("http://localhost:3001/products/size");
       dispatch({
         type: GET_ALL_SIZES,
         payload: response.data,
       });
     } catch (error) {
-      alert('Error al obtener los talles');
+      alert("Error al obtener los talles");
       // console.error('Error al obtener los productos:', error);
     }
   };
@@ -72,13 +73,13 @@ export function getSizes() {
 export function postColor() {
   return async function (dispatch) {
     try {
-      const response = await axios.post('http://localhost:3001/products/color');
+      const response = await axios.post("http://localhost:3001/products/color");
       dispatch({
         type: POST_ALL_COLOR,
         payload: response.data,
       });
     } catch (error) {
-      alert('Error al obtener los colores');
+      alert("Error al obtener los colores");
       // console.error('Error al obtener los productos:', error);
     }
   };
@@ -110,6 +111,23 @@ export function getProductsByName(name) {
     } catch (error) {
       alert("Error al obtener las coincidencias");
       console.error("Error al obtener las coincidencias:", error);
+    }
+  };
+}
+
+export function filterProducts(filterType, name) {
+  return async function (dispatch) {
+    try {
+      const response = await axios(
+        `http://localhost:3001/products?${filterType}=${name}`
+      );
+      dispatch({
+        type: GET_FILTERED_PRODUCTS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert("Error al filtrar ${filterType}");
+      console.error("Error al filtrar ${filterType}", error);
     }
   };
 }
