@@ -4,60 +4,41 @@ import * as actions from "../../redux/Actions";
 import "./SideBAr.css";
 // import { color } from "@mui/system";
 
-function SideBar({ handlerEventSideBar }) {
+function SideBar({ handlerEventSideBar, resetFilters }) {
   const dispatch = useDispatch();
   const colorList = useSelector((state) => state.colorList);
   const series = useSelector((state) => state.series);
   const categories = useSelector((state) => state.categories);
+  const sizes = useSelector((state) => state.sizesList)
 
-  // Estados para los precios máximo y mínimo
-  const [maxPrice, setMaxPrice] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [enOferta, setEnOferta] = useState(false); // Estado para la opción "en oferta"
 
   useEffect(() => {
     dispatch(actions.postColor());
     dispatch(actions.getSeries());
     dispatch(actions.getCategories());
+    dispatch(actions.getSizes());
   }, [dispatch]);
-
-  const handlePrecioMaximoChange = (event) => {
-    const value = event.target.value;
-
-    if (/^\d*$/.test(value)) {
-      setMaxPrice(value);
-      if (minPrice !== "" && parseInt(value) < parseInt(minPrice)) {
-        setMinPrice(value);
-      }
-    }
-  };
-
-  const handlePrecioMinimoChange = (event) => {
-    const value = event.target.value;
-
-    if (/^\d*$/.test(value)) {
-      setMinPrice(value);
-
-      if (maxPrice !== "" && parseInt(value) > parseInt(maxPrice)) {
-        setMaxPrice(value);
-      }
-    }
-  };
-
-  const handleEnOfertaChange = (event) => {
-    setEnOferta(event.target.checked);
-    // Aquí puedes hacer lo que necesites con el estado de la opción "en oferta"
-  };
 
   return (
     <aside className="search-bar-aside">
       <form className="search-form" onChange={handlerEventSideBar}>
         <li className="li-filtros">
+          <li>
+            <h2>Filtrar por categoria</h2>
+            <select name="category">
+              <option value={null}>Todas las categorias</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </li>
           <h2>Filtrar por color</h2>
-          <select>
-            <option value="">Todos los colores</option>
+          <select name="color">
+            <option value={null}>Todos los colores</option>
             {colorList.map((color, index) => (
-              <option key={index} value={color}>
+              <option key={index} value={color.name}>
                 {color.name}
               </option>
             ))}
@@ -65,59 +46,64 @@ function SideBar({ handlerEventSideBar }) {
         </li>
         <li>
           <h2>Filtrar por tallas</h2>
-          <select>
-            <option value="">Todos las tallas</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="X">X</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
+          <select name="size">
+            <option value={null}>Todos las tallas</option>
+            {sizes.map((size, index)=> (
+              <option key={index} value={size.name}>
+                {size.name}
+              </option>
+            ))}
           </select>
         </li>
         <li>
           <h2>Filtrar por serie</h2>
-          <select>
-            <option value="">Todos las series</option>
-            {series.map((serie, index) => (
-              <option key={index} value={serie}>
-                {serie.name}
+          <select name="serie">
+            <option value={null}>Todos las series</option>
+            {series.map((series, index) => (
+              <option key={index} value={series.name}>
+                {series.name}
               </option>
             ))}
           </select>
         </li>
         <li>
-          <h2>Filtrar por categoria</h2>
-          <select>
-            <option value="">Todos las categorias</option>
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
-                {category.name}
-              </option>
-            ))}
+          <h2>Ordenar por precio</h2>
+          <select name="order">
+            <option value={null}>Todos los precios</option>
+            <option value="Precio Ascendente">Precio ascendente</option>
+            <option value="Precio Descendente">Precio descendente</option>
           </select>
         </li>
         <label>Precio máximo</label>
         <input
+          name="maxPrice"
           placeholder="Precio máximo"
-          value={maxPrice}
-          onChange={handlePrecioMaximoChange}
+
+          onChange={handlerEventSideBar}
         />
         <label>Precio mínimo</label>
         <input
+          name="minPrice"
           placeholder="Precio mínimo"
-          value={minPrice}
-          onChange={handlePrecioMinimoChange}
+          onChange={handlerEventSideBar}
         />
         <li>
-          <h2>Filtrar por oferta</h2>
-          <input
-            type="checkbox"
-            checked={enOferta}
-            onChange={handleEnOfertaChange}
-          />
-          <label>en oferta</label>
+          <button
+            type="button"
+            name="sale"
+            className="onSaleButton"
+            onClick={handlerEventSideBar}
+          >
+            ver productos en oferta
+          </button>
         </li>
+        <button
+          name="limpiar Filtros"
+          onClick={resetFilters}
+          className="reloadButton"
+        >
+          LimpiarFiltros
+        </button>
       </form>
     </aside>
   );

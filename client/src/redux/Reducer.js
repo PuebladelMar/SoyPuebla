@@ -6,6 +6,7 @@ import {
   GET_ALL_CATEGORIES,
   GET_ALL_SERIES,
   GET_PRODUCTS_BY_NAME,
+  GET_FILTERED_PRODUCTS
 } from "./ActionsTypes";
 
 let initialState = {
@@ -55,7 +56,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         allProducts: action.payload,
       };
-
+    case GET_FILTERED_PRODUCTS:
+      return  {
+     ...state,
+     allProducts: action.payload,
+      };
     default:
       return state;
   }

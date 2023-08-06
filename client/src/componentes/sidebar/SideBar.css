@@ -72,3 +72,11 @@
 li{
   list-style: none;
 }
+
+.reloadButton{
+ background-color: blueviolet;
+}
+
+.onSaleButton{
+  background-color: rgb(156, 226, 43);
+ }
