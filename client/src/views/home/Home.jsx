@@ -1,7 +1,7 @@
 import Slider from '../../componentes/slider/Slider';
 import Newsletter from '../../componentes/newsletter/newsletter';
 import SeriesContainer from '../../componentes/seriesContainer/SeriesContainer';
-import Reseñas from '../../componentes/reseñas/Reseñas';
+import Reviews from '../../componentes/reviews/Reviews';
 
 const Home = () => {
   return (
@@ -11,7 +11,7 @@ const Home = () => {
       <br />
       <SeriesContainer />
       <br />
-      <Reseñas />
+      <Reviews />
       <br />
       <Newsletter />
     </div>
