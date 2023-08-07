@@ -1,21 +1,15 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
+import { Box, AppBar, Toolbar, IconButton, Alert, } from "@mui/material";
 import Menu from "@mui/material/Menu";
-// import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
+import SearchBar from "../searchBar/SearchBar";
+import "../searchBar/SearchBar.css";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts, getProductsByName } from "../../redux/Actions";
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -43,39 +37,39 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
+// const StyledInputBase = styled(InputBase)(({ theme }) => ({
+//   color: "inherit",
+//   "& .MuiInputBase-input": {
+//     padding: theme.spacing(1, 1, 1, 0),
+//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+//     transition: theme.transitions.create("width"),
+//     width: "100%",
+//     [theme.breakpoints.up("md")]: {
+//       width: "20ch",
+//     },
+//   },
+// }));
 
-export default function NavBar() {
+export default function NavBar({ showSearchBar }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [searchValue, setSearchValue] = React.useState(""); //
+ 
 
-  const isMenuOpen = Boolean(anchorEl);
+//   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleProfileMenuOpen = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
+  // const handleMenuClose = () => {
+  //   setAnchorEl(null);
+  //   handleMobileMenuClose();
+  // };
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -83,23 +77,8 @@ export default function NavBar() {
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    <Menu>
+      
     </Menu>
   );
 
@@ -120,45 +99,45 @@ export default function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
+     
     </Menu>
   );
+
+  //Logica del paginado
+
+  const dispatch = useDispatch();
+  const allProducts = useSelector((state) => state.allProducts);
+
+  const [searchValue, setSearchValue] = useState("");
+  const [ShowNoResultsAlert, setShowNoResultsAlert] = useState(false);
+
+  useEffect(() => {
+    if (searchValue === "") {
+      dispatch(getProducts());
+    } else {
+      dispatch(getProductsByName(searchValue));
+    }
+  }, [dispatch, searchValue]);
+
+  useEffect(() => {
+    setShowNoResultsAlert(allProducts.length === 0);
+  }, [allProducts]);
+
+  const handlerEventSearch = (event) => {
+    event.preventDefault();
+
+    setSearchValue(event.target.value);
+    console.log(setSearchValue);
+  };
+
+  const handlerSubmitSearch = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: " #517f7F" }}>
-        <Toolbar>
+        <Toolbar sx={{ flexGrow: 1 }}>
           <IconButton
             size="large"
             edge="start"
@@ -166,7 +145,7 @@ export default function NavBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <IconButton>
+            <IconButton disableRipple>
               <Link to="/home">
                 <img
                   src="src/assets/images/TORTUGA_ROSA_SINFONDO.png"
@@ -190,23 +169,33 @@ export default function NavBar() {
               <Link to="/create">CREAR</Link>
             </li>
           </ul>
+          
 
-          <IconButton>
-            <img
-              src="src/assets/images/PdM.png"
-              alt="Cart Icon"
-              style={{ width: "5rem", height: "3rem" }}
-            />
-          </IconButton>
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          ></Typography>
-
+           <box sx={{flexGrow: 1}}>
+           
+            <IconButton sx= {{ width: "8rem", height: "4rem"}}  disableRipple>
+              <img className="img-pdm"
+                src="src/assets/images/PdM.png" // Reemplaza esta ruta con la ruta correcta hacia la imagen del logo
+                alt="Cart Icon"
+                style={{ width: "100%", height: "100%" }} // Ajusta el tamaño del logo para que ocupe todo el espacio del IconButton
+              />
+            </IconButton>
+            </box>
+        
           <Box sx={{ flexGrow: 2 }} />
+          <Box sx={{ marginLeft: "auto" }}></Box>
+          <SearchBar 
+        handlerEventSearch={handlerEventSearch}
+        handlerSubmitSearch={handlerSubmitSearch}
+      />
+                  {ShowNoResultsAlert && (
+              <Alert severity="error" className="error-searchBar">
+                No se encontró el producto
+              </Alert>
+            )}
+
+
+          <Box sx={{ flexGrow: 0 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton>
               <Link to="/Cart">
@@ -242,10 +231,10 @@ export default function NavBar() {
               <MoreIcon />
             </IconButton>
           </Box>
+          
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+      
     </Box>
   );
 }
