@@ -23,7 +23,7 @@ function Slider(){
        slidesPerView={2}
        navigation
        pagination={{ clickable: true }}
-       scrollbar={{ draggable: true }}
+      //  scrollbar={{ draggable: true }}
        autoplay={{ delay: 3000 }} 
        loop={true} 
 
