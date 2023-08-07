@@ -37,7 +37,7 @@ const PopUpNews = () => {
         <img
           src='src/assets/images/bannerpop.png'
           alt='Encabezado'
-          style={{ width: '100%', height: '100px', marginBottom: '0px' }}
+          style={{ width: '100%', height: '230px', marginBottom: '0px', objectFit: 'cover', }}
         />
         <NewsletterPop />
       </DialogContent>
