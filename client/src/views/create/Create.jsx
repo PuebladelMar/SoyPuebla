@@ -9,6 +9,7 @@ import {
   getCategories,
   getSeries,
 } from '../../redux/Actions';
+import validations from "./Validations"
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -17,59 +18,7 @@ const Create = () => {
   const size = useSelector((state) => state.sizesList);
   const categories = useSelector((state) => state.categories);
   const series = useSelector((state) => state.series);
-  // const [errors, setErrors] = useState({});
-
-  // const Validations = (createProduct) => {
-  //   let errors = {};
-
-  //   if (!createProduct.name)
-  //     errors.name = 'Debes proveer un nombre al producto.';
-  //   else if (createProduct.name.length > 30)
-  //     errors.name = 'Demasiados caracteres.';
-  //   else if (
-  //     /[^a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+/g.test(
-  //       createProduct.name
-  //     )
-  //   )
-  //     errors.name = 'Nombre debe tener solo letras.';
-
-  //   if (!createProduct.description) {
-  //     errors.description = 'Descripcion vacia.';
-  //   } else if (createProduct.description.length > 300) {
-  //     errors.description = 'Demasiados caracteres.';
-  //   }
-
-  //   if (!createProduct.price) {
-  //     errors.price = 'Sin precio';
-  //   } else if (createProduct.price < 0) {
-  //     errors.createProduct = 'No puede ser un numero negativo';
-  //   }
-
-  //   if (createProduct.color.length === 0) {
-  //     errors.color = 'Selecciona por lo menos un color';
-  //   }
-
-  //   if (
-  //     !createProduct.mainImage &&
-  //     !createProduct.mainImage.match(
-  //       /(http[s]*:\/\/)([a-z\-_0-9/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_/._~:?#[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png|gif)/i
-  //     )
-  //   ) {
-  //     errors.mainImage = 'Invalid image, must be a URL';
-  //   }
-
-  //   if (createProduct.size.length === 0) {
-  //     errors.size = 'Selecciona por lo menos un talle';
-  //   }
-
-  //   if (createProduct.category.length === 0) {
-  //     errors.category = 'Seleccione una categoría';
-  //   }
-  //   if (createProduct.series.length === 0) {
-  //     errors.series = 'Seleccione una coleccion';
-  //   }
-  //   return errors;
-  // };
+  const [errors, setErrors] = useState({});
 
   const [createProduct, setCreateProduct] = useState({
     name: '',
@@ -85,9 +34,9 @@ const Create = () => {
   });
 
   useEffect(() => {
-    // if (Validations(createProduct)) {
-    //   setErrors(Validations(createProduct));
-    // }
+    if (validations(createProduct)) {
+      setErrors(validations(createProduct));
+    }
 
     if (!color.length) {
       dispatch(postColor());
@@ -95,9 +44,9 @@ const Create = () => {
   }, [dispatch, color, createProduct]);
 
   useEffect(() => {
-    // if (Validations(createProduct)) {
-    //   setErrors(Validations(createProduct));
-    // }
+    if (validations(createProduct)) {
+    setErrors(validations(createProduct));
+    }
 
     if (!size.length) {
       dispatch(getSizes());
@@ -105,9 +54,9 @@ const Create = () => {
   }, [dispatch, size, createProduct]);
 
   useEffect(() => {
-    // if (Validations(createProduct)) {
-    //   setErrors(Validations(createProduct));
-    // }
+    if (validations(createProduct)) {
+    setErrors(validations(createProduct));
+    }
 
     if (!series.length) {
       dispatch(getSeries());
@@ -115,9 +64,9 @@ const Create = () => {
   }, [dispatch, series, createProduct]);
 
   useEffect(() => {
-    // if (Validations(createProduct)) {
-    //   setErrors(Validations(createProduct));
-    // }
+    if (validations(createProduct)) {
+      setErrors(validations(createProduct));
+    }
 
     if (!categories.length) {
       dispatch(getCategories());
@@ -125,18 +74,8 @@ const Create = () => {
   }, [dispatch, categories, createProduct]);
 
   const handleChange = (event) => {
-    // const { name, value } = event.target;
-    setCreateProduct({
-      ...createProduct,
-      [event.target.name]: event.target.value,
-    });
-    // setErrors(
-    //   Validations({
-    //     ...createProduct,
-    //     [event.target.name]: event.target.value,
-    //   })
-    // );
-    // };
+    setCreateProduct({...createProduct, [event.target.name]: event.target.value,});
+    setErrors(validations({...createProduct, [event.target.name]: event.target.value}));
   };
 
   const handleSubmit = (event) => {
@@ -155,7 +94,6 @@ const Create = () => {
       alert('Debes llenar todos los campos');
     } else {
       dispatch(postProducts(createProduct));
-      alert('Su producto se creo correctamente');
       setCreateProduct({
         name: '',
         price: 0,
@@ -184,12 +122,7 @@ const Create = () => {
         }
       }
     });
-    // setErrors(
-    //   Validations({
-    //     ...createProduct,
-    //     [event.target.name]: event.target.value,
-    //   })
-    // );
+    setErrors(validations({...createProduct, [event.target.name]: event.target.value}));
   };
 
   const handleSelectSeries = (event) => {
@@ -205,12 +138,7 @@ const Create = () => {
         }
       }
     });
-    // setErrors(
-    //   Validations({
-    //     ...createProduct,
-    //     [event.target.name]: event.target.value,
-    //   })
-    // );
+    setErrors(validations({...createProduct, [event.target.name]: event.target.value}));
   };
 
   const handleSelectCategories = (event) => {
@@ -226,12 +154,7 @@ const Create = () => {
         }
       }
     });
-    // setErrors(
-    //   Validations({
-    //     ...createProduct,
-    //     [event.target.name]: event.target.value,
-    //   })
-    // );
+    setErrors(validations({...createProduct, [event.target.name]: event.target.value}));
   };
 
   const handleSelectSize = (event) => {
@@ -247,12 +170,7 @@ const Create = () => {
         }
       }
     });
-    // setErrors(
-    //   Validations({
-    //     ...createProduct,
-    //     [event.target.name]: event.target.value,
-    //   })
-    // );
+    setErrors(validations({...createProduct, [event.target.name]: event.target.value}));
   };
 
   const handleDeleteColor = (event) => {
@@ -296,7 +214,7 @@ const Create = () => {
           className='custom-input'
           onChange={(event) => handleChange(event)}
         />
-        <p className='error'>Emulamos error</p>
+        <p className='error'>{errors.name}</p>
 
         <label htmlFor='price'>Precio: </label>
         <input
@@ -308,7 +226,7 @@ const Create = () => {
           className='custom-input'
           onChange={handleChange}
         />
-        <p className='error'>Emulamos error</p>
+        <p className='error'>{errors.price}</p>
 
         <label htmlFor='mainImage'>Imagen Principal: </label>
         <textarea
@@ -320,7 +238,7 @@ const Create = () => {
           className='custom-textarea'
           onChange={handleChange}
         />
-        <p className='error'>Emulamos error</p>
+        <p className='error'>{errors.mainImage}</p>
 
         <label htmlFor='image'>Imagen: </label>
         <input
@@ -345,13 +263,13 @@ const Create = () => {
             value={false}
             key='def'
           >
-            False
+            No
           </option>
           <option
             value={true}
             key='def1'
           >
-            True
+            Si
           </option>
         </select>
         {/* <p className='error'>Emulamos error</p> */}
@@ -383,7 +301,7 @@ const Create = () => {
             );
           })}
         </select>
-        <p className='error'>Emulamos error</p>
+        <p className='error'>{errors.color}</p>
 
         <div>
           {createProduct.color.length > 0 ? (
@@ -394,7 +312,7 @@ const Create = () => {
               </div>
             ))
           ) : (
-            <p className='no-dietTypes'>No hay colores seleccionados.</p>
+            <p className='no-dietTypes'></p>
           )}
         </div>
 
@@ -424,7 +342,7 @@ const Create = () => {
             );
           })}
         </select>
-        <p className='error'>Emulamos error</p>
+        <p className='error'>{errors.size}</p>
 
         <div>
           {createProduct.size.length > 0 ? (
@@ -435,7 +353,7 @@ const Create = () => {
               </div>
             ))
           ) : (
-            <p className='no-dietTypes'>No hay talles seleccionados.</p>
+            <p className='no-dietTypes'></p>
           )}
         </div>
 
@@ -465,7 +383,7 @@ const Create = () => {
             );
           })}
         </select>
-        <p className='error'>Emulamos error</p>
+        <p className='error'>{errors.series}</p>
 
         <div>
           {createProduct.series.length > 0 ? (
@@ -476,7 +394,7 @@ const Create = () => {
               </div>
             ))
           ) : (
-            <p>No hay coleccion seleccionada.</p>
+            <p></p>
           )}
         </div>
 
@@ -506,7 +424,7 @@ const Create = () => {
             );
           })}
         </select>
-        <p className='error'>Emulamos error</p>
+        <p className='error'>{errors.category}</p>
 
         <div>
           {createProduct.category.length > 0 ? (
@@ -517,7 +435,7 @@ const Create = () => {
               </div>
             ))
           ) : (
-            <p className='no-dietTypes'>No hay categoria seleccionada.</p>
+            <p className='no-dietTypes'></p>
           )}
         </div>
 
@@ -530,15 +448,16 @@ const Create = () => {
           className='custom-textarea'
           onChange={handleChange}
         />
-        <p className='error'>Emulamos error</p>
+        <p className='error'>{errors.description}</p>
       </form>
       <div className='div-button'>
         <button
-          className='submit-button'
-          type='submit'
-          onClick={handleSubmit}
+        className='submit-button'
+        type='submit'
+        onClick={handleSubmit}
+        disabled={Object.keys(errors).length === 0 ? false : true}
         >
-          Crear
+        Crear
         </button>
       </div>
     </div>
