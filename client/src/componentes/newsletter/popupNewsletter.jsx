@@ -24,20 +24,16 @@ const PopUpNews = () => {
       sx={{ background: '#ffffff' }}
     >
       <DialogTitle
-        sx={{
-          fontSize: '32px',
-          textAlign: 'center',
-          backgroundColor: '#dcaaa1',
-          color: '#ffffff',
-        }}
+        className='welcome'
+        sx={{textAlign: 'center', fontSize: '24px'}}
       >
-        ¡Bienvenida!
+        ¡Bienvenidos!
       </DialogTitle>
       <DialogContent sx={{ backgroundColor: '#dcaaa1' }}>
         <img
-          src='src/assets/images/bannerpop.png'
+          src='src/assets/images/LANDING LOGO 2.png'
           alt='Encabezado'
-          style={{ width: '100%', height: '230px', marginBottom: '0px', objectFit: 'cover', }}
+          style={{ width: '100%', height: '260px', marginBottom: '0px', objectFit: 'cover', marginBottom: '10px' }}
         />
         <NewsletterPop />
       </DialogContent>
