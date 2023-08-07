@@ -84,11 +84,12 @@ export function postProducts(createProduct) {
   return async function (dispatch) {
     try {
       await axios.post(`http://localhost:3001/products/`, createProduct);
+      alert('Su producto se creo correctamente');
       return dispatch({
         type: POST_PRODUCTS,
       });
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     }
   };
 }

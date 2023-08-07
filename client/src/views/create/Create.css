@@ -56,16 +56,20 @@
     margin-bottom: 5px;
   }
 
+
+  .div-button{
+    background-color: red;
+  }
   .submit-button {
     padding: 5px 19px;
     border: none;
     border-radius: 4px;
-    background-color: #517f7f;
-    color:white;
+    /* background-color:red; */
+    color:black;
     font-weight: 400;
     cursor: pointer;
     transition:  0.5s;
-    margin-left: -20.2rem
+    margin-left: -12rem
   }
   
   .submit-button:hover {
