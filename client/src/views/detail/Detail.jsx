@@ -88,11 +88,11 @@ const Detail = () => {
           </div>
 
           <div>
-            <h2>{productDetails[0]?.name}</h2>
-            <h2>{productDetails[0]?.price}</h2>
+            <h2 className="detailName">{productDetails[0]?.name}</h2>
+            <h2 className="detailInfo">$ {productDetails[0]?.price}</h2>
 
             {productDetails[0]?.series.map((s) => (
-              <h2>{s.name}</h2>
+              <h2 className="detailInfo">Serie: {s.name}</h2>
             ))}
 
             {/* <img src={image} alt="" />  */}
@@ -101,11 +101,17 @@ const Detail = () => {
             <div>
             {uniqueColor.map((item) => (
               <button
+              className="detailColorButton"
               key={item.color}
               onClick={() => handleColorChange(item.color)}
-              style={{ backgroundColor: item.codHex }}
+              style={{ 
+                backgroundColor: item.codHex,
+                width: '30px',
+                height: '30px',
+              }}
+              
               >
-                {item.color}
+                {/* {item.color} */}
               </button>
             ))}
             </div>
@@ -115,9 +121,14 @@ const Detail = () => {
               .filter((item) => item.color === selectedColor)
               .map((item) => (
                 <button
+                className="detailSizeButton"
                 key={item.size}
                 onClick={() => handleSizeChange(item.size)}
-                //disabled={item.stock === 0} 
+                // disabled={item.stock === 0} 
+                style={{ 
+                  width: '40px',
+                  height: '30px',
+                }}
                 >
                   {item.size}
                 </button>
@@ -126,14 +137,20 @@ const Detail = () => {
 
            
             {selectedCombination ? (
-              <p>Stock disponible: {selectedCombination.stock}</p>
+              <p className="detailSelection1">Stock disponible: {selectedCombination.stock}</p>
             ) : (
-              <p>Seleccione un color y una talla</p>
+              <p className="detailSelection0">Seleccione un color y una talla</p>
             )}
 
-            <p>{productDetails[0]?.description}</p>
+            <p className="detailDesciption">{productDetails[0]?.description}</p>
 
-            <button>Añadir al carrito</button>
+            <button
+            id="detailAddCartButton" 
+            className="detailAddCartButton"
+            style={{ 
+              width: '150px',
+              height: '30px',
+            }}>Añadir al carrito</button>
           </div>
         </div>
 
