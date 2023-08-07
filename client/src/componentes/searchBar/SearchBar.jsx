@@ -2,9 +2,9 @@ import "./SearchBar.css";
 
 const SearchBar = ({ handlerEventSearch, handlerSubmitSearch }) => {
   return (
-    <div>
+    <div className="search-form">
       <form onChange={handlerEventSearch}>
-        <input placeholder="Qué productos buscás?"></input>
+        <input className="input-search" placeholder="Qué productos buscás?"></input>
       </form>
     </div>
   );

@@ -106,14 +106,16 @@ function Products() {
   };
 
   return (
-    <div>
-      <SearchBar
+    <div className="products-container" >
+      {/* <SearchBar
         handlerEventSearch={handlerEventSearch}
         handlerSubmitSearch={handlerSubmitSearch}
       />
-      {ShowNoResultsAlert && <h1>No se encontró el producto</h1>}
+      {ShowNoResultsAlert && <h1>No se encontró el producto</h1>} */}
       <SideBar handlerEventSideBar={handleChange} resetFilters={resetFilters} />
+      <div>
       <CardContainer products={itemsToShow} />
+      
       <div className="pagination">
         <button
           className={
@@ -150,6 +152,7 @@ function Products() {
         >
           {">"}
         </button>
+      </div>
       </div>
     </div>
   );

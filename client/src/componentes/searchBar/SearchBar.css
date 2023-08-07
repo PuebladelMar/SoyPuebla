@@ -1,14 +1,14 @@
-/* Estilos de la barra de búsqueda */
-.search-container {
+
+/* .search-container {
     position: relative;
     border-radius: 4px;
     background-color: rgba(255, 255, 255, 0.15);
     margin-right: 16px;
     margin-left: 0;
     width: 100%;
-  }
+  } */
   
-  .search-icon {
+  /* .search-icon {
     padding: 10px;
     height: 100%;
     position: absolute;
@@ -16,12 +16,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
   
-  .search-input {
+  /* .search-input {
     color: inherit;
-    padding: 8px 8px 8px calc(1em + 32px);
-    /* vertical padding + font size from searchIcon */
-    width: 100%;
-  }
-  
+    padding: 10px 8px 8px calc(1em + 32px);
+    width: 80%;
+  } */
+.input-search{
+ color: rgb(46, 45, 45);
+  width: 15rem;
+  height: 2rem;
+  border-radius: 5px;
+  background-color: rgb(229, 228, 228);
+
+}
