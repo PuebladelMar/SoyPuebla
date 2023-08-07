@@ -6,7 +6,6 @@ import {
   filterProducts,
 } from "../../redux/Actions";
 import CardContainer from "../../componentes/cardContainer/CardContainer";
-import SearchBar from "../../componentes/searchBar/SearchBar";
 import SideBar from "../../componentes/sidebar/SideBar";
 import "./Products.css";
 
@@ -107,16 +106,11 @@ function Products() {
 
   return (
     <div className="products-container" >
-      {/* <SearchBar
-        handlerEventSearch={handlerEventSearch}
-        handlerSubmitSearch={handlerSubmitSearch}
-      />
-      {ShowNoResultsAlert && <h1>No se encontró el producto</h1>} */}
       <SideBar handlerEventSideBar={handleChange} resetFilters={resetFilters} />
       <div>
       <CardContainer products={itemsToShow} />
       
-      <div className="pagination">
+      <div className="paginated-container">
         <button
           className={
             currentPage === 1 ? "disabledPaginationButton" : "paginationButton"
