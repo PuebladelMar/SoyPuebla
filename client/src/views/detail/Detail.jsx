@@ -75,6 +75,22 @@ const Detail = () => {
 
   const uniqueColor = obtenerColoresUnicos(productDetails);
 
+
+
+  const [showAlert, setShowAlert] = useState(false); // Estado para controlar la visibilidad del alert
+
+  const handleAddToCart = () => {
+    setShowAlert(true); // Mostrar el alert cuando se hace clic en "Añadir al carrito"
+  };
+
+  const handleCloseAlert = () => {
+    setShowAlert(false); // Ocultar el alert al hacer clic en "Seguir comprando"
+  };
+
+
+
+
+
   return (
     <div>
       <div className="containerDetail">
@@ -150,9 +166,27 @@ const Detail = () => {
             style={{ 
               width: '150px',
               height: '30px',
-            }}>Añadir al carrito</button>
+            }}
+            onClick={handleAddToCart}
+            >Añadir al carrito</button>
+          </div>
+
+
+          {showAlert && (
+      <>
+        <div className="transparentBackground"></div>
+        <div className="alertContainer">
+          <p className="alertText" >Producto añadido al carrito</p>
+          <div className="alertButtons">
+            <button onClick={handleCloseAlert}>Seguir comprando</button>
+            <button onClick={() => window.location.href = '/Cart'}>Ir al carrito</button>
           </div>
         </div>
+      </>
+    )}
+
+        </div>
+
 
 
       <div>

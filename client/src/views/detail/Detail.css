@@ -32,7 +32,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 7rem;
+    gap: 3rem;
   
     /* width: 1200px;  */
     max-width: 100%;
@@ -54,9 +54,9 @@
     
 }
 
-p {
+/* p {
     text-align: justify;
-  }
+  } */
 
   .botonX{
     background: rgba(157, 157, 157, 0.766);
@@ -66,6 +66,7 @@ p {
     padding: .25em .65em;
     border-radius: 50%;
     cursor: pointer;
+    
     
     
 }
@@ -150,7 +151,7 @@ p {
     color:  rgba(112, 112, 112, 0.766);
     border: 2px solid;
     border-color: rgb(190, 190, 190);
-    border-radius: 6px;
+    border-radius: 4px;
     margin-right: 10px;
     margin-bottom: 10px;
     margin-top: 5px;
@@ -162,6 +163,68 @@ p {
 
 .detailAddCartButton:hover {
 
-    transform: scale(1.1);
+    transform: scale(1.03);
+    color:  rgb(255, 255, 255);
+    background:rgb(81, 127, 127);
 
 }
+
+
+.alertContainer {
+    background-color: rgb(253, 253, 253);
+    border: 2px solid rgb(81, 127, 127);
+    padding: 15px;
+    position: absolute;
+    width: 22rem;
+    height: 8rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
+  }
+  
+  .alertButtons {
+    display: flex;
+    justify-content: space-evenly; 
+    margin-top: auto; 
+    margin-bottom: 10px;
+    
+
+  }
+  
+  .alertButtons button {
+    /* font-size: .95rem; */
+    color:  rgba(91, 91, 91, 0.766);
+    background: rgb(255, 255, 255);
+    margin-right: 10px;
+    border: 2px solid rgb(81, 127, 127);
+    border-radius: 4px;
+    padding: 2px 10px 3px 10px;
+    transition: transform 300ms, color 300ms, background-color 300ms; 
+  
+    
+    &:hover {
+      transform: scale(1.03);
+      color: rgb(255, 255, 255);
+      background: rgb(81, 127, 127);
+    }}
+
+
+  .transparentBackground {
+    background-color: rgba(255, 255, 255, 0.5); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998; 
+  }
+
+  .alertText{
+    font-size: 1.1rem;
+    color:  rgba(91, 91, 91, 0.766);
+   margin-left: 17px;
+  }
