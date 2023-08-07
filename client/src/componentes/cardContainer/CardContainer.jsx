@@ -10,7 +10,7 @@ function CardContainer(props) {
       <CssBaseline />
       <Container className="card-container" maxWidth="2560px" justifyContent="center" style={{ marginTop: '30px', paddingBottom: '30px', backgroundColor: '#f0f0f0' }}>
    
-        <Grid container spacing={3} justifyContent="center">
+        <Grid container spacing={3} justifyContent="start">
         {props.products?.map((product) => (
           <Grid item xs={12} md={6} lg={4} xl={3} key={product.id}>
             <Card key={product.id} product={product}/>
