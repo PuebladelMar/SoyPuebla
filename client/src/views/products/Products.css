@@ -1,0 +1,84 @@
+/* Estilos para los botones de paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  color:   #517f7f;
+}
+
+.paginationButton {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #f2d5cf;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.activePaginationButton {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color:#dcaaa1;
+  border: 1px solid #eeeeee;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.disabledPaginationButton {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  cursor: not-allowed;
+  margin: 0 5px;
+}
+/* Estilos para los botones de paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .paginationButton {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #f2d5cf;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .activePaginationButton {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #dcaaa1;
+    border: 1px solid #eeeeee;
+    color: #fff;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .disabledPaginationButton {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #ccc;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
+    margin: 0 5px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .pagination {
+      flex-direction: column;
+    }
+    
+    .paginationButton, .activePaginationButton, .disabledPaginationButton {
+      margin: 5px;
+    }
+  }
+  
