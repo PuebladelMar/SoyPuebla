@@ -12,6 +12,7 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
 .social-icons {
@@ -36,11 +37,16 @@ footer {
   color: #f2d5cf;
 }
 
+.footer-links a:hover {
+  color: #fdfbfb;
+}
+
 .brand-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 5px;
 }
 
 @media screen and (max-width: 768px) {

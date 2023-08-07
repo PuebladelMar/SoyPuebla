@@ -71,6 +71,16 @@
     margin: 0 5px;
     transition: background-color 0.3s, border-color 0.3s;
   }
+
+  .paginated-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .products-container {
+    display: flex;
+    flex-direction: row;
+  }
   
   @media screen and (max-width: 600px) {
     .pagination {
@@ -80,8 +90,4 @@
     .paginationButton, .activePaginationButton, .disabledPaginationButton {
       margin: 5px;
     }
-  }
-  .products-container {
-    display: flex;
-    flex-direction: row;
   }
