@@ -29,9 +29,9 @@ function Products() {
     name: null,
   });
 
-  // Lógica del paginado
+  //Logica del paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 6;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
