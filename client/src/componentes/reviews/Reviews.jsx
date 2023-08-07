@@ -7,7 +7,7 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay';
 import './Reviews.css';
 
-function Reseñas(){
+function Reviews(){
     return(
         <div>
             <Swiper
@@ -16,7 +16,7 @@ function Reseñas(){
                 slidesPerView={2}
                 navigation
                 pagination={{ clickable: true }}
-                scrollbar={{ draggable: true }}
+                // scrollbar={{ draggable: true }}
                 className='swiperFooter'
             >
                 <SwiperSlide className='swiperSlide'>
@@ -57,4 +57,4 @@ function Reseñas(){
     )
 }
 
-export default Reseñas;
+export default Reviews;
