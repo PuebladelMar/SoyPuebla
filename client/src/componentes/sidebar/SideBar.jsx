@@ -21,7 +21,7 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
 
   return (
     <aside className="search-bar-aside">
-      <form className="search-form" onChange={handlerEventSideBar}>
+      <form className="search-form-aside" onChange={handlerEventSideBar}>
         <li className="li-filtros">
           <li>
             <h2>Filtrar por categoria</h2>
@@ -102,7 +102,7 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
           onClick={resetFilters}
           className="reloadButton"
         >
-          LimpiarFiltros
+          Limpiar filtros
         </button>
       </form>
     </aside>
