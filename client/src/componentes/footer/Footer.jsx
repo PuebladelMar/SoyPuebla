@@ -42,7 +42,7 @@ const Footer = () => {
 
         <div className="brand-info">
           <h3>Contactanos</h3>
-          <p>Email: info@xxxxxxxx</p>
+          <p>Email: puebladelmar2023@gmail.com</p>
           <p>Teléfono: +1 234 567 890</p>
         </div>
       </div>
