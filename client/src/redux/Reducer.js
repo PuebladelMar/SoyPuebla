@@ -6,7 +6,11 @@ import {
   GET_ALL_CATEGORIES,
   GET_ALL_SERIES,
   GET_PRODUCTS_BY_NAME,
-  GET_FILTERED_PRODUCTS
+  GET_FILTERED_PRODUCTS,
+  GET_USERS,
+  POST_USERS,
+  PUT_USERS,
+  DELETE_USERS,
 } from "./ActionsTypes";
 
 let initialState = {
@@ -15,6 +19,7 @@ let initialState = {
   sizesList: [],
   categories: [],
   series: [],
+  allUsers: [],
 };
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -57,9 +62,20 @@ function rootReducer(state = initialState, action) {
         allProducts: action.payload,
       };
     case GET_FILTERED_PRODUCTS:
-      return  {
-     ...state,
-     allProducts: action.payload,
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+
+    case GET_USERS:
+      return {
+        ...state,
+        allUsers: action.payload,
+      };
+    case POST_USERS:
+      return {
+        ...state,
+        allUsers: action.payload,
       };
     default:
       return state;
