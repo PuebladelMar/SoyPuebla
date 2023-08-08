@@ -37,8 +37,8 @@ function Slider() {
         pagination={{ clickable: true }}
         autoplay={{ delay: 2000 }}
         loop={true}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log("slide change")}
+        // onSwiper={(swiper) => console.log(swiper)}
       >
         <SwiperSlide>
           <div className="img-slider">
