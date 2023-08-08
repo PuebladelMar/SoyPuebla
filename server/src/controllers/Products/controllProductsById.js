@@ -1,4 +1,4 @@
-const {Products,Colors,Sizes,Categories,Series,Stocks} = require("../../db");
+const { Products, Colors, Sizes, Categories, Series, Stocks } = require("../../db");
 
 const productById = async (id) => {
   let product = await Products.findByPk(id, {
@@ -57,4 +57,4 @@ const productById = async (id) => {
   return concatenatedResults;
 };
 
-module.exports = { productById };
+module.exports =  productById;
