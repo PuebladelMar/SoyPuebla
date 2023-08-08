@@ -19,6 +19,7 @@ function Reviews(){
                 // scrollbar={{ draggable: true }}
                 className='swiperFooter'
             >
+                
                 <SwiperSlide className='swiperSlide'>
                     <img className='imagen' src='/src/assets/images/imagesReseñas/mujer.jpeg' alt="Imagen 1" />
                     <div className="review">
