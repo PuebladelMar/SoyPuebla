@@ -10,6 +10,7 @@ import Pay from './views/cart/Pay';
 import Create from './views/create/Create';
 import Login from './views/login/Login';
 import Detail from './views/detail/Detail';
+import ErrorPage from './views/errorPage/ErrorPage'
 import { Routes, Route } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from "react-redux";
@@ -67,10 +68,12 @@ function App() {
           path='/products/:id'
           element={<Detail />}
         />
+          <Route
+          path='*'
+          element={<ErrorPage/>}
+        />
       </Routes>
-      {pathname !== '/' && <Footer />}{' '}
-     
-
+      {pathname !== '/' && <Footer />}
     </div>
   );
 }
