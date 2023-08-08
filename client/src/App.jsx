@@ -10,7 +10,7 @@ import Pay from "./views/cart/Pay";
 import Create from "./views/create/Create";
 import Login from "./views/login/Login";
 import Detail from "./views/detail/Detail";
-import MercadoPago from "./views/mercadoPago/comprar/mercadopago";
+// import MercadoPago from "./views/mercadoPago/comprar/mercadopago";
 import EnProceso from './views/mercadoPago/EnProceso/enProceso'
 import FalloDeCompra from "./views/mercadoPago/FalloDeCompra/falloDeCompra";
 import ErrorPage from "./views/errorPage/ErrorPage";  
@@ -35,7 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/pagar" element={<MercadoPago />} />
+        {/* <Route path="/pagar" element={<MercadoPago />} /> */}
         <Route path="/procesando" element={<EnProceso />} />
         <Route path="/falloDeCompra" element={<FalloDeCompra />} />
         <Route path="/about" element={<About />} />
