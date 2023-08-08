@@ -11,10 +11,10 @@ usersRouter.post("/", postUser);
 
 usersRouter.get("/", getUsers);
 
-usersRouter.put("/user", putUser);
-
-usersRouter.delete("/user", deleteUser);
-
 usersRouter.get("/user/:id", getUser);
+
+usersRouter.put("/user/:id", putUser);
+
+usersRouter.delete("/user/:id", deleteUser);
 
 module.exports = usersRouter
