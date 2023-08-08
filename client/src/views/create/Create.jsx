@@ -9,7 +9,8 @@ import {
   getCategories,
   getSeries,
 } from '../../redux/Actions';
-import validations from "./Validations"
+import validations from './Validations';
+import Cloudinary from '../../componentes/cloudinary/Cloudinary';
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const Create = () => {
 
   useEffect(() => {
     if (validations(createProduct)) {
-    setErrors(validations(createProduct));
+      setErrors(validations(createProduct));
     }
 
     if (!size.length) {
@@ -55,7 +56,7 @@ const Create = () => {
 
   useEffect(() => {
     if (validations(createProduct)) {
-    setErrors(validations(createProduct));
+      setErrors(validations(createProduct));
     }
 
     if (!series.length) {
@@ -74,8 +75,13 @@ const Create = () => {
   }, [dispatch, categories, createProduct]);
 
   const handleChange = (event) => {
-    setCreateProduct({...createProduct, [event.target.name]: event.target.value,});
-    setErrors(validations({...createProduct, [event.target.name]: event.target.value}));
+    setCreateProduct({
+      ...createProduct,
+      [event.target.name]: event.target.value,
+    });
+    setErrors(
+      validations({ ...createProduct, [event.target.name]: event.target.value })
+    );
   };
 
   const handleSubmit = (event) => {
@@ -122,7 +128,9 @@ const Create = () => {
         }
       }
     });
-    setErrors(validations({...createProduct, [event.target.name]: event.target.value}));
+    setErrors(
+      validations({ ...createProduct, [event.target.name]: event.target.value })
+    );
   };
 
   const handleSelectSeries = (event) => {
@@ -138,7 +146,9 @@ const Create = () => {
         }
       }
     });
-    setErrors(validations({...createProduct, [event.target.name]: event.target.value}));
+    setErrors(
+      validations({ ...createProduct, [event.target.name]: event.target.value })
+    );
   };
 
   const handleSelectCategories = (event) => {
@@ -154,7 +164,9 @@ const Create = () => {
         }
       }
     });
-    setErrors(validations({...createProduct, [event.target.name]: event.target.value}));
+    setErrors(
+      validations({ ...createProduct, [event.target.name]: event.target.value })
+    );
   };
 
   const handleSelectSize = (event) => {
@@ -170,7 +182,9 @@ const Create = () => {
         }
       }
     });
-    setErrors(validations({...createProduct, [event.target.name]: event.target.value}));
+    setErrors(
+      validations({ ...createProduct, [event.target.name]: event.target.value })
+    );
   };
 
   const handleDeleteColor = (event) => {
@@ -239,6 +253,8 @@ const Create = () => {
           onChange={handleChange}
         />
         <p className='error'>{errors.mainImage}</p>
+
+        <Cloudinary />
 
         <label htmlFor='image'>Imagen: </label>
         <input
@@ -452,12 +468,12 @@ const Create = () => {
       </form>
       <div className='div-button'>
         <button
-        className='submit-button'
-        type='submit'
-        onClick={handleSubmit}
-        disabled={Object.keys(errors).length === 0 ? false : true}
+          className='submit-button'
+          type='submit'
+          onClick={handleSubmit}
+          disabled={Object.keys(errors).length === 0 ? false : true}
         >
-        Crear
+          Crear
         </button>
       </div>
     </div>
