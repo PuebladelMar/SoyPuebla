@@ -3,8 +3,8 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const routes = require('./routes/index.js');
-const mercadopago = require("mercadopago")
+const router = require('./routes/index.js');
+const mercadopago = require("mercadopago");
 
 require('./db.js');
 
@@ -28,47 +28,9 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use(cors())
+server.use(cors());
 
-server.post("/create_preference", (req, res) => {
-
-	let preference = {
-		items: [
-			{
-				title: req.body.description,
-				unit_price: Number(req.body.price),
-				quantity: Number(req.body.quantity),
-			}
-		],
-		back_urls: {
-			"success": "http://localhost:5173/",
-			"failure": "http://localhost:5173/pagar",
-			"pending": "http://localhost:5173/procesando"
-		},
-		auto_return: "approved",
-	};
-  
-	mercadopago.preferences.create(preference)
-		.then(function (response) {
-			res.json({
-				id: response.body.id
-			});
-		}).catch(function (error) {
-			console.log(error);
-		});
-});
-
-server.get('/feedback', function (req, res) {
-	res.json({
-		Payment: req.query.payment_id,
-		Status: req.query.status,
-		MerchantOrder: req.query.merchant_order_id
-	});
-});
-
-server.get("/mercadoPago", function(req, res){res.send("servidor de pagos levantado")});
-
-server.use('/', routes);
+server.use('/', router);
 
 server.use((err, req, res, next) => {
   const status = err.status || 500;
