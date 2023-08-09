@@ -16,7 +16,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getProducts } from "./redux/Actions";
-import SearchBar from './componentes/searchBar/SearchBar';
+// import SearchBar from './componentes/searchBar/SearchBar';
 
 function App() {
   const { pathname } = useLocation();
@@ -29,7 +29,6 @@ function App() {
 
   return (
     <div>
-
       {<NavBar />}
       <Routes>
         <Route
