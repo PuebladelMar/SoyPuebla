@@ -13,7 +13,7 @@ import Detail from "./views/detail/Detail";
 // import MercadoPago from "./views/mercadoPago/comprar/mercadopago";
 import EnProceso from './views/mercadoPago/EnProceso/enProceso'
 import FalloDeCompra from "./views/mercadoPago/FalloDeCompra/falloDeCompra";
-import ErrorPage from "./views/errorPage/ErrorPage";
+import ErrorPage from "./views/errorPage/ErrorPage";  
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -46,7 +46,7 @@ function App() {
         <Route path="/create" element={<Create />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products/:id" element={<Detail />} />
-        <Route path="" element={<ErrorPage />} />
+        <Route path="*" element={<ErrorPage />} />
         <Route path="/adminAccount" element={<AdminAccount />} />
       </Routes>
       {pathname !== "/" && <Footer />}

@@ -120,6 +120,9 @@ export default function NavBar() {
             <li style={{ margin: "0 1rem" }}>
               <Link to="/create">CREAR</Link>
             </li>
+            <li style={{ margin: "0 1rem" }}>
+              <Link to="/adminAccount">ADMIN</Link>
+            </li>
           </ul>
 
           <box sx={{ flexGrow: 1 }}>
