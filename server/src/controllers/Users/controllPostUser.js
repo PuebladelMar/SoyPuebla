@@ -1,15 +1,13 @@
 const { Users } = require("../../db.js");
 
 const controllPostUser = async (req) => {
-  const { name, email, password, image } = req.body;
+  const { clerkId } = req.body;
+  console.log(clerkId)
 
   const [newUser, created] = await Users.findOrCreate({
     where: {
-      name,
-      email,
-      password,
-      image
-    }
+      clerkId,
+    },
   });
   if (!created) throw new Error("User already exists");
   return newUser;

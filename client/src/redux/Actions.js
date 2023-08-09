@@ -156,10 +156,10 @@ export function getUsers() {
   };
 }
 
-export function postUsers(createUsers) {
+export function postUsers(userClerkId) {
   return async function (dispatch) {
     try {
-      await axios.post(`http://localhost:3001/users/`, createUsers);
+      await axios.post(`http://localhost:3001/users/`, { clerkId: userClerkId });
       alert("Su usuario se creo correctamente");
       return dispatch({
         type: POST_USERS,
