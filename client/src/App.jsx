@@ -7,7 +7,7 @@ import NavBar from "./componentes/navbar/NavBar";
 import Footer from "./componentes/footer/Footer";
 import Cart from "./views/cart/Cart";
 import Create from "./views/create/Create";
-import Login from "./views/login/Login";
+//import Login from "./views/login/Login";
 import Detail from "./views/detail/Detail";
 import EnProceso from './views/mercadoPago/EnProceso/enProceso'
 import ErrorPage from "./views/errorPage/ErrorPage";  
@@ -38,7 +38,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/login" element={<Login />} />
+        {/*<Route path="/login" element={<Login />} />*/}
         <Route path="/products/:id" element={<Detail />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/adminAccount" element={<AdminAccount />} />
