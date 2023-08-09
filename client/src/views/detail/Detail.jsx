@@ -74,54 +74,38 @@ const Detail = () => {
         coloresUnicos.push({ color: item.color, codHex: item.codHex });
       }
     });
-
     return coloresUnicos;
   }
 
   const uniqueColor = obtenerColoresUnicos(productDetails);
-
-
-
   const [showAlert, setShowAlert] = useState(false); // Estado para controlar la visibilidad del alert
 
   const handleAddToCart = () => {
     setShowAlert(true); // Mostrar el alert cuando se hace clic en "Añadir al carrito"
-  
-  
   };
 
   const handleCloseAlert = () => {
     setShowAlert(false); // Ocultar el alert al hacer clic en "Seguir comprando"
   };
-
-
  
   const addProduct= () =>{
   quantity > 0 ? setQuantity(quantity +1 ) : null
   }
-const removeProduct=()=>{
+  const removeProduct=()=>{
   quantity > 1  ? setQuantity(quantity-1): null
-}
-
-
+  }
  
-    const productSelected = {
-      description: productDetails[0]?.name,
-      price:Number(productDetails[0]?.price),
-      quantity: Number(quantity),
-      currency_id: "ARS",
-      color: selectedColor,
-      size: selectedSize,
-      mainImage: productDetails[0]?.mainImage,
-      serie:productDetails[0]?.series
-    };
+  const productSelected = {
+    description: productDetails[0]?.name,
+    price:Number(productDetails[0]?.price),
+    quantity: Number(quantity),
+    currency_id: "ARS",
+    color: selectedColor,
+    size: selectedSize,
+    mainImage: productDetails[0]?.mainImage,
+    serie:productDetails[0]?.series
+  };
    
-        
-  
-  
-
-
-
   return (
     <div>
      
