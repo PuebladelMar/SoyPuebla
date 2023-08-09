@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getProducts } from "./redux/Actions";
 import SearchBar from "./componentes/searchBar/SearchBar";
+import AdminAccount from "./views/adminAccount/AdminAccount";
 
 function App() {
   const { pathname } = useLocation();
@@ -46,6 +47,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/products/:id" element={<Detail />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/adminAccount" element={<AdminAccount />} />
       </Routes>
       {pathname !== "/" && <Footer />}
     </div>
