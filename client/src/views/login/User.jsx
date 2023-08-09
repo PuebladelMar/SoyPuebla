@@ -1,15 +1,15 @@
-import { useUser } from "@clerk/clerk-react";
+import { useUser, UserButton } from "@clerk/clerk-react";
 
 export default function User() {
-  const { isSignedIn, user, isLoaded } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
 
   if (!isLoaded) {
     return null;
   }
 
   if (isSignedIn) {
-    return <div>Hello {user.fullName}!</div>;
+    return (
+      <UserButton />
+    );
   }
-
-  return <div>Not signed in</div>;
 }

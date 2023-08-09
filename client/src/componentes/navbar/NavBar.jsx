@@ -1,6 +1,5 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
-import { Box, AppBar, Toolbar, IconButton, Alert, } from "@mui/material";
+import { Box, AppBar, Toolbar, IconButton, Alert } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
@@ -9,78 +8,33 @@ import "../searchBar/SearchBar.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, getProductsByName } from "../../redux/Actions";
+import User from "../../views/login/User";
+import { useLocation } from "react-router-dom";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+} from "@clerk/clerk-react";
 
+const clerkPubKey = import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY;
 
-// const Search = styled("div")(({ theme }) => ({
-//   position: "relative",
-//   borderRadius: theme.shape.borderRadius,
-//   backgroundColor: alpha(theme.palette.common.white, 0.15),
-//   "&:hover": {
-//     backgroundColor: alpha(theme.palette.common.white, 0.25),
-//   },
-//   marginRight: theme.spacing(2),
-//   marginLeft: 0,
-//   width: "100%",
-//   [theme.breakpoints.up("sm")]: {
-//     marginLeft: theme.spacing(3),
-//     width: "auto",
-//   },
-// }));
-
-// const SearchIconWrapper = styled("div")(({ theme }) => ({
-//   padding: theme.spacing(0, 2),
-//   height: "100%",
-//   position: "absolute",
-//   pointerEvents: "none",
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-// }));
-
-// const StyledInputBase = styled(InputBase)(({ theme }) => ({
-//   color: "inherit",
-//   "& .MuiInputBase-input": {
-//     padding: theme.spacing(1, 1, 1, 0),
-//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-//     transition: theme.transitions.create("width"),
-//     width: "100%",
-//     [theme.breakpoints.up("md")]: {
-//       width: "20ch",
-//     },
-//   },
-// }));
-
-export default function NavBar({ showSearchBar }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+export default function NavBar() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
- 
-
-//   const isMenuOpen = Boolean(anchorEl);
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  // const handleProfileMenuOpen = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
-
-  // const handleMenuClose = () => {
-  //   setAnchorEl(null);
-  //   handleMobileMenuClose();
-  // };
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu>
-      
-    </Menu>
-  );
+  const renderMenu = <Menu></Menu>;
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -98,9 +52,7 @@ export default function NavBar({ showSearchBar }) {
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
-    >
-     
-    </Menu>
+    ></Menu>
   );
 
   //Logica del paginado
@@ -169,31 +121,29 @@ export default function NavBar({ showSearchBar }) {
               <Link to="/create">CREAR</Link>
             </li>
           </ul>
-          
 
-           <box sx={{flexGrow: 1}}>
-           
-            <IconButton sx= {{ width: "8rem", height: "4rem"}}  disableRipple>
-              <img className="img-pdm"
+          <box sx={{ flexGrow: 1 }}>
+            <IconButton sx={{ width: "8rem", height: "4rem" }} disableRipple>
+              <img
+                className="img-pdm"
                 src="src/assets/images/PdM.png" // Reemplaza esta ruta con la ruta correcta hacia la imagen del logo
                 alt="Cart Icon"
                 style={{ width: "100%", height: "100%" }} // Ajusta el tamaño del logo para que ocupe todo el espacio del IconButton
               />
             </IconButton>
-            </box>
-        
+          </box>
+
           <Box sx={{ flexGrow: 2 }} />
           <Box sx={{ marginLeft: "auto" }}></Box>
-          <SearchBar 
-        handlerEventSearch={handlerEventSearch}
-        handlerSubmitSearch={handlerSubmitSearch}
-      />
-                  {ShowNoResultsAlert && (
-              <Alert severity="error" className="error-searchBar">
-                No se encontró el producto
-              </Alert>
-            )}
-
+          <SearchBar
+            handlerEventSearch={handlerEventSearch}
+            handlerSubmitSearch={handlerSubmitSearch}
+          />
+          {ShowNoResultsAlert && (
+            <Alert severity="error" className="error-searchBar">
+              No se encontró el producto
+            </Alert>
+          )}
 
           <Box sx={{ flexGrow: 0 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -216,6 +166,15 @@ export default function NavBar({ showSearchBar }) {
               onClick={""}
               color="inherit"
             >
+              <ClerkProvider publishableKey={clerkPubKey}>
+                <User />
+                <SignedIn></SignedIn>
+                {isLoginPage && (
+                  <SignedOut>
+                    <RedirectToSignIn />
+                  </SignedOut>
+                )}
+              </ClerkProvider>
               <Link to="/login">Log in</Link>
             </IconButton>
           </Box>
@@ -231,10 +190,8 @@ export default function NavBar({ showSearchBar }) {
               <MoreIcon />
             </IconButton>
           </Box>
-          
         </Toolbar>
       </AppBar>
-      
     </Box>
   );
 }
