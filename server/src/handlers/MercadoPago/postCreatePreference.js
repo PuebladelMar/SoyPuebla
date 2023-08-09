@@ -1,16 +1,18 @@
 const mercadopago = require('mercadopago');
 
 const postCreatePreference = async (req, res) => {
-  const { description, price, quantity, currency_id } = req.body;
+  const { products } = req.body;
+  
+  const items = products.map(product => ({
+    title: product.description,
+    description: product.title,
+    unit_price: Number(product.price),
+    quantity: Number(product.quantity),
+  }));
+
 
   const preference = {
-    items: [
-      {
-        title: description,
-        unit_price: Number(price),
-        quantity: Number(quantity),
-      },
-    ],
+    items: items,
     back_urls: {
       success: 'http://localhost:5173/',
       failure: 'http://localhost:5173/pagar',
@@ -31,3 +33,4 @@ const postCreatePreference = async (req, res) => {
 };
 
 module.exports = postCreatePreference;
+
