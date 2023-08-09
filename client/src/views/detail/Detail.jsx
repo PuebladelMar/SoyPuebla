@@ -9,6 +9,8 @@ const Detail = () => {
   const [productDetails, setProductDetails] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+
   // const [ loading, setLoading ] = useState('Loading...');
 
   // let {
@@ -40,6 +42,9 @@ const Detail = () => {
     fetchProductDetails();
   }, []);
 
+
+
+
   const handleColorChange = (color) => {
     setSelectedColor(color);
     setSelectedSize(null); // Reiniciar la talla seleccionada al cambiar el color
@@ -69,14 +74,10 @@ const Detail = () => {
         coloresUnicos.push({ color: item.color, codHex: item.codHex });
       }
     });
-
     return coloresUnicos;
   }
 
   const uniqueColor = obtenerColoresUnicos(productDetails);
-
-
-
   const [showAlert, setShowAlert] = useState(false); // Estado para controlar la visibilidad del alert
 
   const handleAddToCart = () => {
@@ -86,13 +87,28 @@ const Detail = () => {
   const handleCloseAlert = () => {
     setShowAlert(false); // Ocultar el alert al hacer clic en "Seguir comprando"
   };
-
-
-
-
-
+ 
+  const addProduct= () =>{
+  quantity > 0 ? setQuantity(quantity +1 ) : null
+  }
+  const removeProduct=()=>{
+  quantity > 1  ? setQuantity(quantity-1): null
+  }
+ 
+  const productSelected = {
+    description: productDetails[0]?.name,
+    price:Number(productDetails[0]?.price),
+    quantity: Number(quantity),
+    currency_id: "ARS",
+    color: selectedColor,
+    size: selectedSize,
+    mainImage: productDetails[0]?.mainImage,
+    serie:productDetails[0]?.series
+  };
+   
   return (
     <div>
+     
       <div className="containerDetail">
         <div className="secContainer">
           <div>
@@ -107,8 +123,8 @@ const Detail = () => {
             <h2 className="detailName">{productDetails[0]?.name}</h2>
             <h2 className="detailInfo">$ {productDetails[0]?.price}</h2>
 
-            {productDetails[0]?.series.map((s) => (
-              <h2 className="detailInfo">Serie: {s.name}</h2>
+            {productDetails[0]?.series.map((s,i) => (
+              <h2 className="detailInfo" key={i}>Serie: {s.name}</h2>
             ))}
 
             {/* <img src={image} alt="" />  */}
@@ -159,7 +175,7 @@ const Detail = () => {
             )}
 
             <p className="detailDesciption">{productDetails[0]?.description}</p>
-
+              <p>{quantity}</p>
             <button
             id="detailAddCartButton" 
             className="detailAddCartButton"
@@ -167,10 +183,30 @@ const Detail = () => {
               width: '150px',
               height: '30px',
             }}
-            onClick={handleAddToCart}
-            >Añadir al carrito</button>
+            onClick={addProduct}
+            >+</button>
+            <button
+            id="detailAddCartButton" 
+            className="detailAddCartButton"
+            style={{ 
+              width: '150px',
+              height: '30px',
+            }}
+            onClick={removeProduct}
+            >-</button>
+      
           </div>
 
+          <button
+            id="detailAddCartButton" 
+            className="detailAddCartButton"
+            style={{ 
+              width: '150px',
+              height: '30px',
+            }}
+           
+            onClick={() => { handleAddToCart();}}
+            >Añadir al carrito </button>
 
           {showAlert && (
       <>
