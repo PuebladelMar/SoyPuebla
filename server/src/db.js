@@ -59,6 +59,14 @@ Series.belongsToMany(Products, { through: "ProductSeries" });
 Products.belongsToMany(Reviews, { through: "ProductReviews" });
 Reviews.belongsToMany(Products, { through: "ProductReviews" });
 
+//Relación de Carrito de compras
+Products.belongsToMany(Users, { through: "Cart"});
+Users.belongsToMany(Products, { through: "Cart"});
+
+//Relación de Historial de compras
+Products.belongsToMany(Users, { through: "History"});
+Users.belongsToMany(Products, { through: "History"});
+
 module.exports = {
    ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
    conn: sequelize, // para importart la conexión { conn } = require('./db.js');
