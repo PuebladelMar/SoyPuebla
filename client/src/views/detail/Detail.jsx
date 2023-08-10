@@ -104,7 +104,7 @@ const Detail = () => {
     size: selectedSize,
     mainImage: productDetails[0]?.mainImage,
     serie:productDetails[0]?.series,
-    stockId: selectedCombination.stockId
+    stockId: selectedCombination?.stockId
   };
    
   return (
