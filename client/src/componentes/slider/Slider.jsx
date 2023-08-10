@@ -1,8 +1,6 @@
-// import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
 import "swiper/css";
-// import Swiper core and required modules
+
 import {
   Navigation,
   Pagination,
@@ -25,14 +23,16 @@ import Card from "../card/Card";
 
 function Slider() {
   return (
-    <div>
+    <div style={{ marginTop: "1rem" }}>
       <Swiper
        style={{
         width: "85rem",
         height: "30rem",
       }}
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-        spaceBetween={0}
+
+        spaceBetween={-10}
+
         slidesPerView={1}
         navigation={{
           prevEl: ".swiper-button-prev",
@@ -51,7 +51,8 @@ function Slider() {
               alt="Imagen 1"
               style={{
                 width: "100%",
-                height: "100%",
+                height: "30rem",
+
                 borderRadius: "2px",
                 opacity: "1",
                 transform: "scale(1)",
@@ -73,7 +74,9 @@ function Slider() {
               alt="Imagen 2"
               style={{
                 width: "100%",
-                height: "100%",
+
+                height: "30rem",
+
                 borderRadius: "2px",
                 opacity: "1",
                 transform: "scale(1)",
@@ -95,7 +98,9 @@ function Slider() {
               alt="Imagen 3"
               style={{
                 width: "100%",
-                height: "100%",
+
+                height: "30rem",
+
                 borderRadius: "2px",
                 opacity: "1",
                 transform: "scale(1)",
@@ -117,7 +122,9 @@ function Slider() {
               alt="Imagen 4"
               style={{
                 width: "100%",
-                height: "100%",
+
+                height: "30rem",
+
                 borderRadius: "2px",
                 opacity: "1",
                 transform: "scale(1)",
@@ -142,7 +149,6 @@ function Slider() {
         ></div>{" "}
         {/* <Card/> */}
       </Swiper>
-      
     </div>
   );
 }

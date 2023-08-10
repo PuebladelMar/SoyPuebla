@@ -27,9 +27,12 @@ function App() {
     dispatch(getProducts());
   }, [dispatch]);
 
+
+  const linksArray = ['Inicio', 'Productos', 'About', 'Create', 'AdminAccount', 'Cart']
+
   return (
     <div>
-      {<NavBar />}
+      {<NavBar links={linksArray} />}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
