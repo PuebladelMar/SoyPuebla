@@ -103,12 +103,12 @@ const Detail = () => {
     color: selectedColor,
     size: selectedSize,
     mainImage: productDetails[0]?.mainImage,
-    serie:productDetails[0]?.series
+    serie:productDetails[0]?.series,
+    stockId: selectedCombination.stockId
   };
    
   return (
     <div>
-     
       <div className="containerDetail">
         <div className="secContainer">
           <div>
@@ -167,13 +167,11 @@ const Detail = () => {
               ))}
               </div>
 
-           
             {selectedCombination ? (
               <p className="detailSelection1">Stock disponible: {selectedCombination.stock}</p>
             ) : (
               <p className="detailSelection0">Seleccione un color y una talla</p>
             )}
-
             <p className="detailDesciption">{productDetails[0]?.description}</p>
               <p>{quantity}</p>
             <button
