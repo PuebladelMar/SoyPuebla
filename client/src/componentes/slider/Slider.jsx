@@ -27,9 +27,13 @@ function Slider() {
   return (
     <div>
       <Swiper
+       style={{
+        width: "85rem",
+        height: "30rem",
+      }}
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-        spaceBetween={-10}
-        slidesPerView={2}
+        spaceBetween={0}
+        slidesPerView={1}
         navigation={{
           prevEl: ".swiper-button-prev",
           nextEl: ".swiper-button-next",
@@ -46,10 +50,10 @@ function Slider() {
               src={image1}
               alt="Imagen 1"
               style={{
-                width: "30rem",
-                height: "15rem",
+                width: "100%",
+                height: "100%",
                 borderRadius: "2px",
-                opacity: "0.85",
+                opacity: "1",
                 transform: "scale(1)",
                 transition: "transform 0.3s",
               }}
@@ -68,10 +72,10 @@ function Slider() {
               src={image2}
               alt="Imagen 2"
               style={{
-                width: "30rem",
-                height: "15rem",
+                width: "100%",
+                height: "100%",
                 borderRadius: "2px",
-                opacity: "0.85",
+                opacity: "1",
                 transform: "scale(1)",
                 transition: "transform 0.3s",
               }}
@@ -90,10 +94,10 @@ function Slider() {
               src={image3}
               alt="Imagen 3"
               style={{
-                width: "30rem",
-                height: "15rem",
+                width: "100%",
+                height: "100%",
                 borderRadius: "2px",
-                opacity: "0.85",
+                opacity: "1",
                 transform: "scale(1)",
                 transition: "transform 0.3s",
               }}
@@ -112,10 +116,10 @@ function Slider() {
               src={image4}
               alt="Imagen 4"
               style={{
-                width: "30rem",
-                height: "15rem",
+                width: "100%",
+                height: "100%",
                 borderRadius: "2px",
-                opacity: "0.85",
+                opacity: "1",
                 transform: "scale(1)",
                 transition: "transform 0.3s",
               }}
