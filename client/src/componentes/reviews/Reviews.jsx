@@ -19,11 +19,18 @@ function Reviews() {
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
-        slidesPerView={2}
+        slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
         className="swiperFooter"
+        breakpoints={{
+          // Cuando el ancho de la ventana es menor o igual a 600px, mostrar solo 1 tarjeta
+          500: {
+            slidesPerView: 2,
+            // spaceBetween: 5,
+          },
+        }}
       >
         <SwiperSlide className="swiperSlide">
           <img

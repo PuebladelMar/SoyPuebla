@@ -15,7 +15,7 @@ function SeriesContainer() {
     <div>
 
       <h1 className="series-text">SERIES</h1>
-      <h1 className="series-text-underline">_________________</h1>
+      <h1 className="series-text-underline">_____________</h1>
       <br />
 
       <div className="seriesContainer">

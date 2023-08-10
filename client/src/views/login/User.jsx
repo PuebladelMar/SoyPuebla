@@ -1,6 +1,6 @@
 import { useUser, UserButton } from "@clerk/clerk-react";
 import { useEffect } from "react";
-import { postUsers } from "../../redux/Actions";
+// import { postUsers } from "../../redux/Actions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import "./User.css";

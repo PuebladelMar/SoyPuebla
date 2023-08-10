@@ -9,8 +9,8 @@ import Cart from "./views/cart/Cart";
 import Create from "./views/create/Create";
 //import Login from "./views/login/Login";
 import Detail from "./views/detail/Detail";
-import EnProceso from './views/mercadoPago/EnProceso/enProceso'
-import ErrorPage from "./views/errorPage/ErrorPage";  
+import EnProceso from "./views/mercadoPago/EnProceso/enProceso";
+import ErrorPage from "./views/errorPage/ErrorPage";
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -27,9 +27,12 @@ function App() {
     dispatch(getProducts());
   }, [dispatch]);
 
+
+  const linksArray = ['Inicio', 'Productos', 'About', 'Create', 'AdminAccount', 'Cart']
+
   return (
     <div>
-      {<NavBar />}
+      {<NavBar links={linksArray} />}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
