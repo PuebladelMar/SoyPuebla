@@ -33,6 +33,36 @@
     font-weight: bold; /* Hace el texto más grueso */
     background-color: rgba(255, 255, 255, 0.491); /* Ajusta el color de fondo de los textos con translucidez */
   }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  }
+  .social-icons a {
+    margin-right: 0px;
+  }
+  
+  .social-icons img {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 0px;
+  }
+  @media screen and (max-width: 768px) {
+    .social-icons a,
+    .footer-links a {
+        margin-right: 10px; 
+    }
+  
+    .social-icons img {
+        width: 40px;
+        height: 40px;
+        margin-right: 5px; 
+    }
+  }
+  
   
   @keyframes moveBackground {
     0% {
