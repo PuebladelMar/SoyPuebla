@@ -15,7 +15,7 @@ const productById = async (id) => {
       },
       {
         model: Stocks,
-        attributes: ["ColorId", "SizeId", "amount"],
+        attributes: ["id", "ColorId", "SizeId", "amount"],
       },
     ],
   });
@@ -49,6 +49,7 @@ const productById = async (id) => {
       color: color.name,
       codHex: color.codHex,
       size: size.name,
+      stockId: stock.id
     };
 
     concatenatedResults.push(concatenatedResult);

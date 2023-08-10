@@ -1,5 +1,4 @@
 .newsletter {
-  background-color: #f2d5cf;
   width: 100%;
   margin: 0 auto;
   padding: 20px;
@@ -17,6 +16,7 @@
 .newsletter form {
   display: flex;
   align-items: center;
+  width: 35%;
 }
 
 .newsletter input[type="email"] {

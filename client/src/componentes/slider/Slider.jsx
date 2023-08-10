@@ -25,8 +25,14 @@ function Slider() {
   return (
     <div style={{ marginTop: "1rem" }}>
       <Swiper
+       style={{
+        width: "85rem",
+        height: "30rem",
+      }}
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+
         spaceBetween={-10}
+
         slidesPerView={1}
         navigation={{
           prevEl: ".swiper-button-prev",
@@ -46,8 +52,9 @@ function Slider() {
               style={{
                 width: "100%",
                 height: "30rem",
+
                 borderRadius: "2px",
-                opacity: "0.85",
+                opacity: "1",
                 transform: "scale(1)",
                 transition: "transform 0.3s",
               }}
@@ -67,9 +74,11 @@ function Slider() {
               alt="Imagen 2"
               style={{
                 width: "100%",
+
                 height: "30rem",
+
                 borderRadius: "2px",
-                opacity: "0.85",
+                opacity: "1",
                 transform: "scale(1)",
                 transition: "transform 0.3s",
               }}
@@ -89,9 +98,11 @@ function Slider() {
               alt="Imagen 3"
               style={{
                 width: "100%",
+
                 height: "30rem",
+
                 borderRadius: "2px",
-                opacity: "0.85",
+                opacity: "1",
                 transform: "scale(1)",
                 transition: "transform 0.3s",
               }}
@@ -111,9 +122,11 @@ function Slider() {
               alt="Imagen 4"
               style={{
                 width: "100%",
+
                 height: "30rem",
+
                 borderRadius: "2px",
-                opacity: "0.85",
+                opacity: "1",
                 transform: "scale(1)",
                 transition: "transform 0.3s",
               }}
