@@ -1,15 +1,8 @@
+/* Archivo Slider.css */
 .img-slider {
-    overflow: hidden; /* Para asegurar que no se desborden los bordes del contenedor */
-    width: 200px; /* Ajusta el tamaño del contenedor según tus necesidades */
-    height: 200px;
-    border: 2px solid red;
-  }
-  
-  .img-slider img {
-    transition: transform 0.3s; /* Agrega una transición suave para un efecto más agradable */
-  }
-  
-  .img-slider:hover img {
-    transform: scale(1.2); /* Aplica un zoom de 20% en la imagen cuando el cursor esté sobre el contenedor */
-  }
-  
+  overflow: hidden;
+}
+
+.swiper-pagination-bullet {
+  background-color: white !important;
+}

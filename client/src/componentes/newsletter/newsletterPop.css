@@ -1,11 +1,10 @@
-/* Estilos base */
 .newsletter2 {
   background-color: #f2d5cf;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   object-fit: cover;
@@ -15,13 +14,13 @@
   margin-right: 20px;
   border-color: #517f7f;
   color: #517f7f;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
   text-align: center;
 }
 
 .newsletter2 form {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
 }
@@ -29,7 +28,7 @@
 .newsletter2 input[type="email"] {
   flex: 1;
   padding: 8px;
-  margin-right: 10px; 
+  margin-right: 10px;
   max-width: 400px;
   text-align: center;
 }
@@ -47,6 +46,10 @@
   background-color: #b2cebf;
 }
 
+.welcome {
+  color: rgb(255, 255, 255);
+  background-color: rgb(220, 170, 161);
+}
 
 @media screen and (max-width: 600px) {
   .newsletter2 input[type="email"],
@@ -54,7 +57,7 @@
     margin-right: 0;
     margin-bottom: 10px;
     width: 100%;
-    max-width: 100%; 
+    max-width: 100%;
   }
 
   .newsletter2 input[type="email"] {

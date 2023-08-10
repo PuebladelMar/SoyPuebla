@@ -1,4 +1,4 @@
-const { Categories} = require("../../db.js");
+const { Categories } = require("../../db.js");
 
 const getAllCategories = async () => {
   const categoriesList = await Categories.findAll();

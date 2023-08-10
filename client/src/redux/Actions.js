@@ -8,6 +8,10 @@ import {
   GET_ALL_SERIES,
   GET_PRODUCTS_BY_NAME,
   GET_FILTERED_PRODUCTS,
+  GET_USERS,
+  POST_USERS,
+  PUT_USERS,
+  DELETE_USERS,
 } from "./ActionsTypes";
 
 export function getProducts() {
@@ -84,7 +88,7 @@ export function postProducts(createProduct) {
   return async function (dispatch) {
     try {
       await axios.post(`http://localhost:3001/products/`, createProduct);
-      alert('Su producto se creo correctamente');
+      alert("Su producto se creo correctamente");
       return dispatch({
         type: POST_PRODUCTS,
       });
@@ -123,7 +127,9 @@ export function filterProducts(filters) {
         })
         .filter((query) => query !== null)
         .join("&");
-      const response = await axios.get(`http://localhost:3001/products?${queryParams}`);
+      const response = await axios.get(
+        `http://localhost:3001/products?${queryParams}`
+      );
 
       dispatch({
         type: GET_FILTERED_PRODUCTS,
@@ -132,6 +138,34 @@ export function filterProducts(filters) {
     } catch (error) {
       alert(`Error al filtrar ${filterType}`);
       console.error(`Error al filtrar ${filterType}`, error);
+    }
+  };
+}
+
+export function getUsers() {
+  return async function (dispatch) {
+    try {
+      const response = await axios("http://localhost:3001/users/");
+      dispatch({
+        type: GET_USERS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert("Error al obtener usuarios");
+    }
+  };
+}
+
+export function postUsers(userClerkId) {
+  return async function (dispatch) {
+    try {
+      await axios.post(`http://localhost:3001/users/`, { clerkId: userClerkId });
+      alert("Su usuario se creo correctamente");
+      return dispatch({
+        type: POST_USERS,
+      });
+    } catch (error) {
+      alert(error.message);
     }
   };
 }

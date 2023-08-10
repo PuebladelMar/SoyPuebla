@@ -7,14 +7,14 @@ const putUser = require('../handlers/Users/putUser');
 
 const usersRouter = Router();
 
-usersRouter.post("/user", postUser);
+usersRouter.post("/", postUser);
 
-usersRouter.get("/user", getUsers);
+usersRouter.get("/", getUsers);
 
 usersRouter.get("/user/:id", getUser);
 
-usersRouter.put("/user", putUser);
+usersRouter.put("/user/:id", putUser);
 
-usersRouter.delete("/user", deleteUser);
+usersRouter.delete("/user/:id", deleteUser);
 
 module.exports = usersRouter
