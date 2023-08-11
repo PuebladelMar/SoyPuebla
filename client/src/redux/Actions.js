@@ -161,7 +161,7 @@ export function postUsers(userClerkId) {
   return async function (dispatch) {
     try {
      const response = await axios.post(`http://localhost:3001/users/`, { clerkId: userClerkId });
-      alert("Su usuario se creo correctamente");
+      alert(response.data.message);
       return dispatch({
         type: POST_USERS,
         payload: response.data
@@ -172,10 +172,10 @@ export function postUsers(userClerkId) {
   };
 }
 
-export function addToCar(newPostToCart) {
+export function addToCar(userId, stockId, quantity) {
   return async function (dispatch) {
     try {
-     const response = await axios.post(`http://localhost:3001/mp/postNewProduct`, newPostToCart);
+     const response = await axios.post(`http://localhost:3001/mp/postNewProduct`, {userId, stockId, quantity});
       alert("Se ha añadido el producto al carrito");
       return dispatch({
         type: POST_TO_CART

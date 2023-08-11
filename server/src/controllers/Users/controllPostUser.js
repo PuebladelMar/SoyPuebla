@@ -2,15 +2,21 @@ const { Users } = require("../../db.js");
 
 const controllPostUser = async (req) => {
   const { clerkId } = req.body;
-  console.log(clerkId)
 
   const [newUser, created] = await Users.findOrCreate({
     where: {
       clerkId,
     },
   });
-  if (!created) return newUser;
-  // modificar según la logica lo requiera
+
+  let message = "";
+  if (!created) message = "Inicio de sesión exitoso";
+  if (created) message = "Usuario creado correctamente";
+
+  return {
+    newUser,
+    message,
+  };
 };
 
 module.exports = controllPostUser;

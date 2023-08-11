@@ -78,7 +78,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allUsers: action.payload,
-        userId: action.payload.user.clerkId,
+        userId: action.payload.user.id,
       };
     case POST_TO_CART:
       return {

@@ -52,8 +52,8 @@ Products.belongsToMany(Reviews, { through: "ProductReviews" });
 Reviews.belongsToMany(Products, { through: "ProductReviews" });
 
 // Relación de Carrito de compras
-Stocks.belongsToMany(Users, { through: "Cart" });
-Users.belongsToMany(Stocks, { through: "Cart" });
+Stocks.belongsToMany(Users, { through: "Carts" });
+Users.belongsToMany(Stocks, { through: "Carts" });
 
 // Relación de Historial de compras
 Products.belongsToMany(Users, { through: "History" });

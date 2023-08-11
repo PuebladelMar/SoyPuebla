@@ -17,22 +17,7 @@ const Detail = () => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
 
-  // const [ loading, setLoading ] = useState('Loading...');
-
-  // let {
-  //   name,
-  //   price,
-  //   mainImage,
-  //   image,
-  //   description,
-  //   sale,
-  //   category,
-  //   series
-  // } = productDetails[0];
-
-  // if(productDetails.length === 0) {
-  //   return 'Loading...'
-  // }
+  //Aplicar el Loading
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -48,15 +33,11 @@ const Detail = () => {
     fetchProductDetails();
   }, []);
 
-
-
-
   const handleColorChange = (color) => {
     setSelectedColor(color);
-    setSelectedSize(null); // Reiniciar la talla seleccionada al cambiar el color
+    setSelectedSize(null);
   };
 
-  // Función para cambiar la talla seleccionada
   const handleSizeChange = (size) => {
     setSelectedSize(size);
   };
@@ -98,27 +79,10 @@ const Detail = () => {
   const removeProduct=()=>{
   quantity > 1  ? setQuantity(quantity-1): null
   }
- 
-  const productSelected = {
-    description: productDetails[0]?.name,
-    price:Number(productDetails[0]?.price),
-    quantity: Number(quantity),
-    currency_id: "ARS",
-    color: selectedColor,
-    size: selectedSize,
-    mainImage: productDetails[0]?.mainImage,
-    serie:productDetails[0]?.series,
-    stockId: selectedCombination?.stockId
-  };
    
-  const handleAddToCart = (userId, selectedCombination, quantity ) => {
+  const handleAddToCart = () => {
     setShowAlert(true); 
-    let newPostToCart = {
-      userId : userId,
-      stockId: selectedCombination.stockId,
-      quantity: Number(quantity),
-    }
-    dispatch(addToCar(newPostToCart))
+    dispatch(addToCar(userId, selectedCombination?.stockId, Number(quantity)));
   };
 
   return (
