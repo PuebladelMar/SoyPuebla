@@ -250,9 +250,9 @@ export default function NavBar({ links }) {
   };
 
   const theme = useTheme();
-  console.log(theme);
+//   console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
-  console.log(isMatch);
+//   console.log(isMatch);
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState();
@@ -311,7 +311,7 @@ export default function NavBar({ links }) {
                     alignItems: "center",
                   }}
                 >
-                  <li style={{ margin: " 1rem" }}>
+                  <li style={{ margin: " 1rem", }}>
                     <Link to="/home">INICIO</Link>
                   </li>
                   <li style={{ margin: " 1rem" }}>
