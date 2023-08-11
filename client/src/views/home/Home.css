@@ -1,0 +1,9 @@
+.home-container {
+  margin-top: 2.7rem;
+}
+
+@media screen and (max-width: 1124px) {
+  .home-container {
+    margin-top: 6.7rem;
+  }
+}

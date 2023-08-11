@@ -23,7 +23,7 @@ import Card from "../card/Card";
 
 function Slider() {
   return (
-    <div style={{ marginTop: "1rem" }}>
+    <div>
       <Swiper
        style={{
         width: "100%",
