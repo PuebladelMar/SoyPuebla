@@ -11,6 +11,7 @@ import {
 } from '../../redux/Actions';
 import validations from './Validations';
 import Cloudinary from '../../componentes/cloudinary/Cloudinary';
+// import CloudinaryFix from '../../componentes/cloudinary/CloudinaryFix';
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -242,7 +243,7 @@ const Create = () => {
         />
         <p className='error'>{errors.price}</p>
 
-        <label htmlFor='mainImage'>Imagen Principal: </label>
+        {/* <label htmlFor='mainImage'>Imagen Principal: </label>
         <textarea
           type='text'
           name='mainImage'
@@ -252,7 +253,7 @@ const Create = () => {
           className='custom-textarea'
           onChange={handleChange}
         />
-        <p className='error'>{errors.mainImage}</p>
+        <p className='error'>{errors.mainImage}</p> */}
 
         <Cloudinary />
 
