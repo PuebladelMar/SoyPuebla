@@ -12,3 +12,4 @@ export const DELETE_USERS = "DELETE_USERS";
 export const PUT_USERS = "PUT_USERS";
 export const POST_TO_CART = "POST_TO_CART";
 export const GET_USER_CART= "GET_USER_CART";
+export const SEND_MAIL = "SEND_MAIL";
