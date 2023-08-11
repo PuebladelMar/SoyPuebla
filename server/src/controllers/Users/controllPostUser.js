@@ -9,8 +9,8 @@ const controllPostUser = async (req) => {
       clerkId,
     },
   });
-  if (!created) throw new Error("User already exists");
-  return newUser;
+  if (!created) return newUser;
+  // modificar según la logica lo requiera
 };
 
 module.exports = controllPostUser;
