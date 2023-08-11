@@ -29,7 +29,7 @@ function App() {
   }, [dispatch]);
 
 
-  const linksArray = ['Home', 'Products', 'About', 'Create', 'AdminAccount', 'Cart']
+  const linksArray = ['Home', 'Products', 'About', 'Create', 'AdminAccount']
 
 
   return (

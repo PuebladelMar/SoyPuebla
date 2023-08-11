@@ -83,12 +83,6 @@
   margin-top: 4rem;
 }
 
-@media screen and (max-width: 1124px) {
-  .products-container {
-    margin-top: 7.8rem;
-  }
-}
-
 @media screen and (max-width: 600px) {
   .pagination {
     flex-direction: column;
