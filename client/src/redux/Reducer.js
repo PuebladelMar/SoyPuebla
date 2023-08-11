@@ -11,6 +11,7 @@ import {
   POST_USERS,
   PUT_USERS,
   DELETE_USERS,
+  POST_TO_CART,
 } from "./ActionsTypes";
 
 let initialState = {
@@ -20,6 +21,7 @@ let initialState = {
   categories: [],
   series: [],
   allUsers: [],
+  userId: [],
 };
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -76,6 +78,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allUsers: action.payload,
+        userId: action.payload.user.clerkId,
+      };
+    case POST_TO_CART:
+      return {
+        ...state,
       };
     default:
       return state;

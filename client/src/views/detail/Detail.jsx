@@ -2,10 +2,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { addToCar } from "../../redux/Actions"
+import { useSelector, useDispatch } from 'react-redux';
 import "./Detail.css";
 
 const Detail = () => {
   const { id } = useParams();
+
+  const userId = useSelector(state => state.userId);
+  const dispatch = useDispatch();
+
   const [productDetails, setProductDetails] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
@@ -80,9 +86,7 @@ const Detail = () => {
   const uniqueColor = obtenerColoresUnicos(productDetails);
   const [showAlert, setShowAlert] = useState(false); // Estado para controlar la visibilidad del alert
 
-  const handleAddToCart = () => {
-    setShowAlert(true); // Mostrar el alert cuando se hace clic en "Añadir al carrito"
-  };
+  
 
   const handleCloseAlert = () => {
     setShowAlert(false); // Ocultar el alert al hacer clic en "Seguir comprando"
@@ -107,6 +111,16 @@ const Detail = () => {
     stockId: selectedCombination?.stockId
   };
    
+  const handleAddToCart = (userId, selectedCombination, quantity ) => {
+    setShowAlert(true); 
+    let newPostToCart = {
+      userId : userId,
+      stockId: selectedCombination.stockId,
+      quantity: Number(quantity),
+    }
+    dispatch(addToCar(newPostToCart))
+  };
+
   return (
     <div>
       <div className="containerDetail">

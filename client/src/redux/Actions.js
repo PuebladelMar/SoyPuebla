@@ -12,6 +12,7 @@ import {
   POST_USERS,
   PUT_USERS,
   DELETE_USERS,
+  POST_TO_CART
 } from "./ActionsTypes";
 
 export function getProducts() {
@@ -159,10 +160,25 @@ export function getUsers() {
 export function postUsers(userClerkId) {
   return async function (dispatch) {
     try {
-      await axios.post(`http://localhost:3001/users/`, { clerkId: userClerkId });
+     const response = await axios.post(`http://localhost:3001/users/`, { clerkId: userClerkId });
       alert("Su usuario se creo correctamente");
       return dispatch({
         type: POST_USERS,
+        payload: response.data
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+export function addToCar(newPostToCart) {
+  return async function (dispatch) {
+    try {
+     const response = await axios.post(`http://localhost:3001/mp/postNewProduct`, newPostToCart);
+      alert("Se ha añadido el producto al carrito");
+      return dispatch({
+        type: POST_TO_CART
       });
     } catch (error) {
       alert(error.message);
