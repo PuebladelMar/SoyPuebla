@@ -12,6 +12,7 @@ import {
   PUT_USERS,
   DELETE_USERS,
   POST_TO_CART,
+  SEND_MAIL,
 } from "./ActionsTypes";
 
 let initialState = {
@@ -81,6 +82,10 @@ function rootReducer(state = initialState, action) {
         userId: action.payload.user.id,
       };
     case POST_TO_CART:
+      return {
+        ...state,
+      };
+    case SEND_MAIL:
       return {
         ...state,
       };

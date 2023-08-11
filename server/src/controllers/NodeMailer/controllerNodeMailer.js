@@ -16,7 +16,7 @@ const controllNodeMailer = async(emailSubject, emailsUsers) =>{
         from: '"SOY_PUEBLA" : puebladelmar2023@gmail.com',
         to: emailsUsers, 
         subject: emailSubject,
-        html: "<b>El parrafo principal debe ir contenido aquí</b> <p>Parrafo secundario, remplace esta linea</p>",
+        html: "<b>El pedido fue exitoso con un ado de principal debe ir contenido aquí</b> <p>Parrafo secundario, remplace esta linea</p>",
       });
 };
 

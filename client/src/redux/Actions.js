@@ -12,7 +12,8 @@ import {
   POST_USERS,
   PUT_USERS,
   DELETE_USERS,
-  POST_TO_CART
+  POST_TO_CART,
+  SEND_MAIL
 } from "./ActionsTypes";
 
 export function getProducts() {
@@ -161,7 +162,6 @@ export function postUsers(userClerkId) {
   return async function (dispatch) {
     try {
      const response = await axios.post(`http://localhost:3001/users/`, { clerkId: userClerkId });
-      alert(response.data.message);
       return dispatch({
         type: POST_USERS,
         payload: response.data
@@ -176,7 +176,6 @@ export function addToCar(userId, stockId, quantity) {
   return async function (dispatch) {
     try {
      const response = await axios.post(`http://localhost:3001/mp/postNewProduct`, {userId, stockId, quantity});
-      alert("Se ha añadido el producto al carrito");
       return dispatch({
         type: POST_TO_CART
       });
@@ -185,3 +184,18 @@ export function addToCar(userId, stockId, quantity) {
     }
   };
 }
+
+export function sendMail(emailSubject, emailsUsers) {
+  return async function (dispatch) {
+    try {
+     const response = await axios.post(`http://localhost:3001/notify/email`, {emailSubject, emailsUsers});
+      return dispatch({
+        type: SEND_MAIL
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+
