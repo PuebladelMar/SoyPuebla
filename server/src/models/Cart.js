@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-  const Cart = sequelize.define(
-    'Cart', 
+  const Carts = sequelize.define(
+    'Carts', 
     {
     id: {
       type: DataTypes.UUID,
@@ -10,7 +10,6 @@ module.exports = (sequelize) => {
     },
     quantity:{
       type: DataTypes.INTEGER,
-      allowNull: false,
       defaultValue: 0,
       validate:{
         min: 0
