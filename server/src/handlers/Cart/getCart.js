@@ -1,9 +1,9 @@
-const getUserDetails = require("../../controllers/Cart/controllGetSelectProduct")
+const controllGetCart = require("../../controllers/Cart/controllGetCart")
 
-const getSelectedProducts = async (req, res) => {
+const getCart = async (req, res) => {
   const { id } = req.params;
 try {
-    const response = await getUserDetails(id);
+    const response = await controllGetCart(id);
     if (!response) {
       res.status(400).send("non-existent users");
     } else {
@@ -14,4 +14,4 @@ try {
   }
 };
 
-module.exports = getSelectedProducts
+module.exports = getCart;

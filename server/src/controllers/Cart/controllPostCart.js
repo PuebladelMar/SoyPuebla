@@ -1,6 +1,6 @@
 const { Carts, Stocks } = require("../../db.js"); // Asegúrate de importar el modelo Stock
 
-const postSelectedProducts = async (req) => {
+const controllPostCart = async (req) => {
   const { userId, stockId, quantity } = req.body;
 
   const stockItem = await Stocks.findByPk(stockId);
@@ -27,4 +27,4 @@ const postSelectedProducts = async (req) => {
   return newItem;
 };
 
-module.exports = postSelectedProducts;
+module.exports = controllPostCart;

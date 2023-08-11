@@ -180,7 +180,7 @@ export function addToCar(userId, stockId, quantity) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        `http://localhost:3001/mp/postNewProduct`,
+        `http://localhost:3001/cart`,
         { userId, stockId, quantity }
       );
       alert("Se ha añadido el producto al carrito");
@@ -197,7 +197,7 @@ export const getUserCart = (userId) => {
   console.log(userId)
   return async (dispatch) => {
     try {
-      const response = await fetch(`http://localhost:3001/mp/cart/${userId}`);
+      const response = await fetch(`http://localhost:3001/cart/${userId}`);
       const data = await response.json();
 
       dispatch({ type: GET_USER_CART, payload: data });
