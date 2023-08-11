@@ -12,7 +12,8 @@ import {
   PUT_USERS,
   DELETE_USERS,
   POST_TO_CART,
-  GET_USER_CART
+  GET_USER_CART,
+  SEND_MAIL
 } from "./ActionsTypes";
 
 let initialState = {
@@ -91,6 +92,10 @@ function rootReducer(state = initialState, action) {
           ...state,
           userCart: action.payload,
           
+        };
+      case SEND_MAIL:
+        return {
+          ...state,
         }
     default:
       return state;

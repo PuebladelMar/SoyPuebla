@@ -14,6 +14,7 @@ import {
   DELETE_USERS,
   POST_TO_CART,
   GET_USER_CART,
+  SEND_MAIL
 } from "./ActionsTypes";
 
 export function getProducts() {
@@ -205,3 +206,16 @@ export const getUserCart = (userId) => {
     }
   };
 };
+
+export function sendMail(emailSubject, emailsUsers) {
+  return async function (dispatch) {
+    try {
+     const response = await axios.post(`http://localhost:3001/notify/email`, {emailSubject, emailsUsers});
+      return dispatch({
+        type: SEND_MAIL
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
