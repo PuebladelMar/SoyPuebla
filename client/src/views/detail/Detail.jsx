@@ -25,6 +25,7 @@ const Detail = () => {
         const response = await axios.get(
           `http://localhost:3001/products/${id}`
         );
+        console.log(response.data);
         setProductDetails(response.data);
       } catch (error) {
         window.alert(error);
