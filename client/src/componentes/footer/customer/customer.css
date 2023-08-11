@@ -1,0 +1,36 @@
+.customer-container {
+    padding: 50px;
+    margin: 50px;
+  }
+  
+  .accordion-container {
+    padding: 20px;
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .accordion {
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .accordion:last-child {
+    margin-bottom: 0; /* Remove margin from the last accordion */
+  }
+  
+  /* Additional styling for accordion headers and details can be added here */
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .accordion-container {
+      align-items: center;
+    }
+    
+    .accordion {
+      width: 100%;
+    }
+  }
+  
