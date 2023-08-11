@@ -2,31 +2,22 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { addToCar } from "../../redux/Actions"
+import { useSelector, useDispatch } from 'react-redux';
 import "./Detail.css";
 
 const Detail = () => {
   const { id } = useParams();
+
+  const userId = useSelector(state => state.userId);
+  const dispatch = useDispatch();
+
   const [productDetails, setProductDetails] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
 
-  // const [ loading, setLoading ] = useState('Loading...');
-
-  // let {
-  //   name,
-  //   price,
-  //   mainImage,
-  //   image,
-  //   description,
-  //   sale,
-  //   category,
-  //   series
-  // } = productDetails[0];
-
-  // if(productDetails.length === 0) {
-  //   return 'Loading...'
-  // }
+  //Aplicar el Loading
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -42,15 +33,11 @@ const Detail = () => {
     fetchProductDetails();
   }, []);
 
-
-
-
   const handleColorChange = (color) => {
     setSelectedColor(color);
-    setSelectedSize(null); // Reiniciar la talla seleccionada al cambiar el color
+    setSelectedSize(null);
   };
 
-  // Función para cambiar la talla seleccionada
   const handleSizeChange = (size) => {
     setSelectedSize(size);
   };
@@ -80,9 +67,7 @@ const Detail = () => {
   const uniqueColor = obtenerColoresUnicos(productDetails);
   const [showAlert, setShowAlert] = useState(false); // Estado para controlar la visibilidad del alert
 
-  const handleAddToCart = () => {
-    setShowAlert(true); // Mostrar el alert cuando se hace clic en "Añadir al carrito"
-  };
+  
 
   const handleCloseAlert = () => {
     setShowAlert(false); // Ocultar el alert al hacer clic en "Seguir comprando"
@@ -94,19 +79,12 @@ const Detail = () => {
   const removeProduct=()=>{
   quantity > 1  ? setQuantity(quantity-1): null
   }
- 
-  const productSelected = {
-    description: productDetails[0]?.name,
-    price:Number(productDetails[0]?.price),
-    quantity: Number(quantity),
-    currency_id: "ARS",
-    color: selectedColor,
-    size: selectedSize,
-    mainImage: productDetails[0]?.mainImage,
-    serie:productDetails[0]?.series,
-    stockId: selectedCombination?.stockId
-  };
    
+  const handleAddToCart = () => {
+    setShowAlert(true); 
+    dispatch(addToCar(userId, selectedCombination?.stockId, Number(quantity)));
+  };
+
   return (
     <div>
       <div className="containerDetail">

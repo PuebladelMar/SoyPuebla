@@ -26,7 +26,7 @@ function Slider() {
     <div style={{ marginTop: "1rem" }}>
       <Swiper
        style={{
-        width: "85rem",
+        width: "100%",
         height: "30rem",
       }}
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
@@ -98,7 +98,6 @@ function Slider() {
               alt="Imagen 3"
               style={{
                 width: "100%",
-
                 height: "30rem",
 
                 borderRadius: "2px",

@@ -28,14 +28,9 @@ function App() {
     dispatch(getProducts());
   }, [dispatch]);
 
-  const linksArray = [
-    "Inicio",
-    "Productos",
-    "About",
-    "Create",
-    "AdminAccount",
-    "Cart",
-  ];
+
+  const linksArray = ['Home', 'Products', 'About', 'Create', 'AdminAccount', 'Cart']
+
 
   return (
     <div>
