@@ -1,6 +1,6 @@
 const { Carts, Stocks, Products, Sizes, Colors } = require("../../db");
 
-const getUserDetails = async (userId) => {
+const controllGetCart = async (userId) => {
   const userCarts = await Carts.findAll({
     where: { UserId: userId },
   });
@@ -40,4 +40,4 @@ const getUserDetails = async (userId) => {
   return stocksDetails;
 };
 
-module.exports = getUserDetails;
+module.exports = controllGetCart;
