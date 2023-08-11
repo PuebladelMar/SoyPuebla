@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-links">
           <a href="/centro-ayuda">Centro de Ayuda | </a>
-          <a href="/preguntas-frecuentes">Preguntas Frecuentes | </a>
+          <a href="/frequent-questions">Preguntas Frecuentes | </a>
           <a href="/about">Quienes somos | </a>
           <a href="/cambios-devoluciones">Cambios y Devoluciones | </a>
           <a href="/medios-pago">Medios de pago | </a>

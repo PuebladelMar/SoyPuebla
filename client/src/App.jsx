@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { getProducts } from "./redux/Actions";
 import SearchBar from "./componentes/searchBar/SearchBar";
 import AdminAccount from "./views/adminAccount/AdminAccount";
+import Customer from "./componentes/footer/customer/customer";
 
 function App() {
   const { pathname } = useLocation();
@@ -27,8 +28,14 @@ function App() {
     dispatch(getProducts());
   }, [dispatch]);
 
-
-  const linksArray = ['Inicio', 'Productos', 'About', 'Create', 'AdminAccount', 'Cart']
+  const linksArray = [
+    "Inicio",
+    "Productos",
+    "About",
+    "Create",
+    "AdminAccount",
+    "Cart",
+  ];
 
   return (
     <div>
@@ -45,6 +52,7 @@ function App() {
         <Route path="/products/:id" element={<Detail />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/adminAccount" element={<AdminAccount />} />
+        <Route path="/frequent-questions" element={<Customer />} />
       </Routes>
       {pathname !== "/" && <Footer />}
     </div>
