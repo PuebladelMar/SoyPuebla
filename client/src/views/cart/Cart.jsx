@@ -1,5 +1,6 @@
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getUserCart } from "../../redux/Actions";
 import { useEffect } from "react";
@@ -12,13 +13,19 @@ const Cart = () => {
   const [preferenceId, setPreferenceId] = useState(null);
   const userCart = useSelector((state) => state.userCart);
   const userId = useSelector((state) => state.userId);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   initMercadoPago("TEST-617b343c-694c-44b2-a447-349bcd889b8b");
 
   useEffect(() => {
-    dispatch(getUserCart(userId));
+    if(!userId.length){
+      navigate("/home");
+      alert("debes iniciar seción para ir al carrito");
+    }else{
+      dispatch(getUserCart(userId));
+    }
   }, [dispatch]);
-console.log(userId);
+
   //aquí recibo un array con los elementos de props y le voy haciendo push a itemLIst
   const itemList = userCart.map((item) => ({
     description: item.product.name,

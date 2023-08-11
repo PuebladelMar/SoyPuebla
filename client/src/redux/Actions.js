@@ -194,7 +194,6 @@ export function addToCar(userId, stockId, quantity) {
 }
 
 export const getUserCart = (userId) => {
-  console.log(userId)
   return async (dispatch) => {
     try {
       const response = await fetch(`http://localhost:3001/cart/${userId}`);
