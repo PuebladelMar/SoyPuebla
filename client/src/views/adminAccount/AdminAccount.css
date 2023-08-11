@@ -51,9 +51,3 @@ h1 {
 .btn-admin:hover {
   background-color: #245450;
 }
-
-@media screen and (max-width: 1124px) {
-  .admin-account-container {
-    margin-top: 8.1rem;
-  }
-}

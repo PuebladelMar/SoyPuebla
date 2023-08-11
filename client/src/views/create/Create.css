@@ -75,9 +75,3 @@
   background-color: #b2cebf;
   color: rgb(81, 81, 81);
 }
-
-@media screen and (max-width: 1124px) {
-  .create-container {
-    margin-top: 8.2rem;
-  }
-}
