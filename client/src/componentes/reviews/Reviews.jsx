@@ -1,19 +1,28 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react';
 import {
   Navigation,
   Pagination,
   Scrollbar,
   A11y,
   Autoplay,
-} from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import "swiper/css/autoplay";
-import "./Reviews.css";
+} from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/autoplay';
+import './Reviews.css';
+import { NavLink } from 'react-router-dom';
+// import ReviewsForm from './ReviewsForm'
+import { useSelector, useDispatch } from 'react-redux';
+// import { postUsers } from '../../redux/Actions';
+import { useState, useEffect } from 'react';
 
 function Reviews() {
+  const userId = useSelector((state) => state.userId);
+
+  // const dispatch = useDispatch();
+
   return (
     <div>
       <Swiper
@@ -23,7 +32,7 @@ function Reviews() {
         navigation
         pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
-        className="swiperFooter"
+        className='swiperFooter'
         breakpoints={{
           // Cuando el ancho de la ventana es menor o igual a 600px, mostrar solo 1 tarjeta
           500: {
@@ -32,50 +41,34 @@ function Reviews() {
           },
         }}
       >
-        <SwiperSlide className="swiperSlide">
+        <SwiperSlide className='swiperSlide'>
           <img
-            className="imagen"
-            src="/src/assets/images/imagesReseñas/mujer.jpeg"
-            alt="Imagen 1"
+            className='imagen'
+            src='/src/assets/images/imagesReseñas/mujer.jpeg'
+            alt='Imagen 1'
           />
-          <div className="review">
-            <h2 className="th3">Nombre:</h2>
-            <h3 className="th3">Producto 1</h3>
-            <p className="parrafo">Esta es una reseña sobre el producto 1.</p>
-            <div className="stars">⭐⭐⭐⭐⭐</div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="swiperSlide">
-          <img
-            className="imagen"
-            src="/src/assets/images/imagesReseñas/mujer2.png"
-            alt="Imagen 2"
-          />
-          <div className="review">
-            <h2 className="th3">Nombre:</h2>
-            <h3 className="th3">Producto 2</h3>
-            <p className="parrafo">
-              Lorem, ipsum dolor sit amet itecto ipsam impedit voluptatibus
-              atque vitae necessitatibus qui aliquid quae, eos eaque velit
-              eligendi pariatur?
-            </p>
-            <div className="stars">⭐⭐⭐⭐</div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="swiperSlide">
-          <img
-            className="imagen"
-            src="/src/assets/images/imagesReseñas/mujer3.jpeg"
-            alt="Imagen 3"
-          />
-          <div className="review">
-            <h2 className="th3">Nombre:</h2>
-            <h3 className="th3">Producto 3</h3>
-            <p className="parrafo">Esta es una reseña sobre el producto 3.</p>
-            <div className="stars">⭐⭐⭐</div>
+          <div className='review'>
+            <h2 className='th3'>Nombre:</h2>
+            <h3 className='th3'>Producto 1</h3>
+            <p className='parrafo'>Esta es una reseña sobre el producto 1.</p>
+            <div className='stars'>⭐⭐⭐⭐⭐</div>
           </div>
         </SwiperSlide>
       </Swiper>
+      {/* <NavLink to='/reviews'>
+          <button>enviar comentario</button>
+        </NavLink> */}
+      <div>
+        {userId.length === 0 ? (
+          <NavLink to='/create'>
+            <button>Debes Iniciar sesion</button>
+          </NavLink>
+        ) : (
+          <NavLink to='/review'>
+            <button>Enviar comentario</button>
+          </NavLink>
+        )}
+      </div>
     </div>
   );
 }

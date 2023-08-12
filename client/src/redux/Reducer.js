@@ -13,8 +13,9 @@ import {
   DELETE_USERS,
   POST_TO_CART,
   GET_USER_CART,
-  SEND_MAIL
-} from "./ActionsTypes";
+  SEND_MAIL,
+  POST_REVIEWS,
+} from './ActionsTypes';
 
 let initialState = {
   allProducts: [],
@@ -24,7 +25,7 @@ let initialState = {
   series: [],
   allUsers: [],
   userId: [],
-  userCart: []
+  userCart: [],
 };
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -87,16 +88,20 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-      case GET_USER_CART:
-        return {
-          ...state,
-          userCart: action.payload,
-          
-        };
-      case SEND_MAIL:
-        return {
-          ...state,
-        }
+    case GET_USER_CART:
+      return {
+        ...state,
+        userCart: action.payload,
+      };
+    case SEND_MAIL:
+      return {
+        ...state,
+      };
+    case POST_REVIEWS:
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }

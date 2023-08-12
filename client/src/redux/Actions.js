@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   GET_ALL_SIZES,
   POST_ALL_COLOR,
@@ -14,19 +14,20 @@ import {
   DELETE_USERS,
   POST_TO_CART,
   GET_USER_CART,
-  SEND_MAIL
-} from "./ActionsTypes";
+  SEND_MAIL,
+  POST_REVIEWS,
+} from './ActionsTypes';
 
 export function getProducts() {
   return async function (dispatch) {
     try {
-      const response = await axios("http://localhost:3001/products");
+      const response = await axios('http://localhost:3001/products');
       dispatch({
         type: GET_PRODUCTS,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los productos");
+      alert('Error al obtener los productos');
     }
   };
 }
@@ -34,13 +35,13 @@ export function getProducts() {
 export function getCategories() {
   return async function (dispatch) {
     try {
-      const response = await axios("http://localhost:3001/products/category");
+      const response = await axios('http://localhost:3001/products/category');
       dispatch({
         type: GET_ALL_CATEGORIES,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los categorias");
+      alert('Error al obtener los categorias');
     }
   };
 }
@@ -48,13 +49,13 @@ export function getCategories() {
 export function getSeries() {
   return async function (dispatch) {
     try {
-      const response = await axios("http://localhost:3001/products/series");
+      const response = await axios('http://localhost:3001/products/series');
       dispatch({
         type: GET_ALL_SERIES,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener las series");
+      alert('Error al obtener las series');
     }
   };
 }
@@ -62,13 +63,13 @@ export function getSeries() {
 export function getSizes() {
   return async function (dispatch) {
     try {
-      const response = await axios("http://localhost:3001/products/size");
+      const response = await axios('http://localhost:3001/products/size');
       dispatch({
         type: GET_ALL_SIZES,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los talles");
+      alert('Error al obtener los talles');
     }
   };
 }
@@ -76,13 +77,13 @@ export function getSizes() {
 export function postColor() {
   return async function (dispatch) {
     try {
-      const response = await axios.post("http://localhost:3001/products/color");
+      const response = await axios.post('http://localhost:3001/products/color');
       dispatch({
         type: POST_ALL_COLOR,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los colores");
+      alert('Error al obtener los colores');
     }
   };
 }
@@ -91,7 +92,7 @@ export function postProducts(createProduct) {
   return async function (dispatch) {
     try {
       await axios.post(`http://localhost:3001/products/`, createProduct);
-      alert("Su producto se creo correctamente");
+      alert('Su producto se creo correctamente');
       return dispatch({
         type: POST_PRODUCTS,
       });
@@ -112,8 +113,8 @@ export function getProductsByName(name) {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener las coincidencias");
-      console.error("Error al obtener las coincidencias:", error);
+      alert('Error al obtener las coincidencias');
+      console.error('Error al obtener las coincidencias:', error);
     }
   };
 }
@@ -123,13 +124,13 @@ export function filterProducts(filters) {
     try {
       const queryParams = Object.entries(filters)
         .map(([key, value]) => {
-          if (value !== null && value !== "") {
+          if (value !== null && value !== '') {
             return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
           }
           return null;
         })
         .filter((query) => query !== null)
-        .join("&");
+        .join('&');
       const response = await axios.get(
         `http://localhost:3001/products?${queryParams}`
       );
@@ -148,13 +149,13 @@ export function filterProducts(filters) {
 export function getUsers() {
   return async function (dispatch) {
     try {
-      const response = await axios("http://localhost:3001/users/");
+      const response = await axios('http://localhost:3001/users/');
       dispatch({
         type: GET_USERS,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener usuarios");
+      alert('Error al obtener usuarios');
     }
   };
 }
@@ -179,11 +180,12 @@ export function postUsers(userClerkId) {
 export function addToCar(userId, stockId, quantity) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(
-        `http://localhost:3001/cart`,
-        { userId, stockId, quantity }
-      );
-      alert("Se ha añadido el producto al carrito");
+      const response = await axios.post(`http://localhost:3001/cart`, {
+        userId,
+        stockId,
+        quantity,
+      });
+      alert('Se ha añadido el producto al carrito');
       return dispatch({
         type: POST_TO_CART,
       });
@@ -209,9 +211,26 @@ export const getUserCart = (userId) => {
 export function sendMail(emailSubject, emailsUsers) {
   return async function (dispatch) {
     try {
-     const response = await axios.post(`http://localhost:3001/notify/email`, {emailSubject, emailsUsers});
+      const response = await axios.post(`http://localhost:3001/notify/email`, {
+        emailSubject,
+        emailsUsers,
+      });
       return dispatch({
-        type: SEND_MAIL
+        type: SEND_MAIL,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+export function postReviews(userComment) {
+  return async function (dispatch) {
+    try {
+      await axios.post(`http://localhost:3001/review`, userComment);
+      alert('Su producto se creo correctamente');
+      return dispatch({
+        type: POST_REVIEWS,
       });
     } catch (error) {
       alert(error.message);

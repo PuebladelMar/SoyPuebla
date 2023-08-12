@@ -1,25 +1,26 @@
-import "./App.css";
-import About from "./views/about/About";
-import Home from "./views/home/Home";
-import Landing from "./views/landing/Landing";
-import Products from "./views/products/Products";
-import NavBar from "./componentes/navbar/NavBar";
-import Footer from "./componentes/footer/Footer";
-import Cart from "./views/cart/Cart";
-import Create from "./views/create/Create";
+import './App.css';
+import About from './views/about/About';
+import Home from './views/home/Home';
+import Landing from './views/landing/Landing';
+import Products from './views/products/Products';
+import NavBar from './componentes/navbar/NavBar';
+import Footer from './componentes/footer/Footer';
+import Cart from './views/cart/Cart';
+import Create from './views/create/Create';
 //import Login from "./views/login/Login";
-import Detail from "./views/detail/Detail";
-import EnProceso from "./views/mercadoPago/EnProceso/enProceso";
-import ErrorPage from "./views/errorPage/ErrorPage";
-import { Routes, Route } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { getProducts } from "./redux/Actions";
-import SearchBar from "./componentes/searchBar/SearchBar";
-import AdminAccount from "./views/adminAccount/AdminAccount";
-import Customer from "./componentes/footer/customer/customer";
-import PayState from "./views/mercadoPago/PayState";
+import Detail from './views/detail/Detail';
+import EnProceso from './views/mercadoPago/EnProceso/enProceso';
+import ErrorPage from './views/errorPage/ErrorPage';
+import ReviewsForm from './componentes/reviews/ReviewsForm';
+import { Routes, Route } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getProducts } from './redux/Actions';
+import SearchBar from './componentes/searchBar/SearchBar';
+import AdminAccount from './views/adminAccount/AdminAccount';
+import Customer from './componentes/footer/customer/customer';
+import PayState from './views/mercadoPago/PayState';
 //import Subsidiary from "./componentes/footer/subsidiary/subsidiary";
 
 function App() {
@@ -30,41 +31,75 @@ function App() {
     dispatch(getProducts());
   }, [dispatch]);
 
-
   const linksArray = [
-    "Home",
-    "Products",
-    "About",
-    "Create",
-    "AdminAccount",
-    "Cart",
+    'Home',
+    'Products',
+    'About',
+    'Create',
+    'AdminAccount',
+    'Cart',
   ];
-
-
-  
-
-
 
   return (
     <div>
       {<NavBar links={linksArray} />}
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/procesando" element={<EnProceso />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/create" element={<Create />} />
+        <Route
+          path='/'
+          element={<Landing />}
+        />
+        <Route
+          path='/home'
+          element={<Home />}
+        />
+        <Route
+          path='/procesando'
+          element={<EnProceso />}
+        />
+        <Route
+          path='/about'
+          element={<About />}
+        />
+        <Route
+          path='/products'
+          element={<Products />}
+        />
+        <Route
+          path='/cart'
+          element={<Cart />}
+        />
+        <Route
+          path='/create'
+          element={<Create />}
+        />
         {/*<Route path="/login" element={<Login />} />*/}
-        <Route path="/products/:id" element={<Detail />} />
-        <Route path="*" element={<ErrorPage />} />
-        <Route path="/adminAccount" element={<AdminAccount />} />
-        <Route path="/frequent-questions" element={<Customer />} />
+        <Route
+          path='/products/:id'
+          element={<Detail />}
+        />
+        <Route
+          path='*'
+          element={<ErrorPage />}
+        />
+        <Route
+          path='/adminAccount'
+          element={<AdminAccount />}
+        />
+        <Route
+          path='/frequent-questions'
+          element={<Customer />}
+        />
         {/*<Route path="/subsidiary" element={<Subsidiary />} />*/}
-        <Route path="/pay-state" element={<PayState />} />
+        <Route
+          path='/pay-state'
+          element={<PayState />}
+        />
+        <Route
+          path='/reviews'
+          element={<ReviewsForm />}
+        />
       </Routes>
-      {pathname !== "/" && <Footer />}
+      {pathname !== '/' && <Footer />}
     </div>
   );
 }
