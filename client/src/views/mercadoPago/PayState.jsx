@@ -33,6 +33,14 @@ function PayState() {
       </div>
     );
   };
+  if(parsedData.collection_status === "null"){
+    return (
+      <div className="payState">
+        <p className="payState-text">su compra no se pudo realizar</p>
+        <Link to="/home">Click aquí para volver al home</Link>
+      </div>
+    );
+  };
 };
 
 export default PayState;
