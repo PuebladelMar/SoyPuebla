@@ -14,7 +14,7 @@ const postCreatePreference = async (req, res) => {
   const preference = {
     items: items,
     back_urls: {
-      success: 'http://localhost:5173/',
+      success: 'http://localhost:3001/mp/success',
       failure: 'http://localhost:5173/pagar',
       pending: 'http://localhost:5173/procesando',
     },
