@@ -14,7 +14,9 @@ import {
   DELETE_USERS,
   POST_TO_CART,
   GET_USER_CART,
-  SEND_MAIL
+  SEND_MAIL,
+  DELETE_CART,
+  DELETE_CART_USER
 } from "./ActionsTypes";
 
 export function getProducts() {
@@ -215,6 +217,35 @@ export function sendMail(emailSubject, emailsUsers) {
       });
     } catch (error) {
       alert(error.message);
+    }
+  };
+}
+
+
+export function deleteCart(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`http://localhost:3001/cart/${id}`);
+      dispatch({
+        type: DELETE_CART,
+        payload: response.data,
+      });
+    } catch (error) {
+     alert(error.message)
+    }
+  };
+}
+
+export function deleteCartUser(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`http://localhost:3001/cart/user/${id}`);
+      dispatch({
+        type: DELETE_CART_USER,
+        payload: response.data,
+      });
+    } catch (error) {
+     alert(error.message)
     }
   };
 }
