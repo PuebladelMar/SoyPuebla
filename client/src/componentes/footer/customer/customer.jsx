@@ -167,9 +167,9 @@ export default function Customer() {
               <strong>Puntos de retiro:</strong> Podes retirar tu compra sin
               cargo los siguientes puntos:
               <br />
-              <strong>LA PLATA:</strong>
+              <strong>LA PLATA:</strong> Centro
               <br />
-              <strong>Centro CABA:</strong> Palermo.
+              <strong>CABA:</strong> Palermo.
               <br />
               Cuando acreditamos tu pago, el plazo de confirmación para retirar
               el pedido puede ser de 24 - 48hs hábiles, salvo excepcionalidades.
