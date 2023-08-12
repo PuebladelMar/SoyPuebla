@@ -47,7 +47,6 @@ export default function NavBar({ links }) {
   };
 
   const isMatch = useMediaQuery("(max-width: 800px)");
-  const isMatchLogo = useMediaQuery("(max-width: 1224px)");
   const isMatchSearchBar = useMediaQuery("(max-width: 1159px)");
   const [value, setValue] = useState();
 
@@ -142,31 +141,6 @@ export default function NavBar({ links }) {
                   </ul>
                 </Tabs>
               </Grid>
-            </Grid>
-          )}
-        </Box>
-        <Box>
-          {isMatchLogo ? (
-            <Grid margin={"auto"} position={"absolute"} visibility={"hidden"}>
-              <IconButton sx={{ width: "8rem", height: "4rem" }} disableRipple>
-                <img
-                  className="img-pdm"
-                  src="src/assets/images/PdM.png" // Reemplaza esta ruta con la ruta correcta hacia la imagen del logo
-                  alt="Cart Icon"
-                  style={{ width: "100%", height: "100%" }}
-                />
-              </IconButton>
-            </Grid>
-          ) : (
-            <Grid margin={"auto"}>
-              <IconButton sx={{ width: "8rem", height: "4rem" }} disableRipple>
-                <img
-                  className="img-pdm"
-                  src="src/assets/images/PdM.png" // Reemplaza esta ruta con la ruta correcta hacia la imagen del logo
-                  alt="Cart Icon"
-                  style={{ width: "100%", height: "100%" }}
-                />
-              </IconButton>
             </Grid>
           )}
         </Box>

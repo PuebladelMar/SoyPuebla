@@ -9,14 +9,18 @@ function CardContainer(props) {
       maxWidth="2560px"
       justifyContent="center"
       style={{
-        marginTop: "30px",
-        paddingBottom: "30px",
+        padding: "1rem 2rem",
         backgroundColor: "#f0f0f0",
       }}
     >
-      <Grid container spacing={3} justifyContent="start">
+      <Grid style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "start",
+        alignItems: "center",
+      }}>
         {props.products?.map((product) => (
-          <Grid item xs={12} md={6} lg={4} xl={3} key={product.id}>
+          <Grid item xs={12} md={5} lg={4} xl={3} key={product.id} style={{ margin: "1rem" }}>
             <Card key={product.id} product={product} />
           </Grid>
         ))}

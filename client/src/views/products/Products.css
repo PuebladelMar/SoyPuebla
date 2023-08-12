@@ -80,7 +80,18 @@
 .products-container {
   display: flex;
   flex-direction: row;
-  margin-top: 4rem;
+  margin-top: 4.2rem;
+  width: 90%;
+}
+
+.cards-container {
+  width: 100%;
+}
+
+.products-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 600px) {

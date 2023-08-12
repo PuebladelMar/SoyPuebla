@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
+import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function Cardx({ product }) {
@@ -13,34 +14,78 @@ export default function Cardx({ product }) {
 
   return (
     <Link to={`/products/${id}`}>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
+      <Card
+        style={{
+          width: "20rem",
+          borderRadius: "10px",
+          overflow: "hidden",
+        }}
+      >
+        <Box
           style={{
-            width: 300,
-            height: 600,
-            objectFit: "cover",
+            width: "100%",
+            height: "22rem",
+            overflow: "hidden",
           }}
-          image={mainImage}
-          alt="Item"
-        />
-        <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {name}
-          </Typography>
-          <br />
-          <Typography variant="body2" color="text.secondary">
-            {price}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
-        </CardActions>
+        >
+          <CardMedia
+            component="img"
+            style={{
+              width: "100%",
+              height: "22rem",
+              objectFit: "fill",
+              transition: "transform 0.2s",
+            }}
+            image={mainImage}
+            alt="Item"
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = "scale(1.05)";
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+          />
+        </Box>
+        <Box>
+          <CardContent
+            style={{
+              width: "100%",
+              height: "5rem",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+            }}
+          >
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              style={{
+                fontSize: "1rem",
+              }}
+            >
+              {name}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              style={{
+                fontSize: "0.9rem",
+              }}
+            >
+              {price}
+            </Typography>
+          </CardContent>
+        </Box>
+        <Box>
+          <CardActions disableSpacing>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+            <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton>
+          </CardActions>
+        </Box>
       </Card>
     </Link>
   );
