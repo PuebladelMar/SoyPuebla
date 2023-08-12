@@ -1,20 +1,12 @@
-import * as React from "react";
-import { Button, Grid, Tab, Tabs, Typography } from "@mui/material";
+import { Grid, Tabs, Typography } from "@mui/material";
 import {
   Box,
   AppBar,
   Toolbar,
   IconButton,
   Alert,
-  Drawer,
-  useTheme,
   useMediaQuery,
 } from "@mui/material";
-// import  ShoppingCartCheckoutIcon  from '@mui/icons-material/ShoppingCartCheckoutIcon'
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Menu from "@mui/material/Menu";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
 import "../searchBar/SearchBar.css";
@@ -26,17 +18,10 @@ import UserIcon from "../../views/login/UserIcon";
 import DrawerComp from "./DrawerComp";
 
 export default function NavBar({ links }) {
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
   const location = useLocation();
   const isProducts = location.pathname === "/products";
-
-  const menuId = "primary-search-account-menu";
-
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
-
   const [searchValue, setSearchValue] = useState("");
   const [ShowNoResultsAlert, setShowNoResultsAlert] = useState(false);
 
@@ -54,28 +39,22 @@ export default function NavBar({ links }) {
 
   const handlerEventSearch = (event) => {
     event.preventDefault();
-
     setSearchValue(event.target.value);
-    // console.log(setSearchValue);
   };
 
   const handlerSubmitSearch = (event) => {
     event.preventDefault();
   };
 
-  const theme = useTheme();
-  //   console.log(theme);
   const isMatch = useMediaQuery("(max-width: 800px)");
   const isMatchLogo = useMediaQuery("(max-width: 1224px)");
   const isMatchSearchBar = useMediaQuery("(max-width: 1159px)");
-  //   console.log(isMatch);
-
-  const [open, setOpen] = useState(false);
   const [value, setValue] = useState();
 
   return (
     <AppBar
       sx={{
+        boxSizing: "border-box",
         backgroundColor: " #517f7F",
         display: "flex",
         justifyContent: "center",
@@ -138,9 +117,6 @@ export default function NavBar({ links }) {
                   value={value}
                   onChange={(e, val) => setValue(val)}
                 >
-                  {/* {links.map((link, index)=>(
-                 <Tab key={index} label={link} />
-                 ))} */}
                   <ul
                     style={{
                       display: "flex",
@@ -202,11 +178,11 @@ export default function NavBar({ links }) {
             gap={"10px"}
           >
             {isProducts && !isMatchSearchBar && (
-                <SearchBar
-                  handlerEventSearch={handlerEventSearch}
-                  handlerSubmitSearch={handlerSubmitSearch}
-                />
-              )}
+              <SearchBar
+                handlerEventSearch={handlerEventSearch}
+                handlerSubmitSearch={handlerSubmitSearch}
+              />
+            )}
             {ShowNoResultsAlert && (
               <Alert severity="error" className="error-searchBar">
                 No se encontró el producto
