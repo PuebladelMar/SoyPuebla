@@ -83,6 +83,10 @@ const Detail = () => {
     dispatch(addToCar(userId, selectedCombination?.stockId, Number(quantity)));
   };
 
+  const notifyStockByMail = () => {
+    alert("Te notificaremos por correo electrónico cuando hayan existencias de este producto")
+    console.log(selectedCombination.stockId)
+  }
   return (
     <div>
       <div className="containerDetail">
@@ -94,7 +98,6 @@ const Detail = () => {
               alt={productDetails[0]?.name}
             />
           </div>
-
           <div>
             <h2 className="detailName">{productDetails[0]?.name}</h2>
             <h2 className="detailInfo">$ {productDetails[0]?.price}</h2>
@@ -152,6 +155,7 @@ const Detail = () => {
                 Seleccione un color y una talla
               </p>
             )}
+            {selectedCombination && selectedCombination.stock===0 ? <button onClick={notifyStockByMail} className="notifyStock">Avisame cuando esté disponible</button>: null}
             <p className="detailDesciption">{productDetails[0]?.description}</p>
             <button
               id="detailAddCartButton"
@@ -165,7 +169,6 @@ const Detail = () => {
               +
             </button>
             <span>{quantity}</span>
-
             <button
               id="detailAddCartButton"
               className="detailAddCartButton"
