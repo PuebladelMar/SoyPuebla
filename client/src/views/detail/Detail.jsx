@@ -74,7 +74,7 @@ const Detail = () => {
   };
  
   const addProduct= () =>{
-  quantity > 0 ? setQuantity(quantity +1 ) : null
+  quantity < selectedCombination.stock ? setQuantity(quantity +1 ) : null
   }
   const removeProduct=()=>{
   quantity > 1  ? setQuantity(quantity-1): null
@@ -191,7 +191,7 @@ const Detail = () => {
           <p className="alertText" >Producto añadido al carrito</p>
           <div className="alertButtons">
             <button onClick={handleCloseAlert}>Seguir comprando</button>
-            <button onClick={() => window.location.href = '/Cart'}>Ir al carrito</button>
+            <button><Link to="/Cart">Ir al carrito</Link></button>
           </div>
         </div>
       </>

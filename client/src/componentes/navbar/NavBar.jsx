@@ -21,6 +21,7 @@ import "../searchBar/SearchBar.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts, getProductsByName } from "../../redux/Actions";
+import { useLocation } from "react-router-dom";
 import UserIcon from "../../views/login/UserIcon";
 import DrawerComp from "./DrawerComp";
 
@@ -28,6 +29,8 @@ export default function NavBar({ links }) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const location = useLocation();
+  const isProducts = location.pathname === "/products";
 
   const menuId = "primary-search-account-menu";
 
@@ -62,84 +65,123 @@ export default function NavBar({ links }) {
 
   const theme = useTheme();
   //   console.log(theme);
-  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMatch = useMediaQuery("(max-width: 800px)");
+  const isMatchLogo = useMediaQuery("(max-width: 1224px)");
+  const isMatchSearchBar = useMediaQuery("(max-width: 1159px)");
   //   console.log(isMatch);
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState();
 
   return (
-    <AppBar sx={{ backgroundColor: " #517f7F" }}>
-      <Toolbar>
-        {isMatch ? (
-          <>
-            <IconButton disableRipple>
-              <Link to="/home">
-                <img
-                  src="src/assets/images/TORTUGA_ROSA_SINFONDO.png"
-                  alt="Cart Icon"
-                  style={{ width: "3.2rem", height: "2.8rem" }}
-                />
-              </Link>
-            </IconButton>
+    <AppBar
+      sx={{
+        backgroundColor: " #517f7F",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "space-between",
+        width: "100%",
+      }}
+    >
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <Box>
+          {isMatch ? (
+            <Box
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              gap={"1rem"}
+            >
+              <IconButton disableRipple>
+                <Link to="/home">
+                  <img
+                    src="src/assets/images/TORTUGA_ROSA_SINFONDO.png"
+                    alt="Cart Icon"
+                    style={{ width: "3.2rem", height: "2.8rem" }}
+                  />
+                </Link>
+              </IconButton>
 
-            <DrawerComp links={links} />
-          </>
-        ) : (
-          <Grid
-            display={"flex"}
-            sx={{ placeItems: "center" }}
-            container
-            alignItems="center"
-          >
-            <Grid item>
-              <Typography>
-                <IconButton disableRipple>
-                  <Link to="/home">
-                    <img
-                      src="src/assets/images/TORTUGA_ROSA_SINFONDO.png"
-                      alt="Cart Icon"
-                      style={{ width: "3.2rem", height: "2.8rem" }}
-                    />
-                  </Link>
-                </IconButton>
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Tabs
-                indicatorColor="secondary"
-                textColor="inherit"
-                value={value}
-                onChange={(e, val) => setValue(val)}
-              >
-                {/* {links.map((link, index)=>(
+              <DrawerComp links={links} />
+            </Box>
+          ) : (
+            <Grid
+              display={"flex"}
+              sx={{ placeItems: "center" }}
+              container
+              alignItems="center"
+            >
+              <Grid item>
+                <Typography>
+                  <IconButton disableRipple>
+                    <Link to="/home">
+                      <img
+                        src="src/assets/images/TORTUGA_ROSA_SINFONDO.png"
+                        alt="Cart Icon"
+                        style={{ width: "3.2rem", height: "2.8rem" }}
+                      />
+                    </Link>
+                  </IconButton>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Tabs
+                  indicatorColor="secondary"
+                  textColor="inherit"
+                  value={value}
+                  onChange={(e, val) => setValue(val)}
+                >
+                  {/* {links.map((link, index)=>(
                  <Tab key={index} label={link} />
                  ))} */}
-                <ul
-                  style={{
-                    display: "flex",
-                    listStyle: "none",
-                    alignItems: "center",
-                  }}
-                >
-                  <li style={{ margin: " 1rem" }}>
-                    <Link to="/home">INICIO</Link>
-                  </li>
-                  <li style={{ margin: " 1rem" }}>
-                    <Link to="/products">PRODUCTOS</Link>
-                  </li>
-                  <li style={{ margin: " 1rem" }}>
-                    <Link to="/about">NOSOTRAS</Link>
-                  </li>
-                  <li style={{ margin: " 1rem" }}>
-                    <Link to="/create">CREAR</Link>
-                  </li>
-                  <li style={{ margin: " 1rem" }}>
-                    <Link to="/adminAccount">ADMIN</Link>
-                  </li>
-                </ul>
-              </Tabs>
+                  <ul
+                    style={{
+                      display: "flex",
+                      listStyle: "none",
+                      alignItems: "center",
+                    }}
+                  >
+                    <li style={{ margin: " 1rem" }}>
+                      <Link to="/home">INICIO</Link>
+                    </li>
+                    <li style={{ margin: " 1rem" }}>
+                      <Link to="/products">PRODUCTOS</Link>
+                    </li>
+                    <li style={{ margin: " 1rem" }}>
+                      <Link to="/about">NOSOTRAS</Link>
+                    </li>
+                    <li style={{ margin: " 1rem" }}>
+                      <Link to="/create">CREAR</Link>
+                    </li>
+                    <li style={{ margin: " 1rem" }}>
+                      <Link to="/adminAccount">ADMIN</Link>
+                    </li>
+                  </ul>
+                </Tabs>
+              </Grid>
             </Grid>
+          )}
+        </Box>
+        <Box>
+          {isMatchLogo ? (
+            <Grid margin={"auto"} position={"absolute"} visibility={"hidden"}>
+              <IconButton sx={{ width: "8rem", height: "4rem" }} disableRipple>
+                <img
+                  className="img-pdm"
+                  src="src/assets/images/PdM.png" // Reemplaza esta ruta con la ruta correcta hacia la imagen del logo
+                  alt="Cart Icon"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </IconButton>
+            </Grid>
+          ) : (
             <Grid margin={"auto"}>
               <IconButton sx={{ width: "8rem", height: "4rem" }} disableRipple>
                 <img
@@ -150,44 +192,47 @@ export default function NavBar({ links }) {
                 />
               </IconButton>
             </Grid>
-            <Grid
+          )}
+        </Box>
+        <Box>
+          <Grid
+            display={"flex"}
+            marginLeft={"auto"}
+            alignItems={"center"}
+            gap={"10px"}
+          >
+            {isProducts && !isMatchSearchBar && (
+                <SearchBar
+                  handlerEventSearch={handlerEventSearch}
+                  handlerSubmitSearch={handlerSubmitSearch}
+                />
+              )}
+            {ShowNoResultsAlert && (
+              <Alert severity="error" className="error-searchBar">
+                No se encontró el producto
+              </Alert>
+            )}
+            <Box
               display={"flex"}
-              marginLeft={"auto"}
-              alignItems={"center"}
+              justifyContent={"flex-end"}
+              marginRight={1}
               gap={"10px"}
             >
-              {/* <Grid item xs={3} border={1} /> */}
-              <SearchBar
-                handlerEventSearch={handlerEventSearch}
-                handlerSubmitSearch={handlerSubmitSearch}
-              />
-              {ShowNoResultsAlert && (
-                <Alert severity="error" className="error-searchBar">
-                  No se encontró el producto
-                </Alert>
-              )}
-              <Box
-                display={"flex"}
-                justifyContent={"flex-end"}
-                marginRight={1}
-                gap={"10px"}
-              >
-                {/* <Box  sx={{ display: 'flex', alignItems: 'center' }}> */}
-                <IconButton>
-                  <Link to="/Cart">
-                    {" "}
-                    <img
-                      src="src/assets/images/Cart.png"
-                      alt="Cart Icon"
-                      style={{ width: "3.2rem", height: "3.2rem" }}
-                    />
-                  </Link>
-                </IconButton>
-                <UserIcon />
-              </Box>
-            </Grid>
+              {/* <Box  sx={{ display: 'flex', alignItems: 'center' }}> */}
+              <IconButton>
+                <Link to="/Cart">
+                  {" "}
+                  <img
+                    src="src/assets/images/Cart.png"
+                    alt="Cart Icon"
+                    style={{ width: "3.2rem", height: "3.2rem" }}
+                  />
+                </Link>
+              </IconButton>
+              <UserIcon />
+            </Box>
           </Grid>
-        )}
+        </Box>
       </Toolbar>
     </AppBar>
   );

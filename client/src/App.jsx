@@ -29,6 +29,7 @@ function App() {
     dispatch(getProducts());
   }, [dispatch]);
 
+
   const linksArray = [
     "Home",
     "Products",
@@ -37,6 +38,11 @@ function App() {
     "AdminAccount",
     "Cart",
   ];
+
+
+  
+
+
 
   return (
     <div>

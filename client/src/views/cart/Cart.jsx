@@ -1,38 +1,38 @@
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import React, { useState } from "react";
-import image from "../../assets/images/imagenesCarrete/image1.jpg";
-import image2 from "../../assets/images/imagenesCarrete/image2.jpg";
-
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { getUserCart } from "../../redux/Actions";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import "./Cart.css";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [preferenceId, setPreferenceId] = useState(null);
+  const userCart = useSelector((state) => state.userCart);
+  const userId = useSelector((state) => state.userId);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   initMercadoPago("TEST-617b343c-694c-44b2-a447-349bcd889b8b");
 
+  useEffect(() => {
+    if(!userId.length){
+      navigate("/home");
+      alert("debes iniciar seción para ir al carrito");
+    }else{
+      dispatch(getUserCart(userId));
+    }
+  }, [dispatch]);
 
   //aquí recibo un array con los elementos de props y le voy haciendo push a itemLIst
-  const itemList = [
-    //productos harcodeados
-    {
-      title: "Product ref: 323 c33904",
-      description: "Remera",
-      price: 100,
-      quantity: 1,
-      currency_id: "ARS",
-      image: image,
-    },
-    {
-      title: "Product ref: 15 d4376",
-      description: "Pantalon con bota ancha",
-      price: 200,
-      quantity: 3,
-      currency_id: "ARS",
-      image: image2,
-    },
-  ];
+  const itemList = userCart.map((item) => ({
+    description: item.product.name,
+    price: item.product.price,
+    quantity: item.quantity,
+    currency_id: "ARS",
+  }));
   // Función para agregar un artículo al carrito
   const addToCart = (item) => {
     setCartItems([...cartItems, item]);
@@ -40,7 +40,10 @@ const Cart = () => {
 
   // Función para calcular el total del carrito
   const calculateTotal = () => {
-    return itemList.reduce((total, item) => total + (item.price* item.quantity), 0);
+    return userCart.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0
+    );
   };
 
   const createPreference = async () => {
@@ -48,7 +51,7 @@ const Cart = () => {
       const response = await axios.post(
         "http://localhost:3001/mp/create_preference",
         {
-          products: itemList
+          products: itemList,
         }
       );
       const { id } = response.data;
@@ -69,14 +72,16 @@ const Cart = () => {
     <div className="cart-container">
       <h2>Detalle de la orden : </h2>
       <div className="cart-items">
-        {itemList.map((item, index) => (
+        {userCart.map((item, index) => (
           <div className="cart-item" key={index}>
-            <img src={item.image} alt={item.description} />
+            <img src={item.product.mainImage} alt={item.description} />
             <div className="item-details">
-              <p>{item.description}</p>
-              <p>{item.title}</p>
-              <p>${item.price}</p>
+              <p>{item.product.name}</p>
+              <p>{item.color.name}</p>
+              <p>Talle:{item.size.name}</p>
+              <p>${item.product.price}</p>
               <p>Cantidad: {item.quantity}</p>
+              <p>${item.product.price * item.quantity}</p>
             </div>
           </div>
         ))}
@@ -84,9 +89,11 @@ const Cart = () => {
       <p>Total: ${calculateTotal()}</p>
       <div className="cart-summary">
         <div>
-        {preferenceId && <Wallet initialization={{ preferenceId }} />}
+          {preferenceId && <Wallet initialization={{ preferenceId }} />}
         </div>
-      <button className="checkout-button" onClick={handleBuy}>Pagar</button>
+        <button className="checkout-button" onClick={handleBuy}>
+          Pagar
+        </button>
       </div>
       <NavLink to="/products" className="cart-link">
         Volver
