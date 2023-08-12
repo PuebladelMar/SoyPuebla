@@ -201,3 +201,9 @@
   color: rgba(91, 91, 91, 0.766);
   margin-left: 17px;
 }
+
+.notifyStock{
+  font-size: medium;
+  text-decoration: underline;
+  font-family: "Asap";
+}

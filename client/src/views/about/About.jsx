@@ -13,7 +13,7 @@ const About = () => {
           cuerpos, estilos y gustos.
         </p>
 
-        <h1 className="about-title">¿QUÉ HACIMOS?</h1>
+        <h1 className="about-title">¿QUÉ HACEMOS?</h1>
         <p className="about-text">
           Durante años nos amoldamos a aquello que nos ofrecían, ajustándonos a
           modelos y talles que nos exigían a tener que adaptarnos.{" "}
