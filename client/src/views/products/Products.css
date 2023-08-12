@@ -8,16 +8,16 @@
 
 .paginationButton {
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 11px;
   background-color: #f2d5cf;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc6c;
   cursor: pointer;
   margin: 0 5px;
 }
 
 .activePaginationButton {
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 11px;
   background-color: #dcaaa1;
   border: 1px solid #eeeeee;
   color: #fff;
@@ -27,8 +27,9 @@
 
 .disabledPaginationButton {
   padding: 5px 10px;
-  font-size: 16px;
-  background-color: #ccc;
+  font-family: cursive;
+  font-size: 11px;
+  background-color: #cccccc2d;
   border: 1px solid #ccc;
   cursor: not-allowed;
   margin: 0 5px;
@@ -43,7 +44,7 @@
 
 .paginationButton {
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 11px;
   background-color: #f2d5cf;
   border: 1px solid #ccc;
   cursor: pointer;
@@ -53,7 +54,8 @@
 
 .activePaginationButton {
   padding: 5px 10px;
-  font-size: 16px;
+  font-family: Asap;
+  font-size: 11px;
   background-color: #dcaaa1;
   border: 1px solid #eeeeee;
   color: #fff;
@@ -64,7 +66,7 @@
 
 .disabledPaginationButton {
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 11px;
   background-color: #ccc;
   border: 2px solid #ccc;
   cursor: not-allowed;

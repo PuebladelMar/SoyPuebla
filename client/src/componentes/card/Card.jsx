@@ -17,8 +17,8 @@ export default function Cardx({ product }) {
         <CardMedia
           component="img"
           style={{
-            width: 300,
-            height: 600,
+            width: "100%",
+            height: "70vh",
             objectFit: "cover",
           }}
           image={mainImage}
