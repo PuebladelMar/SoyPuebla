@@ -19,6 +19,7 @@ import { getProducts } from "./redux/Actions";
 import SearchBar from "./componentes/searchBar/SearchBar";
 import AdminAccount from "./views/adminAccount/AdminAccount";
 import Customer from "./componentes/footer/customer/customer";
+import Subsidiary from "./componentes/footer/subsidiary/subsidiary";
 
 function App() {
   const { pathname } = useLocation();
@@ -29,7 +30,18 @@ function App() {
   }, [dispatch]);
 
 
-  const linksArray = ['Home', 'Products', 'About', 'Create', 'AdminAccount']
+  const linksArray = [
+    "Home",
+    "Products",
+    "About",
+    "Create",
+    "AdminAccount",
+    "Cart",
+  ];
+
+
+  
+
 
 
   return (
@@ -48,6 +60,7 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
         <Route path="/adminAccount" element={<AdminAccount />} />
         <Route path="/frequent-questions" element={<Customer />} />
+        <Route path="/subsidiary" element={<Subsidiary />} />
       </Routes>
       {pathname !== "/" && <Footer />}
     </div>
