@@ -16,7 +16,8 @@ import {
   GET_USER_CART,
   SEND_MAIL,
   DELETE_CART,
-  DELETE_CART_USER
+  DELETE_CART_USER,
+  ADD_HISTORY
 } from "./ActionsTypes";
 
 export function getProducts() {
@@ -243,6 +244,19 @@ export function deleteCartUser(id) {
       dispatch({
         type: DELETE_CART_USER,
         payload: response.data,
+      });
+    } catch (error) {
+     alert(error.message)
+    }
+  };
+};
+
+export function addHistory(userId) {
+  return async function (dispatch) {
+    try {
+      await axios.post(`http://localhost:3001/history/${userId}`);
+      dispatch({
+        type: ADD_HISTORY,
       });
     } catch (error) {
      alert(error.message)
