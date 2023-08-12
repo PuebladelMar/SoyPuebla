@@ -91,25 +91,25 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-      case GET_USER_CART:
+    case GET_USER_CART:
         return {
           ...state,
           userCart: action.payload,
           
         };
-        case DELETE_CART_USER:
+    case DELETE_CART_USER:
         return {
           ...state,
           deleteCartUser: action.payload,
           
         };
-        case DELETE_CART:
+    case DELETE_CART:
           return {
             ...state,
             deleteCart: action.payload,
             
           };
-      case SEND_MAIL:
+    case SEND_MAIL:
         return {
           ...state,
         }

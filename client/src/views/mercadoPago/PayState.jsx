@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
+import { addHistory, deleteCartUser } from "../../redux/Actions";
 import "./PayState.css";
 
 function PayState() {
@@ -17,8 +17,9 @@ function PayState() {
     if (parsedData.collection_status === "approved") {
       const asyncFunc = async () => {
         if(userId.length){
-          await axios.post(`http://localhost:3001/history/${userId}`);
-        }
+          await dispatch(addHistory(userId));
+          await dispatch(deleteCartUser(userId));
+        };
       };
       asyncFunc();
     }
