@@ -1,4 +1,4 @@
-const controllerNodeMailer = require("../../controllers/NodeMailer/controllerNodeMailer");
+const { controllerNodeMailer } = require("../../controllers/NodeMailer/controllerNodeMailer");
 
 const postEmail = async(req,res)=>{
     const { emailSubject, emailsUsers } = req.body;

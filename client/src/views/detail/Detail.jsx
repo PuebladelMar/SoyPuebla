@@ -192,7 +192,6 @@ const Detail = () => {
               Añadir al carrito{" "}
             </button>
           </div>
-
           {showAlert && (
             <>
               <div className="transparentBackground"></div>
@@ -208,7 +207,6 @@ const Detail = () => {
             </>
           )}
         </div>
-
         <div>
           <Link to="/products">
             <button className="botonX">X</button>
