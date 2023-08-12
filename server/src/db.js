@@ -56,8 +56,8 @@ Stocks.belongsToMany(Users, { through: "Carts" });
 Users.belongsToMany(Stocks, { through: "Carts" });
 
 // Relación de Historial de compras
-Products.belongsToMany(Users, { through: "History" });
-Users.belongsToMany(Products, { through: "History" });
+Stocks.belongsToMany(Users, { through: "Histories" });
+Users.belongsToMany(Stocks, { through: "Histories" });
 
 module.exports = {
   ...sequelize.models, 
