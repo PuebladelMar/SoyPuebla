@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -9,174 +9,231 @@ import "./customer.css";
 export default function Customer() {
   return (
     <div className="customer-container">
-      <div>
-        <h1>Preguntas Frecuentes</h1>
-      </div>
+      <h1>Preguntas Frecuentes</h1>
       <div className="accordion-container">
         <Accordion className="accordion">
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
-          >
-            <Typography>¿Cómo elijo la talla adecuada?</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Recomendamos consultar nuestra guía de tallas, que proporciona
-              medidas precisas para cada prenda. Si tienes dudas adicionales, no
-              dudes en contactarnos para obtener asesoramiento personalizado.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
+            className="accordion-summary"
           >
             <Typography>
-              ¿Qué tipos de tejidos utilizan en su ropa deportiva?
+              <strong>¿Cómo puedo comprar en Puebla del Mar?</strong>
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              Utilizamos una variedad de tejidos de alta calidad, como
-              poliéster, nylon y spandex, que ofrecen transpirabilidad,
-              elasticidad y resistencia para una experiencia cómoda durante tus
-              actividades físicas.
+              Las compras se realizan por nuestro e-commerce. Y puedes elegir la{" "}
+              <a href="/link-envio" className="link">
+                forma de envío
+              </a>{" "}
+              o retirar por el punto más cercano. Para comprar, eliges tus
+              productos, los seleccionas y desde el carrito de compras eliges la{" "}
+              <a href="/link-pago" className="link">
+                forma de pago.
+              </a>
             </Typography>
           </AccordionDetails>
         </Accordion>
-        <Accordion disabled>
+        <Accordion className="accordion">
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            className="accordion-summary"
           >
             <Typography>
-              ¿Puedo devolver o cambiar una prenda si no me queda bien?
+              <strong>¿Tengo que estar registrada para poder comprar??</strong>
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              ¡Por supuesto! Si la prenda no se ajusta como esperabas, ofrecemos
-              opciones de devolución y cambio dentro de un plazo determinado.
-              Consulta nuestra política de devoluciones para obtener más
-              detalles.
+              Si, debes registrarte. El sistema te va a ir guiando para que
+              completes los datos requeridos, como nombre, lugar de entrega y
+              forma de pago.
             </Typography>
           </AccordionDetails>
         </Accordion>
-        <Accordion>
+        <Accordion className="accordion">
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography> ¿Cómo cuidar y lavar mi ropa deportiva?</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Recomendamos lavar las prendas a mano o en ciclo suave con agua
-              fría para preservar la calidad de los tejidos y los colores. Evita
-              el uso de suavizantes y secadoras, ya que pueden afectar la
-              elasticidad y durabilidad de las prendas.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography>¿Ofrecen envío internacional?</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Sí, realizamos envíos internacionales a varios países. Los
-              detalles de envío, costos y tiempos estimados se proporcionan
-              durante el proceso de compra.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography>¿Tienen opciones de pago seguras?</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Sí, garantizamos la seguridad de tus datos. Aceptamos varios
-              métodos de pago seguros, como tarjetas de crédito y PayPal, para
-              facilitar tu experiencia de compra.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            className="accordion-summary"
           >
             <Typography>
-              ¿Puedo cancelar mi pedido después de realizarlo?
+              <strong>¿Cómo sé cuál es mi talle?</strong>
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              Si necesitas cancelar un pedido, contáctanos lo antes posible.
-              Dependiendo del estado del pedido, podemos asistirte en el proceso
-              de cancelación.
+              Lo primero que te sugerimos es que tomes tus medidas para poder
+              tener una referencia real sobre tu cuerpo. Y a partir de esas
+              medidas te guíes por nuestra{" "}
+              <a href="/link-talles" className="link">
+                tabla de talles
+              </a>
+              .
             </Typography>
           </AccordionDetails>
         </Accordion>
-        <Accordion>
+        <Accordion className="accordion">
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            className="accordion-summary"
           >
             <Typography>
-              ¿Ofrecen descuentos o promociones especiales?
+              <strong>¿Cómo sé si un producto tiene stock?</strong>
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              Sí, regularmente ofrecemos descuentos y promociones en nuestra
-              tienda. Mantente atenta a nuestras redes sociales y boletines
-              informativos para enterarte de las últimas ofertas.
+              En caso de estar agotado un producto, un cartel sobre el artículo
+              te lo va a indicar. Podés dejar tu mail para que te avisemos
+              cuando vuelva a estar disponible.
             </Typography>
           </AccordionDetails>
         </Accordion>
-        <Accordion>
+        <Accordion className="accordion">
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            className="accordion-summary"
           >
             <Typography>
-              ¿Cómo puedo ponerme en contacto con el servicio al cliente?
+              <strong>¿Cómo puedo pagar?</strong>
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              Puedes ponerte en contacto con nuestro equipo de servicio al
-              cliente a través de nuestra página de contacto, donde encontrarás
-              un formulario de consulta. Estamos aquí para ayudarte con
-              cualquier pregunta o inquietud que tengas.
+              Podes abonar por transferencia, usando la opción de MERCADO PAGO o
+              por CUENTA BANCARIA.
             </Typography>
           </AccordionDetails>
         </Accordion>
-        <Accordion>
+        <Accordion className="accordion">
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          ></AccordionSummary>
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            className="accordion-summary"
+          >
+            <Typography>
+              <strong>¿Cómo recibo mi producto Puebla del Mar?</strong>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              <strong>
+                Los costos y tiempos estimados de entrega son los siguientes:
+              </strong>
+              <br />
+              <br />
+              <strong>
+                Envío a domicilio a través de Correo Argentino:
+              </strong>{" "}
+              el costo del servicio es de $ XXX. El plazo estimado de entrega es
+              entre 72 - 96hs hábiles desde el despacho del pedido.
+              <br />
+              <br />
+              <strong>Retiro en sucursal de Correo Argentino:</strong> el costo
+              del servicio es de $ XXX. El plazo estimado de entrega es entre 72
+              - 96hs hábiles desde el despacho del pedido. Una vez despachado el
+              envío te mandamos un correo con el número de seguimiento para que
+              puedas ver el estado.
+              <br />
+              <br />
+              <strong>Horarios de entrega Correo Argentino:</strong> lunes a
+              viernes de 9 a 18hs y sábados de 9 a 13hs. Los usuarios no podrán
+              elegir el día u horario en que se entregará su pedido.
+              <br />
+              <br />
+              <strong>
+                Por motomensaje (Sólo en la ciudad de La Plata y alrededores):
+              </strong>{" "}
+              Envío a domicilio, el costo del servicio es de $ 500 dentro del
+              casco urbano y $700 alrededores. El plazo estimado de entrega es
+              entre 48 / 72hs hábiles desde la acreditación de tu pedido. Una
+              vez acreditado tu pago, nos ponemos en contacto para verificar tu
+              dirección y coordinar el envío. El plazo puede ser dentro de las
+              48/72 horas días hábiles, salvo excepcionalidades.{" "}
+              <strong>NO SE REPARTE DÍAS DOMINGO.</strong>
+              <br />
+              <br />
+              <strong>Puntos de retiro:</strong> Podes retirar tu compra sin
+              cargo los siguientes puntos:
+              <br />
+              <strong>LA PLATA:</strong>
+              <br />
+              <strong>Centro CABA:</strong> Palermo.
+              <br />
+              Cuando acreditamos tu pago, el plazo de confirmación para retirar
+              el pedido puede ser de 24 - 48hs hábiles, salvo excepcionalidades.
+              La información te llega al email utilizado en el proceso de
+              compra. Acordate que el número de compra será solicitado a la hora
+              de retirar el pedido.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion className="accordion">
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            className="accordion-summary"
+          >
+            <Typography>
+              <strong>
+                ¿Qué pasá si llega mi producto y no estoy para recibirlo?
+              </strong>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>xxxxx</Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion className="accordion">
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            className="accordion-summary"
+          >
+            <Typography>
+              <strong>¿Qué pasá si llega mi producto no llega?</strong>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Desde Puebla del Mar queremos que tu compra sea satisfactoria y
+              puedas disfrutar de nuestros productos. Si por alguna razón el
+              producto no llega a la dirección consignada, envíanos un correo
+              electrónico a XXX desde donde podremos resolver tu consulta.
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion className="accordion">
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            className="accordion-summary"
+          >
+            <Typography>
+              <strong>¿Puede recibir mi producto otra persona</strong>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              En el caso del motomensaje puede ser recibido por otra persona en
+              el domicilio consignado, quien debe firmar para acreditar la
+              recepción del paquete.
+            </Typography>
+          </AccordionDetails>
         </Accordion>
       </div>
     </div>

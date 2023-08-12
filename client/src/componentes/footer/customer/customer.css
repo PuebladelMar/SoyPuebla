@@ -2,20 +2,43 @@
     padding: 50px;
     margin: 50px;
   }
+
+  .customer-container h1 {
+    font-size: 30px;
+    margin-top: 2.5rem;
+    text-align: center;
+    color: #517f7f;
+    text-shadow: 1px 1px 1px #517f7f;
+  }
+  
   
   .accordion-container {
-    padding: 20px;
-    margin: 50px;
+    padding: 10px;
+    margin: 20px;
     display: flex;
     flex-direction: column;
   }
   
   .accordion {
-    margin: 10px 0;
-    border: 1px solid #ccc;
+    margin: 0px 0;
+    border: 3px solid #f2d5cf;
     border-radius: 5px;
     overflow: hidden;
+
   }
+  
+  /* customer.css */
+.accordion-summary {
+  font-weight: bold;
+}
+
+
+
+.link {
+  color: #517f7f;
+  font-weight: bold;
+}
+
   
   .accordion:last-child {
     margin-bottom: 0; /* Remove margin from the last accordion */
@@ -24,13 +47,28 @@
   /* Additional styling for accordion headers and details can be added here */
   
   /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .accordion-container {
-      align-items: center;
-    }
-    
-    .accordion {
-      width: 100%;
-    }
+ /* Responsive adjustments */
+@media (max-width: 768px) {
+  .customer-container {
+    padding: 20px; /* Reduce padding */
+    margin: 0; /* Remove margin */
+  }
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .customer-container h1 {
+    font-size: 24px; /* Reduce font size */
+    margin-top: 1.5rem; /* Adjust margin top */
+  }
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .accordion-container {
+    padding: 0; /* Remove padding */
+    margin: 10px 0; /* Adjust margin */
   }
   
+  .accordion {
+    margin: 10px 0; /* Adjust margin */
+  }
+}
