@@ -2,7 +2,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { getUserCart } from "../../redux/Actions";
+import { getUserCart, deleteCart, deleteCartUser  } from "../../redux/Actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
@@ -67,6 +67,17 @@ const Cart = () => {
       setPreferenceId(id);
     }
   };
+const deleteAllCart=async()=>{
+await dispatch(deleteCartUser(userId));
+await dispatch(getUserCart(userId))
+}
+
+
+// const deleteCart = async (itemId) => {
+//   console.log(itemId);
+//   await dispatch(deleteCart(itemId)); 
+//   await dispatch(getUserCart(userId)); 
+// }
 
   return (
     <div className="cart-container">
@@ -82,6 +93,8 @@ const Cart = () => {
               <p>${item.product.price}</p>
               <p>Cantidad: {item.quantity}</p>
               <p>${item.product.price * item.quantity}</p>
+           
+              {/* <button onClick={deleteCart(item.id)}>x</button> */}
             </div>
           </div>
         ))}
@@ -94,6 +107,7 @@ const Cart = () => {
         <button className="checkout-button" onClick={handleBuy}>
           Pagar
         </button>
+        <button onClick={deleteAllCart}>Vaciar el carrito</button>
       </div>
       <NavLink to="/products" className="cart-link">
         Volver
