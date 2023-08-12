@@ -161,13 +161,14 @@ export function getUsers() {
   };
 }
 
-export function postUsers(userClerkId) {
+export function postUsers(userClerkId, user) {
   return async function (dispatch) {
     try {
       const response = await axios.post(`http://localhost:3001/users/`, {
         clerkId: userClerkId,
+        user: user
       });
-      alert(response.data.message);
+      console.log("Ingreso exitoso de usuario")
       return dispatch({
         type: POST_USERS,
         payload: response.data,

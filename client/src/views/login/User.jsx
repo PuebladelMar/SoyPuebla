@@ -13,7 +13,7 @@ export default function User() {
   const { isSignedIn, isLoaded } = useUser();
   useEffect(() => {
     if (user) {
-      dispatch(postUsers(user.id));
+      dispatch(postUsers(user.id, user));
     }
   }, [user, dispatch]);
 
