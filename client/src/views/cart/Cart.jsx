@@ -67,17 +67,18 @@ const Cart = () => {
       setPreferenceId(id);
     }
   };
-const deleteAllCart=async()=>{
-await dispatch(deleteCartUser(userId));
-await dispatch(getUserCart(userId))
-}
+
+  const deleteAllCart=async()=>{
+    await dispatch(deleteCartUser(userId));
+    await dispatch(getUserCart(userId))
+  }
 
 
-// const deleteCart = async (itemId) => {
-//   console.log(itemId);
-//   await dispatch(deleteCart(itemId)); 
-//   await dispatch(getUserCart(userId)); 
-// }
+  const handlerDeleteCart = async (itemId) => {
+    console.log(itemId);
+    await dispatch(deleteCart(itemId)); 
+    await dispatch(getUserCart(userId)); 
+  }
 
   return (
     <div className="cart-container">
@@ -93,8 +94,7 @@ await dispatch(getUserCart(userId))
               <p>${item.product.price}</p>
               <p>Cantidad: {item.quantity}</p>
               <p>${item.product.price * item.quantity}</p>
-           
-              {/* <button onClick={deleteCart(item.id)}>x</button> */}
+              <button onClick={() => handlerDeleteCart(item.cartId)}>x</button>
             </div>
           </div>
         ))}
