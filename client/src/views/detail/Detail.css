@@ -66,13 +66,13 @@
 
 .detailName {
   font-size: 1.3rem;
-  color: rgba(157, 157, 157, 0.766);
+  color: rgb(54, 53, 53);
   margin-bottom: 10px;
 }
 
 .detailInfo {
   font-size: 1.1rem;
-  color: rgba(157, 157, 157, 0.766);
+  color: rgb(117, 115, 115);
   margin-bottom: 5px;
 }
 .detailColorButton {
