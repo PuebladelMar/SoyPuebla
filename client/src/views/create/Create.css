@@ -1,28 +1,12 @@
 .create-main-container {
   display: flex;
-  /* flex-direction: row; */
-  /* align-items: center; */
-  /* padding: 20px;
-  background-color: #eeeeee;
-  color: #eeeeee;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px #517f7f(0, 0, 0, 0.1); */
 }
 
-.createImgDetail{
-
+.createImgDetail {
   height: 700px;
-  /* width: 700px; */
   overflow: hidden;
-  /* border-radius: 20px; */
   object-fit: cover;
-  
- 
 }
-
-
-
-
 
 .create-container {
   display: flex;
@@ -89,7 +73,6 @@
   padding: 5px 19px;
   border: none;
   border-radius: 4px;
-  /* background-color:red; */
   color: black;
   font-weight: 400;
   cursor: pointer;

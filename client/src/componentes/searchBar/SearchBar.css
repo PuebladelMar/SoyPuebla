@@ -1,30 +1,5 @@
-
-/* .search-container {
-    position: relative;
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.15);
-    margin-right: 16px;
-    margin-left: 0;
-    width: 100%;
-  } */
-  
-  /* .search-icon {
-    padding: 10px;
-    height: 100%;
-    position: absolute;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  } */
-  
-  /* .search-input {
-    color: inherit;
-    padding: 10px 8px 8px calc(1em + 32px);
-    width: 80%;
-  } */
-.input-search{
- color: rgb(46, 45, 45);
+.input-search {
+  color: rgb(46, 45, 45);
   width: 15rem;
   height: 2rem;
   padding: 20px 15px;

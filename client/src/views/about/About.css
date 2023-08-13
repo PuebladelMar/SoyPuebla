@@ -29,7 +29,6 @@
   color: rgb(81, 81, 81);
 }
 
-/* Media Query para pantallas más pequeñas (por ejemplo, dispositivos móviles) */
 @media screen and (max-width: 600px) {
   .about-content {
     padding: 10px;

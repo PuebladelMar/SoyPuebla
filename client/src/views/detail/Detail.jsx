@@ -8,16 +8,12 @@ import "./Detail.css";
 
 const Detail = () => {
   const { id } = useParams();
-
   const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
-
   const [productDetails, setProductDetails] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
-
-  //Aplicar el Loading
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -42,7 +38,6 @@ const Detail = () => {
     setSelectedSize(size);
   };
 
-  // Obtener los detalles del producto según la combinación seleccionada
   const selectedCombination =
     selectedColor && selectedSize
       ? productDetails.find(
@@ -65,10 +60,10 @@ const Detail = () => {
   }
 
   const uniqueColor = obtenerColoresUnicos(productDetails);
-  const [showAlert, setShowAlert] = useState(false); // Estado para controlar la visibilidad del alert
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleCloseAlert = () => {
-    setShowAlert(false); // Ocultar el alert al hacer clic en "Seguir comprando"
+    setShowAlert(false);
   };
 
   const addProduct = () => {
@@ -84,9 +79,11 @@ const Detail = () => {
   };
 
   const notifyStockByMail = () => {
-    alert("Te notificaremos por correo electrónico cuando hayan existencias de este producto")
-    console.log(selectedCombination.stockId)
-  }
+    alert(
+      "Te notificaremos por correo electrónico cuando hayan existencias de este producto"
+    );
+    console.log(selectedCombination.stockId);
+  };
   return (
     <div>
       <div className="containerDetail">
@@ -108,7 +105,6 @@ const Detail = () => {
               </h2>
             ))}
             <p className="detailInfo">Colores disponibles: </p>
-            {/* <img src={image} alt="" />  */}
 
             <div>
               {uniqueColor.map((item) => (
@@ -121,9 +117,7 @@ const Detail = () => {
                     width: "30px",
                     height: "30px",
                   }}
-                >
-                  {/* {item.color} */}
-                </button>
+                ></button>
               ))}
             </div>
 
@@ -135,7 +129,6 @@ const Detail = () => {
                     className="detailSizeButton"
                     key={item.size}
                     onClick={() => handleSizeChange(item.size)}
-                    // disabled={item.stock === 0}
                     style={{
                       width: "40px",
                       height: "30px",
@@ -155,7 +148,11 @@ const Detail = () => {
                 Seleccione un color y una talla
               </p>
             )}
-            {selectedCombination && selectedCombination.stock===0 ? <button onClick={notifyStockByMail} className="notifyStock">Avisame cuando esté disponible</button>: null}
+            {selectedCombination && selectedCombination.stock === 0 ? (
+              <button onClick={notifyStockByMail} className="notifyStock">
+                Avisame cuando esté disponible
+              </button>
+            ) : null}
             <p className="detailDesciption">{productDetails[0]?.description}</p>
             <button
               id="detailAddCartButton"

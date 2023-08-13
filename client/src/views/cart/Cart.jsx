@@ -2,7 +2,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { getUserCart, deleteCart, deleteCartUser  } from "../../redux/Actions";
+import { getUserCart, deleteCart, deleteCartUser } from "../../redux/Actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
@@ -18,27 +18,21 @@ const Cart = () => {
   initMercadoPago("TEST-617b343c-694c-44b2-a447-349bcd889b8b");
 
   useEffect(() => {
-    if(!userId.length){
+    if (!userId.length) {
       navigate("/home");
       alert("debes iniciar seción para ir al carrito");
-    }else{
+    } else {
       dispatch(getUserCart(userId));
     }
   }, [dispatch]);
 
-  //aquí recibo un array con los elementos de props y le voy haciendo push a itemLIst
   const itemList = userCart.map((item) => ({
     description: item.product.name,
     price: item.product.price,
     quantity: item.quantity,
     currency_id: "ARS",
   }));
-  // Función para agregar un artículo al carrito
-  const addToCart = (item) => {
-    setCartItems([...cartItems, item]);
-  };
 
-  // Función para calcular el total del carrito
   const calculateTotal = () => {
     return userCart.reduce(
       (total, item) => total + item.product.price * item.quantity,
@@ -68,17 +62,16 @@ const Cart = () => {
     }
   };
 
-  const deleteAllCart=async()=>{
+  const deleteAllCart = async () => {
     await dispatch(deleteCartUser(userId));
-    await dispatch(getUserCart(userId))
-  }
-
+    await dispatch(getUserCart(userId));
+  };
 
   const handlerDeleteCart = async (itemId) => {
     console.log(itemId);
-    await dispatch(deleteCart(itemId)); 
-    await dispatch(getUserCart(userId)); 
-  }
+    await dispatch(deleteCart(itemId));
+    await dispatch(getUserCart(userId));
+  };
 
   return (
     <div className="cart-container">

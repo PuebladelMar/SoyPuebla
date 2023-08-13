@@ -1,5 +1,4 @@
-import React from "react";
-import "./FooterContact.css"; // Importa tu archivo CSS aquí
+import "./FooterContact.css";
 import Newsletter from "../newsletter/newsletter";
 
 const FooterContact = () => {

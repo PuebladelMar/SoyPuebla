@@ -1,230 +1,183 @@
-.nameDetailCreate{
-
-    color:rgb(50, 50, 50) ;
-    font-weight: bolder;
-    position: relative;
-    margin-top: 5px;
-    font-family: 'Courier New';
-    font-size: 2.3em;
-
-} 
-
-.cardImgDetailCreate{
-
-    height: 700px;
-    /* width: 700px; */
-    overflow: hidden;
-    /* border-radius: 20px; */
-    object-fit: cover;
-    
-   
+.nameDetailCreate {
+  color: rgb(50, 50, 50);
+  font-weight: bolder;
+  position: relative;
+  margin-top: 5px;
+  font-family: "Courier New";
+  font-size: 2.3em;
 }
 
-.containerDetailCreate{
-
-    background: rgba(250, 250, 250, 0.647);
-    padding: 3rem;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
-    /* border-radius: 2rem; */
-    
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-  
-    /* width: 1200px;  */
-    max-width: 100%;
-    margin-left: 4rem;
-    margin-right: 4rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+.cardImgDetailCreate {
+  height: 700px;
+  overflow: hidden;
+  object-fit: cover;
 }
 
-.secContainerCreate{
-
-  
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 7rem;
-  
-    
+.containerDetailCreate {
+  background: rgba(250, 250, 250, 0.647);
+  padding: 3rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 100%;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
-/* p {
-    text-align: justify;
-  } */
-
-  .botonXCreate{
-    background: rgba(157, 157, 157, 0.766);
-    color: white;
-    /* border: .12em solid rgb(86, 86, 86); */
-    font-size: .85rem;
-    padding: .25em .65em;
-    border-radius: 50%;
-    cursor: pointer;
-    
-    
-    
+.secContainerCreate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 7rem;
 }
 
-.botonXCreate:hover, .botonXCreate:focus {
-
-    background:rgb(221, 159, 148);
-
+.botonXCreate {
+  background: rgba(157, 157, 157, 0.766);
+  color: white;
+  font-size: 0.85rem;
+  padding: 0.25em 0.65em;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.detailNameCreate{
-    font-size: 1.3rem;
-    color:  rgba(157, 157, 157, 0.766);
-    margin-bottom: 10px;
+.botonXCreate:hover,
+.botonXCreate:focus {
+  background: rgb(221, 159, 148);
 }
 
-.detailInfoCreate{
-    font-size: 1.1rem;
-    color:  rgba(157, 157, 157, 0.766);
-    margin-bottom: 5px;
+.detailNameCreate {
+  font-size: 1.3rem;
+  color: rgba(157, 157, 157, 0.766);
+  margin-bottom: 10px;
 }
-.detailColorButtonCreate{
-    border: 2px solid;
-    border-color: rgb(190, 190, 190);
-    border-radius: 50%;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    transform: translateZ(0);
-    transition: 300ms;
-    cursor: pointer;
-               
+
+.detailInfoCreate {
+  font-size: 1.1rem;
+  color: rgba(157, 157, 157, 0.766);
+  margin-bottom: 5px;
+}
+.detailColorButtonCreate {
+  border: 2px solid;
+  border-color: rgb(190, 190, 190);
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  transform: translateZ(0);
+  transition: 300ms;
+  cursor: pointer;
 }
 
 .detailColorButtonCreate:hover {
-
-    transform: scale(1.1);
-
+  transform: scale(1.1);
 }
 
-.detailSizeButtonCreate{
-    font-size: .85rem;
-    color:  rgba(112, 112, 112, 0.766);
-    border: 2px solid;
-    border-color: rgb(190, 190, 190);
-    border-radius: 15%;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    transform: translateZ(0);
-    transition: 300ms;
-    cursor: pointer;
-               
+.detailSizeButtonCreate {
+  font-size: 0.85rem;
+  color: rgba(112, 112, 112, 0.766);
+  border: 2px solid;
+  border-color: rgb(190, 190, 190);
+  border-radius: 15%;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  transform: translateZ(0);
+  transition: 300ms;
+  cursor: pointer;
 }
 
 .detailSizeButtonCreate:hover {
-
-    transform: scale(1.1);
-
+  transform: scale(1.1);
 }
 
-.detailDesciptionCreate{
-    font-size: .9rem;
-    color:  rgba(157, 157, 157, 0.766);
-    margin-bottom: 5px;
+.detailDesciptionCreate {
+  font-size: 0.9rem;
+  color: rgba(157, 157, 157, 0.766);
+  margin-bottom: 5px;
 }
-.detailSelection0Create{
-    font-size: .9rem;
-    color:  rgb(221, 159, 148);
-    margin-bottom: 5px;
-}
-
-.detailSelection1Create{
-    font-size: .9rem;
-    color:  rgb(81, 127, 127);
-    margin-bottom: 5px;
+.detailSelection0Create {
+  font-size: 0.9rem;
+  color: rgb(221, 159, 148);
+  margin-bottom: 5px;
 }
 
+.detailSelection1Create {
+  font-size: 0.9rem;
+  color: rgb(81, 127, 127);
+  margin-bottom: 5px;
+}
 
-.detailAddCartButtonCreate{
-    font-size: .85rem;
-    color:  rgba(112, 112, 112, 0.766);
-    border: 2px solid;
-    border-color: rgb(190, 190, 190);
-    border-radius: 4px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    transform: translateZ(0);
-    transition: 300ms;
-    cursor: pointer;
-               
+.detailAddCartButtonCreate {
+  font-size: 0.85rem;
+  color: rgba(112, 112, 112, 0.766);
+  border: 2px solid;
+  border-color: rgb(190, 190, 190);
+  border-radius: 4px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  transform: translateZ(0);
+  transition: 300ms;
+  cursor: pointer;
 }
 
 .detailAddCartButtonCreate:hover {
-
-    transform: scale(1.03);
-    color:  rgb(255, 255, 255);
-    background:rgb(81, 127, 127);
-
+  transform: scale(1.03);
+  color: rgb(255, 255, 255);
+  background: rgb(81, 127, 127);
 }
 
-
 .alertContainerCreate {
-    background-color: rgb(253, 253, 253);
-    border: 2px solid rgb(81, 127, 127);
-    padding: 15px;
-    position: absolute;
-    width: 22rem;
-    height: 8rem;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
-  }
-  
-  .alertButtonsCreate {
-    display: flex;
-    justify-content: space-evenly; 
-    margin-top: auto; 
-    margin-bottom: 10px;
-    
+  background-color: rgb(253, 253, 253);
+  border: 2px solid rgb(81, 127, 127);
+  padding: 15px;
+  position: absolute;
+  width: 22rem;
+  height: 8rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
+}
 
-  }
-  
-  .alertButtonsCreate button {
-    /* font-size: .95rem; */
-    color:  rgba(91, 91, 91, 0.766);
-    background: rgb(255, 255, 255);
-    margin-right: 10px;
-    border: 2px solid rgb(81, 127, 127);
-    border-radius: 4px;
-    padding: 2px 10px 3px 10px;
-    transition: transform 300ms, color 300ms, background-color 300ms; 
-  
-    
-    &:hover {
-      transform: scale(1.03);
-      color: rgb(255, 255, 255);
-      background: rgb(81, 127, 127);
-    }}
+.alertButtonsCreate {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
 
+.alertButtonsCreate button {
+  color: rgba(91, 91, 91, 0.766);
+  background: rgb(255, 255, 255);
+  margin-right: 10px;
+  border: 2px solid rgb(81, 127, 127);
+  border-radius: 4px;
+  padding: 2px 10px 3px 10px;
+  transition: transform 300ms, color 300ms, background-color 300ms;
+}
 
-  .transparentBackgroundCreate {
-    background-color: rgba(255, 255, 255, 0.5); 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9998; 
-  }
+.transparentBackgroundCreate {
+  background-color: rgba(255, 255, 255, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+}
 
-  .alertTexCreate{
-    font-size: 1.1rem;
-    color:  rgba(91, 91, 91, 0.766);
-   margin-left: 17px;
-  }
+.alertTexCreate {
+  font-size: 1.1rem;
+  color: rgba(91, 91, 91, 0.766);
+  margin-left: 17px;
+}

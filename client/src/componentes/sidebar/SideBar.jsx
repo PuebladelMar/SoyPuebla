@@ -102,7 +102,7 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
           <button className="open-modal-button" onClick={handleOpenModal}>
             Filtros
             <span>
-              <img src={Filtro} alt="filtro" className="img-filter"/>
+              <img src={Filtro} alt="filtro" className="img-filter" />
             </span>
           </button>
         </div>

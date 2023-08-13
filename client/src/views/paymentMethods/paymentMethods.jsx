@@ -1,4 +1,3 @@
-import React from "react";
 import "./paymentMethods.css";
 
 const PaymentMethodsView = () => {

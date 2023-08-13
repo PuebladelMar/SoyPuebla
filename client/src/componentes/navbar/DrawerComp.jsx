@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Drawer,
@@ -44,7 +44,6 @@ function DrawerComp({ links }) {
             justifyContent: "center",
             alignItems: "center",
             width: "100%",
-            
           }}
         >
           <Box
@@ -70,7 +69,7 @@ function DrawerComp({ links }) {
                   <ListItemText
                     sx={{
                       color: "#ededed",
-                      transform: "scale(1.3)",      
+                      transform: "scale(1.3)",
                       textAlign: "center",
                       "&:hover": {
                         color: "#517f7f",

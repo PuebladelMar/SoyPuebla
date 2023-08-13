@@ -59,7 +59,6 @@
   background-color: #ff3384;
 }
 
-/* Ajustes para pantallas pequeñas (max-width: 600px) */
 @media screen and (max-width: 600px) {
   .cart-container {
     max-width: 100%;
@@ -98,7 +97,7 @@
     margin-top: 10px;
   }
 }
-.cart-link{
+.cart-link {
   padding: 10px 10px;
   background-color: #ff66a461;
   width: 4rem;
@@ -107,7 +106,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
-position: relative;
-left:12rem;
-top:2rem;
+  position: relative;
+  left: 12rem;
+  top: 2rem;
 }
