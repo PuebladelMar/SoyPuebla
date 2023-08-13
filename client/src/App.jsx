@@ -22,6 +22,7 @@ import Customer from "./componentes/footer/customer/customer";
 import PayState from "./views/mercadoPago/PayState";
 //import Subsidiary from "./componentes/footer/subsidiary/subsidiary";
 import PaymentMethodsView from "./views/paymentMethods/paymentMethods";
+import Favorites from "./views/favs/Favorites";
 
 function App() {
   const { pathname } = useLocation();
@@ -38,6 +39,7 @@ function App() {
     "Create",
     "AdminAccount",
     "Cart",
+    "Favorites"
   ];
 
   return (
@@ -46,11 +48,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/fav" element={<Favorites />} />
         <Route path="/procesando" element={<EnProceso />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/create" element={<Create />} />
+       
         {/*<Route path="/login" element={<Login />} />*/}
         <Route path="/products/:id" element={<Detail />} />
         <Route path="*" element={<ErrorPage />} />
