@@ -18,7 +18,7 @@ function DrawerComp({ links }) {
     <>
       <Drawer
         PaperProps={{
-          sx: { backgroundColor: "#b2cebf", width: "13rem" },
+          sx: { backgroundColor: "#b2cebf", width: "15.7rem" },
         }}
         open={open}
         onClose={() => setOpen(false)}
@@ -29,7 +29,7 @@ function DrawerComp({ links }) {
               src="src/assets/images/PdM.png"
               alt="Cart Icon"
               style={{
-                width: "6.2rem",
+                width: "7rem",
                 height: "2.8rem",
                 margin: "1rem",
                 filter: " contrast(0%)",

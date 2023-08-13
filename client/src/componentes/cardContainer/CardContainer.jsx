@@ -1,30 +1,74 @@
 import Container from "@mui/material/Container";
 import Card from "../card/Card";
 import Grid from "@mui/material/Grid";
+import { Box, useMediaQuery } from "@mui/material";
 
 function CardContainer(props) {
+  const isMatch = useMediaQuery("(max-width: 644px)");
+
   return (
     <Container
-      className="card-container"
-      maxWidth="2560px"
-      justifyContent="center"
       style={{
-        padding: "1rem 2rem",
+        maxWidth: "100%",
         backgroundColor: "#f0f0f0",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <Grid style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "start",
-        alignItems: "center",
-      }}>
-        {props.products?.map((product) => (
-          <Grid item xs={12} md={5} lg={4} xl={3} key={product.id} style={{ margin: "1rem" }}>
-            <Card key={product.id} product={product} />
-          </Grid>
-        ))}
-      </Grid>
+      {!isMatch ? (
+        <Box
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            padding: "1rem 2rem",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            margin: "0 auto",
+          }}
+        >
+          {props.products?.map((product) => (
+            <Grid
+              item
+              xs={12}
+              md={5}
+              lg={4}
+              xl={3}
+              key={product.id}
+              style={{ margin: "1rem" }}
+            >
+              <Card key={product.id} product={product} />
+            </Grid>
+          ))}
+        </Box>
+      ) : (
+        <Box
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            padding: "1rem 0",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            margin: "0 auto",
+          }}
+        >
+          {props.products?.map((product) => (
+            <Grid
+              item
+              xs={12}
+              md={5}
+              lg={4}
+              xl={3}
+              key={product.id}
+              style={{ margin: "1rem" }}
+            >
+              <Card key={product.id} product={product} />
+            </Grid>
+          ))}
+        </Box>
+      )}
     </Container>
   );
 }

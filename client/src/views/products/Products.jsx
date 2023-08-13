@@ -30,7 +30,7 @@ function Products() {
 
   //Logica del paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -44,7 +44,7 @@ function Products() {
   };
 
   useEffect(() => {
-    setCurrentPage(1); // Reiniciar a la primera página cuando cambien los filtros o la búsqueda
+    setCurrentPage(1);
   }, [filters, searchValue]);
 
   useEffect(() => {
@@ -113,8 +113,7 @@ function Products() {
         />
         <container className="cards-container">
           <CardContainer products={itemsToShow} />
-
-          <div className="paginated-container">
+          <container className="paginated-container">
             <button
               className={
                 currentPage === 1
@@ -124,7 +123,7 @@ function Products() {
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
             >
-              {"<"}
+              &#10094;
             </button>
             {Array.from({ length: totalPages }, (_, index) => index + 1).map(
               (pageNumber) => (
@@ -150,9 +149,9 @@ function Products() {
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
             >
-              {">"}
+              &#10095;
             </button>
-          </div>
+          </container>
         </container>
       </container>
     </section>
