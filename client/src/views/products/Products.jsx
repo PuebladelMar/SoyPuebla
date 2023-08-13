@@ -30,7 +30,7 @@ function Products() {
 
   //Logica del paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -44,7 +44,7 @@ function Products() {
   };
 
   useEffect(() => {
-    setCurrentPage(1); // Reiniciar a la primera página cuando cambien los filtros o la búsqueda
+    setCurrentPage(1);
   }, [filters, searchValue]);
 
   useEffect(() => {
@@ -105,50 +105,56 @@ function Products() {
   };
 
   return (
-    <div className="products-container" >
-      <SideBar handlerEventSideBar={handleChange} resetFilters={resetFilters} />
-      <div>
-      <CardContainer products={itemsToShow} />
-      
-      <div className="paginated-container">
-        <button
-          className={
-            currentPage === 1 ? "disabledPaginationButton" : "paginationButton"
-          }
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          {"<"}
-        </button>
-        {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-          (pageNumber) => (
+    <section className="products-section">
+      <container className="products-container">
+        <SideBar
+          handlerEventSideBar={handleChange}
+          resetFilters={resetFilters}
+        />
+        <container className="cards-container">
+          <CardContainer products={itemsToShow} />
+          <container className="paginated-container">
             <button
-              key={pageNumber}
               className={
-                pageNumber === currentPage
-                  ? "activePaginationButton"
+                currentPage === 1
+                  ? "disabledPaginationButton"
                   : "paginationButton"
               }
-              onClick={() => handlePageChange(pageNumber)}
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
             >
-              {pageNumber}
+              &#10094;
             </button>
-          )
-        )}
-        <button
-          className={
-            currentPage === totalPages
-              ? "disabledPaginationButton"
-              : "paginationButton"
-          }
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          {">"}
-        </button>
-      </div>
-      </div>
-    </div>
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+              (pageNumber) => (
+                <button
+                  key={pageNumber}
+                  className={
+                    pageNumber === currentPage
+                      ? "activePaginationButton"
+                      : "paginationButton"
+                  }
+                  onClick={() => handlePageChange(pageNumber)}
+                >
+                  {pageNumber}
+                </button>
+              )
+            )}
+            <button
+              className={
+                currentPage === totalPages
+                  ? "disabledPaginationButton"
+                  : "paginationButton"
+              }
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              &#10095;
+            </button>
+          </container>
+        </container>
+      </container>
+    </section>
   );
 }
 
