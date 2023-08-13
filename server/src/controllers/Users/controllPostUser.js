@@ -16,12 +16,9 @@ const controllPostUser = async (req) => {
     await sendRegisterMailNotify(emailSubject, emailsUsers);
   };
 
-  if (!created) console.log("El usuario ya se encuentra registrado");
-  if (created) sendEmailNewUser(); // Aquí se envía un mail al usuario si se registra
+  if (created) sendEmailNewUser();
   
-  return {
-    newUser,
-  };
+  return newUser;
 };
 
 module.exports = controllPostUser;
