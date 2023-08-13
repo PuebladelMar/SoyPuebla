@@ -21,6 +21,7 @@ import AdminAccount from "./views/adminAccount/AdminAccount";
 import Customer from "./componentes/footer/customer/customer";
 import PayState from "./views/mercadoPago/PayState";
 //import Subsidiary from "./componentes/footer/subsidiary/subsidiary";
+import PaymentMethodsView from "./views/paymentMethods/paymentMethods";
 
 function App() {
   const { pathname } = useLocation();
@@ -30,7 +31,6 @@ function App() {
     dispatch(getProducts());
   }, [dispatch]);
 
-
   const linksArray = [
     "Home",
     "Products",
@@ -39,11 +39,6 @@ function App() {
     "AdminAccount",
     "Cart",
   ];
-
-
-  
-
-
 
   return (
     <div>
@@ -63,6 +58,7 @@ function App() {
         <Route path="/frequent-questions" element={<Customer />} />
         {/*<Route path="/subsidiary" element={<Subsidiary />} />*/}
         <Route path="/pay-state" element={<PayState />} />
+        <Route path="/payMethods" element={<PaymentMethodsView />} />
       </Routes>
       {pathname !== "/" && <Footer />}
     </div>

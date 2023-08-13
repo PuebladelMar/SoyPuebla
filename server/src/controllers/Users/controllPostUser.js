@@ -1,7 +1,8 @@
 const { Users } = require("../../db.js");
+const { sendRegisterMailNotify } = require ("../../controllers/NodeMailer/controllerNodeMailer");
 
-const controllPostUser = async (req) => {
-  const { clerkId } = req.body;
+const controllPostUser = async (req) => { 
+  const { clerkId, user } = req.body;
 
   const [newUser, created] = await Users.findOrCreate({
     where: {
@@ -9,13 +10,17 @@ const controllPostUser = async (req) => {
     },
   });
 
-  let message = "";
-  if (!created) message = "Inicio de sesión exitoso";
-  if (created) message = "Usuario creado correctamente";
+  const sendEmailNewUser = async () => {
+    const emailsUsers = user.emailAddresses[0].emailAddress;
+    const emailSubject = "Suscripción a SOY PUEBLA"
+    await sendRegisterMailNotify(emailSubject, emailsUsers);
+  };
 
+  if (!created) console.log("El usuario ya se encuentra registrado");
+  if (created) sendEmailNewUser(); // Aquí se envía un mail al usuario si se registra
+  
   return {
     newUser,
-    message,
   };
 };
 

@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-  const Carts = sequelize.define(
-    'Carts', 
+  const Histories = sequelize.define(
+    'Histories', 
     {
     id: {
       type: DataTypes.UUID,
@@ -14,6 +14,13 @@ module.exports = (sequelize) => {
       validate:{
         min: 0
       }
-    }
+    },
+    unitPrice:{
+      type: DataTypes.DECIMAL(9, 2),
+      allowNull: false,
+      validate:{
+        min: 0
+      }
+    },
   },{ timestamps: false });
 };
