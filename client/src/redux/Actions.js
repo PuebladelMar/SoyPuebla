@@ -225,15 +225,18 @@ export function sendMail(emailSubject, emailsUsers) {
 }
 
 export function postReviews(userComment) {
+  console.log(userComment);
   return async function (dispatch) {
     try {
-      await axios.post(`http://localhost:3001/review`, userComment);
-      alert('Su producto se creo correctamente');
+      console.log(userComment);
+      await axios.post(`http://localhost:3001/products/review`, userComment);
+   
+      alert('Su comentario se envió correctamente');
       return dispatch({
         type: POST_REVIEWS,
       });
     } catch (error) {
-      alert(error.message);
+      alert('error en la ruta');
     }
   };
 }

@@ -95,7 +95,7 @@ function App() {
           element={<PayState />}
         />
         <Route
-          path='/reviews'
+          path='/products/reviews'
           element={<ReviewsForm />}
         />
       </Routes>

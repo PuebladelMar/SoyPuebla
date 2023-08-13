@@ -21,10 +21,13 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      // productId: {
-      //   type: DataTypes.STRING,
-      //   // allowNull: false,
-      // },
+      productId: {
+        // type: DataTypes.STRING,
+        // allowNull: false,
+        type: DataTypes.UUID,
+      
+        defaultValue: DataTypes.UUIDV4,
+      },
       description: {
         type: DataTypes.TEXT,
         allowNull: false,

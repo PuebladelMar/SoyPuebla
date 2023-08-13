@@ -1,30 +1,27 @@
-// const ReviewsForm = () => {
-//   return (
-//   <div>
-//     <form>
-//         <label htmlFor=""></label>
-//     </form>
-//   </div>
-//   )
-// };
 
-// export default ReviewsForm;
 
-// import { useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { postReviews } from '../../redux/Actions';
-import './ReviewsForm.css'; // Asegúrate de importar tus estilos CSS aquí
-import { useState } from 'react';
+import { postReviews, getProducts } from '../../redux/Actions';
+import './ReviewsForm.css'; 
+import { useEffect, useState } from 'react';
 
-function ReviewsForm() {
+function ReviewsForm( {productList} ) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userId);
+  const allUsers = useSelector((state) => state.allUsers);
+  const allProducts = useSelector((state) => state.allProducts);
+
+useEffect(()=>{
+  dispatch(getProducts());
+},[dispatch]);
 
   const [userComment, setUserComment] = useState({
-    title: '',
+    // title: '',
     score: '',
     userId: userId,
     description: '',
+    // productId: '', 
   });
 
   const handleChange = (event) => {
@@ -39,10 +36,11 @@ function ReviewsForm() {
     event.preventDefault();
 
     if (
-      !userComment.title ||
+      // userComment.title ||
       !userComment.score ||
       !userComment.userId ||
       !userComment.description
+      
     ) {
       alert('Por favor llena todos los campos');
     } else {
@@ -52,22 +50,26 @@ function ReviewsForm() {
         score: '',
         userId: userId,
         description: '',
+        // productId: '',
       });
     }
+console.log(userComment);
   };
+
+
 
   return (
     <div className='review-form-container'>
-      <h2>Escribe tu Reseña</h2>
+      <h2>Dejanos tu comentario!</h2><br></br>
       <form className='review-form'>
-        <label>Nombre del Producto:</label>
-        <input
-          type='text'
-          value={userComment.title}
-          onChange={handleChange}
-          name='title'
-          required
-        />
+      <label>Selecciona un Producto:</label>
+      <select>
+  {allProducts.map((product) => (
+    <option key={product.id} value={product.id}>
+      {product.name}
+    </option>
+  ))}
+</select>
         <label htmlFor='comment'>Comentario:</label>
         <input
           type='text'
@@ -86,7 +88,9 @@ function ReviewsForm() {
           name='score'
           required
         />
-        <button
+        {/* Mostrar el userId prellenado en un campo oculto */}
+        <input type='hidden' value={userComment.userId} name='userId' />
+        <button className='boton'
           type='submit'
           onClick={handleSubmit}
         >
