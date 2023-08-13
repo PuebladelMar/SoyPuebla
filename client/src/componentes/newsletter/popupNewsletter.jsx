@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
-import NewsletterPop from './newsletterPop';
-import { NavLink } from 'react-router-dom';
-import { colors } from '@mui/material';
+import React, { useEffect, useState } from "react";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+import NewsletterPop from "./newsletterPop";
+import { NavLink } from "react-router-dom";
+import { colors } from "@mui/material";
 
 const PopUpNews = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -18,42 +17,55 @@ const PopUpNews = () => {
   };
 
   return (
-    <Dialog
-      open={isModalOpen}
-      onClose={handleCloseModal}
-      sx={{ background: '#ffffff' }}
-    >
-      <DialogTitle
-        className='welcome'
-        sx={{textAlign: 'center', fontSize: '24px'}}
+    <Dialog open={isModalOpen} onClose={handleCloseModal}>
+      <NavLink to="/home">
+        <Button
+          onClick={handleCloseModal}
+          color="primary"
+          sx={{
+            backgroundColor: "#ffffff",
+            width: "2px",
+            height: "25px",
+            color: "#517f7fb6",
+            fontWeight: "bold",
+            fontSize: "12px",
+            transition: "background-color 0.3s ease",
+            cursor: "pointer",
+            position: "absolute",
+            top: "0",
+            right: "0",
+            marginRight: "0px",
+            "&:hover": {
+              backgroundColor: "#b2cebf74",
+            },
+          }}
+        >
+          x
+        </Button>
+      </NavLink>
+      <DialogContent
+        sx={{
+          margin: "0px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
       >
-        ¡Bienvenidos!
-      </DialogTitle>
-      <DialogContent sx={{ backgroundColor: '#dcaaa1' }}>
         <img
-          src='src/assets/images/LANDING LOGO 2.png'
-          alt='Encabezado'
-          style={{ width: '100%', height: '260px', marginBottom: '0px', objectFit: 'cover', marginBottom: '10px' }}
+          src="src/assets/images/12.png"
+          alt="Encabezado"
+          style={{
+            maxWidth: "100%",
+            marginBottom: "20px",
+            objectFit: "cover",
+            marginTop: "20px",
+          }}
         />
         <NewsletterPop />
       </DialogContent>
-      <DialogActions sx={{ backgroundColor: '#dcaaa1' }}>
-        <NavLink to='/home'>
-          <Button
-            onClick={handleCloseModal}
-            color='primary'
-            sx={{
-              backgroundColor: '#517f7f',
-              width: '10%',
-              color: '#f2d5cf',
-              fontSize: '8px',
-              textAlign: 'center',
-            }}
-          >
-            Cerrar
-          </Button>
-        </NavLink>
-      </DialogActions>
+      <DialogActions sx={{ backgroundColor: "#ffffff" }}></DialogActions>
     </Dialog>
   );
 };
