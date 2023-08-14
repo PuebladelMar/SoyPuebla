@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { addToCar } from "../../redux/Actions";
+import { addToCar, sendMail, postUsers } from "../../redux/Actions";
 import { useSelector, useDispatch } from "react-redux";
 import "./Detail.css";
 
@@ -16,6 +16,7 @@ const Detail = () => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [notifyStock, setNotifyStock] = useState(false);
 
   //Aplicar el Loading
 
@@ -84,9 +85,12 @@ const Detail = () => {
   };
 
   const notifyStockByMail = () => {
-    alert("Te notificaremos por correo electrónico cuando hayan existencias de este producto")
-    console.log(selectedCombination.stockId)
-  }
+    setNotifyStock(true);
+    alert(
+      "Te notificaremos por correo electrónico cuando hayan existencias de este producto"
+    );
+    // dispatch(sendMail(selectedCombination.stockId))
+  };
   return (
     <div>
       <div className="containerDetail">
@@ -101,7 +105,6 @@ const Detail = () => {
           <div>
             <h2 className="detailName">{productDetails[0]?.name}</h2>
             <h2 className="detailInfo">$ {productDetails[0]?.price}</h2>
-
             {productDetails[0]?.series.map((s, i) => (
               <h2 className="detailInfo" key={i}>
                 Serie: {s.name}
@@ -126,7 +129,6 @@ const Detail = () => {
                 </button>
               ))}
             </div>
-
             <div>
               {productDetails
                 .filter((item) => item.color === selectedColor)
@@ -145,7 +147,6 @@ const Detail = () => {
                   </button>
                 ))}
             </div>
-
             {selectedCombination ? (
               <p className="detailSelection1">
                 Stock disponible: {selectedCombination.stock}
@@ -155,45 +156,71 @@ const Detail = () => {
                 Seleccione un color y una talla
               </p>
             )}
-            {selectedCombination && selectedCombination.stock===0 ? <button onClick={notifyStockByMail} className="notifyStock">Avisame cuando esté disponible</button>: null}
+            {selectedCombination && selectedCombination.stock === 0 ? (
+              <>
+                <p className="detailSelection1">
+                  Suscribete si deseas que te avisemos cuando esté disponible:{" "}
+                </p>
+                <div>
+                  <input
+                    style={{
+                      border: "solid 2px",
+                      borderRadius: "4px",
+                      width: "17rem",
+                      height: "2rem",
+                      fontSize: "0.95rem",
+                      borderColor: "rgb(190, 190, 190)",
+                      color: "black",
+                    }}
+                    placeholder=" Ingresa aquí tu correo*"
+                  ></input>
+                </div>
+                <button onClick={notifyStockByMail} className="notifyButton">
+                  Suscribirte
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  id="detailAddCartButton"
+                  className="detailAddCartButton"
+                  style={{
+                    width: "2rem",
+                    height: "1.8rem",
+                  }}
+                  onClick={addProduct}
+                >
+                  +
+                </button>
+                <span>{quantity}</span>
+                <button
+                  id="detailAddCartButton"
+                  className="detailAddCartButton"
+                  style={{
+                    width: "2rem",
+                    height: "1.8rem",
+                    marginLeft: "0.5rem",
+                  }}
+                  onClick={removeProduct}
+                >
+                  -
+                </button>
+                <button
+                  id="detailAddCartButton"
+                  className="detailAddCartButton"
+                  style={{
+                    width: "150px",
+                    height: "30px",
+                  }}
+                  onClick={() => {
+                    handleAddToCart();
+                  }}
+                >
+                  Añadir al carrito{" "}
+                </button>
+              </>
+            )}
             <p className="detailDesciption">{productDetails[0]?.description}</p>
-            <button
-              id="detailAddCartButton"
-              className="detailAddCartButton"
-              style={{
-                width: "2rem",
-                height: "1.8rem",
-              }}
-              onClick={addProduct}
-            >
-              +
-            </button>
-            <span>{quantity}</span>
-            <button
-              id="detailAddCartButton"
-              className="detailAddCartButton"
-              style={{
-                width: "2rem",
-                height: "1.8rem",
-                marginLeft: "0.5rem",
-              }}
-              onClick={removeProduct}
-            >
-              -
-            </button>
-            <button
-              id="detailAddCartButton"
-              className="detailAddCartButton"
-              style={{
-                width: "150px",
-                height: "30px",
-              }}
-              onClick={() => {
-                handleAddToCart();
-              }}
-            >
-              Añadir al carrito{" "}
-            </button>
           </div>
           {showAlert && (
             <>
