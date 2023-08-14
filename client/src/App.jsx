@@ -38,9 +38,8 @@ function App() {
     "About",
     "Create",
     "AdminAccount",
-    "Cart",
-    "Favorites"
-  ];
+    "Cart"
+    ];
 
   return (
     <div>

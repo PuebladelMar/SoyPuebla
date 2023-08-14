@@ -270,8 +270,9 @@ export function addHistory(userId) {
 export function addToFavorites(product) {
    return {
     type: ADD_TO_FAVORITES,
-    payload: product.id,
+    payload: product,
   };
+  
 }
 
 export function removeFromFavorites(productId) {

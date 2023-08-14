@@ -107,7 +107,7 @@ function rootReducer(state = initialState, action) {
           
         };
     case DELETE_CART:
-          return {
+        return {
             ...state,
             deleteCart: action.payload,
             
@@ -117,15 +117,14 @@ function rootReducer(state = initialState, action) {
           ...state,
         }
         case ADD_TO_FAVORITES:
-      return {
+        return {
         ...state,
         favorites: [...state.favorites, action.payload],
       };
     case REMOVE_FROM_FAVORITES:
-      console.log(action.payload);
-      return {
+        return {
         ...state,
-        favorites: [...(state.favorites).filter(product => product.id !== action.payload)],
+        favorites: state.favorites.filter(product => product.id !== action.payload),
       };
     default:
       return state;
