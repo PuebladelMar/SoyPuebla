@@ -23,6 +23,7 @@ import PaymentMethodsView from "./views/paymentMethods/paymentMethods";
 import Favorites from "./views/favs/Favorites";
 import History from "./views/history/History";
 import Shipment from "./views/shipment/shipment";
+import SizeChart from "./views/sizeChart/sizeChart";
 axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
         <Route path="/payMethods" element={<PaymentMethodsView />} />
         <Route path="/history" element={<History />} />
         <Route path="/shipment" element={<Shipment />} />
+        <Route path="/size-chart" element={<SizeChart />} />
       </Routes>
       {pathname !== "/" && <Footer />}
     </div>
