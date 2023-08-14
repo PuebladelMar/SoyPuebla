@@ -22,6 +22,7 @@ import axios from "axios";
 import PaymentMethodsView from "./views/paymentMethods/paymentMethods";
 import Favorites from "./views/favs/Favorites";
 import History from "./views/history/History";
+import Shipment from "./views/shipment/shipment";
 axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
@@ -38,8 +39,8 @@ function App() {
     "About",
     "Create",
     "AdminAccount",
-    "Cart"
-    ];
+    "Cart",
+  ];
 
   return (
     <div>
@@ -61,6 +62,7 @@ function App() {
         <Route path="/pay-state" element={<PayState />} />
         <Route path="/payMethods" element={<PaymentMethodsView />} />
         <Route path="/history" element={<History />} />
+        <Route path="/shipment" element={<Shipment />} />
       </Routes>
       {pathname !== "/" && <Footer />}
     </div>

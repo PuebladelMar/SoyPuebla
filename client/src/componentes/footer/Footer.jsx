@@ -10,7 +10,7 @@ const Footer = () => {
           <a href="/about">Quienes somos | </a>
           <a href="/cambios-devoluciones">Cambios y Devoluciones | </a>
           <a href="/payMethods">Medios de pago | </a>
-          <a href="/medios-envio">Medios de envío</a>
+          <a href="/shipment">Medios de envío</a>
         </div>
         <p>© 2023 Puebla del Mar. Todos los derechos reservados.</p>
       </div>
