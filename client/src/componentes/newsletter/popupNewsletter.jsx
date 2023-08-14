@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import NewsletterPop from "./newsletterPop";
 import { NavLink } from "react-router-dom";
-import { colors } from "@mui/material";
 
 const PopUpNews = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);

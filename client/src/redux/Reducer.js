@@ -95,17 +95,15 @@ function rootReducer(state = initialState, action) {
         ...state,
       };
     case GET_USER_CART:
-        return {
-          ...state,
-          userCart: action.payload,
-          
-        };
+      return {
+        ...state,
+        userCart: action.payload,
+      };
     case DELETE_CART_USER:
-        return {
-          ...state,
-          deleteCartUser: action.payload,
-          
-        };
+      return {
+        ...state,
+        deleteCartUser: action.payload,
+      };
     case DELETE_CART:
         return {
             ...state,
@@ -125,6 +123,13 @@ function rootReducer(state = initialState, action) {
         return {
         ...state,
         favorites: state.favorites.filter(product => product.id !== action.payload),
+      return {
+        ...state,
+        deleteCart: action.payload,
+      };
+    case SEND_MAIL:
+      return {
+        ...state,
       };
     default:
       return state;

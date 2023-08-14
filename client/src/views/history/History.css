@@ -1,4 +1,4 @@
-.cart-container {
+.history-container {
   display: flex;
   max-width: 600px;
   margin: 7rem;
@@ -13,12 +13,12 @@
   justify-content: center;
 }
 
-.cart-items {
+.history-items {
   display: grid;
   grid-gap: 20px;
 }
 
-.cart-item {
+.history-item {
   display: flex;
   align-items: center;
   padding: 10px;
@@ -27,7 +27,7 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.cart-item img {
+.history-item img {
   width: 80px;
   height: 80px;
   object-fit: cover;
@@ -38,7 +38,7 @@
   flex: 1;
 }
 
-.cart-summary {
+.history-summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,45 +59,7 @@
   background-color: #ff3384;
 }
 
-@media screen and (max-width: 600px) {
-  .cart-container {
-    max-width: 100%;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 10px;
-  }
-
-  .cart-item {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 15px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  }
-
-  .cart-item img {
-    width: 100%;
-    height: auto;
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-
-  .item-details {
-    text-align: center;
-    margin-top: 10px;
-  }
-
-  .cart-summary {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
-  }
-
-  .checkout-button {
-    width: 100%;
-    margin-top: 10px;
-  }
-}
-.cart-link {
+.history-link {
   padding: 10px 10px;
   background-color: #ff66a461;
   width: 4rem;
@@ -109,4 +71,43 @@
   position: relative;
   left: 12rem;
   top: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+  .history-container {
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 10px;
+  }
+
+  .history-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .history-item img {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .item-details {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .history-summary {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .checkout-button {
+    width: 100%;
+    margin-top: 10px;
+  }
 }

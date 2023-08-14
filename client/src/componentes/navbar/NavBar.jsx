@@ -1,17 +1,10 @@
 import { Grid, Tabs, Typography } from "@mui/material";
-import {
-  Box,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Alert,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, AppBar, Toolbar, IconButton, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
 import "../searchBar/SearchBar.css";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getProducts, getProductsByName } from "../../redux/Actions";
 import { useLocation } from "react-router-dom";
 import UserIcon from "../../views/login/UserIcon";
@@ -42,7 +35,7 @@ export default function NavBar({ links }) {
 
   const isMatch = useMediaQuery("(max-width: 800px)");
   const isMatchSearchBar = useMediaQuery("(max-width: 1114px)");
-  const [value, setValue] = useState();
+  const [value, setValue] = useState(0);
 
   return (
     <AppBar
@@ -108,6 +101,11 @@ export default function NavBar({ links }) {
                   textColor="inherit"
                   value={value}
                   onChange={(e, val) => setValue(val)}
+                  TabIndicatorProps={{
+                    style: {
+                      backgroundColor: "transparent",
+                    },
+                  }}
                 >
                   <ul
                     style={{
