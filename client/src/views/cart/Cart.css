@@ -110,3 +110,19 @@
   left: 12rem;
   top: 2rem;
 }
+
+.link-history {
+  text-align: center;
+  margin-top: 10px;
+  padding: 10px 10px;
+  background-color: #ff66a461;
+  width: 8rem;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: relative;
+  left: 10rem;
+  top: 2rem;
+}
