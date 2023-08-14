@@ -1,6 +1,4 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-
 import {
   Navigation,
   Pagination,
@@ -8,15 +6,8 @@ import {
   A11y,
   Autoplay,
 } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import "swiper/css/autoplay";
 import image2 from "../../assets/images/imagenesCarrete/image2.jpg";
 import image3 from "../../assets/images/imagenesCarrete/image3.jpg";
-// import { Link } from "react-router-dom";
-import Card from "../card/Card";
 
 function Slider() {
   return (
@@ -85,7 +76,6 @@ function Slider() {
           className="swiper-button-next"
           style={{ color: "whitesmoke" }}
         ></div>{" "}
-        {/* <Card/> */}
       </Swiper>
     </div>
   );

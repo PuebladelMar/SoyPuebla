@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Drawer,
@@ -18,7 +18,7 @@ function DrawerComp({ links }) {
     <>
       <Drawer
         PaperProps={{
-          sx: { backgroundColor: "#b2cebf", width: "13rem" },
+          sx: { backgroundColor: "#b2cebf", width: "15.7rem" },
         }}
         open={open}
         onClose={() => setOpen(false)}
@@ -29,7 +29,7 @@ function DrawerComp({ links }) {
               src="src/assets/images/PdM.png"
               alt="Cart Icon"
               style={{
-                width: "6.2rem",
+                width: "7rem",
                 height: "2.8rem",
                 margin: "1rem",
                 filter: " contrast(0%)",
@@ -44,7 +44,6 @@ function DrawerComp({ links }) {
             justifyContent: "center",
             alignItems: "center",
             width: "100%",
-            
           }}
         >
           <Box
@@ -70,7 +69,7 @@ function DrawerComp({ links }) {
                   <ListItemText
                     sx={{
                       color: "#ededed",
-                      transform: "scale(1.3)",      
+                      transform: "scale(1.3)",
                       textAlign: "center",
                       "&:hover": {
                         color: "#517f7f",

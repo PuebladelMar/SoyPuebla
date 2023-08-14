@@ -7,7 +7,6 @@ import NavBar from "./componentes/navbar/NavBar";
 import Footer from "./componentes/footer/Footer";
 import Cart from "./views/cart/Cart";
 import Create from "./views/create/Create";
-//import Login from "./views/login/Login";
 import Detail from "./views/detail/Detail";
 import EnProceso from "./views/mercadoPago/EnProceso/enProceso";
 import ErrorPage from "./views/errorPage/ErrorPage";
@@ -16,11 +15,13 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getProducts } from "./redux/Actions";
-import SearchBar from "./componentes/searchBar/SearchBar";
 import AdminAccount from "./views/adminAccount/AdminAccount";
 import Customer from "./componentes/footer/customer/customer";
 import PayState from "./views/mercadoPago/PayState";
-//import Subsidiary from "./componentes/footer/subsidiary/subsidiary";
+import axios from "axios";
+import PaymentMethodsView from "./views/paymentMethods/paymentMethods";
+import Favorites from "./views/favs/Favorites";
+axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   const { pathname } = useLocation();
@@ -30,20 +31,14 @@ function App() {
     dispatch(getProducts());
   }, [dispatch]);
 
-
   const linksArray = [
     "Home",
     "Products",
     "About",
     "Create",
     "AdminAccount",
-    "Cart",
-  ];
-
-
-  
-
-
+    "Cart"
+    ];
 
   return (
     <div>
@@ -51,6 +46,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/fav" element={<Favorites />} />
         <Route path="/procesando" element={<EnProceso />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
@@ -61,8 +57,8 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
         <Route path="/adminAccount" element={<AdminAccount />} />
         <Route path="/frequent-questions" element={<Customer />} />
-        {/*<Route path="/subsidiary" element={<Subsidiary />} />*/}
         <Route path="/pay-state" element={<PayState />} />
+        <Route path="/payMethods" element={<PaymentMethodsView />} />
       </Routes>
       {pathname !== "/" && <Footer />}
     </div>

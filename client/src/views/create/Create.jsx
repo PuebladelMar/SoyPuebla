@@ -1,5 +1,4 @@
 import "./Create.css";
-import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import {
@@ -15,23 +14,17 @@ import CreateDetail from "./createDetail/CreateDetail";
 
 const Create = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const color = useSelector((state) => state.colorList);
   const size = useSelector((state) => state.sizesList);
   const categories = useSelector((state) => state.categories);
   const series = useSelector((state) => state.series);
   const [errors, setErrors] = useState({});
 
-  //!_______________
-  
-
   const [uploadedSecureUrl, setUploadedSecureUrl] = useState(null);
 
   const handleUpload = (secureUrl) => {
     setUploadedSecureUrl(secureUrl);
   };
-
-  //!_____________
 
   const [createProduct, setCreateProduct] = useState({
     name: "",
@@ -51,13 +44,10 @@ const Create = () => {
       setErrors(validations(createProduct));
     }
 
-
     if (!color.length) {
       dispatch(postColor());
     }
   }, [dispatch, color, createProduct]);
-
-
 
   useEffect(() => {
     if (validations(createProduct)) {
@@ -99,8 +89,6 @@ const Create = () => {
     );
   };
 
-
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -132,9 +120,6 @@ const Create = () => {
     }
   };
 
-
-
-
   const handleSelect = (event) => {
     setCreateProduct((state) => {
       if (event.target.name === "color") {
@@ -152,9 +137,6 @@ const Create = () => {
       validations({ ...createProduct, [event.target.name]: event.target.value })
     );
   };
-
-
-
 
   const handleSelectSeries = (event) => {
     setCreateProduct((state) => {
@@ -238,22 +220,11 @@ const Create = () => {
     });
   };
 
-
-
-
-
-
   const getColorHexCodes = () => {
     return color
       .filter((col) => createProduct.color.includes(col.name))
       .map((col) => col.codHex);
   };
-  
-
-
-
-
-
 
   return (
     <div className="create-main-container">
@@ -277,7 +248,6 @@ const Create = () => {
             name="price"
             value={createProduct.price}
             placeholder="Precio"
-            // required
             className="custom-input"
             onChange={handleChange}
           />
@@ -303,17 +273,15 @@ const Create = () => {
             name="image"
             value={createProduct.image}
             placeholder="Imagen"
-            // required
             className="custom-input"
             onChange={handleChange}
           />
-          {/* <p className='error'>Emulamos error</p> */}
 
           <label htmlFor="sale">Oferta: </label>
           <select
             name="sale"
             className="custom-select"
-            defaultValue={createProduct.sale} // Establece el valor predeterminado correctamente
+            defaultValue={createProduct.sale} 
             onChange={handleChange}
           >
             <option value={false} key="def">
@@ -323,10 +291,6 @@ const Create = () => {
               Si
             </option>
           </select>
-          {/* <p className='error'>Emulamos error</p> */}
-
-
-
 
           <label htmlFor="color">Color: </label>
           <select
@@ -361,11 +325,6 @@ const Create = () => {
               <p className="no-dietTypes"></p>
             )}
           </div>
-
-
-
-
-
 
           <label htmlFor="size">Talle: </label>
           <select
@@ -499,6 +458,9 @@ const Create = () => {
           precio={createProduct.price}
           serie={createProduct.series}
           color={getColorHexCodes()}
+          size={createProduct.size}
+          category={createProduct.category}
+          description={createProduct.description}
         />
       </div>
     </div>

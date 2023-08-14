@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
-import './AdminAccount.css';
-import { NavLink } from 'react-router-dom';
-
+import { useState } from "react";
+import "./AdminAccount.css";
 
 const AdminAccount = () => {
-  const [usuario, setUsuario] = useState('');
-  const [contrasena, setContrasena] = useState('');
+  const [usuario, setUsuario] = useState("");
+  const [contrasena, setContrasena] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Aquí puedes agregar lógica de autenticación si es necesario
     alert(`Iniciando sesión con usuario: ${usuario}`);
   };
 
@@ -17,7 +14,8 @@ const AdminAccount = () => {
     <div className="admin-account-container">
       <div className="login-container">
         <h2>Iniciar Sesión</h2>
-        <h3>Como administrador</h3><br></br>
+        <h3>Como administrador</h3>
+        <br></br>
         <form onSubmit={handleLogin}>
           <input
             type="text"
@@ -33,14 +31,13 @@ const AdminAccount = () => {
             onChange={(e) => setContrasena(e.target.value)}
             required
           />
-          {/* <NavLink to='/adminPanel'> */}
-          <button className='btn-admin' type="submit">Iniciar Sesión</button>
-         
-          {/* </NavLink> */}
+          <button className="btn-admin" type="submit">
+            Iniciar Sesión
+          </button>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default AdminAccount;

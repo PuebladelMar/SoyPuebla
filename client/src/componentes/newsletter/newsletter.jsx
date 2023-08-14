@@ -1,20 +1,20 @@
-import './newsletter.css';
+import "./newsletter.css";
 
 const Newsletter = () => {
   return (
-    <div className='newsletter'>
+    <div className="newsletter">
       <h2>Suscríbete a nuestro newsletter</h2>
-      <form id='newsletter-form'>
+      <form id="newsletter-form">
         <input
-          type='email'
-          id='email-input'
-          placeholder='Ingresa tu correo electrónico'
+          type="email"
+          id="email-input"
+          placeholder="Ingresa tu correo electrónico"
           required
         />
 
-        <button type='submit'>Suscribirse</button>
+        <button type="submit">Suscribirse</button>
       </form>
-      <p id='subscription-status'></p>
+      <p id="subscription-status"></p>
     </div>
   );
 };

@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Alineación arriba */
-  height: 90vh; /* Mayor altura */
+  justify-content: flex-start;
+  height: 90vh;
   background-color: #f2f2f2;
-  margin-top: 0%; /* Margen superior */
+  margin-top: 0%;
   margin-top: 4.1rem;
 }
 

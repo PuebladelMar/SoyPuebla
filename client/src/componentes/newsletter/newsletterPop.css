@@ -1,13 +1,14 @@
 .newsletter2 {
-  background-color: #f2d5cf;
+  background-color: #ffffff;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   object-fit: cover;
+  margin-top: -20px;
 }
 
 .newsletter2 h2 {
@@ -16,6 +17,7 @@
   color: #517f7f;
   margin-bottom: 20px;
   text-align: center;
+  font-weight: bold;
 }
 
 .newsletter2 form {
@@ -31,6 +33,7 @@
   margin-right: 10px;
   max-width: 400px;
   text-align: center;
+  background-color: #dcaaa16d;
 }
 
 .newsletter2 button {
@@ -48,7 +51,7 @@
 
 .welcome {
   color: rgb(255, 255, 255);
-  background-color: rgb(220, 170, 161);
+  background-color: rgb(255, 255, 255);
 }
 
 @media screen and (max-width: 600px) {

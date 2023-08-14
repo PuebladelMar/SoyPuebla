@@ -1,14 +1,14 @@
 const nodemailer = require("nodemailer");
-const emailApiKey = 'tzxlsdlrobbymssj';
+const emailApiKey = "tzxlsdlrobbymssj";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
   auth: {
-    user: 'puebladelmar2023@gmail.com',
+    user: "puebladelmar2023@gmail.com",
     pass: emailApiKey,
-  }
+  },
 });
 
 const controllerNodeMailer = async (emailSubject, emailsUsers) => {
