@@ -53,6 +53,4 @@ const sendStockNotification = async (emailsUsers) => {
   }
 };
 
-
-
 module.exports = { controllerNodeMailer, sendRegisterMailNotify, sendStockNotification };

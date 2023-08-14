@@ -18,6 +18,7 @@ import {
   DELETE_CART_USER,
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES,
+  NOTIFY_STOCK
 } from "./ActionsTypes";
 
 let initialState = {
@@ -124,6 +125,10 @@ function rootReducer(state = initialState, action) {
         favorites: state.favorites.filter(product => product.id !== action.payload),
         }
     case SEND_MAIL:
+      return {
+        ...state,
+      };
+    case NOTIFY_STOCK:
       return {
         ...state,
       };
