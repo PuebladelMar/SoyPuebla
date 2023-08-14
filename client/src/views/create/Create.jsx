@@ -22,9 +22,15 @@ const Create = () => {
 
   const [uploadedSecureUrl, setUploadedSecureUrl] = useState(null);
 
-  const handleUpload = (secureUrl) => {
-    setUploadedSecureUrl(secureUrl);
+  const handleUpload = (singleUrl) => {
+    setUploadedSecureUrl(singleUrl); 
+    setCreateProduct((prevState) => ({
+      ...prevState,
+      mainImage: singleUrl, 
+    }))
   };
+
+
 
   const [createProduct, setCreateProduct] = useState({
     name: "",
@@ -38,6 +44,8 @@ const Create = () => {
     series: [],
     category: [],
   });
+
+
 
   useEffect(() => {
     if (validations(createProduct)) {
@@ -253,10 +261,11 @@ const Create = () => {
           />
           <p className="error">{errors.price}</p>
 
-          <UploadWidget onUpload={handleUpload} />
+
 
           <label htmlFor="mainImage">Imagen Principal: </label>
-          <textarea
+          <UploadWidget onUpload={handleUpload} />
+          {/* <textarea
             type="text"
             name="mainImage"
             value={uploadedSecureUrl}
@@ -265,17 +274,21 @@ const Create = () => {
             className="custom-textarea"
             onChange={handleChange}
           />
-          <p className="error">{errors.mainImage}</p>
+          <p className="error">{errors.mainImage}</p> */}
+
+        
 
           <label htmlFor="image">Imagen: </label>
           <input
-            type="json"
+            type="text"
             name="image"
             value={createProduct.image}
             placeholder="Imagen"
             className="custom-input"
             onChange={handleChange}
           />
+
+       
 
           <label htmlFor="sale">Oferta: </label>
           <select
