@@ -18,6 +18,8 @@ import {
   DELETE_CART,
   DELETE_CART_USER,
   ADD_HISTORY,
+  ADD_TO_FAVORITES, 
+  REMOVE_FROM_FAVORITES
 } from "./ActionsTypes";
 
 export function getProducts() {
@@ -262,5 +264,20 @@ export function addHistory(userId) {
     } catch (error) {
       alert(error.message);
     }
+  };
+}
+
+export function addToFavorites(product) {
+   return {
+    type: ADD_TO_FAVORITES,
+    payload: product,
+  };
+  
+}
+
+export function removeFromFavorites(productId) {
+  return {
+    type: REMOVE_FROM_FAVORITES,
+    payload: productId,
   };
 }

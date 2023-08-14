@@ -20,6 +20,7 @@ import Customer from "./componentes/footer/customer/customer";
 import PayState from "./views/mercadoPago/PayState";
 import axios from "axios";
 import PaymentMethodsView from "./views/paymentMethods/paymentMethods";
+import Favorites from "./views/favs/Favorites";
 axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
@@ -36,8 +37,8 @@ function App() {
     "About",
     "Create",
     "AdminAccount",
-    "Cart",
-  ];
+    "Cart"
+    ];
 
   return (
     <div>
@@ -45,11 +46,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/fav" element={<Favorites />} />
         <Route path="/procesando" element={<EnProceso />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/create" element={<Create />} />
+        {/*<Route path="/login" element={<Login />} />*/}
         <Route path="/products/:id" element={<Detail />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/adminAccount" element={<AdminAccount />} />

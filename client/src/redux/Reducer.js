@@ -16,6 +16,8 @@ import {
   SEND_MAIL,
   DELETE_CART,
   DELETE_CART_USER,
+  ADD_TO_FAVORITES,
+  REMOVE_FROM_FAVORITES,
 } from "./ActionsTypes";
 
 let initialState = {
@@ -28,7 +30,8 @@ let initialState = {
   userId: [],
   userCart: [],
   deleteCartUser: [],
-  deleteCart: [],
+  deleteCart:[],
+  favorites: []
 };
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -102,6 +105,24 @@ function rootReducer(state = initialState, action) {
         deleteCartUser: action.payload,
       };
     case DELETE_CART:
+        return {
+            ...state,
+            deleteCart: action.payload,
+            
+          };
+    case SEND_MAIL:
+        return {
+          ...state,
+        }
+        case ADD_TO_FAVORITES:
+        return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      };
+    case REMOVE_FROM_FAVORITES:
+        return {
+        ...state,
+        favorites: state.favorites.filter(product => product.id !== action.payload),
       return {
         ...state,
         deleteCart: action.payload,

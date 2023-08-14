@@ -129,6 +129,9 @@ export default function NavBar({ links }) {
                     <li style={{ margin: " 1rem" }}>
                       <Link to="/adminAccount">ADMIN</Link>
                     </li>
+                    <li style={{ margin: " 1rem" }}>
+                      <Link to="/fav">❤️</Link>
+                    </li>
                   </ul>
                 </Tabs>
               </Grid>
