@@ -8,13 +8,17 @@ import "./Detail.css";
 
 const Detail = () => {
   const { id } = useParams();
+
   const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
+
   const [productDetails, setProductDetails] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [notifyStock, setNotifyStock] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  //Aplicar el Loading
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -39,6 +43,7 @@ const Detail = () => {
     setSelectedSize(size);
   };
 
+  // Obtener los detalles del producto según la combinación seleccionada
   const selectedCombination =
     selectedColor && selectedSize
       ? productDetails.find(
@@ -61,7 +66,7 @@ const Detail = () => {
   }
 
   const uniqueColor = obtenerColoresUnicos(productDetails);
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(false); // Estado para controlar la visibilidad del alert
 
   const handleCloseAlert = () => {
     setShowAlert(false);
@@ -79,13 +84,21 @@ const Detail = () => {
     dispatch(addToCar(userId, selectedCombination?.stockId, Number(quantity)));
   };
 
-  const notifyStockByMail = () => {
-    setNotifyStock(true);
-    alert(
-      "Te notificaremos por correo electrónico cuando hayan existencias de este producto"
-    );
-    // dispatch(sendMail(selectedCombination.stockId))
+  const isValidEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
   };
+
+  const notifyStockByMail = () => {
+    if (!isValidEmail(email)) {
+      alert("Ingresa un correo valido");
+      return;
+    }
+    setIsSubscribed(true);
+    // dispatch(sendMail(selectedCombination.stockId, email))
+    //
+  };
+
   return (
     <div>
       <div className="containerDetail">
@@ -106,6 +119,7 @@ const Detail = () => {
               </h2>
             ))}
             <p className="detailInfo">Colores disponibles: </p>
+            {/* <img src={image} alt="" />  */}
 
             <div>
               {uniqueColor.map((item) => (
@@ -118,7 +132,9 @@ const Detail = () => {
                     width: "30px",
                     height: "30px",
                   }}
-                ></button>
+                >
+                  {/* {item.color} */}
+                </button>
               ))}
             </div>
             <div>
@@ -129,6 +145,7 @@ const Detail = () => {
                     className="detailSizeButton"
                     key={item.size}
                     onClick={() => handleSizeChange(item.size)}
+                    // disabled={item.stock === 0}
                     style={{
                       width: "40px",
                       height: "30px",
@@ -164,11 +181,18 @@ const Detail = () => {
                       color: "black",
                     }}
                     placeholder=" Ingresa aquí tu correo*"
+                    type="text"
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={isSubscribed}
                   ></input>
                 </div>
-                <button onClick={notifyStockByMail} className="notifyButton">
-                  Suscribirte
-                </button>
+                {!isSubscribed ? (
+                  <button onClick={notifyStockByMail} className="notifyButton">
+                    Suscribirte
+                  </button>
+                ) : (
+                  <p className="detailSelection1">¡Gracias por suscribirte!</p>
+                )}
               </>
             ) : (
               <>
@@ -179,9 +203,9 @@ const Detail = () => {
                     width: "2rem",
                     height: "1.8rem",
                   }}
-                  onClick={addProduct}
+                  onClick={removeProduct}
                 >
-                  +
+                  -
                 </button>
                 <span>{quantity}</span>
                 <button
@@ -192,9 +216,9 @@ const Detail = () => {
                     height: "1.8rem",
                     marginLeft: "0.5rem",
                   }}
-                  onClick={removeProduct}
+                  onClick={addProduct}
                 >
-                  -
+                  +
                 </button>
                 <button
                   id="detailAddCartButton"
