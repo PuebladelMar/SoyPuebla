@@ -108,7 +108,6 @@ function rootReducer(state = initialState, action) {
         return {
             ...state,
             deleteCart: action.payload,
-            
           };
     case SEND_MAIL:
         return {
@@ -123,10 +122,7 @@ function rootReducer(state = initialState, action) {
         return {
         ...state,
         favorites: state.favorites.filter(product => product.id !== action.payload),
-      return {
-        ...state,
-        deleteCart: action.payload,
-      };
+        }
     case SEND_MAIL:
       return {
         ...state,
