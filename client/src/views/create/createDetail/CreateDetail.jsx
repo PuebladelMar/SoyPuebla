@@ -1,3 +1,5 @@
+import ImageGallery from "react-image-gallery";
+import "../../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 import ImgCarga from "../../../assets/images/Carga imagen.png";
 import "./CreateDetail.css";
 
@@ -11,8 +13,33 @@ const CreateDetail = ({
   category,
   description,
 }) => {
+
+  let images = [
+    {
+      original: "https://picsum.photos/id/1018/1000/600/",
+      thumbnail: "https://picsum.photos/id/1018/250/150/",
+    },
+    {
+      original: "https://picsum.photos/id/1015/1000/600/",
+      thumbnail: "https://picsum.photos/id/1015/250/150/",
+    },
+    {
+      original: "https://picsum.photos/id/1019/1000/600/",
+      thumbnail: "https://picsum.photos/id/1019/250/150/",
+    },
+    {
+      original: imagen,
+      thumbnail: imagen,
+    },
+  ];
+
+
+
+
   return (
     <section className="containerDetailCreate">
+
+
       <container className="secContainerCreate">
         <div>
           {imagen ? (
@@ -103,6 +130,16 @@ const CreateDetail = ({
           )}
         </div>
       </container>
+
+      <ImageGallery 
+      items={images} 
+      className="image-gallery-icon" 
+      thumbnailPosition="left"
+      showFullscreenButton={false}
+      showPlayButton={false}
+      
+      /> 
+
     </section>
   );
 };
