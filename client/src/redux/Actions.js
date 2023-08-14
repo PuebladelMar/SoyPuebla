@@ -19,7 +19,8 @@ import {
   DELETE_CART_USER,
   ADD_HISTORY,
   ADD_TO_FAVORITES, 
-  REMOVE_FROM_FAVORITES
+  REMOVE_FROM_FAVORITES,
+  NOTIFY_STOCK
 } from "./ActionsTypes";
 
 export function getProducts() {
@@ -279,5 +280,21 @@ export function removeFromFavorites(productId) {
   return {
     type: REMOVE_FROM_FAVORITES,
     payload: productId,
+  };
+}
+
+export function notifyStock(data) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`/notify/stockNotify`, {
+        user_email: data.user_email,
+        stock_id: data.stock_id,
+      });
+      return dispatch({
+        type: NOTIFY_STOCK,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
   };
 }
