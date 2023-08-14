@@ -9,35 +9,35 @@ const PaymentMethodsView = () => {
           <h2 className="payment-title">Medios de Pago</h2>
           <span className="payment-text-underline"></span>
         </div>
-        <div className="payment-row">
-          <div className="payment-method">
-            <p>Efectivo</p>
-            <div className="payment-img-container">
-              <img src="src/assets/payMethods/4.png" alt="Efectivo" />
-            </div>
-          </div>
-          <div className="payment-method">
-            <p>Mercado Pago</p>
-            <div className="payment-img-container">
-              <img src="src/assets/payMethods/1.png" alt="Mercado Pago" />
-            </div>
+      </div>
+      <div />
+      <div className="payment-row">
+        <div className="payment-method">
+          <p>Efectivo</p>
+          <div className="payment-img-container">
+            <img src="src/assets/payMethods/4.png" alt="Efectivo" />
           </div>
         </div>
-        <div className="payment-row">
-          <div className="payment-method">
-            <p>Transferencia Bancaria</p>
-            <div className="payment-img-container">
-              <img
-                src="src/assets/payMethods/2.png"
-                alt="Transferencia Bancaria"
-              />
-            </div>
+        <div className="payment-method">
+          <p>Mercado Pago</p>
+          <div className="payment-img-container">
+            <img src="src/assets/payMethods/1.png" alt="Mercado Pago" />
           </div>
-          <div className="payment-method">
-            <p>Tarjetas</p>
-            <div className="payment-img-container">
-              <img src="src/assets/payMethods/3.png" alt="Tarjetas" />
-            </div>
+        </div>
+
+        <div className="payment-method">
+          <p>Transferencia</p>
+          <div className="payment-img-container">
+            <img
+              src="src/assets/payMethods/2.png"
+              alt="Transferencia Bancaria"
+            />
+          </div>
+        </div>
+        <div className="payment-method">
+          <p>Tarjetas</p>
+          <div className="payment-img-container">
+            <img src="src/assets/payMethods/3.png" alt="Tarjetas" />
           </div>
         </div>
       </div>
