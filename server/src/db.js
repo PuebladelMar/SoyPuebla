@@ -59,6 +59,11 @@ Users.belongsToMany(Stocks, { through: "Carts" });
 Stocks.belongsToMany(Users, { through: "Histories" });
 Users.belongsToMany(Stocks, { through: "Histories" });
 
+// Relación de Favoritos
+Products.belongsToMany(Users, { through: "Favorites" });
+Users.belongsToMany(Products, { through: "Favorites" });
+
+
 module.exports = {
   ...sequelize.models, 
   conn: sequelize, 
