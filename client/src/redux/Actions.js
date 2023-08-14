@@ -16,6 +16,7 @@ import {
   GET_USER_CART,
   SEND_MAIL,
   POST_REVIEWS,
+  GET_REVIEWS
 } from './ActionsTypes';
 
 export function getProducts() {
@@ -239,6 +240,20 @@ export function postReviews(userComment) {
       });
     } catch (error) {
       alert(error);
+    }
+  };
+}
+
+export function getReviews() {
+  return async function (dispatch) {
+    try {
+      const response = await axios('http://localhost:3001/products/review');
+      dispatch({
+        type: GET_REVIEWS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert('Error al obtener los comentarios');
     }
   };
 }

@@ -16,6 +16,7 @@ export default function ReviewCard({
         <p>{userId}</p>
         <p>{description}</p>
         <p>{score}</p>
+        <p>{productId}</p>
       </div>
     </div>
     // </Link>

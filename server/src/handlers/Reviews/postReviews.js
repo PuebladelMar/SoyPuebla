@@ -1,4 +1,4 @@
-const controllPostReviews = require("../../controllers/Reviews/controllPostReviews");
+const controllPostReviews = require("../../controllers/Reviews/controllGetReviews");
 
 const postReview = async(req, res)=>{
     // console.log(req)

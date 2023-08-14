@@ -16,12 +16,23 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import ReviewCard from './ReviewCard';
+import { getReviews } from '../../redux/Actions';
 // import { postUsers } from '../../redux/Actions';
 // import ReviewsForm from './ReviewsForm'
 
+
+
 function Reviews() {
   const reviews = useSelector((state) => state.reviews);
+  const dispatch = useDispatch();
 
+useEffect(()=>{
+  console.log('Before dispatching getReviews:', reviews);
+  dispatch(getReviews())
+},[getReviews])
+
+
+console.log('After dispatching getReviews:', reviews);
   return (
     <div>
       <Swiper
@@ -45,7 +56,7 @@ function Reviews() {
             reviews.map((re) => (
               <ReviewCard
                 key={re.id}
-                productId={re.productId}
+                // productId={re.productId}
                 title={re.title}
                 userId={re.userId}
                 score={re.score}

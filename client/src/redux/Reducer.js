@@ -15,6 +15,7 @@ import {
   GET_USER_CART,
   SEND_MAIL,
   POST_REVIEWS,
+  GET_REVIEWS
 } from './ActionsTypes';
 
 let initialState = {
@@ -27,6 +28,7 @@ let initialState = {
   userId: [],
   userCart: [],
   reviews: [],
+  allReviews: [],
 };
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -104,6 +106,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         reviews: [...state.reviews, action.payload],
       };
+      case GET_REVIEWS:
+        return {
+          ...state,
+        reviews: action.payload
+        };
 
     default:
       return state;
