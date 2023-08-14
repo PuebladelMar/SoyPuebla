@@ -10,6 +10,7 @@ export default function Customer() {
   return (
     <div className="customer-container">
       <h1>Preguntas Frecuentes</h1>
+      <span className="customer-text-underline"></span>
       <div className="accordion-container">
         <Accordion className="accordion">
           <AccordionSummary
