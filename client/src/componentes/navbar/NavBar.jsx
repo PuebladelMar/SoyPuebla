@@ -129,9 +129,7 @@ export default function NavBar({ links }) {
                     <li style={{ margin: " 1rem" }}>
                       <Link to="/adminAccount">ADMIN</Link>
                     </li>
-                    <li style={{ margin: " 1rem" }}>
-                      <Link to="/fav">❤️</Link>
-                    </li>
+                    <li style={{ margin: " 1rem" }}></li>
                   </ul>
                 </Tabs>
               </Grid>
@@ -157,13 +155,33 @@ export default function NavBar({ links }) {
               marginRight={1}
               gap={"10px"}
             >
+              {" "}
+              <IconButton>
+                <Link to="/fav">
+                  {" "}
+                  <img
+                    src="src/assets/images/Fav.png"
+                    alt="Fav Icon"
+                    style={{
+                      width: "3rem",
+                      height: "3.2rem",
+                      marginRight: "0.1rem",
+                    }}
+                  />
+                </Link>
+              </IconButton>
               <IconButton>
                 <Link to="/Cart">
                   {" "}
                   <img
                     src="src/assets/images/Cart.png"
                     alt="Cart Icon"
-                    style={{ width: "3.2rem", height: "3.2rem" }}
+                    style={{
+                      width: "3.5rem",
+                      height: "3.5rem",
+                      marginRight: "0rem",
+                      margin: "-0.1rem",
+                    }}
                   />
                 </Link>
               </IconButton>
