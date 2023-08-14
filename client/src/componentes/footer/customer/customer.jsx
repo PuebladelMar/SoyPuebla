@@ -30,7 +30,7 @@ export default function Customer() {
               </a>{" "}
               o retirar por el punto más cercano. Para comprar, eliges tus
               productos, los seleccionas y desde el carrito de compras eliges la{" "}
-              <a href="/link-pago" className="link">
+              <a href="/payMethods" className="link">
                 forma de pago.
               </a>
             </Typography>
