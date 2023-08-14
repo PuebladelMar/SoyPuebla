@@ -1,27 +1,24 @@
-
-
-
 import { useDispatch, useSelector } from 'react-redux';
 import { postReviews, getProducts } from '../../redux/Actions';
-import './ReviewsForm.css'; 
+import './ReviewsForm.css';
 import { useEffect, useState } from 'react';
 
-function ReviewsForm( {productList} ) {
+function ReviewsForm() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userId);
-  const allUsers = useSelector((state) => state.allUsers);
   const allProducts = useSelector((state) => state.allProducts);
+  // const title = allProducts.name;
 
-useEffect(()=>{
-  dispatch(getProducts());
-},[dispatch]);
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
   const [userComment, setUserComment] = useState({
-    // title: '',
+    title: '',
     score: '',
     userId: userId,
     description: '',
-    // productId: '', 
+    productId: '',
   });
 
   const handleChange = (event) => {
@@ -34,42 +31,62 @@ useEffect(()=>{
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (
-      // userComment.title ||
-      !userComment.score ||
-      !userComment.userId ||
-      !userComment.description
-      
-    ) {
-      alert('Por favor llena todos los campos');
-    } else {
-      dispatch(postReviews(userComment));
-      setUserComment({
-        title: '',
-        score: '',
-        userId: userId,
-        description: '',
-        // productId: '',
-      });
-    }
-console.log(userComment);
+    dispatch(postReviews(userComment));
+    setUserComment({
+      title: '',
+      score: '',
+      userId: userId,
+      description: '',
+      productId: '',
+    });
   };
+  //   if (
+  //     userComment.title ||
+  //     !userComment.score ||
+  //     !userComment.userId ||
+  //     !userComment.description
+  //   ) {
 
-
+  //   } else {
+  //     dispatch(postReviews(userComment));
+  //     setUserComment({
+  //       title: '',
+  //       score: '',
+  //       userId: userId,
+  //       description: '',
+  //       productId: '',
+  //     });
+  //   }
+  //   console.log(userComment);
 
   return (
     <div className='review-form-container'>
-      <h2>Dejanos tu comentario!</h2><br></br>
+      <h2>Dejanos tu comentario!</h2>
+      <br></br>
       <form className='review-form'>
-      <label>Selecciona un Producto:</label>
-      <select>
-  {allProducts.map((product) => (
-    <option key={product.id} value={product.id}>
-      {product.name}
-    </option>
-  ))}
-</select>
+        <label>Selecciona un Producto:</label>
+        <select
+          name='productId'
+          value={userComment.productId}
+          onChange={handleChange}
+        >
+          {allProducts.map((product) => (
+            <option
+              key={product.id}
+              value={product.id}
+            >
+              {product.name}
+            </option>
+          ))}
+        </select>
+        <label htmlFor='title'>Deje un titulo: </label>
+        <input
+          type='string'
+          value={userComment.title}
+          onChange={handleChange}
+          name='title'
+          required
+        ></input>
         <label htmlFor='comment'>Comentario:</label>
         <input
           type='text'
@@ -89,8 +106,13 @@ console.log(userComment);
           required
         />
         {/* Mostrar el userId prellenado en un campo oculto */}
-        <input type='hidden' value={userComment.userId} name='userId' />
-        <button className='boton'
+        <input
+          type='hidden'
+          value={userComment.userId}
+          name='userId'
+        />
+        <button
+          className='boton'
           type='submit'
           onClick={handleSubmit}
         >

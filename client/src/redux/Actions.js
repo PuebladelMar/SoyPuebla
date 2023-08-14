@@ -229,14 +229,37 @@ export function postReviews(userComment) {
   return async function (dispatch) {
     try {
       console.log(userComment);
-      await axios.post(`http://localhost:3001/products/review`, userComment);
-   
+      await axios.post(`http://localhost:3001/products/review`, {
+        userComment,
+      });
+
       alert('Su comentario se envió correctamente');
       return dispatch({
         type: POST_REVIEWS,
       });
     } catch (error) {
-      alert('error en la ruta');
+      alert(error);
     }
   };
 }
+
+// export function postReviews(userComment) {
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios.post(
+//         `http://localhost:3001/products/review`,
+//         userComment
+//       );
+
+//       const newReview = response.data; // Supongamos que el backend devuelve la nueva reseña creada
+//       dispatch({
+//         type: POST_REVIEWS,
+//         payload: newReview, // Pasa la nueva reseña al reducer
+//       });
+
+//       alert('Su comentario se envió correctamente');
+//     } catch (error) {
+//       alert(error);
+//     }
+//   };
+// }
