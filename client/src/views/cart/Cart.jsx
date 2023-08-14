@@ -105,6 +105,9 @@ const Cart = () => {
       <NavLink to="/products" className="cart-link">
         Volver
       </NavLink>
+      <NavLink to="/history" className="link-history">
+        Ver historial
+      </NavLink>
     </div>
   );
 };

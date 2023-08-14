@@ -18,7 +18,7 @@ const controllGetHistory = async (userId) => {
       attributes: ["mainImage", "name"],
     });
 
-    return { color, size, product, unitPrice: user.unitPrice };
+    return { color, size, product, unitPrice: user.unitPrice, quantity: user.quantity };
   });
 
   const response = await Promise.all(responsePromises);

@@ -21,6 +21,7 @@ import PayState from "./views/mercadoPago/PayState";
 import axios from "axios";
 import PaymentMethodsView from "./views/paymentMethods/paymentMethods";
 import Favorites from "./views/favs/Favorites";
+import History from "./views/history/History";
 axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
         <Route path="/frequent-questions" element={<Customer />} />
         <Route path="/pay-state" element={<PayState />} />
         <Route path="/payMethods" element={<PaymentMethodsView />} />
+        <Route path="/history" element={<History />} />
       </Routes>
       {pathname !== "/" && <Footer />}
     </div>

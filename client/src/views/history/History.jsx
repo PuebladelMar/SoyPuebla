@@ -15,14 +15,32 @@ const History = () => {
           navigate("/home");
           alert("debes iniciar seción para ir al historial");
         }else{
-          const { data } = axios.get(`http://localhost:3001/history/${userId}`);
-          setUserHistory(data);
+          const asyncFunction = async ()=>{
+            const { data } = await axios.get(`/history/${userId}`);
+            setUserHistory(data);
+          };
+          asyncFunction();
         };
-    });
+    },[dispatch]);
     
     return(
-        <div>
-            {console.log(userHistory)}
+        <div className="history-container">
+            <h2>Historial:</h2>
+            <div className="history-items">
+              {userHistory?.map((item, index)=>(
+                <div className="history-item" key={index}>
+                  <img src={item.product.mainImage}/>
+                  <div className="item-details">
+                    <p>{item.product.name}</p>
+                    <p>{item.color.name}</p>
+                    <p>Talle:{item.size.name}</p>
+                    <p>${item.unitPrice}</p>
+                    <p>Cantidad: {item.quantity}</p>
+                    <p>Total: ${item.unitPrice * item.quantity}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
         </div>
     );
 };
