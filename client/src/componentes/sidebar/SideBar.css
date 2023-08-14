@@ -1,35 +1,59 @@
 .search-bar-aside {
   width: 250px;
-  padding: 20px;
-  background-color: #ece4e1; 
+  padding: 20px 30px 0 30px;
+  background-color: #ece4e1;
   position: sticky;
   top: 0;
-  
 }
-.search-bar-aside select {
+
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filters h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 2px;
-  color: #555;
-  
+  padding-left: 0.5rem;
 }
+
+.filters h2 span {
+  background-color: black;
+  height: 0.01rem;
+  margin-right: 1rem;
+  width: 100%;
+}
+
+.search-bar-aside select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 200px;
+  font-size: 15px;
+  border-radius: 15px;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(46, 79, 82);
+  color: rgb(46, 79, 82);
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
 .search-form-aside {
-  margin-top:10px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-
-  
-}
-
-.search-input {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .dropdown-group {
@@ -44,9 +68,60 @@
   padding: 8px;
   width: 100%;
 }
-li{
+
+li {
   list-style: none;
-  margin-bottom: 6px;
+}
+
+.sale-input {
+  display: none;
+}
+
+.sale-span {
+  display: inline-block;
+  position: relative;
+  height: 2rem;
+  width: 2rem;
+  background-color: #ffffff;
+  border-radius: 100%;
+  border: solid 0.1rem #517f7f;
+  cursor: pointer;
+}
+
+.sale-label {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.sale-span:after {
+  content: "";
+  position: absolute;
+  border: solid #517f7f;
+  border-width: 0 0.1em 0.1em 0;
+  transform: rotate(45deg);
+  width: 0.6rem;
+  height: 1rem;
+  left: 0.35em;
+  top: 0.2em;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.sale-input:checked + .sale-span:after {
+  opacity: 1;
+}
+
+.sale-li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sale-li h3 {
+  padding-bottom: 0.4rem;
+  font-size: 0.93rem;
+  font-weight: 500;
 }
 
 .reloadButton {
@@ -56,15 +131,99 @@ li{
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
   padding: 10px 15px;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
+  margin-bottom: 2rem;
 }
 
 .reloadButton:hover {
   background-color: #497171;
 }
+
 .reloadButton:disabled {
-  background-color: #ccc; 
-  cursor: not-allowed; 
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.search-bar-aside.hide .search-form-aside {
+  display: none;
+}
+
+.toggle-filters-button {
+  display: none;
+}
+
+.search-bar-aside.show .toggle-filters-button {
+  display: block;
+}
+
+.select-container-filter {
+  position: relative;
+}
+
+.select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgb(46, 79, 82);
+  transition: transform 0.3s ease;
+}
+
+.custom-select option {
+  background-color: #517f7f;
+  color: rgb(255, 255, 255);
+}
+
+.select-container-filter.open .select-arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+@media screen and (max-width: 715px) {
+  .search-bar-aside {
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 644px) {
+  .search-bar-aside {
+    background-color: #ece4e1;
+    position: relative;
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+
+  .filter-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 1rem;
+  }
+
+  .open-modal-button {
+    background-color: #517f7f;
+    padding: 0.2rem 0.8rem;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #f8f7f7;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .img-filter {
+    width: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .search-bar-aside {
+    width: 100%;
+    position: relative;
+  }
 }

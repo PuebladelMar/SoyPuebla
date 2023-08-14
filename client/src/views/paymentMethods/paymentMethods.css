@@ -1,0 +1,116 @@
+.payment-methods-container {
+  display: flex;
+  flex-direction: column; /* Cambio a columna */
+   /* Centrar horizontalmente */
+}
+
+.payment-header {
+  display: flex;
+flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  margin-top: 50px; /* Ajustar margen superior */
+}
+
+.payment-title {
+  font-size: 3.5rem;
+  color: rgb(220, 170, 161);
+  font-weight: 400;
+  margin-left: 0;
+  margin-top: 5%;
+  
+}
+
+.payment-text-underline {
+  height: 0.4rem;
+  width: 150%;
+  margin-left: 0;
+  background-color: rgb(220, 170, 161);
+}
+
+.payment-container {
+  display: flex;
+  align-items: center; /* Centrar horizontalmente */
+  margin: 20px;
+  margin-top: 20px; /* Ajustar margen superior */
+}
+
+.payment-row {
+  display: flex;
+ justify-content: center;
+  align-items: center; /* Centrar horizontalmente */
+  margin-top: 10px;
+}
+
+.payment-method {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3%;
+  
+
+}
+.payment-method p {
+  font-size: 20px;
+  margin-bottom: 0%; /* Separar el párrafo de la imagen */
+  text-align: center;
+  color: #517f7f;
+  margin-top: -20%;
+}
+
+
+
+
+.payment-img-container {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment-img-container img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px;
+}
+
+.additional-container{
+  text-align: justify;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: -3%;
+}
+
+/* Media queries para la responsividad */
+@media (max-width: 768px) {
+  .payment-img-container {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-img-container {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .payment-row {
+    flex-wrap: wrap; /* Cambiar a múltiples filas en pantallas pequeñas */
+  }
+}
+@media (max-width: 768px) {
+  .payment-title {
+    font-size: 2rem; /* Ajustar tamaño del título en pantallas pequeñas */
+  }
+}
+.payment-text-underline {
+  margin-left: 0; /* Alinea a la izquierda en pantallas pequeñas */
+}

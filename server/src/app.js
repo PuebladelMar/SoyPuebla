@@ -1,12 +1,18 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const cors = require('cors')
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const routes = require('./routes/index.js');
+const router = require('./routes/index.js');
+const mercadopago = require("mercadopago");
 
 require('./db.js');
 
 const server = express();
+
+mercadopago.configure({
+	access_token: "TEST-5636166372425926-080815-a0093603a0ac2c361462f789a373dd94-1432158528",
+});
 
 server.name = 'API';
 
@@ -22,7 +28,9 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/', routes);
+server.use(cors());
+
+server.use('/', router);
 
 server.use((err, req, res, next) => {
   const status = err.status || 500;

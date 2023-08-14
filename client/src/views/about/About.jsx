@@ -1,31 +1,43 @@
-import React from 'react';
-import './About.css';
+import "./About.css";
 
 const About = () => {
   return (
-    <div className='about-container'>
-      <div>
-        <h1 className='about-title'>¿QUIENES SOMOS?</h1>
-      </div>
-      <div>
-        <p className='about-text'>
-          Somos Karina y Pamela, dos mujeres apasionadas por la belleza de lo
-          sencillo y lo natural. Ambas entendimos que la belleza verdadera
-          proviene de sentirnos cómodas y seguras con quienes somos, y queríamos
-          transmitir ese mensaje a otras personas. Motivadas por nuestra propia
-          experiencia en la búsqueda de ropa de ejercicio que se ajustara a
-          nuestros cuerpos únicos y diversos, nos dimos cuenta de que había una
-          gran brecha en el mercado. Muchas marcas de ropa deportiva se
-          centraban en tallas y estilos estandarizados, lo que dejaba fuera a
-          muchas mujeres que no se sentían representadas o cómodas con las
-          opciones disponibles. Fue así como nació la idea de crear Puebla del
-          Mar, una marca de ropa de ejercicio completamente inclusiva y adaptada
-          a todo tipo de cuerpos. Queríamos ofrecer prendas que fueran cómodas,
-          funcionales y al mismo tiempo resaltaran la belleza natural de cada
-          individuo. Decidimos tomar el nombre "Puebla del Mar" porque
-          representa nuestra conexión con la naturaleza y la calma que
-          encontramos junto al mar, así como la idea de poblar el mundo con
-          nuestra filosofía de aceptación y amor propio.
+    <div className="about-container">
+      <div className="about-content">
+        <h1 className="about-title">¿QUIÉNES SOMOS?</h1>
+        <p className="about-text">
+          Somos Karina y Pamela, nos apasiona la belleza de lo sencillo y lo
+          natural. <strong>Puebla del Mar</strong> es el nombre que elegimos
+          para dar vida a una marca de ropa de ejercicio adaptada a nuestros
+          cuerpos, estilos y gustos.
+        </p>
+
+        <h1 className="about-title">¿QUÉ HACEMOS?</h1>
+        <p className="about-text">
+          Durante años nos amoldamos a aquello que nos ofrecían, ajustándonos a
+          modelos y talles que nos exigían a tener que adaptarnos.{" "}
+          <strong>Puebla del Mar</strong> te propone el camino inverso, pretende
+          que hagamos juntas ropa que se adapte a nosotras. Porque sabemos que
+          nuestros cuerpos son diferentes pero también nuestros estilos, gustos
+          y elecciones.
+        </p>
+
+        <h1 className="about-title">¿POR QUÉ?</h1>
+        <p className="about-text">
+          Nos motorizó la falta de prendas que se adaptan a las necesidades
+          reales y que reproducen solo un modelo de cuerpo e impactan
+          negativamente nuestra salud.
+        </p>
+
+        <h1 className="about-title">¿CÓMO LO HACEMOS?</h1>
+        <p className="about-text">
+          <strong>Escuchamos a un grupo de mujeres</strong>, les preguntamos
+          sobre sus necesidades, qué ropa buscan. Qué y por qué las hace sentir
+          cómodas. A partir de esas respuestas y de algunas preguntas diseñamos
+          juntas prototipos de ropa de ejercicio.
+          <br />
+          Esperamos que te guste nuestro proyecto y que forme parte de tus
+          actividades.
         </p>
       </div>
     </div>

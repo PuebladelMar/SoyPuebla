@@ -1,24 +1,16 @@
-/* Estilos para los botones de paginación */
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  color:   #517f7f;
-}
-
 .paginationButton {
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 11px;
   background-color: #f2d5cf;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc6c;
   cursor: pointer;
   margin: 0 5px;
 }
 
 .activePaginationButton {
   padding: 5px 10px;
-  font-size: 16px;
-  background-color:#dcaaa1;
+  font-size: 11px;
+  background-color: #dcaaa1;
   border: 1px solid #eeeeee;
   color: #fff;
   cursor: pointer;
@@ -27,67 +19,118 @@
 
 .disabledPaginationButton {
   padding: 5px 10px;
-  font-size: 16px;
-  background-color: #ccc;
+  font-family: cursive;
+  font-size: 11px;
+  background-color: #cccccc2d;
   border: 1px solid #ccc;
   cursor: not-allowed;
   margin: 0 5px;
 }
-/* Estilos para los botones de paginación */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .paginationButton {
-    padding: 5px 10px;
-    font-size: 16px;
-    background-color: #f2d5cf;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    margin: 0 5px;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-  
-  .activePaginationButton {
-    padding: 5px 10px;
-    font-size: 16px;
-    background-color: #dcaaa1;
-    border: 1px solid #eeeeee;
-    color: #fff;
-    cursor: pointer;
-    margin: 0 5px;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-  
-  .disabledPaginationButton {
-    padding: 5px 10px;
-    font-size: 16px;
-    background-color: #ccc;
-    border: 2px solid #ccc;
-    cursor: not-allowed;
-    margin: 0 5px;
-    transition: background-color 0.3s, border-color 0.3s;
-  }
 
-  .paginated-container {
-    display: flex;
-    justify-content: center;
+.paginationButton {
+  padding: 5px 10px;
+  font-size: 11px;
+  background-color: #f2d5cf;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.paginationButton:hover {
+  background-color: #dcaaa1;
+  color: #fff;
+}
+
+.activePaginationButton {
+  padding: 5px 10px;
+  font-family: Asap;
+  font-size: 11px;
+  background-color: #dcaaa1;
+  border: 1px solid #eeeeee;
+  border-radius: 15px;
+  color: #fff;
+  cursor: pointer;
+  transform: scale(1.1);
+  margin: 0 5px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.disabledPaginationButton {
+  padding: 5px 10px;
+  font-size: 11px;
+  background-color: #ccc;
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  cursor: not-allowed;
+  margin: 0 5px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.paginated-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 1rem 0 2.3rem 0;
+  gap: 1.5rem;
+  width: 100%;
+  background-color: #F0F0F0;
+}
+
+.products-container {
+  display: flex;
+  flex-direction: row;
+  padding-top: 4.2rem;
+  width: 90%;
+}
+
+.cards-container {
+  width: 100%;
+}
+
+.products-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cards-paginated-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 800px) {
+  .products-container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 715px) {
+  .cards-container {
+    width: 60%;
   }
 
   .products-container {
-    display: flex;
-    flex-direction: row;
+    background-color: #f0f0f0;
   }
-  
-  @media screen and (max-width: 600px) {
-    .pagination {
-      flex-direction: column;
-    }
-    
-    .paginationButton, .activePaginationButton, .disabledPaginationButton {
-      margin: 5px;
-    }
+}
+
+@media screen and (max-width: 644px) {
+  .products-container {
+    flex-direction: column;
+    width: 100%;
   }
+
+  .cards-container {
+    width: 100%;
+  }
+
+  .products-section {
+    flex-direction: column;
+  }
+}

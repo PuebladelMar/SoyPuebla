@@ -4,13 +4,13 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  overflow: hidden; /* Evita que la imagen se desborde del contenedor */
+  overflow: hidden; 
 }
 
 .landing-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Hace que la imagen cubra todo el contenedor */
+  object-fit: cover; 
 }
 
 .boton-landing {
