@@ -185,8 +185,21 @@
   margin-left: 17px;
 }
 
-.notifyStock {
-  font-size: medium;
-  text-decoration: underline;
-  font-family: "Asap";
+.notifyButton{
+  width: 17rem;
+  height: 2rem;
+  font-size: 0.85rem;
+  color: rgba(112, 112, 112, 0.766);
+  border: 2px solid;
+  border-color: rgb(190, 190, 190);
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  transform: translateZ(0);
+  transition: 300ms;
+  cursor: pointer;
+}
+.notifyButton:hover {
+  transform: scale(1.03);
+  color: rgb(255, 255, 255);
+  background: rgb(81, 127, 127);
 }

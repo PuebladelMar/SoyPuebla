@@ -39,4 +39,20 @@ const sendRegisterMailNotify = async (emailSubject, emailsUsers) => {
   }
 };
 
-module.exports = { controllerNodeMailer, sendRegisterMailNotify };
+const sendStockNotification = async (emailsUsers) => {
+  try {
+    await transporter.sendMail({
+      from: '"SOY_PUEBLA" : puebladelmar2023@gmail.com',
+      to: emailsUsers,
+      subject: "¡Tu prenda favorita ya se encuentra disponible",
+      html: "<b>Bienvenida a Soy Puebla</b> <p>Queremos que sepas que trabajamos para ti, por esto queremos informarte que tu producto ya se encuentra disponible, visita nuestra página web para que puedas adquirirlo</p>",
+    });
+    console.log(`Notificación de stock enviado a ${emailsUsers}`);
+  } catch (error) {
+    throw new Error("Error al enviar el correo electrónico de notificación de stock");
+  }
+};
+
+
+
+module.exports = { controllerNodeMailer, sendRegisterMailNotify, sendStockNotification };
