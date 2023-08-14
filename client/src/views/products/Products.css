@@ -73,10 +73,10 @@
   align-items: center;
   justify-content: center;
   list-style: none;
-  padding: 1rem 0;
+  padding: 1rem 0 2.3rem 0;
   gap: 1.5rem;
-  width: 90%;
-  overflow-x: auto;
+  width: 100%;
+  background-color: #F0F0F0;
 }
 
 .products-container {
@@ -95,6 +95,13 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.cards-paginated-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 800px) {

@@ -19,7 +19,7 @@ const Detail = () => {
     const fetchProductDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/products/${id}`
+          `/products/${id}`
         );
         setProductDetails(response.data);
       } catch (error) {

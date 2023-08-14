@@ -14,6 +14,7 @@ function CardContainer(props) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        height: "100%",
       }}
     >
       {!isMatch ? (
@@ -23,7 +24,7 @@ function CardContainer(props) {
             flexWrap: "wrap",
             padding: "1rem 2rem",
             justifyContent: "center",
-            alignItems: "center",
+            alignItems: "start",
             width: "100%",
             margin: "0 auto",
           }}
