@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import './multipleImageUpload.css'
 
 
 const MutipleUploadWidget = ({ onMultipleUpload }) => {
@@ -30,7 +31,10 @@ const MutipleUploadWidget = ({ onMultipleUpload }) => {
 
   return (
     <div>
-      <button onClick={() => widgetRef.current.open()}>Upload</button>
+      <button 
+      className="multipleImage-upload-button" 
+      onClick={() => widgetRef.current.open()}>Cargar Imagenes Secundarias</button>
+      
     </div>
   );
 };

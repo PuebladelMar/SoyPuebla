@@ -25,6 +25,7 @@ const Create = () => {
 
   const handleUpload = (singleUrl) => {
     setUploadedSecureUrl(singleUrl); 
+    // preventDefault();
     setCreateProduct((prevState) => ({
       ...prevState,
       mainImage: singleUrl, 
@@ -35,6 +36,7 @@ const Create = () => {
   
     const handleMultipleUpload = (urls) => {
       setUploadedMultipleUrls(urls);
+      // preventDefault();
     };
 
 
@@ -273,7 +275,12 @@ const Create = () => {
 
 
           <label htmlFor="mainImage">Imagen Principal: </label>
-          <UploadWidget onUpload={handleUpload} />
+
+     
+          <UploadWidget onUpload={handleUpload}  />
+
+
+       
           {/* <textarea
             type="text"
             name="mainImage"
