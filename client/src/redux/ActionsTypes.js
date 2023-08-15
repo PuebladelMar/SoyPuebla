@@ -1,6 +1,7 @@
+
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const POST_PRODUCTS = "POST_PRODUCTS";
-export const POST_ALL_COLOR = "POST_ALL_COLOR";
+export const GET_ALL_COLOR = "GET_ALL_COLOR";
 export const GET_ALL_SIZES = "GET_ALL_SIZES";
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const GET_ALL_SERIES = "POST_ALL_SERIES";
@@ -19,3 +20,6 @@ export const ADD_HISTORY = "ADD_HISTORY";
 export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 export const REMOVE_FROM_FAVORITES = "REMOVE_FROM_FAVORITES";
 export const NOTIFY_STOCK = "NOTIFY_STOCK";
+export const POST_REVIEWS = 'POST_REVIEWS';
+export const GET_REVIEWS = 'GET_REVIEWS';
+

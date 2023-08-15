@@ -13,15 +13,16 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("1", "2", "3", "4", "5"),
         allowNull: false,
       },
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       userId: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       productId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      fullName: {
         type: DataTypes.STRING,
         allowNull: false,
       },

@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import {
   postProducts,
-  postColor,
+  getColor,
   getSizes,
   getCategories,
   getSeries,
 } from "../../redux/Actions";
 import validations from "./Validations";
 import UploadWidget from "../../componentes/imageUpload/imageUpload";
+import MutipleUploadWidget from "../../componentes/multipleImageUpload/multipleImageUpload";
 import CreateDetail from "./createDetail/CreateDetail";
+import { ChromePicker } from 'react-color';
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -24,11 +26,32 @@ const Create = () => {
 
   const handleUpload = (singleUrl) => {
     setUploadedSecureUrl(singleUrl); 
+    // preventDefault();
     setCreateProduct((prevState) => ({
       ...prevState,
       mainImage: singleUrl, 
     }))
   };
+
+    const [uploadedMultipleUrls, setUploadedMultipleUrls] = useState([]);
+  
+    const handleMultipleUpload = (urls) => {
+      setUploadedMultipleUrls(urls);
+      // preventDefault();
+    };
+
+
+    const combinedImagesUrls = [uploadedSecureUrl].concat(uploadedMultipleUrls);
+
+   
+      const [colorSelect, setColorSelect] = useState('#ffffff'); // Estado para el color actual
+      const [hexColor, setHexColor] = useState('#ffffff'); // Estado para el valor HEX del color
+    
+      // Maneja el cambio completo del color
+      const handleColorChangeComplete = (newColor) => {
+        setColorSelect(newColor.rgb);
+        setHexColor(newColor.hex);
+      };
 
 
 
@@ -53,7 +76,7 @@ const Create = () => {
     }
 
     if (!color.length) {
-      dispatch(postColor());
+      dispatch(getColor());
     }
   }, [dispatch, color, createProduct]);
 
@@ -264,7 +287,12 @@ const Create = () => {
 
 
           <label htmlFor="mainImage">Imagen Principal: </label>
-          <UploadWidget onUpload={handleUpload} />
+
+     
+          <UploadWidget onUpload={handleUpload}  />
+
+
+       
           {/* <textarea
             type="text"
             name="mainImage"
@@ -276,17 +304,36 @@ const Create = () => {
           />
           <p className="error">{errors.mainImage}</p> */}
 
-        
+       
 
-          <label htmlFor="image">Imagen: </label>
-          <input
+        {uploadedSecureUrl === null
+
+        ? (
+        <div>
+        <label htmlFor="image">Imagenes complementarias: </label>
+        <br />
+        <br />
+        
+        </div>
+        )
+
+        : ( 
+        <div>        
+        <label htmlFor="image">Imagenes complementarias: </label>
+        <MutipleUploadWidget onMultipleUpload={handleMultipleUpload}/>
+        </div>
+        
+        )}
+         
+
+          {/* <input
             type="text"
             name="image"
             value={createProduct.image}
             placeholder="Imagen"
             className="custom-input"
             onChange={handleChange}
-          />
+          /> */}
 
        
 
@@ -306,6 +353,21 @@ const Create = () => {
           </select>
 
           <label htmlFor="color">Color: </label>
+
+
+          <div>
+      <ChromePicker
+        color={colorSelect}
+        onChangeComplete={handleColorChangeComplete}
+        disableAlpha={true}
+      />
+
+      <div>
+        <p>Color seleccionado: {hexColor}</p>
+      </div>
+    </div>
+
+
           <select
             name="color"
             placeholder="Colores"
@@ -325,6 +387,8 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.color}</p>
+
+
 
           <div>
             {createProduct.color.length > 0 ? (
@@ -467,7 +531,7 @@ const Create = () => {
       <div>
         <CreateDetail
           nombre={createProduct.name}
-          imagen={uploadedSecureUrl}
+          imagenes={combinedImagesUrls}
           precio={createProduct.price}
           serie={createProduct.series}
           color={getColorHexCodes()}

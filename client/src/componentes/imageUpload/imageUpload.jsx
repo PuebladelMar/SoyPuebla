@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-
+import './imageUpload.css'
 
 
 const UploadWidget = ({ onUpload }) => {
@@ -23,7 +23,9 @@ const UploadWidget = ({ onUpload }) => {
     
   return (
     <div>
-      <button onClick={() => widgetRef.current.open()}>Upload</button>
+      <button 
+      className="mainImage-upload-button" 
+      onClick={() => widgetRef.current.open()}>Cargar Imagen Principal</button>
     </div>
   );
 };
