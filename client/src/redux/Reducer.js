@@ -18,6 +18,7 @@ import {
   DELETE_CART_USER,
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES,
+  GET_ALL_FAV,
   NOTIFY_STOCK,
   POST_REVIEWS,
   GET_REVIEWS,
@@ -135,6 +136,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+      case GET_ALL_FAV:
+        return {
+          ...state,
+          favorites: action.payload,
+        };
     case NOTIFY_STOCK:
       return {
         ...state,
@@ -149,7 +155,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         reviews: action.payload,
       };
-
     default:
       return state;
   }
