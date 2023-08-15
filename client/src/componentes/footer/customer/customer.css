@@ -1,74 +1,73 @@
 .customer-container {
-    padding: 50px;
-    margin: 50px;
-  }
+  padding: 50px;
+  margin: 50px;
+}
 
-  .customer-container h1 {
-    font-size: 30px;
-    margin-top: 2.5rem;
-    text-align: center;
-    color: #517f7f;
-    text-shadow: 1px 1px 1px #517f7f;
-  }
-  
-  
-  .accordion-container {
-    padding: 10px;
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .accordion {
-    margin: 0px 0;
-    border: 3px solid #f2d5cf;
-    border-radius: 5px;
-    overflow: hidden;
+.customer-container h1 {
+  font-size: 3.5rem;
+  color: rgb(220, 170, 161);
+  font-weight: 400;
+  margin-left: -6%;
+}
 
-  }
-  
-  /* customer.css */
+.customer-text-underline {
+  height: 6.5px;
+  width: 55%;
+  background-color: rgb(220, 170, 161);
+  display: flex;
+  margin-left: -6%;
+}
+
+.accordion-container {
+  padding: 10px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion {
+  margin: 0px 0;
+  border: 3px solid rgb(238, 238, 238);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
 .accordion-summary {
   font-weight: bold;
 }
-
-
 
 .link {
   color: #517f7f;
   font-weight: bold;
 }
 
-  
-  .accordion:last-child {
-    margin-bottom: 0; /* Remove margin from the last accordion */
-  }
-  
-  /* Additional styling for accordion headers and details can be added here */
-  
-  /* Responsive adjustments */
- /* Responsive adjustments */
+.accordion:last-child {
+  margin-bottom: 0;
+}
+
 @media (max-width: 768px) {
   .customer-container {
-    padding: 20px; /* Reduce padding */
-    margin: 0; /* Remove margin */
+    padding: 20px;
+    margin: 20px; 
   }
-}
-/* Responsive adjustments */
-@media (max-width: 768px) {
+
   .customer-container h1 {
-    font-size: 24px; /* Reduce font size */
-    margin-top: 1.5rem; /* Adjust margin top */
+    font-size: 24px;
+    margin-top: 1.5rem;
+    margin-left: 0;
   }
-}
-/* Responsive adjustments */
-@media (max-width: 768px) {
+
+  .customer-text-underline {
+    width: 100%; 
+    margin-left: 0; 
+  }
+
   .accordion-container {
-    padding: 0; /* Remove padding */
-    margin: 10px 0; /* Adjust margin */
+    padding: 10px;
+    margin: 10px 0;
   }
-  
+
   .accordion {
-    margin: 10px 0; /* Adjust margin */
+    margin: 10px 0;
   }
 }

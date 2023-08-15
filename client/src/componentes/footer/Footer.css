@@ -15,10 +15,7 @@ footer {
 }
 .footer-container p {
   font-size: 14px;
-   
 }
-
-
 
 .footer-links a {
   margin-right: 10px;
@@ -36,6 +33,5 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 22px;
 }
-

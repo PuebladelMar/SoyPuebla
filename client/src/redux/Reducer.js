@@ -14,9 +14,15 @@ import {
   POST_TO_CART,
   GET_USER_CART,
   SEND_MAIL,
-  POST_REVIEWS,
+  DELETE_CART,
+  DELETE_CART_USER,
+  ADD_TO_FAVORITES,
+  REMOVE_FROM_FAVORITES,
+  NOTIFY_STOCK,
+   POST_REVIEWS,
   GET_REVIEWS
-} from './ActionsTypes';
+} from "./ActionsTypes";
+
 
 let initialState = {
   allProducts: [],
@@ -27,8 +33,12 @@ let initialState = {
   allUsers: [],
   userId: [],
   userCart: [],
-  reviews: [],
+  deleteCartUser: [],
+  deleteCart:[],
+  favorites: [],
+     reviews: [],
   allReviews: [],
+
 };
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -96,11 +106,40 @@ function rootReducer(state = initialState, action) {
         ...state,
         userCart: action.payload,
       };
+
+    case DELETE_CART_USER:
+      return {
+        ...state,
+        deleteCartUser: action.payload,
+      };
+    case DELETE_CART:
+        return {
+            ...state,
+            deleteCart: action.payload,
+          };
+    case SEND_MAIL:
+        return {
+          ...state,
+        }
+        case ADD_TO_FAVORITES:
+        return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      };
+    case REMOVE_FROM_FAVORITES:
+        return {
+        ...state,
+        favorites: state.favorites.filter(product => product.id !== action.payload),
+        }
     case SEND_MAIL:
       return {
         ...state,
       };
-    case POST_REVIEWS:
+    case NOTIFY_STOCK:
+      return {
+        ...state,
+      };
+        case POST_REVIEWS:
       console.log(action.payload);
       return {
         ...state,

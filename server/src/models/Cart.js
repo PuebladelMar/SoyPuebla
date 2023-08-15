@@ -15,5 +15,5 @@ module.exports = (sequelize) => {
         min: 0
       }
     }
-  },{ paranoid: true });
+  },{ timestamps: false });
 };

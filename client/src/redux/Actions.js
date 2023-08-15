@@ -15,14 +15,23 @@ import {
   POST_TO_CART,
   GET_USER_CART,
   SEND_MAIL,
+  DELETE_CART,
+  DELETE_CART_USER,
+  ADD_HISTORY,
+  ADD_TO_FAVORITES, 
+  REMOVE_FROM_FAVORITES,
+  NOTIFY_STOCK,
   POST_REVIEWS,
   GET_REVIEWS
-} from './ActionsTypes';
+} from "./ActionsTypes";
+
 
 export function getProducts() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/products');
+
+      const response = await axios("/products");
+
       dispatch({
         type: GET_PRODUCTS,
         payload: response.data,
@@ -36,7 +45,9 @@ export function getProducts() {
 export function getCategories() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/products/category');
+
+      const response = await axios("/products/category");
+
       dispatch({
         type: GET_ALL_CATEGORIES,
         payload: response.data,
@@ -50,7 +61,9 @@ export function getCategories() {
 export function getSeries() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/products/series');
+
+      const response = await axios("/products/series");
+
       dispatch({
         type: GET_ALL_SERIES,
         payload: response.data,
@@ -64,7 +77,9 @@ export function getSeries() {
 export function getSizes() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/products/size');
+
+      const response = await axios("/products/size");
+
       dispatch({
         type: GET_ALL_SIZES,
         payload: response.data,
@@ -78,7 +93,9 @@ export function getSizes() {
 export function postColor() {
   return async function (dispatch) {
     try {
-      const response = await axios.post('http://localhost:3001/products/color');
+
+      const response = await axios.post("/products/color");
+
       dispatch({
         type: POST_ALL_COLOR,
         payload: response.data,
@@ -92,8 +109,10 @@ export function postColor() {
 export function postProducts(createProduct) {
   return async function (dispatch) {
     try {
-      await axios.post(`http://localhost:3001/products/`, createProduct);
-      alert('Su producto se creo correctamente');
+
+      await axios.post(`/products/`, createProduct);
+      alert("Su producto se creo correctamente");
+
       return dispatch({
         type: POST_PRODUCTS,
       });
@@ -106,9 +125,7 @@ export function postProducts(createProduct) {
 export function getProductsByName(name) {
   return async function (dispatch) {
     try {
-      const response = await axios(
-        `http://localhost:3001/products?name=${name}`
-      );
+      const response = await axios(`/products?name=${name}`);
       dispatch({
         type: GET_PRODUCTS_BY_NAME,
         payload: response.data,
@@ -131,18 +148,18 @@ export function filterProducts(filters) {
           return null;
         })
         .filter((query) => query !== null)
-        .join('&');
-      const response = await axios.get(
-        `http://localhost:3001/products?${queryParams}`
-      );
+
+        .join("&");
+      const response = await axios.get(`/products?${queryParams}`);
+
 
       dispatch({
         type: GET_FILTERED_PRODUCTS,
         payload: response.data,
       });
     } catch (error) {
-      alert(`Error al filtrar ${filterType}`);
-      console.error(`Error al filtrar ${filterType}`, error);
+      alert("Error al filtrar");
+      console.error("Error al filtrar", error);
     }
   };
 }
@@ -150,7 +167,9 @@ export function filterProducts(filters) {
 export function getUsers() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/users/');
+
+      const response = await axios("/users/");
+
       dispatch({
         type: GET_USERS,
         payload: response.data,
@@ -161,13 +180,13 @@ export function getUsers() {
   };
 }
 
-export function postUsers(userClerkId) {
+export function postUsers(userClerkId, user) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`http://localhost:3001/users/`, {
+      const response = await axios.post(`/users/`, {
         clerkId: userClerkId,
+        user: user,
       });
-      alert(response.data.message);
       return dispatch({
         type: POST_USERS,
         payload: response.data,
@@ -186,7 +205,9 @@ export function addToCar(userId, stockId, quantity) {
         stockId,
         quantity,
       });
-      alert('Se ha añadido el producto al carrito');
+
+      alert("Se ha añadido el producto al carrito");
+
       return dispatch({
         type: POST_TO_CART,
       });
@@ -212,7 +233,8 @@ export const getUserCart = (userId) => {
 export function sendMail(emailSubject, emailsUsers) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`http://localhost:3001/notify/email`, {
+
+      const response = await axios.post(`/notify/email`, {
         emailSubject,
         emailsUsers,
       });
@@ -225,12 +247,88 @@ export function sendMail(emailSubject, emailsUsers) {
   };
 }
 
+export function deleteCart(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`http://localhost:3001/cart/${id}`);
+      dispatch({
+        type: DELETE_CART,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+export function deleteCartUser(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/cart/user/${id}`
+      );
+      dispatch({
+        type: DELETE_CART_USER,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+export function addHistory(userId) {
+  return async function (dispatch) {
+    try {
+      await axios.post(`/history/${userId}`);
+      dispatch({
+        type: ADD_HISTORY,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+export function addToFavorites(product) {
+   return {
+    type: ADD_TO_FAVORITES,
+    payload: product,
+  };
+  
+}
+
+export function removeFromFavorites(productId) {
+  return {
+    type: REMOVE_FROM_FAVORITES,
+    payload: productId,
+  };
+}
+
+export function notifyStock(data) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`/notify/stockNotify`, {
+        user_email: data.user_email,
+        stock_id: data.stock_id,
+      });
+      return dispatch({
+        type: NOTIFY_STOCK,
+
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+
 export function postReviews(userComment) {
   console.log(userComment);
   return async function (dispatch) {
     try {
       console.log(userComment);
-      await axios.post(`http://localhost:3001/products/review`, {
+      await axios.post(`/products/review`, {
         userComment,
       });
 
@@ -247,7 +345,7 @@ export function postReviews(userComment) {
 export function getReviews() {
   return async function (dispatch) {
     try {
-      const response = await axios('http://localhost:3001/products/review');
+      const response = await axios('/products/review');
       dispatch({
         type: GET_REVIEWS,
         payload: response.data,
@@ -258,23 +356,6 @@ export function getReviews() {
   };
 }
 
-// export function postReviews(userComment) {
-//   return async function (dispatch) {
-//     try {
-//       const response = await axios.post(
-//         `http://localhost:3001/products/review`,
-//         userComment
-//       );
 
-//       const newReview = response.data; // Supongamos que el backend devuelve la nueva reseña creada
-//       dispatch({
-//         type: POST_REVIEWS,
-//         payload: newReview, // Pasa la nueva reseña al reducer
-//       });
 
-//       alert('Su comentario se envió correctamente');
-//     } catch (error) {
-//       alert(error);
-//     }
-//   };
-// }
+

@@ -32,6 +32,7 @@ const controllGetCart = async (userId) => {
       product,
       size,
       color,
+      cartId: cart.id,
     };
 
     stocksDetails.push(stockWithQuantity);

@@ -1,29 +1,24 @@
-import { Grid, Tabs, Typography } from '@mui/material';
-import {
-  Box,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Alert,
-  useMediaQuery,
-} from '@mui/material';
-import { Link } from 'react-router-dom';
-import SearchBar from '../searchBar/SearchBar';
-import '../searchBar/SearchBar.css';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, getProductsByName } from '../../redux/Actions';
-import { useLocation } from 'react-router-dom';
-import UserIcon from '../../views/login/UserIcon';
-import DrawerComp from './DrawerComp';
+
+import { Grid, Tabs, Typography } from "@mui/material";
+import { Box, AppBar, Toolbar, IconButton, useMediaQuery } from "@mui/material";
+import { Link } from "react-router-dom";
+import SearchBar from "../searchBar/SearchBar";
+import "../searchBar/SearchBar.css";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getProducts, getProductsByName } from "../../redux/Actions";
+import { useLocation } from "react-router-dom";
+import UserIcon from "../../views/login/UserIcon";
+import DrawerComp from "./DrawerComp";
+
 
 export default function NavBar({ links }) {
   const location = useLocation();
   const isProducts = location.pathname === '/products';
   const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.allProducts);
-  const [searchValue, setSearchValue] = useState('');
-  const [ShowNoResultsAlert, setShowNoResultsAlert] = useState(false);
+
+  const [searchValue, setSearchValue] = useState("");
+
 
   useEffect(() => {
     if (searchValue === '') {
@@ -32,10 +27,6 @@ export default function NavBar({ links }) {
       dispatch(getProductsByName(searchValue));
     }
   }, [dispatch, searchValue]);
-
-  useEffect(() => {
-    setShowNoResultsAlert(allProducts.length === 0);
-  }, [allProducts]);
 
   const handlerEventSearch = (event) => {
     event.preventDefault();
@@ -46,10 +37,10 @@ export default function NavBar({ links }) {
     event.preventDefault();
   };
 
-  const isMatch = useMediaQuery('(max-width: 800px)');
-  const isMatchLogo = useMediaQuery('(max-width: 1224px)');
-  const isMatchSearchBar = useMediaQuery('(max-width: 1159px)');
-  const [value, setValue] = useState();
+  const isMatch = useMediaQuery("(max-width: 800px)");
+  const isMatchSearchBar = useMediaQuery("(max-width: 1114px)");
+  const [value, setValue] = useState(0);
+
 
   return (
     <AppBar
@@ -78,17 +69,18 @@ export default function NavBar({ links }) {
               alignItems={'center'}
               gap={'1rem'}
             >
+              <DrawerComp links={links} />
               <IconButton disableRipple>
                 <Link to='/home'>
                   <img
-                    src='src/assets/images/TORTUGA_ROSA_SINFONDO.png'
-                    alt='Cart Icon'
-                    style={{ width: '3.2rem', height: '2.8rem' }}
+
+                    src="src/assets/images/PdM.png"
+                    alt="Cart Icon"
+                    style={{ width: "6rem", height: "3rem" }}
+
                   />
                 </Link>
               </IconButton>
-
-              <DrawerComp links={links} />
             </Box>
           ) : (
             <Grid
@@ -116,6 +108,11 @@ export default function NavBar({ links }) {
                   textColor='inherit'
                   value={value}
                   onChange={(e, val) => setValue(val)}
+                  TabIndicatorProps={{
+                    style: {
+                      backgroundColor: "transparent",
+                    },
+                  }}
                 >
                   <ul
                     style={{
@@ -139,6 +136,7 @@ export default function NavBar({ links }) {
                     <li style={{ margin: ' 1rem' }}>
                       <Link to='/adminAccount'>ADMIN</Link>
                     </li>
+                    <li style={{ margin: " 1rem" }}></li>
                   </ul>
                 </Tabs>
               </Grid>
@@ -146,41 +144,8 @@ export default function NavBar({ links }) {
           )}
         </Box>
         <Box>
-          {isMatchLogo ? (
-            <Grid
-              margin={'auto'}
-              position={'absolute'}
-              visibility={'hidden'}
-            >
-              <IconButton
-                sx={{ width: '8rem', height: '4rem' }}
-                disableRipple
-              >
-                <img
-                  className='img-pdm'
-                  src='src/assets/images/PdM.png' // Reemplaza esta ruta con la ruta correcta hacia la imagen del logo
-                  alt='Cart Icon'
-                  style={{ width: '100%', height: '100%' }}
-                />
-              </IconButton>
-            </Grid>
-          ) : (
-            <Grid margin={'auto'}>
-              <IconButton
-                sx={{ width: '8rem', height: '4rem' }}
-                disableRipple
-              >
-                <img
-                  className='img-pdm'
-                  src='src/assets/images/PdM.png' // Reemplaza esta ruta con la ruta correcta hacia la imagen del logo
-                  alt='Cart Icon'
-                  style={{ width: '100%', height: '100%' }}
-                />
-              </IconButton>
-            </Grid>
-          )}
-        </Box>
-        <Box>
+
+
           <Grid
             display={'flex'}
             marginLeft={'auto'}
@@ -193,28 +158,43 @@ export default function NavBar({ links }) {
                 handlerSubmitSearch={handlerSubmitSearch}
               />
             )}
-            {ShowNoResultsAlert && (
-              <Alert
-                severity='error'
-                className='error-searchBar'
-              >
-                No se encontró el producto
-              </Alert>
-            )}
+
+
             <Box
               display={'flex'}
               justifyContent={'flex-end'}
               marginRight={1}
               gap={'10px'}
             >
-              {/* <Box  sx={{ display: 'flex', alignItems: 'center' }}> */}
+              {" "}
+              <IconButton>
+                <Link to="/fav">
+                  {" "}
+                  <img
+                    src="src/assets/images/Fav.png"
+                    alt="Fav Icon"
+                    style={{
+                      width: "3rem",
+                      height: "3.2rem",
+                      marginRight: "0.1rem",
+                    }}
+                  />
+                </Link>
+              </IconButton>
               <IconButton>
                 <Link to='/Cart'>
                   {' '}
                   <img
-                    src='src/assets/images/Cart.png'
-                    alt='Cart Icon'
-                    style={{ width: '3.2rem', height: '3.2rem' }}
+
+                    src="src/assets/images/Cart.png"
+                    alt="Cart Icon"
+                    style={{
+                      width: "3.5rem",
+                      height: "3.5rem",
+                      marginRight: "0rem",
+                      margin: "-0.1rem",
+                    }}
+
                   />
                 </Link>
               </IconButton>

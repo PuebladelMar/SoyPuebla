@@ -10,6 +10,7 @@ export default function Customer() {
   return (
     <div className="customer-container">
       <h1>Preguntas Frecuentes</h1>
+      <span className="customer-text-underline"></span>
       <div className="accordion-container">
         <Accordion className="accordion">
           <AccordionSummary
@@ -25,12 +26,12 @@ export default function Customer() {
           <AccordionDetails>
             <Typography>
               Las compras se realizan por nuestro e-commerce. Y puedes elegir la{" "}
-              <a href="/link-envio" className="link">
+              <a href="/shipment" className="link">
                 forma de envío
               </a>{" "}
               o retirar por el punto más cercano. Para comprar, eliges tus
               productos, los seleccionas y desde el carrito de compras eliges la{" "}
-              <a href="/link-pago" className="link">
+              <a href="/payMethods" className="link">
                 forma de pago.
               </a>
             </Typography>
@@ -71,7 +72,7 @@ export default function Customer() {
               Lo primero que te sugerimos es que tomes tus medidas para poder
               tener una referencia real sobre tu cuerpo. Y a partir de esas
               medidas te guíes por nuestra{" "}
-              <a href="/link-talles" className="link">
+              <a href="/size-chart" className="link">
                 tabla de talles
               </a>
               .
