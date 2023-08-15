@@ -16,6 +16,7 @@ const getSize = require('../handlers/Products/getSize');
 const postReview = require("../handlers/Reviews/postReviews");
 const getReviewsById = require("../handlers/Reviews/getReviewsById");
 const putProducts = require('../handlers/Products/putProducts');
+const getReviews = require('../handlers/Reviews/getReviews')
 
 const productsRouter = Router();
 
@@ -37,6 +38,8 @@ productsRouter.post("/category", postCategory);
 
 productsRouter.post("/series", postSerie);
 
+productsRouter.get("/review", getReviews);
+
 productsRouter.post("/review", postReview);
 
 productsRouter.put("/:id", putProducts);
@@ -52,5 +55,6 @@ productsRouter.delete("/series/:id", deleteSeries);
 productsRouter.get("/review/:id", getReviewsById);
 
 productsRouter.get("/:id", getProductsById);
+
 
 module.exports = productsRouter
