@@ -5,7 +5,7 @@ import "./CreateDetail.css";
 
 const CreateDetail = ({
   nombre,
-  imagen,
+  imagenes,
   precio,
   serie,
   color,
@@ -14,41 +14,33 @@ const CreateDetail = ({
   description,
 }) => {
 
-  let images = [
-    {
-      original: "https://picsum.photos/id/1018/1000/600/",
-      thumbnail: "https://picsum.photos/id/1018/250/150/",
-    },
-    {
-      original: "https://picsum.photos/id/1015/1000/600/",
-      thumbnail: "https://picsum.photos/id/1015/250/150/",
-    },
-    {
-      original: "https://picsum.photos/id/1019/1000/600/",
-      thumbnail: "https://picsum.photos/id/1019/250/150/",
-    },
-    {
-      original: imagen,
-      thumbnail: imagen,
-    },
-  ];
+  if(imagenes === null){
+    imagenes = [];
+  } 
 
-
-
+  let formattedImages = imagenes.map((url) => ({
+    original: url,
+    thumbnail: url,
+  }));
 
   return (
     <section className="containerDetailCreate">
-
-
       <container className="secContainerCreate">
         <div>
-          {imagen ? (
-            <img className="cardImgDetailCreate" src={imagen} alt="Uploaded" />
-          ) : (
+      {console.log(imagenes)}
+          {imagenes == false ? (
             <img
               className="cardImgDetailCreate"
               src={ImgCarga}
               alt="Cargar Imagen"
+            />
+          ) : (
+            <ImageGallery
+              items={formattedImages}
+              className="image-gallery-icon"
+              thumbnailPosition="left"
+              showFullscreenButton={false}
+              showPlayButton={false}
             />
           )}
         </div>
@@ -130,16 +122,6 @@ const CreateDetail = ({
           )}
         </div>
       </container>
-
-      <ImageGallery 
-      items={images} 
-      className="image-gallery-icon" 
-      thumbnailPosition="left"
-      showFullscreenButton={false}
-      showPlayButton={false}
-      
-      /> 
-
     </section>
   );
 };
