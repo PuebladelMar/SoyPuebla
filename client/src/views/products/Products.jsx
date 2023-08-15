@@ -47,7 +47,7 @@ function Products() {
     const { name, value } = event.target;
     const nullOptions = [
       "null",
-      "Todas las categorías",
+      "Todas las categorias",
       "Todos los colores",
       "Todos las tallas",
       "Todos las series",
