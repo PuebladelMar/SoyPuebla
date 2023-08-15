@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { addToCar, sendMail, notifyStock } from "../../redux/Actions";
 import { useSelector, useDispatch } from "react-redux";
+import Reviews from "../.././componentes/reviews/Reviews";
+import ReviewsForm from "../../componentes/reviews/ReviewsForm";
+import { getReviews } from "../../redux/Actions";
 import "./Detail.css";
 
 const Detail = () => {
@@ -11,22 +14,26 @@ const Detail = () => {
 
   const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
+  console.log(userId);
 
   const [productDetails, setProductDetails] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [isReady, setIsReady] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   //Aplicar el Loading
+  useEffect(() => {
+    dispatch(getReviews());
+  }, [dispatch]);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const response = await axios.get(
-          `/products/${id}`
-        );
+        const response = await axios.get(`/products/${id}`);
         setProductDetails(response.data);
+        setIsReady(true);
       } catch (error) {
         window.alert(error);
       }
@@ -89,7 +96,6 @@ const Detail = () => {
     return regex.test(email);
   };
 
-
   const notifyStockByMail = () => {
     if (!isValidEmail(email)) {
       alert("Ingresa un correo valido");
@@ -97,10 +103,10 @@ const Detail = () => {
     }
 
     let data = {
-      user_email : email,
-      stock_id : selectedCombination.stockId
-    } 
-    
+      user_email: email,
+      stock_id: selectedCombination.stockId,
+    };
+
     dispatch(notifyStock(data));
     setIsSubscribed(true);
   };
@@ -273,6 +279,21 @@ const Detail = () => {
           </Link>
         </div>
       </div>
+      {isReady && (
+        <div>
+        <Reviews />
+        {userId.length > 0 ? (
+          <ReviewsForm productId={productDetails[0].id}/>
+        ) : (
+          <div>
+            <Link to="https://worthy-insect-17.accounts.dev/sign-in">
+            <button>Inicia sesion</button>
+            </Link>
+          </div>
+        )}
+         
+      </div>
+      )}
     </div>
   );
 };

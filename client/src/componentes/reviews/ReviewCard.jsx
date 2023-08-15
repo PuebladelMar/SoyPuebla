@@ -1,22 +1,17 @@
 // import { NavLink } from 'react-router-dom';
-import React from 'react';
+import "./ReviewCard.css"
 
-export default function ReviewCard({
-  userId,
-  description,
-  score,
-  title,
-  productId,
-}) {
+export default function ReviewCard({ score, description, fullName }) {
+  console.log(fullName);
   return (
     // <Link to={`/reviews/${id}`}>
-    <div>
+    <div className="container">
       <div>
-        <p>{title}</p>
-        <p>{userId}</p>
-        <p>{description}</p>
-        <p>{score}</p>
-        <p>{productId}</p>
+        <h1>{fullName}</h1>
+        <h2>Valoracion</h2>
+        <span>{score}</span>
+        <h2>Descripcion</h2>
+        <span>{description}</span>
       </div>
     </div>
     // </Link>
