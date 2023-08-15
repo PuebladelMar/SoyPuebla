@@ -13,10 +13,6 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("1", "2", "3", "4", "5"),
         allowNull: false,
       },
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       userId: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -26,13 +22,9 @@ module.exports = (sequelize) => {
         allowNull: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      username: {
+      fullName: {
         type: DataTypes.STRING,
-        allowNull: true,
-      },
-      profileImage: {
-        type: DataTypes.TEXT,
-        allowNull: true,
+        allowNull: false,
       },
       description: {
         type: DataTypes.TEXT,

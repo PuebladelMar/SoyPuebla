@@ -13,12 +13,8 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      username: {
+      fullName: {
         type: DataTypes.STRING,
-        allowNull: true,
-      },
-      profileImage: {
-        type: DataTypes.TEXT,
         allowNull: true,
       },
     },

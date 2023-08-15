@@ -140,7 +140,6 @@ function rootReducer(state = initialState, action) {
         ...state,
       };
     case POST_REVIEWS:
-      console.log(action.payload.userComment);
       return {
         ...state,
         reviews: [...state.reviews, action.payload],

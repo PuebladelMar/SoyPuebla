@@ -180,14 +180,13 @@ export function getUsers() {
   };
 }
 
-export function postUsers(userClerkId, user, username, profileImage) {
+export function postUsers(userClerkId, user, fullName) {
   return async function (dispatch) {
     try {
       const response = await axios.post(`/users/`, {
         clerkId: userClerkId,
         user: user,
-        username: username,
-        profileImage: profileImage,
+        fullName: fullName,
       });
       return dispatch({
         type: POST_USERS,
@@ -324,7 +323,6 @@ export function notifyStock(data) {
   };
 }
 
-
 export function postReviews(userComment) {
   console.log(userComment);
   return async function (dispatch) {
@@ -337,7 +335,7 @@ export function postReviews(userComment) {
       alert('Su comentario se envió correctamente');
       return dispatch({
         type: POST_REVIEWS,
-        payload: { userComment },
+        payload: userComment ,
       });
     } catch (error) {
       alert(error);
