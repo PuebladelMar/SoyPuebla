@@ -20,7 +20,6 @@ import {
   ADD_HISTORY,
   ADD_TO_FAVORITES, 
   REMOVE_FROM_FAVORITES,
-  GET_ALL_FAV,
   NOTIFY_STOCK,
   POST_REVIEWS,
   GET_REVIEWS
@@ -290,57 +289,18 @@ export function addHistory(userId) {
   };
 }
 
-export function addToFavorites(userId, productId) {
-  return async function (dispatch) {
-    try {
-     await axios.post(`http://localhost:3001/cart/fav/`, {
-  userId,
-  productId
-})
-      dispatch({
-        type: ADD_TO_FAVORITES,
-        payload: productId,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
+export function addToFavorites(product) {
+   return {
+    type: ADD_TO_FAVORITES,
+    payload: product,
   };
+  
 }
 
-
-export function removeFromFavorites(userId, productId ) {
-  console.log(userId)
-  console.log(productId)
-  return async function(dispatch) {
-    try {
-      const response = await axios.delete(`http://localhost:3001/cart/fav/`, {
-        data: {
-          userId,
-          productId,
-        }
-      });
-      dispatch({
-        type: REMOVE_FROM_FAVORITES,
-        payload: response.data,
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-}
-
-
-export function getAllFav(userId) {
-  return async function (dispatch) {
-    try {
-      const response = await axios(`http://localhost:3001/cart/fav/${userId}`);
-      dispatch({
-        type: GET_ALL_FAV,
-        payload: response.data,
-      });
-    } catch (error) {
-      alert("Error al obtener usuarios");
-    }
+export function removeFromFavorites(productId) {
+  return {
+    type: REMOVE_FROM_FAVORITES,
+    payload: productId,
   };
 }
 
@@ -394,4 +354,7 @@ export function getReviews() {
     }
   };
 }
+
+
+
 
