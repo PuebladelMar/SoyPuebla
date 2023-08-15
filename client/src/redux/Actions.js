@@ -239,11 +239,11 @@ export function deleteCart(id) {
   };
 }
 
-export function deleteCartUser(id) {
+export function deleteCartUser(id, sale) {
   return async function (dispatch) {
     try {
       const response = await axios.delete(
-        `http://localhost:3001/cart/user/${id}`
+        `http://localhost:3001/cart/user?id=${id}&&sale=${sale}`
       );
       dispatch({
         type: DELETE_CART_USER,
