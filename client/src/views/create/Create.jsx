@@ -10,6 +10,7 @@ import {
 } from "../../redux/Actions";
 import validations from "./Validations";
 import UploadWidget from "../../componentes/imageUpload/imageUpload";
+import MutipleUploadWidget from "../../componentes/multipleImageUpload/multipleImageUpload";
 import CreateDetail from "./createDetail/CreateDetail";
 
 const Create = () => {
@@ -24,12 +25,22 @@ const Create = () => {
 
   const handleUpload = (singleUrl) => {
     setUploadedSecureUrl(singleUrl); 
+    // preventDefault();
     setCreateProduct((prevState) => ({
       ...prevState,
       mainImage: singleUrl, 
     }))
   };
 
+    const [uploadedMultipleUrls, setUploadedMultipleUrls] = useState([]);
+  
+    const handleMultipleUpload = (urls) => {
+      setUploadedMultipleUrls(urls);
+      // preventDefault();
+    };
+
+
+    const combinedImagesUrls = [uploadedSecureUrl].concat(uploadedMultipleUrls);
 
 
   const [createProduct, setCreateProduct] = useState({
@@ -264,7 +275,12 @@ const Create = () => {
 
 
           <label htmlFor="mainImage">Imagen Principal: </label>
-          <UploadWidget onUpload={handleUpload} />
+
+     
+          <UploadWidget onUpload={handleUpload}  />
+
+
+       
           {/* <textarea
             type="text"
             name="mainImage"
@@ -276,17 +292,36 @@ const Create = () => {
           />
           <p className="error">{errors.mainImage}</p> */}
 
-        
+       
 
-          <label htmlFor="image">Imagen: </label>
-          <input
+        {uploadedSecureUrl === null
+
+        ? (
+        <div>
+        <label htmlFor="image">Imagenes complementarias: </label>
+        <br />
+        <br />
+        
+        </div>
+        )
+
+        : ( 
+        <div>        
+        <label htmlFor="image">Imagenes complementarias: </label>
+        <MutipleUploadWidget onMultipleUpload={handleMultipleUpload}/>
+        </div>
+        
+        )}
+         
+
+          {/* <input
             type="text"
             name="image"
             value={createProduct.image}
             placeholder="Imagen"
             className="custom-input"
             onChange={handleChange}
-          />
+          /> */}
 
        
 
@@ -467,7 +502,7 @@ const Create = () => {
       <div>
         <CreateDetail
           nombre={createProduct.name}
-          imagen={uploadedSecureUrl}
+          imagenes={combinedImagesUrls}
           precio={createProduct.price}
           serie={createProduct.series}
           color={getColorHexCodes()}
