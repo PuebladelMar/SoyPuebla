@@ -236,6 +236,7 @@ const Detail = () => {
                   onClick={() => {
                     handleAddToCart();
                   }}
+                  disabled={userId.length === 0 || !selectedCombination}
                 >
                   Añadir al carrito{" "}
                 </button>
