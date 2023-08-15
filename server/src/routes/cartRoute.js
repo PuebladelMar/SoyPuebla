@@ -7,9 +7,9 @@ const cartRouter = Router();
 
 cartRouter.post("/", postCart);
 
-cartRouter.delete("/:id", deleteCart)
+cartRouter.delete("/user", deleteCartUser);
 
-cartRouter.delete("/user/:id", deleteCartUser)
+cartRouter.delete("/:id", deleteCart);
 
 cartRouter.get("/:id", getCart);
 

@@ -1,5 +1,5 @@
 import {
-  POST_ALL_COLOR,
+  GET_ALL_COLOR,
   GET_PRODUCTS,
   POST_PRODUCTS,
   GET_ALL_SIZES,
@@ -19,10 +19,9 @@ import {
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES,
   NOTIFY_STOCK,
-   POST_REVIEWS,
-  GET_REVIEWS
+  POST_REVIEWS,
+  GET_REVIEWS,
 } from "./ActionsTypes";
-
 
 let initialState = {
   allProducts: [],
@@ -34,12 +33,11 @@ let initialState = {
   userId: [],
   userCart: [],
   deleteCartUser: [],
-  deleteCart:[],
+  deleteCart: [],
   favorites: [],
-     reviews: [],
-  allReviews: [],
-
+  reviews: [],
 };
+
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
@@ -64,7 +62,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         // allProducts: [...state.allProducts, action.payload],
       };
-    case POST_ALL_COLOR:
+    case GET_ALL_COLOR:
       return {
         ...state,
         colorList: action.payload,
@@ -113,24 +111,26 @@ function rootReducer(state = initialState, action) {
         deleteCartUser: action.payload,
       };
     case DELETE_CART:
-        return {
-            ...state,
-            deleteCart: action.payload,
-          };
+      return {
+        ...state,
+        deleteCart: action.payload,
+      };
     case SEND_MAIL:
-        return {
-          ...state,
-        }
-        case ADD_TO_FAVORITES:
-        return {
+      return {
+        ...state,
+      };
+    case ADD_TO_FAVORITES:
+      return {
         ...state,
         favorites: [...state.favorites, action.payload],
       };
     case REMOVE_FROM_FAVORITES:
-        return {
+      return {
         ...state,
-        favorites: state.favorites.filter(product => product.id !== action.payload),
-        }
+        favorites: state.favorites.filter(
+          (product) => product.id !== action.payload
+        ),
+      };
     case SEND_MAIL:
       return {
         ...state,
@@ -139,17 +139,16 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-        case POST_REVIEWS:
-      console.log(action.payload);
+    case POST_REVIEWS:
       return {
         ...state,
         reviews: [...state.reviews, action.payload],
       };
-      case GET_REVIEWS:
-        return {
-          ...state,
-        reviews: action.payload
-        };
+    case GET_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
+      };
 
     default:
       return state;

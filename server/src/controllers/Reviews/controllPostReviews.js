@@ -1,23 +1,17 @@
-const { Reviews } = require('../../db');
+const { Reviews } = require("../../db");
 
 const controllPostReviews = async (req) => {
-  try {
-    const { score, userId, description, title, productId } =
-      req.body.userComment;
-    console.log(req.body.userComment);
+  const { score, userId, description, productId, fullName } = req.body;
+  console.log(fullName);
+  const newReview = await Reviews.create({
+    score: score,
+    userId: userId,
+    fullName: fullName,
+    description: description,
+    productId: productId,
+  });
 
-    const newReview = await Reviews.create({
-      title,
-      score,
-      userId,
-      description,
-      productId,
-    });
-
-    return newReview;
-  } catch (error) {
-    throw new Error('Error al crear la reseña: ' + error.message);
-  }
+  return newReview;
 };
 
 module.exports = controllPostReviews;
