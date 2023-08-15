@@ -23,6 +23,7 @@ import PaymentMethodsView from "./views/paymentMethods/paymentMethods";
 import Favorites from "./views/favs/Favorites";
 import History from "./views/history/History";
 import Shipment from "./views/shipment/shipment";
+import CreateCategory from "./views/create/createCategory/createCategory";
 axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
         <Route path="/payMethods" element={<PaymentMethodsView />} />
         <Route path="/history" element={<History />} />
         <Route path="/shipment" element={<Shipment />} />
+        <Route path="/create-category" element={<CreateCategory />} />
       </Routes>
       {pathname !== "/" && <Footer />}
     </div>
