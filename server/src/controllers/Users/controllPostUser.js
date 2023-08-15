@@ -2,11 +2,13 @@ const { Users } = require("../../db.js");
 const { sendRegisterMailNotify } = require ("../../controllers/NodeMailer/controllerNodeMailer");
 
 const controllPostUser = async (req) => { 
-  const { clerkId, user } = req.body;
+  const { clerkId, user, username, profileImage } = req.body;
 
   const [newUser, created] = await Users.findOrCreate({
     where: {
-      clerkId,
+      clerkId: clerkId,
+      username: username,
+      profileImage: profileImage,
     },
   });
 

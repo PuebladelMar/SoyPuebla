@@ -7,7 +7,9 @@ function ReviewsForm() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userId);
   const allProducts = useSelector((state) => state.allProducts);
-  // const title = allProducts.name;
+  const allUsers = useSelector((state) => state.allUsers);
+
+  console.log(allUsers);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -19,6 +21,9 @@ function ReviewsForm() {
     userId: userId,
     description: '',
     productId: '',
+    username: allUsers.user.username,
+    fullName: allUsers.user.username,
+    profileImage: allUsers.user.profileImage,
   });
 
   const handleChange = (event) => {

@@ -1,8 +1,7 @@
-const controllPostReviews = require("../../controllers/Reviews/controllGetReviews");
+const controllPostReviews = require("../../controllers/Reviews/controllPostReviews");
 
 
 const postReview = async (req, res) => {
-  console.log(req);
   try {
     const newReview = await controllPostReviews(req);
     res.status(201).json([newReview]);
