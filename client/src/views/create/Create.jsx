@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import {
   postProducts,
-  postColor,
+  getColor,
   getSizes,
   getCategories,
   getSeries,
@@ -64,7 +64,7 @@ const Create = () => {
     }
 
     if (!color.length) {
-      dispatch(postColor());
+      dispatch(getColor());
     }
   }, [dispatch, color, createProduct]);
 

@@ -89,7 +89,7 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
   }, []);
 
   useEffect(() => {
-    dispatch(actions.postColor());
+    dispatch(actions.getColor());
     dispatch(actions.getSeries());
     dispatch(actions.getCategories());
     dispatch(actions.getSizes());

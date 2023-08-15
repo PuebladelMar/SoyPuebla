@@ -1,5 +1,5 @@
 import {
-  POST_ALL_COLOR,
+  GET_ALL_COLOR,
   GET_PRODUCTS,
   POST_PRODUCTS,
   GET_ALL_SIZES,
@@ -64,7 +64,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         // allProducts: [...state.allProducts, action.payload],
       };
-    case POST_ALL_COLOR:
+    case GET_ALL_COLOR:
       return {
         ...state,
         colorList: action.payload,
