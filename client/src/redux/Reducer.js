@@ -18,6 +18,7 @@ import {
   DELETE_CART_USER,
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES,
+  GET_ALL_FAV,
 } from "./ActionsTypes";
 
 let initialState = {
@@ -127,6 +128,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+      case GET_ALL_FAV:
+        return {
+          ...state,
+          favorites: action.payload,
+        };
     default:
       return state;
   }

@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { filterProducts } from "../../redux/Actions";
+import {
+  getProducts,
+  getProductsByName,
+  filterProducts,
+} from "../../redux/Actions";
 import CardContainer from "../../componentes/cardContainer/CardContainer";
 import SideBar from "../../componentes/sidebar/SideBar";
 import "./Products.css";
@@ -8,6 +12,10 @@ import "./Products.css";
 function Products() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
+
+  const [searchValue, setSearchValue] = useState();
+  const [apllyFilters, setApllyFilters] = useState({});
+  const [ShowNoResultsAlert, setShowNoResultsAlert] = useState(false);
   const [filters, setFilters] = useState({
     color: null,
     size: null,
@@ -20,6 +28,7 @@ function Products() {
     name: null,
   });
 
+  //Logica del paginado
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
@@ -36,11 +45,30 @@ function Products() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [filters]);
+  }, [filters, searchValue]);
+
+  useEffect(() => {
+    !searchValue
+      ? dispatch(getProducts())
+      : dispatch(getProductsByName(searchValue));
+  }, [dispatch, searchValue]);
 
   useEffect(() => {
     dispatch(filterProducts(filters));
-  }, [filters, dispatch]);
+  }, [filters]);
+
+  useEffect(() => {
+    setShowNoResultsAlert(allProducts.length === 0);
+  }, [allProducts]);
+
+  const handlerEventSearch = (event) => {
+    event.preventDefault();
+    setSearchValue(event.target.value);
+  };
+
+  const handlerSubmitSearch = (event) => {
+    event.preventDefault();
+  };
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -78,14 +106,14 @@ function Products() {
 
   return (
     <section className="products-section">
-      <div className="products-container">
+      <container className="products-container">
         <SideBar
           handlerEventSideBar={handleChange}
           resetFilters={resetFilters}
         />
-        <div className="cards-container">
+        <container className="cards-container">
           <CardContainer products={itemsToShow} />
-          <div className="paginated-container">
+          <container className="paginated-container">
             <button
               className={
                 currentPage === 1
@@ -123,9 +151,9 @@ function Products() {
             >
               &#10095;
             </button>
-          </div>
-        </div>
-      </div>
+          </container>
+        </container>
+      </container>
     </section>
   );
 }
