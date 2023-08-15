@@ -12,6 +12,7 @@ import validations from "./Validations";
 import UploadWidget from "../../componentes/imageUpload/imageUpload";
 import MutipleUploadWidget from "../../componentes/multipleImageUpload/multipleImageUpload";
 import CreateDetail from "./createDetail/CreateDetail";
+import { ChromePicker } from 'react-color';
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -41,6 +42,17 @@ const Create = () => {
 
 
     const combinedImagesUrls = [uploadedSecureUrl].concat(uploadedMultipleUrls);
+
+   
+      const [colorSelect, setColorSelect] = useState('#ffffff'); // Estado para el color actual
+      const [hexColor, setHexColor] = useState('#ffffff'); // Estado para el valor HEX del color
+    
+      // Maneja el cambio completo del color
+      const handleColorChangeComplete = (newColor) => {
+        setColorSelect(newColor.rgb);
+        setHexColor(newColor.hex);
+      };
+
 
 
   const [createProduct, setCreateProduct] = useState({
@@ -341,6 +353,21 @@ const Create = () => {
           </select>
 
           <label htmlFor="color">Color: </label>
+
+
+          <div>
+      <ChromePicker
+        color={colorSelect}
+        onChangeComplete={handleColorChangeComplete}
+        disableAlpha={true}
+      />
+
+      <div>
+        <p>Color seleccionado: {hexColor}</p>
+      </div>
+    </div>
+
+
           <select
             name="color"
             placeholder="Colores"
@@ -360,6 +387,8 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.color}</p>
+
+
 
           <div>
             {createProduct.color.length > 0 ? (
