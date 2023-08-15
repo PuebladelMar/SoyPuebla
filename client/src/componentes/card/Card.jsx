@@ -31,7 +31,7 @@ export default function Cardx({ product }) {
       setProductDetails(favProducts);
     } else {
       dispatch(addToFavorites(userId,product.id));  
-      
+      dispatch(getAllFav(userId));
     }
   };
 
