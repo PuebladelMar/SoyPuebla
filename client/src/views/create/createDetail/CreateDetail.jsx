@@ -1,9 +1,11 @@
+import ImageGallery from "react-image-gallery";
+import "../../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 import ImgCarga from "../../../assets/images/Carga imagen.png";
 import "./CreateDetail.css";
 
 const CreateDetail = ({
   nombre,
-  imagen,
+  imagenes,
   precio,
   serie,
   color,
@@ -11,17 +13,31 @@ const CreateDetail = ({
   category,
   description,
 }) => {
+
+
+  let formattedImages = imagenes.map((url) => ({
+    original: url,
+    thumbnail: url,
+  }));
+
   return (
     <section className="containerDetailCreate">
       <container className="secContainerCreate">
         <div>
-          {imagen ? (
-            <img className="cardImgDetailCreate" src={imagen} alt="Uploaded" />
-          ) : (
+      {console.log(imagenes)}
+          {imagenes == false ? (
             <img
               className="cardImgDetailCreate"
               src={ImgCarga}
               alt="Cargar Imagen"
+            />
+          ) : (
+            <ImageGallery
+              items={formattedImages}
+              className="image-gallery-icon"
+              thumbnailPosition="left"
+              showFullscreenButton={false}
+              showPlayButton={false}
             />
           )}
         </div>

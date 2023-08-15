@@ -12,67 +12,59 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import "./Reviews.css";
+import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import ReviewCard from "./ReviewCard";
+// import { getReviews } from "../../redux/Actions";
+// import { postUsers } from '../../redux/Actions';
+// import ReviewsForm from './ReviewsForm'
 
-function Reviews() {
+function Reviews({ productId }) {
+  const reviews = useSelector((state) => state.reviews);
+  // const dispatch = useDispatch();
+  // console.log(reviews);
+  // useEffect(() => {
+  //   dispatch(getReviews());
+  // }, [dispatch]);
+  console.log(reviews);
+
   return (
     <div>
-      <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-        spaceBetween={50}
-        slidesPerView={1}
-        navigation
-        pagination={{ clickable: true }}
-        className="swiperFooter"
-        breakpoints={{
-          500: {
-            slidesPerView: 2,
-          },
-        }}
-      >
-        <SwiperSlide className="swiperSlide">
-          <img
-            className="imagen"
-            src="/src/assets/images/imagesReseñas/mujer.jpeg"
-            alt="Imagen 1"
-          />
-          <div className="review">
-            <h2 className="th3">Nombre:</h2>
-            <h3 className="th3">Producto 1</h3>
-            <p className="parrafo">Esta es una reseña sobre el producto 1.</p>
-            <div className="stars">⭐⭐⭐⭐⭐</div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="swiperSlide">
-          <img
-            className="imagen"
-            src="/src/assets/images/imagesReseñas/mujer2.png"
-            alt="Imagen 2"
-          />
-          <div className="review">
-            <h2 className="th3">Nombre:</h2>
-            <h3 className="th3">Producto 2</h3>
-            <p className="parrafo">
-              Lorem, ipsum dolor sit amet itecto ipsam impedit voluptatibus
-              atque vitae necessitatibus qui aliquid quae, eos eaque velit
-              eligendi pariatur?
-            </p>
-            <div className="stars">⭐⭐⭐⭐</div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="swiperSlide">
-          <img
-            className="imagen"
-            src="/src/assets/images/imagesReseñas/mujer3.jpeg"
-            alt="Imagen 3"
-          />
-          <div className="review">
-            <h2 className="th3">Nombre:</h2>
-            <h3 className="th3">Producto 3</h3>
-            <p className="parrafo">Esta es una reseña sobre el producto 3.</p>
-            <div className="stars">⭐⭐⭐</div>
-          </div>
-        </SwiperSlide>
-      </Swiper>
+      <div className="review">
+        {reviews.length > 0 ? (
+          reviews.map((re) => (
+            <ReviewCard
+              key={re.id}
+              title={re.title}
+              score={re.score}
+              fullName={re.fullName}
+              description={re.description}
+              productId={productId}
+            />
+          ))
+        ) : (
+          <p>No hay reseñas disponibles.</p>
+        )}
+      </div>
+
+      {/* <div className="btn-container">
+        <div className="btn-container2">
+          <NavLink to="/products/reviews">
+            <button>Dejanos tu comentario!</button>
+          </NavLink>
+        </div>
+        <div></div>
+        {userId.length === 0 ? (
+          <NavLink to='/create'>
+            <button>Debes Iniciar sesion</button>
+          </NavLink>
+        ) : (
+          <NavLink to='/review'>
+            <button>Enviar comentario</button>
+          </NavLink>
+        )}
+      </div> */}
     </div>
   );
 }

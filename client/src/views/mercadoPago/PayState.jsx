@@ -18,7 +18,7 @@ function PayState() {
       const asyncFunc = async () => {
         if (userId.length) {
           await dispatch(addHistory(userId));
-          await dispatch(deleteCartUser(userId));
+          await dispatch(deleteCartUser(userId, true));
         }
       };
       asyncFunc();

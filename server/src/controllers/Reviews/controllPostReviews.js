@@ -1,18 +1,14 @@
-const { Reviews, ProductReviews } = require("../../db");
+const { Reviews } = require("../../db");
 
 const controllPostReviews = async (req) => {
-  const { score, title, userId, productId, description } = req.body;
-
+  const { score, userId, description, productId, fullName } = req.body;
+  console.log(fullName);
   const newReview = await Reviews.create({
-    score,
-    title,
-    userId,
-    productId,
-    description,
-  });
-  const newProdutcReview = await ProductReviews.create({
-    ProductId: productId,
-    ReviewId: newReview.id,
+    score: score,
+    userId: userId,
+    fullName: fullName,
+    description: description,
+    productId: productId,
   });
 
   return newReview;

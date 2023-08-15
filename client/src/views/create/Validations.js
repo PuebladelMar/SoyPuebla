@@ -26,7 +26,8 @@ const validations = (createProduct) => {
   if (
     !createProduct.mainImage ||
     !createProduct.mainImage.match(
-      /(http[s]*:\/\/)([a-z\-_0-9/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_/._~:?#[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png|gif)/i
+      /^https?:\/\/[^ ]+\.(?:png|jpg|jpeg|gif|svg)(\?[^ ]*)?$/i
+      // /(http[s]*:\/\/)([a-z\-_0-9/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_/._~:?#[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png|gif)/i
     )
   ) {
     errors.mainImage = "Invalid image, must be a URL";

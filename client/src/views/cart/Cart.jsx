@@ -63,12 +63,11 @@ const Cart = () => {
   };
 
   const deleteAllCart = async () => {
-    await dispatch(deleteCartUser(userId));
+    await dispatch(deleteCartUser(userId, false));
     await dispatch(getUserCart(userId));
   };
 
   const handlerDeleteCart = async (itemId) => {
-    console.log(itemId);
     await dispatch(deleteCart(itemId));
     await dispatch(getUserCart(userId));
   };
