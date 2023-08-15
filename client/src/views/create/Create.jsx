@@ -10,6 +10,7 @@ import {
 } from "../../redux/Actions";
 import validations from "./Validations";
 import UploadWidget from "../../componentes/imageUpload/imageUpload";
+import MutipleUploadWidget from "../../componentes/multipleImageUpload/multipleImageUpload";
 import CreateDetail from "./createDetail/CreateDetail";
 
 const Create = () => {
@@ -22,9 +23,25 @@ const Create = () => {
 
   const [uploadedSecureUrl, setUploadedSecureUrl] = useState(null);
 
-  const handleUpload = (secureUrl) => {
-    setUploadedSecureUrl(secureUrl);
+  const handleUpload = (singleUrl) => {
+    setUploadedSecureUrl(singleUrl); 
+    // preventDefault();
+    setCreateProduct((prevState) => ({
+      ...prevState,
+      mainImage: singleUrl, 
+    }))
   };
+
+    const [uploadedMultipleUrls, setUploadedMultipleUrls] = useState([]);
+  
+    const handleMultipleUpload = (urls) => {
+      setUploadedMultipleUrls(urls);
+      // preventDefault();
+    };
+
+
+    const combinedImagesUrls = [uploadedSecureUrl].concat(uploadedMultipleUrls);
+
 
   const [createProduct, setCreateProduct] = useState({
     name: "",
@@ -38,6 +55,8 @@ const Create = () => {
     series: [],
     category: [],
   });
+
+
 
   useEffect(() => {
     if (validations(createProduct)) {
@@ -253,10 +272,16 @@ const Create = () => {
           />
           <p className="error">{errors.price}</p>
 
-          <UploadWidget onUpload={handleUpload} />
+
 
           <label htmlFor="mainImage">Imagen Principal: </label>
-          <textarea
+
+     
+          <UploadWidget onUpload={handleUpload}  />
+
+
+       
+          {/* <textarea
             type="text"
             name="mainImage"
             value={uploadedSecureUrl}
@@ -265,17 +290,40 @@ const Create = () => {
             className="custom-textarea"
             onChange={handleChange}
           />
-          <p className="error">{errors.mainImage}</p>
+          <p className="error">{errors.mainImage}</p> */}
 
-          <label htmlFor="image">Imagen: </label>
-          <input
-            type="json"
+       
+
+        {uploadedSecureUrl === null
+
+        ? (
+        <div>
+        <label htmlFor="image">Imagenes complementarias: </label>
+        <br />
+        <br />
+        
+        </div>
+        )
+
+        : ( 
+        <div>        
+        <label htmlFor="image">Imagenes complementarias: </label>
+        <MutipleUploadWidget onMultipleUpload={handleMultipleUpload}/>
+        </div>
+        
+        )}
+         
+
+          {/* <input
+            type="text"
             name="image"
             value={createProduct.image}
             placeholder="Imagen"
             className="custom-input"
             onChange={handleChange}
-          />
+          /> */}
+
+       
 
           <label htmlFor="sale">Oferta: </label>
           <select
@@ -454,7 +502,7 @@ const Create = () => {
       <div>
         <CreateDetail
           nombre={createProduct.name}
-          imagen={uploadedSecureUrl}
+          imagenes={combinedImagesUrls}
           precio={createProduct.price}
           serie={createProduct.series}
           color={getColorHexCodes()}

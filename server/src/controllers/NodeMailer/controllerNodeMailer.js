@@ -1,3 +1,4 @@
+
 const nodemailer = require("nodemailer");
 const emailApiKey = "tzxlsdlrobbymssj";
 
@@ -54,3 +55,4 @@ const sendStockNotification = async (emailsUsers) => {
 };
 
 module.exports = { controllerNodeMailer, sendRegisterMailNotify, sendStockNotification };
+

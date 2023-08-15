@@ -1,8 +1,8 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Reviews",
+    'Reviews',
     {
       id: {
         type: DataTypes.UUID,
@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
       },
       score: {
-        type: DataTypes.ENUM("1", "2", "3", "4", "5"),
+        type: DataTypes.ENUM('1', '2', '3', '4', '5'),
         allowNull: false,
       },
       title: {
@@ -24,19 +24,22 @@ module.exports = (sequelize) => {
       productId: {
         type: DataTypes.STRING,
         allowNull: false,
+        type: DataTypes.UUID,
+
+        defaultValue: DataTypes.UUIDV4,
       },
       description: {
         type: DataTypes.TEXT,
         allowNull: false,
         set(value) {
-          if (typeof value !== "string") {
-            throw new Error("La descripción debe ser una cadena de texto.");
+          if (typeof value !== 'string') {
+            throw new Error('La descripción debe ser una cadena de texto.');
           }
-          const words = value.toLowerCase().split(" ");
+          const words = value.toLowerCase().split(' ');
           const wordFixed = words
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ");
-          this.setDataValue("description", wordFixed);
+            .join(' ');
+          this.setDataValue('description', wordFixed);
         },
       },
     },
