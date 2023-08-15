@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
   GET_ALL_SIZES,
-  POST_ALL_COLOR,
+  GET_ALL_COLOR,
   GET_PRODUCTS,
   POST_PRODUCTS,
   GET_ALL_CATEGORIES,
@@ -79,12 +79,12 @@ export function getSizes() {
   };
 }
 
-export function postColor() {
+export function getColor() {
   return async function (dispatch) {
     try {
-      const response = await axios.post("/products/color");
+      const response = await axios.get("/products/color");
       dispatch({
-        type: POST_ALL_COLOR,
+        type: GET_ALL_COLOR,
         payload: response.data,
       });
     } catch (error) {
