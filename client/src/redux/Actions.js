@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   GET_ALL_SIZES,
   GET_ALL_COLOR,
@@ -20,19 +20,24 @@ import {
   ADD_HISTORY,
   ADD_TO_FAVORITES, 
   REMOVE_FROM_FAVORITES,
-  NOTIFY_STOCK
+  NOTIFY_STOCK,
+  POST_REVIEWS,
+  GET_REVIEWS
 } from "./ActionsTypes";
+
 
 export function getProducts() {
   return async function (dispatch) {
     try {
+
       const response = await axios("/products");
+
       dispatch({
         type: GET_PRODUCTS,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los productos");
+      alert('Error al obtener los productos');
     }
   };
 }
@@ -40,13 +45,15 @@ export function getProducts() {
 export function getCategories() {
   return async function (dispatch) {
     try {
+
       const response = await axios("/products/category");
+
       dispatch({
         type: GET_ALL_CATEGORIES,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los categorias");
+      alert('Error al obtener los categorias');
     }
   };
 }
@@ -54,13 +61,15 @@ export function getCategories() {
 export function getSeries() {
   return async function (dispatch) {
     try {
+
       const response = await axios("/products/series");
+
       dispatch({
         type: GET_ALL_SERIES,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener las series");
+      alert('Error al obtener las series');
     }
   };
 }
@@ -68,13 +77,15 @@ export function getSeries() {
 export function getSizes() {
   return async function (dispatch) {
     try {
+
       const response = await axios("/products/size");
+
       dispatch({
         type: GET_ALL_SIZES,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los talles");
+      alert('Error al obtener los talles');
     }
   };
 }
@@ -88,7 +99,7 @@ export function getColor() {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los colores");
+      alert('Error al obtener los colores');
     }
   };
 }
@@ -96,8 +107,10 @@ export function getColor() {
 export function postProducts(createProduct) {
   return async function (dispatch) {
     try {
+
       await axios.post(`/products/`, createProduct);
       alert("Su producto se creo correctamente");
+
       return dispatch({
         type: POST_PRODUCTS,
       });
@@ -116,8 +129,8 @@ export function getProductsByName(name) {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener las coincidencias");
-      console.error("Error al obtener las coincidencias:", error);
+      alert('Error al obtener las coincidencias');
+      console.error('Error al obtener las coincidencias:', error);
     }
   };
 }
@@ -127,14 +140,16 @@ export function filterProducts(filters) {
     try {
       const queryParams = Object.entries(filters)
         .map(([key, value]) => {
-          if (value !== null && value !== "") {
+          if (value !== null && value !== '') {
             return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
           }
           return null;
         })
         .filter((query) => query !== null)
+
         .join("&");
       const response = await axios.get(`/products?${queryParams}`);
+
 
       dispatch({
         type: GET_FILTERED_PRODUCTS,
@@ -150,13 +165,15 @@ export function filterProducts(filters) {
 export function getUsers() {
   return async function (dispatch) {
     try {
+
       const response = await axios("/users/");
+
       dispatch({
         type: GET_USERS,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener usuarios");
+      alert('Error al obtener usuarios');
     }
   };
 }
@@ -186,7 +203,9 @@ export function addToCar(userId, stockId, quantity) {
         stockId,
         quantity,
       });
+
       alert("Se ha añadido el producto al carrito");
+
       return dispatch({
         type: POST_TO_CART,
       });
@@ -212,6 +231,7 @@ export const getUserCart = (userId) => {
 export function sendMail(emailSubject, emailsUsers) {
   return async function (dispatch) {
     try {
+
       const response = await axios.post(`/notify/email`, {
         emailSubject,
         emailsUsers,
@@ -292,9 +312,48 @@ export function notifyStock(data) {
       });
       return dispatch({
         type: NOTIFY_STOCK,
+
       });
     } catch (error) {
       alert(error.message);
     }
   };
 }
+
+
+export function postReviews(userComment) {
+  console.log(userComment);
+  return async function (dispatch) {
+    try {
+      console.log(userComment);
+      await axios.post(`/products/review`, {
+        userComment,
+      });
+
+      alert('Su comentario se envió correctamente');
+      return dispatch({
+        type: POST_REVIEWS,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+}
+
+export function getReviews() {
+  return async function (dispatch) {
+    try {
+      const response = await axios('/products/review');
+      dispatch({
+        type: GET_REVIEWS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert('Error al obtener los comentarios');
+    }
+  };
+}
+
+
+
+

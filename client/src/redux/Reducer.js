@@ -18,8 +18,11 @@ import {
   DELETE_CART_USER,
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES,
-  NOTIFY_STOCK
+  NOTIFY_STOCK,
+   POST_REVIEWS,
+  GET_REVIEWS
 } from "./ActionsTypes";
+
 
 let initialState = {
   allProducts: [],
@@ -32,7 +35,10 @@ let initialState = {
   userCart: [],
   deleteCartUser: [],
   deleteCart:[],
-  favorites: []
+  favorites: [],
+     reviews: [],
+  allReviews: [],
+
 };
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -100,6 +106,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         userCart: action.payload,
       };
+
     case DELETE_CART_USER:
       return {
         ...state,
@@ -132,6 +139,18 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+        case POST_REVIEWS:
+      console.log(action.payload);
+      return {
+        ...state,
+        reviews: [...state.reviews, action.payload],
+      };
+      case GET_REVIEWS:
+        return {
+          ...state,
+        reviews: action.payload
+        };
+
     default:
       return state;
   }

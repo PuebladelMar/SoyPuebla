@@ -124,7 +124,7 @@ const Detail = () => {
                 Serie: {s.name}
               </h2>
             ))}
-            <p className="detailInfo">Colores disponibles: </p>
+            <p className="detailInfo">Selecciona uno de los colores disponibles: </p>
             {/* <img src={image} alt="" />  */}
 
             <div>
@@ -132,11 +132,19 @@ const Detail = () => {
                 <button
                   className="detailColorButton"
                   key={item.color}
-                  onClick={() => handleColorChange(item.color)}
+                  onClick={() => {
+                    if (selectedColor === item.color) {
+                      setSelectedColor(null); // Deseleccionar el color si ya estaba seleccionado
+                    } else {
+                      handleColorChange(item.color);
+                      setSelectedSize(null); // Resetear la selección de tamaño al cambiar de color
+                    }
+                  }}
                   style={{
                     backgroundColor: item.codHex,
                     width: "30px",
                     height: "30px",
+                    opacity: selectedColor === item.color ? 1 : 0.09, // Cambiar opacidad si está seleccionado
                   }}
                 >
                   {/* {item.color} */}
