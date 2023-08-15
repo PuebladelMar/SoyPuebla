@@ -29,7 +29,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Products, Colors, Sizes, Categories, Series, Stocks, Users, Reviews } = sequelize.models;
+const { Products, Colors, Sizes, Categories, Series, Stocks, Users, Reviews, EmailNotify } = sequelize.models;
 
 Products.hasMany(Stocks);
 Colors.hasMany(Stocks);
@@ -48,8 +48,8 @@ Products.belongsToMany(Series, { through: "ProductSeries" });
 Series.belongsToMany(Products, { through: "ProductSeries" });
 
 // Relación Products <-> Reviews
-Products.belongsToMany(Reviews, { through: "ProductReviews" });
-Reviews.belongsToMany(Products, { through: "ProductReviews" });
+// Products.belongsToMany(Reviews, { through: "ProductReviews" });
+// Reviews.belongsToMany(Products, { through: "ProductReviews" });
 
 // Relación de Carrito de compras
 Stocks.belongsToMany(Users, { through: "Carts" });

@@ -1,4 +1,5 @@
-const controllPostReviews = require("../../controllers/Reviews/controllPostReviews");
+const controllPostReviews = require("../../controllers/Reviews/controllGetReviews");
+
 
 const postReview = async (req, res) => {
   console.log(req);
@@ -8,6 +9,7 @@ const postReview = async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
+
 };
 
 module.exports = postReview;

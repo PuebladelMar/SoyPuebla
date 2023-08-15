@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { addToCar, sendMail, postUsers } from "../../redux/Actions";
+import { addToCar, sendMail, notifyStock } from "../../redux/Actions";
 import { useSelector, useDispatch } from "react-redux";
 import "./Detail.css";
 
@@ -24,7 +24,7 @@ const Detail = () => {
     const fetchProductDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/products/${id}`
+          `/products/${id}`
         );
         setProductDetails(response.data);
       } catch (error) {
@@ -89,14 +89,20 @@ const Detail = () => {
     return regex.test(email);
   };
 
+
   const notifyStockByMail = () => {
     if (!isValidEmail(email)) {
       alert("Ingresa un correo valido");
       return;
     }
+
+    let data = {
+      user_email : email,
+      stock_id : selectedCombination.stockId
+    } 
+    
+    dispatch(notifyStock(data));
     setIsSubscribed(true);
-    // dispatch(sendMail(selectedCombination.stockId, email))
-    //
   };
 
   return (
