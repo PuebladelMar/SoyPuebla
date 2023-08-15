@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+
 const MutipleUploadWidget = ({ onMultipleUpload }) => {
   const cloudinaryRef = useRef();
   const widgetRef = useRef();

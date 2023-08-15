@@ -14,9 +14,6 @@ const CreateDetail = ({
   description,
 }) => {
 
-  if(imagenes === null){
-    imagenes = [];
-  } 
 
   let formattedImages = imagenes.map((url) => ({
     original: url,

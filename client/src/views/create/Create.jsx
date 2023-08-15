@@ -31,8 +31,6 @@ const Create = () => {
     }))
   };
 
-
- 
     const [uploadedMultipleUrls, setUploadedMultipleUrls] = useState([]);
   
     const handleMultipleUpload = (urls) => {
