@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { useDispatch, useSelector } from "react-redux";
-import { addToFavorites, removeFromFavorites } from "../../redux/Actions" 
+import { addToFavorites, removeFromFavorites, getAllFav } from "../../redux/Actions" 
 import { Box, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -17,16 +17,23 @@ export default function Cardx({ product }) {
   const isMatchCard = useMediaQuery("(max-width: 470px)");
   const dispatch = useDispatch();
   const favorites = useSelector(state => state.favorites);
-
+  const userId = useSelector((state) => state.userId)
   const isFavorite = favorites.some(item => item.id === product.id);
 
-  const handleFavoriteClick = () => {
-    if (isFavorite) {
-      dispatch(removeFromFavorites(product.id));
-    } else {
-      dispatch(addToFavorites(product));
+  const handleFavoriteClick = async () => {
+    try {
+      if (isFavorite) {
+        await dispatch(removeFromFavorites(userId, product.id));
+        await dispatch(getAllFav(userId));
+      } else {
+        await dispatch(addToFavorites(userId, product.id));
+        await dispatch(getAllFav(userId));
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
+
   return (
     <Card
       style={{
