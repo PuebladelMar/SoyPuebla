@@ -23,9 +23,10 @@ import PaymentMethodsView from "./views/paymentMethods/paymentMethods";
 import Favorites from "./views/favs/Favorites";
 import History from "./views/history/History";
 import Shipment from "./views/shipment/shipment";
-import CreateCategory from "./views/create/createCategory/createCategory";
+import CreateCategory from "./views/create/createCategory/CreateCategory";
 import ReviewsForm from './componentes/reviews/ReviewsForm';
 import SizeChart from "./views/sizeChart/sizeChart";
+import CreateSerie from "./views/create/createSerie/CreateSerie";
 axios.defaults.baseURL = "http://localhost:3001/";
 
 
@@ -70,6 +71,7 @@ function App() {
         <Route path="/create-category" element={<CreateCategory />} />
         <Route path="/size-chart" element={<SizeChart />} />
         <Route path='/products/reviews' element={<ReviewsForm />} />
+        <Route path="/create-serie" element={<CreateSerie />} />
       </Routes>
       {pathname !== '/' && <Footer />}
     </div>
