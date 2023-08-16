@@ -283,17 +283,19 @@ const Detail = () => {
       </div>
       {isReady && (
         <div>
-          <Reviews />
-          {userId.length > 0 ? (
-            <ReviewsForm productId={productDetails[0].id} />
-          ) : (
-            <div>
-              <Link to="https://worthy-insect-17.accounts.dev/sign-in">
-                <button>Inicia sesion</button>
-              </Link>
-            </div>
-          )}
-        </div>
+        <Reviews />
+        {userId.length > 0 ? (
+          <ReviewsForm productId={productDetails[0].id}/>
+        ) : (
+          <div className="btn-container">
+            <Link to="https://worthy-insect-17.accounts.dev/sign-in">
+            <button className="btn-iniciar-sesion">Inicia sesion</button>
+            </Link>
+          </div>
+        )}
+         
+      </div>
+
       )}
     </div>
   );
