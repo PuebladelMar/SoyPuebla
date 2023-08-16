@@ -1,21 +1,21 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react';
 import {
   Navigation,
   Pagination,
   Scrollbar,
   A11y,
   Autoplay,
-} from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import "swiper/css/autoplay";
-import "./Reviews.css";
-import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
-import ReviewCard from "./ReviewCard";
+} from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/autoplay';
+import './Reviews.css';
+import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import ReviewCard from './ReviewCard';
 // import { getReviews } from "../../redux/Actions";
 // import { postUsers } from '../../redux/Actions';
 // import ReviewsForm from './ReviewsForm'
@@ -31,7 +31,7 @@ function Reviews({ productId }) {
 
   return (
     <div>
-      <div className="review">
+      <div className='review'>
         {reviews.length > 0 ? (
           reviews.map((re) => (
             <ReviewCard

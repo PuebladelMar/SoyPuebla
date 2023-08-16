@@ -207,11 +207,24 @@
 
 .btn-iniciar-sesion{
   margin: 10px;
-  background-color: #517f7f;
-  color: #fff;
+  background-color: rgb(255, 255, 255);;
+  color: rgb(81, 127, 127);;
   padding: 8px 16px;
-  border: none;
+  border: 1px solid  rgb(81, 127, 127);;
   border-radius: 4px;
   cursor: pointer;
+  transition: all ease .3s
+
+}
+.btn-iniciar-sesion:hover {
+
+  transform: scale(1.08);
+  color:  rgb(255, 255, 255);
+  background: rgb(81, 127, 127);
 }
 
+.opiniones{
+  text-align: start;
+  color: rgb(81, 127, 127);
+  font-size: x-large;
+}

@@ -1,7 +1,7 @@
 // import { NavLink } from 'react-router-dom';
-import "./ReviewCard.css";
-import { Typography, Rating } from "@mui/material";
-import { useState } from "react";
+import './ReviewCard.css';
+import { Typography, Rating, Card, CardContent } from '@mui/material';
+import { useState } from 'react';
 
 export default function ReviewCard({ score, description, fullName }) {
   console.log(fullName);
@@ -9,24 +9,50 @@ export default function ReviewCard({ score, description, fullName }) {
   const [value, setValue] = useState(score);
   return (
     // <Link to={`/reviews/${id}`}>
-    <div className="container">
-      <div>
-        <h1>{fullName}</h1>
-        <br></br>
-        {/* <h2>Valoracion</h2> */}
-        <span>{score}</span>
-        {/* <h2>Descripcion</h2> */}
-        <span>{description}</span>
-        <Typography component="legend" value={value}></Typography>
+    <Card
+      className='review-card'
+      elevation={3}
+    >
+      <CardContent>
+        <Typography
+          variant='h6'
+          gutterBottom
+        >
+          {fullName}
+        </Typography>
+        <Typography
+          variant='subtitle1'
+          color='textSecondary'
+        >
+          {description}
+        </Typography>
         <Rating
-          name="simple-read-only"
+          name='read-only'
           value={value}
-         readOnly //
-            
-          
+          readOnly
+          size='small'
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
+    // <div className='container'>
+    //   <div>
+    //     <h1>{fullName}</h1>
+    //     <br></br>
+    //     {/* <h2>Valoracion</h2> */}
+    //     <span>{score}</span>
+    //     {/* <h2>Descripcion</h2> */}
+    //     <span>{description}</span>
+    //     <Typography
+    //       component='legend'
+    //       value={value}
+    //     ></Typography>
+    //     <Rating
+    //       name='simple-read-only'
+    //       value={value}
+    //       readOnly //
+    //     />
+    //   </div>
+    // </div>
     // </Link>
   );
 }
