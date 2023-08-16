@@ -2,6 +2,7 @@ const { Products, Colors, Sizes, Categories, Series, Stocks } = require('../../d
 
 const controllPostProduct = async (req) => {
   const { name, price, mainImage, image, sale, description, color, size, series, category } = req.body;
+  //const { name, price, mainImage, image, sale, description, series, category, colorImage } = req.body;
 
   const newProduct = await Products.create({ name, price, mainImage, image, sale, description });
 
@@ -34,6 +35,24 @@ const controllPostProduct = async (req) => {
   await newProduct.setSeries(findedSeries); 
 
   return "product added successfully";
+
+  /*for(const variation of colorImage){
+    const { color, stocks } = variation;
+    for(const stock of stocks){
+      const { size, amount } = stock;
+      const [findedColor, findedSize] = await Promise.all([
+        Colors.findOne({ where: { name: color }}),
+        Sizes.findOne({ where: {name: size}})
+      ]);
+
+      const [ newStock, created ] = await Stocks.create({
+        ProductId: newProduct.id,
+        ColorId: findedColor[0].id,
+        SizeId: findedSize[0].id,
+        amount: amount
+      });
+    };
+  };*/
 };
 
 module.exports = controllPostProduct;
