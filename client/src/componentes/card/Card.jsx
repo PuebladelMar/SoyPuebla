@@ -20,16 +20,17 @@ export default function Cardx({ product }) {
   const userId = useSelector((state) => state.userId)
   const isFavorite = favorites.some(item => item.id === product.id);
 
-  const handleFavoriteClick = () => {
-   
-    if (isFavorite) {
-     
-      dispatch(removeFromFavorites(userId, product.id));
-      dispatch(getAllFav(userId));
-      setProductDetails(favProducts);
-    } else {
-      dispatch(addToFavorites(userId,product.id));  
-      dispatch(getAllFav(userId));
+  const handleFavoriteClick = async () => {
+    try {
+      if (isFavorite) {
+        await dispatch(removeFromFavorites(userId, product.id));
+        await dispatch(getAllFav(userId));
+      } else {
+        await dispatch(addToFavorites(userId, product.id));
+        await dispatch(getAllFav(userId));
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
