@@ -24,14 +24,16 @@ const Create = () => {
 
   //!___________________________
 
-  const [showAlert, setShowAlert] = useState(false); 
-  
-  const handleCloseAlert = () => {
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleCloseAlert = (event) => {
     setShowAlert(false);
+    event.preventDefault();
   };
 
-  const handleOpenColorCreate = () => {
+  const handleOpenColorCreate = (event) => {
     setShowAlert(true);
+    event.preventDefault();
   };
 
   //!___________________________
@@ -77,7 +79,7 @@ const Create = () => {
     if (!color.length) {
       dispatch(getColor());
     }
-  }, [dispatch, color, createProduct]);
+  }, [dispatch, color.length, createProduct]);
 
   useEffect(() => {
     if (validations(createProduct)) {
@@ -87,7 +89,7 @@ const Create = () => {
     if (!size.length) {
       dispatch(getSizes());
     }
-  }, [dispatch, size, createProduct]);
+  }, [dispatch, size.length, createProduct]);
 
   useEffect(() => {
     if (validations(createProduct)) {
@@ -97,7 +99,7 @@ const Create = () => {
     if (!series.length) {
       dispatch(getSeries());
     }
-  }, [dispatch, series, createProduct]);
+  }, [dispatch, series.length, createProduct]);
 
   useEffect(() => {
     if (validations(createProduct)) {
@@ -107,7 +109,7 @@ const Create = () => {
     if (!categories.length) {
       dispatch(getCategories());
     }
-  }, [dispatch, categories, createProduct]);
+  }, [dispatch, categories.length, createProduct]);
 
   const handleChange = (event) => {
     setCreateProduct({
@@ -258,6 +260,22 @@ const Create = () => {
 
   return (
     <div className="create-main-container">
+      {showAlert && (
+        <popups className="pop-ups">
+          <>
+            <div className="transparentBackgroundY"></div>
+
+            <div className="alertContainerY">
+              <p className="alertTextY">Creador de color</p>
+              <CreateColor />
+              <div className="alertButtonsY">
+                <button onClick={handleCloseAlert}>X</button>
+              </div>
+            </div>
+          </>
+        </popups>
+      )}
+
       <div className="create-container">
         <form className="create-form">
           <label htmlFor="name">Nombre: </label>
@@ -329,27 +347,14 @@ const Create = () => {
           </select>
           <label htmlFor="color">Color: </label>
           {/* //!____________________ */}
-          <h2
+          <button
             onClick={() => {
               handleOpenColorCreate();
             }}
+            className="mainImage-upload-buttonY "
           >
             Crear color
-          </h2>
-
-          {showAlert && (
-            <>
-              <div className="transparentBackgroundY"></div>
-              
-              <div className="alertContainerY">
-                <p className="alertTextY">Creador de color</p>
-                <CreateColor/>
-                <div className="alertButtonsY">
-                  <button onClick={handleCloseAlert}>X</button>
-                </div>
-              </div>
-            </>
-          )}
+          </button>
 
           {/* //!____________________ */}
           <select
@@ -490,6 +495,7 @@ const Create = () => {
           />
           <p className="error">{errors.description}</p>
         </form>
+
         <div className="div-button">
           <button
             className="submit-button"
