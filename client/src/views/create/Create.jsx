@@ -336,19 +336,21 @@ const Create = () => {
           >
             Crear color
           </h2>
+
           {showAlert && (
             <>
-              <div className="transparentBackground"></div>
+              <div className="transparentBackgroundY"></div>
               
-              <div className="alertContainer">
-                <p className="alertText">Mostrar creador de color</p>
+              <div className="alertContainerY">
+                <p className="alertTextY">Creador de color</p>
                 <CreateColor/>
-                <div className="alertButtons">
-                  <button onClick={handleCloseAlert}>Volver a CREAR </button>
+                <div className="alertButtonsY">
+                  <button onClick={handleCloseAlert}>X</button>
                 </div>
               </div>
             </>
           )}
+
           {/* //!____________________ */}
           <select
             name="color"
