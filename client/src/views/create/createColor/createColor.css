@@ -1,13 +1,12 @@
 .create-main-containerX {
   display: flex;
-  margin-left: 3rem;
-  margin-right: 3rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .create-containerX {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   padding: 20px;
   background-color: #eeeeee;
   color: #818181;
@@ -57,9 +56,9 @@
   }
   
   .colorItem {
-    flex-basis: calc(20% - 0.5rem); /* Resta el margen para mantener 5 columnas */
-    background-color: #f0f0f0; /* Opcional: Establece un fondo para resaltar los elementos */
-    padding: 0.5rem; /* Opcional: Agrega un espacio entre elementos */
+    flex-basis: calc(20% - 0.5rem); 
+    background-color: #f0f0f0; 
+    padding: 0.5rem; 
   }
   
 
