@@ -2,12 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { postReviews, getProducts } from "../../redux/Actions";
 import "./ReviewsForm.css";
 import { useEffect, useState } from "react";
+import { Typography, Rating } from "@mui/material";
 
 function ReviewsForm({ productId }) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userId);
   const allProducts = useSelector((state) => state.allProducts);
   const allUsers = useSelector((state) => state.allUsers);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -26,6 +28,7 @@ function ReviewsForm({ productId }) {
     setUserComment({
       ...userComment,
       [name]: value,
+      score: score,
     });
   };
 
@@ -40,6 +43,7 @@ function ReviewsForm({ productId }) {
         productId: productId,
         fullName: allUsers.user.fullName,
       });
+      setScore(0);
     }
   };
 
@@ -69,7 +73,7 @@ function ReviewsForm({ productId }) {
           required
         />
         <label htmlFor="rating">Calificación (1-5):</label>
-        <input
+        {/* <input
           type="number"
           min="1"
           max="5"
@@ -77,8 +81,16 @@ function ReviewsForm({ productId }) {
           onChange={handleChange}
           name="score"
           required
+        /> */}
+        <Typography className=" coment" component="legend" value={userComment.score}></Typography>
+        <Rating className="stars-container"
+          name="simple-read-only"
+          value={score}
+          onChange={(event, newValue) => {
+            setScore(newValue);
+          }}
         />
-        {/* Mostrar el userId prellenado en un campo oculto */}
+        
         <input type="hidden" value={userComment.userId} name="userId" />
         <button className="boton" type="submit" onClick={handleSubmit}>
           Enviar Reseña
