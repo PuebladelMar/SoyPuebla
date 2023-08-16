@@ -27,6 +27,16 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: 'user', 
       },
+      emailAddress: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          isEmail: {
+            args: true,
+            msg: "Must be a valid email address",
+          },
+        },
+      },
     },
     { timestamps: true, 
       paranoid: true,
