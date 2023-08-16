@@ -24,7 +24,7 @@ const CreateDetail = ({
     <section className="containerDetailCreate">
       <container className="secContainerCreate">
         <div>
-      {console.log(imagenes)}
+      {/* {console.log(imagenes)} */}
           {imagenes == false ? (
             <img
               className="cardImgDetailCreate"

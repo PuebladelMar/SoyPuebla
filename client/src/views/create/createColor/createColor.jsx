@@ -59,7 +59,7 @@ const CreateColor = () => {
       try {
         const asyncFunction = async () => {
           await axios.post("/products/color", createColor);
-          setCount(count + 1);
+          setCount((prevCount) => prevCount + 1);
           alert("color creado existosamente");
           setCreateColor({
             name: "",
