@@ -26,6 +26,7 @@ import Shipment from "./views/shipment/shipment";
 import CreateCategory from "./views/create/createCategory/createCategory";
 import ReviewsForm from './componentes/reviews/ReviewsForm';
 import SizeChart from "./views/sizeChart/sizeChart";
+import CreateColor from "./views/create/createColor/createColor";
 axios.defaults.baseURL = "http://localhost:3001/";
 
 
@@ -68,6 +69,7 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/shipment" element={<Shipment />} />
         <Route path="/create-category" element={<CreateCategory />} />
+        <Route path="/create-color" element={<CreateColor />} />
         <Route path="/size-chart" element={<SizeChart />} />
         <Route path='/products/reviews' element={<ReviewsForm />} />
       </Routes>
