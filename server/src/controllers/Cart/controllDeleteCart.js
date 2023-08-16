@@ -1,16 +1,19 @@
-const { Carts } = require('../../db.js');
+const { Carts, Stocks } = require('../../db.js');
 
 const deleteCartController = async (id) => {
-  if (id) {
-    const cart = await Carts.findByPk(id);
-    if (!cart) {
-      throw new Error("Cart not found.");
-    }
+  const cart = await Carts.findByPk(id);
+  if (!cart) {
+    throw new Error("Cart not found.");
+  }
 
-    await cart.destroy();
+  const stock = await Stocks.findByPk(cart.StockId);
 
-    return { message: "Cart deleted successfully." };
-  } 
+  stock.amount += cart.quantity;
+  await stock.save();
+
+  await cart.destroy();
+
+  return { message: "Cart deleted successfully." };
 };
 
 module.exports = deleteCartController;

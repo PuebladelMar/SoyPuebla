@@ -12,8 +12,6 @@ const Home = () => {
       <br />
       <SeriesContainer />
       <br />
-      <Reviews />
-      <br />
       <FooterContact />
     </div>
   );

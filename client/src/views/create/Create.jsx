@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import {
   postProducts,
-  postColor,
+  getColor,
   getSizes,
   getCategories,
   getSeries,
 } from "../../redux/Actions";
 import validations from "./Validations";
 import UploadWidget from "../../componentes/imageUpload/imageUpload";
+import MutipleUploadWidget from "../../componentes/multipleImageUpload/multipleImageUpload";
 import CreateDetail from "./createDetail/CreateDetail";
+import CreateColor from "./createColor/createColor";
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -20,17 +22,39 @@ const Create = () => {
   const series = useSelector((state) => state.series);
   const [errors, setErrors] = useState({});
 
+  //!___________________________
+
+  const [showAlert, setShowAlert] = useState(false); 
+  
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
+  const handleOpenColorCreate = () => {
+    setShowAlert(true);
+  };
+
+  //!___________________________
+
   const [uploadedSecureUrl, setUploadedSecureUrl] = useState(null);
 
   const handleUpload = (singleUrl) => {
-    setUploadedSecureUrl(singleUrl); 
+    setUploadedSecureUrl(singleUrl);
+    // preventDefault();
     setCreateProduct((prevState) => ({
       ...prevState,
-      mainImage: singleUrl, 
-    }))
+      mainImage: singleUrl,
+    }));
   };
 
+  const [uploadedMultipleUrls, setUploadedMultipleUrls] = useState([]);
 
+  const handleMultipleUpload = (urls) => {
+    setUploadedMultipleUrls(urls);
+    // preventDefault();
+  };
+
+  const combinedImagesUrls = [uploadedSecureUrl].concat(uploadedMultipleUrls);
 
   const [createProduct, setCreateProduct] = useState({
     name: "",
@@ -45,15 +69,13 @@ const Create = () => {
     category: [],
   });
 
-
-
   useEffect(() => {
     if (validations(createProduct)) {
       setErrors(validations(createProduct));
     }
 
     if (!color.length) {
-      dispatch(postColor());
+      dispatch(getColor());
     }
   }, [dispatch, color, createProduct]);
 
@@ -249,7 +271,6 @@ const Create = () => {
             onChange={(event) => handleChange(event)}
           />
           <p className="error">{errors.name}</p>
-
           <label htmlFor="price">Precio: </label>
           <input
             type="decimal"
@@ -260,9 +281,6 @@ const Create = () => {
             onChange={handleChange}
           />
           <p className="error">{errors.price}</p>
-
-
-
           <label htmlFor="mainImage">Imagen Principal: </label>
           <UploadWidget onUpload={handleUpload} />
           {/* <textarea
@@ -275,26 +293,31 @@ const Create = () => {
             onChange={handleChange}
           />
           <p className="error">{errors.mainImage}</p> */}
-
-        
-
-          <label htmlFor="image">Imagen: </label>
-          <input
+          {uploadedSecureUrl === null ? (
+            <div>
+              <label htmlFor="image">Imagenes complementarias: </label>
+              <br />
+              <br />
+            </div>
+          ) : (
+            <div>
+              <label htmlFor="image">Imagenes complementarias: </label>
+              <MutipleUploadWidget onMultipleUpload={handleMultipleUpload} />
+            </div>
+          )}
+          {/* <input
             type="text"
             name="image"
             value={createProduct.image}
             placeholder="Imagen"
             className="custom-input"
             onChange={handleChange}
-          />
-
-       
-
+          /> */}
           <label htmlFor="sale">Oferta: </label>
           <select
             name="sale"
             className="custom-select"
-            defaultValue={createProduct.sale} 
+            defaultValue={createProduct.sale}
             onChange={handleChange}
           >
             <option value={false} key="def">
@@ -304,8 +327,29 @@ const Create = () => {
               Si
             </option>
           </select>
-
           <label htmlFor="color">Color: </label>
+          {/* //!____________________ */}
+          <h2
+            onClick={() => {
+              handleOpenColorCreate();
+            }}
+          >
+            Crear color
+          </h2>
+          {showAlert && (
+            <>
+              <div className="transparentBackground"></div>
+              
+              <div className="alertContainer">
+                <p className="alertText">Mostrar creador de color</p>
+                <CreateColor/>
+                <div className="alertButtons">
+                  <button onClick={handleCloseAlert}>Volver a CREAR </button>
+                </div>
+              </div>
+            </>
+          )}
+          {/* //!____________________ */}
           <select
             name="color"
             placeholder="Colores"
@@ -325,7 +369,6 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.color}</p>
-
           <div>
             {createProduct.color.length > 0 ? (
               createProduct.color.map((col) => (
@@ -338,7 +381,6 @@ const Create = () => {
               <p className="no-dietTypes"></p>
             )}
           </div>
-
           <label htmlFor="size">Talle: </label>
           <select
             name="size"
@@ -359,7 +401,6 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.size}</p>
-
           <div>
             {createProduct.size.length > 0 ? (
               createProduct.size.map((si) => (
@@ -372,7 +413,6 @@ const Create = () => {
               <p className="no-dietTypes"></p>
             )}
           </div>
-
           <label htmlFor="series">Coleccion: </label>
           <select
             name="series"
@@ -393,7 +433,6 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.series}</p>
-
           <div>
             {createProduct.series.length > 0 ? (
               createProduct.series.map((ser) => (
@@ -406,7 +445,6 @@ const Create = () => {
               <p></p>
             )}
           </div>
-
           <label htmlFor="category">Categoria: </label>
           <select
             name="category"
@@ -427,7 +465,6 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.category}</p>
-
           <div>
             {createProduct.category.length > 0 ? (
               createProduct.category.map((cat) => (
@@ -440,7 +477,6 @@ const Create = () => {
               <p className="no-dietTypes"></p>
             )}
           </div>
-
           <label htmlFor="description">Descripcion: </label>
           <textarea
             type="text"
@@ -467,7 +503,7 @@ const Create = () => {
       <div>
         <CreateDetail
           nombre={createProduct.name}
-          imagen={uploadedSecureUrl}
+          imagenes={combinedImagesUrls}
           precio={createProduct.price}
           serie={createProduct.series}
           color={getColorHexCodes()}

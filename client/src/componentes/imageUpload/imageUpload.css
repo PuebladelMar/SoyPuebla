@@ -1,0 +1,11 @@
+.mainImage-upload-button {
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    margin-bottom: 1.2rem;
+  }
+  
+  .mainImage-upload-button:hover {
+    background-color: #ddd;
+  }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   GET_ALL_SIZES,
-  POST_ALL_COLOR,
+  GET_ALL_COLOR,
   GET_PRODUCTS,
   POST_PRODUCTS,
   GET_ALL_CATEGORIES,
@@ -90,14 +90,12 @@ export function getSizes() {
   };
 }
 
-export function postColor() {
+export function getColor() {
   return async function (dispatch) {
     try {
-
-      const response = await axios.post("/products/color");
-
+      const response = await axios.get("/products/color");
       dispatch({
-        type: POST_ALL_COLOR,
+        type: GET_ALL_COLOR,
         payload: response.data,
       });
     } catch (error) {
@@ -180,12 +178,13 @@ export function getUsers() {
   };
 }
 
-export function postUsers(userClerkId, user) {
+export function postUsers(userClerkId, user, fullName) {
   return async function (dispatch) {
     try {
       const response = await axios.post(`/users/`, {
         clerkId: userClerkId,
         user: user,
+        fullName: fullName,
       });
       return dispatch({
         type: POST_USERS,
@@ -261,11 +260,11 @@ export function deleteCart(id) {
   };
 }
 
-export function deleteCartUser(id) {
+export function deleteCartUser(id, sale) {
   return async function (dispatch) {
     try {
       const response = await axios.delete(
-        `http://localhost:3001/cart/user/${id}`
+        `http://localhost:3001/cart/user?id=${id}&&sale=${sale}`
       );
       dispatch({
         type: DELETE_CART_USER,
@@ -322,19 +321,19 @@ export function notifyStock(data) {
   };
 }
 
-
 export function postReviews(userComment) {
   console.log(userComment);
   return async function (dispatch) {
     try {
       console.log(userComment);
-      await axios.post(`/products/review`, {
+      await axios.post(`/products/review`, 
         userComment,
-      });
+      );
 
       alert('Su comentario se envió correctamente');
       return dispatch({
         type: POST_REVIEWS,
+        payload: userComment ,
       });
     } catch (error) {
       alert(error);
