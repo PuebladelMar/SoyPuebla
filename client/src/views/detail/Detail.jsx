@@ -130,7 +130,9 @@ const Detail = () => {
                 Serie: {s.name}
               </h2>
             ))}
-            <p className="detailInfo">Selecciona uno de los colores disponibles: </p>
+            <p className="detailInfo">
+              Selecciona uno de los colores disponibles:{" "}
+            </p>
             {/* <img src={image} alt="" />  */}
 
             <div>
@@ -150,7 +152,7 @@ const Detail = () => {
                     backgroundColor: item.codHex,
                     width: "30px",
                     height: "30px",
-                    opacity: selectedColor === item.color ? 1 : 0.09, // Cambiar opacidad si está seleccionado
+                    border: selectedColor === item.color ? null : 1, // Cambiar opacidad si está seleccionado
                   }}
                 >
                   {/* {item.color} */}
@@ -293,6 +295,7 @@ const Detail = () => {
         )}
          
       </div>
+
       )}
     </div>
   );
