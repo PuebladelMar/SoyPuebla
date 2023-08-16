@@ -4,16 +4,23 @@
   gap: 2rem;
   flex-wrap: wrap;
   justify-content: center;
-  color: red;
+  color: rgb(3, 3, 3);
   font-size: 1.2rem;
+  padding: 8px;
+
 }
 
 .review h2 {
-  font-size: 1.3rem;
-  color: greenyellow;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #828282;
 }
 
 .review h1 {
-  font-size: 2rem;
-  color: rgb(0, 38, 255);
+font-size: 1.5rem;
+overflow-wrap: break-word;
+    display: inline;
+    font-size: 14px;
+    line-height: 1;
 }
