@@ -30,12 +30,9 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
+      {}
+      <Link color="inherit" href="https://mui.com/"></Link>
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
@@ -203,7 +200,7 @@ export default function Dashboard() {
                 </Paper>
               </Grid>
             </Grid>
-            <Copyright sx={{ pt: 4 }} />
+            {/* <Copyright sx={{ pt: 4 }} /> */}
           </Container>
         </Box>
       </Box>
