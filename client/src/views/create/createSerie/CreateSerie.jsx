@@ -1,49 +1,51 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../../redux/Actions";
+import { getSeries } from "../../../redux/Actions";
 import axios from 'axios'
-import categoryValidations from "./categoryValidations";
+import serieValidations from "./serieValidations";
 import "../Create.css"
 
-const CreateCategory = ()=>{
+const CreateSerie = ()=>{
     const dispatch = useDispatch();
-    const categories = useSelector((state)=> state.categories);
+    const series = useSelector((state)=> state.series);
     let [count, setCount] = useState(0)
     useEffect(()=>{
-        dispatch(getCategories());
+        dispatch(getSeries());
     },[count]);
 
-    let [ createCategory, setCreateCategory ] = useState({
-        name: ""
+    let [ createSerie, setCreateSerie ] = useState({
+        name: "",
+        image:"image.png"
     });
     const [errors, setErrors] = useState({
         disableButton: true
     });
 
     const handleChange = (event)=>{
-        setCreateCategory({...createCategory, [event.target.name]: event.target.value});
+        setCreateSerie({...createSerie, [event.target.name]: event.target.value});
         setErrors(
-            categoryValidations({...createCategory, [event.target.name]: event.target.value})
+            serieValidations({...createSerie, [event.target.name]: event.target.value})
         );
     };
 
     const handleSubmit = async(event)=>{
         event.preventDefault();
-        if(!createCategory.name){
+        if(!createSerie.name){
             alert('Debes llenar el nombre');
         }else{
             try {
-                await axios.post('/products/category', createCategory);
-                setCount(count + 1)
-                alert('categoria creada existosamente');
-                setCreateCategory({
-                    name:""
+                await axios.post('/products/series', createSerie);
+                setCount(count + 1);
+                alert('serie creada existosamente');
+                setCreateSerie({
+                    name:"",
+                    image:"image.png"
                 });
                 setErrors({
                     disableButton: true
                 });
             } catch (error) {
-                setErrors({error: `La categoria ${createCategory.name} ya esta creada`});
+                setErrors({error: `La serie ${createSerie.name} ya esta creada`});
             };
         };
     };
@@ -56,7 +58,7 @@ const CreateCategory = ()=>{
                     <input
                         type="text"
                         name="name"
-                        value={createCategory.name}
+                        value={createSerie.name}
                         required
                         placeholder="Nombre"
                         className="custom-input"
@@ -65,10 +67,10 @@ const CreateCategory = ()=>{
                     <p className="error">{errors.name}</p>
                     <button type="submit" disabled={Object.keys(errors).length === 0 ? false : true}>Crear</button>
                     <p className="error">{errors.error}</p>
-                    <h2>Categorias Creadas:</h2>
+                    <h2>Series Creadas:</h2>
                     <ol>
-                        {categories.map((category)=>(
-                            <li>{category.name}</li>
+                        {series.map((serie)=>(
+                            <li>{serie.name}</li>
                         ))}
                     </ol>
                 </form>
@@ -77,4 +79,4 @@ const CreateCategory = ()=>{
     );
 };
 
-export default CreateCategory;
+export default CreateSerie;
