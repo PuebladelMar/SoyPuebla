@@ -10,7 +10,7 @@ const CreateColor = () => {
   const dispatch = useDispatch();
   const color = useSelector((state) => state.colorList);
 
-  let [count, setCount] = useState(0)
+  let [count, setCount] = useState(0);
 
   useEffect(() => {
     dispatch(getColor());
@@ -59,7 +59,7 @@ const CreateColor = () => {
       try {
         const asyncFunction = async () => {
           await axios.post("/products/color", createColor);
-          setCount(count + 1)
+          setCount(count + 1);
           alert("color creado existosamente");
           setCreateColor({
             name: "",
@@ -92,13 +92,26 @@ const CreateColor = () => {
           />
           <p className="error">{errors.name}</p>
 
-          <div className="color-picker" >
-            <ChromePicker
-              color={colorSelect}
-              onChangeComplete={handleColorChangeComplete}
-              disableAlpha={true}
-            />
-
+          <div className="colorSelectorContainer">
+            <div className="color-picker">
+              <ChromePicker
+                color={colorSelect}
+                onChangeComplete={handleColorChangeComplete}
+                disableAlpha={true}
+              />
+            </div>
+            <div className="colorPreview">
+                <h2>Color Preview</h2>
+              <button
+                className="detailColorButtonX"
+                key={color.codHex}
+                style={{
+                  backgroundColor: hexColor,
+                  width: "50px",
+                  height: "50px",
+                }}
+              ></button>
+            </div>
           </div>
 
           <button
@@ -120,15 +133,15 @@ const CreateColor = () => {
           {color.map((color) => (
             <div key={color.id} className="colorItem">
               <button
-              className="detailColorButtonX"
-              key={color.codHex}
-              style={{
+                className="detailColorButtonX"
+                key={color.codHex}
+                style={{
                   backgroundColor: color.codHex,
                   width: "30px",
                   height: "30px",
                 }}
-                  ></button>
-                <p >{color.name}</p>
+              ></button>
+              <p>{color.name}</p>
             </div>
           ))}
         </div>
