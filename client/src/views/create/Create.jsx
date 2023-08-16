@@ -54,7 +54,6 @@ const Create = () => {
 
   const handleUpload = (singleUrl) => {
     setUploadedSecureUrl(singleUrl);
-    // preventDefault();
     setCreateProduct((prevState) => ({
       ...prevState,
       mainImage: singleUrl,
@@ -350,7 +349,6 @@ const Create = () => {
             name="mainImage"
             value={uploadedSecureUrl}
             placeholder="Main Image"
-            required
             className="custom-textarea"
             onChange={handleChange}
           />
@@ -392,6 +390,7 @@ const Create = () => {
           <label htmlFor="color">Color: </label>
           {/* //!____________________ */}
           <button
+            type="button"
             onClick={() => {
               handleOpenColorCreate();
             }}
@@ -405,7 +404,6 @@ const Create = () => {
             placeholder="Colores"
             defaultValue="def"
             onChange={handleSelect}
-            required
           >
             <option value="def" key="def" disabled>
               Selecciona uno o varios colores.
@@ -437,7 +435,6 @@ const Create = () => {
             placeholder="Talles"
             defaultValue="def"
             onChange={handleSelectSize}
-            required
           >
             <option value="def" key="def" disabled>
               Selecciona uno o varios talles.
@@ -465,6 +462,7 @@ const Create = () => {
           </div>
           <label htmlFor="series">Colección: </label>
           <button
+            type="button"
             onClick={() => {
               handleOpenSerieCreate();
             }}
@@ -477,7 +475,6 @@ const Create = () => {
             placeholder="Coleccion"
             defaultValue="def"
             onChange={handleSelectSeries}
-            required
           >
             <option value="def" key="def" disabled>
               Selecciona colección.
@@ -505,6 +502,7 @@ const Create = () => {
           </div>
           <label htmlFor="category">Categoría: </label>
           <button
+            type="button"
             onClick={() => {
               handleOpenCategoryCreate();
             }}
@@ -517,7 +515,6 @@ const Create = () => {
             placeholder="Categoria"
             defaultValue="def"
             onChange={handleSelectCategories}
-            required
           >
             <option value="def" key="def" disabled>
               Selecciona categoría
@@ -548,7 +545,6 @@ const Create = () => {
             type="text"
             name="description"
             placeholder="Descripcion"
-            required
             className="custom-textarea"
             onChange={handleChange}
           />
