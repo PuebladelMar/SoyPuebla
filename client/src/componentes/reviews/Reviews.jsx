@@ -1,20 +1,11 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
-} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import "./Reviews.css";
-import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import ReviewCard from "./ReviewCard";
 
 import { getReviewById } from "../../redux/Actions";
@@ -22,14 +13,12 @@ import { getReviewById } from "../../redux/Actions";
 // import ReviewsForm from './ReviewsForm'
 
 function Reviews({ productId }) {
-  const getReviewById = useSelector((state) => state.getReviewById);
+  const getReviewById2 = useSelector((state) => state.getReviewById);
   const dispatch = useDispatch();
-  console.log(getReviewById);
-
 
   // useEffect(() => {const handleChange = (event) => {
   //   const { name, value } = event.target;
-  
+
   //   setUserComment((prevComment) => ({
   //     ...prevComment,
   //     [name]: value,
@@ -46,18 +35,19 @@ function Reviews({ productId }) {
         // console.log(productDetails[0].id);
       } catch (error) {
         // Manejar el error aquí si es necesario
-        console.error('Error fetching review:', error);
+        console.error("Error fetching review:", error);
       }
     };
-  
+
     fetchReview();
-  }, [dispatch]); 
+  }, [dispatch]);
+
 
   return (
-    <div>
+    <div className="review-container">
       <div className="review">
-        {getReviewById.length > 0 ? (
-          getReviewById.map((re) => (
+        {getReviewById2.length > 0 ? (
+          getReviewById2.map((re) => (
             <ReviewCard
               key={re.id}
               title={re.title}

@@ -26,7 +26,7 @@ export default function User() {
     return (
       <div className="button-container">
         <Link to="https://worthy-insect-17.accounts.dev/sign-in">
-          <button>
+          <button className="button-container-button">
             <img src={`${userIcon}`} alt="Icono de usuario por defecto" />
           </button>
         </Link>
