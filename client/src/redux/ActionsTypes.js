@@ -26,4 +26,6 @@ export const GET_REVIEWS = 'GET_REVIEWS';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 export const GET_USER_BY_NAME = 'GET_USER_BY_NAME';
 export const GET_REVIEW_BY_ID = 'GET_REVIEW_BY_ID';
+export const GET_ALL_HISTORY= "GET_ALL_HISTORY";
+
 

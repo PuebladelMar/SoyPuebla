@@ -31,7 +31,7 @@ export default function Chart() {
 
   return (
     <>
-      <Title>Today</Title>
+      <Title>Hoy</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -60,7 +60,7 @@ export default function Chart() {
                 ...theme.typography.body1,
               }}
             >
-              Sales ($)
+              Ventas ($)
             </Label>
           </YAxis>
           <Line

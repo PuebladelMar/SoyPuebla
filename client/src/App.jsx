@@ -64,7 +64,7 @@ function App() {
         {/*<Route path="/login" element={<Login />} />*/}
         <Route path="/products/:id" element={<Detail />} />
         <Route path="*" element={<ErrorPage />} />
-        <Route path="/adminAccount" element={<AdminAccount />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/frequent-questions" element={<Customer />} />
         <Route path="/pay-state" element={<PayState />} />
         <Route path="/payMethods" element={<PaymentMethodsView />} />
@@ -75,7 +75,7 @@ function App() {
         <Route path="/size-chart" element={<SizeChart />} />
         <Route path="/products/reviews" element={<ReviewsForm />} />
         <Route path="/create-serie" element={<CreateSerie />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
       </Routes>
       {pathname !== "/" && <Footer />}
     </div>
