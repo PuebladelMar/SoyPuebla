@@ -23,4 +23,6 @@ export const GET_ALL_FAV= "GET_ALL_FAV"
 export const NOTIFY_STOCK = "NOTIFY_STOCK";
 export const POST_REVIEWS = 'POST_REVIEWS';
 export const GET_REVIEWS = 'GET_REVIEWS';
+export const GET_USER_BY_ID = 'GET_USER_BY_ID';
+export const GET_USER_BY_NAME = 'GET_USER_BY_NAME';
 
