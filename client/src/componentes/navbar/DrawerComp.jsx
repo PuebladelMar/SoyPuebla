@@ -9,6 +9,7 @@ import {
   List,
 } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import PdM from "../.././assets/images/PdM.png";
 import { Link } from "react-router-dom";
 
 function DrawerComp({ links }) {
@@ -26,7 +27,7 @@ function DrawerComp({ links }) {
         <Box display={"flex"} justifyContent={"center"}>
           <Link to="/home">
             <img
-              src="src/assets/images/PdM.png"
+              src={PdM}
               alt="Cart Icon"
               style={{
                 width: "7rem",

@@ -8,13 +8,11 @@ import Reviews from "../.././componentes/reviews/Reviews";
 import ReviewsForm from "../../componentes/reviews/ReviewsForm";
 import { getReviewById } from "../../redux/Actions";
 import "./Detail.css";
-// import getReviewsById from "../../../../server/src/controllers/Reviews/controllGetReviewsById";
 
 const Detail = () => {
   const { id } = useParams();
   const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
-
   const [productDetails, setProductDetails] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [isReady, setIsReady] = useState(false);
@@ -38,6 +36,12 @@ const Detail = () => {
     fetchReview();
   }, [dispatch, productDetails]);
 
+  const handleLoginClick = (event) => {
+    event.preventDefault();
+    alert("Debes iniciar Sesion");
+    dispatch(getReviewById(productDetails[0].id));
+  };
+
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
@@ -49,7 +53,7 @@ const Detail = () => {
       }
     };
     fetchProductDetails();
-  }, []);
+  }, [id, setProductDetails]);
 
   const handleColorChange = (color) => {
     setSelectedColor(color);
@@ -294,7 +298,13 @@ const Detail = () => {
       {isReady && (
         <div className="reviews-container">
           <Reviews />
-          <ReviewsForm productId={productDetails[0].id} />
+          {console.log(productDetails)}
+          {productDetails[0] && (
+            <ReviewsForm
+              productId={productDetails[0].id}
+              handleLoginClick={handleLoginClick}
+            />
+          )}
         </div>
       )}
     </div>
