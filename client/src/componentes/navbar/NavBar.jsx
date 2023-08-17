@@ -128,7 +128,7 @@ export default function NavBar({ links }) {
                       <Link to="/create">CREAR</Link>
                     </li>
                     <li style={{ margin: " 1rem" }}>
-                      <Link to="/dashboard">ADMIN</Link>
+                      <Link to="/dashboard">PANEL DE ADMINISTRADOR</Link>
                     </li>
                     <li style={{ margin: " 1rem" }}></li>
                   </ul>
