@@ -22,6 +22,16 @@ module.exports = (sequelize) => {
         min: 0
       }
     },
+    StockId:{
+      type: DataTypes.UUID,
+      allowNull: false,
+      unique: false
+    },
+    UserId:{
+      type: DataTypes.UUID,
+      allowNull: false,
+      unique: false
+    },
     deletedAt: {
       type: DataTypes.DATE,
       allowNull: true,
