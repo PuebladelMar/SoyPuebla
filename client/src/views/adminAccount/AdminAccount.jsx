@@ -9,7 +9,7 @@ const AdminAccount = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Simulación de inicio de sesión exitoso
+
     if (usuario === "1" && contrasena === "1") {
       setIsLoggedIn(true);
     } else {
@@ -46,15 +46,7 @@ const AdminAccount = () => {
         </div>
       ) : (
         <div className="dashboard-container">
-          {/* Contenido del panel d
-          
-          
-          e administración */}
           <h2>Bienvenido al Panel de Administración</h2>
-          {/* ... Más contenido ..
-          
-          
-          . */}
         </div>
       )}
     </div>

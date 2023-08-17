@@ -22,6 +22,8 @@ import {
   NOTIFY_STOCK,
   POST_REVIEWS,
   GET_REVIEWS,
+  GET_USER_BY_ID,
+  GET_USER_BY_NAME
 } from "./ActionsTypes";
 
 let initialState = {
@@ -37,6 +39,10 @@ let initialState = {
   deleteCart: [],
   favorites: [],
   reviews: [],
+  userDeleted:[],
+  userById: [],
+  userEdited: [],
+  userByName: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -155,7 +161,25 @@ function rootReducer(state = initialState, action) {
         ...state,
         reviews: action.payload,
       };
-
+    case DELETE_USERS:
+      return{
+        ...state,
+        userDeleted: action.payload
+      };
+    case GET_USER_BY_ID:
+      return{
+        ...state,
+        userById: action.payload
+      };
+    case PUT_USERS:
+      return{
+        ...state,
+      };
+    case GET_USER_BY_NAME:
+      return{
+        ...state,
+        userByName: action.payload
+      }
     default:
       return state;
   }
