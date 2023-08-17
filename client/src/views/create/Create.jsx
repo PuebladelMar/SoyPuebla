@@ -219,28 +219,54 @@ const Create = () => {
     );
   };
 
-  const handleSelectSize = (event, selectedColor) => {
+  const handleSelectSizeAndStockChange = (event, selectedColor) => {
+    const name = event.target.name;
+    const value = event.target.value;
+  
     setCreateProduct((state) => {
-      if (event.target.name === "size") {
-        const selectedSize = event.target.value;
-        if (selectedColor) {
-          const updatedColorImage = state.colorImage?.map((item) =>
-            item.color === selectedColor
-              ? {
-                  ...item,
-                  stocks: [...item.stocks, { size: selectedSize }],
-                }
-              : item
-          );
-          return {
-            ...state,
-            colorImage: updatedColorImage,
-          };
-        }
+      if (name === "size") {
+        const selectedSize = value;
+        const stockItem = state.colorImage.find(item => item.color === selectedColor)?.stocks.find(stock => stock.size === selectedSize);
+        const initialAmount = stockItem ? stockItem.amount : 0;
+  
+        const updatedColorImage = state.colorImage.map((item) =>
+          item.color === selectedColor
+            ? {
+                ...item,
+                stocks: [...item.stocks, { size: selectedSize, amount: initialAmount }],
+              }
+            : item
+        );
+  
+        return {
+          ...state,
+          colorImage: updatedColorImage,
+        };
+      } else {
+        const color = selectedColor;
+        const size = event.target.getAttribute("data-size");
+        const newAmount = parseInt(value);
+      
+        const updatedColorImage = state.colorImage.map((item) =>
+          item.color === color
+            ? {
+                ...item,
+                stocks: item.stocks.map((stock) =>
+                  stock.size === size ? { ...stock, amount: newAmount } : stock
+                ),
+              }
+            : item
+        );
+  
+        return {
+          ...state,
+          colorImage: updatedColorImage,
+        };
       }
     });
+  
     setErrors(
-      validations({ ...createProduct, [event.target.name]: event.target.value })
+      validations({ ...createProduct, [name]: value })
     );
   };
 
@@ -287,7 +313,6 @@ const Create = () => {
 
   return (
     <div className="create-main-container">
-      {console.log(createProduct)}
       {showAlert.category && (
         <popups className="pop-ups">
           <>
@@ -444,7 +469,7 @@ const Create = () => {
                     name="size"
                     placeholder="Talles"
                     defaultValue="def"
-                    onChange={(event) => handleSelectSize(event, col.color)}
+                    onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
                   >
                   <option value="def" key="def" disabled>
                   Selecciona uno o varios talles.
@@ -460,12 +485,21 @@ const Create = () => {
                   <p className="error">{errors.size}</p>
                 <div>
                 {col.stocks.length > 0 ? (
-                col.stocks.map((si) => (
-                <div key={si.size}>
-                <p>{si.size}</p>
-                <button type="button" onClick={() => handleDeleteSize(si.size, col.color)}>X</button>
-                  </div>
-                ))
+                col.stocks.map((si) => {
+                  return(
+                    <div key={si.size}>
+                      <p>{si.size}</p>
+                      <input
+                      name="amount"
+                      type="number"
+                      data-size={si.size}
+                      value={si.amount}
+                      onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
+                      />
+                      <button type="button" onClick={() => handleDeleteSize(si.size, col.color)}>X</button>
+                    </div>
+                  )
+                })
                 ) : (
                   <p className="no-dietTypes"></p>
                 )}
