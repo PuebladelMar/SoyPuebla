@@ -25,7 +25,8 @@ import {
   GET_REVIEWS,
   GET_ALL_FAV,
   GET_USER_BY_ID,
-  GET_USER_BY_NAME
+  GET_USER_BY_NAME,
+  GET_REVIEW_BY_ID
 } from "./ActionsTypes";
 
 
@@ -433,6 +434,20 @@ export function getUserByName(name) {
       });
     } catch (error) {
       alert('Error al obtener las coincidencias');
+    }
+  };
+}
+
+export function getReviewById(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`http://localhost:3001/products/review/${id}`);
+      dispatch({
+        type: GET_REVIEW_BY_ID,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
     }
   };
 }

@@ -1,18 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { postReviews, getProducts } from "../../redux/Actions";
+import { postReviews, getProducts, getReviewById } from "../../redux/Actions";
 import "./ReviewsForm.css";
 import { useEffect, useState } from "react";
-import { Typography, Rating } from "@mui/material";
+
 
 function ReviewsForm({ productId }) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userId);
   const allProducts = useSelector((state) => state.allProducts);
   const allUsers = useSelector((state) => state.allUsers);
-  const [score, setScore] = useState(0);
 
   useEffect(() => {
     dispatch(getProducts());
+    dispatch(getReviewById(productId));
   }, [dispatch]);
 
   const [userComment, setUserComment] = useState({
@@ -28,7 +28,6 @@ function ReviewsForm({ productId }) {
     setUserComment({
       ...userComment,
       [name]: value,
-      score: score,
     });
   };
 
@@ -43,7 +42,6 @@ function ReviewsForm({ productId }) {
         productId: productId,
         fullName: allUsers.user.fullName,
       });
-      setScore(0);
     }
   };
 
@@ -52,8 +50,8 @@ function ReviewsForm({ productId }) {
       <h2>Dejanos tu comentario!</h2>
       <br></br>
       <form className="review-form">
-        <label>Selecciona un Producto:</label>
-        <select
+        {/* <label>Selecciona un Producto:</label> */}
+        {/* <select
           name="productId"
           value={userComment.productId}
           onChange={handleChange}
@@ -63,7 +61,7 @@ function ReviewsForm({ productId }) {
               {product.name}
             </option>
           ))}
-        </select>
+        </select> */}
         <label htmlFor="comment">Comentario:</label>
         <input
           type="text"
@@ -73,7 +71,7 @@ function ReviewsForm({ productId }) {
           required
         />
         <label htmlFor="rating">Calificación (1-5):</label>
-        {/* <input
+        <input
           type="number"
           min="1"
           max="5"
@@ -81,16 +79,8 @@ function ReviewsForm({ productId }) {
           onChange={handleChange}
           name="score"
           required
-        /> */}
-        <Typography className=" coment" component="legend" value={userComment.score + 1}></Typography>
-        <Rating className="stars-container"
-          name="simple-read-only"
-          value={score}
-          onChange={(event, newValue) => {
-            setScore(newValue);
-          }}
         />
-        
+        {/* Mostrar el userId prellenado en un campo oculto */}
         <input type="hidden" value={userComment.userId} name="userId" />
         <button className="boton" type="submit" onClick={handleSubmit}>
           Enviar Reseña

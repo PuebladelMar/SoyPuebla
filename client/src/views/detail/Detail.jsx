@@ -6,8 +6,9 @@ import { addToCar, sendMail, notifyStock } from "../../redux/Actions";
 import { useSelector, useDispatch } from "react-redux";
 import Reviews from "../.././componentes/reviews/Reviews";
 import ReviewsForm from "../../componentes/reviews/ReviewsForm";
-import { getReviews } from "../../redux/Actions";
+import { getReviewById } from "../../redux/Actions";
 import "./Detail.css";
+// import getReviewsById from "../../../../server/src/controllers/Reviews/controllGetReviewsById";
 
 const Detail = () => {
   const { id } = useParams();
@@ -24,9 +25,22 @@ const Detail = () => {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   //Aplicar el Loading
+  
+
+  
   useEffect(() => {
-    dispatch(getReviews());
-  }, [dispatch]);
+    const fetchReview = async () => {
+      try {
+        await dispatch(getReviewById(productDetails[0].id));
+        // console.log(productDetails[0].id);
+      } catch (error) {
+        // Manejar el error aquí si es necesario
+        console.error('Error fetching review:', error);
+      }
+    };
+  
+    fetchReview();
+  }, [dispatch, productDetails]);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
