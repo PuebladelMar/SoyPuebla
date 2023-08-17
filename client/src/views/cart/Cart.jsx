@@ -5,7 +5,7 @@ import { useState } from "react";
 import { getUserCart, deleteCart, deleteCartUser } from "../../redux/Actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import { initMercadoPago} from "@mercadopago/sdk-react";
 import "./Cart.css";
 
 const Cart = () => {
@@ -42,14 +42,10 @@ const Cart = () => {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:3001/mp/create_preference",
-        {
-          products: itemList,
-        }
-      );
-      const { id } = response.data;
-      return id;
+      await axios.post("http://localhost:3001/mp/create_preference",{products: itemList,})
+      .then(response=>{
+        window.location.href = response.data.response.body.init_point
+      })
     } catch (error) {
       console.log(error);
     }
@@ -93,9 +89,6 @@ const Cart = () => {
       </div>
       <p>Total: ${calculateTotal()}</p>
       <div className="cart-summary">
-        <div>
-          {preferenceId && <Wallet initialization={{ preferenceId }} />}
-        </div>
         <button className="checkout-button" onClick={handleBuy}>
           Pagar
         </button>
