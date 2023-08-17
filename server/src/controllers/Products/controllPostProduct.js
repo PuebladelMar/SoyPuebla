@@ -14,7 +14,7 @@ const controllPostProduct = async (req) => {
   for(const variation of colorImage){
     const { color, stocks } = variation;
     for(const stock of stocks){
-      const { size } = stock;
+      const { size, amount } = stock;
       const findedColor = await Colors.findOne({ where: { name: color }});
       const findedSize = await Sizes.findOne({ where: {name: size}});
 
@@ -22,7 +22,7 @@ const controllPostProduct = async (req) => {
         ProductId: newProduct.id,
         ColorId: findedColor.id,
         SizeId: findedSize.id,
-        amount: 0
+        amount: amount
       });
     };
   };
