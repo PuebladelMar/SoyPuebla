@@ -21,6 +21,7 @@ import { mainListItems, secondaryListItems } from "./listItems";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
+import { NavLink } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -150,7 +151,8 @@ export default function Dashboard() {
             {mainListItems}
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
-          </List>
+             </List>
+          
         </Drawer>
         <Box
           component="main"
@@ -190,6 +192,7 @@ export default function Dashboard() {
                     height: 240,
                   }}
                 >
+                  
                   <Deposits />
                 </Paper>
               </Grid>
@@ -204,6 +207,7 @@ export default function Dashboard() {
           </Container>
         </Box>
       </Box>
+      
     </ThemeProvider>
   );
 }
