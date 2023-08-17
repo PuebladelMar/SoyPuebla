@@ -5,10 +5,16 @@ const {
 
 const controllPostUser = async (req) => {
   const { clerkId, user, fullName } = req.body;
+
+  let emailAddress = user.emailAddresses[0].emailAddress;
+
+  console.log(emailAddress);
+ 
   const [newUser, created] = await Users.findOrCreate({
     where: {
       clerkId,
       fullName,
+      emailAddress,
     },
   });
 

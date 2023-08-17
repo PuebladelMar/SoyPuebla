@@ -17,6 +17,26 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      banUser: {
+        type: DataTypes.BOOLEAN, 
+        allowNull: false, 
+        defaultValue: false, 
+      },
+      userRole: {
+        type: DataTypes.ENUM('user', 'administrator', 'superadministrator'), 
+        allowNull: false,
+        defaultValue: 'user', 
+      },
+      emailAddress: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          isEmail: {
+            args: true,
+            msg: "Must be a valid email address",
+          },
+        },
+      },
     },
     { timestamps: true, 
       paranoid: true,

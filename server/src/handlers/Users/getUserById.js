@@ -2,7 +2,6 @@ const getUserById = require("../../controllers/Users/controllGetUserById");
 
 const getUser = async (req, res) => {
   const { id } = req.params;
-
   try {
     const response = await getUserById(id);
     if (!response) {
