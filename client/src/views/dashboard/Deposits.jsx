@@ -7,15 +7,23 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
+
 export default function Deposits() {
+
+   const currentDate = new Date();
+   const formattedDate = currentDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
   return (
     <>
-      <Title>Recent Deposits</Title>
+      <Title>Ventas totales</Title>
       <Typography component="p" variant="h4">
         $3,024.00
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 15 March, 2019
+      {formattedDate}
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>

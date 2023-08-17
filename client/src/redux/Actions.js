@@ -24,15 +24,16 @@ import {
   POST_REVIEWS,
   GET_REVIEWS,
   GET_ALL_FAV,
+  GET_USER_BY_ID,
+  GET_USER_BY_NAME,
+  GET_ALL_HISTORY
 } from "./ActionsTypes";
 
 
 export function getProducts() {
   return async function (dispatch) {
     try {
-
       const response = await axios("/products");
-
       dispatch({
         type: GET_PRODUCTS,
         payload: response.data,
@@ -46,9 +47,7 @@ export function getProducts() {
 export function getCategories() {
   return async function (dispatch) {
     try {
-
       const response = await axios("/products/category");
-
       dispatch({
         type: GET_ALL_CATEGORIES,
         payload: response.data,
@@ -62,9 +61,7 @@ export function getCategories() {
 export function getSeries() {
   return async function (dispatch) {
     try {
-
       const response = await axios("/products/series");
-
       dispatch({
         type: GET_ALL_SERIES,
         payload: response.data,
@@ -78,9 +75,7 @@ export function getSeries() {
 export function getSizes() {
   return async function (dispatch) {
     try {
-
       const response = await axios("/products/size");
-
       dispatch({
         type: GET_ALL_SIZES,
         payload: response.data,
@@ -108,10 +103,8 @@ export function getColor() {
 export function postProducts(createProduct) {
   return async function (dispatch) {
     try {
-
       await axios.post(`/products/`, createProduct);
       alert("Su producto se creo correctamente");
-
       return dispatch({
         type: POST_PRODUCTS,
       });
@@ -147,11 +140,8 @@ export function filterProducts(filters) {
           return null;
         })
         .filter((query) => query !== null)
-
         .join("&");
       const response = await axios.get(`/products?${queryParams}`);
-
-
       dispatch({
         type: GET_FILTERED_PRODUCTS,
         payload: response.data,
@@ -166,9 +156,7 @@ export function filterProducts(filters) {
 export function getUsers() {
   return async function (dispatch) {
     try {
-
       const response = await axios("/users/");
-
       dispatch({
         type: GET_USERS,
         payload: response.data,
@@ -322,8 +310,6 @@ export function getAllFav(userId) {
 }
 
 export function removeFromFavorites(userId, productId ) {
-  console.log(userId)
-  console.log(productId)
   return async function(dispatch) {
     try {
       const response = await axios.delete(`http://localhost:3001/cart/fav/`, {
@@ -393,6 +379,75 @@ export function getReviews() {
   };
 }
 
+export function deleteUser(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`http://localhost:3001/users/user${id}`);
+      dispatch({
+        type: DELETE_USERS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
 
+export function getUserById(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`http://localhost:3001/users/user${id}`);
+      dispatch({
+        type: GET_USER_BY_ID,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
 
+export function editUser(id, userRole, banUser) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`http://localhost:3001/users/user${id}`,{
+        userRole: userRole,
+        banUser: banUser,
+      });
+      dispatch({
+        type: PUT_USERS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
 
+export function getUserByName(name) {
+  return async function (dispatch) {
+    try {
+      const response = await axios(`http://localhost:3001/users?name=${name}`);
+      dispatch({
+        type: GET_USER_BY_NAME,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert('Error al obtener las coincidencias');
+    }
+  };
+}
+
+export function getAllHistory() {
+  return async function (dispatch) {
+    try {
+      const response = await axios(`http://localhost:3001/history`);
+      dispatch({
+        type: GET_ALL_HISTORY,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert("Error al obtener usuarios");
+    }
+  };
+}

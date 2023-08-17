@@ -82,7 +82,7 @@
 .products-container {
   display: flex;
   flex-direction: row;
-  padding-top: 4.2rem;
+  padding-top: 5rem;
   width: 90%;
 }
 

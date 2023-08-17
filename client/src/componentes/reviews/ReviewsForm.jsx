@@ -82,7 +82,7 @@ function ReviewsForm({ productId }) {
           name="score"
           required
         /> */}
-        <Typography className=" coment" component="legend" value={userComment.score}></Typography>
+        <Typography className=" coment" component="legend" value={userComment.score + 1}></Typography>
         <Rating className="stars-container"
           name="simple-read-only"
           value={score}
