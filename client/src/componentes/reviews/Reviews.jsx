@@ -51,9 +51,7 @@ function Reviews({ productId }) {
     };
   
     fetchReview();
-  }, [dispatch, getReviewById]);
-
-  console.log(getReviewById);
+  }, [dispatch]); 
 
   return (
     <div>

@@ -12,10 +12,8 @@ import "./Detail.css";
 
 const Detail = () => {
   const { id } = useParams();
-
   const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
-  console.log(userId);
 
   const [productDetails, setProductDetails] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -25,9 +23,7 @@ const Detail = () => {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   //Aplicar el Loading
-  
 
-  
   useEffect(() => {
     const fetchReview = async () => {
       try {
@@ -35,10 +31,10 @@ const Detail = () => {
         // console.log(productDetails[0].id);
       } catch (error) {
         // Manejar el error aquí si es necesario
-        console.error('Error fetching review:', error);
+        console.error("Error fetching review:", error);
       }
     };
-  
+
     fetchReview();
   }, [dispatch, productDetails]);
 
@@ -126,7 +122,7 @@ const Detail = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <div className="containerDetail">
         <div className="secContainer">
           <div>
@@ -296,20 +292,10 @@ const Detail = () => {
         </div>
       </div>
       {isReady && (
-        <div>
-        <Reviews />
-        {userId.length > 0 ? (
-          <ReviewsForm productId={productDetails[0].id}/>
-        ) : (
-          <div className="btn-container">
-            <Link to="https://worthy-insect-17.accounts.dev/sign-in">
-            <button className="btn-iniciar-sesion">Inicia sesion</button>
-            </Link>
-          </div>
-        )}
-         
-      </div>
-
+        <div className="reviews-container">
+          <Reviews />
+          <ReviewsForm productId={productDetails[0].id} />
+        </div>
       )}
     </div>
   );

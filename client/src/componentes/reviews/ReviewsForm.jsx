@@ -1,30 +1,38 @@
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { postReviews, getProducts, getReviewById } from "../../redux/Actions";
 import "./ReviewsForm.css";
 import { useEffect, useState } from "react";
 
-
 function ReviewsForm({ productId }) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userId);
-  const allProducts = useSelector((state) => state.allProducts);
   const allUsers = useSelector((state) => state.allUsers);
+  const [isReady, setIsReady] = useState(false);
+  const [userComment, setUserComment] = useState({
+    score: "",
+    userId: "",
+    description: "",
+    productId: "",
+    fullName: "",
+  });
 
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getReviewById(productId));
-  }, [dispatch]);
-
-  const [userComment, setUserComment] = useState({
-    score: "",
-    userId: userId,
-    description: "",
-    productId: productId,
-    fullName: allUsers.user.fullName,
-  });
+    if (userId.length > 0) {
+      setUserComment((prevUserComment) => ({
+        ...prevUserComment,
+        userId: userId,
+        productId: productId,
+        fullName: allUsers.user.fullName,
+      }));
+    }
+  }, [dispatch, userId, productId, allUsers]);
+  console.log(isReady);
 
   const handleChange = (event) => {
-    const { name, value } = event.target; // Usamos name en lugar de title
+    const { name, value } = event.target;
     setUserComment({
       ...userComment,
       [name]: value,
@@ -47,44 +55,39 @@ function ReviewsForm({ productId }) {
 
   return (
     <div className="review-form-container">
-      <h2>Dejanos tu comentario!</h2>
-      <br></br>
+      <h2>¡Dejanos tu comentario!</h2>
       <form className="review-form">
-        {/* <label>Selecciona un Producto:</label> */}
-        {/* <select
-          name="productId"
-          value={userComment.productId}
-          onChange={handleChange}
-        >
-          {allProducts.map((product) => (
-            <option key={product.id} value={product.id}>
-              {product.name}
-            </option>
-          ))}
-        </select> */}
         <label htmlFor="comment">Comentario:</label>
-        <input
+        <textarea
+          className="textarea"
           type="text"
+          style={{ resize: "none" }}
           value={userComment.description}
           onChange={handleChange}
           name="description"
-          required
         />
         <label htmlFor="rating">Calificación (1-5):</label>
         <input
+          className="rating"
+          style={{ width: "4rem" }}
           type="number"
           min="1"
           max="5"
           value={userComment.score}
           onChange={handleChange}
           name="score"
-          required
         />
-        {/* Mostrar el userId prellenado en un campo oculto */}
-        <input type="hidden" value={userComment.userId} name="userId" />
-        <button className="boton" type="submit" onClick={handleSubmit}>
-          Enviar Reseña
-        </button>
+        {userId.length === 0 ? (
+          <div className="btn-container">
+            <Link to="https://worthy-insect-17.accounts.dev/sign-in">
+              <button className="btn-iniciar-sesion">Inicia sesion</button>
+            </Link>
+          </div>
+        ) : (
+          <button className="boton" type="submit" onClick={handleSubmit}>
+            Enviar Reseña
+          </button>
+        )}
       </form>
     </div>
   );

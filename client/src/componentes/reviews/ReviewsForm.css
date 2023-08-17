@@ -1,64 +1,80 @@
 .review-form-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 2rem auto 6rem ;
-    margin-top: 7rem;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .review-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .review-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .review-form input,
-  .review-form textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .review-form textarea {
-    resize: vertical;
-  }
-  
-  .review-form input[type="number"] {
-    width: 50px;
-  }
-  
-  .review-form button {
-    background-color: #517f7F;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .review-form button:hover {
+  width: 100%;
+  max-width: 400px;
+  height: 28.8rem;
+  padding: 2rem;
+  background-color: #FFFFFF;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 
-    background-color: #258181;
-  }
-.btn-container{
+.review-form-container h2 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.review-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.review-form input,
+.review-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.review-form textarea {
+  resize: vertical;
+}
+
+.review-form input[type="number"] {
+  width: 50px;
+}
+
+.review-form button {
+  background-color: #517f7f;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.review-form button:hover {
+  background-color: #258181;
+}
+.btn-container {
   /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.btn-container2{
+.btn-container2 {
   background-color: #517f7f;
   color: #fff;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.textarea {
+  height: 7.3rem;
+  font-size: 1.3rem;
+}
+
+.rating {
+  font-size: 1.4rem;
 }
