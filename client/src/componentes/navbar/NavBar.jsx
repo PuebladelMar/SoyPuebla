@@ -75,7 +75,6 @@ export default function NavBar({ links }) {
                 <Link to="/home">
                   <img
                     src={PdM}
-                    src="src/assets/images/PdM.png"
                     alt="Cart Icon"
                     style={{ width: "6rem", height: "3rem" }}
                   />
@@ -95,7 +94,6 @@ export default function NavBar({ links }) {
                     <Link to="/home">
                       <img
                         src={TortugaRosa}
-                        src="src/assets/images/TORTUGA_ROSA_SINFONDO.png"
                         alt="Cart Icon"
                         style={{ width: "3.2rem", height: "2.8rem" }}
                       />
