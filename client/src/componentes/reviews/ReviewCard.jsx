@@ -10,6 +10,7 @@ export default function ReviewCard({ score, description, fullName }) {
         className="review-card"
         style={{
           padding: "0.8rem 1rem",
+          cursor: "default",
         }}
       >
         <Typography className="username" fontSize={"1.3rem"}>

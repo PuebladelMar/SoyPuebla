@@ -15,6 +15,7 @@
 .review-form-container h2 {
   font-size: 1.5rem;
   text-align: center;
+  cursor: default;
 }
 
 .review-form {
