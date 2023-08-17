@@ -62,7 +62,7 @@ function preventDefault(event) {
 export default function Orders() {
   return (
     <>
-      <Title>Recent Orders</Title>
+      <Title>Ordenes Recientes</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
