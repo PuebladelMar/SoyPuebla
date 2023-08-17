@@ -23,7 +23,7 @@
   justify-content: center;
 }
 
-.button-container button {
+.button-container-button {
   box-sizing: border-box;
   width: fit-content;
   font-family: inherit;

@@ -203,10 +203,6 @@
   background: rgb(81, 127, 127);
 }
 
-.btn-container {
-  
-}
-
 .btn-iniciar-sesion{
   margin: 10px;
   background-color: rgb(255, 255, 255);;
@@ -218,8 +214,8 @@
   transition: all ease .3s
 
 }
-.btn-iniciar-sesion:hover {
 
+.btn-iniciar-sesion:hover {
   transform: scale(1.08);
   color:  rgb(255, 255, 255);
   background: rgb(81, 127, 127);

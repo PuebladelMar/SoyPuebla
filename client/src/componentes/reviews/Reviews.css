@@ -1,5 +1,5 @@
 .review {
-  width: 25rem;
+  width: 80%;
   display: flex;
   flex-direction: column;
   gap: 2.1rem;
@@ -14,18 +14,22 @@
   margin: 0.4rem 0.4rem 0.4rem 0.4rem;
 }
 
-.review span {
-  text-align: center;
+.review-container {
+  width: 100%;
+  display: flex;
+  justify-content: start;
 }
 
-@media (max-width: 980px) {
-  .review {
-    width: 20rem;
-  }
+.review span {
+  text-align: center;
 }
 
 @media (max-width: 860px) {
   .review {
     width: 25rem;
+  }
+
+  .review-container {
+    justify-content: center;
   }
 }
