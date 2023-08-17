@@ -6,6 +6,15 @@
   top: 0;
 }
 
+.search-form-aside-modal {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .filters {
   display: flex;
   justify-content: center;
@@ -31,7 +40,38 @@
   width: 100%;
 }
 
+.search-form-aside-modal h2 {
+  color: rgb(253, 249, 249);
+}
+
+.search-form-aside-modal h3 {
+  color: rgb(253, 249, 249);
+}
+
+.search-form-aside-modal h2 span {
+  background-color: rgb(253, 249, 249);
+  height: 0.01rem;
+  margin-right: 1rem;
+  width: 100%;
+}
+
 .search-bar-aside select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 200px;
+  font-size: 15px;
+  border-radius: 15px;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(46, 79, 82);
+  color: rgb(46, 79, 82);
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.search-form-aside-modal select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -175,6 +215,7 @@ li {
 }
 
 .custom-select option {
+  font-size: 1.2rem;
   background-color: #517f7f;
   color: rgb(255, 255, 255);
 }

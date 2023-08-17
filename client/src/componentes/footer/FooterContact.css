@@ -11,7 +11,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5) url("src/assets/FooterContact.svg");
+  background: rgba(0, 0, 0, 0.5) url("../../assets/FooterContact.svg");
   background-size: cover;
   animation: moveBackground 20s linear infinite,
     zoomBackground 20s alternate infinite;

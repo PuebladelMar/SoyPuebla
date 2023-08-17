@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 import * as actions from "../../redux/Actions";
 import Modal from "@mui/material/Modal";
+import { useMediaQuery } from "@mui/material";
 import Filtro from "../../../src/assets/images/filtro.png";
 import "./SideBAr.css";
 
@@ -23,6 +24,9 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
   const selectSizeRef = useRef(null);
   const selectPriceRef = useRef(null);
   const selectSerieRef = useRef(null);
+  const isMatch = useMediaQuery("(max-width: 644px)");
+  const isMatch2 = useMediaQuery("(max-width: 560px)");
+  const isMatch3 = useMediaQuery("(max-width: 430px)");
 
   const handleSelectClick = (event, toggleFunction) => {
     event.stopPropagation();
@@ -225,20 +229,6 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
               </select>
               <span className="select-arrow"></span>
             </div>
-            {/* </li>
-          <label>Precio máximo</label>
-          <input
-            name="maxPrice"
-            placeholder="Precio máximo"
-            onChange={handlerEventSideBar}
-          />
-          <label>Precio mínimo</label>
-          <input
-            name="minPrice"
-            placeholder="Precio mínimo"
-            onChange={handlerEventSideBar}
-          />
-          <li> */}
           </li>
           <li className="sale-li">
             <label className="sale-label">
@@ -265,42 +255,51 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
       <Modal
         open={isModalOpen}
         onClose={handleCloseModal}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
         style={{
-          backgroundColor: "#517F7F",
+          backgroundColor: "#ECE4E1",
           borderRadius: "10px",
-          height: "33rem",
-          margin: "5rem 2rem 0 2rem",
+          maxHeight: "80vh",
+          width: "80%",
+          margin: isMatch3 ? "5rem 2.5rem" : isMatch2 ? "5rem 3rem" : isMatch && "5rem 4rem",
+          padding: "1rem",
+          overflowY: "auto",
+          backdropFilter: "none",
         }}
       >
         <div className="modal-content">
-          <form className="search-form-aside" onChange={handlerEventSideBar}>
-            <li className="li-filtros">
-              <li>
-                <h2>Filtrar por categoria</h2>
-                <div
-                  className={`select-container-filter ${
-                    isOpenCategory ? "open" : ""
-                  }`}
+          <form
+            className="search-form-aside-modal"
+            onChange={handlerEventSideBar}
+          >
+            <li className="filters">
+              <h2>
+                Categoria<span></span>
+              </h2>
+              <div
+                className={`select-container-filter ${
+                  isOpenCategory ? "open" : ""
+                }`}
+              >
+                <select
+                  className="custom-select"
+                  name="category"
+                  ref={selectCategoryRef}
+                  onClick={handleSelectToggleCategory}
                 >
-                  <select
-                    className="custom-select"
-                    name="category"
-                    ref={selectCategoryRef}
-                    onClick={handleSelectToggleCategory}
-                  >
-                    <option value={null}>Todas las categorias</option>
-                    {categories.map((category, index) => (
-                      <option key={index} value={category.name}>
-                        {category.name}
-                      </option>
-                    ))}
-                  </select>
-                  <span className="select-arrow"></span>
-                </div>
-              </li>
-              <h2>Filtrar por color</h2>
+                  <option value={null}>Todas las categorias</option>
+                  {categories.map((category, index) => (
+                    <option key={index} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+                <span className="select-arrow"></span>
+              </div>
+            </li>
+            <li className="filters">
+              <h2>
+                Color<span></span>
+              </h2>
               <div
                 className={`select-container-filter ${
                   isOpenColor ? "open" : ""
@@ -322,8 +321,10 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 <span className="select-arrow"></span>
               </div>
             </li>
-            <li>
-              <h2>Filtrar por tallas</h2>
+            <li className="filters">
+              <h2>
+                Talla<span></span>
+              </h2>
               <div
                 className={`select-container-filter ${
                   isOpenSize ? "open" : ""
@@ -345,8 +346,10 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 <span className="select-arrow"></span>
               </div>
             </li>
-            <li>
-              <h2>Filtrar por serie</h2>
+            <li className="filters">
+              <h2>
+                Serie<span></span>
+              </h2>
               <div
                 className={`select-container-filter ${
                   isOpenSerie ? "open" : ""
@@ -370,8 +373,10 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 <span className="select-arrow"></span>
               </div>
             </li>
-            <li>
-              <h2>Ordenar por precio</h2>
+            <li className="filters">
+              <h2>
+                Precio<span></span>
+              </h2>
               <div
                 className={`select-container-filter ${
                   isOpenPrice ? "open" : ""
@@ -391,14 +396,18 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 </select>
                 <span className="select-arrow"></span>
               </div>
-              <button
-                type="button"
-                name="sale"
-                className="onSaleButton"
-                onClick={handlerEventSideBar}
-              >
-                Productos en oferta
-              </button>
+            </li>
+            <li className="sale-li">
+              <label className="sale-label">
+                <input
+                  type="checkbox"
+                  name="sale"
+                  onClick={handlerEventSideBar}
+                  className="sale-input"
+                />
+                <span className="sale-span"></span>
+              </label>
+              <h3>Productos en oferta</h3>
             </li>
             <button
               name="limpiar Filtros"

@@ -16,24 +16,48 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import ReviewCard from "./ReviewCard";
-// import { getReviews } from "../../redux/Actions";
+
+import { getReviewById } from "../../redux/Actions";
 // import { postUsers } from '../../redux/Actions';
 // import ReviewsForm from './ReviewsForm'
 
 function Reviews({ productId }) {
-  const reviews = useSelector((state) => state.reviews);
-  // const dispatch = useDispatch();
-  // console.log(reviews);
-  // useEffect(() => {
-  //   dispatch(getReviews());
+  const getReviewById = useSelector((state) => state.getReviewById);
+  const dispatch = useDispatch();
+  console.log(getReviewById);
+
+
+  // useEffect(() => {const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  
+  //   setUserComment((prevComment) => ({
+  //     ...prevComment,
+  //     [name]: value,
+  //     score: name === "score" ? parseInt(value) : prevComment.score,
+  //   }));
+  // };
+  //   dispatch(getReviewById(productId));
   // }, [dispatch]);
-  console.log(reviews);
+
+  useEffect(() => {
+    const fetchReview = async () => {
+      try {
+        await dispatch(getReviewById(productId));
+        // console.log(productDetails[0].id);
+      } catch (error) {
+        // Manejar el error aquí si es necesario
+        console.error('Error fetching review:', error);
+      }
+    };
+  
+    fetchReview();
+  }, [dispatch]); 
 
   return (
     <div>
       <div className="review">
-        {reviews.length > 0 ? (
-          reviews.map((re) => (
+        {getReviewById.length > 0 ? (
+          getReviewById.map((re) => (
             <ReviewCard
               key={re.id}
               title={re.title}

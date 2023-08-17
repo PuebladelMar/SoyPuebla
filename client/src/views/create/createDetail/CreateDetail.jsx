@@ -24,7 +24,7 @@ const CreateDetail = ({
     <section className="containerDetailCreate">
       <container className="secContainerCreate">
         <div>
-      {console.log(imagenes)}
+      {/* {console.log(imagenes)} */}
           {imagenes == false ? (
             <img
               className="cardImgDetailCreate"
@@ -89,11 +89,11 @@ const CreateDetail = ({
           {size?.length !== 0 ? (
             <div>
               <h2 className="detailInfoCreate">Talle:</h2>
-              {size.map((s, i) => (
+              {/*{size.map((s, i) => (
                 <h2 className="detailInfoCreate" key={i}>
                   {s}
                 </h2>
-              ))}
+              ))}*/}
             </div>
           ) : (
             <h2 className="detailInfoCreate">Talle</h2>

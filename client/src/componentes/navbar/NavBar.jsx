@@ -1,4 +1,3 @@
-
 import { Grid, Tabs, Typography } from "@mui/material";
 import { Box, AppBar, Toolbar, IconButton, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -9,19 +8,21 @@ import { useDispatch } from "react-redux";
 import { getProducts, getProductsByName } from "../../redux/Actions";
 import { useLocation } from "react-router-dom";
 import UserIcon from "../../views/login/UserIcon";
+import PdM from "../.././assets/images/PdM.png";
+import TortugaRosa from "../.././assets/images/TORTUGA_ROSA_SINFONDO.png";
+import FavImage from "../.././assets/images/Fav.png";
+import CartImage from "../.././assets/images/Cart.png";
 import DrawerComp from "./DrawerComp";
-
 
 export default function NavBar({ links }) {
   const location = useLocation();
-  const isProducts = location.pathname === '/products';
+  const isProducts = location.pathname === "/products";
   const dispatch = useDispatch();
 
   const [searchValue, setSearchValue] = useState("");
 
-
   useEffect(() => {
-    if (searchValue === '') {
+    if (searchValue === "") {
       dispatch(getProducts());
     } else {
       dispatch(getProductsByName(searchValue));
@@ -41,62 +42,60 @@ export default function NavBar({ links }) {
   const isMatchSearchBar = useMediaQuery("(max-width: 1114px)");
   const [value, setValue] = useState(0);
 
-
   return (
     <AppBar
       sx={{
-        boxSizing: 'border-box',
-        backgroundColor: ' #517f7F',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'space-between',
-        width: '100%',
+        boxSizing: "border-box",
+        backgroundColor: " #517f7F",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "space-between",
+        width: "100%",
+        height: "5rem",
       }}
     >
       <Toolbar
         sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100%',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
         }}
       >
         <Box>
           {isMatch ? (
             <Box
-              display={'flex'}
-              justifyContent={'center'}
-              alignItems={'center'}
-              gap={'1rem'}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              gap={"1rem"}
             >
               <DrawerComp links={links} />
               <IconButton disableRipple>
-                <Link to='/home'>
+                <Link to="/home">
                   <img
-
-                    src="src/assets/images/PdM.png"
+                    src={PdM}
                     alt="Cart Icon"
                     style={{ width: "6rem", height: "3rem" }}
-
                   />
                 </Link>
               </IconButton>
             </Box>
           ) : (
             <Grid
-              display={'flex'}
-              sx={{ placeItems: 'center' }}
+              display={"flex"}
+              sx={{ placeItems: "center" }}
               container
-              alignItems='center'
+              alignItems="center"
             >
               <Grid item>
                 <Typography>
                   <IconButton disableRipple>
-                    <Link to='/home'>
+                    <Link to="/home">
                       <img
-                        src='src/assets/images/TORTUGA_ROSA_SINFONDO.png'
-                        alt='Cart Icon'
-                        style={{ width: '3.2rem', height: '2.8rem' }}
+                        src={TortugaRosa}
+                        alt="Cart Icon"
+                        style={{ width: "3.2rem", height: "2.8rem" }}
                       />
                     </Link>
                   </IconButton>
@@ -104,8 +103,8 @@ export default function NavBar({ links }) {
               </Grid>
               <Grid item>
                 <Tabs
-                  indicatorColor='secondary'
-                  textColor='inherit'
+                  indicatorColor="secondary"
+                  textColor="inherit"
                   value={value}
                   onChange={(e, val) => setValue(val)}
                   TabIndicatorProps={{
@@ -116,27 +115,29 @@ export default function NavBar({ links }) {
                 >
                   <ul
                     style={{
-                      display: 'flex',
-                      listStyle: 'none',
-                      alignItems: 'center',
+                      display: "flex",
+                      listStyle: "none",
+                      alignItems: "center",
                     }}
                   >
-                    <li style={{ margin: ' 1rem' }}>
-                      <Link to='/home'>INICIO</Link>
+                    <li style={{ margin: " 1rem" }}>
+                      <Link to="/home">INICIO</Link>
                     </li>
-                    <li style={{ margin: ' 1rem' }}>
-                      <Link to='/products'>PRODUCTOS</Link>
+                    <li style={{ margin: " 1rem" }}>
+                      <Link to="/products">PRODUCTOS</Link>
                     </li>
-                    <li style={{ margin: ' 1rem' }}>
-                      <Link to='/about'>NOSOTRAS</Link>
+                    <li style={{ margin: " 1rem" }}>
+                      <Link to="/about">NOSOTRAS</Link>
                     </li>
-                    <li style={{ margin: ' 1rem' }}>
-                      <Link to='/create'>CREAR</Link>
+                    {/* <li style={{ margin: " 1rem" }}>
+                      <Link to="/create">CREAR</Link>
+                    </li> */}
+
+                    <li style={{ margin: " 1rem" }}>
+                      <Link to="/dashboard">PANEL DE ADMINISTRADOR</Link>
+                  
+
                     </li>
-                    <li style={{ margin: ' 1rem' }}>
-                      <Link to='/adminAccount'>ADMIN</Link>
-                    </li>
-                    <li style={{ margin: " 1rem" }}></li>
                   </ul>
                 </Tabs>
               </Grid>
@@ -144,13 +145,11 @@ export default function NavBar({ links }) {
           )}
         </Box>
         <Box>
-
-
           <Grid
-            display={'flex'}
-            marginLeft={'auto'}
-            alignItems={'center'}
-            gap={'10px'}
+            display={"flex"}
+            marginLeft={"auto"}
+            alignItems={"center"}
+            gap={"10px"}
           >
             {isProducts && !isMatchSearchBar && (
               <SearchBar
@@ -159,42 +158,40 @@ export default function NavBar({ links }) {
               />
             )}
 
-
             <Box
-              display={'flex'}
-              justifyContent={'flex-end'}
+              display={"flex"}
+              justifyContent={"flex-end"}
               marginRight={1}
-              gap={'10px'}
+              gap={"10px"}
             >
               {" "}
-              <IconButton>
+              <IconButton
+              >
                 <Link to="/fav">
                   {" "}
                   <img
-                    src="src/assets/images/Fav.png"
+                    src={FavImage}
                     alt="Fav Icon"
                     style={{
-                      width: "3rem",
-                      height: "3.2rem",
+                      width: "2.2rem",
+                      height: "2.2rem",
                       marginRight: "0.1rem",
                     }}
                   />
                 </Link>
               </IconButton>
               <IconButton>
-                <Link to='/Cart'>
-                  {' '}
+                <Link to="/Cart">
+                  {" "}
                   <img
-
-                    src="src/assets/images/Cart.png"
+                    src={CartImage}
                     alt="Cart Icon"
                     style={{
-                      width: "3.5rem",
-                      height: "3.5rem",
+                      width: "2.2rem",
+                      height: "2.2rem",
                       marginRight: "0rem",
                       margin: "-0.1rem",
                     }}
-
                   />
                 </Link>
               </IconButton>
