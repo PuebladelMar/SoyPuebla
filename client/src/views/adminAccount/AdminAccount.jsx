@@ -12,6 +12,7 @@ const AdminAccount = () => {
 
     if (usuario === "1" && contrasena === "1") {
       setIsLoggedIn(true);
+      
     } else {
       alert("Inicio de sesión fallido. Verifica tus credenciales.");
     }
