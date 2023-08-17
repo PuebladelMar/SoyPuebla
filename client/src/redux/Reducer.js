@@ -23,7 +23,8 @@ import {
   POST_REVIEWS,
   GET_REVIEWS,
   GET_USER_BY_ID,
-  GET_USER_BY_NAME
+  GET_USER_BY_NAME,
+  GET_ALL_HISTORY
 } from "./ActionsTypes";
 
 let initialState = {
@@ -43,6 +44,7 @@ let initialState = {
   userById: [],
   userEdited: [],
   userByName: [],
+  allHistory: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -179,6 +181,11 @@ function rootReducer(state = initialState, action) {
       return{
         ...state,
         userByName: action.payload
+      };
+      case GET_ALL_HISTORY:
+      return{
+        ...state,
+        allHistory: action.payload
       }
     default:
       return state;

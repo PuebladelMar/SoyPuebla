@@ -25,7 +25,8 @@ import {
   GET_REVIEWS,
   GET_ALL_FAV,
   GET_USER_BY_ID,
-  GET_USER_BY_NAME
+  GET_USER_BY_NAME,
+  GET_ALL_HISTORY
 } from "./ActionsTypes";
 
 
@@ -433,6 +434,20 @@ export function getUserByName(name) {
       });
     } catch (error) {
       alert('Error al obtener las coincidencias');
+    }
+  };
+}
+
+export function getAllHistory() {
+  return async function (dispatch) {
+    try {
+      const response = await axios(`http://localhost:3001/history`);
+      dispatch({
+        type: GET_ALL_HISTORY,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert("Error al obtener usuarios");
     }
   };
 }
