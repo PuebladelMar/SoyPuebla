@@ -89,11 +89,11 @@ const CreateDetail = ({
           {size?.length !== 0 ? (
             <div>
               <h2 className="detailInfoCreate">Talle:</h2>
-              {size.map((s, i) => (
+              {/*{size.map((s, i) => (
                 <h2 className="detailInfoCreate" key={i}>
                   {s}
                 </h2>
-              ))}
+              ))}*/}
             </div>
           ) : (
             <h2 className="detailInfoCreate">Talle</h2>
