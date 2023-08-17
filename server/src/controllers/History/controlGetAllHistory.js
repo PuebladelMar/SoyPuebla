@@ -13,10 +13,12 @@ const controllGetAllHistory = async () => {
           [Op.in]: stockIds,
         },
       },
-      attributes: ['ProductId', 'ColorId', 'SizeId'],
+      attributes: ['id', 'ProductId', 'ColorId', 'SizeId'],
     });
 
-    const stockAttributes = await Promise.all(stockList.map(async (stock) => {
+    const stockAttributesMap = {};
+
+    await Promise.all(stockList.map(async (stock) => {
       const product = await Products.findOne({
         where: {
           id: stock.ProductId,
@@ -38,7 +40,7 @@ const controllGetAllHistory = async () => {
         attributes: ['name'],
       });
 
-      return {
+      stockAttributesMap[stock.id] = {
         product: product ? product.name : '',
         color: color ? color.name : '',
         size: size ? size.name : '',
@@ -61,10 +63,10 @@ const controllGetAllHistory = async () => {
       return acc;
     }, {});
 
-    const result = userHistory.map((history, index) => ({
+    const result = userHistory.map((history) => ({
       ...history.dataValues,
       attributes: {
-        ...stockAttributes[index],
+        ...stockAttributesMap[history.StockId],
         ...userMap[history.UserId],
       },
     }));
