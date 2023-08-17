@@ -10,7 +10,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import { NavLink } from "react-router-dom";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 
 export const mainListItems = (
   <>
@@ -29,8 +29,8 @@ export const mainListItems = (
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Usuarios" />
+        </ListItemIcon>
+      <NavLink to="/dashboard/users"><ListItemText primary="Usuarios" /></NavLink>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
@@ -48,11 +48,10 @@ export const mainListItems = (
       <ListItemIcon>
         <AddIcon />
       </ListItemIcon>
-      <NavLink to="/create"><ListItemText primary="Crear" /></NavLink>
+      <NavLink to="/create">
+        <ListItemText primary="Crear" />
+      </NavLink>
     </ListItemButton>
-    
-    
-    
   </>
 );
 
