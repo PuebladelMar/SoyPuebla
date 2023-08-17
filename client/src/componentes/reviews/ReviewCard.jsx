@@ -8,25 +8,18 @@ export default function ReviewCard({ score, description, fullName }) {
 
   const [value, setValue] = useState(score);
   return (
-    // <Link to={`/reviews/${id}`}>
     <div className="container">
       <div>
         <h1>{fullName}</h1>
         <br></br>
-        {/* <h2>Valoracion</h2> */}
-        <span>{score}</span>
-        {/* <h2>Descripcion</h2> */}
         <span>{description}</span>
         <Typography component="legend" value={value}></Typography>
         <Rating
           name="simple-read-only"
           value={value}
-         readOnly //
-            
-          
+         readOnly
         />
       </div>
     </div>
-    // </Link>
   );
 }
