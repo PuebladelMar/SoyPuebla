@@ -30,7 +30,7 @@ function DrawerComp({ links }) {
               alt="Cart Icon"
               style={{
                 width: "7rem",
-                height: "2.8rem",
+                height: "3.3rem",
                 margin: "1rem",
                 filter: " contrast(0%)",
               }}

@@ -8,6 +8,10 @@ import { useDispatch } from "react-redux";
 import { getProducts, getProductsByName } from "../../redux/Actions";
 import { useLocation } from "react-router-dom";
 import UserIcon from "../../views/login/UserIcon";
+import PdM from "../.././assets/images/PdM.png";
+import TortugaRosa from "../.././assets/images/TORTUGA_ROSA_SINFONDO.png";
+import FavImage from "../.././assets/images/Fav.png";
+import CartImage from "../.././assets/images/Cart.png";
 import DrawerComp from "./DrawerComp";
 
 export default function NavBar({ links }) {
@@ -47,6 +51,7 @@ export default function NavBar({ links }) {
         justifyContent: "center",
         alignItems: "space-between",
         width: "100%",
+        height: "5rem",
       }}
     >
       <Toolbar
@@ -69,6 +74,7 @@ export default function NavBar({ links }) {
               <IconButton disableRipple>
                 <Link to="/home">
                   <img
+                    src={PdM}
                     src="src/assets/images/PdM.png"
                     alt="Cart Icon"
                     style={{ width: "6rem", height: "3rem" }}
@@ -88,6 +94,7 @@ export default function NavBar({ links }) {
                   <IconButton disableRipple>
                     <Link to="/home">
                       <img
+                        src={TortugaRosa}
                         src="src/assets/images/TORTUGA_ROSA_SINFONDO.png"
                         alt="Cart Icon"
                         style={{ width: "3.2rem", height: "2.8rem" }}
@@ -127,10 +134,9 @@ export default function NavBar({ links }) {
                     <li style={{ margin: " 1rem" }}>
                       <Link to="/create">CREAR</Link>
                     </li>
-                    <li style={{ margin: " 1rem" }}>
-                      <Link to="/dashboard">ADMIN</Link>
+                    <li style={{ margin: " 1rem 0 1rem 1rem" }}>
+                      <Link to="/adminAccount">ADMIN</Link>
                     </li>
-                    <li style={{ margin: " 1rem" }}></li>
                   </ul>
                 </Tabs>
               </Grid>
@@ -158,15 +164,16 @@ export default function NavBar({ links }) {
               gap={"10px"}
             >
               {" "}
-              <IconButton>
+              <IconButton
+              >
                 <Link to="/fav">
                   {" "}
                   <img
-                    src="src/assets/images/Fav.png"
+                    src={FavImage}
                     alt="Fav Icon"
                     style={{
-                      width: "3rem",
-                      height: "3.2rem",
+                      width: "2.2rem",
+                      height: "2.2rem",
                       marginRight: "0.1rem",
                     }}
                   />
@@ -176,11 +183,11 @@ export default function NavBar({ links }) {
                 <Link to="/Cart">
                   {" "}
                   <img
-                    src="src/assets/images/Cart.png"
+                    src={CartImage}
                     alt="Cart Icon"
                     style={{
-                      width: "3.5rem",
-                      height: "3.5rem",
+                      width: "2.2rem",
+                      height: "2.2rem",
                       marginRight: "0rem",
                       margin: "-0.1rem",
                     }}
