@@ -175,6 +175,8 @@ const Create = () => {
             ...state,
             colorImage: updatedColorImage,
           };
+        }else{
+          return state
         }
       }
     });
@@ -228,26 +230,28 @@ const Create = () => {
         const selectedSize = value;
         const stockItem = state.colorImage.find(item => item.color === selectedColor)?.stocks.find(stock => stock.size === selectedSize);
         const initialAmount = stockItem ? stockItem.amount : 0;
-  
-        const updatedColorImage = state.colorImage.map((item) =>
+        if(!stockItem){
+          const updatedColorImage = state.colorImage.map((item) =>
           item.color === selectedColor
             ? {
                 ...item,
                 stocks: [...item.stocks, { size: selectedSize, amount: initialAmount }],
               }
             : item
-        );
-  
-        return {
-          ...state,
-          colorImage: updatedColorImage,
-        };
+          );
+          return {
+            ...state,
+            colorImage: updatedColorImage,
+          };
+        }else{
+          return state
+        }
       } else {
         const color = selectedColor;
         const size = event.target.getAttribute("data-size");
         const newAmount = parseInt(value);
-      
-        const updatedColorImage = state.colorImage.map((item) =>
+        if(isNaN(newAmount) || newAmount >= 0){
+          const updatedColorImage = state.colorImage.map((item) =>
           item.color === color
             ? {
                 ...item,
@@ -256,12 +260,15 @@ const Create = () => {
                 ),
               }
             : item
-        );
+          );
   
-        return {
-          ...state,
-          colorImage: updatedColorImage,
-        };
+          return {
+            ...state,
+            colorImage: updatedColorImage,
+          };
+        }else{
+          return state
+        }
       }
     });
   
@@ -700,18 +707,17 @@ const Create = () => {
         </div>
       </div>
 
-      {/*<div>
+      <div>
         <CreateDetail
           nombre={createProduct?.name}
           imagenes={combinedImagesUrls}
           precio={createProduct?.price}
           serie={createProduct?.series}
-          color={getColorHexCodes()}
-          size={createProduct.size}
+          colorImage={createProduct?.colorImage}
           category={createProduct?.category}
           description={createProduct?.description}
         />
-      </div>*/}
+      </div>
     </div>
   );
 };

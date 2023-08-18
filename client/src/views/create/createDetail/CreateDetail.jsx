@@ -61,7 +61,7 @@ const CreateDetail = ({
           {serie?.length !== 0 ? (
             <div>
               <h2 className="detailInfoCreate">Serie:</h2>
-              {serie.map((s, i) => (
+              {serie?.map((s, i) => (
                 <h2 className="detailInfoCreate" key={i}>
                   {s}
                 </h2>
@@ -130,7 +130,7 @@ const CreateDetail = ({
           {category?.length !== 0 ? (
             <div>
               <h2 className="detailInfoCreate">Categoria:</h2>
-              {category.map((s, i) => (
+              {category?.map((s, i) => (
                 <h2 className="detailInfoCreate" key={i}>
                   {s}
                 </h2>
