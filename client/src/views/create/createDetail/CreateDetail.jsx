@@ -1,13 +1,12 @@
 import ImageGallery from "react-image-gallery";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 import ImgCarga from "../../../assets/images/Carga imagen.png";
 import "./CreateDetail.css";
 
 const CreateDetail = ({
   nombre,
-  imagenes,
   precio,
   serie,
   colorImage,
@@ -18,30 +17,40 @@ const CreateDetail = ({
   let color = useSelector((state) => state.colorList);
   color = color.filter((col) => colorImage?.some(item => item.color === col.name));
   const [selectedColor, setSelectedColor] = useState(null);
+  const [ count, setCount ] = useState(0);
 
-  let formattedImages = imagenes.map((url) => ({
-    original: url,
-    thumbnail: url,
-  }));
+  useEffect(()=>{
+    if(count === 1){
+      setSelectedColor(colorImage[0].color);
+    }
+    setCount(count+1);
+  },[colorImage])
 
+  const formattedImages = colorImage
+    .filter((colorItem) => colorItem.color === selectedColor)
+    .flatMap((colorItem) =>
+      colorItem.images.map((url) => ({
+        original: url,
+        thumbnail: url,
+      }))
+    );
   return (
     <section className="containerDetailCreate">
       <container className="secContainerCreate">
         <div>
-      {/* {console.log(imagenes)} */}
-          {imagenes == false ? (
+          {formattedImages.length === 0 ? (
             <img
-              className="cardImgDetailCreate"
-              src={ImgCarga}
-              alt="Cargar Imagen"
+            className="cardImgDetailCreate"
+            src={ImgCarga}
+            alt="Cargar Imagen"
             />
-          ) : (
+            ) : (
             <ImageGallery
-              items={formattedImages}
-              className="image-gallery-icon"
-              thumbnailPosition="left"
-              showFullscreenButton={false}
-              showPlayButton={false}
+            items={formattedImages}
+            className="image-gallery-icon"
+            thumbnailPosition="left"
+            showFullscreenButton={false}
+            showPlayButton={false}
             />
           )}
         </div>
