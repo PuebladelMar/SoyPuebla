@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Informatios",
+    "Informations",
     {
       id: {
         type: DataTypes.UUID,
@@ -12,52 +12,27 @@ module.exports = (sequelize) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          len: {
-            args: [1, 20],
-            msg: "Your field must have between 1 and 20 characters.",
-          },
-        },
+       
       },
       phone: {
         type: DataTypes.STRING, // Corregido a STRING
         allowNull: false,
-        validate: {
-          len: {
-            args: [1, 20],
-            msg: "Your field must have between 1 and 20 characters.",
-          },
-        },
+       
       },
       whatsapp: {
         type: DataTypes.TEXT,
         allowNull: false,
-        validate: {
-          len: {
-            args: [1, 20],
-            msg: "Your field must have between 1 and 20 characters.",
-          },
-        },
+        
       },
       facebook: {
         type: DataTypes.TEXT,
         allowNull: false,
-        validate: {
-          len: {
-            args: [1, 20],
-            msg: "Your field must have between 1 and 20 characters.",
-          },
-        },
+       
       },
       instagram: {
         type: DataTypes.TEXT,
         allowNull: false,
-        validate: {
-          len: {
-            args: [1, 20],
-            msg: "Your field must have between 1 and 20 characters.",
-          },
-        },
+       
       },
       image: {
         type: DataTypes.TEXT,
