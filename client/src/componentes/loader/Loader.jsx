@@ -1,6 +1,6 @@
 
 import "./Loader.css";
-import loadingImage from '../src/assets/images/tortugaRosa.png'
+import loadingImage from '../../assets/images/tortugaRosa.png'
 const Loader = () => {
   return (
    <div className='loadContainer'>
