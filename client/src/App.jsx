@@ -29,7 +29,12 @@ import SizeChart from './views/sizeChart/sizeChart';
 import CreateColor from './views/create/createColor/createColor';
 import CreateSerie from './views/create/createSerie/CreateSerie';
 import Dashboard from './views/dashboard/Dashboard';
-import ProductsInfo from './views/productsInfo/ProductsInfo';
+import AllData from './views/productsInfo/AllData';
+import AllProducts from './views/productsInfo/AllProducts';
+import DetailAdmin from './views/productsInfo/detailadmin/DetailAdmin.jsx';
+import AllColeciones from './views/productsInfo/allColecciones/AllColecciones';
+import AllTalles from './views/productsInfo/allTalles/AllTalles';
+import AllColors from './views/productsInfo/allColors/AllColors';
 
 axios.defaults.baseURL = 'http://localhost:3001/';
 
@@ -140,8 +145,28 @@ function App() {
           element={<CreateSerie />}
         />
         <Route
-          path='/products-info'
-          element={<ProductsInfo />}
+          path='/all-data'
+          element={<AllData />}
+        />
+        <Route
+          path='/all-data/all-products'
+          element={<AllProducts />}
+        />
+        <Route
+          path='/detail-admin/:id'
+          element={<DetailAdmin />}
+        />
+        <Route
+          path='/all-data/all-colecciones'
+          element={<AllColeciones />}
+        />
+        <Route
+          path='/all-data/all-sizes'
+          element={<AllTalles />}
+        />
+        <Route
+          path='/all-data/all-colors'
+          element={<AllColors />}
         />
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
       </Routes>

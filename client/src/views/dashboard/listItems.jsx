@@ -49,7 +49,7 @@ export const mainListItems = (
       <ListItemIcon>
         <CheckroomOutlinedIcon />
       </ListItemIcon>
-      <NavLink to='/products-info'>
+      <NavLink to='/all-data'>
         <ListItemText primary='Products' />
       </NavLink>
     </ListItemButton>
