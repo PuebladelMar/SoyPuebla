@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { FaStar } from 'react-icons/fa';
 import { postReviews, getProducts, getReviewById } from "../../redux/Actions";
 import "./ReviewsForm.css";
 import { useEffect, useState } from "react";
 
-function ReviewsForm({ productId }) {
+function ReviewsForm({ productId, handleLoginClick }) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userId);
   const allUsers = useSelector((state) => state.allUsers);
-  const [isReady, setIsReady] = useState(false);
   const [userComment, setUserComment] = useState({
     score: "",
     userId: "",
@@ -29,7 +28,14 @@ function ReviewsForm({ productId }) {
       }));
     }
   }, [dispatch, userId, productId, allUsers]);
-  console.log(isReady);
+
+  const handleScoreChange = (score) => {
+    console.log(score);
+    setUserComment({
+      ...userComment,
+      score: score,
+    });
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -39,9 +45,8 @@ function ReviewsForm({ productId }) {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = () => {
     if (userId) {
-      event.preventDefault();
       dispatch(postReviews(userComment));
       setUserComment({
         score: "",
@@ -50,6 +55,7 @@ function ReviewsForm({ productId }) {
         productId: productId,
         fullName: allUsers.user.fullName,
       });
+      handleLoginClick();
     }
   };
 
@@ -67,26 +73,47 @@ function ReviewsForm({ productId }) {
           name="description"
         />
         <label htmlFor="rating">Calificación (1-5):</label>
-        <input
-          className="rating"
-          style={{ width: "4rem" }}
-          type="number"
-          min="1"
-          max="5"
-          value={userComment.score}
-          onChange={handleChange}
-          name="score"
-        />
+        <div className="rating-buttons">
+          {[1, 2, 3, 4, 5].map((value) => (
+            <button
+              key={value}
+              type="button"
+              className={`rating-button ${
+                userComment.score === value ? "selected" : ""
+              }`}
+              onClick={() => handleScoreChange(value)}
+            >
+              <FaStar size={25} color={userComment.score >= value ? 'gold' : 'gray'} style={{margin: '0'}} />
+            </button>
+          ))}
+        </div>
         {userId.length === 0 ? (
           <div className="btn-container">
-            <Link to="https://worthy-insect-17.accounts.dev/sign-in">
-              <button className="btn-iniciar-sesion">Inicia sesion</button>
-            </Link>
+            <button
+              className="btn-iniciar-sesion"
+              onClick={handleLoginClick}
+              style={{
+                backgroundColor: "rgb(81, 127, 127)",
+                color: "rgb(255, 255, 255)",
+              }}
+            >
+              Enviar Reseña
+            </button>
           </div>
         ) : (
-          <button className="boton" type="submit" onClick={handleSubmit}>
-            Enviar Reseña
-          </button>
+          <div className="btn-container">
+            <button
+              className="btn-iniciar-sesion"
+              type="submit"
+              onClick={handleSubmit}
+              style={{
+                backgroundColor: "rgb(81, 127, 127)",
+                color: "rgb(255, 255, 255)",
+              }}
+            >
+              Enviar Reseña
+            </button>
+          </div>
         )}
       </form>
     </div>

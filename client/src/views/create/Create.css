@@ -176,7 +176,6 @@
   color: rgb(255, 255, 255);
 }
 
-
 .mainImage-upload-buttonY {
   border: 1px solid #ccc;
   padding: 8px 16px;
@@ -190,8 +189,6 @@
 }
 
 .pop-ups{
-
-
   z-index: 9998;
   display: flex;
   justify-content: center;
@@ -201,6 +198,7 @@
   left: 0;
   width: 100%;
  height: 100%
+
  
 
 }
@@ -263,4 +261,8 @@
   padding: 1rem 4rem 1rem 1rem;
   margin-bottom: 15px;
   
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7cf13ebb76f7ec270cb48af5e68afbafc2ba2a1a
 }

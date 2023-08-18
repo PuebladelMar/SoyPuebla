@@ -610,10 +610,21 @@ const Create = () => {
           <div>
             {createProduct?.series.length > 0 ? (
               createProduct?.series.map((ser) => (
+
+
+
+//!__________________________________
+
                 <div key={ser}>
                   <p>{ser}</p>
                   <button onClick={() => handleDeleteSeries(ser)}>X</button>
                 </div>
+
+
+//!__________________________________
+
+
+
               ))
             ) : (
               <p></p>

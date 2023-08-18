@@ -157,7 +157,7 @@ export function filterProducts(filters) {
 export function getUsers() {
   return async function (dispatch) {
     try {
-      const response = await axios("/users/");
+      const response = await axios.get("http://localhost:3001/users");
       dispatch({
         type: GET_USERS,
         payload: response.data,
