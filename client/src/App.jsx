@@ -32,7 +32,7 @@ import Dashboard from './views/dashboard/Dashboard';
 import AllData from './views/productsInfo/AllData';
 import AllProducts from './views/productsInfo/AllProducts';
 import DetailAdmin from './views/productsInfo/detailadmin/DetailAdmin.jsx';
-import AllColeciones from './views/productsInfo/allColecciones/AllColecciones';
+import AllColecciones from './views/productsInfo/allColecciones/AllColecciones';
 import AllTalles from './views/productsInfo/allTalles/AllTalles';
 import AllColors from './views/productsInfo/allColors/AllColors';
 
@@ -158,7 +158,7 @@ function App() {
         />
         <Route
           path='/all-data/all-colecciones'
-          element={<AllColeciones />}
+          element={<AllColecciones />}
         />
         <Route
           path='/all-data/all-sizes'
