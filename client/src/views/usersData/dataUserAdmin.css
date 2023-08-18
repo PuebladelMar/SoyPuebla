@@ -80,13 +80,8 @@
     
   }
   
-  .userAdmin-table th {
-    cursor: pointer;
-  }
+ 
   
-  .userAdmin-table th:hover {
-    background-color: #f0f0f0;
-  }
   
  
  
