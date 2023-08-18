@@ -311,6 +311,7 @@ const Create = () => {
       .map((col) => col.codHex);
   };
 
+
   return (
     <div className="create-main-container">
       {showAlert.category && (
@@ -363,7 +364,8 @@ const Create = () => {
 
       <div className="create-container">
         <form className="create-form">
-          <label htmlFor="name">Nombre: </label>
+          <label  htmlFor="name">Nombre <separator></separator></label>
+          
           <input
             type="string"
             name="name"
@@ -373,7 +375,10 @@ const Create = () => {
             onChange={(event) => handleChange(event)}
           />
           <p className="error">{errors.name}</p>
-          <label htmlFor="price">Precio: </label>
+         
+
+
+          <label htmlFor="price">Precio <separator></separator> </label>
           <input
             type="decimal"
             name="price"
@@ -383,7 +388,9 @@ const Create = () => {
             onChange={handleChange}
           />
           <p className="error">{errors.price}</p>
-          <label htmlFor="mainImage">Imagen Principal: </label>
+          
+
+          <label htmlFor="mainImage">Imagen Principal <separator></separator> </label>
           <UploadWidget onUpload={handleUpload} />
           {/* <textarea
             type="text"
@@ -396,13 +403,12 @@ const Create = () => {
           <p className="error">{errors.mainImage}</p> */}
           {uploadedSecureUrl === null ? (
             <div>
-              <label htmlFor="image">Imagenes complementarias: </label>
-              <br />
-              <br />
+              <p className="errorImagen">Seleccionar imagen</p>
+             
             </div>
           ) : (
             <div>
-              <label htmlFor="image">Imagenes complementarias: </label>
+              <label htmlFor="image">Imagenes complementarias </label>
               <MutipleUploadWidget onMultipleUpload={handleMultipleUpload} />
             </div>
           )}
@@ -414,10 +420,12 @@ const Create = () => {
             className="custom-input"
             onChange={handleChange}
           /> */}
-          <label htmlFor="sale">Oferta: </label>
+
+            
+
+          <label htmlFor="sale">Oferta <separator></separator></label>
           <select
             name="sale"
-            className="custom-select"
             defaultValue={createProduct?.sale}
             onChange={handleChange}
           >
@@ -428,8 +436,8 @@ const Create = () => {
               Si
             </option>
           </select>
-          <label htmlFor="color">Color: </label>
-          {/* //!____________________ */}
+          <label htmlFor="color">Color <separator></separator> </label>
+         
           <button
             type="button"
             onClick={() => {
@@ -439,7 +447,7 @@ const Create = () => {
           >
             Crear color
           </button>
-          {/* //!____________________ */}
+        
           <select
             name="color"
             placeholder="Colores"
@@ -458,19 +466,42 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.color}</p>
+          
           <div>
             {createProduct?.colorImage.length > 0 ? (
-              createProduct?.colorImage.map((col) => (
-                <div key={col.color}>
+              createProduct?.colorImage.map((col) => {
+
+                 let hexCodex = color.find((c) => (c.name === col.color) )
+
+                 console.log(hexCodex)
+                return (
+
+                  <div className="container-color-talle">
+
+                  <div  key={col.color}>
+                  <div className="containerBotonesSeleccion" >
+                  <sample
+                  className="detailColorButtonCreate"
+                  style={{
+                    backgroundColor: hexCodex?.codHex,
+                    width: "20px",
+                    height: "20px",
+                  }}
+                  ></sample>
                   <p>{col.color}</p>
                   <button type="button" onClick={() => handleDeleteColor(col.color)}>X</button>
-                  <label htmlFor="size">Talle: </label>
+                  </div>
+
+
+
+                  <label className="talle" htmlFor="size"> Talle <separator></separator> </label>
                   <select
+                    className="talle"
                     name="size"
                     placeholder="Talles"
                     defaultValue="def"
                     onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
-                  >
+                    >
                   <option value="def" key="def" disabled>
                   Selecciona uno o varios talles.
                   </option>
@@ -485,9 +516,9 @@ const Create = () => {
                   <p className="error">{errors.size}</p>
                 <div>
                 {col.stocks.length > 0 ? (
-                col.stocks.map((si) => {
-                  return(
-                    <div key={si.size}>
+                  col.stocks.map((si) => {
+                    return(
+                      <div key={si.size}>
                       <p>{si.size}</p>
                       <input
                       name="amount"
@@ -499,13 +530,19 @@ const Create = () => {
                       <button type="button" onClick={() => handleDeleteSize(si.size, col.color)}>X</button>
                     </div>
                   )
+                  
                 })
-                ) : (
+                )
+                : (
                   <p className="no-dietTypes"></p>
-                )}
+                  )}
                 </div>
                 </div>
-              ))
+
+                  </div>
+
+                )
+              })
             ) : (
               <p className="no-dietTypes"></p>
             )}
@@ -541,7 +578,8 @@ const Create = () => {
               <p className="no-dietTypes"></p>
             )}
           </div>*/}
-          <label htmlFor="series">Colección: </label>
+          
+          <label htmlFor="series">Colección <separator></separator> </label>
           <button
             type="button"
             onClick={() => {
@@ -581,7 +619,8 @@ const Create = () => {
               <p></p>
             )}
           </div>
-          <label htmlFor="category">Categoría: </label>
+         
+          <label htmlFor="category">Categoría <separator></separator> </label>
           <button
             type="button"
             onClick={() => {
@@ -621,7 +660,8 @@ const Create = () => {
               <p className="no-dietTypes"></p>
             )}
           </div>
-          <label htmlFor="description">Descripcion: </label>
+          
+          <label htmlFor="description"> Descripcion <separator></separator> </label>
           <textarea
             type="text"
             name="description"
@@ -629,9 +669,10 @@ const Create = () => {
             className="custom-textarea"
             onChange={handleChange}
           />
-          <p className="error">{errors.description}</p>
+          <p className="error">{errors.description} </p>
+          <label><separator></separator></label>
         </form>
-
+        <separator></separator>
         <div className="div-button">
           <button
             className="submit-button"
