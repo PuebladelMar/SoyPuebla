@@ -30,7 +30,7 @@ import CreateColor from "./views/create/createColor/createColor";
 import CreateSerie from "./views/create/createSerie/CreateSerie";
 import Dashboard from "./views/dashboard/Dashboard";
 import UsersData from "./views/usersData/dataUserAdmin"
-
+import Information from "./views/dashboard/Information";
 axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
@@ -62,6 +62,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/info" element={<Information />} />
         {/*<Route path="/login" element={<Login />} />*/}
         <Route path="/products/:id" element={<Detail />} />
         <Route path="*" element={<ErrorPage />} />
