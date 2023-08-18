@@ -29,7 +29,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Products, Colors, Sizes, Categories, Series, Stocks, Users, Reviews, EmailNotify } = sequelize.models;
+const { Products, Colors, Sizes, Categories, Series, Stocks, Users, Reviews, EmailNotify, ColorImages } = sequelize.models;
 
 Products.hasMany(Stocks);
 Colors.hasMany(Stocks);
@@ -60,8 +60,23 @@ Products.belongsToMany(Users, { through: "Favorites" });
 Users.belongsToMany(Products, { through: "Favorites" });
 
 //Relación entre Productos y Colores/Imagenes
-Products.belongsToMany(Colors, { through: "ColorImages"});
-Colors.belongsToMany(Products, { through: "ColorImages"});
+Products.belongsToMany(Colors, {
+  through: {
+    model: ColorImages,
+    unique: false,
+    foreignKey: "ProductId",
+  },
+  otherKey: "ColorId",
+});
+
+Colors.belongsToMany(Products, {
+  through: {
+    model: ColorImages,
+    unique: false,
+    foreignKey: "ColorId",
+  },
+  otherKey: "ProductId",
+});
 
 
 module.exports = {
