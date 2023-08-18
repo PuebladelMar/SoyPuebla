@@ -18,10 +18,6 @@ module.exports = (sequelize) => {
           },
         },
       },
-      stock_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       deletedAt: {
         type: DataTypes.DATE,
         allowNull: true,
