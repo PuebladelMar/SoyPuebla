@@ -5,7 +5,7 @@ import { useState } from "react";
 import { getUserCart, deleteCart, deleteCartUser } from "../../redux/Actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { initMercadoPago} from "@mercadopago/sdk-react";
+import { initMercadoPago } from "@mercadopago/sdk-react";
 import "./Cart.css";
 
 const Cart = () => {
@@ -42,10 +42,13 @@ const Cart = () => {
 
   const createPreference = async () => {
     try {
-      await axios.post("http://localhost:3001/mp/create_preference",{products: itemList,})
-      .then(response=>{
-        window.location.href = response.data.response.body.init_point
-      })
+      await axios
+        .post("http://localhost:3001/mp/create_preference", {
+          products: itemList,
+        })
+        .then((response) => {
+          window.location.href = response.data.response.body.init_point;
+        });
     } catch (error) {
       console.log(error);
     }
@@ -70,35 +73,47 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
-      <h2>Detalle de la orden : </h2>
+      <h1 className="titleCart">Bienvenida a tu carrito de compras</h1>
+      <h2 style={{ marginTop: "1.5rem", fontSize: "0.9rem" }}>
+        Detalle de la orden :{" "}
+      </h2>
       <div className="cart-items">
         {userCart.map((item, index) => (
           <div className="cart-item" key={index}>
             <img src={item.product.mainImage} alt={item.description} />
             <div className="item-details">
-              <p>{item.product.name}</p>
-              <p>{item.color.name}</p>
-              <p>Talle:{item.size.name}</p>
-              <p>${item.product.price}</p>
+              <p>Nombre de producto: {item.product.name}</p>
+              <p>Color: {item.color.name}</p>
+              <p>Talle: {item.size.name}</p>
+              <p>Precio unitario: $ {item.product.price}</p>
               <p>Cantidad: {item.quantity}</p>
-              <p>${item.product.price * item.quantity}</p>
-              <button onClick={() => handlerDeleteCart(item.cartId)}>x</button>
+              <p>Total producto: ${item.product.price * item.quantity}</p>
+              <button
+                className="closeButton"
+                onClick={() => handlerDeleteCart(item.cartId)}
+              >
+                x
+              </button>
             </div>
           </div>
         ))}
       </div>
-      <p>Total: ${calculateTotal()}</p>
+      <p style={{ marginTop: "1rem", fontSize: "0.8rem", color: "green" }}>
+        Compra total: ${calculateTotal()}
+      </p>
       <div className="cart-summary">
+        <button className="checkout-button" onClick={deleteAllCart}>
+          Vaciar carrito
+        </button>
         <button className="checkout-button" onClick={handleBuy}>
           Pagar
         </button>
-        <button onClick={deleteAllCart}>Vaciar el carrito</button>
+        <NavLink to="/history" className="checkout-button">
+          Ver historial
+        </NavLink>
       </div>
       <NavLink to="/products" className="cart-link">
         Volver
-      </NavLink>
-      <NavLink to="/history" className="link-history">
-        Ver historial
       </NavLink>
     </div>
   );
