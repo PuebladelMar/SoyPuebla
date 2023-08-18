@@ -7,6 +7,12 @@ import { useSelector, useDispatch } from "react-redux";
 import Reviews from "../.././componentes/reviews/Reviews";
 import ReviewsForm from "../../componentes/reviews/ReviewsForm";
 import { getReviewById } from "../../redux/Actions";
+import { FiX, FiMinus, FiPlus } from "react-icons/fi";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./Detail.css";
 import Loader from "../../componentes/loader/Loader";
 
@@ -132,67 +138,66 @@ const Detail = () => {
       {isReady ? (
         <div className="containerDetail">
           <div className="secContainer">
-            <div>
+            <div className="mainIMage-container">
               <img
                 className="cardImgDetail"
                 src={productDetails[0]?.mainImage}
                 alt={productDetails[0]?.name}
               />
             </div>
-            <div>
-              <h2 className="detailName">{productDetails[0]?.name}</h2>
-              <h2 className="detailInfo">$ {productDetails[0]?.price}</h2>
-              {productDetails[0]?.series.map((s, i) => (
-                <h2 className="detailInfo" key={i}>
-                  Serie: {s.name}
+            <div className="detail-container">
+              <div className="detailInfo">
+                <h2 className="detailName">{productDetails[0]?.name}</h2>
+                <h2 className="detailInfoPrecio">
+                  $ {productDetails[0]?.price}
                 </h2>
-              ))}
-              <p className="detailInfo">
-                Selecciona uno de los colores disponibles:{" "}
-              </p>
-              {/* <img src={image} alt="" />  */}
-
+              </div>
               <div>
+                {productDetails[0]?.series.map((s, i) => (
+                  <h2 className="detailInfoSerie" key={i}>
+                    Serie: {s.name}
+                  </h2>
+                ))}
+              </div>
+              <div className="color-size-container">
+                <p className="detailInfoColor">Colores disponibles:</p>
                 {uniqueColor.map((item) => (
                   <button
                     className="detailColorButton"
                     key={item.color}
                     onClick={() => {
                       if (selectedColor === item.color) {
-                        setSelectedColor(null); // Deseleccionar el color si ya estaba seleccionado
+                        setSelectedColor(null);
                       } else {
                         handleColorChange(item.color);
-                        setSelectedSize(null); // Resetear la selección de tamaño al cambiar de color
+                        setSelectedSize(null);
                       }
                     }}
                     style={{
                       backgroundColor: item.codHex,
                       width: "30px",
                       height: "30px",
-                      border: selectedColor === item.color ? null : 1, // Cambiar opacidad si está seleccionado
+                      border: selectedColor === item.color ? null : 1,
                     }}
-                  >
-                    {/* {item.color} */}
-                  </button>
+                  ></button>
                 ))}
-              </div>
-              <div>
-                {productDetails
-                  .filter((item) => item.color === selectedColor)
-                  .map((item) => (
-                    <button
-                      className="detailSizeButton"
-                      key={item.size}
-                      onClick={() => handleSizeChange(item.size)}
-                      // disabled={item.stock === 0}
-                      style={{
-                        width: "40px",
-                        height: "30px",
-                      }}
-                    >
-                      {item.size}
-                    </button>
-                  ))}
+                <div className="size-container">
+                  {productDetails
+                    .filter((item) => item.color === selectedColor)
+                    .map((item) => (
+                      <button
+                        className="detailSizeButton"
+                        key={item.size}
+                        onClick={() => handleSizeChange(item.size)}
+                        style={{
+                          width: "40px",
+                          height: "30px",
+                        }}
+                      >
+                        {item.size}
+                      </button>
+                    ))}
+                </div>
               </div>
               {selectedCombination ? (
                 <p className="detailSelection1">
@@ -204,20 +209,21 @@ const Detail = () => {
                 </p>
               )}
               {selectedCombination && selectedCombination.stock === 0 ? (
-                <>
+                <div className="suscribe-container">
                   <p className="detailSelection1">
-                    Suscribete si deseas que te avisemos cuando esté disponible:{" "}
+                    ¡Suscribete! Y sabras cuando esté disponible
                   </p>
-                  <div>
+                  <div className="email-container">
                     <input
                       style={{
                         border: "solid 2px",
                         borderRadius: "4px",
-                        width: "17rem",
                         height: "2rem",
                         fontSize: "0.95rem",
                         borderColor: "rgb(190, 190, 190)",
                         color: "black",
+                        width: "100%",
+                        padding: "0 1rem",
                       }}
                       placeholder=" Ingresa aquí tu correo*"
                       type="text"
@@ -237,52 +243,47 @@ const Detail = () => {
                       ¡Gracias por suscribirte!
                     </p>
                   )}
-                </>
+                </div>
               ) : (
                 <>
+                  <div className="quantity-container">
+                    <button
+                      className="detailAddCartButton"
+                      style={{
+                        width: "2rem",
+                        height: "2rem",
+                      }}
+                      onClick={removeProduct}
+                    >
+                      <FiMinus />
+                    </button>
+                    <span className="quantity-span">{quantity}</span>
+                    <button
+                      className="detailAddCartButton"
+                      style={{
+                        width: "2rem",
+                        height: "2rem",
+                      }}
+                      onClick={addProduct}
+                    >
+                      <FiPlus />
+                    </button>
+                  </div>
                   <button
-                    id="detailAddCartButton"
-                    className="detailAddCartButton"
+                    className="addCartButton"
                     style={{
-                      width: "2rem",
-                      height: "1.8rem",
-                    }}
-                    onClick={removeProduct}
-                  >
-                    -
-                  </button>
-                  <span>{quantity}</span>
-                  <button
-                    id="detailAddCartButton"
-                    className="detailAddCartButton"
-                    style={{
-                      width: "2rem",
-                      height: "1.8rem",
-                      marginLeft: "0.5rem",
-                    }}
-                    onClick={addProduct}
-                  >
-                    +
-                  </button>
-                  <button
-                    id="detailAddCartButton"
-                    className="detailAddCartButton"
-                    style={{
-                      width: "150px",
-                      height: "30px",
+                      width: "100%",
+                      height: "4rem",
                     }}
                     onClick={() => {
                       handleAddToCart();
                     }}
                     disabled={userId.length === 0 || !selectedCombination}
                   >
-                    Añadir al carrito{" "}
+                    Añadir al carrito
                   </button>
                 </>
               )}
-              <p className="detailDesciption">
-                {productDetails[0]?.description}
-              </p>
             </div>
             {showAlert && (
               <>
@@ -299,9 +300,9 @@ const Detail = () => {
               </>
             )}
           </div>
-          <div>
+          <div className="close-button">
             <Link to="/products">
-              <button className="botonX">X</button>
+              <FiX style={{ width: "2rem", height: "2rem" }} />
             </Link>
           </div>
         </div>
@@ -311,6 +312,28 @@ const Detail = () => {
           </div>
        
 
+      )}
+      {isReady && (
+        <div className="description-container">
+          <Accordion className="accordion" style={{ margin: "0", border: 'none' }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>
+                <h2 className="description-text">Descripción</h2>
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                <p className="detailDesciption">
+                  {productDetails[0]?.description}
+                </p>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        </div>
       )}
       {isReady && (
         <div className="reviews-container">
