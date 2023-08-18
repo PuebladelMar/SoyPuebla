@@ -45,6 +45,48 @@
     margin: 20px;
     margin-top: 10px; 
   }
+
+  .button {
+    background-color: #b2cebf;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    width: 150px;
+  }
+  
+  .selected {
+    background-color:#517f7f;
+    width: 150px;
+  }
+
+  .filters {
+    width: 250px;
+  padding: 20px 30px 20px 30px;
+  background-color: #ece4e1;
+  }
+  
+  .filters input[type="text"],
+  .filters select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .filters select {
+    width: 200px;
+    
+  }
+  
+  .userAdmin-table th {
+    cursor: pointer;
+  }
+  
+  .userAdmin-table th:hover {
+    background-color: #f0f0f0;
+  }
   
  
  
