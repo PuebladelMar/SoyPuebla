@@ -473,13 +473,15 @@ const Create = () => {
 
                  let hexCodex = color.find((c) => (c.name === col.color) )
 
-                 console.log(hexCodex)
+                
                 return (
 
                   <div className="container-color-talle">
 
                   <div  key={col.color}>
+
                   <div className="containerBotonesSeleccion" >
+                    <info>
                   <sample
                   className="detailColorButtonCreate"
                   style={{
@@ -489,21 +491,23 @@ const Create = () => {
                   }}
                   ></sample>
                   <p>{col.color}</p>
+                  </info>
                   <button type="button" onClick={() => handleDeleteColor(col.color)}>X</button>
                   </div>
 
 
-
-                  <label className="talle" htmlFor="size"> Talle <separator></separator> </label>
+                  <talle className="talle">
+                  
+                  <label  htmlFor="size"> Talles </label>
                   <select
-                    className="talle"
+                    
                     name="size"
                     placeholder="Talles"
                     defaultValue="def"
                     onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
                     >
                   <option value="def" key="def" disabled>
-                  Selecciona uno o varios talles.
+                  Selecciona talles
                   </option>
                   {size.map((el) => {
                     return (
@@ -513,12 +517,15 @@ const Create = () => {
                     );
                   })}
                   </select>
+                  </talle>
                   <p className="error">{errors.size}</p>
-                <div>
+
+
+                <div >
                 {col.stocks.length > 0 ? (
                   col.stocks.map((si) => {
                     return(
-                      <div key={si.size}>
+                      <div key={si.size} className="container-talle-stock">
                       <p>{si.size}</p>
                       <input
                       name="amount"
@@ -607,29 +614,24 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.series}</p>
-          <div>
+
+
+
+          <div className="container-coleccion" >
             {createProduct?.series.length > 0 ? (
               createProduct?.series.map((ser) => (
-
-
-
-//!__________________________________
-
-                <div key={ser}>
+                <coleccion key={ser}>
                   <p>{ser}</p>
                   <button onClick={() => handleDeleteSeries(ser)}>X</button>
-                </div>
-
-
-//!__________________________________
-
-
-
+                </coleccion>
               ))
             ) : (
               <p></p>
             )}
           </div>
+
+
+
          
           <label htmlFor="category">Categoría <separator></separator> </label>
           <button
@@ -659,18 +661,20 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.category}</p>
-          <div>
+          <div className="container-categoria">
             {createProduct?.category.length > 0 ? (
               createProduct?.category.map((cat) => (
-                <div key={cat}>
+                <categoria key={cat}>
                   <p>{cat}</p>
                   <button onClick={() => handleDeleteCategories(cat)}>X</button>
-                </div>
+                </categoria>
               ))
             ) : (
               <p className="no-dietTypes"></p>
             )}
           </div>
+
+
           
           <label htmlFor="description"> Descripcion <separator></separator> </label>
           <textarea
