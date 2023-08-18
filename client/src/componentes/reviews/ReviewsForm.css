@@ -15,6 +15,7 @@
 .review-form-container h2 {
   font-size: 1.5rem;
   text-align: center;
+  color: rgba(32, 32, 32, 0.766);
   cursor: default;
 }
 
@@ -27,6 +28,7 @@
 .review-form label {
   font-weight: bold;
   margin-bottom: 5px;
+  color: rgb(46, 46, 46);
 }
 
 .review-form input,
@@ -53,8 +55,8 @@
 }
 
 .textarea {
-  height: 7.3rem;
-  font-size: 1.3rem;
+  height: 7.4rem;
+  font-size: 1rem;
 }
 
 .rating {
@@ -83,4 +85,10 @@
   border-radius: 4px;
   width: 12rem;
   cursor: pointer;
+}
+
+@media (max-width: 435px) {
+  .review-form-container h2 {
+    font-size: 1.2rem;
+  }
 }
