@@ -14,5 +14,6 @@ router.use("/mp", mpRouter);
 router.use("/notify", nodemailer);
 router.use("/cart", cartRouter);
 router.use("/history", historyRouter);
+router.use("/info", infoRouter)
 
 module.exports = router;
