@@ -31,7 +31,8 @@ const MutipleUploadWidget = ({ onMultipleUpload }) => {
 
   return (
     <div>
-      <button 
+      <button
+      type='button'
       className="multipleImage-upload-button" 
       onClick={() => widgetRef.current.open()}>Cargar Imagenes Secundarias</button>
       

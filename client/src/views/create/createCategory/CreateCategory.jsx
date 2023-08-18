@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../../redux/Actions";
 import axios from 'axios'
 import categoryValidations from "./categoryValidations";
-import "../Create.css"
+import "../createColor/createColor.css"
 
 const CreateCategory = ()=>{
     const dispatch = useDispatch();
     const categories = useSelector((state)=> state.categories);
+    let [count, setCount] = useState(0)
     useEffect(()=>{
         dispatch(getCategories());
-    },[categories.length]);
+    },[count]);
 
     let [ createCategory, setCreateCategory ] = useState({
         name: ""
@@ -26,34 +27,31 @@ const CreateCategory = ()=>{
         );
     };
 
-    const handleSubmit = (event)=>{
+    const handleSubmit = async(event)=>{
         event.preventDefault();
         if(!createCategory.name){
             alert('Debes llenar el nombre');
         }else{
             try {
-                const asyncFunction = async()=>{
-                    await axios.post('/products/category', createCategory);
-                    alert('categoria creada existosamente');
-                    setCreateCategory({
-                        name:""
-                    });
-                    setErrors({
-                        disableButton: true
-                    });
-                };
-                asyncFunction();
+                await axios.post('/products/category', createCategory);
+                setCount(count + 1)
+                alert('categoria creada existosamente');
+                setCreateCategory({
+                    name:""
+                });
+                setErrors({
+                    disableButton: true
+                });
             } catch (error) {
-                alert(error.message);
-                console.log(error.message)
-            }
+                setErrors({error: `La categoria ${createCategory.name} ya esta creada`});
+            };
         };
     };
 
     return (
-        <div className="create-main-container">
-            <div className="create-container">
-                <form onSubmit={handleSubmit} className="create-form">
+        <div className="create-main-containerX">
+            <div className="create-containerX">
+                <form onSubmit={handleSubmit} className="create-formX">
                     <label htmlFor="name">Nombre:</label>
                     <input
                         type="text"
@@ -61,11 +59,12 @@ const CreateCategory = ()=>{
                         value={createCategory.name}
                         required
                         placeholder="Nombre"
-                        className="custom-input"
+                        className="custom-inputX"
                         onChange={handleChange}
                     />
                     <p className="error">{errors.name}</p>
-                    <button type="submit" disabled={Object.keys(errors).length === 0 ? false : true}>Crear</button>
+                    <button type="submit" className="submit-buttonzX" disabled={Object.keys(errors).length === 0 ? false : true}>Crear</button>
+                    <p className="error">{errors.error}</p>
                     <h2>Categorias Creadas:</h2>
                     <ol>
                         {categories.map((category)=>(

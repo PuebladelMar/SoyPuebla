@@ -22,9 +22,7 @@ const postCreatePreference = async (req, res) => {
 
   try {
     const response = await mercadopago.preferences.create(preference);
-    res.json({
-      id: response.body.id,
-    });
+    res.status(200).json({response});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Ocurrió un error" });

@@ -23,11 +23,15 @@ import PaymentMethodsView from "./views/paymentMethods/paymentMethods";
 import Favorites from "./views/favs/Favorites";
 import History from "./views/history/History";
 import Shipment from "./views/shipment/shipment";
-import CreateCategory from "./views/create/createCategory/createCategory";
-import ReviewsForm from './componentes/reviews/ReviewsForm';
+import CreateCategory from "./views/create/createCategory/CreateCategory";
+import ReviewsForm from "./componentes/reviews/ReviewsForm";
 import SizeChart from "./views/sizeChart/sizeChart";
-axios.defaults.baseURL = "http://localhost:3001/";
+import CreateColor from "./views/create/createColor/createColor";
+import CreateSerie from "./views/create/createSerie/CreateSerie";
+import Dashboard from "./views/dashboard/Dashboard";
+import UsersData from "./views/usersData/dataUserAdmin"
 
+axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   const { pathname } = useLocation();
@@ -38,12 +42,12 @@ function App() {
   }, [dispatch]);
 
   const linksArray = [
-    'Home',
-    'Products',
-    'About',
-    'Create',
-    'AdminAccount',
-    'Cart',
+    "Home",
+    "Products",
+    "About",
+    "Create",
+    "AdminAccount",
+    "Cart",
   ];
 
   return (
@@ -61,17 +65,20 @@ function App() {
         {/*<Route path="/login" element={<Login />} />*/}
         <Route path="/products/:id" element={<Detail />} />
         <Route path="*" element={<ErrorPage />} />
-        <Route path="/adminAccount" element={<AdminAccount />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/frequent-questions" element={<Customer />} />
         <Route path="/pay-state" element={<PayState />} />
         <Route path="/payMethods" element={<PaymentMethodsView />} />
         <Route path="/history" element={<History />} />
         <Route path="/shipment" element={<Shipment />} />
         <Route path="/create-category" element={<CreateCategory />} />
+        <Route path="/create-color" element={<CreateColor />} />
         <Route path="/size-chart" element={<SizeChart />} />
-        <Route path='/products/reviews' element={<ReviewsForm />} />
+        <Route path="/products/reviews" element={<ReviewsForm />} />
+        <Route path="/create-serie" element={<CreateSerie />} />        
+        <Route path="/dashboard/users" element={<UsersData />} />
       </Routes>
-      {pathname !== '/' && <Footer />}
+      {pathname !== "/" && <Footer />}
     </div>
   );
 }

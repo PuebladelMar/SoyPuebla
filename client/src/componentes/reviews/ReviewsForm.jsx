@@ -1,37 +1,52 @@
 import { useDispatch, useSelector } from "react-redux";
-import { postReviews, getProducts } from "../../redux/Actions";
+import { FaStar } from 'react-icons/fa';
+import { postReviews, getProducts, getReviewById } from "../../redux/Actions";
 import "./ReviewsForm.css";
 import { useEffect, useState } from "react";
 
-function ReviewsForm({ productId }) {
+function ReviewsForm({ productId, handleLoginClick }) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userId);
-  const allProducts = useSelector((state) => state.allProducts);
   const allUsers = useSelector((state) => state.allUsers);
+  const [userComment, setUserComment] = useState({
+    score: "",
+    userId: "",
+    description: "",
+    productId: "",
+    fullName: "",
+  });
 
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch]);
+    dispatch(getReviewById(productId));
+    if (userId.length > 0) {
+      setUserComment((prevUserComment) => ({
+        ...prevUserComment,
+        userId: userId,
+        productId: productId,
+        fullName: allUsers.user.fullName,
+      }));
+    }
+  }, [dispatch, userId, productId, allUsers]);
 
-  const [userComment, setUserComment] = useState({
-    score: "",
-    userId: userId,
-    description: "",
-    productId: productId,
-    fullName: allUsers.user.fullName,
-  });
+  const handleScoreChange = (score) => {
+    console.log(score);
+    setUserComment({
+      ...userComment,
+      score: score,
+    });
+  };
 
   const handleChange = (event) => {
-    const { name, value } = event.target; // Usamos name en lugar de title
+    const { name, value } = event.target;
     setUserComment({
       ...userComment,
       [name]: value,
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = () => {
     if (userId) {
-      event.preventDefault();
       dispatch(postReviews(userComment));
       setUserComment({
         score: "",
@@ -40,49 +55,66 @@ function ReviewsForm({ productId }) {
         productId: productId,
         fullName: allUsers.user.fullName,
       });
+      handleLoginClick();
     }
   };
 
   return (
     <div className="review-form-container">
-      <h2>Dejanos tu comentario!</h2>
-      <br></br>
+      <h2>¡Dejanos tu comentario!</h2>
       <form className="review-form">
-        <label>Selecciona un Producto:</label>
-        <select
-          name="productId"
-          value={userComment.productId}
-          onChange={handleChange}
-        >
-          {allProducts.map((product) => (
-            <option key={product.id} value={product.id}>
-              {product.name}
-            </option>
-          ))}
-        </select>
         <label htmlFor="comment">Comentario:</label>
-        <input
+        <textarea
+          className="textarea"
           type="text"
+          style={{ resize: "none" }}
           value={userComment.description}
           onChange={handleChange}
           name="description"
-          required
         />
         <label htmlFor="rating">Calificación (1-5):</label>
-        <input
-          type="number"
-          min="1"
-          max="5"
-          value={userComment.score}
-          onChange={handleChange}
-          name="score"
-          required
-        />
-        {/* Mostrar el userId prellenado en un campo oculto */}
-        <input type="hidden" value={userComment.userId} name="userId" />
-        <button className="boton" type="submit" onClick={handleSubmit}>
-          Enviar Reseña
-        </button>
+        <div className="rating-buttons">
+          {[1, 2, 3, 4, 5].map((value) => (
+            <button
+              key={value}
+              type="button"
+              className={`rating-button ${
+                userComment.score === value ? "selected" : ""
+              }`}
+              onClick={() => handleScoreChange(value)}
+            >
+              <FaStar size={25} color={userComment.score >= value ? 'gold' : 'gray'} style={{margin: '0'}} />
+            </button>
+          ))}
+        </div>
+        {userId.length === 0 ? (
+          <div className="btn-container">
+            <button
+              className="btn-iniciar-sesion"
+              onClick={handleLoginClick}
+              style={{
+                backgroundColor: "rgb(81, 127, 127)",
+                color: "rgb(255, 255, 255)",
+              }}
+            >
+              Enviar Reseña
+            </button>
+          </div>
+        ) : (
+          <div className="btn-container">
+            <button
+              className="btn-iniciar-sesion"
+              type="submit"
+              onClick={handleSubmit}
+              style={{
+                backgroundColor: "rgb(81, 127, 127)",
+                color: "rgb(255, 255, 255)",
+              }}
+            >
+              Enviar Reseña
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );

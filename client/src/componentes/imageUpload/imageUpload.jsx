@@ -24,6 +24,7 @@ const UploadWidget = ({ onUpload }) => {
   return (
     <div>
       <button 
+      type='button'
       className="mainImage-upload-button" 
       onClick={() => widgetRef.current.open()}>Cargar Imagen Principal</button>
     </div>

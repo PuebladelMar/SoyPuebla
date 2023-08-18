@@ -6,4 +6,4 @@ conn.sync({ force: false }).then(() => {
   server.listen(port, () => {
     console.log(`%s listening at ${port}`);
   });
-});
+}); 

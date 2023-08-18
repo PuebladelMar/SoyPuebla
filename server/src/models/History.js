@@ -22,5 +22,20 @@ module.exports = (sequelize) => {
         min: 0
       }
     },
-  },{ timestamps: false });
+    StockId:{
+      type: DataTypes.UUID,
+      allowNull: false,
+      unique: false
+    },
+    UserId:{
+      type: DataTypes.UUID,
+      allowNull: false,
+      unique: false
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: null,
+    }
+  },{ timestamps: true, paranoid: true  });
 };

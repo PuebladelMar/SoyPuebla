@@ -1,50 +1,89 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
-} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import "./Reviews.css";
-import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
-// import { getReviews } from "../../redux/Actions";
+
+import { getReviewById } from "../../redux/Actions";
 // import { postUsers } from '../../redux/Actions';
 // import ReviewsForm from './ReviewsForm'
 
 function Reviews({ productId }) {
-  const reviews = useSelector((state) => state.reviews);
-  // const dispatch = useDispatch();
-  // console.log(reviews);
-  // useEffect(() => {
-  //   dispatch(getReviews());
+  const getReviewById2 = useSelector((state) => state.getReviewById);
+  const dispatch = useDispatch();
+  const [visibleReviews, setVisibleReviews] = useState(3);
+  const [showAllReviews, setShowAllReviews] = useState(false);
+
+  // useEffect(() => {const handleChange = (event) => {
+  //   const { name, value } = event.target;
+
+  //   setUserComment((prevComment) => ({
+  //     ...prevComment,
+  //     [name]: value,
+  //     score: name === "score" ? parseInt(value) : prevComment.score,
+  //   }));
+  // };
+  //   dispatch(getReviewById(productId));
   // }, [dispatch]);
-  console.log(reviews);
+
+  useEffect(() => {
+    const fetchReview = async () => {
+      try {
+        await dispatch(getReviewById(productId));
+        // console.log(productDetails[0].id);
+      } catch (error) {
+        // Manejar el error aquí si es necesario
+        console.error("Error fetching review:", error);
+      }
+    };
+
+    fetchReview();
+  }, [dispatch]);
+
+  const handleShowMoreReviews = () => {
+    setVisibleReviews((prevVisibleReviews) => prevVisibleReviews + 3);
+    setShowAllReviews(true);
+  };
+
+  const handleHideReviews = () => {
+    setVisibleReviews(3);
+    setShowAllReviews(false);
+  };
 
   return (
-    <div>
+    <div className="review-container">
       <div className="review">
-        {reviews.length > 0 ? (
-          reviews.map((re) => (
-            <ReviewCard
-              key={re.id}
-              title={re.title}
-              score={re.score}
-              fullName={re.fullName}
-              description={re.description}
-              productId={productId}
-            />
-          ))
+        {getReviewById2.length > 0 ? (
+          getReviewById2
+            .slice(0, showAllReviews ? getReviewById2.length : visibleReviews)
+            .map((re) => (
+              <ReviewCard
+                key={re.id}
+                title={re.title}
+                score={re.score}
+                fullName={re.fullName}
+                description={re.description}
+                productId={productId}
+              />
+            ))
         ) : (
           <p>No hay reseñas disponibles.</p>
+        )}
+
+        {getReviewById2.length > visibleReviews && !showAllReviews && (
+          <button className="show-more-button" onClick={handleShowMoreReviews}>
+            Ver más reseñas
+          </button>
+        )}
+
+        {showAllReviews && (
+          <button className="show-more-button" onClick={handleHideReviews}>
+            Ocultar reseñas
+          </button>
         )}
       </div>
 

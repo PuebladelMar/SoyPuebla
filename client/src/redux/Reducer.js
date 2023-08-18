@@ -18,9 +18,14 @@ import {
   DELETE_CART_USER,
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES,
+  GET_ALL_FAV,
   NOTIFY_STOCK,
   POST_REVIEWS,
   GET_REVIEWS,
+  GET_USER_BY_ID,
+  GET_USER_BY_NAME,
+  GET_REVIEW_BY_ID,
+  GET_ALL_HISTORY
 } from "./ActionsTypes";
 
 let initialState = {
@@ -36,6 +41,12 @@ let initialState = {
   deleteCart: [],
   favorites: [],
   reviews: [],
+  userDeleted:[],
+  userById: [],
+  userEdited: [],
+  userByName: [],
+  getReviewById: [],
+  allHistory: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -135,6 +146,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+      case GET_ALL_FAV:
+        return {
+          ...state,
+          favorites: action.payload,
+        };
     case NOTIFY_STOCK:
       return {
         ...state,
@@ -149,7 +165,35 @@ function rootReducer(state = initialState, action) {
         ...state,
         reviews: action.payload,
       };
-
+    case DELETE_USERS:
+      return{
+        ...state,
+        userDeleted: action.payload
+      };
+    case GET_USER_BY_ID:
+      return{
+        ...state,
+        userById: action.payload
+      };
+    case PUT_USERS:
+      return{
+        ...state,
+      };
+    case GET_USER_BY_NAME:
+      return{
+        ...state,
+        userByName: action.payload
+      };
+      case GET_ALL_HISTORY:
+      return{
+        ...state,
+        allHistory: action.payload
+      }
+      case GET_REVIEW_BY_ID:
+      return{
+        ...state,
+        getReviewById: action.payload,
+      };
     default:
       return state;
   }

@@ -1,132 +1,187 @@
-.nameDetail {
-  color: rgb(50, 50, 50);
-  font-weight: bolder;
-  position: relative;
-  margin-top: 5px;
-  font-family: "Courier New";
-  font-size: 2.3em;
-}
-
 .cardImgDetail {
-  height: 700px;
-  overflow: hidden;
   object-fit: cover;
 }
 
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-right: 2rem;
+  width: 18rem;
+  height: 30rem;
+  margin-top: 1rem;
+  /* gap: 1.45rem; */
+}
+
 .containerDetail {
+  position: relative;
   background: rgba(250, 250, 250, 0.647);
-  padding: 3rem;
+  padding: 1.5rem 1.5rem 3rem 2rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
   display: flex;
   flex-direction: column-reverse;
-  align-items: normal;
   justify-content: center;
-  gap: 3rem;
-  max-width: 100%;
-  margin-left: 4rem;
-  margin-right: 4rem;
+  height: 35rem;
+  min-width: 1000px;
+  max-width: 1000px;
   margin-top: 3rem;
-  margin-bottom: 3rem;
+}
+
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  padding: 0.3rem;
+  border-radius: 100%;
+  color: rgba(112, 112, 112, 0.766);
+  transition: 0.3s ease;
+}
+
+.close-button:hover {
+  color: rgba(255, 252, 252, 0.766);
+  background-color: #8fb1b1;
+  padding: 0.3rem;
+  border-radius: 100%;
 }
 
 .secContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+}
+
+.mainIMage-container {
+  display: flex;
   justify-content: center;
-  gap: 7rem;
+  overflow: hidden;
+  margin-top: 1rem;
+  width: 23rem;
+  height: 30rem;
 }
 
-.botonX {
-  position: relative;
-  left: 99%;
-  background: rgba(157, 157, 157, 0.766);
-  color: white;
-  font-size: 0.65rem;
-  padding: 0.25em 0.65em;
-  border: solid 0.2px #fcfcfca6;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.botonX:hover,
-.botonX:focus {
-  background: rgb(221, 159, 148);
-}
-
-.detailName {
-  font-size: 1.3rem;
-  color: rgba(157, 157, 157, 0.766);
-  margin-bottom: 10px;
+.quantity-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 10rem;
 }
 
 .detailInfo {
-  font-size: 1.1rem;
-  color: rgba(157, 157, 157, 0.766);
-  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
+
+.detailName {
+  font-size: 2rem;
+  color: rgba(32, 32, 32, 0.766);
+  cursor: default;
+}
+
+.detailInfoPrecio {
+  font-size: 1.3rem;
+  height: 2rem;
+  color: rgba(32, 32, 32, 0.766);
+  cursor: default;
+}
+
+.detailInfoSerie {
+  font-size: 1.1detailColorButtonrem;
+  color: rgba(32, 32, 32, 0.766);
+  cursor: default;
+}
+
+.detailInfoColor {
+  font-size: 1rem;
+  color: rgba(32, 32, 32, 0.766);
+  cursor: default;
+}
+
 .detailColorButton {
-  border: 2px solid;
-  border-color: rgb(190, 190, 190);
   border-radius: 50%;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  margin-top: 5px;
   transform: translateZ(0);
-  transition: 300ms;
+  transition: 0.3s ease;
   cursor: pointer;
 }
 
 .detailColorButton:hover {
+  border: solid 1px rgb(118, 118, 189);
   transform: scale(1.1);
 }
 
 .detailSizeButton {
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: rgba(112, 112, 112, 0.766);
-  border: 2px solid;
+  border: 0.13rem solid;
   border-color: rgb(190, 190, 190);
   border-radius: 15%;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  margin-top: 5px;
-  transform: translateZ(0);
-  transition: 300ms;
+  transition: 0.3s ease;
   cursor: pointer;
 }
 
 .detailSizeButton:hover {
-  transform: scale(1.1);
+  transform: scale(1.03);
+  color: rgb(255, 255, 255);
+  background: rgb(81, 127, 127);
+  border: none;
+}
+
+.color-size-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .detailDesciption {
-  font-size: 0.9rem;
-  color: rgba(157, 157, 157, 0.766);
-  margin-bottom: 5px;
+  font-size: 1.05rem;
+  color: rgba(54, 54, 54, 0.766);
+  padding: 0 0.5rem;
+  cursor: default;
 }
+
 .detailSelection0 {
   font-size: 0.9rem;
   color: rgb(221, 159, 148);
-  margin-bottom: 5px;
+  cursor: default;
 }
 
 .detailSelection1 {
   font-size: 0.9rem;
   color: rgb(81, 127, 127);
-  margin-bottom: 5px;
+  cursor: default;
+}
+
+.addCartButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: rgb(238, 255, 255);
+  background: rgb(81, 127, 127);
+  border-radius: 5px;
+  transform: translateZ(0);
+  transition: 0.3s ease;
+}
+
+.addCartButton:hover {
+  cursor: pointer;
+  transform: scale(1.03);
 }
 
 .detailAddCartButton {
-  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
   color: rgba(112, 112, 112, 0.766);
-  border: 2px solid;
+  border: 0.13rem solid;
   border-color: rgb(190, 190, 190);
   border-radius: 4px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  margin-top: 5px;
   transform: translateZ(0);
-  transition: 300ms;
+  transition: 0.3s ease;
   cursor: pointer;
 }
 
@@ -134,6 +189,17 @@
   transform: scale(1.03);
   color: rgb(255, 255, 255);
   background: rgb(81, 127, 127);
+  border: none;
+}
+
+.quantity-span {
+  font-size: 1.1rem;
+  padding-bottom: 0.3rem;
+  cursor: default;
+}
+
+.size-container {
+  height: 2rem;
 }
 
 .alertContainer {
@@ -158,8 +224,7 @@
   margin-top: auto;
   margin-bottom: 10px;
 }
-
-.alertButtons button {
+detailDesciption .alertButtons button {
   color: rgba(91, 91, 91, 0.766);
   background: rgb(255, 255, 255);
   margin-right: 10px;
@@ -185,22 +250,283 @@
   margin-left: 17px;
 }
 
-.notifyButton{
-  width: 17rem;
+.email-container {
+  width: 100%;
+}
+
+.notifyButton {
+  width: 100%;
   height: 2rem;
-  font-size: 0.85rem;
-  font-family: "Asap";
-  color: rgba(112, 112, 112, 0.766);
-  border: 2px solid;
-  border-color: rgb(190, 190, 190);
-  border-radius: 4px;
-  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: rgb(238, 255, 255);
+  background: rgb(81, 127, 127);
+  border-radius: 5px;
   transform: translateZ(0);
   transition: 300ms;
   cursor: pointer;
 }
+
 .notifyButton:hover {
   transform: scale(1.03);
   color: rgb(255, 255, 255);
   background: rgb(81, 127, 127);
+}
+
+.suscribe-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.1rem;
+  width: 100%;
+  height: 7.5rem;
+}
+
+.btn-iniciar-sesion {
+  margin: 10px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(81, 127, 127);
+  padding: 8px 16px;
+  border: 1px solid rgb(81, 127, 127);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+
+.btn-iniciar-sesion:hover {
+  transform: scale(1.08);
+  color: rgb(255, 255, 255);
+  background: rgb(81, 127, 127);
+}
+
+.opiniones {
+  text-align: start;
+  color: rgb(81, 127, 127);
+  font-size: x-large;
+}
+
+.reviews-container {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  min-width: 1000px;
+  max-width: 1000px;
+  background-color: #ffffff;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+
+.container {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
+
+.description-container {
+  min-width: 1000px;
+  max-width: 1000px;
+}
+
+.description-text {
+  font-size: 1.3rem;
+  color: #535353;
+  padding: 0 0.5rem;
+}
+
+@media (max-width: 1070px) {
+  .reviews-container {
+    min-width: 900px;
+  }
+
+  .containerDetail {
+    min-width: 900px;
+  }
+
+  .description-container {
+    min-width: 900px;
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 980px) {
+  .reviews-container {
+    min-width: 800px;
+  }
+
+  .containerDetail {
+    min-width: 800px;
+  }
+
+  .description-container {
+    min-width: 800px;
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 860px) {
+  .reviews-container {
+    min-width: 700px;
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+  }
+
+  .review-container {
+    min-width: 100%;
+  }
+  
+  .review {
+    width: 100%;
+  }
+
+  .containerDetail {
+    min-width: 700px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .description-container {
+    min-width: 700px;
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 760px) {
+  .containerDetail {
+    min-width: 500px;
+    max-width: 500px;
+    height: 55rem;
+  }
+
+  .reviews-container {
+    min-width: 500px;
+    max-width: 500px;
+  }
+
+  .mainIMage-container {
+    height: 25rem;
+    width: 27rem;
+    margin-top: -3rem;
+  }
+
+  .detailInfo {
+    position: relative;
+  }
+
+  .detail-container {
+    margin: 0;
+    justify-content: center;
+    margin-top: 2.5rem;
+    height: 10rem;
+    width: 27rem;
+  }
+
+  .secContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+  }
+
+  .detailSelection1 {
+    padding: 0.5rem 0;
+  }
+
+  .detailSelection0 {
+    padding: 0.5rem 0;
+  }
+
+  .detailInfoSerie {
+    margin-top: 1rem;
+  }
+
+  .addCartButton {
+    margin-top: 3rem;
+    padding: 1.5rem;
+  }
+
+  .color-size-container {
+    margin-top: 0rem;
+    gap: 0.8rem;
+  }
+
+  .detailName {
+    position: absolute;
+    left: 0;
+    bottom: 28.7rem;
+    font-size: 1.8rem;
+  }
+
+  .suscribe-container {
+    height: 9rem;
+  }
+
+  .notifyButton {
+    height: 3rem;
+  }
+
+  .description-container {
+    min-width: 500px;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 565px) {
+  .reviews-container {
+    min-width: 400px;
+    max-width: 400px;
+  }
+
+  .review-container {
+    min-width: 400px;
+    max-width: 400px;
+  }
+
+  .containerDetail {
+    min-width: 400px;
+    max-width: 400px;
+  }
+
+  .detail-container {
+    width: 21rem;
+  }
+
+  .mainIMage-container {
+    height: 25rem;
+    width: 18rem;
+  }
+
+  .description-container {
+    min-width: 400px;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 435px) {
+  .reviews-container {
+    min-width: 300px;
+    max-width: 300px;
+  }
+
+  .review-container {
+    min-width: 300px;
+    max-width: 300px;
+  }
+
+  .containerDetail {
+    min-width: 300px;
+    max-width: 300px;
+  }
+
+  .description-container {
+    min-width: 300px;
+    max-width: 300px;
+  }
+
+  .detail-container {
+    width: 16rem;
+  }
 }

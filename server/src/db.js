@@ -55,13 +55,13 @@ Series.belongsToMany(Products, { through: "ProductSeries" });
 Stocks.belongsToMany(Users, { through: "Carts" });
 Users.belongsToMany(Stocks, { through: "Carts" });
 
-// Relación de Historial de compras
-Stocks.belongsToMany(Users, { through: "Histories" });
-Users.belongsToMany(Stocks, { through: "Histories" });
-
 // Relación de Favoritos
 Products.belongsToMany(Users, { through: "Favorites" });
 Users.belongsToMany(Products, { through: "Favorites" });
+
+//Relación entre Productos y Colores/Imagenes
+Products.belongsToMany(Colors, { through: "ColorImages"});
+Colors.belongsToMany(Products, { through: "ColorImages"});
 
 
 module.exports = {

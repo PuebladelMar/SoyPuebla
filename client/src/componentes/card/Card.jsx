@@ -7,7 +7,11 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { useDispatch, useSelector } from "react-redux";
-import { addToFavorites, removeFromFavorites } from "../../redux/Actions" 
+import {
+  addToFavorites,
+  removeFromFavorites,
+  getAllFav,
+} from "../../redux/Actions";
 import { Box, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -16,107 +20,134 @@ export default function Cardx({ product }) {
   const isMatch = useMediaQuery("(max-width: 644px)");
   const isMatchCard = useMediaQuery("(max-width: 470px)");
   const dispatch = useDispatch();
-  const favorites = useSelector(state => state.favorites);
+  const favorites = useSelector((state) => state.favorites);
+  const userId = useSelector((state) => state.userId);
+  const isFavorite = favorites.some((item) => item.id === product.id);
 
-  const isFavorite = favorites.some(item => item.id === product.id);
-
-  const handleFavoriteClick = () => {
-    if (isFavorite) {
-      dispatch(removeFromFavorites(product.id));
-    } else {
-      dispatch(addToFavorites(product));
+  const handleFavoriteClick = async () => {
+    try {
+      if (isFavorite) {
+        await dispatch(removeFromFavorites(userId, product.id));
+        await dispatch(getAllFav(userId));
+      } else {
+        await dispatch(addToFavorites(userId, product.id));
+        await dispatch(getAllFav(userId));
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
+
   return (
     <Card
       style={{
-        width: "19rem",
+        width: isMatchCard ? "22rem" : isMatch ? "28rem" : "19rem",
         borderRadius: "10px",
         overflow: "hidden",
       }}
     >
-      <Box>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites" onClick={handleFavoriteClick}>
-            <FavoriteIcon color={isFavorite ? "secondary" : "inherit"} />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
-        </CardActions>
-      </Box>
       {!isMatch ? (
-        <Link to={`/products/${id}`}>
-          <Box
-            style={{
-              width: "100%",
-              height: "22rem",
-              overflow: "hidden",
-            }}
-          >
-            <CardMedia
-              component="img"
+        
+        <Box>
+          <Link to={`/products/${id}`}>
+            <Box
               style={{
                 width: "100%",
                 height: "22rem",
-                objectFit: "fill",
-                transition: "transform 0.2s",
-              }}
-              image={mainImage}
-              alt="Item"
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = "scale(1.05)";
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-              }}
-            />
-          </Box>
-          <Box>
-            <CardContent
-              style={{
-                width: "100%",
-                height: "5rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
+                overflow: "hidden",
               }}
             >
-              <Typography
-                variant="body2"
-                color="text.secondary"
+              <CardMedia
+                component="img"
                 style={{
-                  fontSize: "1rem",
+                  width: "100%",
+                  height: "22rem",
+                  objectFit: "fill",
+                  transition: "transform 0.2s",
                 }}
-              >
-                {name}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                style={{
-                  fontSize: "0.9rem",
+                image={mainImage}
+                alt="Item"
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = "scale(1.05)";
                 }}
-              >
-                {price}
-              </Typography>
-            </CardContent>
-          </Box>
-        </Link>
-      ) : (
-        <Link to={`/products/${id}`}>
-          <Card
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
+              />
+            </Box>
+          </Link>
+          <Box
             style={{
-              borderRadius: "10px",
-              overflow: "hidden",
               display: "flex",
-              width: isMatchCard ? "22rem" : "28rem",
-              height: isMatchCard ? "11.5rem" : "auto",
+              justifyContent: "space-between",
+              alignItems: "end",
+              height: "6.3rem",
             }}
           >
+            <Box>
+              <CardContent
+                style={{
+                  width: "100%",
+                  height: "5rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1.9rem",
+                  marginBottom: "1rem",
+                  padding: "0.5rem 1rem",
+                }}
+              >
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  style={{
+                    fontSize: "1rem",
+                  }}
+                >
+                  {name}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  style={{
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  {price}
+                </Typography>
+              </CardContent>
+            </Box>
+            <CardActions
+              style={{
+                height: "3rem",
+                display: "flex",
+              }}
+            >
+              <IconButton
+                aria-label="add to favorites"
+                onClick={handleFavoriteClick}
+              >
+                <FavoriteIcon color={isFavorite ? "secondary" : "inherit"} />
+              </IconButton>
+              <IconButton aria-label="share">
+                <ShareIcon />
+              </IconButton>
+            </CardActions>
+          </Box>
+        </Box>
+      ) : (
+        <Card
+          style={{
+            borderRadius: "10px",
+            overflow: "hidden",
+            display: "flex",
+            width: isMatchCard ? "22rem" : "28rem",
+            height: isMatchCard ? "11.5rem" : "auto",
+          }}
+        >
+          <Link to={`/products/${id}`}>
             <Box
               style={{
-                width: "30rem",
+                width: "14.5rem",
                 height: isMatchCard ? "11.5rem" : "16rem",
                 overflow: "hidden",
               }}
@@ -139,6 +170,18 @@ export default function Cardx({ product }) {
                 }}
               />
             </Box>
+          </Link>
+          <Box
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: isMatchCard ? "3rem" : "7.5rem",
+              padding: "0 0.5rem",
+              width: "100%",
+            }}
+          >
             <Box
               style={{
                 display: "flex",
@@ -155,9 +198,9 @@ export default function Cardx({ product }) {
                   width: "100%",
                   height: "5rem",
                   display: "flex",
-                  padding: isMatchCard ? "0.5rem" : "auto",
+                  padding: isMatchCard ? "0.5rem" : "0.7rem 0.4rem",
                   flexDirection: "column",
-                  gap: "1rem",
+                  gap: "1.5rem",
                 }}
               >
                 <Typography
@@ -179,33 +222,36 @@ export default function Cardx({ product }) {
                   {price}
                 </Typography>
               </CardContent>
-              <Box
+            </Box>
+            <Box
+              style={{
+                width: "100%",
+              }}
+            >
+              <CardActions
+                disableSpacing
                 style={{
+                  display: "flex",
+                  justifyContent: "end",
+                  alignItems: "center",
+                  gap: isMatchCard ? "0.2rem" : "1rem",
+                  padding: "0 0.5rem",
                   width: "100%",
                 }}
               >
-                <CardActions
-                  disableSpacing
-                  style={{
-                    display: "flex",
-                    justifyContent: "end",
-                    alignItems: "center",
-                    gap: isMatchCard ? "0.2rem" : "1rem",
-                    padding: "0 0.5rem",
-                    width: "100%",
-                  }}
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={handleFavoriteClick}
                 >
-                  <IconButton aria-label="add to favorites" onClick={handleFavoriteClick}>
-                    <FavoriteIcon color={isFavorite ? "secondary" : "inherit"} />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
-                </CardActions>
-              </Box>
+                  <FavoriteIcon color={isFavorite ? "secondary" : "inherit"} />
+                </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+              </CardActions>
             </Box>
-          </Card>
-        </Link>
+          </Box>
+        </Card>
       )}
     </Card>
   );

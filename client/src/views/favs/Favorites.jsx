@@ -1,21 +1,32 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React,{ useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Cardx from "../../componentes/card/Card";
 import { Box, useMediaQuery } from "@mui/material";
+import { getAllFav } from "../../redux/Actions";
 import "./Favorites.css"
 
 function Favorites() {
   const favorites = useSelector(state => state.favorites);
   const isMatch = useMediaQuery("(max-width: 644px)");
+  const userId = useSelector((state) => state.userId)
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    const fetchFavorites = async () => {
+    
+       dispatch(getAllFav(userId));
+
+   
+    };
+
+    fetchFavorites();
+  }, [dispatch, userId]);
+
+  console.log(userId);
   return (
-    // <div className="cardsFavorite">
-    //     {favorites.map(product => (
-    //       <Cardx key={product.id} product={product} />
-    //     ))}
-      
-    // </div>
+  
     <Container
     style={{
       maxWidth: "100%",
