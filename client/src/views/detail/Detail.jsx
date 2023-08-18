@@ -8,6 +8,8 @@ import Reviews from "../.././componentes/reviews/Reviews";
 import ReviewsForm from "../../componentes/reviews/ReviewsForm";
 import { getReviewById } from "../../redux/Actions";
 import "./Detail.css";
+import Loader from "../../componentes/loader/Loader";
+
 
 const Detail = () => {
   const { id } = useParams();
@@ -304,7 +306,11 @@ const Detail = () => {
           </div>
         </div>
       ) : (
-        <div>Cargando...</div>
+        <div className="loader-container"> 
+          <Loader/>
+          </div>
+       
+
       )}
       {isReady && (
         <div className="reviews-container">
