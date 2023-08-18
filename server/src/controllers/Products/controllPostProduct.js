@@ -1,9 +1,9 @@
-const { Products, Colors, Sizes, Categories, Series, Stocks } = require('../../db.js');
+const { Products, Colors, Sizes, Categories, Series, Stocks, ColorImages } = require('../../db.js');
 
 const controllPostProduct = async (req) => {
-  const { name, price, mainImage, image, sale, description, series, category, colorImage } = req.body;
+  const { name, price, sale, description, series, category, colorImage } = req.body;
 
-  const newProduct = await Products.create({ name, price, mainImage, image, sale, description });
+  const newProduct = await Products.create({ name, price, sale, description });
 
   const findedCategories  = await Categories.findAll({where: { name : category }} );
   await newProduct.setCategories(findedCategories); 
@@ -12,10 +12,19 @@ const controllPostProduct = async (req) => {
   await newProduct.setSeries(findedSeries); 
 
   for(const variation of colorImage){
-    const { color, stocks } = variation;
+    const { color, stocks, images } = variation;
+
+    const findedColor = await Colors.findOne({ where: { name: color }});
+
+    const newColorImage = await ColorImages.create({
+      images: images,
+      ProductId: newProduct.id,
+      ColorId: findedColor.id
+    });
+
     for(const stock of stocks){
       const { size, amount } = stock;
-      const findedColor = await Colors.findOne({ where: { name: color }});
+      
       const findedSize = await Sizes.findOne({ where: {name: size}});
 
       const newStock = await Stocks.create({

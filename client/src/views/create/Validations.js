@@ -23,7 +23,7 @@ const validations = (createProduct) => {
     errors.color = "Selecciona por lo menos un color";
   }*/
 
-  if (
+  /*if (
     !createProduct?.mainImage ||
     !createProduct?.mainImage.match(
       /^https?:\/\/[^ ]+\.(?:png|jpg|jpeg|gif|svg)(\?[^ ]*)?$/i
@@ -31,7 +31,7 @@ const validations = (createProduct) => {
     )
   ) {
     errors.mainImage = "Invalid image, must be a URL";
-  }
+  }*/
 
   /*if (createProduct?.size.length === 0) {
     errors.size = "Selecciona por lo menos un talle";
