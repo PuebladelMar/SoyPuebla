@@ -59,6 +59,10 @@ Users.belongsToMany(Stocks, { through: "Carts" });
 Products.belongsToMany(Users, { through: "Favorites" });
 Users.belongsToMany(Products, { through: "Favorites" });
 
+//Relación entre Productos y Colores/Imagenes
+Products.belongsToMany(Colors, { through: "ColorImages"});
+Colors.belongsToMany(Products, { through: "ColorImages"});
+
 
 module.exports = {
   ...sequelize.models, 

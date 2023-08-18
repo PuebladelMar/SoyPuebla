@@ -175,6 +175,8 @@ const Create = () => {
             ...state,
             colorImage: updatedColorImage,
           };
+        }else{
+          return state
         }
       }
     });
@@ -228,26 +230,28 @@ const Create = () => {
         const selectedSize = value;
         const stockItem = state.colorImage.find(item => item.color === selectedColor)?.stocks.find(stock => stock.size === selectedSize);
         const initialAmount = stockItem ? stockItem.amount : 0;
-  
-        const updatedColorImage = state.colorImage.map((item) =>
+        if(!stockItem){
+          const updatedColorImage = state.colorImage.map((item) =>
           item.color === selectedColor
             ? {
                 ...item,
                 stocks: [...item.stocks, { size: selectedSize, amount: initialAmount }],
               }
             : item
-        );
-  
-        return {
-          ...state,
-          colorImage: updatedColorImage,
-        };
+          );
+          return {
+            ...state,
+            colorImage: updatedColorImage,
+          };
+        }else{
+          return state
+        }
       } else {
         const color = selectedColor;
         const size = event.target.getAttribute("data-size");
         const newAmount = parseInt(value);
-      
-        const updatedColorImage = state.colorImage.map((item) =>
+        if(isNaN(newAmount) || newAmount >= 0){
+          const updatedColorImage = state.colorImage.map((item) =>
           item.color === color
             ? {
                 ...item,
@@ -256,12 +260,15 @@ const Create = () => {
                 ),
               }
             : item
-        );
+          );
   
-        return {
-          ...state,
-          colorImage: updatedColorImage,
-        };
+          return {
+            ...state,
+            colorImage: updatedColorImage,
+          };
+        }else{
+          return state
+        }
       }
     });
   
@@ -473,13 +480,15 @@ const Create = () => {
 
                  let hexCodex = color.find((c) => (c.name === col.color) )
 
-                 console.log(hexCodex)
+                
                 return (
 
                   <div className="container-color-talle">
 
                   <div  key={col.color}>
+
                   <div className="containerBotonesSeleccion" >
+                    <info>
                   <sample
                   className="detailColorButtonCreate"
                   style={{
@@ -489,21 +498,23 @@ const Create = () => {
                   }}
                   ></sample>
                   <p>{col.color}</p>
+                  </info>
                   <button type="button" onClick={() => handleDeleteColor(col.color)}>X</button>
                   </div>
 
 
-
-                  <label className="talle" htmlFor="size"> Talle <separator></separator> </label>
+                  <talle className="talle">
+                  
+                  <label  htmlFor="size"> Talles </label>
                   <select
-                    className="talle"
+                    
                     name="size"
                     placeholder="Talles"
                     defaultValue="def"
                     onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
                     >
                   <option value="def" key="def" disabled>
-                  Selecciona uno o varios talles.
+                  Selecciona talles
                   </option>
                   {size.map((el) => {
                     return (
@@ -513,12 +524,15 @@ const Create = () => {
                     );
                   })}
                   </select>
+                  </talle>
                   <p className="error">{errors.size}</p>
-                <div>
+
+
+                <div >
                 {col.stocks.length > 0 ? (
                   col.stocks.map((si) => {
                     return(
-                      <div key={si.size}>
+                      <div key={si.size} className="container-talle-stock">
                       <p>{si.size}</p>
                       <input
                       name="amount"
@@ -607,18 +621,24 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.series}</p>
-          <div>
+
+
+
+          <div className="container-coleccion" >
             {createProduct?.series.length > 0 ? (
               createProduct?.series.map((ser) => (
-                <div key={ser}>
+                <coleccion key={ser}>
                   <p>{ser}</p>
                   <button onClick={() => handleDeleteSeries(ser)}>X</button>
-                </div>
+                </coleccion>
               ))
             ) : (
               <p></p>
             )}
           </div>
+
+
+
          
           <label htmlFor="category">Categoría <separator></separator> </label>
           <button
@@ -648,18 +668,20 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.category}</p>
-          <div>
+          <div className="container-categoria">
             {createProduct?.category.length > 0 ? (
               createProduct?.category.map((cat) => (
-                <div key={cat}>
+                <categoria key={cat}>
                   <p>{cat}</p>
                   <button onClick={() => handleDeleteCategories(cat)}>X</button>
-                </div>
+                </categoria>
               ))
             ) : (
               <p className="no-dietTypes"></p>
             )}
           </div>
+
+
           
           <label htmlFor="description"> Descripcion <separator></separator> </label>
           <textarea
@@ -685,18 +707,17 @@ const Create = () => {
         </div>
       </div>
 
-      {/*<div>
+      <div>
         <CreateDetail
           nombre={createProduct?.name}
           imagenes={combinedImagesUrls}
           precio={createProduct?.price}
           serie={createProduct?.series}
-          color={getColorHexCodes()}
-          size={createProduct.size}
+          colorImage={createProduct?.colorImage}
           category={createProduct?.category}
           description={createProduct?.description}
         />
-      </div>*/}
+      </div>
     </div>
   );
 };
