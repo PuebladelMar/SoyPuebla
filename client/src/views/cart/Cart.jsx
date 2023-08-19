@@ -6,6 +6,7 @@ import { getUserCart, deleteCart, deleteCartUser } from "../../redux/Actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago } from "@mercadopago/sdk-react";
+import { FiX } from "react-icons/fi";
 import "./Cart.css";
 
 const Cart = () => {
@@ -72,49 +73,51 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart-container">
-      <h1 className="titleCart">Bienvenida a tu carrito de compras</h1>
-      <h2 style={{ marginTop: "1.5rem", fontSize: "0.9rem" }}>
-        Detalle de la orden :{" "}
-      </h2>
-      <div className="cart-items">
-        {userCart.map((item, index) => (
-          <div className="cart-item" key={index}>
-            <img src={item.images[0]} alt={item.description} />
-            <div className="item-details">
-              <p>Nombre de producto: {item.product.name}</p>
-              <p>Color: {item.color.name}</p>
-              <p>Talle: {item.size.name}</p>
-              <p>Precio unitario: $ {item.product.price}</p>
-              <p>Cantidad: {item.quantity}</p>
-              <p>Total producto: ${item.product.price * item.quantity}</p>
-              <button
-                className="closeButton"
-                onClick={() => handlerDeleteCart(item.cartId)}
-              >
-                x
-              </button>
+    <div className="container-cart">
+      <div className="cart-container">
+        <h1 className="titleCart">Bienvenida a tu carrito de compras</h1>
+        <h2 style={{ fontSize: "0.9rem" }}>
+          Detalle de la orden :
+        </h2>
+        <div className="cart-items">
+          {userCart.map((item, index) => (
+            <div className="cart-item" key={index}>
+              <img className="img-cart" src={item.images[0]} alt={item.description} />
+              <div className="item-details">
+                <p>Nombre de producto: {item.product.name}</p>
+                <p>Color: {item.color.name}</p>
+                <p>Talle: {item.size.name}</p>
+                <p>Precio unitario: $ {item.product.price}</p>
+                <p>Cantidad: {item.quantity}</p>
+                <p>Total producto: ${item.product.price * item.quantity}</p>
+                <button
+                  className="closeButton"
+                  onClick={() => handlerDeleteCart(item.cartId)}
+                >
+                 <FiX style={{ width: "2rem", height: "2rem" }} />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <p style={{ marginTop: "1rem", fontSize: "0.8rem", color: "green" }}>
-        Compra total: ${calculateTotal()}
-      </p>
-      <div className="cart-summary">
-        <button className="checkout-button" onClick={deleteAllCart}>
-          Vaciar carrito
-        </button>
-        <button className="checkout-button" onClick={handleBuy}>
-          Pagar
-        </button>
-        <NavLink to="/history" className="checkout-button">
-          Ver historial
+          ))}
+        </div>
+        <p style={{ fontSize: "0.8rem", color: "green" }}>
+          Compra total: ${calculateTotal()}
+        </p>
+        <div className="cart-summary">
+          <button className="checkout-button" onClick={deleteAllCart}>
+            Vaciar carrito
+          </button>
+          <button className="checkout-button" onClick={handleBuy}>
+            Pagar
+          </button>
+          <NavLink to="/history" className="checkout-button">
+            Ver historial
+          </NavLink>
+        </div>
+        <NavLink to="/products" className="cart-link" styles={{}}>
+          Volver
         </NavLink>
       </div>
-      <NavLink to="/products" className="cart-link">
-        Volver
-      </NavLink>
     </div>
   );
 };

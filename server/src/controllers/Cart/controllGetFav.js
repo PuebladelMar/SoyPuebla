@@ -1,4 +1,4 @@
-const { Favorites, Products } = require("../../db.js");
+const { Favorites, Products, ColorImages } = require("../../db.js");
 
 const getAllFav = async (userId) => {
   try {
@@ -6,11 +6,28 @@ const getAllFav = async (userId) => {
 
     const favoriteProductIds = favorites.map((fav) => fav.ProductId);
 
-    const categoriesList = await Products.findAll({
-      where: { id: favoriteProductIds },
-    });
+    const productsWithImagesAndColors = await Promise.all(
+      favoriteProductIds.map(async (productId) => {
+        const product = await Products.findByPk(productId);
 
-    return categoriesList;
+        // Obtener las imágenes y colores asociados al producto
+        const colorImages = await ColorImages.findAll({ where: { ProductId: productId } });
+
+        const formattedColorImages = colorImages.map((image) => ({
+          id: image.id,
+          images: image.images,
+          ProductId: image.ProductId,
+          ColorId: image.ColorId,
+        }));
+
+        return {
+          ...product.toJSON(),
+          colorImages: formattedColorImages,
+        };
+      })
+    );
+
+    return productsWithImagesAndColors;
   } catch (error) {
     throw error;
   }

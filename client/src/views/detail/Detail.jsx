@@ -16,7 +16,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./Detail.css";
 import Loader from "../../componentes/loader/Loader";
 
-
 const Detail = () => {
   const { id } = useParams();
   const userId = useSelector((state) => state.userId);
@@ -164,26 +163,28 @@ const Detail = () => {
               </div>
               <div className="color-size-container">
                 <p className="detailInfoColor">Colores disponibles:</p>
-                {uniqueColor.map((item) => (
-                  <button
-                    className="detailColorButton"
-                    key={item.color}
-                    onClick={() => {
-                      if (selectedColor === item.color) {
-                        setSelectedColor(null);
-                      } else {
-                        handleColorChange(item.color);
-                        setSelectedSize(null);
-                      }
-                    }}
-                    style={{
-                      backgroundColor: item.codHex,
-                      width: "30px",
-                      height: "30px",
-                      border: selectedColor === item.color ? null : 1,
-                    }}
-                  ></button>
-                ))}
+                <div className="color-container">
+                  {uniqueColor.map((item) => (
+                    <button
+                      className="detailColorButton"
+                      key={item.color}
+                      onClick={() => {
+                        if (selectedColor === item.color) {
+                          setSelectedColor(null);
+                        } else {
+                          handleColorChange(item.color);
+                          setSelectedSize(null);
+                        }
+                      }}
+                      style={{
+                        backgroundColor: item.codHex,
+                        width: "30px",
+                        height: "30px",
+                        border: selectedColor === item.color ? null : 1,
+                      }}
+                    ></button>
+                  ))}
+                </div>
                 <div className="size-container">
                   {productDetails
                     .filter((item) => item.color === selectedColor)
@@ -310,15 +311,16 @@ const Detail = () => {
           </div>
         </div>
       ) : (
-        <div className="loader-container"> 
-          <Loader/>
-          </div>
-       
-
+        <div className="loader-container">
+          <Loader />
+        </div>
       )}
       {isReady && (
         <div className="description-container">
-          <Accordion className="accordion" style={{ margin: "0", border: 'none' }}>
+          <Accordion
+            className="accordion"
+            style={{ margin: "0", border: "none" }}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
