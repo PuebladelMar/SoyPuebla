@@ -41,12 +41,11 @@ export default function Cardx({ product }) {
   };
 
   const matchingColors = color.filter((c) =>
-  colorImages.some((ci) => ci.ColorId === c.id));
+  colorImages?.some((ci) => ci.ColorId === c.id));
 
   const [selectedColor, setSelectedColor] = useState(matchingColors[0]?.id);
 
-  const selectedColorImages = colorImages
-  .find((colorItem) => colorItem.ColorId === selectedColor)
+  const selectedColorImages = colorImages?.find((colorItem) => colorItem.ColorId === selectedColor)
 
   return (
     <Card

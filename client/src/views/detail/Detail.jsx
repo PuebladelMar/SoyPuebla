@@ -169,12 +169,8 @@ const Detail = () => {
                     className="detailColorButton"
                     key={item.color}
                     onClick={() => {
-                      if (selectedColor === item.color) {
-                        setSelectedColor(null);
-                      } else {
-                        handleColorChange(item.color);
-                        setSelectedSize(null);
-                      }
+                      handleColorChange(item.color);
+                      setSelectedSize(null);
                     }}
                     style={{
                       backgroundColor: item.codHex,
