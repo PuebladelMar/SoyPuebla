@@ -80,7 +80,7 @@ const Cart = () => {
       <div className="cart-items">
         {userCart.map((item, index) => (
           <div className="cart-item" key={index}>
-            <img src={item.product.mainImage} alt={item.description} />
+            <img src={item.images[0]} alt={item.description} />
             <div className="item-details">
               <p>Nombre de producto: {item.product.name}</p>
               <p>Color: {item.color.name}</p>

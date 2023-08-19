@@ -12,32 +12,54 @@ const UsersData = () => {
     banUser: "",
     id: "",
     userRole: "",
+    fullName: "",
   });
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [selectedButton, setSelectedButton] = useState("");
 
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
 
   useEffect(() => {
-    // Aplicar filtros
     const filtered = allUsers.filter((user) => {
       return (
         (filters.createdAt === "" ||
           user.createdAt.includes(filters.createdAt)) &&
+        (filters.fullName === "" || user.fullName.includes(filters.fullName)) &&
         (filters.banUser === "" ||
           user.banUser.toString() === filters.banUser) &&
         (filters.id === "" || user.id.includes(filters.id)) &&
         (filters.userRole === "" || user.userRole.includes(filters.userRole))
       );
     });
-    setFilteredUsers(filtered);
-  }, [filters, allUsers]);
+
+    const sortedUsers = filtered.slice().sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.createdAt.localeCompare(b.createdAt);
+      } else {
+        return b.createdAt.localeCompare(a.createdAt);
+      }
+    });
+
+    setFilteredUsers(sortedUsers);
+  }, [filters, allUsers, sortOrder]);
 
   const handleFilterChange = (field, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [field]: value,
     }));
+  };
+
+  const setSortOrderAsc = () => {
+    setSelectedButton("asc");
+    setSortOrder("asc");
+  };
+
+  const setSortOrderDesc = () => {
+    setSelectedButton("desc");
+    setSortOrder("desc");
   };
 
   return (
@@ -55,6 +77,28 @@ const UsersData = () => {
             placeholder="Fecha de creación"
             value={filters.createdAt}
             onChange={(e) => handleFilterChange("createdAt", e.target.value)}
+          />
+          <div className="filters">
+            <button
+              onClick={setSortOrderAsc}
+              className={`button ${selectedButton === "asc" ? "selected" : ""}`}
+            >
+              Ascendente
+            </button>
+            <button
+              onClick={setSortOrderDesc}
+              className={`button ${
+                selectedButton === "desc" ? "selected" : ""
+              }`}
+            >
+              Descendente
+            </button>
+          </div>
+          <input
+            type="text"
+            placeholder="Nombre"
+            value={filters.fullName}
+            onChange={(e) => handleFilterChange("fullName", e.target.value)}
           />
           <select
             value={filters.banUser}
@@ -77,8 +121,7 @@ const UsersData = () => {
             onChange={(e) => handleFilterChange("userRole", e.target.value)}
           />
         </div>
-      </div>
-      <div className="userAdmin-container">
+
         <table className="userAdmin-table">
           <thead>
             <tr>
@@ -91,7 +134,7 @@ const UsersData = () => {
             </tr>
           </thead>
           <tbody>
-            {allUsers.map((user) => (
+            {filteredUsers.map((user) => (
               <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.fullName}</td>

@@ -24,7 +24,6 @@ function Favorites() {
     fetchFavorites();
   }, [dispatch, userId]);
 
-  console.log(userId);
   return (
   
     <Container
