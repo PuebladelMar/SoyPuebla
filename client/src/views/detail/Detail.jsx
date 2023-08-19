@@ -54,7 +54,9 @@ const Detail = () => {
         const response = await axios.get(`/products/${id}`);
         setProductDetails(response.data);
         setIsReady(true);
-        setSelectedColor(response.data[0].color);
+        if(selectedColor === null){
+          setSelectedColor(response.data[0].color);
+        }
       } catch (error) {
         window.alert(error);
       }
