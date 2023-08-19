@@ -28,5 +28,5 @@ export const GET_USER_BY_NAME = 'GET_USER_BY_NAME';
 export const GET_REVIEW_BY_ID = 'GET_REVIEW_BY_ID';
 export const GET_ALL_HISTORY= "GET_ALL_HISTORY";
 export const PUT_COLORS = "PUT_COLORS";
-export const DELETE_COLORS = "DELETE_COLORS";
+export const DELETE_SERIES = "DELETE_SERIES";
 

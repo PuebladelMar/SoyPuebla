@@ -8,7 +8,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 import ModificarColorAdmin from "./ModificarColorAdmin";
 
-const AllColors = () => {
+const AllColors = ({modifiedColor}) => {
   const colors = useSelector((state) => state.colorList);
 
   const dispatch = useDispatch();
@@ -20,8 +20,12 @@ const AllColors = () => {
     dispatch(getColor());
   }, [dispatch]);
 
-  const handleColorChange = (event) => {
-    setNewColor(event.target.value);
+  // const handleColorChange = (event) => {
+  //   setNewColor(event.target.value);
+  // };
+
+  const handleColorModified = (color) => {
+    setModifiedColor(color); // Actualiza el estado con el color modificado
   };
 
   const handleDeleteColor = (colorId) => {};
@@ -53,9 +57,17 @@ const AllColors = () => {
         {
         isOpen ? (
 
-          <ModificarColorAdmin />
+          <ModificarColorAdmin onColorModified={handleColorModified}/>
         ):(
-         <div> La puta madre </div>
+         <div>
+         
+         {modifiedColor && (
+                <div className="color-item">
+                  <p>{modifiedColor.name}</p>
+                  {/* Renderiza el color modificado */}
+                </div>
+              )}
+         </div>
         )
 
         }

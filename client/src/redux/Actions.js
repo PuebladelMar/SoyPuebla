@@ -469,22 +469,22 @@ export function getAllHistory() {
   };
 }
 
-// export function editColors(id, name, codHex ) {
-//   return async function (dispatch) {
-//     try {
-//       const response = await axios.put(`http://localhost:3001/products/${id}`,{
-//         name: name,
-//         codHex: codHex
-//       });
-//       dispatch({
-//         type: PUT_COLORS,
-//         payload: response.data,
-//       });
-//     } catch (error) {
-//       alert(error.message);
-//     }
-//   };
-// }
+export function editColors(id, name, codHex ) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`http://localhost:3001/products/${id}`,{
+        name: name,
+        codHex: codHex
+      });
+      dispatch({
+        type: PUT_COLORS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
 
 export function deleteSeries(id) {
   return async function (dispatch) {
