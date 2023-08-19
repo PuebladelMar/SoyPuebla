@@ -498,4 +498,4 @@ export function postInformation({ email, phone, instagram, facebook, whatsapp, i
       alert(error.message);
     }
   };
-}
+} 
