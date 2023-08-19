@@ -486,7 +486,11 @@ export function editColors(id, name, codHex ) {
       });
     } catch (error) {
       alert(error.message);
-export function getAllInformation() {
+    }
+  };
+}
+
+      export function getAllInformation() {
   return async function (dispatch) {
     try {
       const response = await axios(`http://localhost:3001/information`);
@@ -532,4 +536,5 @@ export function postInformation({ email, phone, instagram, facebook, whatsapp, i
     }
   };
 } 
-
+    
+    
