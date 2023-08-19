@@ -43,7 +43,7 @@ export default function Cardx({ product }) {
   const matchingColors = color.filter((c) =>
   colorImages.some((ci) => ci.ColorId === c.id));
 
-  const [selectedColor, setSelectedColor] = useState(matchingColors[0].id);
+  const [selectedColor, setSelectedColor] = useState(matchingColors[0]?.id);
 
   const selectedColorImages = colorImages
   .find((colorItem) => colorItem.ColorId === selectedColor)
@@ -57,7 +57,7 @@ export default function Cardx({ product }) {
       }}
     >
       {!isMatch ? (
-        
+
         <Box>
           <Link to={`/products/${id}`}>
             <Box
@@ -75,7 +75,7 @@ export default function Cardx({ product }) {
                   objectFit: "fill",
                   transition: "transform 0.2s",
                 }}
-                image={selectedColorImages.images[0]}
+                image={selectedColorImages?.images[0]}
                 alt="Item"
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = "scale(1.05)";
