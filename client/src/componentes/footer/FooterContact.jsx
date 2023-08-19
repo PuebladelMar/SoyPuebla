@@ -1,4 +1,7 @@
 import "./FooterContact.css";
+import WhatsAppIcon from "../.././assets/images/Whatsapp.png";
+import FacebookIcon from "../.././assets/images/face.png";
+import InstagramIcon from "../.././assets/images/Insta.png";
 import Newsletter from "../newsletter/newsletter";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllInformation } from "../../redux/Actions";
@@ -36,21 +39,21 @@ const FooterContact = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="src/assets/images/Whatsapp.png" alt="WhatsApp" />
+            <img src={WhatsAppIcon} alt="WhatsApp" />
           </a>
           <a
             href={information.facebook}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="src/assets/images/face.png" alt="Facebook" />
+            <img src={FacebookIcon} alt="Facebook" />
           </a>
           <a
             href={information.instagram}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="src/assets/images/Insta.png" alt="Instagram" />
+            <img src={InstagramIcon} alt="Instagram" />
           </a>
         </div>
         <Newsletter />
