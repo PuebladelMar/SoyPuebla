@@ -29,6 +29,7 @@ import SizeChart from "./views/sizeChart/sizeChart";
 import CreateColor from "./views/create/createColor/createColor";
 import CreateSerie from "./views/create/createSerie/CreateSerie";
 import Dashboard from "./views/dashboard/Dashboard";
+import Information from "./views/dashboard/Information";
 import UsersData from "./views/usersData/dataUserAdmin";
 import HistoryData from "./views/dashboard/purchaseHistory/purchaseHistory";
 
@@ -63,6 +64,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/info" element={<Information />} />
         {/*<Route path="/login" element={<Login />} />*/}
         <Route path="/products/:id" element={<Detail />} />
         <Route path="*" element={<ErrorPage />} />

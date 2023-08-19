@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getAllInformation, postInformation } from '../../redux/Actions';
 import "./Information.css"
 
 const Information = () => {
-  // Estado para almacenar la información editable
+
+ 
+  const dispatch=useDispatch()
+
   const [info, setInfo] = useState({
     email: 'correo@example.com',
     phone: '123-456-7890',
     instagram: '@usuario_instagram',
     facebook: 'nombre_de_usuario',
     whatsapp: '123-456-7890',
+    image: "www.imagen.com"
   });
 
-  // Manejador de cambio de input
+  
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setInfo((prevInfo) => ({
@@ -20,10 +26,10 @@ const Information = () => {
     }));
   };
 
-  // Función para guardar los cambios
-  const saveChanges = () => {
-    // Aquí puedes implementar la lógica para guardar los cambios en la base de datos
-    console.log('Cambios guardados:', info);
+ 
+  const saveChanges =async () => {
+   await dispatch(postInformation(info))
+    // console.log('Cambios guardados:', info);
   };
 
   return (
@@ -43,6 +49,9 @@ const Information = () => {
       <br />
       <label>WhatsApp:</label>
       <input type="text" name="whatsapp" value={info.whatsapp} onChange={handleInputChange} />
+      <br />
+      <label>Imagen del footer:</label>
+      <input type="text" name="image" value={info.image} onChange={handleInputChange} />
       <br />
       <button onClick={saveChanges}>Guardar Cambios</button>
     </div>
