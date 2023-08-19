@@ -17,6 +17,13 @@ import CreateSerie from "./createSerie/CreateSerie";
 import CreateCategory from "./createCategory/CreateCategory";
 import CreateSize from "./createSize/createSize";
 
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { red } from "@mui/material/colors";
+
 const Create = () => {
   const dispatch = useDispatch();
   const color = useSelector((state) => state.colorList);
@@ -469,14 +476,35 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.color}</p>
-          <div>
+
+
+
+          <div >
             {createProduct?.colorImage.length > 0 ? (
               createProduct?.colorImage.map((col) => {
                 let hexCodex = color.find((c) => (c.name === col.color) )
                 return (
-                  <div className="container-color-talle">
-                    <div  key={col.color}>
-                    <div className="containerBotonesSeleccion" >
+                    <div  >
+
+                  <div  key={col.color}>
+                  <Accordion style={{ boxShadow: "none", width: "400px", margin: "10px", border: '1px solid #aeaeae', backgroundColor: "#FBFBFB"}}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                      style={{display: 'flex', alignItems: "center"}}
+                      
+                    >
+              
+                      <div className="containerBotonesSeleccion" style={{
+                        display: 'flex', 
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        width: '90%',
+                        gap: '25px',
+                        
+                        
+                        }} >
                       <info>
                         <sample
                         className="detailColorButtonCreate"
@@ -490,6 +518,11 @@ const Create = () => {
                       </info>
                       <button type="button" onClick={() => handleDeleteColor(col.color)}>X</button>
                     </div>
+                 
+                    </AccordionSummary>
+                    <AccordionDetails>
+                   
+                   <div>
                     <div>
                       <label htmlFor="image">Imagenes </label>
                       <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
@@ -522,9 +555,9 @@ const Create = () => {
 
                     <div >
                       {col.stocks.length > 0 ? (
-                      col.stocks.map((si) => {
-                        return(
-                          <div key={si.size} className="container-talle-stock">
+                        col.stocks.map((si) => {
+                          return(
+                            <div key={si.size} className="container-talle-stock">
                             <p>{si.size}</p>
                             <input
                             name="amount"
@@ -543,13 +576,94 @@ const Create = () => {
                       )}
                     </div>
                   </div>
+               
+            
+                     
+                    </AccordionDetails>
+                  </Accordion>
                 </div>
+
+
+                  {/* <div className="container-color-talle">
+                        <div  key={col.color}>
+                    <div className="containerBotonesSeleccion" >
+                      <info>
+                        <sample
+                        className="detailColorButtonCreate"
+                        style={{
+                          backgroundColor: hexCodex?.codHex,
+                        width: "20px",
+                        height: "20px",
+                        }}
+                      ></sample>
+                      <p>{col.color}</p>
+                      </info>
+                      <button type="button" onClick={() => handleDeleteColor(col.color)}>X</button>
+                    </div>
+                    
+                    <div>
+                      <label htmlFor="image">Imagenes </label>
+                      <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
+                    </div>
+
+                    <talle className="talle">
+                  
+                    <label  htmlFor="size"> Talles </label>
+                    <select
+                    
+                    name="size"
+                    placeholder="Talles"
+                    defaultValue="def"
+                    onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
+                    >
+                    <option value="def" key="def" disabled>
+                    Selecciona talles
+                    </option>
+                    {size.map((el) => {
+                      return (
+                        <option value={el.name} key={el.id}>
+                        {el.name}
+                        </option>
+                      );
+                    })}
+                    </select>
+                    </talle>
+                    <p className="error">{errors.size}</p>
+
+
+                    <div >
+                      {col.stocks.length > 0 ? (
+                        col.stocks.map((si) => {
+                          return(
+                            <div key={si.size} className="container-talle-stock">
+                            <p>{si.size}</p>
+                            <input
+                            name="amount"
+                            type="number"
+                            data-size={si.size}
+                            value={si.amount}
+                            onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
+                            />
+                            <button type="button" onClick={() => handleDeleteSize(si.size, col.color)}>X</button>
+                          </div>
+                        ) 
+                      })
+                      )
+                      : (
+                      <p className="no-dietTypes"></p>
+                      )}
+                    </div>
+                  </div>
+                </div> */}
+            </div>
               )
             })
             ) : (
               <p className="no-dietTypes"></p>
             )}
           </div>
+
+
           <label htmlFor="series">Colección <separator></separator> </label>
           <button
             type="button"
