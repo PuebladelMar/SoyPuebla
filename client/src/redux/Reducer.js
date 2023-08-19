@@ -44,12 +44,13 @@ let initialState = {
   deleteCart: [],
   favorites: [],
   reviews: [],
-  userDeleted:[],
+  userDeleted: [],
   userById: [],
   userEdited: [],
   userByName: [],
   getReviewById: [],
   allHistory: [],
+  mailConfirmation: [],
   information:[],
 };
 
@@ -133,6 +134,7 @@ function rootReducer(state = initialState, action) {
     case SEND_MAIL:
       return {
         ...state,
+        mailConfirmation: action.payload,
       };
     case ADD_TO_FAVORITES:
       return {
@@ -146,15 +148,11 @@ function rootReducer(state = initialState, action) {
           (product) => product.id !== action.payload
         ),
       };
-    case SEND_MAIL:
+    case GET_ALL_FAV:
       return {
         ...state,
+        favorites: action.payload,
       };
-      case GET_ALL_FAV:
-        return {
-          ...state,
-          favorites: action.payload,
-        };
     case NOTIFY_STOCK:
       return {
         ...state,
@@ -170,31 +168,31 @@ function rootReducer(state = initialState, action) {
         reviews: action.payload,
       };
     case DELETE_USERS:
-      return{
+      return {
         ...state,
-        userDeleted: action.payload
+        userDeleted: action.payload,
       };
     case GET_USER_BY_ID:
-      return{
+      return {
         ...state,
-        userById: action.payload
+        userById: action.payload,
       };
     case PUT_USERS:
-      return{
+      return {
         ...state,
       };
     case GET_USER_BY_NAME:
-      return{
+      return {
         ...state,
-        userByName: action.payload
+        userByName: action.payload,
       };
-      case GET_ALL_HISTORY:
-      return{
+    case GET_ALL_HISTORY:
+      return {
         ...state,
-        allHistory: action.payload
-      }
-      case GET_REVIEW_BY_ID:
-      return{
+        allHistory: action.payload,
+      };
+    case GET_REVIEW_BY_ID:
+      return {
         ...state,
         getReviewById: action.payload,
       };
