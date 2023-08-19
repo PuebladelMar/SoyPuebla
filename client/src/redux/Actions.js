@@ -471,23 +471,20 @@ export function getAllHistory() {
   };
 }
 
-// export function editColors(id, name, codHex ) {
-//   return async function (dispatch) {
-//     try {
-//       const response = await axios.put(`http://localhost:3001/products/${id}`,{
-//         name: name,
-//         codHex: codHex
-//       });
-//       dispatch({
-//         type: PUT_COLORS,
-//         payload: response.data,
-//       });
-//     } catch (error) {
-//       alert(error.message);
-//     }
-//   };
-// }
 
+export function editColors(id, name, codHex ) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`http://localhost:3001/products/${id}`,{
+        name: name,
+        codHex: codHex
+      });
+      dispatch({
+        type: PUT_COLORS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
 export function getAllInformation() {
   return async function (dispatch) {
     try {
@@ -498,10 +495,27 @@ export function getAllInformation() {
       });
     } catch (error) {
       alert(error);
+
     }
   };
 }
 
+
+export function deleteSeries(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+       ` http://localhost:3001/products/series/${id}`
+      );
+      dispatch({
+        type: DELETE_SERIES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert('daleee rey');
+    }
+  };
+}
 export function postInformation({ email, phone, instagram, facebook, whatsapp, image }) {
   return async function (dispatch) {
     try {
@@ -517,3 +531,4 @@ export function postInformation({ email, phone, instagram, facebook, whatsapp, i
     }
   };
 } 
+
