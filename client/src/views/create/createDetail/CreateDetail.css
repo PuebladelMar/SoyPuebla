@@ -14,27 +14,39 @@
 }
 
 .containerDetailCreate {
-  background: rgba(250, 250, 250, 0.647);
+  background: rgb(250, 250, 250);
   padding: 3rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
   max-width: 100%;
   margin-left: 4rem;
   margin-right: 4rem;
-  margin-top: 3rem;
+  margin-top: 8rem;
   margin-bottom: 3rem;
 }
 
 .secContainerCreate {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 7rem;
+  justify-content: left;
+  gap: 3rem;
+}
+
+.secContainerCreate slideshow {
+  /* border: 1px solid rgb(0, 0, 0); */
+  max-width: 600px;
+  /* max-height: 500px; */
+}
+
+.secContainerCreate info {
+  /* border: 1px solid rgb(0, 0, 0); */
+  min-width: 300px;
+  max-width: 400px;
 }
 
 .botonXCreate {
@@ -54,17 +66,47 @@
 .detailNameCreate {
   font-size: 1.3rem;
   color: rgba(157, 157, 157, 0.766);
+  font-weight: 500;
   margin-bottom: 10px;
 }
 
 .detailInfoCreate {
   font-size: 1.1rem;
   color: rgba(157, 157, 157, 0.766);
-  margin-bottom: 5px;
+  margin: 10px 0;
 }
+
+.detailInfoStocks {
+  font-size: 1.1rem;
+  color: rgba(157, 157, 157, 0.766);
+  border : 1px solid rgb(190, 190, 190);
+  border-radius: 5px;
+  padding: 3px 12px;
+  margin: 5px;
+  width: fit-content;
+}
+
+.detailInfoDescription {
+  display: flex;
+  flex-direction: column;
+  font-size: .95rem;
+  color: rgba(157, 157, 157, 0.766);
+  margin: 0px 10px;
+  font-style: italic;
+  text-align: justify;
+  
+}
+
+.colores-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .detailColorButtonCreate {
   border: 2px solid;
-  border-color: rgb(190, 190, 190);
+  border-color: rgb(222, 222, 222);
   border-radius: 50%;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -75,7 +117,7 @@
 }
 
 .detailColorButtonCreate:hover {
-  transform: scale(1.1);
+  transform: scale(1.25);
 }
 
 .detailSizeButtonCreate {
@@ -180,4 +222,73 @@
   font-size: 1.1rem;
   color: rgba(91, 91, 91, 0.766);
   margin-left: 17px;
+}
+
+.detailNameCreate separator {
+  margin-top: 3px;
+  margin-bottom: 20px;
+  display: flex;
+  background-color: #c8c8c8;
+  height: 2px;
+  width: 60%;
+}
+
+.coleccionContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin: 10px 0px;
+
+}
+.coleccionContainerSec{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.coleccionContainer coleccion {
+  /* border: 2px solid rgb(225, 224, 224); */
+  
+  border-radius: 5px;
+  padding: 0px 10px;
+  font-style: italic;
+}
+
+.categoriaContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin: 10px 0px;
+}
+
+
+.categoriaContainerSec{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.categoriaContainer categoria {
+  /* border: 2px solid rgb(225, 224, 224); */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  padding: 0px 10px;
+  font-style: italic;
+}
+
+.descripcionContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0px;
+ 
+}
+
+.stocksContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0px;
+  flex-wrap: wrap;
+ 
 }

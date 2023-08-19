@@ -11,12 +11,14 @@
   background-color: #eeeeee;
   color: #818181;
   border-radius: 4px;
-  margin-top: 4.2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 
 .create-containerX button {
   margin-top: 10px;
+  color: rgb(81, 127, 127);
 }
 
 .create-formX {
@@ -89,19 +91,20 @@ padding-bottom: 1rem;
 
   .submit-buttonzX {
     padding: 5px 19px;
-    border: 2px solid #ccc;
+    border: 2px solid rgb(81, 127, 127);
     border-radius: 4px;
     color: #818181;
     background-color: #777373;
     /* font-weight: 400; */
     cursor: pointer;
     transition: 0.5s;
+    margin-bottom: 10px;
     
   }
   
   .submit-buttonzX:hover {
-    background-color: #b2cebf;
-    color: rgb(81, 81, 81);
+    background-color: rgb(81, 127, 127);
+    color: rgb(255, 255, 255);
   }
 
   .colorSelectorContainer{
@@ -115,3 +118,9 @@ padding-bottom: 1rem;
     padding: 1rem;
     margin-left: 1rem;
   }
+
+  .buttons-align {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

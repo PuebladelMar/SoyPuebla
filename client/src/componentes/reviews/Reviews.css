@@ -5,23 +5,36 @@
   gap: 2.1rem;
 }
 
-.review h1 {
-  font-size: 90rem;
-  overflow-wrap: break-word;
-  display: inline;
-  font-size: 14px;
-  line-height: 1;
-  margin: 0.4rem 0.4rem 0.4rem 0.4rem;
-}
-
 .review-container {
-  width: 100%;
+  width: 45rem;
   display: flex;
   justify-content: start;
 }
 
-.review span {
-  text-align: center;
+.show-more-button:hover {
+  color: #517F7F;
+}
+
+@media (max-width: 1300px) {
+  .review {
+    width: 25rem;
+  }
+}
+
+@media (max-width: 1140px) {
+  .review-container {
+    width: 30rem;
+  }
+}
+
+@media (max-width: 980px) {
+  .review {
+    width: 20rem;
+  }
+
+  .review-container {
+    max-width: 30rem;
+  }
 }
 
 @media (max-width: 860px) {

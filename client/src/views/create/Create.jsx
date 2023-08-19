@@ -15,6 +15,7 @@ import CreateDetail from "./createDetail/CreateDetail";
 import CreateColor from "./createColor/createColor";
 import CreateSerie from "./createSerie/CreateSerie";
 import CreateCategory from "./createCategory/CreateCategory";
+import CreateSize from "./createSize/createSize";
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -48,37 +49,45 @@ const Create = () => {
     event.preventDefault();
   };
 
+  const handleOpenSizeCreate = (event) =>{
+    setShowAlert({size: true});
+    event.preventDefault();
+  };
+
+
+
   //!___________________________
 
   const [uploadedSecureUrl, setUploadedSecureUrl] = useState(null);
 
-  const handleUpload = (singleUrl) => {
-    setUploadedSecureUrl(singleUrl);
-    setCreateProduct((prevState) => ({
-      ...prevState,
-      mainImage: singleUrl,
-    }));
+  const handleUpload = (url, actualColor) => {
+    setUploadedSecureUrl(url);
+    setCreateProduct((state) => {
+      const updateImages = state.colorImage.map((item)=> {
+        if(item.color === actualColor){
+          return {
+            ...item,
+            images:[...item.images, url]
+          }
+        }
+        return item
+      })
+      return {
+        ...state,
+        colorImage: updateImages
+      }
+    });
   };
-
-  const [uploadedMultipleUrls, setUploadedMultipleUrls] = useState([]);
-
-  const handleMultipleUpload = (urls) => {
-    setUploadedMultipleUrls(urls);
-    // preventDefault();
-  };
-
-  const combinedImagesUrls = [uploadedSecureUrl].concat(uploadedMultipleUrls);
 
   const [createProduct, setCreateProduct] = useState({
     name: "",
     price: 0,
-    mainImage: "",
-    image: [],
     sale: false,
     colorImage: [],
     description: "",
     series: [],
     category: [],
+    size: [],
   });
 
   useEffect(() => {
@@ -136,10 +145,10 @@ const Create = () => {
 
     if (
       !createProduct.name ||
-      !createProduct.mainImage ||
       !createProduct.description ||
       !createProduct.price ||
       !createProduct.category.length === 0 ||
+      !createProduct.size.length === 0 ||
       !createProduct.series.length === 0 ||
       !createProduct.colorImage.length === 0
     ) {
@@ -149,13 +158,12 @@ const Create = () => {
       setCreateProduct({
         name: "",
         price: 0,
-        mainImage: "",
-        image: [],
         sale: false,
         colorImage: [],
         description: "",
         series: [],
         category: [],
+        size: [],
       });
     }
   };
@@ -169,12 +177,14 @@ const Create = () => {
         if (!existingColor) {
           const updatedColorImage = [
             ...state.colorImage,
-            { color: selectedColor, stocks: [] }, // Agregar stocks vacíos
+            { color: selectedColor, images: [], stocks: [] }, // Agregar stocks vacíos
           ];
           return {
             ...state,
             colorImage: updatedColorImage,
           };
+        }else{
+          return state
         }
       }
     });
@@ -228,26 +238,28 @@ const Create = () => {
         const selectedSize = value;
         const stockItem = state.colorImage.find(item => item.color === selectedColor)?.stocks.find(stock => stock.size === selectedSize);
         const initialAmount = stockItem ? stockItem.amount : 0;
-  
-        const updatedColorImage = state.colorImage.map((item) =>
+        if(!stockItem){
+          const updatedColorImage = state.colorImage.map((item) =>
           item.color === selectedColor
             ? {
                 ...item,
                 stocks: [...item.stocks, { size: selectedSize, amount: initialAmount }],
               }
             : item
-        );
-  
-        return {
-          ...state,
-          colorImage: updatedColorImage,
-        };
+          );
+          return {
+            ...state,
+            colorImage: updatedColorImage,
+          };
+        }else{
+          return state
+        }
       } else {
         const color = selectedColor;
         const size = event.target.getAttribute("data-size");
         const newAmount = parseInt(value);
-      
-        const updatedColorImage = state.colorImage.map((item) =>
+        if(isNaN(newAmount) || newAmount >= 0){
+          const updatedColorImage = state.colorImage.map((item) =>
           item.color === color
             ? {
                 ...item,
@@ -256,15 +268,16 @@ const Create = () => {
                 ),
               }
             : item
-        );
-  
-        return {
-          ...state,
-          colorImage: updatedColorImage,
-        };
+          );
+          return {
+            ...state,
+            colorImage: updatedColorImage,
+          };
+        }else{
+          return state
+        }
       }
     });
-  
     setErrors(
       validations({ ...createProduct, [name]: value })
     );
@@ -317,7 +330,6 @@ const Create = () => {
         <popups className="pop-ups">
           <>
             <div className="transparentBackgroundY"></div>
-
             <div className="alertContainerY">
               <p className="alertTextY">Creador de categorías</p>
               <CreateCategory />
@@ -328,7 +340,6 @@ const Create = () => {
           </>
         </popups>
       )}
-
       {showAlert.serie && (
         <popups className="pop-ups">
           <>
@@ -344,7 +355,6 @@ const Create = () => {
           </>
         </popups>
       )}
-
       {showAlert.color && (
         <popups className="pop-ups">
           <>
@@ -360,10 +370,28 @@ const Create = () => {
           </>
         </popups>
       )}
+      {showAlert.size && (
+        <popups className="pop-ups">
+          <>
+            <div className="transparentBackgroundY"></div>
+
+            <div className="alertContainerY">
+              <p className="alertTextY">Creador de talle</p>
+              <CreateSize />
+              <div className="alertButtonsY">
+                <button onClick={handleCloseAlert}>X</button>
+              </div>
+            </div>
+          </>
+        </popups>
+      )}
+
+
 
       <div className="create-container">
         <form className="create-form">
-          <label htmlFor="name">Nombre: </label>
+          <label  htmlFor="name">Nombre <separator></separator></label>
+          
           <input
             type="string"
             name="name"
@@ -373,7 +401,10 @@ const Create = () => {
             onChange={(event) => handleChange(event)}
           />
           <p className="error">{errors.name}</p>
-          <label htmlFor="price">Precio: </label>
+         
+
+
+          <label htmlFor="price">Precio <separator></separator> </label>
           <input
             type="decimal"
             name="price"
@@ -383,41 +414,9 @@ const Create = () => {
             onChange={handleChange}
           />
           <p className="error">{errors.price}</p>
-          <label htmlFor="mainImage">Imagen Principal: </label>
-          <UploadWidget onUpload={handleUpload} />
-          {/* <textarea
-            type="text"
-            name="mainImage"
-            value={uploadedSecureUrl}
-            placeholder="Main Image"
-            className="custom-textarea"
-            onChange={handleChange}
-          />
-          <p className="error">{errors.mainImage}</p> */}
-          {uploadedSecureUrl === null ? (
-            <div>
-              <label htmlFor="image">Imagenes complementarias: </label>
-              <br />
-              <br />
-            </div>
-          ) : (
-            <div>
-              <label htmlFor="image">Imagenes complementarias: </label>
-              <MutipleUploadWidget onMultipleUpload={handleMultipleUpload} />
-            </div>
-          )}
-          {/* <input
-            type="text"
-            name="image"
-            value={createProduct.image}
-            placeholder="Imagen"
-            className="custom-input"
-            onChange={handleChange}
-          /> */}
-          <label htmlFor="sale">Oferta: </label>
+          <label htmlFor="sale">Oferta <separator></separator></label>
           <select
             name="sale"
-            className="custom-select"
             defaultValue={createProduct?.sale}
             onChange={handleChange}
           >
@@ -428,8 +427,9 @@ const Create = () => {
               Si
             </option>
           </select>
-          <label htmlFor="color">Color: </label>
-          {/* //!____________________ */}
+          <label htmlFor="color">Color <separator></separator> </label>
+
+         <div className="buttons-align" >
           <button
             type="button"
             onClick={() => {
@@ -439,7 +439,18 @@ const Create = () => {
           >
             Crear color
           </button>
-          {/* //!____________________ */}
+
+          <button
+            type="button"
+            onClick={() => {
+              handleOpenSizeCreate();
+            }}
+            className="mainImage-upload-buttonY "
+            >
+            Crear Talle
+          </button>
+            </div>
+        
           <select
             name="color"
             placeholder="Colores"
@@ -460,88 +471,86 @@ const Create = () => {
           <p className="error">{errors.color}</p>
           <div>
             {createProduct?.colorImage.length > 0 ? (
-              createProduct?.colorImage.map((col) => (
-                <div key={col.color}>
-                  <p>{col.color}</p>
-                  <button type="button" onClick={() => handleDeleteColor(col.color)}>X</button>
-                  <label htmlFor="size">Talle: </label>
-                  <select
+              createProduct?.colorImage.map((col) => {
+                let hexCodex = color.find((c) => (c.name === col.color) )
+                return (
+                  <div className="container-color-talle">
+                    <div  key={col.color}>
+                    <div className="containerBotonesSeleccion" >
+                      <info>
+                        <sample
+                        className="detailColorButtonCreate"
+                        style={{
+                        backgroundColor: hexCodex?.codHex,
+                        width: "20px",
+                        height: "20px",
+                        }}
+                      ></sample>
+                      <p>{col.color}</p>
+                      </info>
+                      <button type="button" onClick={() => handleDeleteColor(col.color)}>X</button>
+                    </div>
+                    <div>
+                      <label htmlFor="image">Imagenes </label>
+                      <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
+                    </div>
+
+                    <talle className="talle">
+                  
+                    <label  htmlFor="size"> Talles </label>
+                    <select
+                    
                     name="size"
                     placeholder="Talles"
                     defaultValue="def"
                     onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
-                  >
-                  <option value="def" key="def" disabled>
-                  Selecciona uno o varios talles.
-                  </option>
-                  {size.map((el) => {
-                    return (
-                      <option value={el.name} key={el.id}>
-                      {el.name}
-                      </option>
-                    );
-                  })}
-                  </select>
-                  <p className="error">{errors.size}</p>
-                <div>
-                {col.stocks.length > 0 ? (
-                col.stocks.map((si) => {
-                  return(
-                    <div key={si.size}>
-                      <p>{si.size}</p>
-                      <input
-                      name="amount"
-                      type="number"
-                      data-size={si.size}
-                      value={si.amount}
-                      onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
-                      />
-                      <button type="button" onClick={() => handleDeleteSize(si.size, col.color)}>X</button>
+                    >
+                    <option value="def" key="def" disabled>
+                    Selecciona talles
+                    </option>
+                    {size.map((el) => {
+                      return (
+                        <option value={el.name} key={el.id}>
+                        {el.name}
+                        </option>
+                      );
+                    })}
+                    </select>
+                    </talle>
+                    <p className="error">{errors.size}</p>
+
+
+                    <div >
+                      {col.stocks.length > 0 ? (
+                      col.stocks.map((si) => {
+                        return(
+                          <div key={si.size} className="container-talle-stock">
+                            <p>{si.size}</p>
+                            <input
+                            name="amount"
+                            type="number"
+                            data-size={si.size}
+                            value={si.amount}
+                            onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
+                            />
+                            <button type="button" onClick={() => handleDeleteSize(si.size, col.color)}>X</button>
+                          </div>
+                        ) 
+                      })
+                      )
+                      : (
+                      <p className="no-dietTypes"></p>
+                      )}
                     </div>
-                  )
-                })
-                ) : (
-                  <p className="no-dietTypes"></p>
-                )}
+                  </div>
                 </div>
-                </div>
-              ))
+              )
+            })
             ) : (
               <p className="no-dietTypes"></p>
             )}
           </div>
-          {/*<label htmlFor="size">Talle: </label>
-          <select
-            name="size"
-            placeholder="Talles"
-            defaultValue="def"
-            onChange={handleSelectSize}
-          >
-            <option value="def" key="def" disabled>
-              Selecciona uno o varios talles.
-            </option>
-            {size.map((el) => {
-              return (
-                <option value={el.name} key={el.id}>
-                  {el.name}
-                </option>
-              );
-            })}
-          </select>
-          <p className="error">{errors.size}</p>
-          <div>
-            {createProduct.size.length > 0 ? (
-              createProduct.size.map((si) => (
-                <div key={si}>
-                  <p>{si}</p>
-                  <button onClick={() => handleDeleteSize(si)}>X</button>
-                </div>
-              ))
-            ) : (
-              <p className="no-dietTypes"></p>
-            )}
-          </div>*/}
-          <label htmlFor="series">Colección: </label>
+          <label htmlFor="series">Colección <separator></separator> </label>
           <button
             type="button"
             onClick={() => {
@@ -569,19 +578,19 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.series}</p>
-          <div>
+          <div className="container-coleccion" >
             {createProduct?.series.length > 0 ? (
               createProduct?.series.map((ser) => (
-                <div key={ser}>
+                <coleccion key={ser}>
                   <p>{ser}</p>
                   <button onClick={() => handleDeleteSeries(ser)}>X</button>
-                </div>
+                </coleccion>
               ))
             ) : (
               <p></p>
             )}
           </div>
-          <label htmlFor="category">Categoría: </label>
+          <label htmlFor="category">Categoría <separator></separator> </label>
           <button
             type="button"
             onClick={() => {
@@ -609,19 +618,19 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.category}</p>
-          <div>
+          <div className="container-categoria">
             {createProduct?.category.length > 0 ? (
               createProduct?.category.map((cat) => (
-                <div key={cat}>
+                <categoria key={cat}>
                   <p>{cat}</p>
                   <button onClick={() => handleDeleteCategories(cat)}>X</button>
-                </div>
+                </categoria>
               ))
             ) : (
               <p className="no-dietTypes"></p>
             )}
           </div>
-          <label htmlFor="description">Descripcion: </label>
+          <label htmlFor="description"> Descripcion <separator></separator> </label>
           <textarea
             type="text"
             name="description"
@@ -629,9 +638,10 @@ const Create = () => {
             className="custom-textarea"
             onChange={handleChange}
           />
-          <p className="error">{errors.description}</p>
+          <p className="error">{errors.description} </p>
+          <label><separator></separator></label>
         </form>
-
+        <separator></separator>
         <div className="div-button">
           <button
             className="submit-button"
@@ -644,18 +654,16 @@ const Create = () => {
         </div>
       </div>
 
-      {/*<div>
+      <div>
         <CreateDetail
           nombre={createProduct?.name}
-          imagenes={combinedImagesUrls}
           precio={createProduct?.price}
           serie={createProduct?.series}
-          color={getColorHexCodes()}
-          size={createProduct.size}
+          colorImage={createProduct?.colorImage}
           category={createProduct?.category}
           description={createProduct?.description}
         />
-      </div>*/}
+      </div>
     </div>
   );
 };

@@ -129,14 +129,8 @@ export default function NavBar({ links }) {
                     <li style={{ margin: " 1rem" }}>
                       <Link to="/about">NOSOTRAS</Link>
                     </li>
-                    {/* <li style={{ margin: " 1rem" }}>
-                      <Link to="/create">CREAR</Link>
-                    </li> */}
-
                     <li style={{ margin: " 1rem" }}>
-                      <Link to="/dashboard">PANEL DE ADMINISTRADOR</Link>
-                  
-
+                      <Link to="/dashboard">ADMINISTRADOR</Link>
                     </li>
                   </ul>
                 </Tabs>
@@ -165,8 +159,7 @@ export default function NavBar({ links }) {
               gap={"10px"}
             >
               {" "}
-              <IconButton
-              >
+              <IconButton>
                 <Link to="/fav">
                   {" "}
                   <img

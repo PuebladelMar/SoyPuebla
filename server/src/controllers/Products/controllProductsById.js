@@ -1,4 +1,4 @@
-const { Products, Colors, Sizes, Categories, Series, Stocks } = require("../../db");
+const { Products, Colors, Sizes, Categories, Series, Stocks, ColorImages } = require("../../db");
 
 const productById = async (id) => {
   let product = await Products.findByPk(id, {
@@ -35,12 +35,21 @@ const productById = async (id) => {
       },
     });
 
+    let colorImages = await ColorImages.findAll({
+      where: {
+        ProductId: id,
+        ColorId: stock.ColorId,
+      },
+    });
+
+    let imageUrls = colorImages.reduce((urls, image) => {
+      return urls.concat(image.images);
+    }, []);
+
     let concatenatedResult = {
       id: product.id,
       name: product.name,
       price: product.price,
-      mainImage: product.mainImage,
-      image: product.image,
       description: product.description,
       sale: product.sale,
       category: product.Categories,
@@ -49,7 +58,8 @@ const productById = async (id) => {
       color: color.name,
       codHex: color.codHex,
       size: size.name,
-      stockId: stock.id
+      stockId: stock.id,
+      colorImages: imageUrls
     };
 
     concatenatedResults.push(concatenatedResult);
@@ -58,4 +68,4 @@ const productById = async (id) => {
   return concatenatedResults;
 };
 
-module.exports =  productById;
+module.exports = productById;

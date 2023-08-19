@@ -1,4 +1,3 @@
-
 const nodemailer = require("nodemailer");
 const emailApiKey = "tzxlsdlrobbymssj";
 
@@ -26,14 +25,15 @@ const controllerNodeMailer = async (emailSubject, emailsUsers) => {
   }
 };
 
-const sendRegisterMailNotify = async (emailSubject, emailsUsers) => {
-  try {
+const sendRegisterMailNotify = async (emailSubject, emailsUsers) => { 
+  try {  
     await transporter.sendMail({
       from: '"SOY_PUEBLA" : puebladelmar2023@gmail.com',
       to: emailsUsers,
       subject: emailSubject,
-      html: "<b>Bienvenida a Soy Puebla</b> <p>Estás recibiendo este e-mail como verificación de registro en nuestra tienda virtual</p>",
+      html: "<b>Bienvenida a Soy Puebla</b> <p>Gracias por suscribirte en nuestra tienda virtual</p>",
     });
+    
     console.log(`Correo de registro enviado a ${emailsUsers}`);
   } catch (error) {
     throw new Error("Error al enviar el correo electrónico de registro");

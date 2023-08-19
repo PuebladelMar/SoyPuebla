@@ -1,3 +1,9 @@
+import AllData from './views/productsInfo/AllData';
+import AllProducts from './views/productsInfo/AllProducts';
+import DetailAdmin from './views/productsInfo/detailadmin/DetailAdmin.jsx';
+import AllColecciones from './views/productsInfo/allColecciones/AllColecciones';
+import AllTalles from './views/productsInfo/allTalles/AllTalles';
+import AllColors from './views/productsInfo/allColors/AllColors';
 import "./App.css";
 import About from "./views/about/About";
 import Home from "./views/home/Home";
@@ -29,8 +35,11 @@ import SizeChart from "./views/sizeChart/sizeChart";
 import CreateColor from "./views/create/createColor/createColor";
 import CreateSerie from "./views/create/createSerie/CreateSerie";
 import Dashboard from "./views/dashboard/Dashboard";
+import Information from "./views/dashboard/Information";
+import UsersData from "./views/usersData/dataUserAdmin";
+import HistoryData from "./views/dashboard/purchaseHistory/purchaseHistory";
 
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = 'http://localhost:3001/';
 
 function App() {
   const { pathname } = useLocation();
@@ -41,18 +50,43 @@ function App() {
   }, [dispatch]);
 
   const linksArray = [
-    "Home",
-    "Products",
-    "About",
-    "Create",
-    "AdminAccount",
-    "Cart",
+    'Home',
+    'Products',
+    'About',
+    'Create',
+    'AdminAccount',
+    'Cart',
   ];
 
   return (
     <div>
       {<NavBar links={linksArray} />}
       <Routes>
+        <Route
+          path='/all-data'
+          element={<AllData />}
+        />
+        <Route
+          path='/all-data/all-products'
+          element={<AllProducts />}
+        />
+        <Route
+          path='/detail-admin/:id'
+          element={<DetailAdmin />}
+        />
+        <Route
+          path='/all-data/all-colecciones'
+          element={<AllColecciones />}
+        />
+        <Route
+          path='/all-data/all-sizes'
+          element={<AllTalles />}
+        />
+        <Route
+          path='/all-data/all-colors'
+          element={<AllColors />}
+        />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/fav" element={<Favorites />} />
@@ -61,6 +95,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/info" element={<Information />} />
         {/*<Route path="/login" element={<Login />} />*/}
         <Route path="/products/:id" element={<Detail />} />
         <Route path="*" element={<ErrorPage />} />
@@ -75,9 +110,10 @@ function App() {
         <Route path="/size-chart" element={<SizeChart />} />
         <Route path="/products/reviews" element={<ReviewsForm />} />
         <Route path="/create-serie" element={<CreateSerie />} />
-        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+        <Route path="/dashboard/users" element={<UsersData />} />
+        <Route path="/dashboard/history" element={<HistoryData />} />
       </Routes>
-      {pathname !== "/" && <Footer />}
+      {pathname !== '/' && <Footer />}
     </div>
   );
 }

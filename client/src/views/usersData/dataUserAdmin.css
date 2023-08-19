@@ -1,0 +1,116 @@
+.userAdmin-methods-container {
+    display: flex;
+    flex-direction: column; 
+    
+  }
+  /* .userAdminP {
+   text-align: justify;
+    color:  rgb(81, 81, 81);
+    margin-top: 2%;
+    margin-bottom: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
+  } */
+  
+  .userAdmin-table{
+    width: 80%;
+  }
+  .userAdmin-header {
+    display: flex;
+  flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    margin-top: 50px; 
+  }
+  
+  .userAdmin-title {
+    font-size: 3.5rem;
+    color: rgb(220, 170, 161);
+    font-weight: 400;
+    margin-left: 0;
+    margin-top: 5%;
+    
+  }
+  
+  .userAdmin-text-underline {
+    height: 0.4rem;
+    width: 150%;
+    margin-left: 0;
+    background-color: rgb(220, 170, 161);
+  }
+  
+  .userAdmin-container {
+    display: flex;
+    align-items: center; 
+    margin: 20px;
+    margin-top: 10px; 
+  }
+
+  .button {
+    background-color: #b2cebf;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    width: 150px;
+  }
+  
+  .selected {
+    background-color:#517f7f;
+    width: 150px;
+  }
+
+  .filters {
+    width: 250px;
+  padding: 20px 30px 20px 30px;
+  background-color: #ece4e1;
+  }
+  
+  .filters input[type="text"],
+  .filters select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .filters select {
+    width: 200px;
+    
+  }
+  
+ 
+  
+  
+ 
+ 
+  @media (max-width: 768px) {
+    .userAdmin-img-container {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .userAdmin-method {
+      margin: 5%;
+      flex-direction: column;
+      align-items: center; 
+    }
+  
+    .userAdmin-method p {
+      margin-top: 0; 
+    }
+    
+    .userAdmin-title {
+      font-size: 2rem; 
+    }
+  
+    .userAdmin-text-underline {
+      margin-left: 0; 
+    }
+    
+    .userAdmin-container {
+      flex-wrap: wrap; 
+    }
+ 
+  }
