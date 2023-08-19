@@ -17,7 +17,7 @@ const MutipleUploadWidget = ({ onMultipleUpload }) => {
       function (error, result) {
         if (!error && result && result.event === 'success') {
           const uploadedUrl = result.info.secure_url;
-          setUploadedUrls((prevUrls) => [...prevUrls, uploadedUrl]);
+          setUploadedUrls([uploadedUrl]);
         }
       }
     );
@@ -34,7 +34,7 @@ const MutipleUploadWidget = ({ onMultipleUpload }) => {
       <button
       type='button'
       className="multipleImage-upload-button" 
-      onClick={() => widgetRef.current.open()}>Cargar Imagenes Secundarias</button>
+      onClick={() => widgetRef.current.open()}>Cargar Imagenes</button>
       
     </div>
   );
