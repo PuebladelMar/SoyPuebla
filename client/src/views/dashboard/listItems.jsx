@@ -18,7 +18,9 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <NavLink to="/info">
+      <ListItemText primary="Informations" />
+      </NavLink>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
@@ -48,6 +50,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Integración" />
     </ListItemButton>
+    
     <ListItemButton>
       <ListItemIcon>
         <AddIcon />

@@ -1,31 +1,52 @@
 import "./FooterContact.css";
 import Newsletter from "../newsletter/newsletter";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllInformation } from "../../redux/Actions";
+import { useEffect } from "react";
 
 const FooterContact = () => {
+  const information = useSelector((state) => state.information);
+  const dispatch=useDispatch()
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(getAllInformation());
+      } catch (error) {
+        
+        console.error("Error al obtener la información:", error);
+      }
+    };
+  
+    fetchData(); 
+  }, [dispatch]);
+
+ 
+
   return (
     <footer className="footerC">
       <div className="moving-background"></div>
       <div className="brand-info">
         <h3>Contactanos</h3>
-        <p>Email: puebladelmar2023@gmail.com</p>
-        <p>Teléfono: +1 234 567 890</p>
+        <p>Email: {information.email}</p>
+        <p>Teléfono: {information.phone}</p>
         <div className="social-icons">
           <a
-            href="https://www.whatsapp.com/?lang=es_LA"
+            href={information.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
           >
             <img src="src/assets/images/Whatsapp.png" alt="WhatsApp" />
           </a>
           <a
-            href="https://www.facebook.com/"
+            href={information.facebook}
             target="_blank"
             rel="noopener noreferrer"
           >
             <img src="src/assets/images/face.png" alt="Facebook" />
           </a>
           <a
-            href="https://www.instagram.com/"
+            href={information.instagram}
             target="_blank"
             rel="noopener noreferrer"
           >
