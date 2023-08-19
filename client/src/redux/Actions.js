@@ -27,7 +27,8 @@ import {
   GET_USER_BY_ID,
   GET_USER_BY_NAME,
   GET_REVIEW_BY_ID,
-  GET_ALL_HISTORY
+  GET_ALL_HISTORY,
+  PUT_COLORS
 } from "./ActionsTypes";
 
 
@@ -468,3 +469,19 @@ export function getAllHistory() {
   };
 }
 
+// export function editColors(id, name, codHex ) {
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios.put(`http://localhost:3001/products/${id}`,{
+//         name: name,
+//         codHex: codHex
+//       });
+//       dispatch({
+//         type: PUT_COLORS,
+//         payload: response.data,
+//       });
+//     } catch (error) {
+//       alert(error.message);
+//     }
+//   };
+// }
