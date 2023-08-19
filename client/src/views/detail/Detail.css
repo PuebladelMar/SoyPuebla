@@ -28,6 +28,13 @@
   margin-top: 3rem;
 }
 
+.color-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .close-button {
   position: absolute;
   top: 0;
@@ -199,6 +206,10 @@
 }
 
 .size-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
   height: 2rem;
 }
 
@@ -307,7 +318,7 @@ detailDesciption .alertButtons button {
 
 .reviews-container {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
   min-width: 1000px;
   max-width: 1000px;

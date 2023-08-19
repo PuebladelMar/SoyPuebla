@@ -1,30 +1,31 @@
-.cart-container {
-  position: relative;
-  left: 32vw;
+.container-cart {
+  width: 100%;
+  height: 100%;
+  margin-top: 5rem;
   display: flex;
-  width: 39rem;
-  margin-top: 10rem;
-  margin-bottom: 4rem;
-  padding: 2rem;
-  font-family: Asap;
-  background-color: #f8f8f800;
-  border-radius: 8px;
-  box-shadow: 0.5px 2px 4px 4px rgba(0, 0, 0, 0.1);
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 1000px;
+  max-width: 1000px;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0.5px 2px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
 .cart-items {
-  display: grid;
-  grid-gap: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-item {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
   display: flex;
-  padding-top: 13px;
-  padding-left: 31px;
   background-color: white;
   border-radius: 4px;
   box-shadow: 0px 0px 0px 1px rgb(140 140 140 / 10%);
@@ -42,11 +43,11 @@
   height: 80px;
   -o-object-fit: cover;
   object-fit: cover;
-  margin-right: 10px;
   border: solid 1px;
 }
 
 .item-details {
+  position: relative;
   flex: 1;
 }
 
@@ -54,12 +55,10 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 20px;
 }
 
 .checkout-button {
   text-align: center;
-  margin: 10px;
   font-size: 0.75rem;
   width: 8rem;
   height: 1.5rem;
@@ -75,6 +74,31 @@
 .checkout-button:hover {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9em;
+  border: 0.1rem solid;
+  border-color: rgb(190, 190, 190);
+  cursor: pointer;
+  position: absolute;
+  left: 90%;
+  bottom: 95%;
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 0.2rem;
+  border-radius: 100%;
+  color: rgba(112, 112, 112, 0.766);
+  transition: 0.3s ease;
+}
+
+.closeButton:hover {
+  color: rgba(255, 252, 252, 0.766);
+  background-color: #8fb1b1;
+  border-radius: 100%;
 }
 
 @media screen and (max-width: 600px) {
@@ -145,29 +169,4 @@
   font-size: 2rem;
   color: rgba(32, 32, 32, 0.766);
   cursor: default;
-}
-
-.closeButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9em;
-  color: rgba(112, 112, 112, 0.766);
-  border: 0.13rem solid;
-  border-color: rgb(190, 190, 190);
-  border-radius: 4px;
-  transform: translateZ(0);
-  transition: 0.3s ease;
-  cursor: pointer;
-  position: relative;
-  left: 90%;
-  height: 1.2rem;
-  width: 1.2rem;
-}
-
-.closeButton:hover {
-  transform: scale(1.03);
-  color: rgb(255, 255, 255);
-  background: rgb(81, 127, 127);
-  border: none;
 }
