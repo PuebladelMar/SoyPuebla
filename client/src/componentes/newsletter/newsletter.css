@@ -40,17 +40,21 @@
 
 @media screen and (max-width: 768px) {
   .newsletter {
-      flex-direction: column; 
-      text-align: center; 
+    flex-direction: column;
+    text-align: center;
   }
 
   .newsletter h2 {
-      margin-right: 0; 
-      margin-bottom: 10px; 
+    margin-right: 0;
+    margin-bottom: 10px;
   }
 
   .newsletter input[type="email"],
   .newsletter button {
-      width: 100%; 
+    width: 100%;
   }
+}
+
+.isSuscribed {
+  margin-left: 1rem;
 }

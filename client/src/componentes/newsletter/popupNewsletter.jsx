@@ -4,6 +4,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import NewsletterPop from "./newsletterPop";
+import PopImg from "../.././assets/images/12.png"
 import { NavLink } from "react-router-dom";
 
 const PopUpNews = () => {
@@ -53,7 +54,7 @@ const PopUpNews = () => {
         }}
       >
         <img
-          src="src/assets/images/12.png"
+          src={PopImg}
           alt="Encabezado"
           style={{
             maxWidth: "100%",

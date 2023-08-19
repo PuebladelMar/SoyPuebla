@@ -16,7 +16,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./Detail.css";
 import Loader from "../../componentes/loader/Loader";
 
-
 const Detail = () => {
   const { id } = useParams();
   const userId = useSelector((state) => state.userId);
@@ -34,9 +33,7 @@ const Detail = () => {
     const fetchReview = async () => {
       try {
         await dispatch(getReviewById(productDetails[0].id));
-        // console.log(productDetails[0].id);
       } catch (error) {
-        // Manejar el error aquí si es necesario
         console.error("Error fetching review:", error);
       }
     };
@@ -56,6 +53,9 @@ const Detail = () => {
         const response = await axios.get(`/products/${id}`);
         setProductDetails(response.data);
         setIsReady(true);
+        if(selectedColor === null){
+          setSelectedColor(response.data[0].color);
+        }
       } catch (error) {
         window.alert(error);
       }
@@ -133,6 +133,8 @@ const Detail = () => {
     setIsSubscribed(true);
   };
 
+  const selectedColorImages = productDetails.find((product)=> product?.color === selectedColor)
+
   return (
     <div className="container">
       {isReady ? (
@@ -141,7 +143,7 @@ const Detail = () => {
             <div className="mainIMage-container">
               <img
                 className="cardImgDetail"
-                src={productDetails[0]?.mainImage}
+                src={selectedColorImages?.colorImages[0]}
                 alt={productDetails[0]?.name}
               />
             </div>
@@ -161,26 +163,28 @@ const Detail = () => {
               </div>
               <div className="color-size-container">
                 <p className="detailInfoColor">Colores disponibles:</p>
-                {uniqueColor.map((item) => (
-                  <button
-                    className="detailColorButton"
-                    key={item.color}
-                    onClick={() => {
-                      if (selectedColor === item.color) {
-                        setSelectedColor(null);
-                      } else {
-                        handleColorChange(item.color);
-                        setSelectedSize(null);
-                      }
-                    }}
-                    style={{
-                      backgroundColor: item.codHex,
-                      width: "30px",
-                      height: "30px",
-                      border: selectedColor === item.color ? null : 1,
-                    }}
-                  ></button>
-                ))}
+                <div className="color-container">
+                  {uniqueColor.map((item) => (
+                    <button
+                      className="detailColorButton"
+                      key={item.color}
+                      onClick={() => {
+                        if (selectedColor === item.color) {
+                          setSelectedColor(null);
+                        } else {
+                          handleColorChange(item.color);
+                          setSelectedSize(null);
+                        }
+                      }}
+                      style={{
+                        backgroundColor: item.codHex,
+                        width: "30px",
+                        height: "30px",
+                        border: selectedColor === item.color ? null : 1,
+                      }}
+                    ></button>
+                  ))}
+                </div>
                 <div className="size-container">
                   {productDetails
                     .filter((item) => item.color === selectedColor)
@@ -307,15 +311,16 @@ const Detail = () => {
           </div>
         </div>
       ) : (
-        <div className="loader-container"> 
-          <Loader/>
-          </div>
-       
-
+        <div className="loader-container">
+          <Loader />
+        </div>
       )}
       {isReady && (
         <div className="description-container">
-          <Accordion className="accordion" style={{ margin: "0", border: 'none' }}>
+          <Accordion
+            className="accordion"
+            style={{ margin: "0", border: "none" }}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"

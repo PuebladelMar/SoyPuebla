@@ -124,6 +124,7 @@ padding-bottom: 1rem;
     display: flex;
     justify-content: space-between;
     width: 100%;
+
 }
 
 .createdElementsListContainer {
@@ -150,6 +151,4 @@ padding-bottom: 1rem;
   border: 1px solid #a5a5a5;
   border-radius: 3px;
   padding: 2px 10px;
-
-
 }

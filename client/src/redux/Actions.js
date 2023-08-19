@@ -28,6 +28,7 @@ import {
   GET_USER_BY_NAME,
   GET_REVIEW_BY_ID,
   GET_ALL_HISTORY,
+  PUT_COLORS,
   POST_INFORMATION,
   GET_LATEST_INFORMATION
 } from "./ActionsTypes";
@@ -221,16 +222,17 @@ export const getUserCart = (userId) => {
   };
 };
 
-export function sendMail(emailSubject, emailsUsers) {
+export function sendMail(data) {
   return async function (dispatch) {
     try {
-
-      const response = await axios.post(`/notify/email`, {
-        emailSubject,
-        emailsUsers,
+      const response = await axios.post(`http://localhost:3001/notify/email`, {
+        emailSubject: data.emailSubject ,
+        emailsUsers: data.emailsUsers,
+        
       });
       return dispatch({
         type: SEND_MAIL,
+        payload: response.data,
       });
     } catch (error) {
       alert(error.message);
@@ -470,7 +472,25 @@ export function getAllHistory() {
   };
 }
 
-export function getAllInformation() {
+
+export function editColors(id, name, codHex ) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.put(`http://localhost:3001/products/${id}`,{
+        name: name,
+        codHex: codHex
+      });
+      dispatch({
+        type: PUT_COLORS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+      export function getAllInformation() {
   return async function (dispatch) {
     try {
       const response = await axios(`http://localhost:3001/information`);
@@ -480,10 +500,27 @@ export function getAllInformation() {
       });
     } catch (error) {
       alert(error);
+
     }
   };
 }
 
+
+export function deleteSeries(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+       ` http://localhost:3001/products/series/${id}`
+      );
+      dispatch({
+        type: DELETE_SERIES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert('daleee rey');
+    }
+  };
+}
 export function postInformation({ email, phone, instagram, facebook, whatsapp, image }) {
   return async function (dispatch) {
     try {
@@ -499,3 +536,5 @@ export function postInformation({ email, phone, instagram, facebook, whatsapp, i
     }
   };
 } 
+    
+    
