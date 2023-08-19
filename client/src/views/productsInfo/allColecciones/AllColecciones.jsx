@@ -40,6 +40,7 @@ const AllColecciones = () => {
         </div>
       ))}
       {/* <p>
+      
         {coleccions?.series.length > 0 ? (
           coleccions?.series.map((ser) => (
             <div key={ser}>
