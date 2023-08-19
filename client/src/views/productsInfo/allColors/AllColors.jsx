@@ -8,7 +8,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 import ModificarColorAdmin from "./ModificarColorAdmin";
 
-const AllColors = ({modifiedColor}) => {
+const AllColors = () => {
   const colors = useSelector((state) => state.colorList);
 
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ const AllColors = ({modifiedColor}) => {
   const [newColor, setNewColor] = useState("");
   const [ isOpen, setIsOpen] = useState(false)
 
+  const [modifiedColor, setModifiedColor] = useState(null)
   useEffect(() => {
     dispatch(getColor());
   }, [dispatch]);

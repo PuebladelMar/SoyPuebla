@@ -30,7 +30,7 @@ const ModificarColorAdmin = () => {
 
   const [colorSelect, setColorSelect] = useState("#ffffff");
   const [hexColor, setHexColor] = useState("#ffffff");
-  const [modifiedColor, setModifiedColor] = useState(null)
+
 
   const handlePut = ( id, name, codHex) => {
     // const idUpdate = color.id
@@ -111,6 +111,7 @@ const ModificarColorAdmin = () => {
             onChange={handleChange}
 
           /> 
+          
           {/* <p className="error">{errors.name}</p> */}
 
           <div className="colorSelectorContainer">
@@ -147,7 +148,7 @@ const ModificarColorAdmin = () => {
         
             Modificar
           </button>
-         {/* {console.log(handlePut)} */}
+         {console.log(handlePut)}
         </form>
       </div>
 

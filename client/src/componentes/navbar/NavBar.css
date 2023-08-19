@@ -1,0 +1,25 @@
+.menu-item {
+    margin: 1rem;
+    position: relative;
+    text-decoration: none;
+  }
+  
+  .menu-item a {
+    color: inherit;
+  }
+  
+  .menu-item::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: rgb(255, 255, 255); /* Cambia el color según tu preferencia */
+    transition: width 0.2s ease;
+  }
+  
+  .menu-item:hover::after {
+    width: 100%; 
+  }
+  
