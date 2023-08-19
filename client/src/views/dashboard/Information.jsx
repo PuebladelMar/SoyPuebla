@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getAllInformation, postInformation } from '../../redux/Actions';
-import "./Information.css"
+import { postInformation } from '../../redux/Actions';
+import "./Information.css";
 
 const Information = () => {
-
- 
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
   const [info, setInfo] = useState({
     email: 'correo@example.com',
@@ -17,7 +15,6 @@ const Information = () => {
     image: "www.imagen.com"
   });
 
-  
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setInfo((prevInfo) => ({
@@ -26,34 +23,67 @@ const Information = () => {
     }));
   };
 
- 
-  const saveChanges =async () => {
-   await dispatch(postInformation(info))
+  const saveChanges = async () => {
+    await dispatch(postInformation(info));
     // console.log('Cambios guardados:', info);
   };
 
   return (
-    <div>
-      <h2 className='vista'>Información de Contacto</h2>
-      <label>Email:</label>
-      <input type="text" name="email" value={info.email} onChange={handleInputChange} />
-      <br />
-      <label>Teléfono:</label>
-      <input type="text" name="phone" value={info.phone} onChange={handleInputChange} />
-      <br />
-      <label>Instagram:</label>
-      <input type="text" name="instagram" value={info.instagram} onChange={handleInputChange} />
-      <br />
-      <label>Facebook:</label>
-      <input type="text" name="facebook" value={info.facebook} onChange={handleInputChange} />
-      <br />
-      <label>WhatsApp:</label>
-      <input type="text" name="whatsapp" value={info.whatsapp} onChange={handleInputChange} />
-      <br />
-      <label>Imagen del footer:</label>
-      <input type="text" name="image" value={info.image} onChange={handleInputChange} />
-      <br />
-      <button onClick={saveChanges}>Guardar Cambios</button>
+    <div className="container">
+      <div className="form-container">
+        <h2 className="vista">Información de Contacto</h2>
+        <label className="label">Email:</label>
+        <input
+          className="input"
+          type="text"
+          name="email"
+          value={info.email}
+          onChange={handleInputChange}
+        />
+        <label className="label">Teléfono:</label>
+        <input
+          className="input"
+          type="text"
+          name="phone"
+          value={info.phone}
+          onChange={handleInputChange}
+        />
+        <label className="label">Instagram:</label>
+        <input
+          className="input"
+          type="text"
+          name="instagram"
+          value={info.instagram}
+          onChange={handleInputChange}
+        />
+        <label className="label">Facebook:</label>
+        <input
+          className="input"
+          type="text"
+          name="facebook"
+          value={info.facebook}
+          onChange={handleInputChange}
+        />
+        <label className="label">WhatsApp:</label>
+        <input
+          className="input"
+          type="text"
+          name="whatsapp"
+          value={info.whatsapp}
+          onChange={handleInputChange}
+        />
+        <label className="label">Imagen del footer:</label>
+        <input
+          className="input"
+          type="text"
+          name="image"
+          value={info.image}
+          onChange={handleInputChange}
+        />
+        <button className="button" onClick={saveChanges}>
+          Guardar Cambios
+        </button>
+      </div>
     </div>
   );
 };
