@@ -26,7 +26,9 @@ import {
   GET_USER_BY_NAME,
   GET_REVIEW_BY_ID,
   GET_ALL_HISTORY,
-  PUT_COLORS
+  PUT_COLORS,
+  POST_INFORMATION,
+  GET_LATEST_INFORMATION
 } from "./ActionsTypes";
 
 let initialState = {
@@ -48,6 +50,7 @@ let initialState = {
   userByName: [],
   getReviewById: [],
   allHistory: [],
+  information:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -199,6 +202,16 @@ function rootReducer(state = initialState, action) {
       return{
         ...state,
       };
+      case POST_INFORMATION:
+        return{
+          ...state,
+          information: action.payload,
+        };
+        case GET_LATEST_INFORMATION:
+          return{
+            ...state,
+            information: action.payload,
+          };
     default:
       return state;
   }
