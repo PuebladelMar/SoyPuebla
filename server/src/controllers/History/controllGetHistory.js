@@ -1,4 +1,4 @@
-const { Histories, Stocks, Products, Sizes, Colors } = require("../../db");
+const { Histories, Stocks, Products, Sizes, Colors, ColorImages } = require("../../db");
 
 const controllGetHistory = async (userId) => {
   const userHistory = await Histories.findAll({ where: { UserId: userId } });
@@ -7,7 +7,7 @@ const controllGetHistory = async (userId) => {
     const stock = await Stocks.findByPk(user.StockId);
 
     const color = await Colors.findByPk(stock.dataValues.ColorId, {
-      attributes: ["codHex", "name"],
+      attributes: ["codHex", "name", "id"],
     });
 
     const size = await Sizes.findByPk(stock.dataValues.SizeId, {
@@ -15,10 +15,12 @@ const controllGetHistory = async (userId) => {
     });
 
     const product = await Products.findByPk(stock.dataValues.ProductId, {
-      attributes: ["mainImage", "name"],
+      attributes: ["name", "id"],
     });
 
-    return { color, size, product, unitPrice: user.unitPrice, quantity: user.quantity };
+    const images = await ColorImages.findOne({where: {ColorId: color.id, ProductId: product.id}});
+
+    return { color, size, product, unitPrice: user.unitPrice, quantity: user.quantity, images };
   });
 
   const response = await Promise.all(responsePromises);
