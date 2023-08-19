@@ -29,7 +29,7 @@ const History = () => {
             <div className="history-items">
               {userHistory?.map((item, index)=>(
                 <div className="history-item" key={index}>
-                  <img src={item.product.mainImage}/>
+                  <img src={item.images.images[0]}/>
                   <div className="item-details">
                     <p>{item.product.name}</p>
                     <p>{item.color.name}</p>
