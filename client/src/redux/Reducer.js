@@ -26,6 +26,7 @@ import {
   GET_USER_BY_NAME,
   GET_REVIEW_BY_ID,
   GET_ALL_HISTORY,
+  PUT_COLORS,
   POST_INFORMATION,
   GET_LATEST_INFORMATION
 } from "./ActionsTypes";
@@ -196,6 +197,10 @@ function rootReducer(state = initialState, action) {
       return{
         ...state,
         getReviewById: action.payload,
+      };
+      case PUT_COLORS:
+      return{
+        ...state,
       };
       case POST_INFORMATION:
         return{
