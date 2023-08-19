@@ -40,10 +40,16 @@ export default function Cardx({ product }) {
     }
   };
 
+  const [selectedColor, setSelectedColor] = useState(null);
+
   const matchingColors = color.filter((c) =>
   colorImages?.some((ci) => ci.ColorId === c.id));
 
-  const [selectedColor, setSelectedColor] = useState(matchingColors[0]?.id);
+  useEffect(() => {
+    if (matchingColors.length > 0 && selectedColor === null) {
+      setSelectedColor(matchingColors[0]?.id);
+    }
+  }, [matchingColors, selectedColor]);
 
   const selectedColorImages = colorImages?.find((colorItem) => colorItem.ColorId === selectedColor)
 
