@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToFavorites,
@@ -16,12 +17,13 @@ import { Box, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function Cardx({ product }) {
-  const { id, name, price, mainImage, sale } = product;
+  const { id, name, price, colorImages, sale } = product;
   const isMatch = useMediaQuery("(max-width: 644px)");
   const isMatchCard = useMediaQuery("(max-width: 470px)");
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
   const userId = useSelector((state) => state.userId);
+  const color = useSelector((state)=> state.colorList);
   const isFavorite = favorites.some((item) => item.id === product.id);
 
   const handleFavoriteClick = async () => {
@@ -38,6 +40,19 @@ export default function Cardx({ product }) {
     }
   };
 
+  const [selectedColor, setSelectedColor] = useState(null);
+
+  const matchingColors = color.filter((c) =>
+  colorImages?.some((ci) => ci.ColorId === c.id));
+
+  useEffect(() => {
+    if (matchingColors.length > 0 && selectedColor === null) {
+      setSelectedColor(matchingColors[0]?.id);
+    }
+  }, [matchingColors, selectedColor]);
+
+  const selectedColorImages = colorImages?.find((colorItem) => colorItem.ColorId === selectedColor)
+
   return (
     <Card
       style={{
@@ -47,7 +62,7 @@ export default function Cardx({ product }) {
       }}
     >
       {!isMatch ? (
-        
+
         <Box>
           <Link to={`/products/${id}`}>
             <Box
@@ -65,7 +80,7 @@ export default function Cardx({ product }) {
                   objectFit: "fill",
                   transition: "transform 0.2s",
                 }}
-                image={mainImage}
+                image={selectedColorImages?.images[0]}
                 alt="Item"
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = "scale(1.05)";
@@ -122,6 +137,19 @@ export default function Cardx({ product }) {
                 display: "flex",
               }}
             >
+              {matchingColors.map((col, i) => (
+                <div key={i} style={{ marginTop: "10px" }}>
+                  <button
+                  className="detailColorButtonCreate"
+                  style={{
+                  backgroundColor: col.codHex,
+                  width: "30px",
+                  height: "30px",
+                  }}
+                  onClick={() => {setSelectedColor(col.id);}}
+                  ></button>
+                </div>
+              ))}
               <IconButton
                 aria-label="add to favorites"
                 onClick={handleFavoriteClick}

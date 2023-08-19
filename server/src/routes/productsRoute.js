@@ -18,6 +18,7 @@ const getReviewsById = require("../handlers/Reviews/getReviewsById");
 const putProducts = require('../handlers/Products/putProducts');
 const getColor = require('../handlers/Products/getColor');
 const getReviews = require('../handlers/Reviews/getReviews')
+const putColor = require('../handlers/Products/putColor')
 
 const productsRouter = Router();
 
@@ -58,6 +59,8 @@ productsRouter.delete("/series/:id", deleteSeries);
 productsRouter.get("/review/:id", getReviewsById);
 
 productsRouter.get("/:id", getProductsById);
+
+productsRouter.put("/:id", putColor);
 
 
 module.exports = productsRouter

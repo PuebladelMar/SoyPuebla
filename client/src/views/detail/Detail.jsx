@@ -33,9 +33,7 @@ const Detail = () => {
     const fetchReview = async () => {
       try {
         await dispatch(getReviewById(productDetails[0].id));
-        // console.log(productDetails[0].id);
       } catch (error) {
-        // Manejar el error aquí si es necesario
         console.error("Error fetching review:", error);
       }
     };
@@ -55,6 +53,9 @@ const Detail = () => {
         const response = await axios.get(`/products/${id}`);
         setProductDetails(response.data);
         setIsReady(true);
+        if(selectedColor === null){
+          setSelectedColor(response.data[0].color);
+        }
       } catch (error) {
         window.alert(error);
       }
@@ -132,6 +133,8 @@ const Detail = () => {
     setIsSubscribed(true);
   };
 
+  const selectedColorImages = productDetails.find((product)=> product?.color === selectedColor)
+
   return (
     <div className="container">
       {isReady ? (
@@ -140,7 +143,7 @@ const Detail = () => {
             <div className="mainIMage-container">
               <img
                 className="cardImgDetail"
-                src={productDetails[0]?.mainImage}
+                src={selectedColorImages?.colorImages[0]}
                 alt={productDetails[0]?.name}
               />
             </div>

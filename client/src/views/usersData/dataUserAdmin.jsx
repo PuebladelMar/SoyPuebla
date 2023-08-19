@@ -6,24 +6,61 @@ import "./dataUserAdmin.css";
 const UsersData = () => {
   const allUsers = useSelector((state) => state.allUsers);
   const dispatch = useDispatch();
-  const obj = [
-    {
-      banUser: false,
-      clerkId: "user_2U4GrWVlUALWFyrMmfA6ZrR0KPS",
-      createdAt: "2023-08-17T12:52:35.060Z",
-      deletedAt: null,
-      emailAddress: "agustinnazer5@gmail.com",
-      fullName: "Agus",
-      id: "ef2b2732-2e40-4fbf-a840-f38296a22649",
-      updatedAt: "2023-08-17T12:52:35.060Z",
-      userRole: "user",
-    },
-  ];
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [filters, setFilters] = useState({
+    createdAt: "",
+    banUser: "",
+    id: "",
+    userRole: "",
+    fullName: "",
+  });
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [selectedButton, setSelectedButton] = useState("");
 
   useEffect(() => {
     dispatch(getUsers());
-    console.log(allUsers);
   }, [dispatch]);
+
+  useEffect(() => {
+    const filtered = allUsers.filter((user) => {
+      return (
+        (filters.createdAt === "" ||
+          user.createdAt.includes(filters.createdAt)) &&
+        (filters.fullName === "" || user.fullName.includes(filters.fullName)) &&
+        (filters.banUser === "" ||
+          user.banUser.toString() === filters.banUser) &&
+        (filters.id === "" || user.id.includes(filters.id)) &&
+        (filters.userRole === "" || user.userRole.includes(filters.userRole))
+      );
+    });
+
+    const sortedUsers = filtered.slice().sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.createdAt.localeCompare(b.createdAt);
+      } else {
+        return b.createdAt.localeCompare(a.createdAt);
+      }
+    });
+
+    setFilteredUsers(sortedUsers);
+  }, [filters, allUsers, sortOrder]);
+
+  const handleFilterChange = (field, value) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [field]: value,
+    }));
+  };
+
+  const setSortOrderAsc = () => {
+    setSelectedButton("asc");
+    setSortOrder("asc");
+  };
+
+  const setSortOrderDesc = () => {
+    setSelectedButton("desc");
+    setSortOrder("desc");
+  };
 
   return (
     <div className="userAdmin-methods-container">
@@ -33,9 +70,58 @@ const UsersData = () => {
           <span className="userAdmin-text-underline"></span>
         </div>
       </div>
-      <div />
-      <div></div>
       <div className="userAdmin-container">
+        <div className="filters">
+          <input
+            type="text"
+            placeholder="Fecha de creación"
+            value={filters.createdAt}
+            onChange={(e) => handleFilterChange("createdAt", e.target.value)}
+          />
+          <div className="filters">
+            <button
+              onClick={setSortOrderAsc}
+              className={`button ${selectedButton === "asc" ? "selected" : ""}`}
+            >
+              Ascendente
+            </button>
+            <button
+              onClick={setSortOrderDesc}
+              className={`button ${
+                selectedButton === "desc" ? "selected" : ""
+              }`}
+            >
+              Descendente
+            </button>
+          </div>
+          <input
+            type="text"
+            placeholder="Nombre"
+            value={filters.fullName}
+            onChange={(e) => handleFilterChange("fullName", e.target.value)}
+          />
+          <select
+            value={filters.banUser}
+            onChange={(e) => handleFilterChange("banUser", e.target.value)}
+          >
+            <option value="">Bloqueado</option>
+            <option value="true">Sí</option>
+            <option value="false">No</option>
+          </select>
+          <input
+            type="text"
+            placeholder="ID"
+            value={filters.id}
+            onChange={(e) => handleFilterChange("id", e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Rol"
+            value={filters.userRole}
+            onChange={(e) => handleFilterChange("userRole", e.target.value)}
+          />
+        </div>
+
         <table className="userAdmin-table">
           <thead>
             <tr>
@@ -48,7 +134,7 @@ const UsersData = () => {
             </tr>
           </thead>
           <tbody>
-            {allUsers.map((user) => (
+            {filteredUsers.map((user) => (
               <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.fullName}</td>

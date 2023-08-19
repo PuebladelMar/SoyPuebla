@@ -136,6 +136,7 @@
 .alertContainerY {
   background-color: rgb(253, 253, 253);
   border: 2px solid rgb(81, 127, 127);
+  border-radius: 10px;
   padding: 15px;
   position: absolute;
   z-index: 9999;
@@ -146,9 +147,11 @@
 }
 
 .alertTextY {
+  font-weight: 500;
   font-size: 1.1rem;
-  color: rgba(91, 91, 91, 0.766);
+  color: rgb(81, 127, 127);
   margin-left: 2rem;
+  margin-top: 1rem;
 }
 
 .alertButtonsY {
@@ -159,7 +162,7 @@
 }
 
 .alertButtonsY button {
-  color: rgba(91, 91, 91, 0.766);
+  color: rgb(81, 127, 127);
   background: rgb(255, 255, 255);
   font-size: 15px;
   margin-right: 10px;
@@ -195,8 +198,8 @@
   top: 0;
   left: 0;
   width: 100%;
- height: 100%
-
+ height: 100%;
+    background-color: rgba(255, 255, 255, 0.644);
  
 
 }
