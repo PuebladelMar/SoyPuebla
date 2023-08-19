@@ -219,16 +219,17 @@ export const getUserCart = (userId) => {
   };
 };
 
-export function sendMail(emailSubject, emailsUsers) {
+export function sendMail(data) {
   return async function (dispatch) {
     try {
-
-      const response = await axios.post(`/notify/email`, {
-        emailSubject,
-        emailsUsers,
+      const response = await axios.post(`http://localhost:3001/notify/email`, {
+        emailSubject: data.emailSubject ,
+        emailsUsers: data.emailsUsers,
+        
       });
       return dispatch({
         type: SEND_MAIL,
+        payload: response.data,
       });
     } catch (error) {
       alert(error.message);
