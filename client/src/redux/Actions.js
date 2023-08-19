@@ -28,7 +28,9 @@ import {
   GET_USER_BY_NAME,
   GET_REVIEW_BY_ID,
   GET_ALL_HISTORY,
-  PUT_COLORS
+  PUT_COLORS,
+  POST_INFORMATION,
+  GET_LATEST_INFORMATION
 } from "./ActionsTypes";
 
 
@@ -348,10 +350,10 @@ export function notifyStock(data) {
 }
 
 export function postReviews(userComment) {
-  console.log(userComment);
+ 
   return async function (dispatch) {
     try {
-      console.log(userComment);
+     
       await axios.post(`/products/review`, 
         userComment,
       );
@@ -435,7 +437,7 @@ export function getUserByName(name) {
         payload: response.data,
       });
     } catch (error) {
-      alert('Error al obtener las coincidencias');
+      alert(error);
     }
   };
 }
@@ -464,10 +466,11 @@ export function getAllHistory() {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener usuarios");
+      alert(error);
     }
   };
 }
+
 
 export function editColors(id, name, codHex ) {
   return async function (dispatch) {
@@ -482,9 +485,21 @@ export function editColors(id, name, codHex ) {
       });
     } catch (error) {
       alert(error.message);
+export function getAllInformation() {
+  return async function (dispatch) {
+    try {
+      const response = await axios(`http://localhost:3001/information`);
+      dispatch({
+        type: GET_LATEST_INFORMATION,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error);
+
     }
   };
 }
+
 
 export function deleteSeries(id) {
   return async function (dispatch) {
@@ -501,3 +516,19 @@ export function deleteSeries(id) {
     }
   };
 }
+export function postInformation({ email, phone, instagram, facebook, whatsapp, image }) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`http://localhost:3001/information`,{
+        email, phone, instagram, facebook, whatsapp, image 
+      });
+      dispatch({
+        type: POST_INFORMATION,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+} 
+

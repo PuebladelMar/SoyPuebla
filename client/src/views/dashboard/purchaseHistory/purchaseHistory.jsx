@@ -1,31 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsers } from "../../redux/Actions";
-import "./dataUserAdmin.css";
+import { getAllHistory } from "../../../redux/Actions";
+// import "./dataUserAdmin.css";
 
-const UsersData = () => {
-  const allUsers = useSelector((state) => state.allUsers);
+const HistoryData = () => {
+  const allHistory = useSelector((state) => state.allHistory);
   const dispatch = useDispatch();
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [filters, setFilters] = useState({
     createdAt: "",
-    banUser: "",
-    id: "",
+    quantity: "",
+    unitPrice: "",
+    deletedAt: "",
+    updatedAt: "",
+    attributes: "",
+    emailAddress: "",
     userRole: "",
+    banUser: "",
     fullName: "",
   });
+
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedButton, setSelectedButton] = useState("");
 
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getAllHistory());
   }, [dispatch]);
 
   useEffect(() => {
-    const filtered = allUsers.filter((user) => {
+    const filtered = allHistory.filter((user) => {
       return (
         (filters.createdAt === "" ||
           user.createdAt.includes(filters.createdAt)) &&
+        (filters.quantity === "" || user.quantity.includes(filters.quantity)) &&
+        (filters.unitPrice === "" ||
+          user.unitPrice.includes(filters.unitPrice)) &&
+        (filters.deletedAt === "" ||
+          user.deletedAt.includes(filters.deletedAt)) &&
+        (filters.updatedAt === "" ||
+          user.updatedAt.includes(filters.updatedAt)) &&
+        (filters.attributes === "" ||
+          user.attributes.includes(filters.attributes)) &&
+        (filters.emailAddress === "" ||
+          useremailAddress.includes(filters.emailAddress)) &&
         (filters.fullName === "" || user.fullName.includes(filters.fullName)) &&
         (filters.banUser === "" ||
           user.banUser.toString() === filters.banUser) &&
@@ -43,7 +60,7 @@ const UsersData = () => {
     });
 
     setFilteredUsers(sortedUsers);
-  }, [filters, allUsers, sortOrder]);
+  }, [filters, allHistory, sortOrder]);
 
   const handleFilterChange = (field, value) => {
     setFilters((prevFilters) => ({
@@ -94,6 +111,42 @@ const UsersData = () => {
               Descendente
             </button>
           </div>
+          <input
+            type="text"
+            placeholder="Cantidad"
+            value={filters.quantity}
+            onChange={(e) => handleFilterChange("quantity", e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Precio"
+            value={filters.unitPrice}
+            onChange={(e) => handleFilterChange("unitPrice", e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Eliminado"
+            value={filters.deletedAt}
+            onChange={(e) => handleFilterChange("deletedAt", e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Actualizado"
+            value={filters.updatedAt}
+            onChange={(e) => handleFilterChange("updatedAt", e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Detalle"
+            value={filters.attributes}
+            onChange={(e) => handleFilterChange("attributes", e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Mail"
+            value={filters.emailAddress}
+            onChange={(e) => handleFilterChange("emailAddress", e.target.value)}
+          />
           <input
             type="text"
             placeholder="Nombre"
@@ -151,4 +204,4 @@ const UsersData = () => {
   );
 };
 
-export default UsersData;
+export default HistoryData;

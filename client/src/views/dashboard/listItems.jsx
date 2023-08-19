@@ -20,18 +20,26 @@ export const mainListItems = (
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary='Dashboard' />
+      <NavLink to="/info">
+      <ListItemText primary="Informations" />
+      </NavLink>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
       <ListItemText primary='Historial de compra' />
+      <NavLink to="/dashboard/history">
+        <ListItemText primary="Historial de compras" />
+      </NavLink>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
-        </ListItemIcon>
-      <NavLink to="/dashboard/users"><ListItemText primary="Usuarios" /></NavLink>
+      </ListItemIcon>
+      <NavLink to="/dashboard/users">
+        <ListItemText primary="Usuarios" />
+      </NavLink>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
@@ -53,6 +61,7 @@ export const mainListItems = (
         <ListItemText primary='Products' />
       </NavLink>
     </ListItemButton>
+    
     <ListItemButton>
       <ListItemIcon>
         <AddIcon />
