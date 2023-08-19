@@ -29,8 +29,10 @@ import SizeChart from "./views/sizeChart/sizeChart";
 import CreateColor from "./views/create/createColor/createColor";
 import CreateSerie from "./views/create/createSerie/CreateSerie";
 import Dashboard from "./views/dashboard/Dashboard";
-import UsersData from "./views/usersData/dataUserAdmin"
 import Information from "./views/dashboard/Information";
+import UsersData from "./views/usersData/dataUserAdmin";
+import HistoryData from "./views/dashboard/purchaseHistory/purchaseHistory";
+
 axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
@@ -76,8 +78,9 @@ function App() {
         <Route path="/create-color" element={<CreateColor />} />
         <Route path="/size-chart" element={<SizeChart />} />
         <Route path="/products/reviews" element={<ReviewsForm />} />
-        <Route path="/create-serie" element={<CreateSerie />} />        
+        <Route path="/create-serie" element={<CreateSerie />} />
         <Route path="/dashboard/users" element={<UsersData />} />
+        <Route path="/dashboard/history" element={<HistoryData />} />
       </Routes>
       {pathname !== "/" && <Footer />}
     </div>
