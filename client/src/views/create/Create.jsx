@@ -87,6 +87,7 @@ const Create = () => {
     description: "",
     series: [],
     category: [],
+    size: [],
   });
 
   useEffect(() => {
@@ -147,6 +148,7 @@ const Create = () => {
       !createProduct.description ||
       !createProduct.price ||
       !createProduct.category.length === 0 ||
+      !createProduct.size.length === 0 ||
       !createProduct.series.length === 0 ||
       !createProduct.colorImage.length === 0
     ) {
@@ -161,6 +163,7 @@ const Create = () => {
         description: "",
         series: [],
         category: [],
+        size: [],
       });
     }
   };
@@ -367,6 +370,24 @@ const Create = () => {
           </>
         </popups>
       )}
+      {showAlert.size && (
+        <popups className="pop-ups">
+          <>
+            <div className="transparentBackgroundY"></div>
+
+            <div className="alertContainerY">
+              <p className="alertTextY">Creador de talle</p>
+              <CreateSize />
+              <div className="alertButtonsY">
+                <button onClick={handleCloseAlert}>X</button>
+              </div>
+            </div>
+          </>
+        </popups>
+      )}
+
+
+
       <div className="create-container">
         <form className="create-form">
           <label  htmlFor="name">Nombre <separator></separator></label>
@@ -407,7 +428,8 @@ const Create = () => {
             </option>
           </select>
           <label htmlFor="color">Color <separator></separator> </label>
-         
+
+         <div className="buttons-align" >
           <button
             type="button"
             onClick={() => {
@@ -417,6 +439,17 @@ const Create = () => {
           >
             Crear color
           </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              handleOpenSizeCreate();
+            }}
+            className="mainImage-upload-buttonY "
+            >
+            Crear Talle
+          </button>
+            </div>
         
           <select
             name="color"
