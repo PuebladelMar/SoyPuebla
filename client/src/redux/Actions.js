@@ -485,3 +485,19 @@ export function getAllHistory() {
 //     }
 //   };
 // }
+
+export function deleteSeries(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+       ` http://localhost:3001/products/series/${id}`
+      );
+      dispatch({
+        type: DELETE_SERIES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert('daleee rey');
+    }
+  };
+}

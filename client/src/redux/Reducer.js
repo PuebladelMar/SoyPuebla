@@ -26,7 +26,8 @@ import {
   GET_USER_BY_NAME,
   GET_REVIEW_BY_ID,
   GET_ALL_HISTORY,
-  PUT_COLORS
+  PUT_COLORS,
+  DELETE_SERIES,
 } from "./ActionsTypes";
 
 let initialState = {
@@ -198,6 +199,11 @@ function rootReducer(state = initialState, action) {
       case PUT_COLORS:
       return{
         ...state,
+      };
+      case DELETE_SERIES:
+      return {
+        ...state,
+        series: action.payload,
       };
     default:
       return state;
