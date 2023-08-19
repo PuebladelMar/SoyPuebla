@@ -15,6 +15,7 @@ import CreateDetail from "./createDetail/CreateDetail";
 import CreateColor from "./createColor/createColor";
 import CreateSerie from "./createSerie/CreateSerie";
 import CreateCategory from "./createCategory/CreateCategory";
+import CreateSize from "./createSize/createSize";
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,13 @@ const Create = () => {
     setShowAlert({category: true});
     event.preventDefault();
   };
+
+  const handleOpenSizeCreate = (event) =>{
+    setShowAlert({size: true});
+    event.preventDefault();
+  };
+
+
 
   //!___________________________
 
