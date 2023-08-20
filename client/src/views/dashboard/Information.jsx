@@ -7,12 +7,12 @@ const Information = () => {
   const dispatch = useDispatch();
   
   const [info, setInfo] = useState({
-    email: 'correo@example.com',
-    phone: '123-456-7890',
-    instagram: '@usuario_instagram',
-    facebook: 'nombre_de_usuario',
-    whatsapp: '123-456-7890',
-    image: "www.imagen.com"
+    email: '',
+    phone: '',
+    instagram: '',
+    facebook: '',
+    whatsapp: '',
+    image: ""
   });
   const [questionForm, setQuestionForm] = useState({
     questions: '',
