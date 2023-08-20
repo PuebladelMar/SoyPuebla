@@ -47,7 +47,7 @@ function DrawerComp({ links }) {
             width: "100%",
           }}
         >
-          <Box
+          {/* <Box
             display={"flex"}
             flexDirection={"column"}
             justifyContent={"center"}
@@ -84,6 +84,164 @@ function DrawerComp({ links }) {
                 </ListItemIcon>
               </ListItemButton>
             ))}
+          </Box> */}
+
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            width={"100%"}
+          >
+            <ListItemButton component={Link} to="/home">
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
+                    "&:hover": {
+                      color: "#517f7f",
+                      cursor: "pointer",
+                      transform: "scale(1.4)",
+                    },
+                  }}
+                >
+                  Inicio
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            <ListItemButton component={Link} to="/products">
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
+                    "&:hover": {
+                      color: "#517f7f",
+                      cursor: "pointer",
+                      transform: "scale(1.4)",
+                    },
+                  }}
+                >
+                  Productos
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            <ListItemButton component={Link} to="/about">
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
+                    "&:hover": {
+                      color: "#517f7f",
+                      cursor: "pointer",
+                      transform: "scale(1.4)",
+                    },
+                  }}
+                >
+                  Nosotras
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            <ListItemButton component={Link} to="/dashboard">
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
+                    "&:hover": {
+                      color: "#517f7f",
+                      cursor: "pointer",
+                      transform: "scale(1.4)",
+                    },
+                  }}
+                >
+                  Administrador
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            <ListItemButton component={Link} to="/fav">
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
+                    "&:hover": {
+                      color: "#517f7f",
+                      cursor: "pointer",
+                      transform: "scale(1.4)",
+                    },
+                  }}
+                >
+                  Favoritos
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            <ListItemButton component={Link} to="/cart">
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
+                    "&:hover": {
+                      color: "#517f7f",
+                      cursor: "pointer",
+                      transform: "scale(1.4)",
+                    },
+                  }}
+                >
+                  Carrito
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
           </Box>
         </List>
       </Drawer>

@@ -1,4 +1,4 @@
-import { Grid, Tabs, Typography } from "@mui/material";
+import { Grid, Tabs, Typography, makeStyles } from "@mui/material";
 import { Box, AppBar, Toolbar, IconButton, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
@@ -13,6 +13,7 @@ import TortugaRosa from "../.././assets/images/TORTUGA_ROSA_SINFONDO.png";
 import FavImage from "../.././assets/images/Fav.png";
 import CartImage from "../.././assets/images/Cart.png";
 import DrawerComp from "./DrawerComp";
+import './NavBar.css'
 
 export default function NavBar({ links }) {
   const location = useLocation();
@@ -42,6 +43,30 @@ export default function NavBar({ links }) {
   const isMatchSearchBar = useMediaQuery("(max-width: 1114px)");
   const [value, setValue] = useState(0);
 
+  // const linkSubrayado = makeStyles((theme) => ({
+  //   ulContainer: {
+  //     display: "flex",
+  //     listStyle: "none",
+  //     alignItems: "center",
+  //   },
+  //   liItem: {
+  //     margin: "1rem",
+  //     position: "relative",
+  //     textDecoration: "none",
+  //     color: "inherit",
+  //     "&:hover::after": {
+  //       content: '""',
+  //       position: "absolute",
+  //       bottom: "-2px",
+  //       left: 0,
+  //       width: "100%",
+  //       height: "2px",
+  //       backgroundColor: theme.palette.primary.main, // Cambia el color según tu paleta
+  //     },
+  //   },
+  // }));
+
+  
   return (
     <AppBar
       sx={{
@@ -120,16 +145,16 @@ export default function NavBar({ links }) {
                       alignItems: "center",
                     }}
                   >
-                    <li style={{ margin: " 1rem" }}>
+                    <li className="menu-item" style={{ margin: " 1rem" }}>
                       <Link to="/home">INICIO</Link>
                     </li>
-                    <li style={{ margin: " 1rem" }}>
+                    <li className="menu-item" style={{ margin: " 1rem" }}>
                       <Link to="/products">PRODUCTOS</Link>
                     </li>
-                    <li style={{ margin: " 1rem" }}>
+                    <li className="menu-item" style={{ margin: " 1rem" }}>
                       <Link to="/about">NOSOTRAS</Link>
                     </li>
-                    <li style={{ margin: " 1rem" }}>
+                    <li className="menu-item" style={{ margin: " 1rem" }}>
                       <Link to="/dashboard">ADMINISTRADOR</Link>
                     </li>
                   </ul>
