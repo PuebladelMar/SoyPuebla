@@ -221,17 +221,18 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editColors } from "../../../redux/Actions";
-import './createColor.css'
-
+import './createColor.css';
 
 const ModificarColorAdmin = ({ isOpen, setIsOpen, editingColor }) => {
   const dispatch = useDispatch();
   const [newName, setNewName] = useState(editingColor.name);
   const [newCodHex, setNewCodHex] = useState(editingColor.codHex);
 
-  const handleEditSubmit = () => {
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
     dispatch(editColors(editingColor.id, newName, newCodHex));
     setIsOpen(false);
+
   };
 
   return (
@@ -256,3 +257,4 @@ const ModificarColorAdmin = ({ isOpen, setIsOpen, editingColor }) => {
 };
 
 export default ModificarColorAdmin;
+

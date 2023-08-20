@@ -33,7 +33,7 @@ import {
   POST_QUESTIONS,
   DELETE_QUESTIONS,
   GET_ALL_QUESTIONS,
-
+  DELETE_COLOR,
 } from "./ActionsTypes";
 
 let initialState = {
@@ -56,8 +56,8 @@ let initialState = {
   getReviewById: [],
   allHistory: [],
   mailConfirmation: [],
-  information:[],
-  questions:[],
+  information: [],
+  questions: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -202,40 +202,58 @@ function rootReducer(state = initialState, action) {
         ...state,
         getReviewById: action.payload,
       };
-      case PUT_COLORS:
-      return{
+    case PUT_COLORS:
+      const updatedColor = action.payload;
+      const updatedColorList = state.colorList.map((color) => {
+        if (color.id === updatedColor.id) {
+          return updatedColor;
+        }
+        return color;
+      });
+
+      return {
         ...state,
+        colorList: updatedColorList,
       };
-      case DELETE_SERIES:
+    case DELETE_SERIES:
       return {
         ...state,
         series: action.payload,
       };
-      case POST_INFORMATION:
-        return{
-          ...state,
-          information: action.payload,
-        };
-        case GET_LATEST_INFORMATION:
-          return{
-            ...state,
-            information: action.payload,
-          };
-          case DELETE_QUESTIONS:
-            return {
-              ...state,
-              questions: action.payload,
-            };
-            case GET_ALL_QUESTIONS:
-              return{
-                ...state,
-                questions: action.payload,
-              };
-              case POST_QUESTIONS:
-                return{
-                  ...state,
-                  questions: action.payload,
-                };
+    case POST_INFORMATION:
+      return {
+        ...state,
+        information: action.payload,
+      };
+    case GET_LATEST_INFORMATION:
+      return {
+        ...state,
+        information: action.payload,
+      };
+    case DELETE_QUESTIONS:
+      return {
+        ...state,
+        questions: action.payload,
+      };
+    case GET_ALL_QUESTIONS:
+      return {
+        ...state,
+        questions: action.payload,
+      };
+    case POST_QUESTIONS:
+      return {
+        ...state,
+        questions: action.payload,
+      };
+    case DELETE_COLOR:
+      const deletedColorId = action.payload;
+      const updatedColorListDelete = state.colorList.filter(
+        (color) => color.id !== deletedColorId
+      );
+      return {
+        ...state,
+        colorList: updatedColorList,
+      };
     default:
       return state;
   }
