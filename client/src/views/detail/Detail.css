@@ -84,6 +84,8 @@
 
 .detailName {
   font-size: 2rem;
+  width: 100%;
+  display: inline-block;
   color: rgba(32, 32, 32, 0.766);
   cursor: default;
 }
@@ -327,9 +329,17 @@ detailDesciption .alertButtons button {
   margin-bottom: 3rem;
 }
 
-.container {
+.span-product-name {
+  display: flex;
+  height: 0.1rem;
+  background-color: rgba(91, 91, 91, 0.766);
+  border-radius: 0.2rem;
+}
+
+.container-detail {
   margin-top: 5rem;
   display: flex;
+  height: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -451,11 +461,11 @@ detailDesciption .alertButtons button {
   }
 
   .detailInfoSerie {
-    margin-top: 1rem;
+    margin-top: 0.2rem;
   }
 
   .addCartButton {
-    margin-top: 3rem;
+    margin-top: 3.8rem;
     padding: 1.5rem;
   }
 
@@ -466,8 +476,11 @@ detailDesciption .alertButtons button {
 
   .detailName {
     position: absolute;
+    white-space: nowrap;
     left: 0;
-    bottom: 28.7rem;
+    min-width: 12rem;
+    max-width: 100%;
+    bottom: 28.5rem;
     font-size: 1.8rem;
   }
 
@@ -497,8 +510,8 @@ detailDesciption .alertButtons button {
   }
 
   .containerDetail {
-    min-width: 400px;
-    max-width: 400px;
+    min-width: 100%;
+    max-width: 100%;
   }
 
   .detail-container {
@@ -507,7 +520,7 @@ detailDesciption .alertButtons button {
 
   .mainIMage-container {
     height: 25rem;
-    width: 18rem;
+    width: 100%;
   }
 
   .description-container {
@@ -527,9 +540,13 @@ detailDesciption .alertButtons button {
     max-width: 300px;
   }
 
+  .mainIMage-container {
+    width: 100%;
+  }
+
   .containerDetail {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 100%;
+    max-width: 100%;
   }
 
   .description-container {

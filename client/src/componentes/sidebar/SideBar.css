@@ -6,8 +6,7 @@
   top: 0;
 }
 
-.search-form-aside-modal {
-  margin-top: 10px;
+.search-form-aside {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,6 +19,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 0;
   gap: 0.5rem;
 }
 
@@ -88,7 +88,6 @@
 }
 
 .search-form-aside {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -107,10 +106,6 @@
 .dropdown-btn {
   padding: 8px;
   width: 100%;
-}
-
-li {
-  list-style: none;
 }
 
 .sale-input {
@@ -141,13 +136,13 @@ li {
   transform: rotate(45deg);
   width: 0.6rem;
   height: 1rem;
-  left: 0.35em;
-  top: 0.2em;
+  left: 0.32em;
+  top: 0.15em;
   opacity: 0;
   transition: 0.3s ease;
 }
 
-.sale-input:checked + .sale-span:after {
+.sale-span.off:after {
   opacity: 1;
 }
 
