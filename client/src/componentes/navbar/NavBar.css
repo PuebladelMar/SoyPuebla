@@ -24,5 +24,13 @@
     width: 100%;
     transform-origin: left; 
   }
+
+  .navbar-search-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    width: 3.5rem;
+  }
   
   
