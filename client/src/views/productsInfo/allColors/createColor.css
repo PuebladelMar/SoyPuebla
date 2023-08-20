@@ -115,3 +115,60 @@
       padding: 1rem;
       margin-left: 1rem;
     }
+
+    /* Agrega estos estilos en tu archivo CSS */
+.edit-modal {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-modal h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.edit-modal form {
+  width: 100%;
+}
+
+.edit-modal input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.edit-modal button {
+  background-color: #517f7F;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.edit-modal button:last-child {
+  background-color: #e74c3c;
+}
+
+.edit-modal button:hover {
+  background-color: #146b5a;
+}
+
+.edit-modal button:last-child:hover {
+  background-color: #c0392b;
+}
