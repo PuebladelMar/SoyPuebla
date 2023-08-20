@@ -30,7 +30,10 @@ import {
   GET_ALL_HISTORY,
   PUT_COLORS,
   POST_INFORMATION,
-  GET_LATEST_INFORMATION
+  GET_LATEST_INFORMATION,
+  POST_QUESTIONS,
+  DELETE_QUESTIONS,
+  GET_ALL_QUESTIONS,
 } from "./ActionsTypes";
 
 
@@ -538,3 +541,50 @@ export function postInformation({ email, phone, instagram, facebook, whatsapp, i
 } 
     
     
+export function getAllQuestions() {
+  return async function (dispatch) {
+    try {
+      const response = await axios(`http://localhost:3001/question`);
+      dispatch({
+        type: GET_ALL_QUESTIONS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error);
+
+    }
+  };
+}
+
+
+export function deleteQuestions(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+       ` http://localhost:3001/question/${id}`
+      );
+      dispatch({
+        type: DELETE_QUESTIONS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert('daleee rey');
+    }
+  };
+}
+
+export function postQuestions({questions, answers }) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`http://localhost:3001/question`,{
+        questions, answers 
+      });
+      dispatch({
+        type: POST_QUESTIONS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+} 
