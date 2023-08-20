@@ -49,6 +49,7 @@ const PopUpNews = () => {
           alignItems: "center",
           justifyContent: "center",
           height: "100vh",
+          maxHeight: "650px",
         }}
       >
         <img
