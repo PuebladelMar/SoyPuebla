@@ -1,11 +1,11 @@
-const { Products, Colors, Sizes, Categories, Series, Stocks } = require("../../db");
+const { Products, Colors, Sizes, Categories, Series, Stocks, ColorImages } = require("../../db");
 
 const controllPutProducts = async(req)=>{
-    const { name, price, mainImage, image, sale, description, series, categories, variations } = req.body;
+    const { name, price, sale, description, series, categories, colorImage } = req.body;
     const { id } = req.params;
 
     await Products.update(
-        { name, price, mainImage, image, sale, description },
+        { name, price, sale, description },
         { where: { id }}
     );
 
@@ -30,27 +30,48 @@ const controllPutProducts = async(req)=>{
         };
     };
 
-    for (const variation of variations) {
-        const { color, size, amount } = variation;
+    for (const variation of colorImage) {
+        const { color, stocks, images } = variation;
 
-        const [findedColor, findedSize] = await Promise.all([
-            Colors.findOrCreate({ where: { name: color }}),
-            Sizes.findOrCreate({ where: { name: size }}),
-        ]);
+        const findedColor = await Colors.findOne({ where: { name: color }});
 
-        const [stock, created] = await Stocks.findOrCreate({
-            where: {
-                ProductId: id,
-                ColorId: findedColor[0].id,
-                SizeId: findedSize[0].id,
-            },
-            defaults: { amount },
+        let colorImageInstance = await ColorImages.findOne({
+            where: { ProductId: id, ColorId: findedColor.id },
         });
-    
-        if (!created) {
-            await stock.update({ amount });
+      
+        if (!colorImageInstance) {
+            colorImageInstance = await ColorImages.create({
+            images: images,
+            ProductId: id,
+            ColorId: findedColor.id,
+            });
+        } else {
+            await colorImageInstance.update({ images: images });
         }
-
+        for (const stock of stocks) {
+            const { size, amount } = stock;
+      
+            const findedSize = await Sizes.findOne({ where: { name: size } });
+      
+            let stockInstance = await Stocks.findOne({
+              where: {
+                ProductId: id,
+                ColorId: findedColor.id,
+                SizeId: findedSize.id,
+              },
+            });
+      
+            if (!stockInstance) {
+              stockInstance = await Stocks.create({
+                ProductId: id,
+                ColorId: findedColor.id,
+                SizeId: findedSize.id,
+                amount: amount,
+              });
+            } else {
+              await stockInstance.update({ amount: amount });
+            }
+        }
     }
 
     return "Product updated successfully";

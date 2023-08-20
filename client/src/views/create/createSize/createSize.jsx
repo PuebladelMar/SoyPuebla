@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSeries } from "../../../redux/Actions";
+import { getSizes } from "../../../redux/Actions";
 import axios from 'axios'
 import sizeValidations from "./sizeValidations";
 import "../createColor/createColor.css"
 
 const CreateSize = ()=>{
     const dispatch = useDispatch();
-    const series = useSelector((state)=> state.sizesList);
+    const talles = useSelector((state)=> state.sizesList);
     let [count, setCount] = useState(0)
     useEffect(()=>{
-        dispatch(getSeries());
+        dispatch(getSizes());
     },[count]);
 
     let [ createSize, setCreateSize ] = useState({
@@ -65,13 +65,15 @@ const CreateSize = ()=>{
                     <p className="error">{errors.name}</p>
                     <button type="submit" className="submit-buttonzX" disabled={Object.keys(errors).length === 0 ? false : true}>Crear</button>
                     <p className="error">{errors.error}</p>
-                    <h2>Series Creadas:</h2>
+                        </form>
+                    <div className="createdElementsListContainer"> 
+                    <h2>Talles Creados:</h2>
                     <ol>
-                        {series.map((size)=>(
+                        {talles.map((size)=>(
                             <li>{size.name}</li>
-                        ))}
+                            ))}
                     </ol>
-                </form>
+                </div>
             </div>
         </div>
     );

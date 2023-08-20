@@ -16,12 +16,17 @@ const AllColors = () => {
   const [newColor, setNewColor] = useState("");
   const [ isOpen, setIsOpen] = useState(false)
 
+  const [modifiedColor, setModifiedColor] = useState(null)
   useEffect(() => {
     dispatch(getColor());
   }, [dispatch]);
 
-  const handleColorChange = (event) => {
-    setNewColor(event.target.value);
+  // const handleColorChange = (event) => {
+  //   setNewColor(event.target.value);
+  // };
+
+  const handleColorModified = (color) => {
+    setModifiedColor(color); // Actualiza el estado con el color modificado
   };
 
   const handleDeleteColor = (colorId) => {};
@@ -53,9 +58,17 @@ const AllColors = () => {
         {
         isOpen ? (
 
-          <ModificarColorAdmin />
+          <ModificarColorAdmin onColorModified={handleColorModified}/>
         ):(
-         <div> La puta madre </div>
+         <div>
+         
+         {modifiedColor && (
+                <div className="color-item">
+                  <p>{modifiedColor.name}</p>
+                  {/* Renderiza el color modificado */}
+                </div>
+              )}
+         </div>
         )
 
         }

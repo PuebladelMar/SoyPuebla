@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  getColor } from "../../../redux/Actions";
-// import {  editColors } from "../../../redux/Actions";
+import {  editColors } from "../../../redux/Actions";
 import axios from "axios";
 // import colorValidations from "./colorValidations";
 import { ChromePicker } from "react-color";
 import "./createColor.css";
+
 
 const ModificarColorAdmin = () => {
   const dispatch = useDispatch();
@@ -17,16 +18,33 @@ const ModificarColorAdmin = () => {
     dispatch(getColor());
   }, [count]);
 
+
   let [editColors, setEditColors] = useState({
     name: "",
     codHex: "",
+
   });
-  const [errors, setErrors] = useState({
-    disableButton: true,
-  });
+  // const [errors, setErrors] = useState({
+  //   disableButton: true,
+  // });
 
   const [colorSelect, setColorSelect] = useState("#ffffff");
   const [hexColor, setHexColor] = useState("#ffffff");
+
+
+  const handlePut = ( id, name, codHex) => {
+    // const idUpdate = color.id
+    dispatch(editColors(id, editColors.name, editColors.codHex))
+    .then((updateColor) => {
+      setModifiedColor(updateColor)
+    })
+    .catch((error) => {
+      // Manejar el error
+    });
+    // setEditColors({...editColors, name:editColors.name.filter((e)=> e !== event)
+    
+    // })
+  }
 
   const handleColorChangeComplete = (newColor) => {
     setColorSelect(newColor.rgb);
@@ -43,55 +61,58 @@ const ModificarColorAdmin = () => {
       ...editColors,
       [event.target.name]: event.target.value,
     });
+  }
+    // setErrors(
+    //   colorValidations({
+    //     ...editColors,
+    //     [event.target.name]: event.target.value,
+    //   })
+    // );
+  // };
 
-    setErrors(
-      colorValidations({
-        ...editColors,
-        [event.target.name]: event.target.value,
-      })
-    );
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!editColors.name || !editColors.codHex) {
-      <p>Debes llenar el nombre</p>;
-    } else {
-      try {
-        const asyncFunction = async () => {
-          await axios.post(`/products/${id}`, {editColors});
-          setCount((prevCount) => prevCount + 1);
-          alert("color modificado existosamente");
-          setEditColors({
-            name: "",
-            codHex: "",
-          });
-          setErrors({
-            disableButton: true,
-          });
-        };
-        asyncFunction();
-      } catch (error) {
-        setErrors({ error: `El color ${editColors.name} ya esta creado` });
-      }
-    }
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   if (!editColors.name || !editColors.codHex) {
+  //     <p>Debes llenar el nombre</p>;
+  //   } else {
+  //     try {
+  //       const asyncFunction = async () => {
+  //         await axios.put(`/products/${id}`, {editColors});
+  //         setCount((prevCount) => prevCount + 1);
+  //         alert("color modificado existosamente");
+  //         setEditColors({
+  //           name: "",
+  //           codHex: "",
+  //         });
+  //         setErrors({
+  //           disableButton: true,
+  //         });
+  //       };
+  //       asyncFunction();
+  //     } catch (error) {
+  //       // setErrors({ error: `El color ${editColors.name} ya esta creado` });
+  //       alert('dskfnadsjonds')
+  //     }
+  //   }
+  // };
 
   return (
     <div className="create-main-containerX">
       <div className="create-containerX">
-        <form onSubmit={handleSubmit} className="create-formX">
+        <form className="create-formX">
           <label htmlFor="name">Nombre color:</label>
           <input
             type="text"
             name="name"
-            // value={createColor.name}
+            value={editColors.name}
             required
             placeholder="Nombre"
             className="custom-inputX"
             onChange={handleChange}
-          />
-          <p className="error">{errors.name}</p>
+
+          /> 
+          
+          {/* <p className="error">{errors.name}</p> */}
 
           <div className="colorSelectorContainer">
             <div className="color-picker">
@@ -115,16 +136,19 @@ const ModificarColorAdmin = () => {
             </div>
           </div>
 
-          <button
+          <button 
+          onClick={handlePut}
             className="submit-buttonzX"
-            type="submit"
+            // type="submit"
             // style={{
             //     backgroundColor: "#d9d9d9",
             //   }}
-            disabled={Object.keys(errors).length === 0 ? false : true}
-          >
-            Crear
+            // disabled={Object.keys(errors).length === 0 ? false : true}
+          > 
+        
+            Modificar
           </button>
+         {console.log(handlePut)}
         </form>
       </div>
 

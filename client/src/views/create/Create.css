@@ -206,19 +206,20 @@
   justify-content: space-between;
 }
 
-.containerBotonesSeleccion p {
+.containerBotonesSeleccion p{
+  color: #969696;
   margin-right: 5px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
-.containerBotonesSeleccion button {
-  font-size: 50%;
-  border: 1px solid #afafaf;
-  border-color: #afafaf;
-  padding: 1px 5px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-  transition: transform 300ms, color 300ms, background-color 300ms;
+.containerBotonesSeleccion button{
+ font-size: 50%;
+ border: 1px solid #afafaf;
+ border-color: #afafaf;
+ padding: 1px 5px;
+ border-radius: 50%;
+ /* margin-bottom: 10px; */
+ transition: transform 300ms, color 300ms, background-color 300ms;
 }
 
 .containerBotonesSeleccion button:hover {
@@ -231,8 +232,8 @@
   border-color: rgb(225, 224, 224);
   border-radius: 50%;
   margin-right: 10px;
-  margin-bottom: 15px;
-  margin-top: 5px;
+  margin-bottom: 3px;
+  margin-top: 5px
 }
 
 .talle {
@@ -360,9 +361,20 @@
   border-radius: 50%;
   margin-bottom: 10px;
   transition: transform 300ms, color 300ms, background-color 300ms;
-}
+ }
+ 
+ .container-categoria button:hover{
+   background-color: rgb(217, 217, 217);
+   color: rgb(255, 255, 255);
+ 
+ }
 
-.container-categoria button:hover {
-  background-color: rgb(217, 217, 217);
-  color: rgb(255, 255, 255);
-}
+ .acordionCreateContainer{
+  border: 1px solid #aeaeae;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+  background-color: #FBFBFB;
+ 
+ }
