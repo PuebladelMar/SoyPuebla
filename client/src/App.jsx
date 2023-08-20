@@ -49,18 +49,18 @@ function App() {
     dispatch(getProducts());
   }, [dispatch]);
 
-  const linksArray = [
-    'Home',
-    'Products',
-    'About',
-    'Create',
-    'AdminAccount',
-    'Cart',
-  ];
+  // const linksArray = [
+  //   'Home',
+  //   'Products',
+  //   'About',
+  //   'Create',
+  //   'AdminAccount',
+  //   'Cart',
+  // ];
 
   return (
     <div>
-      {<NavBar links={linksArray} />}
+      {<NavBar />}
       <Routes>
         <Route
           path='/all-data'

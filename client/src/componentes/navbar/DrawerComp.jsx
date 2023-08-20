@@ -164,7 +164,6 @@ function DrawerComp({ links }) {
                   }}
                 >
                   Nosotras
-              
                 </ListItemText>
               </ListItemIcon>
             </ListItemButton>
@@ -243,7 +242,6 @@ function DrawerComp({ links }) {
                 </ListItemText>
               </ListItemIcon>
             </ListItemButton>
-            
           </Box>
         </List>
       </Drawer>

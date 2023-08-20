@@ -15,8 +15,7 @@
     left: 0;
     width: 0;
     height: 1px;
-    background-color: rgb(255, 255, 255); /* Cambia el color según tu preferencia */
-    transition: width 0.2s ease;
+    background-color: rgb(255, 255, 255);
   }
   
   .menu-item:hover::after {
