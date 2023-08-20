@@ -124,6 +124,7 @@ export default function Cardx({ product }) {
                   style={{
                     fontSize: "1rem",
                     fontWeight: "600",
+                    cursor: "default",
                   }}
                 >
                   {name}
@@ -133,6 +134,7 @@ export default function Cardx({ product }) {
                   color="text.secondary"
                   style={{
                     fontSize: "0.9rem",
+                    cursor: "default",
                   }}
                 >
                   $ {price}
@@ -280,6 +282,7 @@ export default function Cardx({ product }) {
                   style={{
                     fontSize: "1rem",
                     fontWeight: "600",
+                    cursor: "default",
                   }}
                 >
                   {name}
@@ -289,6 +292,7 @@ export default function Cardx({ product }) {
                   color="text.secondary"
                   style={{
                     fontSize: "0.9rem",
+                    cursor: "default",
                   }}
                 >
                   $ {price}
