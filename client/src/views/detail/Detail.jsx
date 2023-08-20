@@ -16,6 +16,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./Detail.css";
 import Loader from "../../componentes/loader/Loader";
 
+import ImageGallery from "react-image-gallery";
+import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
+
 const Detail = () => {
   const { id } = useParams();
   const userId = useSelector((state) => state.userId);
@@ -27,6 +30,23 @@ const Detail = () => {
   const [quantity, setQuantity] = useState(1);
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
+
+  
+// const firstImageLoad = productDetails[0]?.colorImages.map((url) => ({
+//     original: url,
+//     thumbnail: url,
+//   }));
+  
+//   if( !firstImageLoad == undefined  && firstImageLoad.length > 0){
+    
+//     setImagesToRender(firstImageLoad)
+//   }
+  
+ 
+ 
+
+  const [ImagesToRender, setImagesToRender] = useState([]);
+
   //Aplicar el Loading
 
   useEffect(() => {
@@ -66,6 +86,20 @@ const Detail = () => {
   const handleColorChange = (color) => {
     setSelectedColor(color);
     setSelectedSize(null);
+
+    const images = productDetails.find(
+      (product) => product?.color === color
+    )?.colorImages;
+
+    if (images) {
+      const formattedImages = images.map((url) => ({
+        original: url,
+        thumbnail: url,
+      }));
+      setImagesToRender(formattedImages);
+    } else {
+      setImagesToRender([]);
+    }
   };
 
   const handleSizeChange = (size) => {
@@ -137,17 +171,41 @@ const Detail = () => {
     (product) => product?.color === selectedColor
   );
 
+  // const formattedImages = createProduct?.colorImage
+  // .filter((colorItem) => colorItem.color === selectedColor)
+  // .flatMap((colorItem) =>
+  //   colorItem.images.map((url) => ({
+  //     original: url,
+  //     thumbnail: url,
+  //   }))
+  // );
+
+  // console.log(ImagesToRender);
+  // console.log(firstImageLoad);
+
   return (
     <div className="container-detail">
       {isReady ? (
         <div className="containerDetail">
           <div className="secContainer">
             <div className="mainIMage-container">
-              <img
+            {ImagesToRender && ImagesToRender.length > 0 && (
+  <div>
+    <ImageGallery
+      items={ImagesToRender}
+      className="image-gallery-icon"
+      thumbnailPosition="left"
+      showFullscreenButton={false}
+      showPlayButton={false}
+    />
+  </div>
+)}
+
+              {/* <img
                 className="cardImgDetail"
                 src={selectedColorImages?.colorImages[0]}
                 alt={productDetails[0]?.name}
-              />
+              /> */}
             </div>
             <div className="detail-container">
               <div className="detailInfo">
