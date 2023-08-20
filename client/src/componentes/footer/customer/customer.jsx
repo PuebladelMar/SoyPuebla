@@ -3,7 +3,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { getAllQuestions } from "../../../redux/Actions";
+import { getAllQuestions, deleteQuestions } from "../../../redux/Actions";
 import "./customer.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,16 +11,22 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Customer() {
   const questions = useSelector((state) => state.questions);
   const dispatch=useDispatch()
-  console.log(questions)
+
  
  
   useEffect(() => {
     async function fetchData() {
-      await dispatch(getAllQuestions());
+    await dispatch(getAllQuestions());
     }
     fetchData();
-  }, [dispatch, questions]);
+  }, [dispatch]);
+  
+  const handleDeleteQuestion = async (id) => {
+   
+  await dispatch(deleteQuestions(id));
+  await dispatch(getAllQuestions());
 
+  };
 
 
   return (
@@ -253,7 +259,8 @@ export default function Customer() {
           </AccordionDetails>
         </Accordion>
 
-        {questions.map((question) => (
+        {Array.isArray(questions) &&
+  questions.map((question) => (
   <Accordion key={question.id} className="accordion">
     <AccordionSummary
       expandIcon={<ExpandMoreIcon />}
@@ -264,6 +271,12 @@ export default function Customer() {
       <Typography>
         <strong>{question.questions}</strong>
       </Typography>
+      <button
+    onClick={() => handleDeleteQuestion(question.id)}
+    className="delete-button"
+  >
+    Eliminar
+  </button>
     </AccordionSummary>
     <AccordionDetails>
       <Typography>
