@@ -15,7 +15,7 @@ const Newsletter = () => {
     return regex.test(emailValue);
   };
 
-  const handledSubmit = () => {
+  const handledSubmit = (mailConfirmation) => {
     if (!isValidEmail(emailValue)) {
       alert("Ingresa un correo valido");
       return;
@@ -27,14 +27,14 @@ const Newsletter = () => {
     };
     dispatch(sendMail(data));
   };
-
   const handleEmailChange = (event) => {
     setEmailValue(event.target.value);
   };
 
   useEffect(() => {
-    if (mailConfirmation === "Ya te encuentras suscrita") {
+    if (mailConfirmation.error === "Ya te encuentras suscrita") {
       setIsSubscribed(true);
+      alert(mailConfirmation.error)
     }
     if (mailConfirmation === "Suscripcion exitosa") {
       setIsSubscribed(true);
