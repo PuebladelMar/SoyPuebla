@@ -9,8 +9,6 @@ import { NavLink } from "react-router-dom";
 const PopUpNews = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
 
-  useEffect(() => {}, []);
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -39,7 +37,7 @@ const PopUpNews = () => {
             },
           }}
         >
-          x
+          close
         </Button>
       </NavLink>
       <DialogContent
