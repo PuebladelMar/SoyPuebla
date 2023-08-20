@@ -34,6 +34,7 @@ import {
   POST_QUESTIONS,
   DELETE_QUESTIONS,
   GET_ALL_QUESTIONS,
+  DELETE_COLOR,
 } from "./ActionsTypes";
 
 
@@ -476,12 +477,14 @@ export function getAllHistory() {
 }
 
 
-export function editColors(id, name, codHex ) {
+export function editColors(id, newName, newCodHex ) {
   return async function (dispatch) {
     try {
+      console.log("Datos que se envían en la solicitud PUT:", { id, newName, newCodHex });
       const response = await axios.put(`http://localhost:3001/products/${id}`,{
-        name: name,
-        codHex: codHex
+        name: newName,
+        codHex: newCodHex
+        
       });
       dispatch({
         type: PUT_COLORS,
@@ -588,3 +591,16 @@ export function postQuestions({questions, answers }) {
     }
   };
 } 
+export function deleteColor(id) {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`http://localhost:3001/products/${id}`);
+      dispatch({
+        type: DELETE_COLOR,
+        payload: id,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}

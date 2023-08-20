@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago } from "@mercadopago/sdk-react";
 import { FiX } from "react-icons/fi";
+import { useMediaQuery } from "@mui/material";
 import "./Cart.css";
 
 const Cart = () => {
@@ -16,6 +17,7 @@ const Cart = () => {
   const userId = useSelector((state) => state.userId);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isMatch = useMediaQuery("(max-width: 525px)");
   initMercadoPago("TEST-617b343c-694c-44b2-a447-349bcd889b8b");
 
   useEffect(() => {
@@ -75,45 +77,73 @@ const Cart = () => {
   return (
     <div className="container-cart">
       <div className="cart-container">
-        <h1 className="titleCart">Bienvenida a tu carrito de compras</h1>
-        <h2 style={{ fontSize: "0.9rem" }}>
+        <h1 className="titleCart">Carrito de compras</h1>
+        <h2 style={{ fontSize: "1.1rem", cursor: "default" }}>
           Detalle de la orden :
         </h2>
         <div className="cart-items">
           {userCart.map((item, index) => (
             <div className="cart-item" key={index}>
-              <img className="img-cart" src={item.images[0]} alt={item.description} />
-              <div className="item-details">
-                <p>Nombre de producto: {item.product.name}</p>
+              <img
+                className="img-cart"
+                src={item.images[0]}
+                alt={item.description}
+              />
+              <div className="item-detail">
+                <p className="product-name">{item.product.name}</p>
                 <p>Color: {item.color.name}</p>
                 <p>Talle: {item.size.name}</p>
                 <p>Precio unitario: $ {item.product.price}</p>
                 <p>Cantidad: {item.quantity}</p>
-                <p>Total producto: ${item.product.price * item.quantity}</p>
+                <p>Total producto: $ {item.product.price * item.quantity}</p>
                 <button
                   className="closeButton"
                   onClick={() => handlerDeleteCart(item.cartId)}
                 >
-                 <FiX style={{ width: "2rem", height: "2rem" }} />
+                  <FiX style={{ width: "2rem", height: "2rem" }} />
                 </button>
               </div>
             </div>
           ))}
         </div>
-        <p style={{ fontSize: "0.8rem", color: "green" }}>
-          Compra total: ${calculateTotal()}
+        <p
+          style={{
+            fontSize: "1.4rem",
+            color: "green",
+            cursor: "default",
+            marginTop: "1rem",
+            marginBottom: isMatch ? "1rem" : "0",
+          }}
+        >
+          Compra total: $ {calculateTotal()}
         </p>
-        <div className="cart-summary">
-          <button className="checkout-button" onClick={deleteAllCart}>
-            Vaciar carrito
-          </button>
-          <button className="checkout-button" onClick={handleBuy}>
-            Pagar
-          </button>
-          <NavLink to="/history" className="checkout-button">
-            Ver historial
-          </NavLink>
-        </div>
+        {isMatch ? (
+          <div className="buttons-cart-container">
+            <button className="checkout-button-big" onClick={handleBuy}>
+              Pagar
+            </button>
+            <div className="cart-summary">
+              <button className="checkout-button" onClick={deleteAllCart}>
+                Vaciar carrito
+              </button>
+              <NavLink to="/history" className="checkout-button">
+                Ver historial
+              </NavLink>
+            </div>
+          </div>
+        ) : (
+          <div className="cart-summary">
+            <button className="checkout-button" onClick={deleteAllCart}>
+              Vaciar carrito
+            </button>
+            <button className="checkout-button" onClick={handleBuy}>
+              Pagar
+            </button>
+            <NavLink to="/history" className="checkout-button">
+              Ver historial
+            </NavLink>
+          </div>
+        )}
         <NavLink to="/products" className="cart-link" styles={{}}>
           Volver
         </NavLink>

@@ -5,7 +5,6 @@ import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,6 +19,8 @@ export default function Cardx({ product }) {
   const { id, name, price, colorImages, sale } = product;
   const isMatch = useMediaQuery("(max-width: 644px)");
   const isMatchCard = useMediaQuery("(max-width: 470px)");
+  const isMatchColor = useMediaQuery("(max-width: 415px)");
+  const isMatchColor2 = useMediaQuery("(max-width: 375px)");
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
   const userId = useSelector((state) => state.userId);
@@ -59,8 +60,8 @@ export default function Cardx({ product }) {
   return (
     <Card
       style={{
-        width: isMatchCard ? "22rem" : isMatch ? "28rem" : "19rem",
-        borderRadius: "10px",
+        width: isMatchCard ? "100%" : isMatch ? "28rem" : "19rem",
+        borderRadius: isMatchCard ? "0" : "10px",
         overflow: "hidden",
       }}
     >
@@ -122,6 +123,8 @@ export default function Cardx({ product }) {
                   color="text.secondary"
                   style={{
                     fontSize: "1rem",
+                    fontWeight: "600",
+                    cursor: "default",
                   }}
                 >
                   {name}
@@ -131,6 +134,7 @@ export default function Cardx({ product }) {
                   color="text.secondary"
                   style={{
                     fontSize: "0.9rem",
+                    cursor: "default",
                   }}
                 >
                   $ {price}
@@ -205,17 +209,17 @@ export default function Cardx({ product }) {
       ) : (
         <Card
           style={{
-            borderRadius: "10px",
+            borderRadius: isMatchCard ? "0" : "10px",
             overflow: "hidden",
             display: "flex",
-            width: isMatchCard ? "22rem" : "28rem",
+            width: isMatchCard ? "100%" : "28rem",
             height: isMatchCard ? "11.5rem" : "auto",
           }}
         >
           <Link to={`/products/${id}`}>
             <Box
               style={{
-                width: "14.5rem",
+                width: isMatchCard ? "100%" : "14.5rem",
                 height: isMatchCard ? "11.5rem" : "16rem",
                 overflow: "hidden",
               }}
@@ -257,7 +261,7 @@ export default function Cardx({ product }) {
                 justifyContent: "center",
                 alignItems: "center",
                 gap: isMatchCard ? "3rem" : "7rem",
-                padding: "0 0.5rem",
+                padding: isMatchCard ? "0" : "0 0.5rem",
                 width: "100%",
               }}
             >
@@ -266,9 +270,10 @@ export default function Cardx({ product }) {
                   width: "100%",
                   height: "5rem",
                   display: "flex",
+                  marginTop: isMatchCard ? "-0.6rem" : "0",
                   padding: isMatchCard ? "0.5rem" : "0",
                   flexDirection: "column",
-                  gap: "1.5rem",
+                  gap: isMatchCard ? "1rem" : "1.5rem",
                 }}
               >
                 <Typography
@@ -276,6 +281,8 @@ export default function Cardx({ product }) {
                   color="text.secondary"
                   style={{
                     fontSize: "1rem",
+                    fontWeight: "600",
+                    cursor: "default",
                   }}
                 >
                   {name}
@@ -285,9 +292,10 @@ export default function Cardx({ product }) {
                   color="text.secondary"
                   style={{
                     fontSize: "0.9rem",
+                    cursor: "default",
                   }}
                 >
-                  {price}
+                  $ {price}
                 </Typography>
               </CardContent>
             </Box>
@@ -307,8 +315,8 @@ export default function Cardx({ product }) {
                   paddingBottom: "0.9rem",
                   gap: "0.5rem",
                   position: "absolute",
-                  right: "-6.5rem",
-                  top: "-0.2rem",
+                  right: isMatchColor2 ? "-6.5rem" : isMatchColor ? "-7.5rem" : isMatchCard ? "-8.5rem" : "-6.5rem",
+                  top: isMatchCard ? "0.35rem" : "-0.2rem",
                 }}
               >
                 {matchingColors.map((col, i) => (
