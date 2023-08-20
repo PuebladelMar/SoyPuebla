@@ -19,6 +19,7 @@ const { Colors } = require("../../db");
 
 const controllPutColor = async (id, name, codHex) => {
   try {
+    console.log('Datos del controlador', { id, name, codHex });
     const color = await Colors.findByPk(id);
     if (!color) throw Error("Color no encontrado");
 

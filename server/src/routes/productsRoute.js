@@ -19,6 +19,7 @@ const putProducts = require('../handlers/Products/putProducts');
 const getColor = require('../handlers/Products/getColor');
 const getReviews = require('../handlers/Reviews/getReviews')
 const putColor = require('../handlers/Products/putColor')
+const deleteColor = require('../handlers/Products/deleteColor')
 
 const productsRouter = Router();
 
@@ -61,6 +62,8 @@ productsRouter.get("/review/:id", getReviewsById);
 productsRouter.get("/:id", getProductsById);
 
 productsRouter.put("/:id", putColor);
+
+productsRouter.delete("/:id", deleteColor);
 
 
 module.exports = productsRouter

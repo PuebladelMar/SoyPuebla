@@ -94,10 +94,12 @@
 import { getColor } from "../../../redux/Actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
- import "./allColors.css";
- import { FaPencilAlt } from "react-icons/fa";
- import { RiDeleteBin6Line } from "react-icons/ri";
- import ModificarColorAdmin from "./ModificarColorAdmin";
+import { FaPencilAlt } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import ModificarColorAdmin from "./ModificarColorAdmin";
+import Swal from 'sweetalert2'
+import './AllColors.css';
+import { deleteColor } from "../../../redux/Actions";
 
 const AllColors = () => {
   const colors = useSelector((state) => state.colorList);
@@ -107,6 +109,7 @@ const AllColors = () => {
   const [editingColor, setEditingColor] = useState(null); 
 
   useEffect(() => {
+    // Swal.fire('Soy un alert de sweet alert')
     dispatch(getColor());
   }, [dispatch]);
 
@@ -115,6 +118,27 @@ const AllColors = () => {
     setIsOpen(true); 
   };
 
+  const handleDeleteClick = (color) => {
+    Swal.fire({
+      title: `¿Estás seguro de eliminar el color ${color.name}?`,
+      text: "No podrás revertir este cambio",
+      icon: 'warning', // Cambia 'Advertencia' por 'warning'
+      showCancelButton: true,
+      confirmButtonColor: '#517f7F',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, bórralo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si el usuario confirma, entonces dispara la acción de Redux para eliminar el color
+        dispatch(deleteColor(color.id));
+        Swal.fire(
+          'Borrado',
+          'Tu color ha sido borrado',
+          'success' // Cambia 'Exitoso' por 'success'
+        );
+      }
+    });
+  };
   return (
     <div className="main-container">
       <div className="colors">
@@ -126,7 +150,9 @@ const AllColors = () => {
               <button className="edit-color" onClick={() => handleEditClick(color)}>
                 <FaPencilAlt />
               </button>
+              <button className="delete-color" onClick={() => handleDeleteClick(color)}>
               <RiDeleteBin6Line />
+              </button>
             </div>
           </div>
         ))}
@@ -143,3 +169,4 @@ const AllColors = () => {
 };
 
 export default AllColors;
+
