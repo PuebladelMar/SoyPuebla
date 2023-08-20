@@ -43,7 +43,6 @@ function Products() {
   }, [filters, dispatch]);
 
   const handleChange = (event) => {
-    event.preventDefault();
     const { name, value } = event.target;
     const nullOptions = [
       "null",

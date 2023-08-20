@@ -12,6 +12,7 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
   const series = useSelector((state) => state.series);
   const categories = useSelector((state) => state.categories);
   const sizes = useSelector((state) => state.sizesList);
+  const [isOff, setIsOff] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isOpenCategory, setIsOpenCategory] = useState(false);
@@ -32,6 +33,11 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
     event.stopPropagation();
     toggleFunction();
   };
+
+  const handleSelectOff = () => {
+    setIsOff(!isOff);
+    console.log("hola");
+  }
 
   const handleSelectToggleCategory = () => {
     setIsOpenCategory(!isOpenCategory);
@@ -78,6 +84,11 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleSelectOffAndEvent = () => {
+    handleSelectOff();
+    handlerEventSideBar();
   };
 
   useEffect(() => {
@@ -235,10 +246,10 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
               <input
                 type="checkbox"
                 name="sale"
-                onClick={handlerEventSideBar}
+                onClick={handleSelectOffAndEvent}
                 className="sale-input"
               />
-              <span className="sale-span"></span>
+              <span className={`sale-span ${ isOff  ? "off" : "" }`}></span>
             </label>
             <h3>Productos en oferta</h3>
           </li>
@@ -405,7 +416,7 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                   onClick={handlerEventSideBar}
                   className="sale-input"
                 />
-                <span className="sale-span"></span>
+                <span className={`sale-span ${ isOff  ? "off" : "" }`}></span>
               </label>
               <h3>Productos en oferta</h3>
             </li>

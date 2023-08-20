@@ -79,7 +79,7 @@ function ReviewsForm({ productId, handleLoginClick }) {
               key={value}
               type="button"
               className={`rating-button ${
-                userComment.score === value ? "selected" : ""
+                userComment.score === value ? "selected-star" : ""
               }`}
               onClick={() => handleScoreChange(value)}
             >

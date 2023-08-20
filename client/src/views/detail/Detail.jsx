@@ -53,7 +53,7 @@ const Detail = () => {
         const response = await axios.get(`/products/${id}`);
         setProductDetails(response.data);
         setIsReady(true);
-        if(selectedColor === null){
+        if (selectedColor === null) {
           setSelectedColor(response.data[0].color);
         }
       } catch (error) {
@@ -133,10 +133,12 @@ const Detail = () => {
     setIsSubscribed(true);
   };
 
-  const selectedColorImages = productDetails.find((product)=> product?.color === selectedColor)
+  const selectedColorImages = productDetails.find(
+    (product) => product?.color === selectedColor
+  );
 
   return (
-    <div className="container">
+    <div className="container-detail">
       {isReady ? (
         <div className="containerDetail">
           <div className="secContainer">
@@ -149,17 +151,21 @@ const Detail = () => {
             </div>
             <div className="detail-container">
               <div className="detailInfo">
-                <h2 className="detailName">{productDetails[0]?.name}</h2>
+                <h2 className="detailName">
+                  {productDetails[0]?.name}{" "}
+                  <span className="span-product-name"></span>{" "}
+                </h2>
                 <h2 className="detailInfoPrecio">
                   $ {productDetails[0]?.price}
                 </h2>
               </div>
               <div>
-                {productDetails[0]?.series.map((s, i) => (
-                  <h2 className="detailInfoSerie" key={i}>
-                    Serie: {s.name}
-                  </h2>
-                ))}
+                <h2 className="detailInfoSerie">
+                  Serie:
+                  {productDetails[0]?.series.map((s, i) => (
+                    <span key={i}> {s.name}. </span>
+                  ))}
+                </h2>
               </div>
               <div className="color-size-container">
                 <p className="detailInfoColor">Colores disponibles:</p>
