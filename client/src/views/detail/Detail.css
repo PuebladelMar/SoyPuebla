@@ -237,7 +237,8 @@
   margin-top: auto;
   margin-bottom: 10px;
 }
-detailDesciption .alertButtons button {
+
+.detailDesciption .alertButtons button {
   color: rgba(91, 91, 91, 0.766);
   background: rgb(255, 255, 255);
   margin-right: 10px;
