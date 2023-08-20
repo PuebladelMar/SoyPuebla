@@ -29,7 +29,10 @@ import {
   PUT_COLORS,
   DELETE_SERIES,
   POST_INFORMATION,
-  GET_LATEST_INFORMATION
+  GET_LATEST_INFORMATION,
+  POST_QUESTIONS,
+  DELETE_QUESTIONS,
+  GET_ALL_QUESTIONS,
 
 } from "./ActionsTypes";
 
@@ -54,6 +57,7 @@ let initialState = {
   allHistory: [],
   mailConfirmation: [],
   information:[],
+  questions:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -217,6 +221,21 @@ function rootReducer(state = initialState, action) {
             ...state,
             information: action.payload,
           };
+          case DELETE_QUESTIONS:
+            return {
+              ...state,
+              questions: action.payload,
+            };
+            case GET_ALL_QUESTIONS:
+              return{
+                ...state,
+                questions: action.payload,
+              };
+              case POST_QUESTIONS:
+                return{
+                  ...state,
+                  questions: action.payload,
+                };
     default:
       return state;
   }
