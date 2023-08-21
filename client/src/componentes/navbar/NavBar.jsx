@@ -1,4 +1,4 @@
-import { Grid, Tabs, Typography, makeStyles } from "@mui/material";
+import { Grid, Tabs, Typography } from "@mui/material";
 import { Box, AppBar, Toolbar, IconButton, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
@@ -7,12 +7,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getProducts, getProductsByName } from "../../redux/Actions";
 import { useLocation } from "react-router-dom";
-import { FiSearch } from "react-icons/fi";
+import { FiSearch, FiHeart, FiShoppingCart } from "react-icons/fi";
 import UserIcon from "../../views/login/UserIcon";
 import PdM from "../.././assets/images/PdM.png";
 import TortugaRosa from "../.././assets/images/TORTUGA_ROSA_SINFONDO.png";
-import FavImage from "../.././assets/images/Fav.png";
-import CartImage from "../.././assets/images/Cart.png";
 import DrawerComp from "./DrawerComp";
 import "./NavBar.css";
 
@@ -20,8 +18,22 @@ export default function NavBar({ links }) {
   const location = useLocation();
   const isProducts = location.pathname === "/products";
   const dispatch = useDispatch();
-
+  // const [iconPosition, setIconPosition] = useState(0);
   const [searchValue, setSearchValue] = useState("");
+
+  // const handleScroll = () => {
+  //   const scrollPosition = window.scrollY - 20;
+  //   setIconPosition(scrollPosition);
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
+  // const iconBottom = Math.min(90, window.innerHeight - iconPosition - 90);
 
   useEffect(() => {
     if (searchValue === "") {
@@ -43,29 +55,6 @@ export default function NavBar({ links }) {
   const isMatch = useMediaQuery("(max-width: 850px)");
   const isMatchSearchBar = useMediaQuery("(max-width: 1114px)");
   const [value, setValue] = useState(0);
-
-  // const linkSubrayado = makeStyles((theme) => ({
-  //   ulContainer: {
-  //     display: "flex",
-  //     listStyle: "none",
-  //     alignItems: "center",
-  //   },
-  //   liItem: {
-  //     margin: "1rem",
-  //     position: "relative",
-  //     textDecoration: "none",
-  //     color: "inherit",
-  //     "&:hover::after": {
-  //       content: '""',
-  //       position: "absolute",
-  //       bottom: "-2px",
-  //       left: 0,
-  //       width: "100%",
-  //       height: "2px",
-  //       backgroundColor: theme.palette.primary.main, // Cambia el color según tu paleta
-  //     },
-  //   },
-  // }));
 
   return (
     <AppBar
@@ -183,37 +172,65 @@ export default function NavBar({ links }) {
               gap={"10px"}
               position={"relative"}
             >
-              {isMatchSearchBar && (
-                <div className="navbar-search-icon">
-                  <FiSearch style={{width: "1.6rem", height: "1.6rem", marginTop: "0.2rem"}}/>
-                </div>
+              {isProducts && isMatchSearchBar && (
+                <IconButton
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "3.2rem",
+                    height: "3.2rem",
+                    marginTop: "0.1rem",
+                  }}
+                >
+                  <FiSearch
+                    style={{
+                      width: "1.8rem",
+                      height: "1.8rem",
+                      color: "white",
+                    }}
+                  />
+                </IconButton>
               )}
               {!isMatch && (
-                <IconButton>
+                <IconButton
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "0.1rem",
+                    width: "3.2rem",
+                    height: "3.2rem",
+                  }}
+                >
                   <Link to="/fav">
-                    <img
-                      src={FavImage}
-                      alt="Fav Icon"
+                    <FiHeart
                       style={{
-                        width: "2.2rem",
-                        height: "2.2rem",
-                        marginRight: "0.1rem",
+                        width: "1.8rem",
+                        height: "1.8rem",
+                        color: "white",
                       }}
                     />
                   </Link>
                 </IconButton>
               )}
               {!isMatch ? (
-                <IconButton>
+                <IconButton
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "0.1rem",
+                    width: "3.2rem",
+                    height: "3.2rem",
+                  }}
+                >
                   <Link to="/Cart">
-                    <img
-                      src={CartImage}
-                      alt="Cart Icon"
+                    <FiShoppingCart
                       style={{
-                        width: "2.2rem",
-                        height: "2.2rem",
-                        marginRight: "0rem",
-                        margin: "-0.1rem",
+                        width: "1.8rem",
+                        height: "1.8rem",
+                        color: "white",
                       }}
                     />
                   </Link>
@@ -221,14 +238,14 @@ export default function NavBar({ links }) {
               ) : (
                 <IconButton
                   style={{
-                    width: "3rem",
-                    height: "3rem",
+                    width: "3.2rem",
+                    height: "3.2rem",
                     marginRight: "0rem",
                     margin: "0rem",
                     position: "absolute",
                     backgroundColor: "#517F7F",
                     top: "90vh",
-                    left: "3vw",
+                    // top: `${iconBottom}vh`,
                     transition: "background-color 0.3s ease",
                     "&:hover": {
                       backgroundColor: "#497171",
@@ -236,14 +253,13 @@ export default function NavBar({ links }) {
                   }}
                 >
                   <Link to="/Cart">
-                    <img
-                      src={CartImage}
-                      alt="Cart Icon"
+                    <FiShoppingCart
                       style={{
-                        width: "2.2rem",
-                        height: "2.2rem",
-                        marginRight: "0rem",
-                        margin: "-0.1rem",
+                        marginTop: "0.2rem",
+                        marginRight: "0.1rem",
+                        width: "1.8rem",
+                        height: "1.8rem",
+                        color: "white",
                       }}
                     />
                   </Link>

@@ -37,7 +37,7 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
   const handleSelectOff = () => {
     setIsOff(!isOff);
     console.log("hola");
-  }
+  };
 
   const handleSelectToggleCategory = () => {
     setIsOpenCategory(!isOpenCategory);
@@ -249,7 +249,7 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 onClick={handleSelectOffAndEvent}
                 className="sale-input"
               />
-              <span className={`sale-span ${ isOff  ? "off" : "" }`}></span>
+              <span className={`sale-span ${isOff ? "off" : ""}`}></span>
             </label>
             <h3>Productos en oferta</h3>
           </li>
@@ -267,11 +267,15 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
         open={isModalOpen}
         onClose={handleCloseModal}
         style={{
-          backgroundColor: "#ECE4E1",
+          backgroundColor: "#FFFFFF",
           borderRadius: "10px",
           maxHeight: "80vh",
           width: "80%",
-          margin: isMatch3 ? "5rem 2.5rem" : isMatch2 ? "5rem 3rem" : isMatch && "5rem 4rem",
+          margin: isMatch3
+            ? "5rem 2.5rem"
+            : isMatch2
+            ? "5rem 3rem"
+            : isMatch && "5rem 4rem",
           padding: "1rem",
           overflowY: "auto",
           backdropFilter: "none",
@@ -413,21 +417,24 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 <input
                   type="checkbox"
                   name="sale"
-                  onClick={handlerEventSideBar}
+                  onClick={handleSelectOffAndEvent}
                   className="sale-input"
                 />
-                <span className={`sale-span ${ isOff  ? "off" : "" }`}></span>
+                <span className={`sale-span ${isOff ? "off" : ""}`}></span>
               </label>
               <h3>Productos en oferta</h3>
             </li>
             <button
               name="limpiar Filtros"
               onClick={resetFilters}
-              className="reloadButton"
+              className="reloadButton-modal"
             >
               Limpiar filtros
             </button>
           </form>
+          <button className="button-close-modal" onClick={handleCloseModal}>
+            Cerrar
+          </button>
         </div>
       </Modal>
     </aside>

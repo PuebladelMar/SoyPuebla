@@ -158,7 +158,7 @@ export default function Cardx({ product }) {
                   position: "absolute",
                   top: "0.8rem",
                   right: "-0.1rem",
-                  zIndex: "2",
+                  zIndex: "1",
                   gap: "0.5rem",
                 }}
               >
@@ -214,6 +214,7 @@ export default function Cardx({ product }) {
             display: "flex",
             width: isMatchCard ? "100%" : "28rem",
             height: isMatchCard ? "11.5rem" : "auto",
+            zIndex: "1",
           }}
         >
           <Link to={`/products/${id}`}>
@@ -231,6 +232,7 @@ export default function Cardx({ product }) {
                   height: isMatchCard ? "11.5rem" : "16rem",
                   objectFit: "fill",
                   transition: "transform 0.2s",
+                  zIndex: "1",
                 }}
                 image={selectedColorImages?.images[0]}
                 alt="Item"
