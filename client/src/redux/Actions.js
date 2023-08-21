@@ -564,14 +564,14 @@ export function deleteQuestions(id) {
   return async function (dispatch) {
     try {
       const response = await axios.delete(
-       ` http://localhost:3001/question/${id}`
+       `http://localhost:3001/question/${id}`
       );
       dispatch({
         type: DELETE_QUESTIONS,
         payload: response.data,
       });
     } catch (error) {
-      alert('daleee rey');
+      alert(error);
     }
   };
 }
