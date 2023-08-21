@@ -12,8 +12,9 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import PdM from "../.././assets/images/PdM.png";
 import { Link } from "react-router-dom";
 
-function DrawerComp({ links }) {
+function DrawerComp() {
   const [open, setOpen] = useState(false);
+  console.log(open);
 
   return (
     <>
@@ -23,8 +24,9 @@ function DrawerComp({ links }) {
         }}
         open={open}
         onClose={() => setOpen(false)}
+        onClick={() => setOpen(false)}
       >
-        <Box display={"flex"} justifyContent={"center"}>
+        <Box display={"flex"} justifyContent={"center"} >
           <Link to="/home">
             <img
               src={PdM}
@@ -47,45 +49,6 @@ function DrawerComp({ links }) {
             width: "100%",
           }}
         >
-          {/* <Box
-            display={"flex"}
-            flexDirection={"column"}
-            justifyContent={"center"}
-            width={"100%"}
-          >
-            {links.map((link, index) => (
-              <ListItemButton
-                key={index}
-                component={Link}
-                to={`/${link.toLowerCase()}`}
-              >
-                <ListItemIcon
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <ListItemText
-                    sx={{
-                      color: "#ededed",
-                      transform: "scale(1.3)",
-                      textAlign: "center",
-                      "&:hover": {
-                        color: "#517f7f",
-                        cursor: "pointer",
-                        transform: "scale(1.4)",
-                      },
-                    }}
-                  >
-                    {link}
-                  </ListItemText>
-                </ListItemIcon>
-              </ListItemButton>
-            ))}
-          </Box> */}
-
           <Box
             display={"flex"}
             flexDirection={"column"}

@@ -8,7 +8,7 @@
 .review-container {
   width: 45rem;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .show-more-button:hover {

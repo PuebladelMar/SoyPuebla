@@ -71,6 +71,15 @@
   }
 }
 
+@-webkit-keyframes moveBackground {
+  0% {
+    -webkit-transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+  }
+}
+
 @keyframes zoomBackground {
   0%,
   100% {
@@ -78,5 +87,14 @@
   }
   50% {
     transform: scale(1.1);
+  }
+}
+
+@-webkit-keyframes zoomBackground {
+  0%, 100% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
   }
 }

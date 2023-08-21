@@ -1,9 +1,10 @@
 .search-bar-aside {
-  width: 250px;
+  width: 300px;
   padding: 20px 30px 0 30px;
   background-color: #ece4e1;
   position: sticky;
   top: 0;
+  min-height: 100vh;
 }
 
 .search-form-aside {
@@ -12,6 +13,8 @@
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
+  position: fixed;
+  margin-bottom: 10rem;
 }
 
 .filters {
@@ -38,6 +41,15 @@
   height: 0.01rem;
   margin-right: 1rem;
   width: 100%;
+}
+
+.search-form-aside-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 1rem;
 }
 
 .search-form-aside-modal h2 {
@@ -167,12 +179,31 @@
   border-radius: 4px;
   cursor: pointer;
   padding: 10px 15px;
-  transition: background-color 0.3s ease;
+  transition: 0.3s ease;
   margin-bottom: 2rem;
 }
 
 .reloadButton:hover {
   background-color: #497171;
+  transform: scale(1.05);
+}
+
+.reloadButton-modal {
+  background-color: #517f7f;
+  color: white;
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.reloadButton-modal:hover {
+  background-color: #497171;
+  transform: scale(1.05);
 }
 
 .reloadButton:disabled {
@@ -219,6 +250,44 @@
   transform: translateY(-50%) rotate(180deg);
 }
 
+.button-close-modal {
+  background-color: #517f7f;
+  color: white;
+  font-size: 16px;
+  width: 30%;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.button-close-modal:hover {
+  background-color: #ECE4E1;
+  color: #517f7f;
+  transform: scale(1.05);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1475px) {
+  .search-bar-aside {
+    width: 320px;
+  }
+}
+
+@media screen and (max-width: 1065px) {
+  .search-bar-aside {
+    width: 340px;
+  }
+}
+
 @media screen and (max-width: 715px) {
   .search-bar-aside {
     width: 250px;
@@ -228,16 +297,19 @@
 @media screen and (max-width: 644px) {
   .search-bar-aside {
     background-color: #ece4e1;
-    position: relative;
+    position: fixed;
+    margin-top: 5rem;
+    min-height: 0;
     width: 100%;
     padding: 0.8rem 0;
+    z-index: 2;
   }
 
   .filter-button {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     padding-right: 1rem;
   }
 
@@ -260,6 +332,7 @@
 @media screen and (max-width: 400px) {
   .search-bar-aside {
     width: 100%;
+    margin: 0;
     position: relative;
   }
 }
