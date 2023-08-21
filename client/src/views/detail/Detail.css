@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
-  height: 35rem;
+  height: 47rem;
   min-width: 1000px;
   max-width: 1000px;
   margin-top: 3rem;
@@ -65,8 +65,15 @@
   justify-content: center;
   overflow: hidden;
   margin-top: 1rem;
-  width: 23rem;
-  height: 30rem;
+  width: 37rem;
+  height: 40rem;
+
+}
+
+.image-gallery-content.image-gallery-thumbnails-left .image-gallery-slide .image-gallery-image, 
+.image-gallery-content.image-gallery-thumbnails-right .image-gallery-slide .image-gallery-image {
+  max-height: 700px;
+  max-width: 500px;
 }
 
 .quantity-container {
@@ -114,10 +121,16 @@
   transform: translateZ(0);
   transition: 0.3s ease;
   cursor: pointer;
+  border: 1px solid #ffffff;
+}
+
+.detailColorButton.selected {
+  border: 1px solid rgb(148, 148, 148); 
+  transform: scale(1.2);
 }
 
 .detailColorButton:hover {
-  border: solid 1px rgb(118, 118, 189);
+  border: solid 1px rgb(148, 148, 148); 
   transform: scale(1.1);
 }
 
@@ -130,6 +143,14 @@
   transition: 0.3s ease;
   cursor: pointer;
 }
+
+.detailSizeButton.selected {
+  transform: scale(1.03);
+  color: rgb(255, 255, 255);
+  background: rgb(81, 127, 127);
+  border: none;
+}
+
 
 .detailSizeButton:hover {
   transform: scale(1.03);
@@ -359,17 +380,26 @@
 }
 
 @media (max-width: 1070px) {
+
+  
   .reviews-container {
     min-width: 900px;
   }
 
   .containerDetail {
     min-width: 900px;
+    height: 40rem;
   }
+
 
   .description-container {
     min-width: 900px;
     max-width: 900px;
+  }
+
+  .mainIMage-container {
+    width: 30rem;
+    height:  30rem;
   }
 }
 
@@ -380,11 +410,16 @@
 
   .containerDetail {
     min-width: 800px;
+    height: 47rem;
   }
 
   .description-container {
     min-width: 800px;
     max-width: 800px;
+  }
+  .mainIMage-container {
+    width: 23rem;
+    height: 40rem;
   }
 }
 
@@ -414,13 +449,18 @@
     min-width: 700px;
     max-width: 700px;
   }
+
+  .mainIMage-container {
+    width: 22rem;
+    height: 40rem;
+  }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 840px) {
   .containerDetail {
     min-width: 500px;
     max-width: 500px;
-    height: 55rem;
+    height: 75rem;
   }
 
   .reviews-container {
@@ -429,21 +469,23 @@
   }
 
   .mainIMage-container {
-    height: 25rem;
-    width: 27rem;
+    height: 40rem;
+    width: 25rem;
     margin-top: -3rem;
   }
 
   .detailInfo {
-    position: relative;
+    /* position: relative; */
+    /* margin-top: 5rem; */
+
   }
 
   .detail-container {
     margin: 0;
     justify-content: center;
-    margin-top: 2.5rem;
-    height: 10rem;
-    width: 27rem;
+    /* margin-top: 2.5rem; */
+    height: 20rem;
+    width: 24rem;
   }
 
   .secContainer {
@@ -476,7 +518,7 @@
   }
 
   .detailName {
-    position: absolute;
+    /* position: absolute; */
     white-space: nowrap;
     left: 0;
     min-width: 12rem;
@@ -513,6 +555,7 @@
   .containerDetail {
     min-width: 100%;
     max-width: 100%;
+    height: fit-content;
   }
 
   .detail-container {
