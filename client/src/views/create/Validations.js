@@ -21,6 +21,19 @@ const validations = (createProduct) => {
     errors.price = "No puede ser un número negativo";
   }
 
+  if (!createProduct?.sale) {
+    errors.sale = "Sin oferta";
+  } else if (!/^\d+(\.\d+)?$/.test(createProduct?.sale)) {
+    errors.sale = "Debe ser un número válido";
+  } else {
+    const saleValue = parseFloat(createProduct?.sale);
+    if (saleValue < 0) {
+      errors.sale = "No puede ser un número negativo";
+    } else if (saleValue > 100) {
+      errors.sale = "Debe estar en el rango de 0 a 100";
+    }
+  }
+
   if (createProduct?.colorImage.length === 0) {
     errors.color = "Selecciona por lo menos un color";
   } else {
