@@ -1,20 +1,20 @@
-.talles-main{
+.categories-main{
     margin: 5rem;
     padding: 20px;
 }
 
   
-  .talles {
+  .categories {
     border: 1px solid #ccc;
     padding: 20px;
   }
   
-  .talles-title {
+  .categories-title {
     font-size: 1.5rem;
     margin-bottom: 10px;
   }
   
-  .talles-item {
+  .categories-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,10 +29,11 @@
     
   }
   
-  .edit-talles,
-  .delete-talles {
+  .edit-categories,
+  .delete-categories {
     background-color: transparent;
     border: none;
     cursor: pointer;
     margin-left: 10px;
   }
+  
