@@ -88,8 +88,8 @@ const Create = () => {
 
   const [createProduct, setCreateProduct] = useState({
     name: "",
-    price: 0,
-    sale: false,
+    price: "",
+    sale: "",
     colorImage: [],
     description: "",
     series: [],
@@ -154,6 +154,7 @@ const Create = () => {
       !createProduct.name ||
       !createProduct.description ||
       !createProduct.price ||
+      !createProduct.sale ||
       !createProduct.category.length === 0 ||
       !createProduct.size.length === 0 ||
       !createProduct.series.length === 0 ||
@@ -164,8 +165,8 @@ const Create = () => {
       dispatch(postProducts(createProduct));
       setCreateProduct({
         name: "",
-        price: 0,
-        sale: false,
+        price: "",
+        sale: "",
         colorImage: [],
         description: "",
         series: [],
@@ -395,9 +396,6 @@ const Create = () => {
           </>
         </popups>
       )}
-
-
-
       <div className="create-container">
         <form className="create-form">
           <label  htmlFor="name">Nombre <separator></separator></label>
@@ -416,7 +414,7 @@ const Create = () => {
 
           <label htmlFor="price">Precio <separator></separator> </label>
           <input
-            type="decimal"
+            type="number"
             name="price"
             value={createProduct?.price}
             placeholder="Precio"
@@ -424,19 +422,16 @@ const Create = () => {
             onChange={handleChange}
           />
           <p className="error">{errors.price}</p>
-          <label htmlFor="sale">Oferta <separator></separator></label>
-          <select
+          <label htmlFor="sale">Oferta %<separator></separator></label>
+          <input
+            type="number"
             name="sale"
-            defaultValue={createProduct?.sale}
+            value={createProduct?.sale}
+            placeholder="Oferta %"
+            className="custom-input"
             onChange={handleChange}
-          >
-            <option value={false} key="def">
-              No
-            </option>
-            <option value={true} key="def1">
-              Si
-            </option>
-          </select>
+          />
+          <p className="error">{errors.sale}</p>
           <label htmlFor="color">Color <separator></separator> </label>
 
          <div className="buttons-align" >
@@ -479,9 +474,6 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.color}</p>
-
-
-
           <div >
             {createProduct?.colorImage.length > 0 ? (
               createProduct?.colorImage.map((col) => {
@@ -496,9 +488,7 @@ const Create = () => {
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                       style={{display: 'flex', alignItems: "center"}}
-                      
                     >
-              
                       <div className="containerBotonesSeleccion" style={{
                         display: 'flex', 
                         flexDirection: 'row',
@@ -580,84 +570,9 @@ const Create = () => {
                     </div>
                   </div>
                
-            
-                     
                     </AccordionDetails>
                   </Accordion>
                 </div>
-
-
-                  {/* <div className="container-color-talle">
-                        <div  key={col.color}>
-                    <div className="containerBotonesSeleccion" >
-                      <info>
-                        <sample
-                        className="detailColorButtonCreate"
-                        style={{
-                          backgroundColor: hexCodex?.codHex,
-                        width: "20px",
-                        height: "20px",
-                        }}
-                      ></sample>
-                      <p>{col.color}</p>
-                      </info>
-                      <button type="button" onClick={() => handleDeleteColor(col.color)}>X</button>
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="image">Imagenes </label>
-                      <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
-                    </div>
-
-                    <talle className="talle">
-                  
-                    <label  htmlFor="size"> Talles </label>
-                    <select
-                    
-                    name="size"
-                    placeholder="Talles"
-                    defaultValue="def"
-                    onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
-                    >
-                    <option value="def" key="def" disabled>
-                    Selecciona talles
-                    </option>
-                    {size.map((el) => {
-                      return (
-                        <option value={el.name} key={el.id}>
-                        {el.name}
-                        </option>
-                      );
-                    })}
-                    </select>
-                    </talle>
-                    <p className="error">{errors.size}</p>
-
-
-                    <div >
-                      {col.stocks.length > 0 ? (
-                        col.stocks.map((si) => {
-                          return(
-                            <div key={si.size} className="container-talle-stock">
-                            <p>{si.size}</p>
-                            <input
-                            name="amount"
-                            type="number"
-                            data-size={si.size}
-                            value={si.amount}
-                            onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
-                            />
-                            <button type="button" onClick={() => handleDeleteSize(si.size, col.color)}>X</button>
-                          </div>
-                        ) 
-                      })
-                      )
-                      : (
-                      <p className="no-dietTypes"></p>
-                      )}
-                    </div>
-                  </div>
-                </div> */}
             </div>
               )
             })
