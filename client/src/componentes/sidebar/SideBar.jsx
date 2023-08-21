@@ -6,6 +6,20 @@ import { useMediaQuery } from "@mui/material";
 import Filtro from "../../../src/assets/images/filtro.png";
 import "./SideBAr.css";
 
+const initialState = {
+  isOpenCategory: false,
+  isOpenColor: false,
+  isOpenSize: false,
+  isOpenPrice: false,
+  isOpenSerie: false,
+  isOff: false,
+  selectedCategory: null,
+  selectedColor: null,
+  selectedSize: null,
+  selectedPrice: null,
+  selectedSerie: null,
+};
+
 function SideBar({ handlerEventSideBar, resetFilters }) {
   const dispatch = useDispatch();
   const colorList = useSelector((state) => state.colorList);
@@ -28,6 +42,13 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
   const isMatch = useMediaQuery("(max-width: 644px)");
   const isMatch2 = useMediaQuery("(max-width: 560px)");
   const isMatch3 = useMediaQuery("(max-width: 430px)");
+  const [filterState, setFilterState] = useState(initialState);
+
+  const handleResetFilters = (event) => {
+    event.preventDefault();
+    resetFilters();
+    setFilterState(initialState);
+  };
 
   const handleSelectClick = (event, toggleFunction) => {
     event.stopPropagation();
@@ -136,7 +157,14 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 className="custom-select"
                 name="category"
                 ref={selectCategoryRef}
-                onClick={handleSelectToggleCategory}
+                onClick={() => handleSelectToggleCategory()}
+                value={filterState.selectedCategory || ""}
+                onChange={(event) =>
+                  setFilterState({
+                    ...filterState,
+                    selectedCategory: event.target.value,
+                  })
+                }
               >
                 <option value={null}>Todas las categorias</option>
                 {categories.map((category, index) => (
@@ -159,7 +187,14 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 className="custom-select"
                 name="color"
                 ref={selectColorRef}
-                onClick={handleSelectToggleColor}
+                onClick={() => handleSelectToggleColor()}
+                value={filterState.selectedColor || ""}
+                onChange={(event) =>
+                  setFilterState({
+                    ...filterState,
+                    selectedColor: event.target.value,
+                  })
+                }
               >
                 <option value={null}>Todos los colores</option>
                 {colorList.map((color, index) => (
@@ -182,7 +217,14 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 className="custom-select"
                 name="size"
                 ref={selectSizeRef}
-                onClick={handleSelectToggleSize}
+                onClick={() => handleSelectToggleSize()}
+                value={filterState.selectedSize || ""}
+                onChange={(event) =>
+                  setFilterState({
+                    ...filterState,
+                    selectedSize: event.target.value,
+                  })
+                }
               >
                 <option value={null}>Todos las tallas</option>
                 {sizes.map((size, index) => (
@@ -207,6 +249,13 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 ref={selectSerieRef}
                 onClick={(event) =>
                   handleSelectClick(event, handleSelectToggleSerie)
+                }
+                value={filterState.selectedSerie || ""}
+                onChange={(event) =>
+                  setFilterState({
+                    ...filterState,
+                    selectedSerie: event.target.value,
+                  })
                 }
               >
                 <option value={null}>Todos las series</option>
@@ -233,6 +282,13 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 onClick={(event) =>
                   handleSelectClick(event, handleSelectTogglePrice)
                 }
+                value={filterState.selectedPrice || ""}
+                onChange={(event) =>
+                  setFilterState({
+                    ...filterState,
+                    selectedPrice: event.target.value,
+                  })
+                }
               >
                 <option value={null}>Todos los precios</option>
                 <option value="Precio Ascendente">&uarr; Precio</option>
@@ -246,16 +302,24 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
               <input
                 type="checkbox"
                 name="sale"
-                onClick={handleSelectOffAndEvent}
+                checked={filterState.isOff}
+                onChange={() =>
+                  setFilterState({
+                    ...filterState,
+                    isOff: !filterState.isOff,
+                  })
+                }
                 className="sale-input"
               />
-              <span className={`sale-span ${isOff ? "off" : ""}`}></span>
+              <span
+                className={`sale-span ${filterState.isOff ? "off" : ""}`}
+              ></span>
             </label>
             <h3>Productos en oferta</h3>
           </li>
           <button
             name="limpiar Filtros"
-            onClick={resetFilters}
+            onClick={handleResetFilters}
             className="reloadButton"
           >
             Limpiar filtros
@@ -299,7 +363,16 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                   className="custom-select"
                   name="category"
                   ref={selectCategoryRef}
-                  onClick={handleSelectToggleCategory}
+                  onClick={() =>
+                    handleSelectClick(event, handleSelectToggleCategory)
+                  }
+                  value={filterState.selectedCategory || ""}
+                  onChange={(event) =>
+                    setFilterState({
+                      ...filterState,
+                      selectedCategory: event.target.value,
+                    })
+                  }
                 >
                   <option value={null}>Todas las categorias</option>
                   {categories.map((category, index) => (
@@ -324,7 +397,16 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                   className="custom-select"
                   name="color"
                   ref={selectColorRef}
-                  onClick={handleSelectToggleColor}
+                  onClick={() =>
+                    handleSelectClick(event, handleSelectToggleColor)
+                  }
+                  value={filterState.selectedColor || ""}
+                  onChange={(event) =>
+                    setFilterState({
+                      ...filterState,
+                      selectedColor: event.target.value,
+                    })
+                  }
                 >
                   <option value={null}>Todos los colores</option>
                   {colorList.map((color, index) => (
@@ -349,7 +431,16 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                   className="custom-select"
                   name="size"
                   ref={selectSizeRef}
-                  onClick={handleSelectToggleSize}
+                  onClick={() =>
+                    handleSelectClick(event, handleSelectToggleSize)
+                  }
+                  value={filterState.selectedSize || ""}
+                  onChange={(event) =>
+                    setFilterState({
+                      ...filterState,
+                      selectedSize: event.target.value,
+                    })
+                  }
                 >
                   <option value={null}>Todos las tallas</option>
                   {sizes.map((size, index) => (
@@ -374,8 +465,15 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                   className="custom-select"
                   name="serie"
                   ref={selectSerieRef}
-                  onClick={(event) =>
+                  onClick={() =>
                     handleSelectClick(event, handleSelectToggleSerie)
+                  }
+                  value={filterState.selectedSerie || ""}
+                  onChange={(event) =>
+                    setFilterState({
+                      ...filterState,
+                      selectedSerie: event.target.value,
+                    })
                   }
                 >
                   <option value={null}>Todos las series</option>
@@ -401,8 +499,15 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                   className="custom-select"
                   name="order"
                   ref={selectPriceRef}
-                  onClick={(event) =>
+                  onClick={() =>
                     handleSelectClick(event, handleSelectTogglePrice)
+                  }
+                  value={filterState.selectedPrice || ""}
+                  onChange={(event) =>
+                    setFilterState({
+                      ...filterState,
+                      selectedPrice: event.target.value,
+                    })
                   }
                 >
                   <option value={null}>Todos los precios</option>
@@ -417,16 +522,24 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
                 <input
                   type="checkbox"
                   name="sale"
-                  onClick={handleSelectOffAndEvent}
+                  checked={filterState.isOff}
+                  onClick={() =>
+                    setFilterState({
+                      ...filterState,
+                      isOff: !filterState.isOff,
+                    })
+                  }
                   className="sale-input"
                 />
-                <span className={`sale-span ${isOff ? "off" : ""}`}></span>
+                <span
+                  className={`sale-span ${filterState.isOff ? "off" : ""}`}
+                ></span>
               </label>
               <h3>Productos en oferta</h3>
             </li>
             <button
               name="limpiar Filtros"
-              onClick={resetFilters}
+              onClick={handleResetFilters}
               className="reloadButton-modal"
             >
               Limpiar filtros
