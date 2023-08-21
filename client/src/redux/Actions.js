@@ -477,13 +477,13 @@ export function getAllHistory() {
 }
 
 
-export function editColors(id, newName, newCodHex ) {
+export function editColors(id, name, codHex ) {
   return async function (dispatch) {
     try {
-      console.log("Datos que se envían en la solicitud PUT:", { id, newName, newCodHex });
+      console.log("Datos que se envían en la solicitud PUT:", { id, name, codHex });
       const response = await axios.put(`http://localhost:3001/products/${id}`,{
-        name: newName,
-        codHex: newCodHex
+        name: name,
+        codHex: codHex
         
       });
       dispatch({
