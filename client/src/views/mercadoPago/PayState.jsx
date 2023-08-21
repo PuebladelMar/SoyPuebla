@@ -2,16 +2,21 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addHistory, deleteCartUser } from "../../redux/Actions";
+import { addHistory, deleteCartUser, getUserById } from "../../redux/Actions";
 import "./PayState.css";
 
 function PayState() {
   const userId = useSelector((state) => state.userId);
+  const userById = useSelector((state) => state.userById);
   const location = useLocation();
   const dispatch = useDispatch();
   const queryParams = new URLSearchParams(location.search);
   const data = queryParams.get("data");
   const parsedData = JSON.parse(decodeURIComponent(data));
+
+ dispatch(getUserById(userId));
+ 
+ console.log(userById);
 
   useEffect(() => {
     if (parsedData.status === "approved") {
@@ -19,6 +24,7 @@ function PayState() {
         if (userId.length) {
           await dispatch(addHistory(userId, "approved"));
           await dispatch(deleteCartUser(userId, true));
+          //agregar envío de correo 
         }
       };
       asyncFunc();
