@@ -30,6 +30,41 @@ const controllPutProducts = async(req)=>{
         };
     };
 
+    const existingColorImages = await ColorImages.findAll({
+        where: { ProductId: id },
+    });
+    
+    for (const existingColorImage of existingColorImages) {
+        const existingColor = await Colors.findByPk(existingColorImage.ColorId);
+        const colorName = existingColor.name;
+        const matchingColorImage = colorImage.find((image) => image.color === colorName);
+    
+        if (!matchingColorImage) {
+            await ColorImages.destroy({
+                where: { ProductId: id, ColorId: existingColor.id },
+            });
+
+            await Stocks.destroy({
+                where: { ProductId: id, ColorId: existingColor.id },
+            });
+        } else {
+            const existingStocks = await Stocks.findAll({
+                where: { ProductId: id, ColorId: existingColorImage.ColorId },
+                include: [Sizes],
+            });
+        
+            for (const existingStock of existingStocks) {
+                const existingSize = existingStock.Size;
+                const sizeName = existingSize.name;
+                const matchingStock = matchingColorImage.stocks.find((stock) => stock.size === sizeName);
+        
+                if (!matchingStock) {
+                  await existingStock.destroy();
+                }
+            }
+        }
+    }
+
     for (const variation of colorImage) {
         const { color, stocks, images } = variation;
 
