@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCar, notifyStock } from "../../redux/Actions";
@@ -62,7 +62,6 @@ const Detail = () => {
     dispatch(getReviewById(productDetails[0].id));
   };
 
-
   const handleColorChange = (color) => {
     if (selectedColor !== color) {
       setSelectedColor(color);
@@ -83,7 +82,6 @@ const Detail = () => {
       }
     }
   };
-
 
   const handleSizeChange = (size) => {
     setSelectedSize(size);
@@ -146,21 +144,15 @@ const Detail = () => {
     setIsSubscribed(true);
   };
 
-  const selectedColorImages = productDetails.find(
-    (product) => product?.color === selectedColor
-  );
-
-
-
   useEffect(() => {
-    if (window.innerWidth < 980) {
+    if (window.innerWidth < 981) {
       setThumbnailPosition("bottom");
     } else {
       setThumbnailPosition("left");
     }
 
     const handleResize = () => {
-      if (window.innerWidth < 980) {
+      if (window.innerWidth < 981) {
         setThumbnailPosition("bottom");
       } else {
         setThumbnailPosition("left");
@@ -181,7 +173,7 @@ const Detail = () => {
           <div className="secContainer">
             <div className="mainIMage-container">
               {ImagesToRender && ImagesToRender.length > 0 && (
-                <div>
+                <div className="image-galery-container">
                   <ImageGallery
                     items={ImagesToRender}
                     className="image-gallery-icon"
