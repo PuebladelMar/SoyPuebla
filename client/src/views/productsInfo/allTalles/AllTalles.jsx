@@ -1,7 +1,7 @@
 import './AllTalles.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSizes } from '../../../redux/Actions';
+import { getSizes, putSizes } from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
 // import { RiDeleteBin6Line } from 'react-icons/ri';
 
@@ -15,6 +15,14 @@ const AllTalles = () => {
     }
     fetchSizes();
   }, [dispatch]);
+
+  const handleEditSizes = async (id, name) => {
+    const updatedName = prompt('Enter new name', name);
+    if (updatedName) {
+      await dispatch(putSizes(id, updatedName));
+      dispatch(getSizes());
+    }
+  };
 
   return (
     <div
@@ -32,7 +40,9 @@ const AllTalles = () => {
             >
               {el.name}
               <div className='icons'>
-                <FaPencilAlt />
+                <button onClick={() => handleEditSizes(el.id, el.name)}>
+                  <FaPencilAlt />
+                </button>
               </div>
             </div>
           ))}

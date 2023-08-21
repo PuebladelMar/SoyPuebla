@@ -37,6 +37,7 @@ import {
   DELETE_COLOR,
   DELETE_SERIES,
   DELETE_SIZES,
+  DELETE_CATEGORIES,
   PUT_SIZES,
   PUT_CATEGORIES,
   PUT_COLECCIONS,
@@ -700,6 +701,22 @@ export function putSeries(id, name, image) {
       });
     } catch (error) {
       alert(error.message);
+    }
+  };
+}
+
+export function deleteCategories(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/products/category/${id}`
+      );
+      dispatch({
+        type: DELETE_CATEGORIES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error);
     }
   };
 }
