@@ -17,8 +17,23 @@ function PayState() {
     if (parsedData.status === "approved") {
       const asyncFunc = async () => {
         if (userId.length) {
-          await dispatch(addHistory(userId));
+          await dispatch(addHistory(userId, "approved"));
           await dispatch(deleteCartUser(userId, true));
+        }
+      };
+      asyncFunc();
+    }else if (parsedData.status === "in_process") {
+      const asyncFunc = async () => {
+        if (userId.length) {
+          await dispatch(addHistory(userId, "pending"));
+          await dispatch(deleteCartUser(userId, true));
+        }
+      };
+      asyncFunc();
+    }else{
+      const asyncFunc = async () => {
+        if (userId.length) {
+          await dispatch(addHistory(userId, "rejected"));
         }
       };
       asyncFunc();
