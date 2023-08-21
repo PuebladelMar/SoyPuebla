@@ -1,4 +1,4 @@
-.create-main-containerX {
+/* .create-main-containerX {
     display: flex;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -93,7 +93,6 @@
       border-radius: 4px;
       color: #818181;
       background-color: #777373;
-      /* font-weight: 400; */
       cursor: pointer;
       transition: 0.5s;
       
@@ -116,10 +115,7 @@
       margin-left: 1rem;
     }
 
-    /* Agrega estos estilos en tu archivo CSS */
-/* ModificarColorAdmin.css */
 
-/* Estilos generales para el modal */
 .create-main-containerX {
   position: fixed;
   top: 0;
@@ -146,4 +142,4 @@
   margin-top: 0;
   font-size: 1.5rem;
 }
-
+ */

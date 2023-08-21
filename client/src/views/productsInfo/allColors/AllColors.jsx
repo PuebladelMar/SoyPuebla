@@ -7,7 +7,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 import ModificarColorAdmin from "./ModificarColorAdmin";
-import './createColor.css'
+// import './createColor.css'
 
 const AllColors = () => {
   const colors = useSelector((state) => state.colorList);

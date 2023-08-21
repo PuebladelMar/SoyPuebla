@@ -1,3 +1,12 @@
+.image-gallery-content.image-gallery-thumbnails-left .image-gallery-slide .image-gallery-image, 
+.image-gallery-content.image-gallery-thumbnails-right .image-gallery-slide .image-gallery-image {
+  max-height: 700px;
+  max-width: 500px;
+  height: 700px;
+  width: 500px
+}
+
+
 .nameDetailCreate {
   color: rgb(50, 50, 50);
   font-weight: bolder;
