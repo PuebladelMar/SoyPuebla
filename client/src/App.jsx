@@ -38,7 +38,7 @@ import Dashboard from './views/dashboard/Dashboard';
 import Information from './views/dashboard/Information';
 import UsersData from './views/usersData/dataUserAdmin';
 import HistoryData from './views/dashboard/purchaseHistory/purchaseHistory';
-import AllCategories from './views/productsInfo/colections/AllCategories';
+import AllCategories from './views/productsInfo/categories/AllCategories';
 
 axios.defaults.baseURL = 'http://localhost:3001/';
 
