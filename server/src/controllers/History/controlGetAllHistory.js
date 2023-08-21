@@ -76,6 +76,6 @@ const controllGetAllHistory = async () => {
     console.error(error);
     throw error;
   }
-};
+}; 
 
 module.exports = controllGetAllHistory;
