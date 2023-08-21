@@ -20,13 +20,17 @@ function DrawerComp() {
     <>
       <Drawer
         PaperProps={{
-          sx: { backgroundColor: "#b2cebf", width: "15.7rem" },
+          sx: {
+            backgroundColor: "#517F7F",
+            minWidth: "14rem",
+            paddingTop: "0.5rem",
+          },
         }}
         open={open}
         onClose={() => setOpen(false)}
         onClick={() => setOpen(false)}
       >
-        <Box display={"flex"} justifyContent={"center"} >
+        <Box display={"flex"} justifyContent={"center"}>
           <Link to="/home">
             <img
               src={PdM}
@@ -35,7 +39,6 @@ function DrawerComp() {
                 width: "7rem",
                 height: "3.3rem",
                 margin: "1rem",
-                filter: " contrast(0%)",
               }}
             />
           </Link>
@@ -53,26 +56,36 @@ function DrawerComp() {
             display={"flex"}
             flexDirection={"column"}
             justifyContent={"center"}
+            alignItems={"center"}
             width={"100%"}
           >
-            <ListItemButton component={Link} to="/home">
+            <ListItemButton
+              component={Link}
+              to="/home"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
               <ListItemIcon
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "100%",
+                  width: "10.8rem",
                 }}
               >
                 <ListItemText
                   sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                     color: "#ededed",
                     transform: "scale(1.3)",
                     textAlign: "center",
+                    width: "100%",
                     "&:hover": {
-                      color: "#517f7f",
+                      color: "#baa199",
                       cursor: "pointer",
-                      transform: "scale(1.4)",
                     },
                   }}
                 >
@@ -80,13 +93,19 @@ function DrawerComp() {
                 </ListItemText>
               </ListItemIcon>
             </ListItemButton>
-            <ListItemButton component={Link} to="/products">
+            <ListItemButton
+              component={Link}
+              to="/products"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
               <ListItemIcon
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "100%",
+                  width: "10.8rem",
                 }}
               >
                 <ListItemText
@@ -95,9 +114,8 @@ function DrawerComp() {
                     transform: "scale(1.3)",
                     textAlign: "center",
                     "&:hover": {
-                      color: "#517f7f",
+                      color: "#baa199",
                       cursor: "pointer",
-                      transform: "scale(1.4)",
                     },
                   }}
                 >
@@ -105,13 +123,19 @@ function DrawerComp() {
                 </ListItemText>
               </ListItemIcon>
             </ListItemButton>
-            <ListItemButton component={Link} to="/about">
+            <ListItemButton
+              component={Link}
+              to="/about"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
               <ListItemIcon
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "100%",
+                  width: "10.8rem",
                 }}
               >
                 <ListItemText
@@ -120,9 +144,8 @@ function DrawerComp() {
                     transform: "scale(1.3)",
                     textAlign: "center",
                     "&:hover": {
-                      color: "#517f7f",
+                      color: "#baa199",
                       cursor: "pointer",
-                      transform: "scale(1.4)",
                     },
                   }}
                 >
@@ -130,13 +153,19 @@ function DrawerComp() {
                 </ListItemText>
               </ListItemIcon>
             </ListItemButton>
-            <ListItemButton component={Link} to="/dashboard">
+            <ListItemButton
+              component={Link}
+              to="/dashboard"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
               <ListItemIcon
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "100%",
+                  width: "10.8rem",
                 }}
               >
                 <ListItemText
@@ -145,9 +174,8 @@ function DrawerComp() {
                     transform: "scale(1.3)",
                     textAlign: "center",
                     "&:hover": {
-                      color: "#517f7f",
+                      color: "#baa199",
                       cursor: "pointer",
-                      transform: "scale(1.4)",
                     },
                   }}
                 >
@@ -155,13 +183,19 @@ function DrawerComp() {
                 </ListItemText>
               </ListItemIcon>
             </ListItemButton>
-            <ListItemButton component={Link} to="/fav">
+            <ListItemButton
+              component={Link}
+              to="/fav"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
               <ListItemIcon
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "100%",
+                  width: "10.8rem",
                 }}
               >
                 <ListItemText
@@ -170,9 +204,8 @@ function DrawerComp() {
                     transform: "scale(1.3)",
                     textAlign: "center",
                     "&:hover": {
-                      color: "#517f7f",
+                      color: "#baa199",
                       cursor: "pointer",
-                      transform: "scale(1.4)",
                     },
                   }}
                 >
@@ -180,13 +213,19 @@ function DrawerComp() {
                 </ListItemText>
               </ListItemIcon>
             </ListItemButton>
-            <ListItemButton component={Link} to="/cart">
+            <ListItemButton
+              component={Link}
+              to="/cart"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
               <ListItemIcon
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "100%",
+                  width: "10.8rem",
                 }}
               >
                 <ListItemText
@@ -195,9 +234,8 @@ function DrawerComp() {
                     transform: "scale(1.3)",
                     textAlign: "center",
                     "&:hover": {
-                      color: "#517f7f",
+                      color: "#baa199",
                       cursor: "pointer",
-                      transform: "scale(1.4)",
                     },
                   }}
                 >

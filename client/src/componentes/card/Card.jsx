@@ -378,8 +378,8 @@ export default function Cardx({ product }) {
                   onClick={handleFavoriteClick}
                   style={{
                     position: "absolute",
-                    right: "18.8rem",
-                    bottom: "11.9rem",
+                    right: isMatchColor2 ? "-5.8rem" : isMatchColor ? "-6.8rem" : isMatchCard ? "-7.8rem" : "18.8rem",
+                    bottom: isMatchCard ? "7rem" : "11.9rem",
                   }}
                 >
                   <FavoriteIcon color={isFavorite ? "secondary" : "inherit"} />
