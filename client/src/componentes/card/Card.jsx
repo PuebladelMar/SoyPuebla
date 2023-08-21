@@ -15,7 +15,12 @@ import {
 import { Box, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 
+
+
+
 export default function Cardx({ product }) {
+
+
   const { id, name, price, colorImages, sale } = product;
   const isMatch = useMediaQuery("(max-width: 644px)");
   const isMatchCard = useMediaQuery("(max-width: 470px)");
@@ -26,6 +31,7 @@ export default function Cardx({ product }) {
   const userId = useSelector((state) => state.userId);
   const color = useSelector((state) => state.colorList);
   const isFavorite = favorites.some((item) => item.id === product.id);
+  const [selectedColor, setSelectedColor] = useState(null);
 
   const handleFavoriteClick = async () => {
     try {
@@ -41,7 +47,6 @@ export default function Cardx({ product }) {
     }
   };
 
-  const [selectedColor, setSelectedColor] = useState(null);
 
   const matchingColors = color.filter((c) =>
     colorImages?.some((ci) => ci.ColorId === c.id)
@@ -56,6 +61,19 @@ export default function Cardx({ product }) {
   const selectedColorImages = colorImages?.find(
     (colorItem) => colorItem.ColorId === selectedColor
   );
+
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        await dispatch(getAllFav(userId));
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+
+    fetchData();
+  }, [dispatch, userId]);
 
   return (
     <Card
@@ -174,8 +192,9 @@ export default function Cardx({ product }) {
                       className="detailColorButton"
                       style={{
                         backgroundColor: col.codHex,
-                        width: "1.5rem",
-                        height: "1.5rem",
+                        width: selectedColor === col.id ? "1.7rem" : "1.5rem",
+                        height: selectedColor === col.id ? "1.7rem" : "1.5rem",
+                        border: selectedColor === col.id ? "2px solid #8b8b8b" : "none",
                       }}
                       onClick={() => {
                         setSelectedColor(col.id);
@@ -184,6 +203,7 @@ export default function Cardx({ product }) {
                   </div>
                 ))}
               </Box>
+
               <CardActions
                 style={{
                   height: "3rem",
@@ -335,6 +355,7 @@ export default function Cardx({ product }) {
                         backgroundColor: col.codHex,
                         width: "1.5rem",
                         height: "1.5rem",
+                        border: selectedColor === col.id ? "2px solid #8b8b8b" : "none",
                       }}
                       onClick={() => {
                         setSelectedColor(col.id);
@@ -342,6 +363,7 @@ export default function Cardx({ product }) {
                     ></button>
                   </div>
                 ))}
+
               </Box>
               <CardActions
                 style={{
@@ -369,4 +391,6 @@ export default function Cardx({ product }) {
       )}
     </Card>
   );
+
 }
+
