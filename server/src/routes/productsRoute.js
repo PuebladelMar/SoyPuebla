@@ -61,7 +61,7 @@ productsRouter.get("/review/:id", getReviewsById);
 
 productsRouter.get("/:id", getProductsById);
 
-productsRouter.put("/:id", putColor);
+productsRouter.put("/color/:id", putColor);
 
 productsRouter.delete("/:id", deleteColor);
 
