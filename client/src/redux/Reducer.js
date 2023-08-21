@@ -35,6 +35,9 @@ import {
   GET_ALL_QUESTIONS,
   DELETE_COLOR,
   DELETE_SIZES,
+  PUT_CATEGORIES,
+  PUT_SIZES,
+  PUT_COLECCIONS,
 } from './ActionsTypes';
 
 let initialState = {
@@ -259,6 +262,21 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         sizesList: action.payload,
+      };
+    case PUT_SIZES:
+      return {
+        ...state,
+        sizesList: action.payload,
+      };
+    case PUT_COLECCIONS:
+      return {
+        ...state,
+        seriesList: action.payload,
+      };
+    case PUT_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload,
       };
     default:
       return state;

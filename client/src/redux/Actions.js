@@ -37,6 +37,9 @@ import {
   DELETE_COLOR,
   DELETE_SERIES,
   DELETE_SIZES,
+  PUT_SIZES,
+  PUT_CATEGORIES,
+  PUT_COLECCIONS,
 } from './ActionsTypes';
 
 export function getProducts() {
@@ -524,7 +527,7 @@ export function deleteSeries(id) {
         payload: response.data,
       });
     } catch (error) {
-      alert('daleee rey');
+      alert(error);
     }
   };
 }
@@ -628,6 +631,75 @@ export function deleteSizes(id) {
       });
     } catch (error) {
       alert(error);
+    }
+  };
+}
+
+export function putSizes(id, name) {
+  return async function (dispatch) {
+    try {
+      console.log('Datos que se envían en la solicitud PUT:', {
+        id,
+        name,
+      });
+      const response = await axios.put(`http://localhost:3001/products/size`, {
+        name,
+        id,
+      });
+      dispatch({
+        type: PUT_SIZES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+export function putCategories(id, name) {
+  return async function (dispatch) {
+    try {
+      console.log('Datos que se envían en la solicitud PUT:', {
+        id,
+        name,
+      });
+      const response = await axios.put(
+        `http://localhost:3001/products/category`,
+        {
+          name,
+          id,
+        }
+      );
+      dispatch({
+        type: PUT_CATEGORIES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+export function putSeries(id, name, image) {
+  return async function (dispatch) {
+    try {
+      console.log('Datos que se envían en la solicitud PUT:', {
+        id,
+        name,
+        image,
+      });
+      const response = await axios.put(
+        `http://localhost:3001/products/series`,
+        {
+          id,
+          name,
+          image,
+        }
+      );
+      dispatch({
+        type: PUT_COLECCIONS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
     }
   };
 }
