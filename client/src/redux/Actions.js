@@ -485,9 +485,10 @@ export function editColors(id, name, codHex) {
         name,
         codHex,
       });
-      const response = await axios.put(`http://localhost:3001/products/${id}`, {
-        name: name,
-        codHex: codHex,
+      const response = await axios.put(`http://localhost:3001/products/color/${id}`, {
+      id,  
+      name,
+      codHex
       });
       dispatch({
         type: PUT_COLORS,
@@ -605,10 +606,10 @@ export function postQuestions({ questions, answers }) {
 export function deleteColor(id) {
   return async function (dispatch) {
     try {
-      await axios.delete(`http://localhost:3001/products/${id}`);
+       const response = await axios.delete(`http://localhost:3001/products/color/${id}`);
       dispatch({
         type: DELETE_COLOR,
-        payload: id,
+        payload: response.data,
       });
     } catch (error) {
       alert(error.message);

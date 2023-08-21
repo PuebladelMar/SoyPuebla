@@ -204,17 +204,9 @@ function rootReducer(state = initialState, action) {
         getReviewById: action.payload,
       };
     case PUT_COLORS:
-      const updatedColor = action.payload;
-      const updatedColorList = state.colorList.map((color) => {
-        if (color.id === updatedColor.id) {
-          return updatedColor;
-        }
-        return color;
-      });
-
       return {
         ...state,
-        colorList: updatedColorList,
+        colorList: action.payload
       };
     case DELETE_SERIES:
       return {
@@ -246,15 +238,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         questions: action.payload,
       };
-    case DELETE_COLOR:
-      const deletedColorId = action.payload;
-      const updatedColorListDelete = state.colorList.filter(
-        (color) => color.id !== deletedColorId
-      );
-      return {
-        ...state,
-        colorList: updatedColorList,
-      };
+      case DELETE_COLOR:
+        return {
+          ...state,
+          colorList: action.payload,
+        };
     case DELETE_SIZES:
       return {
         ...state,
