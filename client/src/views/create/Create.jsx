@@ -254,6 +254,9 @@ const Create = () => {
               }
             : item
           );
+          setErrors(
+            validations({ ...state, colorImage: updatedColorImage })
+          );
           return {
             ...state,
             colorImage: updatedColorImage,
@@ -276,6 +279,9 @@ const Create = () => {
               }
             : item
           );
+          setErrors(
+            validations({ ...state, colorImage: updatedColorImage })
+          );
           return {
             ...state,
             colorImage: updatedColorImage,
@@ -285,9 +291,6 @@ const Create = () => {
         }
       }
     });
-    setErrors(
-      validations({ ...createProduct, [name]: value })
-    );
   };
 
   const handleDeleteColor = (event) => {
@@ -526,6 +529,7 @@ const Create = () => {
                     <div>
                       <label htmlFor="image">Imagenes </label>
                       <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
+                      <p className="error">{errors.images}</p>
                     </div>
 
                     <talle className="talle">
@@ -551,7 +555,6 @@ const Create = () => {
                     </select>
                     </talle>
                     <p className="error">{errors.size}</p>
-
 
                     <div >
                       {col.stocks.length > 0 ? (
