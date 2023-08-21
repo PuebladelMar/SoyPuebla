@@ -1,6 +1,6 @@
 const { Carts, Histories, Stocks, Products } = require("../../db");
 
-const controllPostHistory = async (userId) => {
+const controllPostHistory = async (userId, state) => {
   const userCart = await Carts.findAll({ where: { UserId: userId } });
 
   const insertPromises = userCart.map(async (user) => {
@@ -16,6 +16,7 @@ const controllPostHistory = async (userId) => {
       StockId: user.StockId,
       UserId: user.UserId,
       unitPrice: product.price,
+      state: state
     });
   });
 

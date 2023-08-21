@@ -22,6 +22,9 @@ module.exports = (sequelize) => {
         min: 0
       }
     },
+    state:{
+      type: DataTypes.ENUM('approved', 'rejected', 'pending'),
+    },
     StockId:{
       type: DataTypes.UUID,
       allowNull: false,

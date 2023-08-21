@@ -274,10 +274,10 @@ export function deleteCartUser(id, sale) {
   };
 }
 
-export function addHistory(userId) {
+export function addHistory(userId, state) {
   return async function (dispatch) {
     try {
-      await axios.post(`/history/${userId}`);
+      await axios.post(`/history/${userId}`, { state: state });
       dispatch({
         type: ADD_HISTORY,
       });
