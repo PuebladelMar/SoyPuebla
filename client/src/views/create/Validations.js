@@ -19,23 +19,25 @@ const validations = (createProduct) => {
     errors.price = "No puede ser un numero negativo";
   }
 
-  /*if (createProduct?.colorImage.length === 0) {
+  if (createProduct?.colorImage.length === 0) {
     errors.color = "Selecciona por lo menos un color";
-  }*/
-
-  /*if (
-    !createProduct?.mainImage ||
-    !createProduct?.mainImage.match(
-      /^https?:\/\/[^ ]+\.(?:png|jpg|jpeg|gif|svg)(\?[^ ]*)?$/i
-      // /(http[s]*:\/\/)([a-z\-_0-9/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_/._~:?#[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png|gif)/i
-    )
-  ) {
-    errors.mainImage = "Invalid image, must be a URL";
-  }*/
-
-  /*if (createProduct?.size.length === 0) {
-    errors.size = "Selecciona por lo menos un talle";
-  }*/
+  } else {
+    const hasEmptyStocks = createProduct.colorImage.some(
+      item => item.stocks.length === 0
+    );
+  
+    const hasEmptyImages = createProduct.colorImage.some(
+      item => item.images.length === 0
+    );
+  
+    if (hasEmptyStocks) {
+      errors.size = "Selecciona por lo menos una talla para cada color";
+    }
+  
+    if (hasEmptyImages) {
+      errors.images = "Selecciona por lo menos una imagen para cada color";
+    }
+  }
 
   if (createProduct?.category.length === 0) {
     errors.category = "Seleccione una categoría";
