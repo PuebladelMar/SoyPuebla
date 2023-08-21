@@ -1,4 +1,3 @@
-import React from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -19,20 +18,18 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary='Dashboard' />
       <NavLink to="/info">
-      <ListItemText primary="Informations" />
+      <ListItemText primary='Informacion' />
       </NavLink>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
-      <ListItemText primary='Historial de compra' />
       <NavLink to="/dashboard/history">
-        <ListItemText primary="Historial de compras" />
+      <ListItemText primary='Historial de compras' />
       </NavLink>
-    </ListItemButton>
+       </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />

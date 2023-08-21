@@ -13,10 +13,10 @@ const postEmail = async (req, res) => {
     
     if (created) {
       sendRegisterMailNotify(emailSubject, emailsUsers);
-      res.status(201).send(`email enviado con éxito al usuario a ${emailsUsers}`);
+      res.status(201).send(`Suscripcion exitosa`);
       console.log('Nuevo usuario creado');
     } else {
-      res.status(201).json({ error: "El usuario ya se encuentra suscrito" });
+      res.status(201).json({ error: "Ya te encuentras suscrita" });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });

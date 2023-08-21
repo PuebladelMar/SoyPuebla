@@ -6,6 +6,7 @@ const nodemailer = require('./nodemailer');
 const cartRouter = require('./cartRoute');
 const historyRouter = require('./historyRoute');
 const infoRouter=require("./infoRoute")
+const questionsRouter=require("./questionRoute")
 const router = Router();
 
 router.use("/products", productsRouter);
@@ -15,5 +16,5 @@ router.use("/notify", nodemailer);
 router.use("/cart", cartRouter);
 router.use("/history", historyRouter);
 router.use("/information", infoRouter)
-
+router.use("/question",questionsRouter )
 module.exports = router;

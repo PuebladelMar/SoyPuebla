@@ -4,12 +4,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import NewsletterPop from "./newsletterPop";
+import PopImg from "../.././assets/images/12.png"
 import { NavLink } from "react-router-dom";
 
 const PopUpNews = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
-
-  useEffect(() => {}, []);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -39,7 +38,7 @@ const PopUpNews = () => {
             },
           }}
         >
-          x
+          close
         </Button>
       </NavLink>
       <DialogContent
@@ -50,10 +49,11 @@ const PopUpNews = () => {
           alignItems: "center",
           justifyContent: "center",
           height: "100vh",
+          maxHeight: "650px",
         }}
       >
         <img
-          src="src/assets/images/12.png"
+          src={PopImg}
           alt="Encabezado"
           style={{
             maxWidth: "100%",

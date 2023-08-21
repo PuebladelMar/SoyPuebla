@@ -22,10 +22,17 @@
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
-  height: 35rem;
+  height: 47rem;
   min-width: 1000px;
   max-width: 1000px;
   margin-top: 3rem;
+}
+
+.color-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .close-button {
@@ -58,8 +65,15 @@
   justify-content: center;
   overflow: hidden;
   margin-top: 1rem;
-  width: 23rem;
-  height: 30rem;
+  width: 37rem;
+  height: 40rem;
+
+}
+
+.image-gallery-content.image-gallery-thumbnails-left .image-gallery-slide .image-gallery-image, 
+.image-gallery-content.image-gallery-thumbnails-right .image-gallery-slide .image-gallery-image {
+  max-height: 700px;
+  max-width: 500px;
 }
 
 .quantity-container {
@@ -77,6 +91,8 @@
 
 .detailName {
   font-size: 2rem;
+  width: 100%;
+  display: inline-block;
   color: rgba(32, 32, 32, 0.766);
   cursor: default;
 }
@@ -105,10 +121,16 @@
   transform: translateZ(0);
   transition: 0.3s ease;
   cursor: pointer;
+  border: 1px solid #ffffff;
+}
+
+.detailColorButton.selected {
+  border: 1px solid rgb(148, 148, 148); 
+  transform: scale(1.2);
 }
 
 .detailColorButton:hover {
-  border: solid 1px rgb(118, 118, 189);
+  border: solid 1px rgb(148, 148, 148); 
   transform: scale(1.1);
 }
 
@@ -121,6 +143,14 @@
   transition: 0.3s ease;
   cursor: pointer;
 }
+
+.detailSizeButton.selected {
+  transform: scale(1.03);
+  color: rgb(255, 255, 255);
+  background: rgb(81, 127, 127);
+  border: none;
+}
+
 
 .detailSizeButton:hover {
   transform: scale(1.03);
@@ -199,6 +229,10 @@
 }
 
 .size-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
   height: 2rem;
 }
 
@@ -224,7 +258,8 @@
   margin-top: auto;
   margin-bottom: 10px;
 }
-detailDesciption .alertButtons button {
+
+.detailDesciption .alertButtons button {
   color: rgba(91, 91, 91, 0.766);
   background: rgb(255, 255, 255);
   margin-right: 10px;
@@ -307,7 +342,7 @@ detailDesciption .alertButtons button {
 
 .reviews-container {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
   min-width: 1000px;
   max-width: 1000px;
@@ -316,9 +351,17 @@ detailDesciption .alertButtons button {
   margin-bottom: 3rem;
 }
 
-.container {
+.span-product-name {
+  display: flex;
+  height: 0.1rem;
+  background-color: rgba(91, 91, 91, 0.766);
+  border-radius: 0.2rem;
+}
+
+.container-detail {
   margin-top: 5rem;
   display: flex;
+  height: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -337,17 +380,26 @@ detailDesciption .alertButtons button {
 }
 
 @media (max-width: 1070px) {
+
+  
   .reviews-container {
     min-width: 900px;
   }
 
   .containerDetail {
     min-width: 900px;
+    height: 40rem;
   }
+
 
   .description-container {
     min-width: 900px;
     max-width: 900px;
+  }
+
+  .mainIMage-container {
+    width: 30rem;
+    height:  30rem;
   }
 }
 
@@ -358,11 +410,16 @@ detailDesciption .alertButtons button {
 
   .containerDetail {
     min-width: 800px;
+    height: 47rem;
   }
 
   .description-container {
     min-width: 800px;
     max-width: 800px;
+  }
+  .mainIMage-container {
+    width: 23rem;
+    height: 40rem;
   }
 }
 
@@ -392,13 +449,18 @@ detailDesciption .alertButtons button {
     min-width: 700px;
     max-width: 700px;
   }
+
+  .mainIMage-container {
+    width: 22rem;
+    height: 40rem;
+  }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 840px) {
   .containerDetail {
     min-width: 500px;
     max-width: 500px;
-    height: 55rem;
+    height: 75rem;
   }
 
   .reviews-container {
@@ -407,21 +469,23 @@ detailDesciption .alertButtons button {
   }
 
   .mainIMage-container {
-    height: 25rem;
-    width: 27rem;
+    height: 40rem;
+    width: 25rem;
     margin-top: -3rem;
   }
 
-  .detailInfo {
-    position: relative;
-  }
+  /* .detailInfo { */
+    /* position: relative; */
+    /* margin-top: 5rem; */
+    
+  /* } */
 
   .detail-container {
     margin: 0;
     justify-content: center;
-    margin-top: 2.5rem;
-    height: 10rem;
-    width: 27rem;
+    /* margin-top: 2.5rem; */
+    height: 20rem;
+    width: 24rem;
   }
 
   .secContainer {
@@ -440,11 +504,11 @@ detailDesciption .alertButtons button {
   }
 
   .detailInfoSerie {
-    margin-top: 1rem;
+    margin-top: 0.2rem;
   }
 
   .addCartButton {
-    margin-top: 3rem;
+    margin-top: 3.8rem;
     padding: 1.5rem;
   }
 
@@ -454,9 +518,12 @@ detailDesciption .alertButtons button {
   }
 
   .detailName {
-    position: absolute;
+    /* position: absolute; */
+    white-space: nowrap;
     left: 0;
-    bottom: 28.7rem;
+    min-width: 12rem;
+    max-width: 100%;
+    bottom: 28.5rem;
     font-size: 1.8rem;
   }
 
@@ -486,8 +553,9 @@ detailDesciption .alertButtons button {
   }
 
   .containerDetail {
-    min-width: 400px;
-    max-width: 400px;
+    min-width: 100%;
+    max-width: 100%;
+    height: fit-content;
   }
 
   .detail-container {
@@ -496,7 +564,7 @@ detailDesciption .alertButtons button {
 
   .mainIMage-container {
     height: 25rem;
-    width: 18rem;
+    width: 100%;
   }
 
   .description-container {
@@ -516,9 +584,13 @@ detailDesciption .alertButtons button {
     max-width: 300px;
   }
 
+  .mainIMage-container {
+    width: 100%;
+  }
+
   .containerDetail {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 100%;
+    max-width: 100%;
   }
 
   .description-container {

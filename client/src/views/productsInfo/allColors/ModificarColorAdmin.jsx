@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  getColor } from "../../../redux/Actions";
-// import {  editColors } from "../../../redux/Actions";
+import { getColor } from "../../../redux/Actions";
 import axios from "axios";
 // import colorValidations from "./colorValidations";
 import { ChromePicker } from "react-color";
 import "./createColor.css";
 
-const ModificarColorAdmin = () => {
+const modificarColorAdmin = ({
+  colorInitial,
+  onColorModified,
+  onClose,
+  isOpen,
+}) => {
   const dispatch = useDispatch();
   const color = useSelector((state) => state.colorList);
 
@@ -17,7 +21,7 @@ const ModificarColorAdmin = () => {
     dispatch(getColor());
   }, [count]);
 
-  let [editColors, setEditColors] = useState({
+  let [createColor, setCreateColor] = useState({
     name: "",
     codHex: "",
   });
@@ -32,21 +36,21 @@ const ModificarColorAdmin = () => {
     setColorSelect(newColor.rgb);
     setHexColor(newColor.hex);
 
-    setEditColors((prevCreateColor) => ({
+    setCreateColor((prevCreateColor) => ({
       ...prevCreateColor,
       codHex: newColor.hex,
     }));
   };
 
   const handleChange = (event) => {
-    setEditColors({
-      ...editColors,
+    setCreateColor({
+      ...createColor,
       [event.target.name]: event.target.value,
     });
 
     setErrors(
       colorValidations({
-        ...editColors,
+        ...createColor,
         [event.target.name]: event.target.value,
       })
     );
@@ -54,15 +58,15 @@ const ModificarColorAdmin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!editColors.name || !editColors.codHex) {
+    if (!createColor.name || !createColor.codHex) {
       <p>Debes llenar el nombre</p>;
     } else {
       try {
         const asyncFunction = async () => {
-          await axios.post(`/products/${id}`, {editColors});
+          await axios.post("/products/color", createColor);
           setCount((prevCount) => prevCount + 1);
-          alert("color modificado existosamente");
-          setEditColors({
+          alert("color creado existosamente");
+          setCreateColor({
             name: "",
             codHex: "",
           });
@@ -72,20 +76,23 @@ const ModificarColorAdmin = () => {
         };
         asyncFunction();
       } catch (error) {
-        setErrors({ error: `El color ${editColors.name} ya esta creado` });
+        setErrors({ error: `El color ${createColor.name} ya esta creado` });
       }
     }
   };
+  const handleCloseModal = () => {
+    onClose(); // Cierra el modal cuando se hace clic en el botón de cerrar
+  };
 
   return (
-    <div className="create-main-containerX">
-      <div className="create-containerX">
+    <div className={`create-main-containerX ${isOpen ? "modal-open" : ""}`}>
+      <div className="create-containerX ">
         <form onSubmit={handleSubmit} className="create-formX">
           <label htmlFor="name">Nombre color:</label>
           <input
             type="text"
             name="name"
-            // value={createColor.name}
+            value={createColor.name}
             required
             placeholder="Nombre"
             className="custom-inputX"
@@ -102,7 +109,7 @@ const ModificarColorAdmin = () => {
               />
             </div>
             <div className="colorPreview">
-                <h2>Color Preview</h2>
+              <h2>Color Preview</h2>
               <button
                 className="detailColorButtonX"
                 key={color.codHex}
@@ -114,14 +121,16 @@ const ModificarColorAdmin = () => {
               ></button>
             </div>
           </div>
-
+          <button className="close-button" onClick={handleCloseModal}>
+            Cerrar
+          </button>
           <button
             className="submit-buttonzX"
             type="submit"
             // style={{
             //     backgroundColor: "#d9d9d9",
             //   }}
-            disabled={Object.keys(errors).length === 0 ? false : true}
+            // disabled={Object.keys(errors).length === 0 ? false : true}
           >
             Crear
           </button>
@@ -151,4 +160,4 @@ const ModificarColorAdmin = () => {
   );
 };
 
-export default ModificarColorAdmin;
+export default modificarColorAdmin;

@@ -7,19 +7,33 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getProducts, getProductsByName } from "../../redux/Actions";
 import { useLocation } from "react-router-dom";
+import { FiSearch, FiHeart, FiShoppingCart } from "react-icons/fi";
 import UserIcon from "../../views/login/UserIcon";
 import PdM from "../.././assets/images/PdM.png";
 import TortugaRosa from "../.././assets/images/TORTUGA_ROSA_SINFONDO.png";
-import FavImage from "../.././assets/images/Fav.png";
-import CartImage from "../.././assets/images/Cart.png";
 import DrawerComp from "./DrawerComp";
+import "./NavBar.css";
 
 export default function NavBar({ links }) {
   const location = useLocation();
   const isProducts = location.pathname === "/products";
   const dispatch = useDispatch();
-
+  // const [iconPosition, setIconPosition] = useState(0);
   const [searchValue, setSearchValue] = useState("");
+
+  // const handleScroll = () => {
+  //   const scrollPosition = window.scrollY - 20;
+  //   setIconPosition(scrollPosition);
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
+  // const iconBottom = Math.min(90, window.innerHeight - iconPosition - 90);
 
   useEffect(() => {
     if (searchValue === "") {
@@ -38,7 +52,7 @@ export default function NavBar({ links }) {
     event.preventDefault();
   };
 
-  const isMatch = useMediaQuery("(max-width: 800px)");
+  const isMatch = useMediaQuery("(max-width: 850px)");
   const isMatchSearchBar = useMediaQuery("(max-width: 1114px)");
   const [value, setValue] = useState(0);
 
@@ -120,16 +134,16 @@ export default function NavBar({ links }) {
                       alignItems: "center",
                     }}
                   >
-                    <li style={{ margin: " 1rem" }}>
+                    <li className="menu-item" style={{ margin: " 1rem" }}>
                       <Link to="/home">INICIO</Link>
                     </li>
-                    <li style={{ margin: " 1rem" }}>
+                    <li className="menu-item" style={{ margin: " 1rem" }}>
                       <Link to="/products">PRODUCTOS</Link>
                     </li>
-                    <li style={{ margin: " 1rem" }}>
+                    <li className="menu-item" style={{ margin: " 1rem" }}>
                       <Link to="/about">NOSOTRAS</Link>
                     </li>
-                    <li style={{ margin: " 1rem" }}>
+                    <li className="menu-item" style={{ margin: " 1rem" }}>
                       <Link to="/dashboard">ADMINISTRADOR</Link>
                     </li>
                   </ul>
@@ -151,43 +165,106 @@ export default function NavBar({ links }) {
                 handlerSubmitSearch={handlerSubmitSearch}
               />
             )}
-
             <Box
               display={"flex"}
               justifyContent={"flex-end"}
               marginRight={1}
               gap={"10px"}
+              position={"relative"}
             >
-              {" "}
-              <IconButton>
-                <Link to="/fav">
-                  {" "}
-                  <img
-                    src={FavImage}
-                    alt="Fav Icon"
+              {isProducts && isMatchSearchBar && (
+                <IconButton
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "3.2rem",
+                    height: "3.2rem",
+                    marginTop: "0.1rem",
+                  }}
+                >
+                  <FiSearch
                     style={{
-                      width: "2.2rem",
-                      height: "2.2rem",
-                      marginRight: "0.1rem",
+                      width: "1.8rem",
+                      height: "1.8rem",
+                      color: "white",
                     }}
                   />
-                </Link>
-              </IconButton>
-              <IconButton>
-                <Link to="/Cart">
-                  {" "}
-                  <img
-                    src={CartImage}
-                    alt="Cart Icon"
-                    style={{
-                      width: "2.2rem",
-                      height: "2.2rem",
-                      marginRight: "0rem",
-                      margin: "-0.1rem",
-                    }}
-                  />
-                </Link>
-              </IconButton>
+                </IconButton>
+              )}
+              {!isMatch && (
+                <IconButton
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "0.1rem",
+                    width: "3.2rem",
+                    height: "3.2rem",
+                  }}
+                >
+                  <Link to="/fav">
+                    <FiHeart
+                      style={{
+                        width: "1.8rem",
+                        height: "1.8rem",
+                        color: "white",
+                      }}
+                    />
+                  </Link>
+                </IconButton>
+              )}
+              {!isMatch ? (
+                <IconButton
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "0.1rem",
+                    width: "3.2rem",
+                    height: "3.2rem",
+                  }}
+                >
+                  <Link to="/Cart">
+                    <FiShoppingCart
+                      style={{
+                        width: "1.8rem",
+                        height: "1.8rem",
+                        color: "white",
+                      }}
+                    />
+                  </Link>
+                </IconButton>
+              ) : (
+                <IconButton
+                  style={{
+                    width: "3.2rem",
+                    height: "3.2rem",
+                    marginRight: "0rem",
+                    margin: "0rem",
+                    position: "absolute",
+                    backgroundColor: "#517F7F",
+                    top: "90vh",
+                    // top: `${iconBottom}vh`,
+                    transition: "background-color 0.3s ease",
+                    "&:hover": {
+                      backgroundColor: "#497171",
+                    },
+                  }}
+                >
+                  <Link to="/Cart">
+                    <FiShoppingCart
+                      style={{
+                        marginTop: "0.2rem",
+                        marginRight: "0.1rem",
+                        width: "1.8rem",
+                        height: "1.8rem",
+                        color: "white",
+                      }}
+                    />
+                  </Link>
+                </IconButton>
+              )}
               <UserIcon />
             </Box>
           </Grid>

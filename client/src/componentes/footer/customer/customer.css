@@ -71,3 +71,11 @@
     margin: 10px 0;
   }
 }
+
+.delete-button {
+  margin-left: auto;
+}
+.delete-button:hover {
+  background-color: rgba(60, 185, 154, 0.798);
+  color: white;
+}

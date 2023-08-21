@@ -14,7 +14,7 @@ function PayState() {
   const parsedData = JSON.parse(decodeURIComponent(data));
 
   useEffect(() => {
-    if (parsedData.collection_status === "approved") {
+    if (parsedData.status === "approved") {
       const asyncFunc = async () => {
         if (userId.length) {
           await dispatch(addHistory(userId));
@@ -25,7 +25,7 @@ function PayState() {
     }
   }, [dispatch, userId]);
 
-  if (parsedData.collection_status === "approved") {
+  if (parsedData.status === "approved") {
     return (
       <div className="payState">
         <p className="payState-text">su compra se realizo con exito</p>
@@ -33,14 +33,20 @@ function PayState() {
       </div>
     );
   }
-  if (parsedData.collection_status === "null") {
+  if (parsedData.status === "in_process") {
     return (
       <div className="payState">
-        <p className="payState-text">su compra no se pudo realizar</p>
+        <p className="payState-text">su compra esta en estado pendiente</p>
         <Link to="/home">Click aquí para volver al home</Link>
       </div>
     );
   }
+  return (
+    <div className="payState">
+      <p className="payState-text">su compra no se pudo realizar</p>
+      <Link to="/home">Click aquí para volver al home</Link>
+    </div>
+  );
 }
 
 export default PayState;

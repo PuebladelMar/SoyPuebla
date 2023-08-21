@@ -67,12 +67,14 @@ const CreateSerie = ()=>{
                     <p className="error">{errors.name}</p>
                     <button type="submit" className="submit-buttonzX" disabled={Object.keys(errors).length === 0 ? false : true}>Crear</button>
                     <p className="error">{errors.error}</p>
+                    <div className="createdElementsListContainer">
                     <h2>Series Creadas:</h2>
                     <ol>
                         {series.map((serie)=>(
                             <li>{serie.name}</li>
-                        ))}
+                            ))}
                     </ol>
+                </div>
                 </form>
             </div>
         </div>
