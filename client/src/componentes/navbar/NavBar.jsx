@@ -18,22 +18,7 @@ export default function NavBar({ links }) {
   const location = useLocation();
   const isProducts = location.pathname === "/products";
   const dispatch = useDispatch();
-  // const [iconPosition, setIconPosition] = useState(0);
   const [searchValue, setSearchValue] = useState("");
-
-  // const handleScroll = () => {
-  //   const scrollPosition = window.scrollY - 20;
-  //   setIconPosition(scrollPosition);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-
-  // const iconBottom = Math.min(90, window.innerHeight - iconPosition - 90);
 
   useEffect(() => {
     if (searchValue === "") {
@@ -53,7 +38,7 @@ export default function NavBar({ links }) {
   };
 
   const isMatch = useMediaQuery("(max-width: 850px)");
-  const isMatchSearchBar = useMediaQuery("(max-width: 1114px)");
+  const isMatchSearchBar = useMediaQuery("(max-width: 1039px)");
   const [value, setValue] = useState(0);
 
   return (
@@ -242,10 +227,10 @@ export default function NavBar({ links }) {
                     height: "3.2rem",
                     marginRight: "0rem",
                     margin: "0rem",
+                    border: "0.15rem solid #FFFFFF",
                     position: "absolute",
                     backgroundColor: "#517F7F",
                     top: "90vh",
-                    // top: `${iconBottom}vh`,
                     transition: "background-color 0.3s ease",
                     "&:hover": {
                       backgroundColor: "#497171",
