@@ -61,7 +61,7 @@ function Products() {
   };
 
   const resetFilters = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     setFilters({
       color: null,
       size: null,
