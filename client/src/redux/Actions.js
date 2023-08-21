@@ -18,7 +18,7 @@ import {
   DELETE_CART,
   DELETE_CART_USER,
   ADD_HISTORY,
-  ADD_TO_FAVORITES, 
+  ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES,
   NOTIFY_STOCK,
   POST_REVIEWS,
@@ -35,13 +35,14 @@ import {
   DELETE_QUESTIONS,
   GET_ALL_QUESTIONS,
   DELETE_COLOR,
-} from "./ActionsTypes";
-
+  DELETE_SERIES,
+  DELETE_SIZES,
+} from './ActionsTypes';
 
 export function getProducts() {
   return async function (dispatch) {
     try {
-      const response = await axios("/products");
+      const response = await axios('/products');
       dispatch({
         type: GET_PRODUCTS,
         payload: response.data,
@@ -55,7 +56,7 @@ export function getProducts() {
 export function getCategories() {
   return async function (dispatch) {
     try {
-      const response = await axios("/products/category");
+      const response = await axios('/products/category');
       dispatch({
         type: GET_ALL_CATEGORIES,
         payload: response.data,
@@ -69,7 +70,7 @@ export function getCategories() {
 export function getSeries() {
   return async function (dispatch) {
     try {
-      const response = await axios("/products/series");
+      const response = await axios('/products/series');
       dispatch({
         type: GET_ALL_SERIES,
         payload: response.data,
@@ -83,7 +84,7 @@ export function getSeries() {
 export function getSizes() {
   return async function (dispatch) {
     try {
-      const response = await axios("/products/size");
+      const response = await axios('/products/size');
       dispatch({
         type: GET_ALL_SIZES,
         payload: response.data,
@@ -97,7 +98,7 @@ export function getSizes() {
 export function getColor() {
   return async function (dispatch) {
     try {
-      const response = await axios.get("/products/color");
+      const response = await axios.get('/products/color');
       dispatch({
         type: GET_ALL_COLOR,
         payload: response.data,
@@ -112,7 +113,7 @@ export function postProducts(createProduct) {
   return async function (dispatch) {
     try {
       await axios.post(`/products/`, createProduct);
-      alert("Su producto se creo correctamente");
+      alert('Su producto se creo correctamente');
       return dispatch({
         type: POST_PRODUCTS,
       });
@@ -148,15 +149,15 @@ export function filterProducts(filters) {
           return null;
         })
         .filter((query) => query !== null)
-        .join("&");
+        .join('&');
       const response = await axios.get(`/products?${queryParams}`);
       dispatch({
         type: GET_FILTERED_PRODUCTS,
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al filtrar");
-      console.error("Error al filtrar", error);
+      alert('Error al filtrar');
+      console.error('Error al filtrar', error);
     }
   };
 }
@@ -164,7 +165,7 @@ export function filterProducts(filters) {
 export function getUsers() {
   return async function (dispatch) {
     try {
-      const response = await axios.get("http://localhost:3001/users");
+      const response = await axios.get('http://localhost:3001/users');
       dispatch({
         type: GET_USERS,
         payload: response.data,
@@ -202,7 +203,7 @@ export function addToCar(userId, stockId, quantity) {
         quantity,
       });
 
-      alert("Se ha añadido el producto al carrito");
+      alert('Se ha añadido el producto al carrito');
 
       return dispatch({
         type: POST_TO_CART,
@@ -230,9 +231,8 @@ export function sendMail(data) {
   return async function (dispatch) {
     try {
       const response = await axios.post(`http://localhost:3001/notify/email`, {
-        emailSubject: data.emailSubject ,
+        emailSubject: data.emailSubject,
         emailsUsers: data.emailsUsers,
-        
       });
       return dispatch({
         type: SEND_MAIL,
@@ -290,10 +290,10 @@ export function addHistory(userId) {
 export function addToFavorites(userId, productId) {
   return async function (dispatch) {
     try {
-     await axios.post(`http://localhost:3001/cart/fav/`, {
-      userId: userId,
-      productId: productId
-    });
+      await axios.post(`http://localhost:3001/cart/fav/`, {
+        userId: userId,
+        productId: productId,
+      });
       dispatch({
         type: ADD_TO_FAVORITES,
         payload: productId,
@@ -313,19 +313,19 @@ export function getAllFav(userId) {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener usuarios");
+      alert('Error al obtener usuarios');
     }
   };
 }
 
-export function removeFromFavorites(userId, productId ) {
-  return async function(dispatch) {
+export function removeFromFavorites(userId, productId) {
+  return async function (dispatch) {
     try {
       const response = await axios.delete(`http://localhost:3001/cart/fav/`, {
         data: {
           userId,
           productId,
-        }
+        },
       });
       dispatch({
         type: REMOVE_FROM_FAVORITES,
@@ -346,7 +346,6 @@ export function notifyStock(data) {
       });
       return dispatch({
         type: NOTIFY_STOCK,
-
       });
     } catch (error) {
       alert(error.message);
@@ -355,18 +354,14 @@ export function notifyStock(data) {
 }
 
 export function postReviews(userComment) {
- 
   return async function (dispatch) {
     try {
-     
-      await axios.post(`/products/review`, 
-        userComment,
-      );
+      await axios.post(`/products/review`, userComment);
 
       alert('Su comentario se envió correctamente');
       return dispatch({
         type: POST_REVIEWS,
-        payload: userComment ,
+        payload: userComment,
       });
     } catch (error) {
       alert(error);
@@ -391,7 +386,9 @@ export function getReviews() {
 export function deleteUser(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(`http://localhost:3001/users/user${id}`);
+      const response = await axios.delete(
+        `http://localhost:3001/users/user${id}`
+      );
       dispatch({
         type: DELETE_USERS,
         payload: response.data,
@@ -419,10 +416,13 @@ export function getUserById(id) {
 export function editUser(id, userRole, banUser) {
   return async function (dispatch) {
     try {
-      const response = await axios.put(`http://localhost:3001/users/user${id}`,{
-        userRole: userRole,
-        banUser: banUser,
-      });
+      const response = await axios.put(
+        `http://localhost:3001/users/user${id}`,
+        {
+          userRole: userRole,
+          banUser: banUser,
+        }
+      );
       dispatch({
         type: PUT_USERS,
         payload: response.data,
@@ -447,11 +447,12 @@ export function getUserByName(name) {
   };
 }
 
-
 export function getReviewById(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/products/review/${id}`);
+      const response = await axios.get(
+        `http://localhost:3001/products/review/${id}`
+      );
       dispatch({
         type: GET_REVIEW_BY_ID,
         payload: response.data,
@@ -476,15 +477,17 @@ export function getAllHistory() {
   };
 }
 
-
-export function editColors(id, name, codHex ) {
+export function editColors(id, name, codHex) {
   return async function (dispatch) {
     try {
-      console.log("Datos que se envían en la solicitud PUT:", { id, name, codHex });
-      const response = await axios.put(`http://localhost:3001/products/${id}`,{
+      console.log('Datos que se envían en la solicitud PUT:', {
+        id,
+        name,
+        codHex,
+      });
+      const response = await axios.put(`http://localhost:3001/products/${id}`, {
         name: name,
-        codHex: codHex
-        
+        codHex: codHex,
       });
       dispatch({
         type: PUT_COLORS,
@@ -496,7 +499,7 @@ export function editColors(id, name, codHex ) {
   };
 }
 
-      export function getAllInformation() {
+export function getAllInformation() {
   return async function (dispatch) {
     try {
       const response = await axios(`http://localhost:3001/information`);
@@ -506,17 +509,15 @@ export function editColors(id, name, codHex ) {
       });
     } catch (error) {
       alert(error);
-
     }
   };
 }
-
 
 export function deleteSeries(id) {
   return async function (dispatch) {
     try {
       const response = await axios.delete(
-       ` http://localhost:3001/products/series/${id}`
+        `http://localhost:3001/products/series/${id}`
       );
       dispatch({
         type: DELETE_SERIES,
@@ -527,11 +528,23 @@ export function deleteSeries(id) {
     }
   };
 }
-export function postInformation({ email, phone, instagram, facebook, whatsapp, image }) {
+export function postInformation({
+  email,
+  phone,
+  instagram,
+  facebook,
+  whatsapp,
+  image,
+}) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`http://localhost:3001/information`,{
-        email, phone, instagram, facebook, whatsapp, image 
+      const response = await axios.post(`http://localhost:3001/information`, {
+        email,
+        phone,
+        instagram,
+        facebook,
+        whatsapp,
+        image,
       });
       dispatch({
         type: POST_INFORMATION,
@@ -541,9 +554,8 @@ export function postInformation({ email, phone, instagram, facebook, whatsapp, i
       alert(error.message);
     }
   };
-} 
-    
-    
+}
+
 export function getAllQuestions() {
   return async function (dispatch) {
     try {
@@ -554,17 +566,15 @@ export function getAllQuestions() {
       });
     } catch (error) {
       alert(error);
-
     }
   };
 }
-
 
 export function deleteQuestions(id) {
   return async function (dispatch) {
     try {
       const response = await axios.delete(
-       `http://localhost:3001/question/${id}`
+        `http://localhost:3001/question/${id}`
       );
       dispatch({
         type: DELETE_QUESTIONS,
@@ -576,11 +586,12 @@ export function deleteQuestions(id) {
   };
 }
 
-export function postQuestions({questions, answers }) {
+export function postQuestions({ questions, answers }) {
   return async function (dispatch) {
     try {
-      const response = await axios.post(`http://localhost:3001/question`,{
-        questions, answers 
+      const response = await axios.post(`http://localhost:3001/question`, {
+        questions,
+        answers,
       });
       dispatch({
         type: POST_QUESTIONS,
@@ -590,7 +601,7 @@ export function postQuestions({questions, answers }) {
       alert(error.message);
     }
   };
-} 
+}
 export function deleteColor(id) {
   return async function (dispatch) {
     try {
@@ -601,6 +612,22 @@ export function deleteColor(id) {
       });
     } catch (error) {
       alert(error.message);
+    }
+  };
+}
+
+export function deleteSizes(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/products/size/${id}`
+      );
+      dispatch({
+        type: DELETE_SIZES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error);
     }
   };
 }

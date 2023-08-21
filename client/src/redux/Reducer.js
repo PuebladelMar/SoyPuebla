@@ -34,7 +34,8 @@ import {
   DELETE_QUESTIONS,
   GET_ALL_QUESTIONS,
   DELETE_COLOR,
-} from "./ActionsTypes";
+  DELETE_SIZES,
+} from './ActionsTypes';
 
 let initialState = {
   allProducts: [],
@@ -253,6 +254,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         colorList: updatedColorList,
+      };
+    case DELETE_SIZES:
+      return {
+        ...state,
+        sizesList: action.payload,
       };
     default:
       return state;

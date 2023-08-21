@@ -1,56 +1,71 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSeries, deleteSeries } from '../../../redux/Actions';
+import { FaPencilAlt } from 'react-icons/fa';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import './AllColecciones.css';
 
 const AllColecciones = () => {
   const series = useSelector((state) => state.series);
   const dispatch = useDispatch();
 
-  const [coleccions, setColeccions] = useState({
-    series: [],
-  });
+  // const [coleccions, setColeccions] = useState({
+  //   series: [],
+  // });
 
   useEffect(() => {
-    dispatch(getSeries());
-  }, [dispatch, coleccions]);
+    async function fetchSeries() {
+      await dispatch(getSeries());
+    }
+    fetchSeries();
+  }, [dispatch]);
   console.log(series);
 
-  const handleDeleteSeries = (id) => {
-    dispatch(deleteSeries(id));
-    setColeccions({
-      ...coleccions,
-      series: coleccions.series.filter((el) => el !== event),
-    });
+  const handleDeleteSeries = async (id) => {
+    await dispatch(deleteSeries(id));
+    await dispatch(getSeries());
   };
 
   return (
     <div
-      className='coleccion'
+      className='coleccion-main'
       name='series'
       value='name'
     >
-      {series.map((el) => (
-        <div
-          key={el.id}
-          // value={el.name}
-        >
-          {el.name}
-          <button onClick={(el) => handleDeleteSeries(el.id)}>X</button>
-        </div>
-      ))}
-      {/* <p>
+      <div className='coleccion'>
+        <h2 className='coleccion-title'>Colecciones disponibles</h2>
+        {Array.isArray(series) &&
+          series.map((el) => (
+            <div
+              key={el.id}
+              className='coleccion-item'
+            >
+              {el.name}
+              <div className='icons'>
+                <FaPencilAlt />
+
+                <button
+                  className='delete-coleccion'
+                  onClick={() => handleDeleteSeries(el.id)}
+                >
+                  {<RiDeleteBin6Line />}
+                </button>
+              </div>
+            </div>
+          ))}
+        {/* <p>
       
         {coleccions?.series.length > 0 ? (
           coleccions?.series.map((ser) => (
             <div key={ser}>
               <p>{ser}</p>
-            </div>
-          ))
+              </div>
+              ))
         ) : (
           <p></p>
-        )}
-      </p> */}
+          )}
+        </p> */}
+      </div>
     </div>
   );
 };
