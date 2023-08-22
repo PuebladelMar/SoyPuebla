@@ -31,33 +31,29 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { Products, Colors, Sizes, Categories, Series, Stocks, Users, Reviews, EmailNotify, ColorImages, Informations, Questions } = sequelize.models;
 
-Products.hasMany(Stocks);
-Colors.hasMany(Stocks);
-Sizes.hasMany(Stocks);
+Products.hasMany(Stocks, { onDelete: 'CASCADE', hooks: true });
+Colors.hasMany(Stocks, { onDelete: 'CASCADE', hooks: true });
+Sizes.hasMany(Stocks, { onDelete: 'CASCADE', hooks: true });
 
-Stocks.belongsTo(Products);
-Stocks.belongsTo(Colors);
-Stocks.belongsTo(Sizes);
+Stocks.belongsTo(Products, { onDelete: 'CASCADE', hooks: true });
+Stocks.belongsTo(Colors, { onDelete: 'CASCADE', hooks: true });
+Stocks.belongsTo(Sizes, { onDelete: 'CASCADE', hooks: true });
 
 // Relación Products <-> Categories
-Products.belongsToMany(Categories, { through: "ProductCategories" });
-Categories.belongsToMany(Products, { through: "ProductCategories" });
+Products.belongsToMany(Categories, { through: "ProductCategories", onDelete: 'CASCADE' });
+Categories.belongsToMany(Products, { through: "ProductCategories", onDelete: 'CASCADE' });
 
 // Relación Products <-> Series
-Products.belongsToMany(Series, { through: "ProductSeries" });
-Series.belongsToMany(Products, { through: "ProductSeries" });
-
-// Relación Products <-> Reviews
-// Products.belongsToMany(Reviews, { through: "ProductReviews" });
-// Reviews.belongsToMany(Products, { through: "ProductReviews" });
+Products.belongsToMany(Series, { through: "ProductSeries", onDelete: 'CASCADE' });
+Series.belongsToMany(Products, { through: "ProductSeries", onDelete: 'CASCADE' });
 
 // Relación de Carrito de compras
-Stocks.belongsToMany(Users, { through: "Carts" });
-Users.belongsToMany(Stocks, { through: "Carts" });
+Stocks.belongsToMany(Users, { through: "Carts", onDelete: 'CASCADE' });
+Users.belongsToMany(Stocks, { through: "Carts", onDelete: 'CASCADE' });
 
 // Relación de Favoritos
-Products.belongsToMany(Users, { through: "Favorites" });
-Users.belongsToMany(Products, { through: "Favorites" });
+Products.belongsToMany(Users, { through: "Favorites", onDelete: 'CASCADE' });
+Users.belongsToMany(Products, { through: "Favorites", onDelete: 'CASCADE' });
 
 //Relación entre Productos y Colores/Imagenes
 Products.belongsToMany(Colors, {
@@ -65,6 +61,7 @@ Products.belongsToMany(Colors, {
     model: ColorImages,
     unique: false,
     foreignKey: "ProductId",
+    onDelete: 'CASCADE', 
   },
   otherKey: "ColorId",
 });
@@ -74,10 +71,10 @@ Colors.belongsToMany(Products, {
     model: ColorImages,
     unique: false,
     foreignKey: "ColorId",
+    onDelete: 'CASCADE', 
   },
   otherKey: "ProductId",
 });
-
 
 module.exports = {
   ...sequelize.models, 
