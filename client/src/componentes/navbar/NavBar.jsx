@@ -21,6 +21,7 @@ export default function NavBar({ links }) {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
   const userId = useSelector((state) => state.userId);
+  const user = useSelector((state)=> state.userById)
 
   useEffect(() => {
     if (searchValue === '') {
@@ -139,12 +140,14 @@ export default function NavBar({ links }) {
                     >
                       <Link to='/about'>NOSOTRAS</Link>
                     </li>
+                    {user?.user?.userRole === 'administrator' || user?.user?.userRole === 'superadministrator' ? (
                     <li
                       className='menu-item'
                       style={{ margin: ' 1rem' }}
                     >
                       <Link to='/dashboard'>ADMINISTRADOR</Link>
                     </li>
+                    ) : ( null)}
                   </ul>
                 </Tabs>
               </Grid>
