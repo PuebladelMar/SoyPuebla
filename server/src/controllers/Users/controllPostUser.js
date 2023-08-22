@@ -8,7 +8,7 @@ const controllPostUser = async (req) => {
 
   let emailAddress = user.emailAddresses[0].emailAddress;
 
-  console.log(emailAddress);
+  
  
   const [newUser, created] = await Users.findOrCreate({
     where: {
