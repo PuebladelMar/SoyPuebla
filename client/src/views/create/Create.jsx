@@ -32,7 +32,6 @@ const Create = () => {
   const series = useSelector((state) => state.series);
   const [errors, setErrors] = useState({});
 
-  //!___________________________
 
   const [showAlert, setShowAlert] = useState({});
 
@@ -61,9 +60,6 @@ const Create = () => {
     event.preventDefault();
   };
 
-
-
-  //!___________________________
 
   const [uploadedSecureUrl, setUploadedSecureUrl] = useState(null);
 
@@ -422,12 +418,12 @@ const Create = () => {
             onChange={handleChange}
           />
           <p className="error">{errors.price}</p>
-          <label htmlFor="sale">Oferta %<separator></separator></label>
+          <label htmlFor="sale">Descuento %<separator></separator></label>
           <input
             type="number"
             name="sale"
             value={createProduct?.sale}
-            placeholder="Oferta %"
+            placeholder="Descuento %"
             className="custom-input"
             onChange={handleChange}
           />
@@ -694,6 +690,7 @@ const Create = () => {
           colorImage={createProduct?.colorImage}
           category={createProduct?.category}
           description={createProduct?.description}
+          sale={createProduct?.sale}
         />
       </div>
     </div>
