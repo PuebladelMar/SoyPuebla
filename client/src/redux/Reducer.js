@@ -35,6 +35,7 @@ import {
   GET_ALL_QUESTIONS,
   DELETE_COLOR,
   DELETE_SIZES,
+  SEND_PURCHASE_MAIL,
   PUT_CATEGORIES,
   PUT_SIZES,
   PUT_COLECCIONS,
@@ -62,6 +63,7 @@ let initialState = {
   mailConfirmation: [],
   information: [],
   questions: [],
+  pusrchaseStatusMail: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -255,6 +257,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         sizesList: action.payload,
+      };
+    case SEND_PURCHASE_MAIL:
+      return {
+        ...state,
+        pusrchaseStatusMail: action.payload,
       };
     case PUT_COLECCIONS:
       return {
