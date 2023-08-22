@@ -477,6 +477,66 @@
   padding: 0 0.5rem;
 }
 
+.alertContainer {
+  background-color: rgb(253, 253, 253);
+  border: 2px solid rgb(81, 127, 127);
+  padding: 15px;
+  position: absolute;
+  width: 22rem;
+  height: 8rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
+}
+
+.alertButtons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.alertButtons button {
+  /* font-size: .95rem; */
+  color: rgba(91, 91, 91, 0.766);
+  background: rgb(255, 255, 255);
+  margin-right: 10px;
+  border: 2px solid rgb(81, 127, 127);
+  border-radius: 4px;
+  padding: 2px 10px 3px 10px;
+  transition: transform 300ms, color 300ms, background-color 300ms;
+}
+
+.alertButtons button:hover {
+  transform: scale(1.03);
+  color: rgb(255, 255, 255);
+  background: rgb(81, 127, 127);
+}
+
+h3 {
+  cursor: default;
+}
+
+.transparentBackground {
+  background-color: rgba(255, 255, 255, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+}
+
+.alertText {
+  font-size: 1.1rem;
+  color: rgba(91, 91, 91, 0.766);
+  margin-left: 17px;
+}
+
 @media (max-width: 1070px) {
   .reviews-container {
     min-width: 900px;
@@ -561,6 +621,10 @@
     min-height: 6.5rem;
     max-height: 6.5rem;
   }
+
+  .saleBanner {
+    bottom: 12rem;
+  }
 }
 
 @media (max-width: 860px) {
@@ -624,6 +688,10 @@
     visibility: hidden;
     min-height: 1px;
     max-height: 1px;
+  }
+
+  .saleBanner {
+    bottom: 3rem;
   }
 
   .image-gallery-content {
@@ -724,12 +792,6 @@
     max-height: 49%;
     width: 24rem;
   }
-  
-  .mainIMage-container {
-    min-height: 100%;
-    max-height: 100%;
-    width: 100%;
-  }
 
   .description-container {
     min-width: 400px;
@@ -771,63 +833,3 @@
     width: 16rem;
   }
 }
-
-
-.alertContainer {
-    background-color: rgb(253, 253, 253);
-    border: 2px solid rgb(81, 127, 127);
-    padding: 15px;
-    position: absolute;
-    width: 22rem;
-    height: 8rem;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
-  }
-  
-  .alertButtons {
-    display: flex;
-    justify-content: space-evenly; 
-    margin-top: auto; 
-    margin-bottom: 10px;
-    
-
-  }
-  
-  .alertButtons button {
-    /* font-size: .95rem; */
-    color:  rgba(91, 91, 91, 0.766);
-    background: rgb(255, 255, 255);
-    margin-right: 10px;
-    border: 2px solid rgb(81, 127, 127);
-    border-radius: 4px;
-    padding: 2px 10px 3px 10px;
-    transition: transform 300ms, color 300ms, background-color 300ms; 
-  
-    
-    &:hover {
-      transform: scale(1.03);
-      color: rgb(255, 255, 255);
-      background: rgb(81, 127, 127);
-    }}
-
-
-  .transparentBackground {
-    background-color: rgba(255, 255, 255, 0.5); 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9998; 
-  }
-
-  .alertText{
-    font-size: 1.1rem;
-    color:  rgba(91, 91, 91, 0.766);
-   margin-left: 17px;
-  }
