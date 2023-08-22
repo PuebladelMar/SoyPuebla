@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./History.css";
 
 const History = () => {
@@ -24,8 +25,9 @@ const History = () => {
     },[dispatch]);
     
     return(
+      <div className="container-history">
         <div className="history-container">
-            <h2>Historial:</h2>
+          <h2 className="history-title">Historial:</h2>
             <div className="history-items">
               {userHistory?.map((item, index)=>(
                 <div className="history-item" key={index}>
@@ -41,7 +43,9 @@ const History = () => {
                 </div>
               ))}
             </div>
+            <button className="buttonHistory"><Link to="/home">Inicio</Link></button>
         </div>
+      </div>
     );
 };
 
