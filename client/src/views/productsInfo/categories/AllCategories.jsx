@@ -8,12 +8,15 @@ import {
 import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { NavLink, useNavigate } from 'react-router-dom';
+import CreateCategory from '../../create/createCategory/CreateCategory';
+import { useState } from 'react';
 import './AllCategories.css';
 
 const AllCategories = () => {
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState({});
 
   useEffect(() => {
     async function fetchCategories() {
@@ -33,6 +36,14 @@ const AllCategories = () => {
       await dispatch(putCategories(id, updatedName));
       dispatch(getCategories());
     }
+  };
+  const handleOpenCategoryCreate = (event) => {
+    setShowAlert({ category: true });
+    event.preventDefault();
+  };
+  const handleCloseAlert = (event) => {
+    setShowAlert({});
+    event.preventDefault();
   };
   return (
     <div
@@ -105,6 +116,29 @@ const AllCategories = () => {
             </div>
           ))}
       </div>
+      {showAlert.category && (
+        <popups className='pop-ups'>
+          <>
+            <div className='transparentBackgroundY'></div>
+            <div className='alertContainerY'>
+              <p className='alertTextY'>Creador de categorías</p>
+              <CreateCategory />
+              <div className='alertButtonsY'>
+                <button onClick={handleCloseAlert}>X</button>
+              </div>
+            </div>
+          </>
+        </popups>
+      )}
+      <button
+        type='button'
+        onClick={() => {
+          handleOpenCategoryCreate();
+        }}
+        className='mainImage-upload-buttonY '
+      >
+        Crear categoría
+      </button>
     </div>
   );
 };
