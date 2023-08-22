@@ -28,7 +28,7 @@ export default function Cardx({ product }) {
   const isFavorite = favorites.some((item) => item.id === product.id);
   const [selectedColor, setSelectedColor] = useState(null);
 
-  console.log(sale)
+  console.log(sale);
 
   const handleFavoriteClick = async () => {
     try {
@@ -70,10 +70,9 @@ export default function Cardx({ product }) {
     fetchData();
   }, [dispatch, userId]);
 
-
   function formatNumber(number) {
-    const wholeNumber = Math.floor(number); 
-    return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const wholeNumber = Math.floor(number);
+    return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
   return (
@@ -87,57 +86,56 @@ export default function Cardx({ product }) {
       {!isMatch ? (
         <Box>
           <Link to={`/products/${id}`}>
-  <Box
-    style={{
-      width: "100%",
-      height: "22rem",
-      overflow: "hidden",
-      position: "relative", 
-    }}
-  >
-    <CardMedia
-      component="img"
-      style={{
-        width: "100%",
-        height: "22rem",
-        objectFit: "fill",
-        transition: "transform 0.2s",
-        position: "relative", 
-      }}
-      image={selectedColorImages?.images[0]}
-      alt="Item"
-      onMouseOver={(e) => {
-        e.currentTarget.style.transform = "scale(1.05)";
-      }}
-      onMouseOut={(e) => {
-        e.currentTarget.style.transform = "scale(1)";
-      }}
-    />
-    {sale == 0 ? (
-    <Typography/>
-     
-   ) : (
-    <Typography
-    variant="body2"
-    color="text.secondary"
-    style={{
-      fontSize: ".8rem",
-      fontWeight: "600",
-      position: "absolute",
-      top: "17px", 
-      left: "0px",
-      color: "#ffffff",
-      backgroundColor: "#ff0000",
-      padding: "3px 15px 3px 13px",
-      borderTopRightRadius: "15px",
-      borderBottomRightRadius: "15px",
-    }}
-  > 
-    {sale} off%
-  </Typography>
-    )}
-  </Box>
-</Link>
+            <Box
+              style={{
+                width: "100%",
+                height: "22rem",
+                overflow: "hidden",
+                position: "relative",
+              }}
+            >
+              <CardMedia
+                component="img"
+                style={{
+                  width: "100%",
+                  height: "22rem",
+                  objectFit: "fill",
+                  transition: "transform 0.2s",
+                  position: "relative",
+                }}
+                image={selectedColorImages?.images[0]}
+                alt="Item"
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = "scale(1.05)";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
+              />
+              {sale == 0 ? (
+                <Typography />
+              ) : (
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  style={{
+                    fontSize: ".8rem",
+                    fontWeight: "600",
+                    position: "absolute",
+                    top: "17px",
+                    left: "0px",
+                    color: "#ffffff",
+                    backgroundColor: "#ff0000",
+                    padding: "3px 15px 3px 13px",
+                    borderTopRightRadius: "15px",
+                    borderBottomRightRadius: "15px",
+                  }}
+                >
+                  {sale} off%
+                </Typography>
+              )}
+            </Box>
+          </Link>
 
           <Box
             style={{
@@ -154,7 +152,7 @@ export default function Cardx({ product }) {
             >
               <CardContent
                 style={{
-                  width: "100%",
+                  width: "18rem",
                   height: "5rem",
                   display: "flex",
                   flexDirection: "column",
@@ -163,7 +161,6 @@ export default function Cardx({ product }) {
                   padding: "0.5rem 0 0.5rem 1rem",
                 }}
               >
-
                 <Link to={`/products/${id}`}>
                   <Typography
                     variant="body2"
@@ -189,7 +186,6 @@ export default function Cardx({ product }) {
                     $ {formatNumber(price)}
                   </Typography>
                 </Link>
-
               </CardContent>
             </Box>
             <Box

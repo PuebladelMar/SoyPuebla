@@ -318,7 +318,8 @@ export function getAllFav(userId) {
         payload: response.data,
       });
     } catch (error) {
-      alert('Error al obtener usuarios');
+      // alert('Error al obtener usuarios');
+      console.error('Error al obtener favoritos:', error);
     }
   };
 }
@@ -636,7 +637,7 @@ export function deleteSizes(id) {
       alert(error);
     }
   };
-};
+}
 
 export function sendStatusPurchaseMail(data) {
   return async function (dispatch) {
