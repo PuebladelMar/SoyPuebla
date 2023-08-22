@@ -19,6 +19,9 @@ const AllData = () => {
       <NavLink to='all-categories'>
         <button className='alldata-btn'>Categorias</button>
       </NavLink>
+      <NavLink to='/dashboard'>
+        <button className='nav-dashboard-btn' onClick={() => navigate('/dashboard')}>Dashboard</button>
+      </NavLink>
     </div>
   );
 };
