@@ -23,7 +23,7 @@ const Cart = () => {
   useEffect(() => {
     if (!userId.length) {
       navigate("/home");
-      alert("debes iniciar seción para ir al carrito");
+      alert("debes iniciar sesión para ir al carrito");
     } else {
       dispatch(getUserCart(userId));
     }
