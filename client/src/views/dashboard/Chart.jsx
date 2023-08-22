@@ -86,7 +86,7 @@ export default function Chart() {
       setData(newData);
     } 
     else if (alignment === "mes") {
-      const interval = 5; // Mostrar datos cada 5 días
+      const interval = 5;
       const newData = [];
 
       for (let day = 1; day <= 31; day += interval) {
@@ -134,7 +134,7 @@ export default function Chart() {
 
       setData(newData);
     } else if (alignment === "año") {
-      const interval = 2; // Mostrar datos cada 2 meses
+      const interval = 2; 
       const months = [
         "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
