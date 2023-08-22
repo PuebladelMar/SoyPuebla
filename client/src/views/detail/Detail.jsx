@@ -30,7 +30,6 @@ const Detail = () => {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [ImagesToRender, setImagesToRender] = useState([]);
-  // const [showAlert, setShowAlert] = useState(false);
   const uniqueColor = obtenerColoresUnicos(productDetails);
   const [thumbnailPosition, setThumbnailPosition] = useState('left');
   const sale = productDetails[0]?.sale;
@@ -114,10 +113,6 @@ const Detail = () => {
     return coloresUnicos;
   }
 
-  // const handleCloseAlert = () => {
-  //   setShowAlert(false);
-  // };
-
   const addProduct = () => {
     quantity < selectedCombination.stock ? setQuantity(quantity + 1) : null;
   };
@@ -126,7 +121,6 @@ const Detail = () => {
   };
 
   const handleAddToCart = () => {
-    // setShowAlert(true);
     Swal.fire({
       position: 'center',
       icon: 'success',

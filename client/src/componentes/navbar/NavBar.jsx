@@ -3,7 +3,6 @@ import { Box, AppBar, Toolbar, IconButton, useMediaQuery } from '@mui/material';
 import { Link } from 'react-router-dom';
 import SearchBar from '../searchBar/SearchBar';
 import '../searchBar/SearchBar.css';
-import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getProducts, getProductsByName } from '../../redux/Actions';
@@ -194,33 +193,6 @@ export default function NavBar({ links }) {
                   />
                 </IconButton>
               )}
-
-              {/* {userId.length === 0
-                ? alert('Debes iniciar sesion')
-                : !isMatch && (
-                    <IconButton
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginTop: '0.1rem',
-                        width: '3.2rem',
-                        height: '3.2rem',
-                      }}
-                    >
-                      {' '}
-                      <Link to='/fav'>
-                        <FiHeart
-                          style={{
-                            width: '1.8rem',
-                            height: '1.8rem',
-                            color: 'white',
-                          }}
-                        />
-                      </Link>
-                    </IconButton>
-                  )} */}
-
               {!isMatch && (
                 <IconButton
                   style={{
@@ -243,7 +215,7 @@ export default function NavBar({ links }) {
                   </Link>
                 </IconButton>
               )}
-              {!isMatch ? (
+              {!isMatch && (
                 <IconButton
                   style={{
                     display: 'flex',
@@ -264,35 +236,28 @@ export default function NavBar({ links }) {
                     />
                   </Link>
                 </IconButton>
-              ) : (
+              )}
+              {!isProducts && isMatch &&(
                 <IconButton
-                  style={{
-                    'width': '3.2rem',
-                    'height': '3.2rem',
-                    'marginRight': '0rem',
-                    'margin': '0rem',
-                    'border': '0.15rem solid #FFFFFF',
-                    'position': 'absolute',
-                    'backgroundColor': '#517F7F',
-                    'top': '90vh',
-                    'transition': 'background-color 0.3s ease',
-                    '&:hover': {
-                      backgroundColor: '#497171',
-                    },
-                  }}
-                >
-                  <Link to='/Cart'>
-                    <FiShoppingCart
-                      style={{
-                        marginTop: '0.2rem',
-                        marginRight: '0.1rem',
-                        width: '1.8rem',
-                        height: '1.8rem',
-                        color: 'white',
-                      }}
-                    />
-                  </Link>
-                </IconButton>
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: '0.1rem',
+                  width: '3.2rem',
+                  height: '3.2rem',
+                }}
+              >
+                <Link to='/Cart'>
+                  <FiShoppingCart
+                    style={{
+                      width: '1.8rem',
+                      height: '1.8rem',
+                      color: 'white',
+                    }}
+                  />
+                </Link>
+              </IconButton>
               )}
               <UserIcon />
             </Box>
