@@ -32,7 +32,7 @@ function Products() {
 
   const totalPages = Math.ceil(allProducts.length / itemsPerPage);
 
-  const [isReady, setIsReady] = useState(false);
+
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -102,11 +102,74 @@ function Products() {
   };
 
   return (
-    <section className="products-section">
+    // <section className="products-section">
 
-      {!isReady ? ( 
-        <div className="loader">Cargando...
-         <Loader/>
+    //   {!isReady ? ( 
+    //     <div className="loader">Cargando...
+    //      <Loader/>
+    //     </div>
+    //   ) : (
+    //     <div className="products-container">
+    //       <SideBar
+    //         handlerEventSideBar={handleChange}
+    //         resetFilters={resetFilters}
+    //       />
+
+    //       <div className="cards-container">
+
+    //         <div className="cards-paginated-container">
+    //           <CardContainer products={itemsToShow} />
+    //           <div className="paginated-container">
+    //             <button
+    //               className={
+    //                 currentPage === 1
+    //                   ? "disabledPaginationButton"
+    //                   : "paginationButton"
+    //               }
+    //               onClick={() => handlePageChange(currentPage - 1)}
+    //               disabled={currentPage === 1}
+    //             >
+    //               &#10094;
+    //             </button>
+
+    //             {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+    //               (pageNumber) => (
+    //                 <button
+    //                   key={pageNumber}
+    //                   className={
+    //                     pageNumber === currentPage
+    //                       ? "activePaginationButton"
+    //                       : "paginationButton"
+    //                   }
+    //                   onClick={() => handlePageChange(pageNumber)}
+    //                 >
+    //                   {pageNumber}
+    //                 </button>
+    //               )
+    //             )}
+    //             <button
+    //               className={
+    //                 currentPage === totalPages
+    //                   ? "disabledPaginationButton"
+    //                   : "paginationButton"
+    //               }
+    //               onClick={() => handlePageChange(currentPage + 1)}
+    //               disabled={currentPage === totalPages}
+    //             >
+    //               &#10095;
+    //             </button>
+    //           </div>
+    //         </div>
+    //         </div>
+    //       )}
+    //     </div>
+    //   )}
+    // </section>
+
+    <section className="products-section">
+      {!isReady ? ( // Mostrar el indicador de carga si isReady es false
+        <div className="loader">
+        <Loader/>
         </div>
       ) : (
         <div className="products-container">
@@ -116,7 +179,6 @@ function Products() {
           />
 
           <div className="cards-container">
-
             <div className="cards-paginated-container">
               <CardContainer products={itemsToShow} />
               <div className="paginated-container">
@@ -131,7 +193,6 @@ function Products() {
                 >
                   &#10094;
                 </button>
-
                 {Array.from({ length: totalPages }, (_, index) => index + 1).map(
                   (pageNumber) => (
                     <button
@@ -160,7 +221,7 @@ function Products() {
                 </button>
               </div>
             </div>
-          )}
+          </div>
         </div>
       )}
     </section>
