@@ -3,7 +3,8 @@ import { useEffect, useState, useRef } from "react";
 import * as actions from "../../redux/Actions";
 import Modal from "@mui/material/Modal";
 import { useMediaQuery } from "@mui/material";
-import Filtro from "../../../src/assets/images/filtro.png";
+import { FiSliders, FiShoppingCart } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import "./SideBAr.css";
 
 const initialState = {
@@ -26,7 +27,6 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
   const series = useSelector((state) => state.series);
   const categories = useSelector((state) => state.categories);
   const sizes = useSelector((state) => state.sizesList);
-  const [isOff, setIsOff] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isOpenCategory, setIsOpenCategory] = useState(false);
@@ -53,11 +53,6 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
   const handleSelectClick = (event, toggleFunction) => {
     event.stopPropagation();
     toggleFunction();
-  };
-
-  const handleSelectOff = () => {
-    setIsOff(!isOff);
-    console.log("hola");
   };
 
   const handleSelectToggleCategory = () => {
@@ -107,11 +102,6 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
     setIsModalOpen(false);
   };
 
-  const handleSelectOffAndEvent = () => {
-    handleSelectOff();
-    handlerEventSideBar();
-  };
-
   useEffect(() => {
     const handleWindowResize = () => {
       setWindowWidth(window.innerWidth);
@@ -135,10 +125,21 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
     <aside className="search-bar-aside">
       {windowWidth < 645 ? (
         <div className="filter-button">
+          <button className="cart-button">
+            <Link to="/Cart">
+              <FiShoppingCart
+                style={{
+                  width: "1.8rem",
+                  height: "1.8rem",
+                  color: "white",
+                }}
+              />
+            </Link>
+          </button>
           <button className="open-modal-button" onClick={handleOpenModal}>
-            Filtros
-            <span>
-              <img src={Filtro} alt="filtro" className="img-filter" />
+            <span className="open-modal-span">Filtros</span>
+            <span className="open-modal-span">
+              <FiSliders />
             </span>
           </button>
         </div>
