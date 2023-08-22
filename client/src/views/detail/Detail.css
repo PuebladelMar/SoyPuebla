@@ -35,6 +35,23 @@
   gap: 0.5rem;
 }
 
+.saleBannerDetail {
+  position: absolute;
+  bottom: 50px;
+  right: 0px;
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 7px 20px 7px 25px;
+  text-align: center;
+  font-weight: 500;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.image-galery-containerDeatil {
+  position: relative;
+}
+
 .close-button {
   position: absolute;
   top: 0;
@@ -166,6 +183,24 @@
   height: 2rem;
   color: rgba(32, 32, 32, 0.766);
   cursor: default;
+}
+
+.precioDescuentoContainerDetail {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  gap: 1.6rem;
+}
+
+.originalPriceDetail {
+  font-size: 1.3rem;
+  color: rgba(157, 157, 157, 0.766);
+  text-decoration: line-through;
+}
+
+.discountedPriceDetail {
+  font-size: 1.3rem;
+  color: #ff0000;
 }
 
 .detailInfoSerie {
