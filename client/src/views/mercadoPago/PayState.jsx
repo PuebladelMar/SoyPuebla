@@ -8,6 +8,7 @@ import "./PayState.css";
 function PayState() {
   const userId = useSelector((state) => state.userId);
   const userById = useSelector((state) => state.userById);
+  const totalPay = useSelector((state) => state.totalPay)
   const location = useLocation();
   const dispatch = useDispatch();
   const queryParams = new URLSearchParams(location.search);
@@ -57,7 +58,10 @@ function PayState() {
   if (parsedData.status === "approved") {
     return (
       <div className="payState">
+        {console.log(parsedData)}
         <p className="payState-text">su compra se realizo con exito</p>
+        <p className="payState-text">id de compra: {parsedData.payment_id}</p>
+        <p className="payState-text">pago total: ${totalPay}</p>
         <Link to="/home">Click aquí para volver al home</Link>
       </div>
     );
