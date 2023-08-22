@@ -3,6 +3,7 @@ import { Box, AppBar, Toolbar, IconButton, useMediaQuery } from '@mui/material';
 import { Link } from 'react-router-dom';
 import SearchBar from '../searchBar/SearchBar';
 import '../searchBar/SearchBar.css';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getProducts, getProductsByName } from '../../redux/Actions';
