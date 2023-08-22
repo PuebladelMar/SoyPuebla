@@ -1,72 +1,62 @@
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import LayersIcon from '@mui/icons-material/Layers';
-import CheckroomOutlinedIcon from '@mui/icons-material/CheckroomOutlined';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import { NavLink } from 'react-router-dom';
-import AddIcon from '@mui/icons-material/Add';
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PeopleIcon from "@mui/icons-material/People";
+import CheckroomOutlinedIcon from "@mui/icons-material/CheckroomOutlined";
+import { NavLink } from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add";
 
 export const mainListItems = (
   <>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <NavLink to="/info">
-      <ListItemText primary='Informacion' />
-      </NavLink>
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <NavLink to="/dashboard/history">
-      <ListItemText primary='Historial de compras' />
-      </NavLink>
-       </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <NavLink to="/dashboard/users">
+    <NavLink to="/info">
+      <ListItemButton>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Informacion" />
+      </ListItemButton>
+    </NavLink>
+    <NavLink to="/dashboard/history">
+      <ListItemButton>
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Historial de compras" />
+      </ListItemButton>
+    </NavLink>
+    <NavLink to="/dashboard/users">
+      <ListItemButton>
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
         <ListItemText primary="Usuarios" />
-      </NavLink>
-    </ListItemButton>
-    <ListItemButton>
+      </ListItemButton>
+    </NavLink>
+    {/* <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary='Reportes' />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary='Integración' />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <CheckroomOutlinedIcon />
-      </ListItemIcon>
-      <NavLink to='/all-data'>
-        <ListItemText primary='Products' />
-      </NavLink>
-    </ListItemButton>
-    
-    <ListItemButton>
-      <ListItemIcon>
-        <AddIcon />
-      </ListItemIcon>
-      <NavLink to='/create'>
-        <ListItemText primary='Crear' />
-      </NavLink>
-    </ListItemButton>
+      <ListItemText primary="Reportes" />
+    </ListItemButton> */}
+    <NavLink to="/all-data">
+      <ListItemButton>
+        <ListItemIcon>
+          <CheckroomOutlinedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Products" />
+      </ListItemButton>
+    </NavLink>
+
+    <NavLink to="/create">
+      <ListItemButton>
+        <ListItemIcon>
+          <AddIcon />
+        </ListItemIcon>
+        <ListItemText primary="Crear" />
+      </ListItemButton>
+    </NavLink>
   </>
 );
 

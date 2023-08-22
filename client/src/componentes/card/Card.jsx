@@ -163,27 +163,33 @@ export default function Cardx({ product }) {
                   padding: "0.5rem 0 0.5rem 1rem",
                 }}
               >
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  style={{
-                    fontSize: "1rem",
-                    fontWeight: "600",
-                    cursor: "default",
-                  }}
-                >
-                  {name}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  style={{
-                    fontSize: "0.9rem",
-                    cursor: "default",
-                  }}
-                >
-                  $ {formatNumber(price)}
-                </Typography>
+
+                <Link to={`/products/${id}`}>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={{
+                      fontSize: "1rem",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {name}
+                  </Typography>
+                </Link>
+                <Link to={`/products/${id}`}>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={{
+                      fontSize: "0.9rem",
+                      cursor: "pointer",
+                    }}
+                  >
+                    $ {formatNumber(price)}
+                  </Typography>
+                </Link>
+
               </CardContent>
             </Box>
             <Box
@@ -328,27 +334,31 @@ export default function Cardx({ product }) {
                   gap: isMatchCard ? "1rem" : "1.5rem",
                 }}
               >
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  style={{
-                    fontSize: "1rem",
-                    fontWeight: "600",
-                    cursor: "default",
-                  }}
-                >
-                  {name}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  style={{
-                    fontSize: "0.9rem",
-                    cursor: "default",
-                  }}
-                >
-                  $ {price}
-                </Typography>
+                <Link to={`/products/${id}`}>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={{
+                      fontSize: "1rem",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {name}
+                  </Typography>
+                </Link>
+                <Link to={`/products/${id}`}>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={{
+                      fontSize: "0.9rem",
+                      cursor: "pointer",
+                    }}
+                  >
+                    $ {price}
+                  </Typography>
+                </Link>
               </CardContent>
             </Box>
             <Box
