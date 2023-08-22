@@ -26,7 +26,7 @@ function CardContainer(props) {
             flexWrap: "wrap",
             padding: isMatchCard ? "0" : "1rem 2rem",
             justifyContent: "center",
-            alignItems: "start",
+            alignItems: "flex-start",
             width: "100%",
             height: "100%"
           }}
@@ -52,8 +52,9 @@ function CardContainer(props) {
             flexWrap: "wrap",
             padding: "1rem 0",
             justifyContent: "center",
-            alignItems: "center",
+            alignItems: "flex-start",
             width: "100%",
+            height: "100%"
           }}
         >
           {props.products?.map((product) => (

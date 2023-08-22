@@ -319,7 +319,8 @@ export function getAllFav(userId) {
         payload: response.data,
       });
     } catch (error) {
-      alert('Error al obtener usuarios');
+      // alert('Error al obtener usuarios');
+      console.error('Error al obtener favoritos:', error);
     }
   };
 }

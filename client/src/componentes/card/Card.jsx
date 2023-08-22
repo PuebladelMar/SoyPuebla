@@ -28,7 +28,6 @@ export default function Cardx({ product }) {
   const isFavorite = favorites.some((item) => item.id === product.id);
   const [selectedColor, setSelectedColor] = useState(null);
 
-
   const handleFavoriteClick = async () => {
     try {
       if (isFavorite) {
@@ -151,7 +150,7 @@ export default function Cardx({ product }) {
             >
               <CardContent
                 style={{
-                  width: "100%",
+                  width: "18rem",
                   height: "5rem",
                   display: "flex",
                   flexDirection: "column",
@@ -160,7 +159,6 @@ export default function Cardx({ product }) {
                   padding: "0.5rem 0 0.5rem 1rem",
                 }}
               >
-
                 <Link to={`/products/${id}`}>
                   <Typography
                     variant="body2"

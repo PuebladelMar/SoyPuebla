@@ -133,7 +133,12 @@
 
   .cards-container {
     width: 100%;
+    min-height: 100vh;
     margin-top: 3.5rem;
+  }
+
+  .cards-paginated-container {
+    min-height: 100vh;
   }
 
   .products-section {
