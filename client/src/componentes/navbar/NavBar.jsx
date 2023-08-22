@@ -192,7 +192,7 @@ export default function NavBar({ links }) {
                 </IconButton>
               )}
 
-              {userId.length === 0
+              {/* {userId.length === 0
                 ? alert('Debes iniciar sesion')
                 : !isMatch && (
                     <IconButton
@@ -216,9 +216,9 @@ export default function NavBar({ links }) {
                         />
                       </Link>
                     </IconButton>
-                  )}
+                  )} */}
 
-              {/* {!isMatch && (
+              {!isMatch && (
                 <IconButton
                   style={{
                     display: 'flex',
@@ -229,21 +229,17 @@ export default function NavBar({ links }) {
                     height: '3.2rem',
                   }}
                 >
-                  {userId.length === 0 ? (
-                    alert('Debes iniciar sesion')
-                  ) : (
-                    <Link to='/fav'>
-                      <FiHeart
-                        style={{
-                          width: '1.8rem',
-                          height: '1.8rem',
-                          color: 'white',
-                        }}
-                      />
-                    </Link>
-                  )}
+                  <Link to='/fav'>
+                    <FiHeart
+                      style={{
+                        width: '1.8rem',
+                        height: '1.8rem',
+                        color: 'white',
+                      }}
+                    />
+                  </Link>
                 </IconButton>
-              )} */}
+              )}
               {!isMatch ? (
                 <IconButton
                   style={{
