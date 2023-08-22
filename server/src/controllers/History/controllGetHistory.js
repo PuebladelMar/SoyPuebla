@@ -1,7 +1,7 @@
 const { Histories, Stocks, Products, Sizes, Colors, ColorImages } = require("../../db");
 
 const controllGetHistory = async (userId) => {
-  const userHistory = await Histories.findAll({ where: { UserId: userId } });
+  const userHistory = await Histories.findAll({ where: { UserId: userId, state: "approved" } });
 
   const responsePromises = userHistory.map(async (user) => {
     const stock = await Stocks.findByPk(user.StockId);

@@ -12,17 +12,23 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import PdM from "../.././assets/images/PdM.png";
 import { Link } from "react-router-dom";
 
-function DrawerComp({ links }) {
+function DrawerComp() {
   const [open, setOpen] = useState(false);
+  console.log(open);
 
   return (
     <>
       <Drawer
         PaperProps={{
-          sx: { backgroundColor: "#b2cebf", width: "15.7rem" },
+          sx: {
+            backgroundColor: "#517F7F",
+            minWidth: "14rem",
+            paddingTop: "0.5rem",
+          },
         }}
         open={open}
         onClose={() => setOpen(false)}
+        onClick={() => setOpen(false)}
       >
         <Box display={"flex"} justifyContent={"center"}>
           <Link to="/home">
@@ -33,7 +39,6 @@ function DrawerComp({ links }) {
                 width: "7rem",
                 height: "3.3rem",
                 margin: "1rem",
-                filter: " contrast(0%)",
               }}
             />
           </Link>
@@ -51,39 +56,193 @@ function DrawerComp({ links }) {
             display={"flex"}
             flexDirection={"column"}
             justifyContent={"center"}
+            alignItems={"center"}
             width={"100%"}
           >
-            {links.map((link, index) => (
-              <ListItemButton
-                key={index}
-                component={Link}
-                to={`/${link.toLowerCase()}`}
+            <ListItemButton
+              component={Link}
+              to="/home"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "10.8rem",
+                }}
               >
-                <ListItemIcon
+                <ListItemText
                   sx={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
                     width: "100%",
+                    "&:hover": {
+                      color: "#baa199",
+                      cursor: "pointer",
+                    },
                   }}
                 >
-                  <ListItemText
-                    sx={{
-                      color: "#ededed",
-                      transform: "scale(1.3)",
-                      textAlign: "center",
-                      "&:hover": {
-                        color: "#517f7f",
-                        cursor: "pointer",
-                        transform: "scale(1.4)",
-                      },
-                    }}
-                  >
-                    {link}
-                  </ListItemText>
-                </ListItemIcon>
-              </ListItemButton>
-            ))}
+                  Inicio
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            <ListItemButton
+              component={Link}
+              to="/products"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "10.8rem",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
+                    "&:hover": {
+                      color: "#baa199",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  Productos
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            <ListItemButton
+              component={Link}
+              to="/about"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "10.8rem",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
+                    "&:hover": {
+                      color: "#baa199",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  Nosotras
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            <ListItemButton
+              component={Link}
+              to="/dashboard"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "10.8rem",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
+                    "&:hover": {
+                      color: "#baa199",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  Administrador
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            <ListItemButton
+              component={Link}
+              to="/fav"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "10.8rem",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
+                    "&:hover": {
+                      color: "#baa199",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  Favoritos
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
+            <ListItemButton
+              component={Link}
+              to="/cart"
+              sx={{
+                borderRadius: "10px",
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "10.8rem",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    color: "#ededed",
+                    transform: "scale(1.3)",
+                    textAlign: "center",
+                    "&:hover": {
+                      color: "#baa199",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  Carrito
+                </ListItemText>
+              </ListItemIcon>
+            </ListItemButton>
           </Box>
         </List>
       </Drawer>

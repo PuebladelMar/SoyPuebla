@@ -1,8 +1,6 @@
 const { Favorites, Products } = require("../../db.js");
 
 const deleteFavController = async (userId, productId) => {
-  console.log(userId);
-  console.log(productId);
   try {
     await Favorites.destroy({
       where: { UserId: userId, ProductId: productId },

@@ -2,6 +2,7 @@
   display: flex;
   margin-left: 2rem;
   margin-right: 2rem;
+  /* flex-wrap: wrap;   */
 }
 
 .create-containerX {
@@ -123,4 +124,31 @@ padding-bottom: 1rem;
     display: flex;
     justify-content: space-between;
     width: 100%;
+
+}
+
+.createdElementsListContainer {
+
+  margin-top: 1rem;
+}
+
+.createdElementsListContainer h2 {
+
+  margin-bottom: .7rem;
+}
+
+.createdElementsListContainer ol {
+  max-width: 400px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.createdElementsListContainer li {
+
+  color: #a5a5a5;
+  border: 1px solid #a5a5a5;
+  border-radius: 3px;
+  padding: 2px 10px;
 }

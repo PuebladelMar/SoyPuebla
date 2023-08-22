@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import { filterProducts } from "../../redux/Actions";
 import CardContainer from "../../componentes/cardContainer/CardContainer";
 import SideBar from "../../componentes/sidebar/SideBar";
@@ -8,6 +8,7 @@ import "./Products.css";
 function Products() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
+  const [isReady, setIsReady] = useState(false);
   const [filters, setFilters] = useState({
     color: null,
     size: null,
@@ -34,6 +35,16 @@ function Products() {
     setCurrentPage(pageNumber);
   };
 
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsReady(!isReady);
+    }, "1200");
+  }, [dispatch, setIsReady]);
+
   useEffect(() => {
     setCurrentPage(1);
   }, [filters]);
@@ -43,7 +54,6 @@ function Products() {
   }, [filters, dispatch]);
 
   const handleChange = (event) => {
-    event.preventDefault();
     const { name, value } = event.target;
     const nullOptions = [
       "null",
@@ -62,7 +72,7 @@ function Products() {
   };
 
   const resetFilters = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     setFilters({
       color: null,
       size: null,
@@ -84,22 +94,25 @@ function Products() {
           resetFilters={resetFilters}
         />
         <div className="cards-container">
-          <div className="cards-paginated-container">
-            <CardContainer products={itemsToShow} />
-            <div className="paginated-container">
-              <button
-                className={
-                  currentPage === 1
-                    ? "disabledPaginationButton"
-                    : "paginationButton"
-                }
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                &#10094;
-              </button>
-              {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-                (pageNumber) => (
+          {isReady && (
+            <div className="cards-paginated-container">
+              <CardContainer products={itemsToShow} />
+              <div className="paginated-container">
+                <button
+                  className={
+                    currentPage === 1
+                      ? "disabledPaginationButton"
+                      : "paginationButton"
+                  }
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  &#10094;
+                </button>
+                {Array.from(
+                  { length: totalPages },
+                  (_, index) => index + 1
+                ).map((pageNumber) => (
                   <button
                     key={pageNumber}
                     className={
@@ -111,21 +124,21 @@ function Products() {
                   >
                     {pageNumber}
                   </button>
-                )
-              )}
-              <button
-                className={
-                  currentPage === totalPages
-                    ? "disabledPaginationButton"
-                    : "paginationButton"
-                }
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              >
-                &#10095;
-              </button>
+                ))}
+                <button
+                  className={
+                    currentPage === totalPages
+                      ? "disabledPaginationButton"
+                      : "paginationButton"
+                  }
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  &#10095;
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

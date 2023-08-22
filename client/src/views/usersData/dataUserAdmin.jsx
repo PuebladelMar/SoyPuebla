@@ -71,14 +71,14 @@ const UsersData = () => {
         </div>
       </div>
       <div className="userAdmin-container">
-        <div className="filters">
+        <div className="filter">
           <input
             type="text"
             placeholder="Fecha de creación"
             value={filters.createdAt}
             onChange={(e) => handleFilterChange("createdAt", e.target.value)}
           />
-          <div className="filters">
+          <div className="filter">
             <button
               onClick={setSortOrderAsc}
               className={`button ${selectedButton === "asc" ? "selected" : ""}`}

@@ -6,7 +6,7 @@ const nodemailer = require('./nodemailer');
 const cartRouter = require('./cartRoute');
 const historyRouter = require('./historyRoute');
 const infoRouter=require("./infoRoute")
-const questionsRouter=require("./questionsRoute")
+const questionsRouter=require("./questionRoute")
 const router = Router();
 
 router.use("/products", productsRouter);

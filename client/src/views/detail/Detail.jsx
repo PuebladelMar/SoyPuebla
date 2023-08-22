@@ -1,10 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { addToCar, sendMail, notifyStock } from "../../redux/Actions";
-import { useSelector, useDispatch } from "react-redux";
-import Reviews from "../.././componentes/reviews/Reviews";
+import { useEffect, useState, useLayoutEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCar, notifyStock } from "../../redux/Actions";
+import Reviews from "../../componentes/reviews/Reviews";
 import ReviewsForm from "../../componentes/reviews/ReviewsForm";
 import { getReviewById } from "../../redux/Actions";
 import { FiX, FiMinus, FiPlus } from "react-icons/fi";
@@ -15,6 +14,8 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./Detail.css";
 import Loader from "../../componentes/loader/Loader";
+import ImageGallery from "react-image-gallery";
+import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
 
 const Detail = () => {
   const { id } = useParams();
@@ -27,25 +28,15 @@ const Detail = () => {
   const [quantity, setQuantity] = useState(1);
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
-  //Aplicar el Loading
+  const [ImagesToRender, setImagesToRender] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
+  const uniqueColor = obtenerColoresUnicos(productDetails);
+  const [thumbnailPosition, setThumbnailPosition] = useState("left");
+  const sale = productDetails[0]?.sale
 
-  useEffect(() => {
-    const fetchReview = async () => {
-      try {
-        await dispatch(getReviewById(productDetails[0].id));
-      } catch (error) {
-        console.error("Error fetching review:", error);
-      }
-    };
-
-    fetchReview();
-  }, [dispatch, productDetails]);
-
-  const handleLoginClick = (event) => {
-    event.preventDefault();
-    alert("Debes iniciar Sesion");
-    dispatch(getReviewById(productDetails[0].id));
-  };
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -53,26 +44,54 @@ const Detail = () => {
         const response = await axios.get(`/products/${id}`);
         setProductDetails(response.data);
         setIsReady(true);
-        if(selectedColor === null){
-          setSelectedColor(response.data[0].color);
-        }
+        
+        const defaultColor = response.data[0]?.color;
+        setSelectedColor(defaultColor);
+
+        setImagesToRender(
+          response.data[0]?.colorImages.map((url) => ({
+            original: url,
+            thumbnail: url,
+          }))
+        );
       } catch (error) {
         window.alert(error);
       }
     };
     fetchProductDetails();
-  }, [id, setProductDetails]);
+  }, [id]);
+
+  const handleLoginClick = (event) => {
+    event.preventDefault();
+    alert("Debes iniciar Sesion");
+    dispatch(getReviewById(productDetails[0].id));
+  };
 
   const handleColorChange = (color) => {
-    setSelectedColor(color);
-    setSelectedSize(null);
+    if (selectedColor !== color) {
+      setSelectedColor(color);
+      setSelectedSize(null);
+
+      const images = productDetails.find(
+        (product) => product?.color === color
+      )?.colorImages;
+
+      if (images) {
+        const formattedImages = images.map((url) => ({
+          original: url,
+          thumbnail: url,
+        }));
+        setImagesToRender(formattedImages);
+      } else {
+        setImagesToRender([]);
+      }
+    }
   };
 
   const handleSizeChange = (size) => {
     setSelectedSize(size);
   };
 
-  // Obtener los detalles del producto según la combinación seleccionada
   const selectedCombination =
     selectedColor && selectedSize
       ? productDetails.find(
@@ -93,9 +112,6 @@ const Detail = () => {
     });
     return coloresUnicos;
   }
-
-  const uniqueColor = obtenerColoresUnicos(productDetails);
-  const [showAlert, setShowAlert] = useState(false); // Estado para controlar la visibilidad del alert
 
   const handleCloseAlert = () => {
     setShowAlert(false);
@@ -133,54 +149,110 @@ const Detail = () => {
     setIsSubscribed(true);
   };
 
-  const selectedColorImages = productDetails.find((product)=> product?.color === selectedColor)
+  useEffect(() => {
+    if (window.innerWidth < 1071) {
+      setThumbnailPosition("bottom");
+    } else {
+      setThumbnailPosition("left");
+    }
+
+    const handleResize = () => {
+      if (window.innerWidth < 1071) {
+        setThumbnailPosition("bottom");
+      } else {
+        setThumbnailPosition("left");
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  function formatNumber(number) {
+    const wholeNumber = Math.floor(number); 
+    return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+  
 
   return (
-    <div className="container">
+    <div className="container-detail">
       {isReady ? (
         <div className="containerDetail">
           <div className="secContainer">
             <div className="mainIMage-container">
-              <img
-                className="cardImgDetail"
-                src={selectedColorImages?.colorImages[0]}
-                alt={productDetails[0]?.name}
-              />
+              {ImagesToRender && ImagesToRender.length > 0 && (
+                <div className="image-galery-containerDeatil">
+                  <ImageGallery
+                    items={ImagesToRender}
+                    className="image-gallery-icon"
+                    thumbnailPosition={thumbnailPosition}
+                    showFullscreenButton={false}
+                    showPlayButton={false}
+                  />
+                  {sale == 0 ? (
+                <h3 className="saleBanner0"></h3>
+              ) : (
+                <h3 className="saleBanner">{sale}% off</h3>
+              )}
+                </div>
+              )}
             </div>
             <div className="detail-container">
               <div className="detailInfo">
-                <h2 className="detailName">{productDetails[0]?.name}</h2>
-                <h2 className="detailInfoPrecio">
-                  $ {productDetails[0]?.price}
+                <h2 className="detailName">
+                  {productDetails[0]?.name}{" "}
+                  <span className="span-product-name"></span>{" "}
                 </h2>
+                
+                {sale == 0 ? (
+            <h3 className="saleBanner0"></h3>
+          ) : (
+            <h3 className="saleButton">SALE</h3>
+          )}
+
+          {sale == 0 ? (
+              <h2 className="detailInfoPrecio">
+              $ {formatNumber(productDetails[0]?.price)}
+            </h2>
+            ) : (
+              <h3 className="precioDescuentoContainerDetail ">
+                <span className="originalPriceDetail"> $ {formatNumber(productDetails[0]?.price)} </span>
+                <span className="discountedPriceDetail">
+                  $ {formatNumber(Math.floor(productDetails[0]?.price * (1 - sale / 100)))}
+                </span>
+              </h3>
+            )
+           }
+
               </div>
               <div>
-                {productDetails[0]?.series.map((s, i) => (
-                  <h2 className="detailInfoSerie" key={i}>
-                    Serie: {s.name}
-                  </h2>
-                ))}
+                <h2 className="detailInfoSerie">
+                  Serie:
+                  {productDetails[0]?.series.map((s, i) => (
+                    <span key={i}> {s.name}. </span>
+                  ))}
+                </h2>
               </div>
               <div className="color-size-container">
                 <p className="detailInfoColor">Colores disponibles:</p>
                 <div className="color-container">
                   {uniqueColor.map((item) => (
                     <button
-                      className="detailColorButton"
+                      className={`detailColorButton ${
+                        selectedColor === item.color ? "selected" : ""
+                      }`}
                       key={item.color}
                       onClick={() => {
-                        if (selectedColor === item.color) {
-                          setSelectedColor(null);
-                        } else {
-                          handleColorChange(item.color);
-                          setSelectedSize(null);
-                        }
+                        handleColorChange(item.color);
+                        setSelectedSize(null);
                       }}
                       style={{
                         backgroundColor: item.codHex,
                         width: "30px",
                         height: "30px",
-                        border: selectedColor === item.color ? null : 1,
                       }}
                     ></button>
                   ))}
@@ -190,7 +262,9 @@ const Detail = () => {
                     .filter((item) => item.color === selectedColor)
                     .map((item) => (
                       <button
-                        className="detailSizeButton"
+                        className={`detailSizeButton ${
+                          selectedSize === item.size ? "selected" : ""
+                        }`}
                         key={item.size}
                         onClick={() => handleSizeChange(item.size)}
                         style={{
@@ -293,7 +367,7 @@ const Detail = () => {
               <>
                 <div className="transparentBackground"></div>
                 <div className="alertContainer">
-                  <p className="alertText">Producto añadido al carrito</p>
+                  <p className="alertText">El Producto se añadido a su carrito</p>
                   <div className="alertButtons">
                     <button onClick={handleCloseAlert}>Seguir comprando</button>
                     <button>

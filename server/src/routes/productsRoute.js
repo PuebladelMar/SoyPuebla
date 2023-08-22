@@ -17,8 +17,12 @@ const postReview = require("../handlers/Reviews/postReviews");
 const getReviewsById = require("../handlers/Reviews/getReviewsById");
 const putProducts = require('../handlers/Products/putProducts');
 const getColor = require('../handlers/Products/getColor');
-const getReviews = require('../handlers/Reviews/getReviews')
-const putColor = require('../handlers/Products/putColor')
+const getReviews = require('../handlers/Reviews/getReviews');
+const putColor = require('../handlers/Products/putColor');
+const deleteColor = require('../handlers/Products/deleteColor');
+const putSize = require("../handlers/Products/putSize")
+const putSeries = require("../handlers/Products/putSeries")
+const putCategory = require("../handlers/Products/putCategory")
 
 const productsRouter = Router();
 
@@ -46,6 +50,12 @@ productsRouter.get("/review", getReviews);
 
 productsRouter.post("/review", postReview);
 
+productsRouter.put("/size/", putSize);
+
+productsRouter.put("/series/", putSeries);
+
+productsRouter.put("/category/", putCategory);
+
 productsRouter.put("/:id", putProducts);
 
 productsRouter.delete("/:id", deleteProduct)
@@ -60,7 +70,11 @@ productsRouter.get("/review/:id", getReviewsById);
 
 productsRouter.get("/:id", getProductsById);
 
-productsRouter.put("/:id", putColor);
+productsRouter.put("/color/:id", putColor);
+
+productsRouter.delete("/color/:id", deleteColor);
 
 
 module.exports = productsRouter
+
+//

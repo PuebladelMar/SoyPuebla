@@ -1,6 +1,6 @@
 import "./Create.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import {
   postProducts,
   getColor,
@@ -10,12 +10,15 @@ import {
 } from "../../redux/Actions";
 import validations from "./Validations";
 import UploadWidget from "../../componentes/imageUpload/imageUpload";
-import MutipleUploadWidget from "../../componentes/multipleImageUpload/multipleImageUpload";
 import CreateDetail from "./createDetail/CreateDetail";
 import CreateColor from "./createColor/createColor";
 import CreateSerie from "./createSerie/CreateSerie";
 import CreateCategory from "./createCategory/CreateCategory";
 import CreateSize from "./createSize/createSize";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -25,8 +28,10 @@ const Create = () => {
   const series = useSelector((state) => state.series);
   const [errors, setErrors] = useState({});
 
-  //!___________________________
-
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const [showAlert, setShowAlert] = useState({});
 
   const handleCloseAlert = (event) => {
@@ -55,9 +60,6 @@ const Create = () => {
   };
 
 
-
-  //!___________________________
-
   const [uploadedSecureUrl, setUploadedSecureUrl] = useState(null);
 
   const handleUpload = (url, actualColor) => {
@@ -81,8 +83,8 @@ const Create = () => {
 
   const [createProduct, setCreateProduct] = useState({
     name: "",
-    price: 0,
-    sale: false,
+    price: "",
+    sale: "",
     colorImage: [],
     description: "",
     series: [],
@@ -147,6 +149,7 @@ const Create = () => {
       !createProduct.name ||
       !createProduct.description ||
       !createProduct.price ||
+      !createProduct.sale ||
       !createProduct.category.length === 0 ||
       !createProduct.size.length === 0 ||
       !createProduct.series.length === 0 ||
@@ -157,8 +160,8 @@ const Create = () => {
       dispatch(postProducts(createProduct));
       setCreateProduct({
         name: "",
-        price: 0,
-        sale: false,
+        price: "",
+        sale: "",
         colorImage: [],
         description: "",
         series: [],
@@ -247,6 +250,9 @@ const Create = () => {
               }
             : item
           );
+          setErrors(
+            validations({ ...state, colorImage: updatedColorImage })
+          );
           return {
             ...state,
             colorImage: updatedColorImage,
@@ -269,6 +275,9 @@ const Create = () => {
               }
             : item
           );
+          setErrors(
+            validations({ ...state, colorImage: updatedColorImage })
+          );
           return {
             ...state,
             colorImage: updatedColorImage,
@@ -278,9 +287,6 @@ const Create = () => {
         }
       }
     });
-    setErrors(
-      validations({ ...createProduct, [name]: value })
-    );
   };
 
   const handleDeleteColor = (event) => {
@@ -385,9 +391,6 @@ const Create = () => {
           </>
         </popups>
       )}
-
-
-
       <div className="create-container">
         <form className="create-form">
           <label  htmlFor="name">Nombre <separator></separator></label>
@@ -406,7 +409,7 @@ const Create = () => {
 
           <label htmlFor="price">Precio <separator></separator> </label>
           <input
-            type="decimal"
+            type="number"
             name="price"
             value={createProduct?.price}
             placeholder="Precio"
@@ -414,19 +417,16 @@ const Create = () => {
             onChange={handleChange}
           />
           <p className="error">{errors.price}</p>
-          <label htmlFor="sale">Oferta <separator></separator></label>
-          <select
+          <label htmlFor="sale">Descuento %<separator></separator></label>
+          <input
+            type="number"
             name="sale"
-            defaultValue={createProduct?.sale}
+            value={createProduct?.sale}
+            placeholder="Descuento %"
+            className="custom-input"
             onChange={handleChange}
-          >
-            <option value={false} key="def">
-              No
-            </option>
-            <option value={true} key="def1">
-              Si
-            </option>
-          </select>
+          />
+          <p className="error">{errors.sale}</p>
           <label htmlFor="color">Color <separator></separator> </label>
 
          <div className="buttons-align" >
@@ -469,14 +469,30 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.color}</p>
-          <div>
+          <div >
             {createProduct?.colorImage.length > 0 ? (
               createProduct?.colorImage.map((col) => {
                 let hexCodex = color.find((c) => (c.name === col.color) )
                 return (
-                  <div className="container-color-talle">
-                    <div  key={col.color}>
-                    <div className="containerBotonesSeleccion" >
+                    <div  >
+
+                  <div  key={col.color}>
+                  <Accordion style={{ boxShadow: "none", width: "400px", margin: "10px", border: '1px solid #aeaeae', backgroundColor: "#FBFBFB"}}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                      style={{display: 'flex', alignItems: "center"}}
+                    >
+                      <div className="containerBotonesSeleccion" style={{
+                        display: 'flex', 
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        width: '90%',
+                        gap: '25px',
+                        
+                        
+                        }} >
                       <info>
                         <sample
                         className="detailColorButtonCreate"
@@ -490,9 +506,15 @@ const Create = () => {
                       </info>
                       <button type="button" onClick={() => handleDeleteColor(col.color)}>X</button>
                     </div>
+                 
+                    </AccordionSummary>
+                    <AccordionDetails>
+                   
+                   <div>
                     <div>
                       <label htmlFor="image">Imagenes </label>
                       <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
+                      <p className="error">{errors.images}</p>
                     </div>
 
                     <talle className="talle">
@@ -519,12 +541,11 @@ const Create = () => {
                     </talle>
                     <p className="error">{errors.size}</p>
 
-
                     <div >
                       {col.stocks.length > 0 ? (
-                      col.stocks.map((si) => {
-                        return(
-                          <div key={si.size} className="container-talle-stock">
+                        col.stocks.map((si) => {
+                          return(
+                            <div key={si.size} className="container-talle-stock">
                             <p>{si.size}</p>
                             <input
                             name="amount"
@@ -543,13 +564,19 @@ const Create = () => {
                       )}
                     </div>
                   </div>
+               
+                    </AccordionDetails>
+                  </Accordion>
                 </div>
+            </div>
               )
             })
             ) : (
               <p className="no-dietTypes"></p>
             )}
           </div>
+
+
           <label htmlFor="series">Colección <separator></separator> </label>
           <button
             type="button"
@@ -662,6 +689,7 @@ const Create = () => {
           colorImage={createProduct?.colorImage}
           category={createProduct?.category}
           description={createProduct?.description}
+          sale={createProduct?.sale}
         />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./newsletter.css";
 import { sendMail } from "../../redux/Actions";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,7 +15,7 @@ const Newsletter = () => {
     return regex.test(emailValue);
   };
 
-  const handledSubmit = () => {
+  const handledSubmit = (mailConfirmation) => {
     if (!isValidEmail(emailValue)) {
       alert("Ingresa un correo valido");
       return;
@@ -27,14 +27,14 @@ const Newsletter = () => {
     };
     dispatch(sendMail(data));
   };
-
   const handleEmailChange = (event) => {
     setEmailValue(event.target.value);
   };
 
   useEffect(() => {
-    if (mailConfirmation === "Ya te encuentras suscrita") {
+    if (mailConfirmation.error === "Ya te encuentras suscrita") {
       setIsSubscribed(true);
+      alert(mailConfirmation.error)
     }
     if (mailConfirmation === "Suscripcion exitosa") {
       setIsSubscribed(true);
@@ -44,21 +44,27 @@ const Newsletter = () => {
 
   return (
     <div className="newsletter">
-      <h2>Suscríbete a nuestro newsletter</h2>
-      <form id="newsletter-form">
+      <h2 className="newsletter-title">Suscríbete a nuestro newsletter</h2>
+      <div id="newsletter-form">
         <input
           type="email"
           id="email-input"
           placeholder="Ingresa tu correo electrónico"
-          required
+          className="input-newsletter"
           value={emailValue}
           onChange={handleEmailChange}
           disabled={isSubscribed}
         />
-        <button type="button" onClick={handledSubmit} disabled={isSubscribed}>
+        <button
+          className="newsletter-button"
+          type="button"
+          onClick={handledSubmit}
+          disabled={isSubscribed}
+          style={{ backgroundColor: "#517f7f" }}
+        >
           Suscribirse
         </button>
-      </form>
+      </div>
       {mailConfirmation && (
         <span className="isSuscribed" id="subscription-status">
           {mailConfirmation.error}

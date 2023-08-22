@@ -6,41 +6,61 @@ import {
   A11y,
   Autoplay,
 } from "swiper/modules";
-import image2 from "../../assets/images/imagenesCarrete/image2.jpg";
-import image3 from "../../assets/images/imagenesCarrete/image3.jpg";
+import image1 from "../../assets/images/imagenesCarrete/Yoga 1.png";
+import image2 from "../../assets/images/imagenesCarrete/Modelos 1.png";
+import image3 from "../../assets/images/imagenesCarrete/Sport 1.png";
+import image4 from "../../assets/images/imagenesCarrete/Muscle 1.png";
+
+import "./Slider.css"
 
 function Slider() {
   return (
-    <div>
-      <Swiper
-        style={{
-          width: "100%",
-          height: "70vh",
-        }}
-        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-        spaceBetween={-10}
-        slidesPerView={1}
-        navigation={{
-          prevEl: ".swiper-button-prev",
-          nextEl: ".swiper-button-next",
-        }}
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 2000 }}
-        loop={true}
-      >
+    <div className="slider-container">
+    <Swiper
+      className="swiper"
+      modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+      spaceBetween={-10}
+      slidesPerView={1}
+      navigation={{
+        prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next",
+      }}
+      pagination={{ clickable: true }}
+      autoplay={{ delay: 2000 }}
+      loop={true}
+    >
+        <SwiperSlide>
+          <div className="img-slider">
+            <img
+              src={image1}
+              alt="Imagen 1"
+              style={{
+                height: "100%",
+                transform: "scale(1)",
+                transition: "transform 0.8s",
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = "scale(1.01)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            />
+          </div>
+        </SwiperSlide>
         <SwiperSlide>
           <div className="img-slider">
             <img
               src={image2}
               alt="Imagen 2"
               style={{
-                width: "100%",
+                width: "auto",
                 height: "100%",
                 transform: "scale(1)",
-                transition: "transform 0.3s",
+                transition: "transform 0.8s",
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.transform = "scale(1.1)";
+                e.currentTarget.style.transform = "scale(1.01)";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = "scale(1)";
@@ -54,13 +74,33 @@ function Slider() {
               src={image3}
               alt="Imagen 3"
               style={{
-                width: "100%",
+                width: "auto",
                 height: "100%",
                 transform: "scale(1)",
-                transition: "transform 0.3s",
+                transition: "transform 0.8s",
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.transform = "scale(1.1)";
+                e.currentTarget.style.transform = "scale(1.01)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="img-slider">
+            <img
+              src={image4}
+              alt="Imagen 4"
+              style={{
+                width: "auto",
+                height: "100%",
+                transform: "scale(1)",
+                transition: "transform 0.8s",
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = "scale(1.01)";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = "scale(1)";

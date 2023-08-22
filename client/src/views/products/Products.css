@@ -128,9 +128,17 @@
 
   .cards-container {
     width: 100%;
+    margin-top: 3.5rem;
   }
 
   .products-section {
     flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .cards-container {
+    width: 100%;
+    margin-top: 0;
   }
 }

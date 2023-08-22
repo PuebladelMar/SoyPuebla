@@ -29,9 +29,17 @@ import {
   PUT_COLORS,
   DELETE_SERIES,
   POST_INFORMATION,
-  GET_LATEST_INFORMATION
-
-} from "./ActionsTypes";
+  GET_LATEST_INFORMATION,
+  POST_QUESTIONS,
+  DELETE_QUESTIONS,
+  GET_ALL_QUESTIONS,
+  DELETE_COLOR,
+  DELETE_SIZES,
+  SEND_PURCHASE_MAIL,
+  PUT_CATEGORIES,
+  PUT_SIZES,
+  PUT_COLECCIONS,
+} from './ActionsTypes';
 
 let initialState = {
   allProducts: [],
@@ -53,7 +61,9 @@ let initialState = {
   getReviewById: [],
   allHistory: [],
   mailConfirmation: [],
-  information:[],
+  information: [],
+  questions: [],
+  pusrchaseStatusMail: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -198,25 +208,71 @@ function rootReducer(state = initialState, action) {
         ...state,
         getReviewById: action.payload,
       };
-      case PUT_COLORS:
-      return{
+    case PUT_COLORS:
+      return {
         ...state,
+        colorList: action.payload
       };
-      case DELETE_SERIES:
+    case DELETE_SERIES:
       return {
         ...state,
         series: action.payload,
       };
-      case POST_INFORMATION:
-        return{
+    case POST_INFORMATION:
+      return {
+        ...state,
+        information: action.payload,
+      };
+    case GET_LATEST_INFORMATION:
+      return {
+        ...state,
+        information: action.payload,
+      };
+    case DELETE_QUESTIONS:
+      return {
+        ...state,
+        questions: action.payload,
+      };
+    case GET_ALL_QUESTIONS:
+      return {
+        ...state,
+        questions: action.payload,
+      };
+    case POST_QUESTIONS:
+      return {
+        ...state,
+        questions: action.payload,
+      };
+      case DELETE_COLOR:
+        return {
           ...state,
-          information: action.payload,
+          colorList: action.payload,
         };
-        case GET_LATEST_INFORMATION:
-          return{
-            ...state,
-            information: action.payload,
-          };
+    case DELETE_SIZES:
+      return {
+        ...state,
+        sizesList: action.payload,
+      };
+    case PUT_SIZES:
+      return {
+        ...state,
+        sizesList: action.payload,
+      };
+    case SEND_PURCHASE_MAIL:
+      return {
+        ...state,
+        pusrchaseStatusMail: action.payload,
+      };
+    case PUT_COLECCIONS:
+      return {
+        ...state,
+        seriesList: action.payload,
+      };
+    case PUT_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload,
+      };
     default:
       return state;
   }

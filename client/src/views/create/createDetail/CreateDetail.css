@@ -1,3 +1,67 @@
+.image-gallery-content.image-gallery-thumbnails-left
+  .image-gallery-slide
+  .image-gallery-image,
+.image-gallery-content.image-gallery-thumbnails-right
+  .image-gallery-slide
+  .image-gallery-image {
+  max-height: 700px;
+  max-width: 500px;
+  height: 700px;
+  width: 500px;
+}
+
+.image-gallery-container {
+  position: relative;
+}
+
+.precioDescuentoContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  gap: 1.6rem;
+}
+
+.originalPrice {
+  font-size: 1.1rem;
+  color: rgba(157, 157, 157, 0.766);
+  text-decoration: line-through;
+}
+
+.discountedPrice {
+  font-size: 1.1rem;
+  color: #ff0000;
+}
+
+.saleBanner {
+  position: absolute;
+  bottom: 50px;
+  right: 0px;
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 7px 20px 7px 25px;
+  text-align: center;
+  font-weight: 500;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.saleBanner0 {
+  position: absolute;
+  bottom: 50px;
+  right: 0px;
+}
+
+.saleButton {
+  color: #ff0000;
+  padding: 3px;
+  border: 1px solid #ff0000;
+  width: 4rem;
+  text-align: center;
+  border-radius: 3px;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
 .nameDetailCreate {
   color: rgb(50, 50, 50);
   font-weight: bolder;
@@ -38,13 +102,10 @@
 }
 
 .secContainerCreate slideshow {
-  /* border: 1px solid rgb(0, 0, 0); */
   max-width: 600px;
-  /* max-height: 500px; */
 }
 
 .secContainerCreate info {
-  /* border: 1px solid rgb(0, 0, 0); */
   min-width: 300px;
   max-width: 400px;
 }
@@ -79,7 +140,7 @@
 .detailInfoStocks {
   font-size: 1.1rem;
   color: rgba(157, 157, 157, 0.766);
-  border : 1px solid rgb(190, 190, 190);
+  border: 1px solid rgb(190, 190, 190);
   border-radius: 5px;
   padding: 3px 12px;
   margin: 5px;
@@ -89,12 +150,11 @@
 .detailInfoDescription {
   display: flex;
   flex-direction: column;
-  font-size: .95rem;
+  font-size: 0.95rem;
   color: rgba(157, 157, 157, 0.766);
   margin: 0px 10px;
   font-style: italic;
   text-align: justify;
-  
 }
 
 .colores-container {
@@ -238,17 +298,14 @@
   flex-direction: row;
   gap: 15px;
   margin: 10px 0px;
-
 }
-.coleccionContainerSec{
+.coleccionContainerSec {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 .coleccionContainer coleccion {
-  /* border: 2px solid rgb(225, 224, 224); */
-  
   border-radius: 5px;
   padding: 0px 10px;
   font-style: italic;
@@ -261,15 +318,13 @@
   margin: 10px 0px;
 }
 
-
-.categoriaContainerSec{
+.categoriaContainerSec {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 .categoriaContainer categoria {
-  /* border: 2px solid rgb(225, 224, 224); */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -282,7 +337,6 @@
   display: flex;
   flex-direction: column;
   margin: 10px 0px;
- 
 }
 
 .stocksContainer {
@@ -290,5 +344,4 @@
   flex-direction: row;
   margin: 10px 0px;
   flex-wrap: wrap;
- 
 }
