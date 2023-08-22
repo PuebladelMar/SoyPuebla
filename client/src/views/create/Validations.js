@@ -15,8 +15,23 @@ const validations = (createProduct) => {
 
   if (!createProduct?.price) {
     errors.price = "Sin precio";
-  } else if (createProduct?.price < 0) {
-    errors.price = "No puede ser un numero negativo";
+  } else if (!/^\d+(\.\d+)?$/.test(createProduct?.price)) {
+    errors.price = "Debe ser un número válido";
+  } else if (parseFloat(createProduct?.price) < 0) {
+    errors.price = "No puede ser un número negativo";
+  }
+
+  if (!createProduct?.sale) {
+    errors.sale = "Sin oferta";
+  } else if (!/^\d+(\.\d+)?$/.test(createProduct?.sale)) {
+    errors.sale = "Debe ser un número válido";
+  } else {
+    const saleValue = parseFloat(createProduct?.sale);
+    if (saleValue < 0) {
+      errors.sale = "No puede ser un número negativo";
+    } else if (saleValue > 100) {
+      errors.sale = "Debe estar en el rango de 0 a 100";
+    }
   }
 
   if (createProduct?.colorImage.length === 0) {
@@ -37,6 +52,10 @@ const validations = (createProduct) => {
     if (hasEmptyImages) {
       errors.images = "Selecciona por lo menos una imagen para cada color";
     }
+  }
+
+  if(createProduct?.colorImage.length > 6){
+    errors.color = "no puedes seleccionar mas de 6 colores";
   }
 
   if (createProduct?.category.length === 0) {

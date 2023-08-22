@@ -1,34 +1,42 @@
-import './AllTalles.css';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSizes, putSizes } from '../../../redux/Actions';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  deleteCategories,
+  getCategories,
+  putCategories,
+} from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import { NavLink, useNavigate } from 'react-router-dom';
-// import { RiDeleteBin6Line } from 'react-icons/ri';
+import './AllCategories.css';
 
-const AllTalles = () => {
-  const sizesList = useSelector((state) => state.sizesList);
+const AllCategories = () => {
+  const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchSizes() {
-      await dispatch(getSizes());
+    async function fetchCategories() {
+      await dispatch(getCategories());
     }
-    fetchSizes();
+    fetchCategories();
   }, [dispatch]);
 
-  const handleEditSizes = async (id, name) => {
-    const updatedName = prompt('Enter new name', name);
-    if (updatedName) {
-      await dispatch(putSizes(id, updatedName));
-      dispatch(getSizes());
-    }
+  const handleDeleteCategories = async (id) => {
+    await dispatch(deleteCategories(id));
+    await dispatch(getCategories());
   };
 
+  const handleEditCategories = async (id, name) => {
+    const updatedName = prompt('Enter new name', name);
+    if (updatedName) {
+      await dispatch(putCategories(id, updatedName));
+      dispatch(getCategories());
+    }
+  };
   return (
     <div
-      className='coleccion-main'
+      className='categories-main'
       name='series'
       value='name'
     >
@@ -57,12 +65,12 @@ const AllTalles = () => {
             Colores
           </button>
         </NavLink>
-        <NavLink to='/all-data/all-categories'>
+        <NavLink to='/all-data/all-sizes'>
           <button
             className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-categories')}
+            onClick={() => navigate('/all-data/all-sizes')}
           >
-            Categorias
+            Talles
           </button>
         </NavLink>
         <NavLink to='/dashboard'>
@@ -74,18 +82,24 @@ const AllTalles = () => {
           </button>
         </NavLink>
       </div>
-      <div className='coleccion'>
-        <h2 className='coleccion-title'>Talles disponibles</h2>
-        {Array.isArray(sizesList) &&
-          sizesList.map((el) => (
+      <div className='categories'>
+        <h2 className='categories-title'>Categorias disponibles</h2>
+        {Array.isArray(categories) &&
+          categories.map((el) => (
             <div
               key={el.id}
-              className='talles-item'
+              className='categories-item'
             >
               {el.name}
               <div className='icons'>
-                <button onClick={() => handleEditSizes(el.id, el.name)}>
+                <button onClick={() => handleEditCategories(el.id, el.name)}>
                   <FaPencilAlt />
+                </button>
+                <button
+                  className='delete-categories'
+                  onClick={() => handleDeleteCategories(el.id)}
+                >
+                  {<RiDeleteBin6Line />}
                 </button>
               </div>
             </div>
@@ -95,4 +109,4 @@ const AllTalles = () => {
   );
 };
 
-export default AllTalles;
+export default AllCategories;

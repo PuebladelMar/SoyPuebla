@@ -35,6 +35,23 @@
   gap: 0.5rem;
 }
 
+.saleBannerDetail {
+  position: absolute;
+  bottom: 50px;
+  right: 0px;
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 7px 20px 7px 25px;
+  text-align: center;
+  font-weight: 500;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.image-galery-containerDeatil {
+  position: relative;
+}
+
 .close-button {
   position: absolute;
   top: 0;
@@ -166,6 +183,24 @@
   height: 2rem;
   color: rgba(32, 32, 32, 0.766);
   cursor: default;
+}
+
+.precioDescuentoContainerDetail {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  gap: 1.6rem;
+}
+
+.originalPriceDetail {
+  font-size: 1.3rem;
+  color: rgba(157, 157, 157, 0.766);
+  text-decoration: line-through;
+}
+
+.discountedPriceDetail {
+  font-size: 1.3rem;
+  color: #ff0000;
 }
 
 .detailInfoSerie {
@@ -688,6 +723,11 @@
     min-height: 49%;
     max-height: 49%;
     width: 24rem;
+
+  .mainIMage-container {
+    min-height: 100%;
+    max-height: 100%;
+    width: 100%;
   }
 
   .description-container {
@@ -730,3 +770,63 @@
     width: 16rem;
   }
 }
+
+
+.alertContainer {
+    background-color: rgb(253, 253, 253);
+    border: 2px solid rgb(81, 127, 127);
+    padding: 15px;
+    position: absolute;
+    width: 22rem;
+    height: 8rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
+  }
+  
+  .alertButtons {
+    display: flex;
+    justify-content: space-evenly; 
+    margin-top: auto; 
+    margin-bottom: 10px;
+    
+
+  }
+  
+  .alertButtons button {
+    /* font-size: .95rem; */
+    color:  rgba(91, 91, 91, 0.766);
+    background: rgb(255, 255, 255);
+    margin-right: 10px;
+    border: 2px solid rgb(81, 127, 127);
+    border-radius: 4px;
+    padding: 2px 10px 3px 10px;
+    transition: transform 300ms, color 300ms, background-color 300ms; 
+  
+    
+    &:hover {
+      transform: scale(1.03);
+      color: rgb(255, 255, 255);
+      background: rgb(81, 127, 127);
+    }}
+
+
+  .transparentBackground {
+    background-color: rgba(255, 255, 255, 0.5); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998; 
+  }
+
+  .alertText{
+    font-size: 1.1rem;
+    color:  rgba(91, 91, 91, 0.766);
+   margin-left: 17px;
+  }

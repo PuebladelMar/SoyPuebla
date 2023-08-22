@@ -32,8 +32,12 @@ module.exports = (sequelize) => {
         },
       },
       sale: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        validate: {
+          min: 0,
+          max: 100
+        },
       },
       description: {
         type: DataTypes.TEXT,

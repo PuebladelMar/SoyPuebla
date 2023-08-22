@@ -37,6 +37,11 @@ import {
   DELETE_COLOR,
   DELETE_SERIES,
   DELETE_SIZES,
+  SEND_PURCHASE_MAIL,
+  DELETE_CATEGORIES,
+  PUT_SIZES,
+  PUT_CATEGORIES,
+  PUT_COLECCIONS,
 } from './ActionsTypes';
 
 export function getProducts() {
@@ -274,10 +279,10 @@ export function deleteCartUser(id, sale) {
   };
 }
 
-export function addHistory(userId) {
+export function addHistory(userId, state) {
   return async function (dispatch) {
     try {
-      await axios.post(`/history/${userId}`);
+      await axios.post(`/history/${userId}`, { state: state });
       dispatch({
         type: ADD_HISTORY,
       });
@@ -402,7 +407,7 @@ export function deleteUser(id) {
 export function getUserById(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/users/user${id}`);
+      const response = await axios.get(`http://localhost:3001/users/user/${id}`);
       dispatch({
         type: GET_USER_BY_ID,
         payload: response.data,
@@ -485,9 +490,10 @@ export function editColors(id, name, codHex) {
         name,
         codHex,
       });
-      const response = await axios.put(`http://localhost:3001/products/${id}`, {
-        name: name,
-        codHex: codHex,
+      const response = await axios.put(`http://localhost:3001/products/color/${id}`, {
+      id,  
+      name,
+      codHex
       });
       dispatch({
         type: PUT_COLORS,
@@ -524,7 +530,7 @@ export function deleteSeries(id) {
         payload: response.data,
       });
     } catch (error) {
-      alert('daleee rey');
+      alert(error);
     }
   };
 }
@@ -605,10 +611,10 @@ export function postQuestions({ questions, answers }) {
 export function deleteColor(id) {
   return async function (dispatch) {
     try {
-      await axios.delete(`http://localhost:3001/products/${id}`);
+       const response = await axios.delete(`http://localhost:3001/products/color/${id}`);
       dispatch({
         type: DELETE_COLOR,
-        payload: id,
+        payload: response.data,
       });
     } catch (error) {
       alert(error.message);
@@ -624,6 +630,108 @@ export function deleteSizes(id) {
       );
       dispatch({
         type: DELETE_SIZES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
+
+export function sendStatusPurchaseMail(data) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`http://localhost:3001/notify/status`, {
+        emailsUsers: data.emailsUsers,
+        emailSubject: data.emailSubject,
+      });
+      return dispatch({
+        type: SEND_PURCHASE_MAIL,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+export function putSizes(id, name) {
+  return async function (dispatch) {
+    try {
+      console.log('Datos que se envían en la solicitud PUT:', {
+        id,
+        name,
+      });
+      const response = await axios.put(`http://localhost:3001/products/size`, {
+        name,
+        id,
+      });
+      dispatch({
+        type: PUT_SIZES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+export function putCategories(id, name) {
+  return async function (dispatch) {
+    try {
+      console.log('Datos que se envían en la solicitud PUT:', {
+        id,
+        name,
+      });
+      const response = await axios.put(
+        `http://localhost:3001/products/category`,
+        {
+          name,
+          id,
+        }
+      );
+      dispatch({
+        type: PUT_CATEGORIES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+export function putSeries(id, name, image) {
+  return async function (dispatch) {
+    try {
+      console.log('Datos que se envían en la solicitud PUT:', {
+        id,
+        name,
+        image,
+      });
+      const response = await axios.put(
+        `http://localhost:3001/products/series`,
+        {
+          id,
+          name,
+          image,
+        }
+      );
+      dispatch({
+        type: PUT_COLECCIONS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+export function deleteCategories(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/products/category/${id}`
+      );
+      dispatch({
+        type: DELETE_CATEGORIES,
         payload: response.data,
       });
     } catch (error) {

@@ -32,6 +32,8 @@ const Detail = () => {
   const [showAlert, setShowAlert] = useState(false);
   const uniqueColor = obtenerColoresUnicos(productDetails);
   const [thumbnailPosition, setThumbnailPosition] = useState("left");
+  const sale = productDetails[0]?.sale
+
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -166,6 +168,12 @@ const Detail = () => {
     };
   }, []);
 
+  function formatNumber(number) {
+    const wholeNumber = Math.floor(number); 
+    return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+  
+
   return (
     <div className="container-detail">
       {isReady ? (
@@ -173,7 +181,7 @@ const Detail = () => {
           <div className="secContainer">
             <div className="mainIMage-container">
               {ImagesToRender && ImagesToRender.length > 0 && (
-                <div className="image-galery-container">
+                <div className="image-galery-containerDeatil">
                   <ImageGallery
                     items={ImagesToRender}
                     className="image-gallery-icon"
@@ -181,6 +189,11 @@ const Detail = () => {
                     showFullscreenButton={false}
                     showPlayButton={false}
                   />
+                  {sale == 0 ? (
+                <h3 className="saleBanner0"></h3>
+              ) : (
+                <h3 className="saleBanner">{sale}% off</h3>
+              )}
                 </div>
               )}
             </div>
@@ -190,9 +203,27 @@ const Detail = () => {
                   {productDetails[0]?.name}{" "}
                   <span className="span-product-name"></span>{" "}
                 </h2>
-                <h2 className="detailInfoPrecio">
-                  $ {productDetails[0]?.price}
-                </h2>
+                
+                {sale == 0 ? (
+            <h3 className="saleBanner0"></h3>
+          ) : (
+            <h3 className="saleButton">SALE</h3>
+          )}
+
+          {sale == 0 ? (
+              <h2 className="detailInfoPrecio">
+              $ {formatNumber(productDetails[0]?.price)}
+            </h2>
+            ) : (
+              <h3 className="precioDescuentoContainerDetail ">
+                <span className="originalPriceDetail"> $ {formatNumber(productDetails[0]?.price)} </span>
+                <span className="discountedPriceDetail">
+                  $ {formatNumber(Math.floor(productDetails[0]?.price * (1 - sale / 100)))}
+                </span>
+              </h3>
+            )
+           }
+
               </div>
               <div>
                 <h2 className="detailInfoSerie">

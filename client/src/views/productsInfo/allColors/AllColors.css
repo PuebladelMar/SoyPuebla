@@ -1,45 +1,72 @@
 .main-container {
-    margin: 5rem;
-    padding: 20px;
-  }
-  
-  .colors {
-    border: 1px solid #ccc;
-    padding: 20px;
-  }
-  
-  .colores-title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .color-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-  }
-  
-  .icons {
 
-    display: flex;
-    align-items: center;
-    
-  }
-  
-  .edit-color,
-  .delete-color {
-    background-color: transparent;
-    border: none;
+margin: 5rem;
+  padding: 20px;
+}
+.colores-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.colors {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.color-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.color-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+}
+
+.edit-color,
+.delete-color {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.edit-color i {
+  color: blue;
+}
+
+.delete-color {
+  color: red;
+}
+.nav-dashboard{
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  width: 100%;
+  height: 3rem;
+}
+
+.nav-dashboard-btn{
+  margin: 10px;
+    background-color: rgb(81, 127, 127);
+    color:  rgb(255, 255, 255);
+    padding: 8px 16px;
+    border: 1px solid  rgb(81, 127, 127);
+    border-radius: 4px;
+    width: 10rem;
+    height: 3rem;
     cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  .edit-color i {
-    color: blue;
-  }
-  
-  .delete-color {
-    color: red;
-  }
+}
+
