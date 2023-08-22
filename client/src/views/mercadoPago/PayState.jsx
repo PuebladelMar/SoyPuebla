@@ -58,26 +58,31 @@ function PayState() {
   if (parsedData.status === "approved") {
     return (
       <div className="payState">
-        {console.log(parsedData)}
-        <p className="payState-text">su compra se realizo con exito</p>
-        <p className="payState-text">id de compra: {parsedData.payment_id}</p>
-        <p className="payState-text">pago total: ${totalPay}</p>
-        <Link to="/home">Click aquí para volver al home</Link>
+        <div className="payContainer">
+          <h3 className="payState-text">Su compra se realizo con exito</h3>
+          <p className="payState-Id">Id de compra: {parsedData.payment_id}</p>
+          <p className="payState-total">Pago total: ${totalPay}</p>
+          <button className="buttonToHome"><Link to="/home">Inicio</Link></button>
+        </div>
       </div>
     );
   }
   if (parsedData.status === "in_process") {
     return (
       <div className="payState">
-        <p className="payState-text">su compra esta en estado pendiente</p>
-        <Link to="/home">Click aquí para volver al home</Link>
+        <div className="payContainer">
+          <h3 className="payState-text">Su compra esta en estado pendiente</h3>
+          <button className="buttonToHome"><Link to="/home">Inicio</Link></button>
+        </div>
       </div>
     );
   }
   return (
     <div className="payState">
-      <p className="payState-text">su compra no se pudo realizar</p>
-      <Link to="/home">Click aquí para volver al home</Link>
+      <div className="payContainer">
+        <h3 className="payState-text">Su compra no se pudo realizar</h3>
+        <button className="buttonToHome"><Link to="/home">Inicio</Link></button>
+      </div>
     </div>
   );
 }
