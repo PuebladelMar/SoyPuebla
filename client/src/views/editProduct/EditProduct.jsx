@@ -1,5 +1,6 @@
 import "../create/Create.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import {
@@ -25,9 +26,12 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { red } from "@mui/material/colors";
 import { useParams } from "react-router-dom";
+import Loader from "../../componentes/loader/Loader";
 
 const EditProduct = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isReady, setIsReady] = useState(false);
   const color = useSelector((state) => state.colorList);
   const size = useSelector((state) => state.sizesList);
   const categories = useSelector((state) => state.categories);
@@ -36,7 +40,7 @@ const EditProduct = () => {
   const [createProduct, setCreateProduct] = useState({
     name: "",
     price: "",
-    sale: "",
+    sale: 0,
     colorImage: [],
     description: "",
     series: [],
@@ -49,7 +53,7 @@ const EditProduct = () => {
   useEffect(() => {
     const asyncFunction = async () => {
       const { data } = await axios.get(`/products/${id}`);
-
+      setIsReady(true);
       const transformedData = [];
 
       data.forEach((detail) => {
@@ -61,7 +65,6 @@ const EditProduct = () => {
             amount: detail.stock,
           });
         } else {
-          console.log(detail.colorImages)
           transformedData.push({
             color: detail.color,
             images: detail.colorImages,
@@ -184,7 +187,7 @@ const EditProduct = () => {
     );
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
 
     if (
@@ -193,23 +196,19 @@ const EditProduct = () => {
       !createProduct.price ||
       !createProduct.sale ||
       !createProduct.category.length === 0 ||
-      !createProduct.size.length === 0 ||
       !createProduct.series.length === 0 ||
       !createProduct.colorImage.length === 0
     ) {
       alert("Debes llenar todos los campos");
     } else {
-      dispatch(postProducts(createProduct));
-      setCreateProduct({
-        name: "",
-        price: "",
-        sale: "",
-        colorImage: [],
-        description: "",
-        series: [],
-        category: [],
-        size: [],
-      });
+      try {
+        setIsReady(false);
+        await axios.put(`http://localhost:3001/products/${id}`, createProduct);
+        navigate(`/products/${id}`);
+      } catch (error) {
+        setIsReady(true);
+        alert(`El nombre ${createProduct.name} ya existe`);
+      };
     }
   };
 
@@ -374,6 +373,8 @@ const EditProduct = () => {
 
   return (
     <div className="create-main-container">
+      {isReady ? (
+      <>
       {showAlert.category && (
         <popups className="pop-ups">
           <>
@@ -556,7 +557,6 @@ const EditProduct = () => {
                     <div>
                       <label htmlFor="image">Imagenes </label>
                       <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
-                      <p className="error">{errors.images}</p>
                     </div>
 
                     <talle className="talle">
@@ -581,7 +581,6 @@ const EditProduct = () => {
                     })}
                     </select>
                     </talle>
-                    <p className="error">{errors.size}</p>
 
                     <div >
                       {col.stocks.length > 0 ? (
@@ -617,7 +616,8 @@ const EditProduct = () => {
               <p className="no-dietTypes"></p>
             )}
           </div>
-
+          <p className="error">{errors.images}</p>
+          <p className="error">{errors.size}</p>
 
           <label htmlFor="series">Colección <separator></separator> </label>
           <button
@@ -701,6 +701,7 @@ const EditProduct = () => {
           </div>
           <label htmlFor="description"> Descripcion <separator></separator> </label>
           <textarea
+          value={createProduct?.description}
             type="text"
             name="description"
             placeholder="Descripcion"
@@ -718,7 +719,7 @@ const EditProduct = () => {
             onClick={handleSubmit}
             disabled={Object.keys(errors).length === 0 ? false : true}
           >
-            Crear
+            Editar
           </button>
         </div>
       </div>
@@ -734,6 +735,12 @@ const EditProduct = () => {
           sale={createProduct?.sale}
         />
       </div>
+      </>
+      ) : (
+        <div className="loader-container">
+          <Loader />
+        </div>
+      )}
     </div>
   );
 };
