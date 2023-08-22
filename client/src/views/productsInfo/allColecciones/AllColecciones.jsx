@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSeries, deleteSeries, putSeries } from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import { NavLink, useNavigate } from 'react-router-dom';
+
 import './AllColecciones.css';
 
 const AllColecciones = () => {
   const series = useSelector((state) => state.series);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchSeries() {
@@ -36,6 +39,49 @@ const AllColecciones = () => {
       name='series'
       value='name'
     >
+      <div className='nav-dashboard'>
+        <NavLink to='/all-data/all-products'>
+          <button
+            className='nav-dashboard-btn'
+            onClick={() => navigate('/all-data/all-products')}
+          >
+            Productos{' '}
+          </button>
+        </NavLink>
+        <NavLink to='/all-data/all-colors'>
+          <button
+            className='nav-dashboard-btn'
+            onClick={() => navigate('/all-data/all-colors')}
+          >
+            Colors
+          </button>
+        </NavLink>
+        <NavLink to='/all-data/all-sizes'>
+          <button
+            className='nav-dashboard-btn'
+            onClick={() => navigate('/all-data/all-sizes')}
+          >
+            Talles
+          </button>
+        </NavLink>
+        <NavLink to='/all-data/all-categories'>
+          <button
+            className='nav-dashboard-btn'
+            onClick={() => navigate('/all-data/all-categories')}
+          >
+            Categorias
+          </button>
+        </NavLink>
+        <NavLink to='/dashboard'>
+          <button
+            className='nav-dashboard-btn'
+            onClick={() => navigate('/dashboard')}
+          >
+            Dashboard
+          </button>
+        </NavLink>
+      </div>
+
       <div className='coleccion'>
         <h2 className='coleccion-title'>Colecciones disponibles</h2>
         {Array.isArray(series) &&
