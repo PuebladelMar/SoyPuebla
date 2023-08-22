@@ -23,7 +23,19 @@ const controllGetProducts = async (req) => {
       },
     });
 
-    return productByName;
+    const allColorImages = await ColorImages.findAll();
+
+    const productWithImages = productByName.map((product) => {
+      const colorImages = allColorImages.filter(
+        (colorImage) => colorImage.ProductId === product.id
+      );
+      return {
+        ...product,
+        colorImages: colorImages.map((colorImage) => colorImage)
+      };
+    });
+  
+    return productWithImages;
   }
   const products = await Products.findAll({
     include: [
