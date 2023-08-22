@@ -16,6 +16,7 @@ import "./Detail.css";
 import Loader from "../../componentes/loader/Loader";
 import ImageGallery from "react-image-gallery";
 import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
+import Swal from 'sweetalert2'
 
 const Detail = () => {
   const { id } = useParams();
@@ -60,7 +61,7 @@ const Detail = () => {
 
   const handleLoginClick = (event) => {
     event.preventDefault();
-    alert("Debes iniciar Sesion");
+    Swal.fire("Debes iniciar Sesion");
     dispatch(getReviewById(productDetails[0].id));
   };
 
@@ -133,7 +134,7 @@ const Detail = () => {
 
   const notifyStockByMail = () => {
     if (!isValidEmail(email)) {
-      alert("Ingresa un correo valido");
+      Swal.fire("Ingresa un correo valido");
       return;
     }
 
