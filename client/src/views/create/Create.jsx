@@ -84,7 +84,7 @@ const Create = () => {
   const [createProduct, setCreateProduct] = useState({
     name: "",
     price: "",
-    sale: "",
+    sale: 0,
     colorImage: [],
     description: "",
     series: [],
@@ -161,7 +161,7 @@ const Create = () => {
       setCreateProduct({
         name: "",
         price: "",
-        sale: "",
+        sale: 0,
         colorImage: [],
         description: "",
         series: [],

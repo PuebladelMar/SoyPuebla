@@ -21,7 +21,7 @@ const validations = (createProduct) => {
     errors.price = "No puede ser un número negativo";
   }
 
-  if (!createProduct?.sale) {
+  if (!createProduct?.sale && createProduct.sale !== 0) {
     errors.sale = "Sin oferta";
   } else if (!/^\d+(\.\d+)?$/.test(createProduct?.sale)) {
     errors.sale = "Debe ser un número válido";
