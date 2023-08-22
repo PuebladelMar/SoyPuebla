@@ -28,8 +28,6 @@ export default function Cardx({ product }) {
   const isFavorite = favorites.some((item) => item.id === product.id);
   const [selectedColor, setSelectedColor] = useState(null);
 
-  console.log(sale);
-
   const handleFavoriteClick = async () => {
     try {
       if (isFavorite) {
@@ -175,16 +173,74 @@ export default function Cardx({ product }) {
                   </Typography>
                 </Link>
                 <Link to={`/products/${id}`}>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
+                  {sale == 0 ? (
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      style={{
+                        fontSize: "0.9rem",
+                        cursor: "pointer",
+                      }}
+                    >
+                      $ {formatNumber(price)}
+                    </Typography>
+                  ) : (
+                    <Box
                     style={{
-                      fontSize: "0.9rem",
-                      cursor: "pointer",
-                    }}
-                  >
-                    $ {formatNumber(price)}
-                  </Typography>
+                      marginTop: "-1.3rem",
+                      // backgroundColor: "black",
+                    }}>
+
+                      <Box 
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "1rem",
+                      }}>
+
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        style={{
+                          fontSize: "0.9rem",
+                          cursor: "pointer",
+                          color: "#ff0000",
+                        }}
+                      >
+                        $ {formatNumber(Math.floor(price * (1 - sale / 100)))}
+
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        style={{
+                          fontSize: "0.9rem",
+                          cursor: "pointer",
+                          color: "#ff0000",
+                          border: "1px solid #ff0000",
+                          padding: "0px 8px 0px 6px ",
+                          borderRadius: "3px",
+                          fontStyle: "italic",
+                        }}
+                      >
+                        SALE
+                      </Typography>
+                        </Box>
+
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        style={{
+                          fontSize: "0.9rem",
+                          cursor: "pointer",
+                          color: "#9d9d9dc3",
+                          textDecoration: "line-through",
+                        }}
+                      >
+                        $ {formatNumber(price)}
+                      </Typography>
+                    </Box>
+                  )}
                 </Link>
               </CardContent>
             </Box>

@@ -4,6 +4,7 @@ import { getSeries, deleteSeries, putSeries } from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { NavLink, useNavigate } from 'react-router-dom';
+import CreateSerie from '../../create/createSerie/CreateSerie';
 
 import './AllColecciones.css';
 
@@ -11,6 +12,7 @@ const AllColecciones = () => {
   const series = useSelector((state) => state.series);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState({});
 
   useEffect(() => {
     async function fetchSeries() {
@@ -31,6 +33,16 @@ const AllColecciones = () => {
       await dispatch(putSeries(id, updatedName, image));
       dispatch(getSeries());
     }
+  };
+
+  const handleCloseAlert = (event) => {
+    setShowAlert({});
+    event.preventDefault();
+  };
+
+  const handleOpenSerieCreate = (event) => {
+    setShowAlert({ serie: true });
+    event.preventDefault();
   };
 
   return (
@@ -108,6 +120,30 @@ const AllColecciones = () => {
             </div>
           ))}
       </div>
+      {showAlert.serie && (
+        <popups className='pop-ups'>
+          <>
+            <div className='transparentBackgroundY'></div>
+
+            <div className='alertContainerY'>
+              <p className='alertTextY'>Creador de colecciones</p>
+              <CreateSerie />
+              <div className='alertButtonsY'>
+                <button onClick={handleCloseAlert}>X</button>
+              </div>
+            </div>
+          </>
+        </popups>
+      )}
+      <button
+        type='button'
+        onClick={() => {
+          handleOpenSerieCreate();
+        }}
+        className='mainImage-upload-buttonY '
+      >
+        Crear colección
+      </button>
     </div>
   );
 };

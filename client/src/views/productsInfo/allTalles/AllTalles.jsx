@@ -1,15 +1,17 @@
 import './AllTalles.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSizes, putSizes } from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
 import { NavLink, useNavigate } from 'react-router-dom';
+import CreateSize from '../../create/createSize/createSize';
 // import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const AllTalles = () => {
   const sizesList = useSelector((state) => state.sizesList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState({});
 
   useEffect(() => {
     async function fetchSizes() {
@@ -24,6 +26,16 @@ const AllTalles = () => {
       await dispatch(putSizes(id, updatedName));
       dispatch(getSizes());
     }
+  };
+
+  const handleCloseAlert = (event) => {
+    setShowAlert({});
+    event.preventDefault();
+  };
+
+  const handleOpenSizeCreate = (event) => {
+    setShowAlert({ size: true });
+    event.preventDefault();
   };
 
   return (
@@ -91,6 +103,30 @@ const AllTalles = () => {
             </div>
           ))}
       </div>
+      {showAlert.size && (
+        <popups className='pop-ups'>
+          <>
+            <div className='transparentBackgroundY'></div>
+
+            <div className='alertContainerY'>
+              <p className='alertTextY'>Creador de talle</p>
+              <CreateSize />
+              <div className='alertButtonsY'>
+                <button onClick={handleCloseAlert}>X</button>
+              </div>
+            </div>
+          </>
+        </popups>
+      )}
+      <button
+        type='button'
+        onClick={() => {
+          handleOpenSizeCreate();
+        }}
+        className='mainImage-upload-buttonY '
+      >
+        Crear Talle
+      </button>
     </div>
   );
 };

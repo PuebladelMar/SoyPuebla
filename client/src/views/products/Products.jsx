@@ -4,6 +4,7 @@ import { filterProducts } from "../../redux/Actions";
 import CardContainer from "../../componentes/cardContainer/CardContainer";
 import SideBar from "../../componentes/sidebar/SideBar";
 import "./Products.css";
+import Loader from "../../componentes/loader/Loader";
 
 function Products() {
   const dispatch = useDispatch();
@@ -31,6 +32,8 @@ function Products() {
 
   const totalPages = Math.ceil(allProducts.length / itemsPerPage);
 
+
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -51,7 +54,19 @@ function Products() {
 
   useEffect(() => {
     dispatch(filterProducts(filters));
+    setIsReady(true)
   }, [filters, dispatch]);
+
+  // useEffect(() => {
+   
+  //   const loadingTimeout = setTimeout(() => {
+  //     dispatch(filterProducts(filters));
+  //     setIsReady(true);
+  //   }, 1000); 
+  
+  
+  //   return () => clearTimeout(loadingTimeout);
+  // }, [filters, dispatch]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -87,14 +102,83 @@ function Products() {
   };
 
   return (
+    // <section className="products-section">
+
+    //   {!isReady ? ( 
+    //     <div className="loader">Cargando...
+    //      <Loader/>
+    //     </div>
+    //   ) : (
+    //     <div className="products-container">
+    //       <SideBar
+    //         handlerEventSideBar={handleChange}
+    //         resetFilters={resetFilters}
+    //       />
+
+    //       <div className="cards-container">
+
+    //         <div className="cards-paginated-container">
+    //           <CardContainer products={itemsToShow} />
+    //           <div className="paginated-container">
+    //             <button
+    //               className={
+    //                 currentPage === 1
+    //                   ? "disabledPaginationButton"
+    //                   : "paginationButton"
+    //               }
+    //               onClick={() => handlePageChange(currentPage - 1)}
+    //               disabled={currentPage === 1}
+    //             >
+    //               &#10094;
+    //             </button>
+
+    //             {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+    //               (pageNumber) => (
+    //                 <button
+    //                   key={pageNumber}
+    //                   className={
+    //                     pageNumber === currentPage
+    //                       ? "activePaginationButton"
+    //                       : "paginationButton"
+    //                   }
+    //                   onClick={() => handlePageChange(pageNumber)}
+    //                 >
+    //                   {pageNumber}
+    //                 </button>
+    //               )
+    //             )}
+    //             <button
+    //               className={
+    //                 currentPage === totalPages
+    //                   ? "disabledPaginationButton"
+    //                   : "paginationButton"
+    //               }
+    //               onClick={() => handlePageChange(currentPage + 1)}
+    //               disabled={currentPage === totalPages}
+    //             >
+    //               &#10095;
+    //             </button>
+    //           </div>
+    //         </div>
+    //         </div>
+    //       )}
+    //     </div>
+    //   )}
+    // </section>
+
     <section className="products-section">
-      <div className="products-container">
-        <SideBar
-          handlerEventSideBar={handleChange}
-          resetFilters={resetFilters}
-        />
-        <div className="cards-container">
-          {isReady && (
+      {!isReady ? ( // Mostrar el indicador de carga si isReady es false
+        <div className="loader">
+        <Loader/>
+        </div>
+      ) : (
+        <div className="products-container">
+          <SideBar
+            handlerEventSideBar={handleChange}
+            resetFilters={resetFilters}
+          />
+
+          <div className="cards-container">
             <div className="cards-paginated-container">
               <CardContainer products={itemsToShow} />
               <div className="paginated-container">
@@ -109,22 +193,21 @@ function Products() {
                 >
                   &#10094;
                 </button>
-                {Array.from(
-                  { length: totalPages },
-                  (_, index) => index + 1
-                ).map((pageNumber) => (
-                  <button
-                    key={pageNumber}
-                    className={
-                      pageNumber === currentPage
-                        ? "activePaginationButton"
-                        : "paginationButton"
-                    }
-                    onClick={() => handlePageChange(pageNumber)}
-                  >
-                    {pageNumber}
-                  </button>
-                ))}
+                {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+                  (pageNumber) => (
+                    <button
+                      key={pageNumber}
+                      className={
+                        pageNumber === currentPage
+                          ? "activePaginationButton"
+                          : "paginationButton"
+                      }
+                      onClick={() => handlePageChange(pageNumber)}
+                    >
+                      {pageNumber}
+                    </button>
+                  )
+                )}
                 <button
                   className={
                     currentPage === totalPages
@@ -138,9 +221,9 @@ function Products() {
                 </button>
               </div>
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

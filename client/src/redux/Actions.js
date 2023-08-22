@@ -208,7 +208,7 @@ export function addToCar(userId, stockId, quantity) {
         quantity,
       });
 
-      alert('Se ha añadido el producto al carrito');
+      // alert('Se ha añadido el producto al carrito');
 
       return dispatch({
         type: POST_TO_CART,
@@ -282,9 +282,10 @@ export function deleteCartUser(id, sale) {
 export function addHistory(userId, state) {
   return async function (dispatch) {
     try {
-      await axios.post(`/history/${userId}`, { state: state });
+      const { data } = await axios.post(`/history/${userId}`, { state: state });
       dispatch({
         type: ADD_HISTORY,
+        payload: data,
       });
     } catch (error) {
       alert(error.message);
@@ -408,7 +409,9 @@ export function deleteUser(id) {
 export function getUserById(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/users/user/${id}`);
+      const response = await axios.get(
+        `http://localhost:3001/users/user/${id}`
+      );
       dispatch({
         type: GET_USER_BY_ID,
         payload: response.data,
@@ -491,11 +494,14 @@ export function editColors(id, name, codHex) {
         name,
         codHex,
       });
-      const response = await axios.put(`http://localhost:3001/products/color/${id}`, {
-      id,  
-      name,
-      codHex
-      });
+      const response = await axios.put(
+        `http://localhost:3001/products/color/${id}`,
+        {
+          id,
+          name,
+          codHex,
+        }
+      );
       dispatch({
         type: PUT_COLORS,
         payload: response.data,
@@ -612,7 +618,9 @@ export function postQuestions({ questions, answers }) {
 export function deleteColor(id) {
   return async function (dispatch) {
     try {
-       const response = await axios.delete(`http://localhost:3001/products/color/${id}`);
+      const response = await axios.delete(
+        `http://localhost:3001/products/color/${id}`
+      );
       dispatch({
         type: DELETE_COLOR,
         payload: response.data,
@@ -740,5 +748,3 @@ export function deleteCategories(id) {
     }
   };
 }
-
-
