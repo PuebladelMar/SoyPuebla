@@ -7,8 +7,45 @@
     text-align: center;
   }
   
+  .payContainer {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 100px;
+  }
+
+  .buttonToHome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    width: 100%;
+    height: 3rem;
+    background-color: rgb(81, 127, 127);
+    color: rgb(255, 255, 255);
+    padding: 2px 20px;
+    border: 1px solid rgb(81, 127, 127);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all ease 0.3s;
+  }
+  
   .payState-text {
     font-size: 1.5rem;
     font-family: Asap;
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    color: rgba(32, 32, 32, 0.766);
+  }
+
+  .payState-Id {
+    font-size: 1.3rem;
+    font-family: Asap;
+    padding-bottom: 10px;
+    color: rgba(32, 32, 32, 0.766);
+  }
+
+  .payState-total {
+    font-size: 1.2rem;
+    color: green;
+    margin-bottom: 10px;
+    font-family: Asap;
   }
