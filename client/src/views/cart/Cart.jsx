@@ -28,16 +28,20 @@ const Cart = () => {
     }
   }, [dispatch]);
 
-  const itemList = userCart.map((item) => ({
-    description: item.product.name,
-    price: item.product.price,
-    quantity: item.quantity,
-    currency_id: "ARS",
-  }));
+  const itemList = userCart.map((item) => {
+    const priceWithDiscount = item.product.price * (1 - item.product.sale / 100);
+  
+    return {
+      description: item.product.name,
+      price: priceWithDiscount,
+      quantity: item.quantity,
+      currency_id: "ARS",
+    };
+  });
 
   const calculateTotal = () => {
     return userCart.reduce(
-      (total, item) => total + item.product.price * item.quantity,
+      (total, item) => total + item.product.price * (1 - item.product.sale / 100) * item.quantity,
       0
     );
   };
@@ -73,6 +77,10 @@ const Cart = () => {
     await dispatch(getUserCart(userId));
   };
 
+  const CalculateSale = (price, sale) =>{
+    return price * (1 - sale / 100)
+  }
+
   return (
     <div className="container-cart">
       <div className="cart-container">
@@ -92,9 +100,9 @@ const Cart = () => {
                 <p className="product-name">{item.product.name}</p>
                 <p>Color: {item.color.name}</p>
                 <p>Talle: {item.size.name}</p>
-                <p>Precio unitario: $ {item.product.price}</p>
+                <p>Precio unitario: $ {CalculateSale(item.product.price, item.product.sale)}</p>
                 <p>Cantidad: {item.quantity}</p>
-                <p>Total producto: $ {item.product.price * item.quantity}</p>
+                <p>Total producto: $ {CalculateSale(item.product.price, item.product.sale) * item.quantity}</p>
                 <button
                   className="closeButton"
                   onClick={() => handlerDeleteCart(item.cartId)}

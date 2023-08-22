@@ -13,7 +13,7 @@ const controllGetCart = async (userId) => {
     const productId = userStock.ProductId;
 
     const product = await Products.findByPk(productId, {
-      attributes: ["id", "name", "price"],
+      attributes: ["id", "name", "price", "sale"],
     });
 
     const sizeId = userStock.SizeId;
