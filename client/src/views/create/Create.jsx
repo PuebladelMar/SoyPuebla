@@ -1,6 +1,6 @@
 import "./Create.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import {
   postProducts,
   getColor,
@@ -10,19 +10,15 @@ import {
 } from "../../redux/Actions";
 import validations from "./Validations";
 import UploadWidget from "../../componentes/imageUpload/imageUpload";
-import MutipleUploadWidget from "../../componentes/multipleImageUpload/multipleImageUpload";
 import CreateDetail from "./createDetail/CreateDetail";
 import CreateColor from "./createColor/createColor";
 import CreateSerie from "./createSerie/CreateSerie";
 import CreateCategory from "./createCategory/CreateCategory";
 import CreateSize from "./createSize/createSize";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { red } from "@mui/material/colors";
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -32,7 +28,10 @@ const Create = () => {
   const series = useSelector((state) => state.series);
   const [errors, setErrors] = useState({});
 
-
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const [showAlert, setShowAlert] = useState({});
 
   const handleCloseAlert = (event) => {

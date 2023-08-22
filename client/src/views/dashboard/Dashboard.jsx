@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -38,6 +38,7 @@ const AppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
+  
 }));
 
 const Drawer = styled(MuiDrawer, {
@@ -77,6 +78,10 @@ export default function Dashboard() {
     setOpen(!open);
   };
 
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
