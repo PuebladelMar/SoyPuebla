@@ -98,7 +98,7 @@ export default function Cardx({ product }) {
                   width: "100%",
                   height: "22rem",
                   objectFit: "fill",
-                  transition: "transform 0.2s",
+                  transition: "0.5s ease",
                   position: "relative",
                 }}
                 image={selectedColorImages?.images[0]}
@@ -188,7 +188,6 @@ export default function Cardx({ product }) {
                     <Box
                     style={{
                       marginTop: "-1.3rem",
-                      // backgroundColor: "black",
                     }}>
 
                       <Box 
@@ -281,7 +280,7 @@ export default function Cardx({ product }) {
                         height: selectedColor === col.id ? "1.55rem" : "1.5rem",
                         border:
                           selectedColor === col.id
-                            ? "2px solid #797979"
+                            ? "2px solid #303030"
                             : "1px solid #8b8b8b",
                       }}
                       onClick={() => {
@@ -339,7 +338,7 @@ export default function Cardx({ product }) {
                   width: "15rem",
                   height: isMatchCard ? "11.5rem" : "16rem",
                   objectFit: "fill",
-                  transition: "transform 0.2s",
+                  transition: "0.5s ease",
                   zIndex: "1",
                 }}
                 image={selectedColorImages?.images[0]}

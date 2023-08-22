@@ -21,18 +21,12 @@ function Products() {
     order: null,
     name: null,
   });
-
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
   const itemsToShow = allProducts.slice(indexOfFirstItem, indexOfLastItem);
-
   const totalPages = Math.ceil(allProducts.length / itemsPerPage);
-
-
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -57,17 +51,6 @@ function Products() {
     setIsReady(true)
   }, [filters, dispatch]);
 
-  // useEffect(() => {
-   
-  //   const loadingTimeout = setTimeout(() => {
-  //     dispatch(filterProducts(filters));
-  //     setIsReady(true);
-  //   }, 1000); 
-  
-  
-  //   return () => clearTimeout(loadingTimeout);
-  // }, [filters, dispatch]);
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     const nullOptions = [
@@ -86,8 +69,7 @@ function Products() {
     }
   };
 
-  const resetFilters = (event) => {
-    // event.preventDefault();
+  const resetFilters = () => {
     setFilters({
       color: null,
       size: null,
@@ -102,72 +84,8 @@ function Products() {
   };
 
   return (
-    // <section className="products-section">
-
-    //   {!isReady ? ( 
-    //     <div className="loader">Cargando...
-    //      <Loader/>
-    //     </div>
-    //   ) : (
-    //     <div className="products-container">
-    //       <SideBar
-    //         handlerEventSideBar={handleChange}
-    //         resetFilters={resetFilters}
-    //       />
-
-    //       <div className="cards-container">
-
-    //         <div className="cards-paginated-container">
-    //           <CardContainer products={itemsToShow} />
-    //           <div className="paginated-container">
-    //             <button
-    //               className={
-    //                 currentPage === 1
-    //                   ? "disabledPaginationButton"
-    //                   : "paginationButton"
-    //               }
-    //               onClick={() => handlePageChange(currentPage - 1)}
-    //               disabled={currentPage === 1}
-    //             >
-    //               &#10094;
-    //             </button>
-
-    //             {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-    //               (pageNumber) => (
-    //                 <button
-    //                   key={pageNumber}
-    //                   className={
-    //                     pageNumber === currentPage
-    //                       ? "activePaginationButton"
-    //                       : "paginationButton"
-    //                   }
-    //                   onClick={() => handlePageChange(pageNumber)}
-    //                 >
-    //                   {pageNumber}
-    //                 </button>
-    //               )
-    //             )}
-    //             <button
-    //               className={
-    //                 currentPage === totalPages
-    //                   ? "disabledPaginationButton"
-    //                   : "paginationButton"
-    //               }
-    //               onClick={() => handlePageChange(currentPage + 1)}
-    //               disabled={currentPage === totalPages}
-    //             >
-    //               &#10095;
-    //             </button>
-    //           </div>
-    //         </div>
-    //         </div>
-    //       )}
-    //     </div>
-    //   )}
-    // </section>
-
     <section className="products-section">
-      {!isReady ? ( // Mostrar el indicador de carga si isReady es false
+      {!isReady ? ( 
         <div className="loader">
         <Loader/>
         </div>
