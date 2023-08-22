@@ -739,3 +739,5 @@ export function deleteCategories(id) {
     }
   };
 }
+
+

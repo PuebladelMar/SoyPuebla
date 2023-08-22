@@ -147,14 +147,14 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    if (window.innerWidth < 981) {
+    if (window.innerWidth < 1071) {
       setThumbnailPosition("bottom");
     } else {
       setThumbnailPosition("left");
     }
 
     const handleResize = () => {
-      if (window.innerWidth < 981) {
+      if (window.innerWidth < 1071) {
         setThumbnailPosition("bottom");
       } else {
         setThumbnailPosition("left");

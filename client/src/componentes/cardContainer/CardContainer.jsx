@@ -28,6 +28,7 @@ function CardContainer(props) {
             justifyContent: "center",
             alignItems: "start",
             width: "100%",
+            height: "100%"
           }}
         >
           {props.products?.map((product) => (
