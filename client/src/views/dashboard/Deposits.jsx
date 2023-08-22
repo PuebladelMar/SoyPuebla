@@ -154,7 +154,7 @@ export default function Deposits() {
           Ver balance
         </Link>
       </div>
-      <div>
+      <div> 
       
     
       </div>
