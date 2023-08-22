@@ -29,8 +29,8 @@ const FooterContact = () => {
   return (
     <footer className="footerC">
       <div className="moving-background"></div>
-      <div className="brand-info">
-        <h3>Contactanos</h3>
+      <div className="brand-info-contact">
+        <h3 className="contact-us">Contactanos</h3>
         <p>Email: {information.email}</p>
         <p>Teléfono: {information.phone}</p>
         <div className="social-icons">

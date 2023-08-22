@@ -72,7 +72,7 @@ productsRouter.get("/:id", getProductsById);
 
 productsRouter.put("/color/:id", putColor);
 
-productsRouter.delete("/:id", deleteColor);
+productsRouter.delete("/color/:id", deleteColor);
 
 
 module.exports = productsRouter

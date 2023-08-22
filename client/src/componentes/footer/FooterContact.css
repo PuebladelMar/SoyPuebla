@@ -18,11 +18,11 @@
   animation-fill-mode: forwards;
 }
 
-.brand-info {
+.brand-info-contact {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-around;
   align-items: center;
   z-index: 1;
   width: 100%;
@@ -49,6 +49,11 @@
   height: 50px;
   margin-right: 0px;
 }
+
+.contact-us {
+  font-size: 1.5rem;
+}
+
 @media screen and (max-width: 768px) {
   .social-icons a,
   .footer-links a {
@@ -91,7 +96,8 @@
 }
 
 @-webkit-keyframes zoomBackground {
-  0%, 100% {
+  0%,
+  100% {
     -webkit-transform: scale(1);
   }
   50% {

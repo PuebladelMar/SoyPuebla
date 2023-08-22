@@ -35,7 +35,10 @@ import {
   GET_ALL_QUESTIONS,
   DELETE_COLOR,
   DELETE_SIZES,
-  SEND_PURCHASE_MAIL
+  SEND_PURCHASE_MAIL,
+  PUT_CATEGORIES,
+  PUT_SIZES,
+  PUT_COLECCIONS,
 } from './ActionsTypes';
 
 let initialState = {
@@ -206,17 +209,9 @@ function rootReducer(state = initialState, action) {
         getReviewById: action.payload,
       };
     case PUT_COLORS:
-      const updatedColor = action.payload;
-      const updatedColorList = state.colorList.map((color) => {
-        if (color.id === updatedColor.id) {
-          return updatedColor;
-        }
-        return color;
-      });
-
       return {
         ...state,
-        colorList: updatedColorList,
+        colorList: action.payload
       };
     case DELETE_SERIES:
       return {
@@ -248,16 +243,17 @@ function rootReducer(state = initialState, action) {
         ...state,
         questions: action.payload,
       };
-    case DELETE_COLOR:
-      const deletedColorId = action.payload;
-      const updatedColorListDelete = state.colorList.filter(
-        (color) => color.id !== deletedColorId
-      );
+      case DELETE_COLOR:
+        return {
+          ...state,
+          colorList: action.payload,
+        };
+    case DELETE_SIZES:
       return {
         ...state,
-        colorList: updatedColorList,
+        sizesList: action.payload,
       };
-    case DELETE_SIZES:
+    case PUT_SIZES:
       return {
         ...state,
         sizesList: action.payload,
@@ -266,6 +262,16 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         pusrchaseStatusMail: action.payload,
+      };
+    case PUT_COLECCIONS:
+      return {
+        ...state,
+        seriesList: action.payload,
+      };
+    case PUT_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload,
       };
     default:
       return state;

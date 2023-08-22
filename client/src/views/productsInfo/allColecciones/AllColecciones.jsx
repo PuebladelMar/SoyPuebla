@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSeries, deleteSeries } from '../../../redux/Actions';
+import { getSeries, deleteSeries, putSeries } from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import './AllColecciones.css';
@@ -8,10 +8,6 @@ import './AllColecciones.css';
 const AllColecciones = () => {
   const series = useSelector((state) => state.series);
   const dispatch = useDispatch();
-
-  // const [coleccions, setColeccions] = useState({
-  //   series: [],
-  // });
 
   useEffect(() => {
     async function fetchSeries() {
@@ -24,6 +20,14 @@ const AllColecciones = () => {
   const handleDeleteSeries = async (id) => {
     await dispatch(deleteSeries(id));
     await dispatch(getSeries());
+  };
+
+  const handleEditSeries = async (id, name, image) => {
+    const updatedName = prompt('Enter new name', name);
+    if (updatedName) {
+      await dispatch(putSeries(id, updatedName, image));
+      dispatch(getSeries());
+    }
   };
 
   return (
@@ -42,7 +46,11 @@ const AllColecciones = () => {
             >
               {el.name}
               <div className='icons'>
-                <FaPencilAlt />
+                <button
+                  onClick={() => handleEditSeries(el.id, el.name, el.image)}
+                >
+                  <FaPencilAlt />
+                </button>
 
                 <button
                   className='delete-coleccion'
@@ -53,18 +61,6 @@ const AllColecciones = () => {
               </div>
             </div>
           ))}
-        {/* <p>
-      
-        {coleccions?.series.length > 0 ? (
-          coleccions?.series.map((ser) => (
-            <div key={ser}>
-              <p>{ser}</p>
-              </div>
-              ))
-        ) : (
-          <p></p>
-          )}
-        </p> */}
       </div>
     </div>
   );

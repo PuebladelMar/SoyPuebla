@@ -12,6 +12,7 @@ const CreateDetail = ({
   colorImage,
   category,
   description,
+  sale,
 }) => {
   let color = useSelector((state) => state.colorList);
   color = color.filter((col) =>
@@ -35,6 +36,13 @@ const CreateDetail = ({
         thumbnail: url,
       }))
     );
+
+    function formatNumber(number) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+    
+
+
   return (
     <section className="containerDetailCreate">
       <container className="secContainerCreate">
@@ -46,15 +54,23 @@ const CreateDetail = ({
               alt="Cargar Imagen"
             />
           ) : (
-            <ImageGallery
-              items={formattedImages}
-              className="image-gallery-icon"
-              thumbnailPosition="left"
-              showFullscreenButton={false}
-              showPlayButton={false}
-            />
+            <div className="image-gallery-container">
+              <ImageGallery
+                items={formattedImages}
+                className="image-gallery-icon"
+                thumbnailPosition="left"
+                showFullscreenButton={false}
+                showPlayButton={false}
+              />
+              {sale == 0 ? (
+                <h3 className="saleBanner0"></h3>
+              ) : (
+                <h3 className="saleBanner">{sale}% off</h3>
+              )}
+            </div>
           )}
         </slideshow>
+
         <info>
           {nombre ? (
             <h2 className="detailNameCreate">
@@ -66,8 +82,23 @@ const CreateDetail = ({
             </h2>
           )}
 
+          {sale == 0 ? (
+            <h3 className="saleBanner0"></h3>
+          ) : (
+            <h3 className="saleButton">SALE</h3>
+          )}
+
           {precio ? (
-            <h2 className="detailInfoCreate">$ {precio}</h2>
+            sale == 0 ? (
+              <h2 className="detailInfoCreate">$ {formatNumber(precio)}</h2>
+            ) : (
+              <h3 className="precioDescuentoContainer">
+                <span className="originalPrice"> $ {formatNumber(precio)} </span>
+                <span className="discountedPrice">
+                  $ {formatNumber(Math.floor(precio * (1 - sale / 100)))}
+                </span>
+              </h3>
+            )
           ) : (
             <h2 className="detailInfoCreate">$ 0.00</h2>
           )}
@@ -115,30 +146,17 @@ const CreateDetail = ({
             </div>
           )}
 
-          {/*size?.length !== 0 ? (
-            <div>
-              <h2 className="detailInfoCreate">Talle:</h2>
-              {{size.map((s, i) => (
-                <h2 className="detailInfoCreate" key={i}>
-                  {s}
-                </h2>
-              ))}
-            </div>
-          ) : (
-            <h2 className="detailInfoCreate">Talle</h2>
-          )}*/}
-
           {serie?.length !== 0 ? (
             <div className="coleccionContainer">
               <h2 className="detailInfoCreate">Colección: </h2>
               <div className="coleccionContainerSec">
-              {serie?.map((s, i) => (
-                <coleccion>
-                  <h2 className="detailInfoCreate" key={i}>
-                    {s}
-                  </h2>
-                </coleccion>
-              ))}
+                {serie?.map((s, i) => (
+                  <coleccion>
+                    <h2 className="detailInfoCreate" key={i}>
+                      {s}
+                    </h2>
+                  </coleccion>
+                ))}
               </div>
             </div>
           ) : (
@@ -149,14 +167,13 @@ const CreateDetail = ({
             <div className="categoriaContainer">
               <h2 className="detailInfoCreate">Categoria:</h2>
               <div className="categoriaContainerSec">
-
-              {category?.map((s, i) => (
-                <categoria>
-                <h2 className="detailInfoCreate" key={i}>
-                  {s}
-                </h2>
-                </categoria>
-              ))}
+                {category?.map((s, i) => (
+                  <categoria>
+                    <h2 className="detailInfoCreate" key={i}>
+                      {s}
+                    </h2>
+                  </categoria>
+                ))}
               </div>
             </div>
           ) : (
@@ -165,9 +182,8 @@ const CreateDetail = ({
 
           {description ? (
             <div className="descripcionContainer">
-
-            <h3 className="detailInfoCreate">Descripción: </h3>
-            <h4 className="detailInfoDescription">{description}</h4>
+              <h3 className="detailInfoCreate">Descripción: </h3>
+              <h4 className="detailInfoDescription">{description}</h4>
             </div>
           ) : (
             <h3 className="detailInfoCreate">Descripción</h3>

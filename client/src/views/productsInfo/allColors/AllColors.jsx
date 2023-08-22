@@ -1,95 +1,74 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getColor } from '../../../redux/Actions';
-// import { editColors } from "../../../redux/Actions";
+import { editColors, getColor, deleteColor } from '../../../redux/Actions';
 import './allColors.css';
 import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import Swal from 'sweetalert2'
 
 
-import ModificarColorAdmin from './ModificarColorAdmin';
-import './createColor.css';
+
 
 const AllColors = () => {
   const colors = useSelector((state) => state.colorList);
 
   const dispatch = useDispatch();
 
-  const [newColor, setNewColor] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
-
-  const [modifiedColor, setModifiedColor] = useState(null);
   useEffect(() => {
-    dispatch(getColor());
+    async function fetchColors(){
+      await dispatch(getColor())
+    }
+    fetchColors()
   }, [dispatch]);
 
-  // const handleColorChange = (event) => {
-  //   setNewColor(event.target.value);
-  // };
 
-  // const handleColorModified = (color) => {
-  //   setModifiedColor(color); // Actualiza el estado con el color modificado
-  // };
 
-  const handleColorModified = (color) => {
-    const updatedColors = colors.map((c) =>
-      c.id === color.id ? color : alert('Color ya existente')
-    );
-    setModifiedColor(null);
-    // dispatch({ type: "SET_COLORS", payload: updatedColors });
-    console.log(setModifiedColor);
+  const handleEditColors = async (id, name, codHex) => {
+    const updatedName = prompt('Enter new name', name);
+    if (updatedName) {
+      await dispatch(editColors(id, updatedName, codHex));
+      dispatch(getColor());
+    }
+  };
+  const handleDeleteColors = async (id) => {
+    await dispatch(deleteColor(id));
+    await dispatch(getColor());
   };
 
-  const handleDeleteColor = (colorId) => {};
-
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleOpenModal = (color) => {
-    setModifiedColor(color);
-    // setIsOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
   return (
     <div className='main-container'>
       <div className='colors'>
         <h2 className='colores-title'>Colores disponibles</h2>
-        {colors.map((color) => (
+        {
+          Array.isArray(colors) && 
+        
+        colors.map((color) => (
           <div
             key={color.id}
             className='color-item'
           >
-            <p>{color.name}</p>
+            {color.name}
             {console.log(color)}
             <div className='icons'>
               <button
                 className='edit-color'
-                onClick={() => setModifiedColor(color)}
+                onClick={() => handleEditColors(color.id, color.name, color.codHex)}
               >
                 <FaPencilAlt />
               </button>
-              <RiDeleteBin6Line />
               <button
-                className='delete-color'
-                onClick={() => handleDeleteColor(color.id)}
-              ></button>
+                  className='delete-colors'
+                  onClick={() => handleDeleteColors(color.id)}
+                >
+                  {<RiDeleteBin6Line />}
+                </button>
+              
+              
+                
+              
             </div>
           </div>
         ))}
-        {/* ... Otro código ... */}
-        {modifiedColor && (
-          <ModificarColorAdmin
-            isOpen={isOpen}
-            color={modifiedColor}
-            onColorModified={handleColorModified}
-            onClose={handleCloseModal}
-          />
-        )}
-        {console.log(onclose)}
       </div>
       <button>Crear</button>
     </div>

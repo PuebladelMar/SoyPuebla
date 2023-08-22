@@ -15,12 +15,7 @@ import {
 import { Box, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 
-
-
-
 export default function Cardx({ product }) {
-
-
   const { id, name, price, colorImages, sale } = product;
   const isMatch = useMediaQuery("(max-width: 644px)");
   const isMatchCard = useMediaQuery("(max-width: 470px)");
@@ -47,7 +42,6 @@ export default function Cardx({ product }) {
     }
   };
 
-
   const matchingColors = color.filter((c) =>
     colorImages?.some((ci) => ci.ColorId === c.id)
   );
@@ -61,7 +55,6 @@ export default function Cardx({ product }) {
   const selectedColorImages = colorImages?.find(
     (colorItem) => colorItem.ColorId === selectedColor
   );
-
 
   useEffect(() => {
     async function fetchData() {
@@ -192,9 +185,12 @@ export default function Cardx({ product }) {
                       className="detailColorButton"
                       style={{
                         backgroundColor: col.codHex,
-                        width: selectedColor === col.id ? "1.7rem" : "1.5rem",
-                        height: selectedColor === col.id ? "1.7rem" : "1.5rem",
-                        border: selectedColor === col.id ? "2px solid #8b8b8b" : "none",
+                        width: selectedColor === col.id ? "1.5rem" : "1.5rem",
+                        height: selectedColor === col.id ? "1.5rem" : "1.5rem",
+                        border:
+                          selectedColor === col.id
+                            ? "0.18rem solid #8b8b8b"
+                            : "none",
                       }}
                       onClick={() => {
                         setSelectedColor(col.id);
@@ -337,7 +333,13 @@ export default function Cardx({ product }) {
                   paddingBottom: "0.9rem",
                   gap: "0.5rem",
                   position: "absolute",
-                  right: isMatchColor2 ? "-6.5rem" : isMatchColor ? "-7.5rem" : isMatchCard ? "-8.5rem" : "-6.5rem",
+                  right: isMatchColor2
+                    ? "-6.5rem"
+                    : isMatchColor
+                    ? "-7.5rem"
+                    : isMatchCard
+                    ? "-8.5rem"
+                    : "-6.5rem",
                   top: isMatchCard ? "0.35rem" : "-0.2rem",
                 }}
               >
@@ -355,7 +357,10 @@ export default function Cardx({ product }) {
                         backgroundColor: col.codHex,
                         width: "1.5rem",
                         height: "1.5rem",
-                        border: selectedColor === col.id ? "2px solid #8b8b8b" : "none",
+                        border:
+                          selectedColor === col.id
+                            ? "2px solid #8b8b8b"
+                            : "none",
                       }}
                       onClick={() => {
                         setSelectedColor(col.id);
@@ -363,7 +368,6 @@ export default function Cardx({ product }) {
                     ></button>
                   </div>
                 ))}
-
               </Box>
               <CardActions
                 style={{
@@ -378,7 +382,13 @@ export default function Cardx({ product }) {
                   onClick={handleFavoriteClick}
                   style={{
                     position: "absolute",
-                    right: isMatchColor2 ? "-5.8rem" : isMatchColor ? "-6.8rem" : isMatchCard ? "-7.8rem" : "18.8rem",
+                    right: isMatchColor2
+                      ? "-5.8rem"
+                      : isMatchColor
+                      ? "-6.8rem"
+                      : isMatchCard
+                      ? "-7.8rem"
+                      : "18.8rem",
                     bottom: isMatchCard ? "7rem" : "11.9rem",
                   }}
                 >
@@ -391,6 +401,4 @@ export default function Cardx({ product }) {
       )}
     </Card>
   );
-
 }
-
