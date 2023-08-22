@@ -54,5 +54,18 @@ const sendStockNotification = async (emailsUsers) => {
   }
 };
 
-module.exports = { controllerNodeMailer, sendRegisterMailNotify, sendStockNotification };
+const sendMercadoPagoStatus = async (emailsUsers, emailSubject) => {
+  try {
+    await transporter.sendMail({
+      from: '"SOY_PUEBLA" : puebladelmar2023@gmail.com',
+      to: emailsUsers,
+      subject: emailSubject,
+      html: "<b>Bienvenida a Soy Puebla</b> <p>En Soy Puebla trabajamos para ti, por esto queremos informarte el estado de tu compra.</p> <p>Si deseas conocer más al respecto no dudes en contactarte a nuestra línea telefónica xxxxxx.</p>",
+    });
+  } catch (error) {
+    throw new Error("Error al enviar el correo electrónico de estado de compra");
+  }
+};
+
+module.exports = { controllerNodeMailer, sendRegisterMailNotify, sendStockNotification, sendMercadoPagoStatus };
 

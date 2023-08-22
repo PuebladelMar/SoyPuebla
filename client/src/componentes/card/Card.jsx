@@ -15,23 +15,20 @@ import {
 import { Box, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 
-
-
-
 export default function Cardx({ product }) {
-
-
+  const dispatch = useDispatch();
   const { id, name, price, colorImages, sale } = product;
   const isMatch = useMediaQuery("(max-width: 644px)");
   const isMatchCard = useMediaQuery("(max-width: 470px)");
   const isMatchColor = useMediaQuery("(max-width: 415px)");
   const isMatchColor2 = useMediaQuery("(max-width: 375px)");
-  const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
   const userId = useSelector((state) => state.userId);
   const color = useSelector((state) => state.colorList);
   const isFavorite = favorites.some((item) => item.id === product.id);
   const [selectedColor, setSelectedColor] = useState(null);
+
+  console.log(sale)
 
   const handleFavoriteClick = async () => {
     try {
@@ -47,7 +44,6 @@ export default function Cardx({ product }) {
     }
   };
 
-
   const matchingColors = color.filter((c) =>
     colorImages?.some((ci) => ci.ColorId === c.id)
   );
@@ -62,7 +58,6 @@ export default function Cardx({ product }) {
     (colorItem) => colorItem.ColorId === selectedColor
   );
 
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -75,6 +70,12 @@ export default function Cardx({ product }) {
     fetchData();
   }, [dispatch, userId]);
 
+
+  function formatNumber(number) {
+    const wholeNumber = Math.floor(number); 
+    return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
   return (
     <Card
       style={{
@@ -86,32 +87,58 @@ export default function Cardx({ product }) {
       {!isMatch ? (
         <Box>
           <Link to={`/products/${id}`}>
-            <Box
-              style={{
-                width: "100%",
-                height: "22rem",
-                overflow: "hidden",
-              }}
-            >
-              <CardMedia
-                component="img"
-                style={{
-                  width: "100%",
-                  height: "22rem",
-                  objectFit: "fill",
-                  transition: "transform 0.2s",
-                }}
-                image={selectedColorImages?.images[0]}
-                alt="Item"
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = "scale(1.05)";
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = "scale(1)";
-                }}
-              />
-            </Box>
-          </Link>
+  <Box
+    style={{
+      width: "100%",
+      height: "22rem",
+      overflow: "hidden",
+      position: "relative", 
+    }}
+  >
+    <CardMedia
+      component="img"
+      style={{
+        width: "100%",
+        height: "22rem",
+        objectFit: "fill",
+        transition: "transform 0.2s",
+        position: "relative", 
+      }}
+      image={selectedColorImages?.images[0]}
+      alt="Item"
+      onMouseOver={(e) => {
+        e.currentTarget.style.transform = "scale(1.05)";
+      }}
+      onMouseOut={(e) => {
+        e.currentTarget.style.transform = "scale(1)";
+      }}
+    />
+    {sale == 0 ? (
+    <Typography/>
+     
+   ) : (
+    <Typography
+    variant="body2"
+    color="text.secondary"
+    style={{
+      fontSize: ".8rem",
+      fontWeight: "600",
+      position: "absolute",
+      top: "17px", 
+      left: "0px",
+      color: "#ffffff",
+      backgroundColor: "#ff0000",
+      padding: "3px 15px 3px 13px",
+      borderTopRightRadius: "15px",
+      borderBottomRightRadius: "15px",
+    }}
+  > 
+    {sale} off%
+  </Typography>
+    )}
+  </Box>
+</Link>
+
           <Box
             style={{
               display: "flex",
@@ -136,27 +163,33 @@ export default function Cardx({ product }) {
                   padding: "0.5rem 0 0.5rem 1rem",
                 }}
               >
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  style={{
-                    fontSize: "1rem",
-                    fontWeight: "600",
-                    cursor: "default",
-                  }}
-                >
-                  {name}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  style={{
-                    fontSize: "0.9rem",
-                    cursor: "default",
-                  }}
-                >
-                  $ {price}
-                </Typography>
+
+                <Link to={`/products/${id}`}>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={{
+                      fontSize: "1rem",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {name}
+                  </Typography>
+                </Link>
+                <Link to={`/products/${id}`}>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={{
+                      fontSize: "0.9rem",
+                      cursor: "pointer",
+                    }}
+                  >
+                    $ {formatNumber(price)}
+                  </Typography>
+                </Link>
+
               </CardContent>
             </Box>
             <Box
@@ -192,9 +225,12 @@ export default function Cardx({ product }) {
                       className="detailColorButton"
                       style={{
                         backgroundColor: col.codHex,
-                        width: selectedColor === col.id ? "1.7rem" : "1.5rem",
-                        height: selectedColor === col.id ? "1.7rem" : "1.5rem",
-                        border: selectedColor === col.id ? "2px solid #8b8b8b" : "none",
+                        width: selectedColor === col.id ? "1.55rem" : "1.5rem",
+                        height: selectedColor === col.id ? "1.55rem" : "1.5rem",
+                        border:
+                          selectedColor === col.id
+                            ? "2px solid #797979"
+                            : "1px solid #8b8b8b",
                       }}
                       onClick={() => {
                         setSelectedColor(col.id);
@@ -298,27 +334,31 @@ export default function Cardx({ product }) {
                   gap: isMatchCard ? "1rem" : "1.5rem",
                 }}
               >
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  style={{
-                    fontSize: "1rem",
-                    fontWeight: "600",
-                    cursor: "default",
-                  }}
-                >
-                  {name}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  style={{
-                    fontSize: "0.9rem",
-                    cursor: "default",
-                  }}
-                >
-                  $ {price}
-                </Typography>
+                <Link to={`/products/${id}`}>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={{
+                      fontSize: "1rem",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {name}
+                  </Typography>
+                </Link>
+                <Link to={`/products/${id}`}>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={{
+                      fontSize: "0.9rem",
+                      cursor: "pointer",
+                    }}
+                  >
+                    $ {price}
+                  </Typography>
+                </Link>
               </CardContent>
             </Box>
             <Box
@@ -337,7 +377,13 @@ export default function Cardx({ product }) {
                   paddingBottom: "0.9rem",
                   gap: "0.5rem",
                   position: "absolute",
-                  right: isMatchColor2 ? "-6.5rem" : isMatchColor ? "-7.5rem" : isMatchCard ? "-8.5rem" : "-6.5rem",
+                  right: isMatchColor2
+                    ? "-6.5rem"
+                    : isMatchColor
+                    ? "-7.5rem"
+                    : isMatchCard
+                    ? "-8.5rem"
+                    : "-6.5rem",
                   top: isMatchCard ? "0.35rem" : "-0.2rem",
                 }}
               >
@@ -355,7 +401,10 @@ export default function Cardx({ product }) {
                         backgroundColor: col.codHex,
                         width: "1.5rem",
                         height: "1.5rem",
-                        border: selectedColor === col.id ? "2px solid #8b8b8b" : "none",
+                        border:
+                          selectedColor === col.id
+                            ? "2px solid #8b8b8b"
+                            : "none",
                       }}
                       onClick={() => {
                         setSelectedColor(col.id);
@@ -363,7 +412,6 @@ export default function Cardx({ product }) {
                     ></button>
                   </div>
                 ))}
-
               </Box>
               <CardActions
                 style={{
@@ -378,7 +426,13 @@ export default function Cardx({ product }) {
                   onClick={handleFavoriteClick}
                   style={{
                     position: "absolute",
-                    right: isMatchColor2 ? "-5.8rem" : isMatchColor ? "-6.8rem" : isMatchCard ? "-7.8rem" : "18.8rem",
+                    right: isMatchColor2
+                      ? "-5.8rem"
+                      : isMatchColor
+                      ? "-6.8rem"
+                      : isMatchCard
+                      ? "-7.8rem"
+                      : "18.8rem",
                     bottom: isMatchCard ? "7rem" : "11.9rem",
                   }}
                 >
@@ -391,6 +445,4 @@ export default function Cardx({ product }) {
       )}
     </Card>
   );
-
 }
-

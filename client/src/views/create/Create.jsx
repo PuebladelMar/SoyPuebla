@@ -1,6 +1,6 @@
 import "./Create.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import {
   postProducts,
   getColor,
@@ -10,19 +10,15 @@ import {
 } from "../../redux/Actions";
 import validations from "./Validations";
 import UploadWidget from "../../componentes/imageUpload/imageUpload";
-import MutipleUploadWidget from "../../componentes/multipleImageUpload/multipleImageUpload";
 import CreateDetail from "./createDetail/CreateDetail";
 import CreateColor from "./createColor/createColor";
 import CreateSerie from "./createSerie/CreateSerie";
 import CreateCategory from "./createCategory/CreateCategory";
 import CreateSize from "./createSize/createSize";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { red } from "@mui/material/colors";
 
 const Create = () => {
   const dispatch = useDispatch();
@@ -32,8 +28,10 @@ const Create = () => {
   const series = useSelector((state) => state.series);
   const [errors, setErrors] = useState({});
 
-  //!___________________________
-
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const [showAlert, setShowAlert] = useState({});
 
   const handleCloseAlert = (event) => {
@@ -61,9 +59,6 @@ const Create = () => {
     event.preventDefault();
   };
 
-
-
-  //!___________________________
 
   const [uploadedSecureUrl, setUploadedSecureUrl] = useState(null);
 
@@ -422,12 +417,12 @@ const Create = () => {
             onChange={handleChange}
           />
           <p className="error">{errors.price}</p>
-          <label htmlFor="sale">Oferta %<separator></separator></label>
+          <label htmlFor="sale">Descuento %<separator></separator></label>
           <input
             type="number"
             name="sale"
             value={createProduct?.sale}
-            placeholder="Oferta %"
+            placeholder="Descuento %"
             className="custom-input"
             onChange={handleChange}
           />
@@ -694,6 +689,7 @@ const Create = () => {
           colorImage={createProduct?.colorImage}
           category={createProduct?.category}
           description={createProduct?.description}
+          sale={createProduct?.sale}
         />
       </div>
     </div>

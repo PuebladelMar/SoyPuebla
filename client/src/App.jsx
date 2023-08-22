@@ -1,64 +1,50 @@
-import AllData from './views/productsInfo/AllData';
-import AllProducts from './views/productsInfo/AllProducts';
-import DetailAdmin from './views/productsInfo/detailadmin/DetailAdmin.jsx';
-import AllColecciones from './views/productsInfo/allColecciones/AllColecciones';
-import AllTalles from './views/productsInfo/allTalles/AllTalles';
-import AllColors from './views/productsInfo/allColors/AllColors';
-import './App.css';
-import About from './views/about/About';
-import Home from './views/home/Home';
-import Landing from './views/landing/Landing';
-import Products from './views/products/Products';
-import NavBar from './componentes/navbar/NavBar';
-import Footer from './componentes/footer/Footer';
-import Cart from './views/cart/Cart';
-import Create from './views/create/Create';
-import Detail from './views/detail/Detail';
-import EnProceso from './views/mercadoPago/EnProceso/enProceso';
-import ErrorPage from './views/errorPage/ErrorPage';
-import { Routes, Route } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getProducts } from './redux/Actions';
 import AdminAccount from './views/adminAccount/AdminAccount';
-import Customer from './componentes/footer/customer/customer';
-import PayState from './views/mercadoPago/PayState';
-import axios from 'axios';
-import PaymentMethodsView from './views/paymentMethods/paymentMethods';
-import Favorites from './views/favs/Favorites';
-import History from './views/history/History';
-import Shipment from './views/shipment/shipment';
-import CreateCategory from './views/create/createCategory/CreateCategory';
-import ReviewsForm from './componentes/reviews/ReviewsForm';
-import SizeChart from './views/sizeChart/sizeChart';
-import CreateColor from './views/create/createColor/createColor';
-import CreateSerie from './views/create/createSerie/CreateSerie';
-import Dashboard from './views/dashboard/Dashboard';
-import Information from './views/dashboard/Information';
-import UsersData from './views/usersData/dataUserAdmin';
-import HistoryData from './views/dashboard/purchaseHistory/purchaseHistory';
-import AllCategories from './views/productsInfo/categories/AllCategories';
 import EditProduct from './views/editProduct/EditProduct';
+import AllData from "./views/productsInfo/AllData";
+import AllProducts from "./views/productsInfo/AllProducts";
+import DetailAdmin from "./views/productsInfo/detailadmin/DetailAdmin.jsx";
+import AllColecciones from "./views/productsInfo/allColecciones/AllColecciones";
+import AllTalles from "./views/productsInfo/allTalles/AllTalles";
+import AllColors from "./views/productsInfo/allColors/AllColors";
+import "./App.css";
+import About from "./views/about/About";
+import Home from "./views/home/Home";
+import Landing from "./views/landing/Landing";
+import Products from "./views/products/Products";
+import NavBar from "./componentes/navbar/NavBar";
+import Footer from "./componentes/footer/Footer";
+import Cart from "./views/cart/Cart";
+import Create from "./views/create/Create";
+import Detail from "./views/detail/Detail";
+import EnProceso from "./views/mercadoPago/EnProceso/enProceso";
+import ErrorPage from "./views/errorPage/ErrorPage";
+import { Routes, Route } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import Customer from "./componentes/footer/customer/customer";
+import PayState from "./views/mercadoPago/PayState";
+import axios from "axios";
+import PaymentMethodsView from "./views/paymentMethods/paymentMethods";
+import Favorites from "./views/favs/Favorites";
+import History from "./views/history/History";
+import Shipment from "./views/shipment/shipment";
+import CreateCategory from "./views/create/createCategory/CreateCategory";
+import ReviewsForm from "./componentes/reviews/ReviewsForm";
+import SizeChart from "./views/sizeChart/sizeChart";
+import CreateColor from "./views/create/createColor/createColor";
+import CreateSerie from "./views/create/createSerie/CreateSerie";
+import Dashboard from "./views/dashboard/Dashboard";
+import Information from "./views/dashboard/Information";
+import UsersData from "./views/usersData/dataUserAdmin";
+import HistoryData from "./views/dashboard/purchaseHistory/purchaseHistory";
+import AllCategories from "./views/productsInfo/categories/AllCategories";
 
-axios.defaults.baseURL = 'http://localhost:3001/';
+axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   const { pathname } = useLocation();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
-
-  // const linksArray = [
-  //   'Home',
-  //   'Products',
-  //   'About',
-  //   'Create',
-  //   'AdminAccount',
-  //   'Cart',
-  // ];
 
   return (
     <div>

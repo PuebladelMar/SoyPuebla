@@ -11,7 +11,6 @@ import { useMediaQuery } from "@mui/material";
 import "./Cart.css";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
   const [preferenceId, setPreferenceId] = useState(null);
   const userCart = useSelector((state) => state.userCart);
   const userId = useSelector((state) => state.userId);
@@ -23,7 +22,7 @@ const Cart = () => {
   useEffect(() => {
     if (!userId.length) {
       navigate("/home");
-      alert("debes iniciar seción para ir al carrito");
+      alert("debes iniciar sesión para ir al carrito");
     } else {
       dispatch(getUserCart(userId));
     }
