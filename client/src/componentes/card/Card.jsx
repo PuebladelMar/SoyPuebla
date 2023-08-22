@@ -161,6 +161,7 @@ export default function Cardx({ product }) {
                   padding: "0.5rem 0 0.5rem 1rem",
                 }}
               >
+
                 <Link to={`/products/${id}`}>
                   <Typography
                     variant="body2"
