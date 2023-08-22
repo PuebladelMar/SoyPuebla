@@ -37,6 +37,7 @@ import {
   DELETE_COLOR,
   DELETE_SERIES,
   DELETE_SIZES,
+  SEND_PURCHASE_MAIL
 } from './ActionsTypes';
 
 export function getProducts() {
@@ -402,7 +403,7 @@ export function deleteUser(id) {
 export function getUserById(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/users/user${id}`);
+      const response = await axios.get(`http://localhost:3001/users/user/${id}`);
       dispatch({
         type: GET_USER_BY_ID,
         payload: response.data,
@@ -628,6 +629,23 @@ export function deleteSizes(id) {
       });
     } catch (error) {
       alert(error);
+    }
+  };
+};
+
+export function sendStatusPurchaseMail(data) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post(`http://localhost:3001/notify/status`, {
+        emailsUsers: data.emailsUsers,
+        emailSubject: data.emailSubject,
+      });
+      return dispatch({
+        type: SEND_PURCHASE_MAIL,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
     }
   };
 }

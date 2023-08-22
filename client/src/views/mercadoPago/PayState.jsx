@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { addHistory, deleteCartUser, getUserById } from "../../redux/Actions";
+import { useDispatch, useSelector} from "react-redux";
+import { addHistory, deleteCartUser, getUserById, sendStatusPurchaseMail } from "../../redux/Actions";
 import "./PayState.css";
 
 function PayState() {
@@ -14,21 +14,22 @@ function PayState() {
   const data = queryParams.get("data");
   const parsedData = JSON.parse(decodeURIComponent(data));
 
- dispatch(getUserById(userId));
- 
- console.log(userById);
-
   useEffect(() => {
     if (parsedData.status === "approved") {
       const asyncFunc = async () => {
         if (userId.length) {
           await dispatch(addHistory(userId, "approved"));
           await dispatch(deleteCartUser(userId, true));
-          //agregar envío de correo 
+          const emailAddress =  userById.emailAddress;
+          let data = {
+            emailsUsers: emailAddress,
+            emailSubject: "Tu compra ha sido aprobada❤️🤗",
+          };
+          dispatch(sendStatusPurchaseMail(data)); 
         }
       };
       asyncFunc();
-    }else if (parsedData.status === "in_process") {
+    } else if (parsedData.status === "in_process") {
       const asyncFunc = async () => {
         if (userId.length) {
           await dispatch(addHistory(userId, "pending"));
@@ -36,10 +37,17 @@ function PayState() {
         }
       };
       asyncFunc();
-    }else{
+    } else {
       const asyncFunc = async () => {
         if (userId.length) {
           await dispatch(addHistory(userId, "rejected"));
+          dispatch(getUserById(userId));
+          const emailAddress =  userById.emailAddress;
+          let data = {
+            emailsUsers: emailAddress,
+            emailSubject: "Tu compra ha sido rechazada💔",
+          };
+          dispatch(sendStatusPurchaseMail(data)); 
         }
       };
       asyncFunc();
