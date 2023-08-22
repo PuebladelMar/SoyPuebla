@@ -39,6 +39,7 @@ import Information from './views/dashboard/Information';
 import UsersData from './views/usersData/dataUserAdmin';
 import HistoryData from './views/dashboard/purchaseHistory/purchaseHistory';
 import AllCategories from './views/productsInfo/categories/AllCategories';
+import EditProduct from './views/editProduct/EditProduct';
 
 axios.defaults.baseURL = 'http://localhost:3001/';
 
@@ -188,6 +189,10 @@ function App() {
         <Route
           path='/all-data/all-categories'
           element={<AllCategories />}
+        />
+        <Route
+          path='/edit-products/:id'
+          element={<EditProduct />}
         />
       </Routes>
       {pathname !== '/' && <Footer />}

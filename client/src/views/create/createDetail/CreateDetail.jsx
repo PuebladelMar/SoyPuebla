@@ -22,7 +22,7 @@ const CreateDetail = ({
 
   useEffect(() => {
     if (count === 1) {
-      setSelectedColor(colorImage[0].color);
+      setSelectedColor(colorImage[0]?.color);
     }
     setCount(count + 1);
   }, [colorImage]);
