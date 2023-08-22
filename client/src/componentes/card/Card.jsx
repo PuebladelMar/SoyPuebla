@@ -28,7 +28,6 @@ export default function Cardx({ product }) {
   const isFavorite = favorites.some((item) => item.id === product.id);
   const [selectedColor, setSelectedColor] = useState(null);
 
-  console.log(sale);
 
   const handleFavoriteClick = async () => {
     try {
