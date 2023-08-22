@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCar, notifyStock } from "../../redux/Actions";
@@ -34,6 +34,9 @@ const Detail = () => {
   const [thumbnailPosition, setThumbnailPosition] = useState("left");
   const sale = productDetails[0]?.sale
 
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -364,7 +367,7 @@ const Detail = () => {
               <>
                 <div className="transparentBackground"></div>
                 <div className="alertContainer">
-                  <p className="alertText">Producto añadido al carrito</p>
+                  <p className="alertText">El Producto se añadido a su carrito</p>
                   <div className="alertButtons">
                     <button onClick={handleCloseAlert}>Seguir comprando</button>
                     <button>

@@ -24,30 +24,19 @@ export default function Chart() {
 
   useEffect(() => {
     dispatch(getAllHistory());
-  }, [dispatch]);
+  }, [dispatch, allHistory.length]);
 
   const theme = useTheme();
 
-  // Agrupar ventas por intervalos de 3 horas
-  const interval = 3; // horas
+  
+  const interval = 3;
   const data = [];
 
   for (let hour = 0; hour < 24; hour += interval) {
     const startTime = `${hour.toString().padStart(2, "0")}:00`;
     const endTime = `${(hour + interval).toString().padStart(2, "0")}:00`;
 
-  //   const salesInInterval = allHistory.reduce((totalSales, history) => {
-  //     const createdAtHour = new Date(history.createdAt).getHours();
-
-  //     if (createdAtHour >= hour && createdAtHour < hour + interval) {
-  //       totalSales += history.unitPrice * history.quantity;
-  //     }
-
-  //     return totalSales;
-  //   }, 0);
-
-  //   data.push(createData(`${startTime} - ${endTime}`, salesInInterval));
-  // }
+  
   const salesInInterval = {
     approved: 0,
     pending: 0,

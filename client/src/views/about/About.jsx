@@ -1,6 +1,10 @@
 import "./About.css";
+import { useLayoutEffect } from "react";
 
 const About = () => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="about-container">
       <div className="about-content">
