@@ -35,13 +35,12 @@ function Slider() {
               src={image1}
               alt="Imagen 1"
               style={{
-                // width: "auto",
                 height: "100%",
                 transform: "scale(1)",
-                transition: "transform 0.3s",
+                transition: "transform 0.8s",
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.transform = "scale(1.1)";
+                e.currentTarget.style.transform = "scale(1.01)";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = "scale(1)";
@@ -58,10 +57,10 @@ function Slider() {
                 width: "auto",
                 height: "100%",
                 transform: "scale(1)",
-                transition: "transform 0.3s",
+                transition: "transform 0.8s",
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.transform = "scale(1.1)";
+                e.currentTarget.style.transform = "scale(1.01)";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = "scale(1)";
@@ -78,10 +77,10 @@ function Slider() {
                 width: "auto",
                 height: "100%",
                 transform: "scale(1)",
-                transition: "transform 0.3s",
+                transition: "transform 0.8s",
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.transform = "scale(1.1)";
+                e.currentTarget.style.transform = "scale(1.01)";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = "scale(1)";
@@ -98,10 +97,10 @@ function Slider() {
                 width: "auto",
                 height: "100%",
                 transform: "scale(1)",
-                transition: "transform 0.3s",
+                transition: "transform 0.8s",
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.transform = "scale(1.1)";
+                e.currentTarget.style.transform = "scale(1.01)";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.transform = "scale(1)";
