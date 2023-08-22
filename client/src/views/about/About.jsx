@@ -1,8 +1,16 @@
 import "./About.css";
+import { useLayoutEffect } from "react";
+import Puebla from "../../assets/images/PdM.png"
+import Tortuga from "../../assets/images/TORTUGA_ROSA_SINFONDO.png"
 
 const About = () => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="about-container">
+
+      <img src={Puebla} alt="Puebla del Mar" className="img-About-Pdm" />
       <div className="about-content">
         <h1 className="about-title">¿QUIÉNES SOMOS?</h1>
         <p className="about-text">
@@ -40,6 +48,7 @@ const About = () => {
           actividades.
         </p>
       </div>
+      <img src={Tortuga} alt="Puebla del Mar" className="img-About-Tortuga" />
     </div>
   );
 };

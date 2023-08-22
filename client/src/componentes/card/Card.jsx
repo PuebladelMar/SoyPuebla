@@ -16,17 +16,18 @@ import { Box, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function Cardx({ product }) {
+  const dispatch = useDispatch();
   const { id, name, price, colorImages, sale } = product;
   const isMatch = useMediaQuery("(max-width: 644px)");
   const isMatchCard = useMediaQuery("(max-width: 470px)");
   const isMatchColor = useMediaQuery("(max-width: 415px)");
   const isMatchColor2 = useMediaQuery("(max-width: 375px)");
-  const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
   const userId = useSelector((state) => state.userId);
   const color = useSelector((state) => state.colorList);
   const isFavorite = favorites.some((item) => item.id === product.id);
   const [selectedColor, setSelectedColor] = useState(null);
+
 
   const handleFavoriteClick = async () => {
     try {
@@ -68,6 +69,11 @@ export default function Cardx({ product }) {
     fetchData();
   }, [dispatch, userId]);
 
+  function formatNumber(number) {
+    const wholeNumber = Math.floor(number);
+    return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
   return (
     <Card
       style={{
@@ -84,6 +90,7 @@ export default function Cardx({ product }) {
                 width: "100%",
                 height: "22rem",
                 overflow: "hidden",
+                position: "relative",
               }}
             >
               <CardMedia
@@ -93,6 +100,7 @@ export default function Cardx({ product }) {
                   height: "22rem",
                   objectFit: "fill",
                   transition: "transform 0.2s",
+                  position: "relative",
                 }}
                 image={selectedColorImages?.images[0]}
                 alt="Item"
@@ -103,8 +111,31 @@ export default function Cardx({ product }) {
                   e.currentTarget.style.transform = "scale(1)";
                 }}
               />
+              {sale == 0 ? (
+                <Typography />
+              ) : (
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  style={{
+                    fontSize: ".8rem",
+                    fontWeight: "600",
+                    position: "absolute",
+                    top: "17px",
+                    left: "0px",
+                    color: "#ffffff",
+                    backgroundColor: "#ff0000",
+                    padding: "3px 15px 3px 13px",
+                    borderTopRightRadius: "15px",
+                    borderBottomRightRadius: "15px",
+                  }}
+                >
+                  {sale} off%
+                </Typography>
+              )}
             </Box>
           </Link>
+
           <Box
             style={{
               display: "flex",
@@ -129,6 +160,7 @@ export default function Cardx({ product }) {
                   padding: "0.5rem 0 0.5rem 1rem",
                 }}
               >
+
                 <Link to={`/products/${id}`}>
                   <Typography
                     variant="body2"
@@ -143,16 +175,74 @@ export default function Cardx({ product }) {
                   </Typography>
                 </Link>
                 <Link to={`/products/${id}`}>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
+                  {sale == 0 ? (
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      style={{
+                        fontSize: "0.9rem",
+                        cursor: "pointer",
+                      }}
+                    >
+                      $ {formatNumber(price)}
+                    </Typography>
+                  ) : (
+                    <Box
                     style={{
-                      fontSize: "0.9rem",
-                      cursor: "pointer",
-                    }}
-                  >
-                    $ {price}
-                  </Typography>
+                      marginTop: "-1.3rem",
+                      // backgroundColor: "black",
+                    }}>
+
+                      <Box 
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "1rem",
+                      }}>
+
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        style={{
+                          fontSize: "0.9rem",
+                          cursor: "pointer",
+                          color: "#ff0000",
+                        }}
+                      >
+                        $ {formatNumber(Math.floor(price * (1 - sale / 100)))}
+
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        style={{
+                          fontSize: "0.9rem",
+                          cursor: "pointer",
+                          color: "#ff0000",
+                          border: "1px solid #ff0000",
+                          padding: "0px 8px 0px 6px ",
+                          borderRadius: "3px",
+                          fontStyle: "italic",
+                        }}
+                      >
+                        SALE
+                      </Typography>
+                        </Box>
+
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        style={{
+                          fontSize: "0.9rem",
+                          cursor: "pointer",
+                          color: "#9d9d9dc3",
+                          textDecoration: "line-through",
+                        }}
+                      >
+                        $ {formatNumber(price)}
+                      </Typography>
+                    </Box>
+                  )}
                 </Link>
               </CardContent>
             </Box>
@@ -189,12 +279,12 @@ export default function Cardx({ product }) {
                       className="detailColorButton"
                       style={{
                         backgroundColor: col.codHex,
-                        width: selectedColor === col.id ? "1.5rem" : "1.5rem",
-                        height: selectedColor === col.id ? "1.5rem" : "1.5rem",
+                        width: selectedColor === col.id ? "1.55rem" : "1.5rem",
+                        height: selectedColor === col.id ? "1.55rem" : "1.5rem",
                         border:
                           selectedColor === col.id
-                            ? "0.18rem solid #8b8b8b"
-                            : "none",
+                            ? "2px solid #797979"
+                            : "1px solid #8b8b8b",
                       }}
                       onClick={() => {
                         setSelectedColor(col.id);

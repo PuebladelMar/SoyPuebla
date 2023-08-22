@@ -8,21 +8,23 @@ const controllPostHistory = async (userId, state) => {
     const productId = userStock.ProductId;
 
     const product = await Products.findByPk(productId, {
-      attributes: ["price"],
+      attributes: ["price", "sale"],
     });
 
     await Histories.create({
       quantity: user.quantity,
       StockId: user.StockId,
       UserId: user.UserId,
-      unitPrice: product.price,
+      unitPrice: product.price * (1 - product.sale / 100),
       state: state
     });
+
+    return product.price * (1 - product.sale / 100) * user.quantity;
   });
 
-  await Promise.all(insertPromises);
+  const totalPrice = (await Promise.all(insertPromises)).reduce((total, price) => total + price, 0);
 
-  return;
+  return totalPrice;
 };
 
 module.exports = controllPostHistory;

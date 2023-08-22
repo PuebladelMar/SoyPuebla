@@ -39,6 +39,7 @@ import {
   PUT_CATEGORIES,
   PUT_SIZES,
   PUT_COLECCIONS,
+  ADD_HISTORY
 } from './ActionsTypes';
 
 let initialState = {
@@ -64,6 +65,7 @@ let initialState = {
   information: [],
   questions: [],
   pusrchaseStatusMail: [],
+  totalPay: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -272,6 +274,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         categories: action.payload,
+      };
+    case ADD_HISTORY:
+      return {
+        ...state,
+        totalPay: action.payload
       };
     default:
       return state;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 import {
   LineChart,
@@ -11,7 +11,8 @@ import {
 } from "recharts";
 import Title from "./Title";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { getAllHistory } from "../../redux/Actions";
 
 function createData(time, approved, pending, rejected) {
@@ -22,58 +23,236 @@ export default function Chart() {
   const allHistory = useSelector((state) => state.allHistory);
   const dispatch = useDispatch();
 
+  const theme = useTheme();
+  const [alignment, setAlignment] = useState("hoy");
+  const [data, setData] = useState([]);
+  const currentDate = new Date();
+  const currentDay = currentDate.getDate();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth();
+
   useEffect(() => {
     dispatch(getAllHistory());
-  }, [dispatch]);
 
-  const theme = useTheme();
+    if (alignment === "semana") {
+      const interval = 7;
+      const daysInWeek = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+      const newData = [];
+      const currentDayIndex = currentDate.getDay();
+      for (let day = currentDayIndex; day >= currentDayIndex - 6; day--) {
+        const dayIndex = (day < 0 ? day + 7 : day) % 7; 
 
-  // Agrupar ventas por intervalos de 3 horas
-  const interval = 3; // horas
-  const data = [];
+        const currentDateOfWeek = new Date(currentYear, currentMonth, currentDay - dayIndex);
+        const dayOfWeek = daysInWeek[currentDateOfWeek.getDay()];
+        const formattedDate = `${currentDateOfWeek.getDate()}/${currentDateOfWeek.getMonth() + 1}`;
 
-  for (let hour = 0; hour < 24; hour += interval) {
-    const startTime = `${hour.toString().padStart(2, "0")}:00`;
-    const endTime = `${(hour + interval).toString().padStart(2, "0")}:00`;
+        const salesInInterval = {
+          approved: 0,
+          pending: 0,
+          rejected: 0,
+        };
 
-  //   const salesInInterval = allHistory.reduce((totalSales, history) => {
-  //     const createdAtHour = new Date(history.createdAt).getHours();
+        allHistory.forEach((history) => {
+          const createdAtDate = new Date(history.createdAt);
+          const createdAtDay = createdAtDate.getDate();
+          const createdAtMonth = createdAtDate.getMonth();
+          const createdAtYear = createdAtDate.getFullYear();
 
-  //     if (createdAtHour >= hour && createdAtHour < hour + interval) {
-  //       totalSales += history.unitPrice * history.quantity;
-  //     }
+          if (
+            createdAtYear === currentYear &&
+            createdAtMonth === currentMonth &&
+            createdAtDay === currentDateOfWeek.getDate()
+          ) {
+            if (history.state === "approved") {
+              salesInInterval.approved += history.unitPrice * history.quantity;
+            } else if (history.state === "pending") {
+              salesInInterval.pending += history.unitPrice * history.quantity;
+            } else if (history.state === "rejected") {
+              salesInInterval.rejected += history.unitPrice * history.quantity;
+            }
+          }
+        });
 
-  //     return totalSales;
-  //   }, 0);
-
-  //   data.push(createData(`${startTime} - ${endTime}`, salesInInterval));
-  // }
-  const salesInInterval = {
-    approved: 0,
-    pending: 0,
-    rejected: 0,
-  };
-
-  allHistory.forEach((history) => {
-    const createdAtHour = new Date(history.createdAt).getHours();
-
-    if (createdAtHour >= hour && createdAtHour < hour + interval) {
-      if (history.state === "approved") {
-        salesInInterval.approved += history.unitPrice * history.quantity;
-      } else if (history.state === "pending") {
-        salesInInterval.pending += history.unitPrice * history.quantity;
-      } else if (history.state === "rejected") {
-        salesInInterval.rejected += history.unitPrice * history.quantity;
+        newData.push(
+          createData(
+            `${dayOfWeek} (${formattedDate})`,
+            salesInInterval.approved,
+            salesInInterval.pending,
+            salesInInterval.rejected
+          )
+        );
       }
-    }
-  });
 
-  data.push(createData(startTime, salesInInterval.approved, salesInInterval.pending, salesInInterval.rejected));
-}
+      setData(newData);
+    } 
+    else if (alignment === "mes") {
+      const interval = 5;
+      const newData = [];
+
+      for (let day = 1; day <= 31; day += interval) {
+        const startDay = day;
+        const endDay = Math.min(day + interval - 1, 31);
+        const timeLabel = `${startDay}-${endDay}`;
+
+        const salesInInterval = {
+          approved: 0,
+          pending: 0,
+          rejected: 0,
+        };
+
+        allHistory.forEach((history) => {
+          const createdAtDate = new Date(history.createdAt);
+          const createdAtDay = createdAtDate.getDate();
+          const createdAtMonth = createdAtDate.getMonth();
+          const createdAtYear = createdAtDate.getFullYear();
+
+          if (
+            createdAtYear === currentYear &&
+            createdAtMonth === currentMonth &&
+            createdAtDay >= startDay &&
+            createdAtDay <= endDay
+          ) {
+            if (history.state === "approved") {
+              salesInInterval.approved += history.unitPrice * history.quantity;
+            } else if (history.state === "pending") {
+              salesInInterval.pending += history.unitPrice * history.quantity;
+            } else if (history.state === "rejected") {
+              salesInInterval.rejected += history.unitPrice * history.quantity;
+            }
+          }
+        });
+
+        newData.push(
+          createData(
+            timeLabel,
+            salesInInterval.approved,
+            salesInInterval.pending,
+            salesInInterval.rejected
+          )
+        );
+      }
+
+      setData(newData);
+    } else if (alignment === "año") {
+      const interval = 2; 
+      const months = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+      ];
+      const newData = [];
+
+      for (let month = 0; month < 12; month += interval) {
+        const startMonth = months[month];
+        const endMonth = months[Math.min(month + interval - 1, 11)];
+        const timeLabel = `${startMonth}-${endMonth}`;
+
+        const salesInInterval = {
+          approved: 0,
+          pending: 0,
+          rejected: 0,
+        };
+
+        allHistory.forEach((history) => {
+          const createdAtDate = new Date(history.createdAt);
+          const createdAtMonth = createdAtDate.getMonth();
+          const createdAtYear = createdAtDate.getFullYear();
+
+          if (
+            createdAtYear === currentYear &&
+            createdAtMonth >= month &&
+            createdAtMonth <= month + interval - 1
+          ) {
+            if (history.state === "approved") {
+              salesInInterval.approved += history.unitPrice * history.quantity;
+            } else if (history.state === "pending") {
+              salesInInterval.pending += history.unitPrice * history.quantity;
+            } else if (history.state === "rejected") {
+              salesInInterval.rejected += history.unitPrice * history.quantity;
+            }
+          }
+        });
+
+        newData.push(
+          createData(
+            timeLabel,
+            salesInInterval.approved,
+            salesInInterval.pending,
+            salesInInterval.rejected
+          )
+        );
+      }
+
+      setData(newData);
+    
+    } 
+    else {
+      const interval = 3;
+      const newData = [];
+
+      for (let hour = 0; hour <= 24; hour += interval) {
+        const startTime = `${hour.toString().padStart(2, "0")}:00`;
+
+        const salesInInterval = {
+          approved: 0,
+          pending: 0,
+          rejected: 0,
+        };
+
+        allHistory.forEach((history) => {
+          const createdAtDate = new Date(history.createdAt);
+          const createdAtDay = createdAtDate.getDate();
+          const createdAtHour = createdAtDate.getHours();
+
+          if (
+            currentDay === createdAtDay &&
+            createdAtHour >= hour &&
+            createdAtHour < hour + interval
+          ) {
+            if (history.state === "approved") {
+              salesInInterval.approved += history.unitPrice * history.quantity;
+            } else if (history.state === "pending") {
+              salesInInterval.pending += history.unitPrice * history.quantity;
+            } else if (history.state === "rejected") {
+              salesInInterval.rejected += history.unitPrice * history.quantity;
+            }
+          }
+        });
+
+        newData.push(
+          createData(
+            startTime,
+            salesInInterval.approved,
+            salesInInterval.pending,
+            salesInInterval.rejected
+          )
+        );
+      }
+
+      setData(newData);
+    }
+  }, [alignment, dispatch, currentYear, currentMonth, currentDay]);
+
+  const handleAlignmentChange = (event, newAlignment) => {
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
+  };
 
   return (
     <>
       <Title>Hoy</Title>
+      <ToggleButtonGroup
+        color="primary"
+        value={alignment}
+        exclusive
+        onChange={handleAlignmentChange}
+        aria-label="Intervalo"
+      >
+        <ToggleButton value="hoy">Hoy</ToggleButton>
+        <ToggleButton value="semana">Semana</ToggleButton>
+        <ToggleButton value="mes">Mes</ToggleButton>
+        <ToggleButton value="año">Año</ToggleButton>
+      </ToggleButtonGroup>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -84,6 +263,7 @@ export default function Chart() {
             left: 24,
           }}
         >
+        
           <XAxis
             dataKey="time"
             stroke={theme.palette.text.secondary}
@@ -124,6 +304,7 @@ export default function Chart() {
             stroke={theme.palette.error.main}
             dot={false}
           />
+       
         </LineChart>
       </ResponsiveContainer>
     </>

@@ -4,6 +4,8 @@
   justify-content: center;
   margin-top: 5rem;
   align-items: center;
+  background-color: #F0F0F0;
+  padding-bottom: 5rem;
 }
 
 .about-content {
@@ -12,7 +14,7 @@
 }
 
 .about-title {
-  font-size: 25px;
+  font-size: 28px;
   margin-bottom: 10px;
   margin-top: 2.5rem;
   text-align: center;
@@ -25,8 +27,8 @@
   line-height: 1.5;
   text-align: justify;
   justify-content: center;
-  margin: 2rem 2rem 2rem 2rem;
-  color: rgb(81, 81, 81);
+  margin: 2rem 4rem 2rem 4rem;
+  color: rgb(127 127 127);
 }
 
 @media screen and (max-width: 600px) {
@@ -35,10 +37,28 @@
   }
 
   .about-title {
-    font-size: 28px;
+    font-size: 25px;
   }
 
   .about-text {
     font-size: 16px;
   }
+}
+
+.img-About-Pdm{
+  scale: 30%;
+  margin-top: -5rem;
+  margin-bottom: -8rem;
+  min-height: 300px;
+  min-width: 600px;
+  object-fit: cover;
+}
+
+.img-About-Tortuga{
+  scale: 18%;
+  margin-top: -10rem;
+  margin-bottom: -13rem;
+  min-height: 300px;
+  min-width: 600px;
+  object-fit: cover;
 }
