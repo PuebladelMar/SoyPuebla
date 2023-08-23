@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getColor } from "../../../redux/Actions";
-import axios from "axios";
-import colorValidations from "./colorValidations";
-import { ChromePicker } from "react-color";
-import "./createColor.css";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getColor } from '../../../redux/Actions';
+import axios from 'axios';
+import colorValidations from './colorValidations';
+import { ChromePicker } from 'react-color';
+import './createColor.css';
 
 const CreateColor = () => {
   const dispatch = useDispatch();
@@ -17,15 +17,15 @@ const CreateColor = () => {
   }, [count]);
 
   let [createColor, setCreateColor] = useState({
-    name: "",
-    codHex: "",
+    name: '',
+    codHex: '',
   });
   const [errors, setErrors] = useState({
     disableButton: true,
   });
 
-  const [colorSelect, setColorSelect] = useState("#ffffff");
-  const [hexColor, setHexColor] = useState("#ffffff");
+  const [colorSelect, setColorSelect] = useState('#ffffff');
+  const [hexColor, setHexColor] = useState('#ffffff');
 
   const handleColorChangeComplete = (newColor) => {
     setColorSelect(newColor.rgb);
@@ -58,12 +58,12 @@ const CreateColor = () => {
     } else {
       try {
         const asyncFunction = async () => {
-          await axios.post("/products/color", createColor);
+          await axios.post('/products/color', createColor);
           setCount((prevCount) => prevCount + 1);
-          alert("color creado existosamente");
+
           setCreateColor({
-            name: "",
-            codHex: "",
+            name: '',
+            codHex: '',
           });
           setErrors({
             disableButton: true,
@@ -77,46 +77,49 @@ const CreateColor = () => {
   };
 
   return (
-    <div className="create-main-containerX">
-      <div className="create-containerX">
-        <form onSubmit={handleSubmit} className="create-formX">
-          <label htmlFor="name">Nombre color:</label>
+    <div className='create-main-containerX'>
+      <div className='create-containerX'>
+        <form
+          onSubmit={handleSubmit}
+          className='create-formX'
+        >
+          <label htmlFor='name'>Nombre color:</label>
           <input
-            type="text"
-            name="name"
+            type='text'
+            name='name'
             value={createColor.name}
             required
-            placeholder="Nombre"
-            className="custom-inputX"
+            placeholder='Nombre'
+            className='custom-inputX'
             onChange={handleChange}
           />
-          <p className="error">{errors.name}</p>
+          <p className='error'>{errors.name}</p>
 
-          <div className="colorSelectorContainer">
-            <div className="color-picker">
+          <div className='colorSelectorContainer'>
+            <div className='color-picker'>
               <ChromePicker
                 color={colorSelect}
                 onChangeComplete={handleColorChangeComplete}
                 disableAlpha={true}
               />
             </div>
-            <div className="colorPreview">
-                <h2>Color Preview</h2>
+            <div className='colorPreview'>
+              <h2>Color Preview</h2>
               <button
-                className="detailColorButtonX"
+                className='detailColorButtonX'
                 key={color.codHex}
                 style={{
                   backgroundColor: hexColor,
-                  width: "50px",
-                  height: "50px",
+                  width: '50px',
+                  height: '50px',
                 }}
               ></button>
             </div>
           </div>
 
           <button
-            className="submit-buttonzX"
-            type="submit"
+            className='submit-buttonzX'
+            type='submit'
             // style={{
             //     backgroundColor: "#d9d9d9",
             //   }}
@@ -127,18 +130,21 @@ const CreateColor = () => {
         </form>
       </div>
 
-      <container className="create-containerX">
+      <container className='create-containerX'>
         <h2>Colores Creados:</h2>
-        <div className="listaColores">
+        <div className='listaColores'>
           {color.map((color) => (
-            <div key={color.id} className="colorItem">
+            <div
+              key={color.id}
+              className='colorItem'
+            >
               <button
-                className="detailColorButtonX"
+                className='detailColorButtonX'
                 key={color.codHex}
                 style={{
                   backgroundColor: color.codHex,
-                  width: "30px",
-                  height: "30px",
+                  width: '30px',
+                  height: '30px',
                 }}
               ></button>
               <p>{color.name}</p>

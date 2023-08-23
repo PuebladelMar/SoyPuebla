@@ -1,3 +1,21 @@
-.container{
+.products-section-admin{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row-reverse;
+   margin-top: 20rem;
+}
+
+.div1{
+    order: -1;
     margin-top: 10rem;
 }
+.div2{
+   
+    border: 1px solid red;
+    order: 1;
+}
+.nav-dashboard-admin{
+     margin-top: 10rem;
+}
+
