@@ -29,12 +29,14 @@ const HistoryData = () => {
 
   useEffect(() => {
     async function fetchHistory() {
+      // console.log("Filters State:", filters.state)
       const filtered = allHistory.filter((user) => {
+        // console.log("User State:", user.state)
         return (
           (filters.createdAt === "" ||
             user.createdAt.includes(filters.createdAt)) &&
           (filters.state === "" ||
-            user.state.toLowerCase().includes(filters.state)) &&
+            (user.state).toLowerCase().includes((filters.state).toLocaleLowerCase())) &&
           (filters.quantity === "" ||
             user.quantity.toString().includes(filters.quantity)) &&
           (filters.unitPrice === "" ||
@@ -86,6 +88,7 @@ const HistoryData = () => {
     }
     fetchHistory();
   }, [filters, allHistory, sortOrder]);
+
 
   const handleFilterChange = (field, value) => {
     setFilters((prevFilters) => ({
@@ -191,20 +194,20 @@ const HistoryData = () => {
             value={filters.attributes.fullName}
             onChange={(e) => handleFilterChange("attributes", e.target.value)}
           />
-          <select
+          {/* <select
             value={filters.attributes.banUser}
             onChange={(e) => handleFilterChange("attributes", e.target.value)}
           >
             <option value="">Bloqueado</option>
             <option value="true">Sí</option>
             <option value="false">No</option>
-          </select>
-          <input
+          </select> */}
+          {/* <input
             type="text"
             placeholder="Rol"
             value={filters.attributes.userRole}
             onChange={(e) => handleFilterChange("attributes", e.target.value)}
-          />
+          /> */}
           <input
             type="text"
             placeholder="E-mail"
@@ -221,7 +224,7 @@ const HistoryData = () => {
               <th>Estado de compra</th>
               <th>Cantidad</th>
               <th>Precio</th>
-              <th>Eliminado</th>
+              {/* <th>Eliminado</th> */}
               <th>Actualizado</th>
 
               <th>Producto</th>
@@ -229,7 +232,7 @@ const HistoryData = () => {
               <th>Talla</th>
 
               <th>Nombre</th>
-              <th>Bloqueado</th>
+              {/* <th>Bloqueado</th> */}
               <th>Rol</th>
               <th>Email</th>
             </tr>
@@ -242,14 +245,14 @@ const HistoryData = () => {
                 <td>{user.state}</td>
                 <td>{user.quantity}</td>
                 <td>{user.unitPrice}</td>
-                <td>{user.deletedAt}</td>
+                {/* <td>{user.deletedAt}</td> */}
                 <td>{user.updatedAt.split("T")[0]}</td>
                 <td>{user.attributes.product}</td>
                 <td>{user.attributes.color}</td>
                 <td>{user.attributes.size}</td>
 
                 <td>{user.attributes.fullName}</td>
-                <td>{user.attributes.banUser}</td>
+                {/* <td>{user.attributes.banUser}</td> */}
                 <td>{user.attributes.userRole}</td>
                 <td>{user.attributes.emailAddress}</td>
               </tr>
