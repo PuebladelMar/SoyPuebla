@@ -121,14 +121,38 @@ const Detail = () => {
   };
 
   const handleAddToCart = () => {
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Su producto se añadido correctamente',
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    dispatch(addToCar(userId, selectedCombination?.stockId, Number(quantity)));
+    if (selectedCombination) {
+      const updatedProductDetails = [...productDetails];
+      const productToUpdateIndex = updatedProductDetails.findIndex(
+        (item) => item.color === selectedColor && item.size === selectedSize
+      );
+  
+      if (productToUpdateIndex !== -1) {
+        if (selectedCombination.stock >= quantity) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Su producto se añadido correctamente',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+  
+          dispatch(addToCar(userId, selectedCombination.stockId, Number(quantity)));
+  
+          updatedProductDetails[productToUpdateIndex].stock -= quantity;
+          setProductDetails(updatedProductDetails);
+          setQuantity(1)
+        } else {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'No hay suficiente stock disponible',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      }
+    }
   };
 
   const isValidEmail = (email) => {

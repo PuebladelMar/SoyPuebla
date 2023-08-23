@@ -146,7 +146,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 405px) {
   .cards-container {
     width: 100%;
     margin-top: 0;

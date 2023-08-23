@@ -23,6 +23,7 @@ import EnProceso from "./views/mercadoPago/EnProceso/enProceso";
 import ErrorPage from "./views/errorPage/ErrorPage";
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import Customer from "./componentes/footer/customer/customer";
 import PayState from "./views/mercadoPago/PayState";
 import axios from "axios";
@@ -45,35 +46,11 @@ axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   const { pathname } = useLocation();
-
+  const user = useSelector((state)=> state.userById)
   return (
     <div>
       {<NavBar />}
       <Routes>
-        <Route
-          path='/all-data'
-          element={<AllData />}
-        />
-        <Route
-          path='/all-data/all-products'
-          element={<AllProducts />}
-        />
-        <Route
-          path='/detail-admin/:id'
-          element={<DetailAdmin />}
-        />
-        <Route
-          path='/all-data/all-colecciones'
-          element={<AllColecciones />}
-        />
-        <Route
-          path='/all-data/all-sizes'
-          element={<AllTalles />}
-        />
-        <Route
-          path='/all-data/all-colors'
-          element={<AllColors />}
-        />
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route
           path='/'
@@ -107,10 +84,6 @@ function App() {
           path='/create'
           element={<Create />}
         />
-        <Route
-          path='/info'
-          element={<Information />}
-        />
         {/*<Route path="/login" element={<Login />} />*/}
         <Route
           path='/products/:id'
@@ -119,10 +92,6 @@ function App() {
         <Route
           path='*'
           element={<ErrorPage />}
-        />
-        <Route
-          path='/dashboard'
-          element={<Dashboard />}
         />
         <Route
           path='/frequent-questions'
@@ -145,14 +114,6 @@ function App() {
           element={<Shipment />}
         />
         <Route
-          path='/create-category'
-          element={<CreateCategory />}
-        />
-        <Route
-          path='/create-color'
-          element={<CreateColor />}
-        />
-        <Route
           path='/size-chart'
           element={<SizeChart />}
         />
@@ -160,9 +121,39 @@ function App() {
           path='/products/reviews'
           element={<ReviewsForm />}
         />
+        {user?.user?.userRole === 'administrator' || user?.user?.userRole === 'superadministrator' ? (
+        <>
         <Route
-          path='/create-serie'
-          element={<CreateSerie />}
+          path='/dashboard'
+          element={<Dashboard />}
+        />
+        <Route
+          path='/info'
+          element={<Information />}
+        />
+                <Route
+          path='/all-data'
+          element={<AllData />}
+        />
+        <Route
+          path='/all-data/all-products'
+          element={<AllProducts />}
+        />
+        <Route
+          path='/detail-admin/:id'
+          element={<DetailAdmin />}
+        />
+        <Route
+          path='/all-data/all-colecciones'
+          element={<AllColecciones />}
+        />
+        <Route
+          path='/all-data/all-sizes'
+          element={<AllTalles />}
+        />
+        <Route
+          path='/all-data/all-colors'
+          element={<AllColors />}
         />
         <Route
           path='/dashboard/users'
@@ -180,6 +171,8 @@ function App() {
           path='/edit-products/:id'
           element={<EditProduct />}
         />
+        </>
+        ):(null)}
       </Routes>
       {pathname !== '/' && <Footer />}
     </div>

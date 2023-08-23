@@ -134,7 +134,6 @@ export default function Cardx({ product }) {
               )}
             </Box>
           </Link>
-
           <Box
             style={{
               display: "flex",
@@ -189,7 +188,6 @@ export default function Cardx({ product }) {
                     style={{
                       marginTop: "-1.3rem",
                     }}>
-
                       <Box 
                       style={{
                         display: "flex",
@@ -290,7 +288,6 @@ export default function Cardx({ product }) {
                   </div>
                 ))}
               </Box>
-
               <CardActions
                 style={{
                   height: "3rem",
@@ -333,8 +330,6 @@ export default function Cardx({ product }) {
                 position: "relative",
               }}
             >
-
-
               <CardMedia
                 component="img"
                 style={{
@@ -353,7 +348,6 @@ export default function Cardx({ product }) {
                   e.currentTarget.style.transform = "scale(1)";
                 }}
               />
-
               {sale == 0 ? (
                 <Typography />
               ) : (
@@ -376,8 +370,6 @@ export default function Cardx({ product }) {
                   {sale} off%
                 </Typography>
               )}
-
-
             </Box>
           </Link>
           <Box
@@ -413,7 +405,9 @@ export default function Cardx({ product }) {
                   gap: isMatchCard ? "1rem" : "1.5rem",
                 }}
               >
-                <Link to={`/products/${id}`}>
+                <Link to={`/products/${id}`} style={{
+                      width: "80%"
+                    }}>
                   <Typography
                     variant="body2"
                     color="text.secondary"
@@ -427,7 +421,6 @@ export default function Cardx({ product }) {
                   </Typography>
                 </Link>
                 <Link to={`/products/${id}`}>
-
                 {sale == 0 ? (
                   <Typography
                     variant="body2"
@@ -443,16 +436,13 @@ export default function Cardx({ product }) {
                     <Box
                     style={{
                       marginTop: "-1.3rem",
-                      // backgroundColor: "black",
                     }}>
-
                       <Box 
                       style={{
                         display: "flex",
                         flexDirection: "row",
                         gap: "1rem",
                       }}>
-
                       <Typography
                         variant="body2"
                         color="text.secondary"
@@ -463,7 +453,6 @@ export default function Cardx({ product }) {
                         }}
                       >
                         $ {formatNumber(Math.floor(price * (1 - sale / 100)))}
-
                       </Typography>
                       <Typography
                         variant="body2"
@@ -481,7 +470,6 @@ export default function Cardx({ product }) {
                         SALE
                       </Typography>
                         </Box>
-
                       <Typography
                         variant="body2"
                         color="text.secondary"

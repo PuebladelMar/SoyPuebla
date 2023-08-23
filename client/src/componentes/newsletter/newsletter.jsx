@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import "./newsletter.css";
 import { sendMail } from "../../redux/Actions";
 import { useSelector, useDispatch } from "react-redux";
+import { useMediaQuery } from '@mui/material';
 
 const Newsletter = () => {
   const dispatch = useDispatch();
   const mailConfirmation = useSelector((state) => state.mailConfirmation);
-
   const [emailValue, setEmailValue] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const isMatch = useMediaQuery('(max-width: 420px)');
 
   const isValidEmail = (emailValue) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -49,7 +50,7 @@ const Newsletter = () => {
         <input
           type="email"
           id="email-input"
-          placeholder="Ingresa tu correo electrónico"
+          placeholder= {isMatch ? "Ingresa tu correo": "Ingresa tu correo electrónico"}
           className="input-newsletter"
           value={emailValue}
           onChange={handleEmailChange}

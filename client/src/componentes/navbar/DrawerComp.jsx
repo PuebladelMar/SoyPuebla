@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from 'react-redux';
 import {
   Box,
   Drawer,
@@ -14,7 +15,7 @@ import { Link } from "react-router-dom";
 
 function DrawerComp() {
   const [open, setOpen] = useState(false);
- 
+  const user = useSelector(state => state.userById);
 
   return (
     <>
@@ -153,6 +154,7 @@ function DrawerComp() {
                 </ListItemText>
               </ListItemIcon>
             </ListItemButton>
+            {user?.user?.userRole === 'administrator' || user?.user?.userRole === 'superadministrator' ? (
             <ListItemButton
               component={Link}
               to="/dashboard"
@@ -183,6 +185,7 @@ function DrawerComp() {
                 </ListItemText>
               </ListItemIcon>
             </ListItemButton>
+            ):(null)}
             <ListItemButton
               component={Link}
               to="/fav"
