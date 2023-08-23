@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllHistory } from "../../../redux/Actions";
+import { getAllHistory, putHistories} from "../../../redux/Actions";
+import { FaPencilAlt } from 'react-icons/fa';
 
 const HistoryData = () => {
   const allHistory = useSelector((state) => state.allHistory);
@@ -105,6 +106,23 @@ const HistoryData = () => {
   const setSortOrderDesc = () => {
     setSelectedButton("desc");
     setSortOrder("desc");
+  };
+
+  const handleEditState = async (id, state) => {
+    const updatedState = prompt(
+      "Selecciona el nuevo estado: 'approved' o 'rejected'",
+      state
+    );
+    if (updatedState) {
+      if (
+        updatedState === 'approved' ||
+        updatedState === 'rejected') {
+        await dispatch(putHistories(id, updatedState));
+        dispatch(getAllHistory());
+      } else {
+        alert("Rol no válido. Por favor, selecciona uno de los roles permitidos.");
+      }
+    }
   };
 
   return (
@@ -242,7 +260,13 @@ const HistoryData = () => {
               <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.createdAt.split("T")[0]}</td>
-                <td>{user.state}</td>
+                <td>{user.state}
+                <button
+                    className="edit-color"
+                    onClick={() => handleEditState(user.id,user.state)}
+                  >
+                    <FaPencilAlt />
+                  </button></td>
                 <td>{user.quantity}</td>
                 <td>{user.unitPrice}</td>
                 {/* <td>{user.deletedAt}</td> */}
