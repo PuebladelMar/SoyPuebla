@@ -1,65 +1,84 @@
 .menu-item {
-    margin: 1rem;
-    position: relative;
-    text-decoration: none;
-  }
-  
-  .menu-item a {
-    color: inherit;
-  }
-  
-  .menu-item::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: rgb(255, 255, 255);
-    transition: width 0.2s ease;
-    transform-origin: right;
-  }
-  
-  .menu-item:hover::after {
-    width: 100%;
-    transform-origin: left; 
-  }
+  margin: 1rem;
+  position: relative;
+  text-decoration: none;
+}
 
-  .navbar-search-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 3rem;
-    width: 3.5rem;
-  }
+.menu-item a {
+  color: inherit;
+}
 
-  .div-user-hidden {
-    padding-top: 2px;
-    padding-left: 10px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.menu-item::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: rgb(255, 255, 255);
+  transition: width 0.2s ease;
+  transform-origin: right;
+}
 
-  .cart-num-container {
-    position: relative;
-  }
+.menu-item:hover::after {
+  width: 100%;
+  transform-origin: left;
+}
 
-  .span-num-cart {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 0.1rem;
-    background-color: rgb(235, 0, 0);
-    border-radius: 50%;
-    top: -0.3rem;
-    right: -0.5rem;
-    height: 0.9rem;
-    width: 0.9rem;
-    font-size: 0.7rem;
-    color: rgb(243, 243, 243);
-  }
+.navbar-search-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  width: 3.5rem;
+}
+
+.div-user-hidden {
+  padding-top: 2px;
+  padding-left: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-num-container {
+  position: relative;
+}
+
+.span-num-cart {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.1rem;
+  background-color: rgb(235, 0, 0);
+  border-radius: 50%;
+  top: -0.3rem;
+  right: -0.5rem;
+  height: 0.9rem;
+  width: 0.9rem;
+  font-size: 0.7rem;
+  color: rgb(243, 243, 243);
+}
+
+.li-products {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.05rem;
+  align-items: center;
+  color: rgb(7, 21, 22);
+  gap: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.li-products:hover {
+  background-color: rgb(216, 216, 216);
+}

@@ -27,6 +27,7 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
   const series = useSelector((state) => state.series);
   const categories = useSelector((state) => state.categories);
   const sizes = useSelector((state) => state.sizesList);
+  const userCart = useSelector((state) => state.userCart);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isOpenCategory, setIsOpenCategory] = useState(false);
@@ -126,13 +127,15 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
       {windowWidth < 645 ? (
         <div className="filter-button">
           <Link to="/Cart">
-          <button className="open-modal-button">
-            <span className="open-modal-span">Carrito</span>
-            <span className="open-modal-span">
-            <FiShoppingCart />
-            </span>
-            <span className="span-num-cart-sidebar">0</span>
-          </button>
+            <button className="open-modal-button">
+              <span className="open-modal-span">Carrito</span>
+              <span className="open-modal-span">
+                <FiShoppingCart />
+              </span>
+              {userCart.length > 0 && (
+                <span className="span-num-cart">{userCart.length}</span>
+              )}
+            </button>
           </Link>
           <button className="open-modal-button" onClick={handleResetFilters}>
             <span className="open-modal-span">Deshacer</span>
