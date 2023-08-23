@@ -8,15 +8,16 @@ const HistoryData = () => {
   const [filteredHistory, setFilteredHistory] = useState([]);
   const [filters, setFilters] = useState({
     createdAt: "",
+    state: "",
     quantity: "",
     unitPrice: "",
     deletedAt: "",
     updatedAt: "",
-    attributes: "",
     emailAddress: "",
     userRole: "",
     banUser: "",
     fullName: "",
+    attributes: "",
   });
 
   const [sortOrder, setSortOrder] = useState("asc");
@@ -29,12 +30,12 @@ const HistoryData = () => {
   }, [dispatch]);
 
   useEffect(() => {
-
     async function fetchHistory() {
       const filtered = allHistory.filter((user) => {
         return (
           (filters.createdAt === "" ||
             user.createdAt.includes(filters.createdAt)) &&
+          (filters.state === "" || user.state.includes(filters.state)) &&
           (filters.quantity === "" ||
             user.quantity.toString().includes(filters.quantity)) &&
           (filters.unitPrice === "" ||
@@ -49,14 +50,16 @@ const HistoryData = () => {
               user.attributes.product.includes(filters.attributes)) ||
             (user.attributes.color &&
               user.attributes.color.includes(filters.attributes)) ||
+            (user.attributes.fullName &&
+              user.attributes.fullName.includes(filters.attributes)) ||
+            (user.attributes.banUser &&
+              user.attributes.banUser.includes(filters.attributes)) ||
+            (user.attributes.userRole &&
+              user.attributes.userRole.includes(filters.attributes)) ||
+            (user.attributes.emailAddress &&
+              user.attributes.emailAddress.includes(filters.attributes)) ||
             (user.attributes.size &&
               user.attributes.size.includes(filters.attributes))) &&
-          (filters.emailAddress === "" ||
-            user.emailAddress.includes(filters.emailAddress)) &&
-          (filters.fullName === "" ||
-            user.fullName.includes(filters.fullName)) &&
-          (filters.banUser === "" ||
-            user.banUser.toString() === filters.banUser) &&
           (filters.id === "" || user.id.includes(filters.id)) &&
           (filters.userRole === "" || user.userRole.includes(filters.userRole))
         );
@@ -73,7 +76,6 @@ const HistoryData = () => {
       setFilteredHistory(sortedHistory);
     }
     fetchHistory();
-
   }, [filters, allHistory, sortOrder]);
 
   const handleFilterChange = (field, value) => {
@@ -97,7 +99,6 @@ const HistoryData = () => {
     <div className="userAdmin-methods-container">
       <div className="userAdmin-container">
         <div className="userAdmin-header">
-
           <h2 className="userAdmin-title">Historial de Compras</h2>
 
           <span className="userAdmin-text-underline"></span>
@@ -111,6 +112,7 @@ const HistoryData = () => {
             value={filters.createdAt}
             onChange={(e) => handleFilterChange("createdAt", e.target.value)}
           />
+
           <div className="filters">
             <button
               onClick={setSortOrderAsc}
@@ -127,6 +129,12 @@ const HistoryData = () => {
               Descendente
             </button>
           </div>
+          <input
+            type="text"
+            placeholder="Estado de compra"
+            value={filters.state}
+            onChange={(e) => handleFilterChange("createdAt", e.target.value)}
+          />
           <input
             type="text"
             placeholder="Cantidad"
@@ -199,11 +207,11 @@ const HistoryData = () => {
               <th>Color</th>
               <th>Size</th>
               <th>Fecha de Compra</th>
+              <th>Estado de compra</th>
               <th>Nombre</th>
               <th>Email</th>
               <th>Bloqueado</th>
               <th>Rol</th>
-
               <th>Eliminado</th>
               <th>Actualizado</th>
             </tr>
@@ -216,10 +224,11 @@ const HistoryData = () => {
                 <td>{user.attributes.color}</td>
                 <td>{user.attributes.size}</td>
                 <td>{user.createdAt.split("T")[0]}</td>
-                <td>{user.fullName}</td>
-                <td>{user.emailAddress}</td>
-                <td>{user.banUser}</td>
-                <td>{user.userRole}</td>
+                <td>{user.state}</td>
+                <td>{user.attributes.fullName}</td>
+                <td>{user.attributes.emailAddress}</td>
+                <td>{user.attributes.banUser}</td>
+                <td>{user.attributes.userRole}</td>
                 <td>{user.deletedAt}</td>
                 <td>{user.updatedAt.split("T")[0]}</td>
               </tr>
