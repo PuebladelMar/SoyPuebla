@@ -45,7 +45,7 @@
   margin-left: 1rem;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .newsletter {
     flex-direction: column;
     text-align: center;
@@ -54,5 +54,19 @@
 
   .newsletter-title {
     margin: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .newsletter-form {
+    width: 100%;
+  }
+
+  .input-newsletter {
+    width: 10rem;
+  }
+
+  .newsletter-button {
+    height: 2.5rem;
   }
 }

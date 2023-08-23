@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import * as actions from "../../redux/Actions";
 import Modal from "@mui/material/Modal";
 import { useMediaQuery } from "@mui/material";
-import { FiSliders, FiShoppingCart } from "react-icons/fi";
+import { FiSliders, FiShoppingCart, FiRotateCcw } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import "./SideBAr.css";
 
@@ -125,16 +125,19 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
     <aside className="search-bar-aside">
       {windowWidth < 645 ? (
         <div className="filter-button">
-          <button className="cart-button">
-            <Link to="/Cart">
-              <FiShoppingCart
-                style={{
-                  width: "1.8rem",
-                  height: "1.8rem",
-                  color: "white",
-                }}
-              />
-            </Link>
+          <Link to="/Cart">
+          <button className="open-modal-button">
+            <span className="open-modal-span">Carrito</span>
+            <span className="open-modal-span">
+            <FiShoppingCart />
+            </span>
+          </button>
+          </Link>
+          <button className="open-modal-button" onClick={handleResetFilters}>
+            <span className="open-modal-span">Deshacer</span>
+            <span className="open-modal-span">
+              <FiRotateCcw />
+            </span>
           </button>
           <button className="open-modal-button" onClick={handleOpenModal}>
             <span className="open-modal-span">Filtros</span>
