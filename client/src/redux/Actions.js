@@ -42,18 +42,13 @@ import {
   PUT_SIZES,
   PUT_CATEGORIES,
   PUT_COLECCIONS,
-
   GET_CATEGORIES_BY_NAME,
   GET_SERIES_BY_NAME,
   GET_COLORS_BY_NAME,
   GET_SIZES_BY_NAME,
-
-
   PUT_PRODUCTS,
   DELETE_PRODUCT,
- 
   PUT_HISTORY_STATES,
-
 } from './ActionsTypes';
 
 export function getProducts() {
@@ -760,7 +755,6 @@ export function deleteCategories(id) {
   };
 }
 
-
 export function getCategoriesByName(name) {
   return async function (dispatch) {
     try {
@@ -772,19 +766,39 @@ export function getCategoriesByName(name) {
     } catch (error) {
       alert('Error al obtener las colecciones');
       console.error('Error al obtener las coincidencias:', error);
+    }
+  };
+}
 
-export function editProducts(name, price, sale, description, series, category, colorImage) {
+export function editProducts(
+  name,
+  price,
+  sale,
+  description,
+  series,
+  category,
+  colorImage
+) {
   return async function (dispatch) {
     try {
       console.log('Datos que se envían en la solicitud PUT:', {
-        name, price, sale, description, series, category, colorImage
+        name,
+        price,
+        sale,
+        description,
+        series,
+        category,
+        colorImage,
       });
-      const response = await axios.put(
-        `http://localhost:3001/products/${id}`,
-        {
-          name, price, sale, description, series, category, colorImage
-        }
-      );
+      const response = await axios.put(`http://localhost:3001/products/${id}`, {
+        name,
+        price,
+        sale,
+        description,
+        series,
+        category,
+        colorImage,
+      });
       dispatch({
         type: PUT_PRODUCTS,
         payload: response.data,
@@ -807,11 +821,9 @@ export function deleteProduct(id) {
       });
     } catch (error) {
       alert(error.message);
-
     }
   };
 }
-
 
 export function getSeriesByName(name) {
   return async function (dispatch) {
@@ -830,7 +842,7 @@ export function getSeriesByName(name) {
 export function getColorByName(name) {
   return async function (dispatch) {
     try {
-      const response = await axios(`/all-colors?name=${name}`);
+      const response = await axios(`/products/color?name=${name}`);
       dispatch({
         type: GET_COLORS_BY_NAME,
         payload: response.data,
@@ -841,10 +853,11 @@ export function getColorByName(name) {
     }
   };
 }
+
 export function getSizesByName(name) {
   return async function (dispatch) {
     try {
-      const response = await axios(`/all-sizes?name=${name}`);
+      const response = await axios(`/products/size?name=${name}`);
       dispatch({
         type: GET_SIZES_BY_NAME,
         payload: response.data,
@@ -859,14 +872,10 @@ export function getSizesByName(name) {
 export function putHistories(id, state) {
   return async function (dispatch) {
     try {
-  
-      const response = await axios.put(
-        `http://localhost:3001/history`,
-        {
-         id,
-         state,
-        }
-      );
+      const response = await axios.put(`http://localhost:3001/history`, {
+        id,
+        state,
+      });
       dispatch({
         type: PUT_HISTORY_STATES,
         payload: response.data,
@@ -876,4 +885,3 @@ export function putHistories(id, state) {
     }
   };
 }
-
