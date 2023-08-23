@@ -149,7 +149,6 @@ const Create = () => {
       !createProduct.name ||
       !createProduct.description ||
       !createProduct.price ||
-      !createProduct.sale ||
       !createProduct.category.length === 0 ||
       !createProduct.size.length === 0 ||
       !createProduct.series.length === 0 ||
@@ -180,7 +179,7 @@ const Create = () => {
         if (!existingColor) {
           const updatedColorImage = [
             ...state.colorImage,
-            { color: selectedColor, images: [], stocks: [] }, // Agregar stocks vacíos
+            { color: selectedColor, images: [], stocks: [] },
           ];
           return {
             ...state,
@@ -511,11 +510,24 @@ const Create = () => {
                     <AccordionDetails>
                    
                    <div>
-                    <div>
+                    {col.images.length === 0 ? (
+                      <div>
+                        <label htmlFor="image">Imagenes </label>
+                        <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
+                      </div>
+                    ) : (
+                      <div>
                       <label htmlFor="image">Imagenes </label>
-                      <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
-                      <p className="error">{errors.images}</p>
+                      <div>
+                        <button 
+                        type='button'
+                        className="mainImage-upload-button" 
+                        disabled= {true}>
+                          Imagen cargada
+                        </button>
+                      </div>
                     </div>
+                    )}
 
                     <talle className="talle">
                   
@@ -539,8 +551,6 @@ const Create = () => {
                     })}
                     </select>
                     </talle>
-                    <p className="error">{errors.size}</p>
-
                     <div >
                       {col.stocks.length > 0 ? (
                         col.stocks.map((si) => {
@@ -564,7 +574,6 @@ const Create = () => {
                       )}
                     </div>
                   </div>
-               
                     </AccordionDetails>
                   </Accordion>
                 </div>
@@ -575,7 +584,8 @@ const Create = () => {
               <p className="no-dietTypes"></p>
             )}
           </div>
-
+          <p className="error">{errors.size}</p>
+          <p className="error">{errors.images}</p>
 
           <label htmlFor="series">Colección <separator></separator> </label>
           <button
