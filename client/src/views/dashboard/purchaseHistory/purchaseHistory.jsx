@@ -6,6 +6,7 @@ import { FaPencilAlt } from 'react-icons/fa';
 const HistoryData = () => {
   const allHistory = useSelector((state) => state.allHistory);
   const dispatch = useDispatch();
+  const [selectedColor, setSelectedColor] = useState("");
   const [filteredHistory, setFilteredHistory] = useState([]);
   const [filters, setFilters] = useState({
     createdAt: "",
@@ -28,16 +29,18 @@ const HistoryData = () => {
     dispatch(getAllHistory());
   }, [dispatch]);
 
+
   useEffect(() => {
     async function fetchHistory() {
-
       const filtered = allHistory.filter((user) => {
+        const lowerCaseFiltersState = filters.state.toLowerCase();
+        const lowerCaseUserState = user.state.toLowerCase();
 
         return (
           (filters.createdAt === "" ||
             user.createdAt.includes(filters.createdAt)) &&
           (filters.state === "" ||
-            (user.state).toLowerCase().includes((filters.state).toLocaleLowerCase())) &&
+            lowerCaseUserState.includes(lowerCaseFiltersState)) &&
           (filters.quantity === "" ||
             user.quantity.toString().includes(filters.quantity)) &&
           (filters.unitPrice === "" ||
@@ -76,8 +79,11 @@ const HistoryData = () => {
               user.attributes.size.toLowerCase().includes(filters.attributes)))
         );
       });
+      const filteredByColor = selectedColor
+      ? filtered.filter((user) => user.attributes.color.toLowerCase() === selectedColor)
+      : filtered;
 
-      const sortedHistory = filtered.slice().sort((a, b) => {
+      const sortedHistory = filteredByColor.slice().sort((a, b) => {
         if (sortOrder === "asc") {
           return a.createdAt.localeCompare(b.createdAt);
         } else {
@@ -87,16 +93,20 @@ const HistoryData = () => {
 
       setFilteredHistory(sortedHistory);
     }
+
     fetchHistory();
-  }, [filters, allHistory, sortOrder]);
+  }, [filters, allHistory, sortOrder, selectedColor]);
+
+
 
 
   const handleFilterChange = (field, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [field]: value.toLowerCase(),
+      [field]: value,
     }));
   };
+
 
   const setSortOrderAsc = () => {
     setSelectedButton("asc");
@@ -157,12 +167,16 @@ const HistoryData = () => {
               Descendente
             </button>
           </div>
-          <input
-            type="text"
-            placeholder="Estado de compra"
+          <select
             value={filters.state}
             onChange={(e) => handleFilterChange("state", e.target.value)}
-          />
+          >
+            <option value="">Todos</option>
+            <option value="approved">Aprobado</option>
+            <option value="rejected">Desaprobado</option>
+            <option value="pending">Pendiente</option>
+          </select>
+
           <input
             type="text"
             placeholder="Cantidad"
@@ -175,7 +189,7 @@ const HistoryData = () => {
             value={filters.unitPrice}
             onChange={(e) => handleFilterChange("unitPrice", e.target.value)}
           />
-        
+
           <input
             type="text"
             placeholder="Actualizado DD-MM-AA"
@@ -188,12 +202,19 @@ const HistoryData = () => {
             value={filters.attributes.product}
             onChange={(e) => handleFilterChange("attributes", e.target.value)}
           />
-          <input
-            type="text"
-            placeholder="Color"
-            value={filters.attributes.color}
-            onChange={(e) => handleFilterChange("attributes", e.target.value)}
-          />{" "}
+         
+          <select
+            value={selectedColor}
+            onChange={(e) => setSelectedColor(e.target.value)}
+          >
+            <option value="">Todos los colores</option>
+            {Array.from(new Set(allHistory.map((user) => user.attributes.color.toLowerCase()))).map((color) => (
+              <option key={color} value={color}>
+                {color}
+              </option>
+            ))}
+          </select>
+          {" "}
           <input
             type="text"
             placeholder="Talla"
