@@ -183,7 +183,6 @@ export default function Chart() {
       }
 
       setData(newData);
-    
     } 
     else {
       const interval = 3;
@@ -304,7 +303,6 @@ export default function Chart() {
             stroke={theme.palette.error.main}
             dot={false}
           />
-       
         </LineChart>
       </ResponsiveContainer>
     </>
