@@ -1,18 +1,17 @@
-const { Histories } = require("../../db");
+const { Histories, Stocks } = require("../../db");
 const { Op } = require("sequelize");
 
 const controllPutCategory = async (id, state) => {
   const history = await Histories.findByPk(id);
   if (!history) {
     throw new Error("Category not found");
-  }
+  };
 
-  const existingHistoryWhithSameState = await  Histories.findOne({
-    where: {
-      id: { [Op.not]: id }
-     
-    },
-  });
+  if (state === "rejected") {
+    const stock = await Stocks.findByPk(history.StockId);
+    stock.amount = stock.amount + history.quantity;
+    await stock.save();
+  }
 
   await history.update({ state });
   return "history updated successfully";
