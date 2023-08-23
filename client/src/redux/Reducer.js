@@ -40,6 +40,7 @@ import {
   PUT_SIZES,
   PUT_COLECCIONS,
   ADD_HISTORY,
+  PUT_HISTORY_STATES,
  
 } from './ActionsTypes';
 
@@ -281,6 +282,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         totalPay: action.payload
       };
+      case PUT_HISTORY_STATES:
+        return {
+          ...state,
+          allHistory: action.payload
+        };
     default:
       return state;
   }
