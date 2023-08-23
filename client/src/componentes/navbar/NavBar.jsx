@@ -378,6 +378,16 @@ export default function NavBar({ links }) {
                 >
                   <div className="cart-num-container">
                     <span className="span-num-cart">0</span>
+                  {!userId.length ? (
+                    <FiShoppingCart
+                      style={{
+                        width: "1.8rem",
+                        height: "1.8rem",
+                        color: "white",
+                      }}
+                      onClick={handleCartClick}
+                    />
+                  ) : (
                     <Link to="/Cart">
                       <FiShoppingCart
                         style={{
@@ -388,6 +398,7 @@ export default function NavBar({ links }) {
                       />
                     </Link>
                   </div>
+                  )}
                 </IconButton>
               )}
               {isMatchSearchBarIcon && searchBarVisible ? (

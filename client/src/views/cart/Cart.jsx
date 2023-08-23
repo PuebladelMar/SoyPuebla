@@ -11,6 +11,7 @@ import { FiX } from "react-icons/fi";
 import { useMediaQuery } from "@mui/material";
 import "./Cart.css";
 import Swal from 'sweetalert2';
+const INIT_MP = import.meta.env.INIT_MP;
 
 const Cart = () => {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -20,7 +21,7 @@ const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isMatch = useMediaQuery("(max-width: 525px)");
-  initMercadoPago("TEST-617b343c-694c-44b2-a447-349bcd889b8b");
+  initMercadoPago(INIT_MP);
 
   useEffect(() => {
       const asyncFunction = async()=>{

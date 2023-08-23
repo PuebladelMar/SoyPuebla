@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllHistory, putHistories} from "../../../redux/Actions";
+import { getAllHistory, putHistories } from "../../../redux/Actions";
 import { FaPencilAlt } from 'react-icons/fa';
 
 const HistoryData = () => {
@@ -30,9 +30,9 @@ const HistoryData = () => {
 
   useEffect(() => {
     async function fetchHistory() {
-      // console.log("Filters State:", filters.state)
+
       const filtered = allHistory.filter((user) => {
-        // console.log("User State:", user.state)
+
         return (
           (filters.createdAt === "" ||
             user.createdAt.includes(filters.createdAt)) &&
@@ -151,9 +151,8 @@ const HistoryData = () => {
             </button>
             <button
               onClick={setSortOrderDesc}
-              className={`button ${
-                selectedButton === "desc" ? "selected" : ""
-              }`}
+              className={`button ${selectedButton === "desc" ? "selected" : ""
+                }`}
             >
               Descendente
             </button>
@@ -212,20 +211,7 @@ const HistoryData = () => {
             value={filters.attributes.fullName}
             onChange={(e) => handleFilterChange("attributes", e.target.value)}
           />
-          {/* <select
-            value={filters.attributes.banUser}
-            onChange={(e) => handleFilterChange("attributes", e.target.value)}
-          >
-            <option value="">Bloqueado</option>
-            <option value="true">Sí</option>
-            <option value="false">No</option>
-          </select> */}
-          {/* <input
-            type="text"
-            placeholder="Rol"
-            value={filters.attributes.userRole}
-            onChange={(e) => handleFilterChange("attributes", e.target.value)}
-          /> */}
+
           <input
             type="text"
             placeholder="E-mail"
@@ -242,16 +228,11 @@ const HistoryData = () => {
               <th>Estado de compra</th>
               <th>Cantidad</th>
               <th>Precio</th>
-              {/* <th>Eliminado</th> */}
               <th>Actualizado</th>
-
               <th>Producto</th>
               <th>Color</th>
               <th>Talla</th>
-
               <th>Nombre</th>
-              {/* <th>Bloqueado</th> */}
-              <th>Rol</th>
               <th>Email</th>
             </tr>
           </thead>
@@ -260,24 +241,30 @@ const HistoryData = () => {
               <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.createdAt.split("T")[0]}</td>
-                <td>{user.state}
-                <button
-                    className="edit-color"
-                    onClick={() => handleEditState(user.id,user.state)}
-                  >
-                    <FaPencilAlt />
-                  </button></td>
+                <td>
+                  {user.state === "approved"
+                    ? "Aprobado"
+                    : user.state === "rejected"
+                      ? "Desaprobado"
+                      : user.state === "pending"
+                        ? "Pendiente"
+                        : ""}
+                  {user.state === "pending" && (
+                    <button
+                      className="edit-color"
+                      onClick={() => handleEditState(user.id, user.state)}
+                    >
+                      <FaPencilAlt />
+                    </button>
+                  )}
+                </td>
                 <td>{user.quantity}</td>
                 <td>{user.unitPrice}</td>
-                {/* <td>{user.deletedAt}</td> */}
                 <td>{user.updatedAt.split("T")[0]}</td>
                 <td>{user.attributes.product}</td>
                 <td>{user.attributes.color}</td>
                 <td>{user.attributes.size}</td>
-
                 <td>{user.attributes.fullName}</td>
-                {/* <td>{user.attributes.banUser}</td> */}
-                <td>{user.attributes.userRole}</td>
                 <td>{user.attributes.emailAddress}</td>
               </tr>
             ))}
