@@ -1,10 +1,11 @@
 import './AllTalles.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSizes, putSizes } from '../../../redux/Actions';
+import { getSizes, putSizes, getSizesByName } from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
 import { NavLink, useNavigate } from 'react-router-dom';
 import CreateSize from '../../create/createSize/createSize';
+import SearchBar from '../../../componentes/searchBar/SearchBar';
 // import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const AllTalles = () => {
@@ -12,13 +13,19 @@ const AllTalles = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState({});
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
-    async function fetchSizes() {
-      await dispatch(getSizes());
-    }
-    fetchSizes();
-  }, [dispatch]);
+    const fetchData = async () => {
+      if (searchValue === '') {
+        await dispatch(getSizes());
+      } else {
+        await dispatch(getSizesByName(searchValue));
+      }
+    };
+
+    fetchData();
+  }, [dispatch, searchValue]);
 
   const handleEditSizes = async (id, name) => {
     const updatedName = prompt('Enter new name', name);
@@ -37,6 +44,14 @@ const AllTalles = () => {
     setShowAlert({ size: true });
     event.preventDefault();
   };
+  const handlerEventSearch = (event) => {
+    event.preventDefault();
+    setSearchValue(event.target.value);
+  };
+
+  const handlerSubmitSearch = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <div
@@ -44,6 +59,10 @@ const AllTalles = () => {
       name='series'
       value='name'
     >
+      <SearchBar
+        handlerEventSearch={handlerEventSearch}
+        handlerSubmitSearch={handlerSubmitSearch}
+      />
       <div className='nav-dashboard'>
         <NavLink to='/all-data/all-products'>
           <button

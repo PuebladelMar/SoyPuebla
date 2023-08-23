@@ -40,7 +40,10 @@ import {
   PUT_SIZES,
   PUT_COLECCIONS,
   ADD_HISTORY,
- 
+  GET_CATEGORIES_BY_NAME,
+  GET_SERIES_BY_NAME,
+  GET_COLORS_BY_NAME,
+  GET_SIZES_BY_NAME,
 } from './ActionsTypes';
 
 let initialState = {
@@ -214,7 +217,7 @@ function rootReducer(state = initialState, action) {
     case PUT_COLORS:
       return {
         ...state,
-        colorList: action.payload
+        colorList: action.payload,
       };
     case DELETE_SERIES:
       return {
@@ -246,11 +249,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         questions: action.payload,
       };
-      case DELETE_COLOR:
-        return {
-          ...state,
-          colorList: action.payload,
-        };
+    case DELETE_COLOR:
+      return {
+        ...state,
+        colorList: action.payload,
+      };
     case DELETE_SIZES:
       return {
         ...state,
@@ -279,7 +282,27 @@ function rootReducer(state = initialState, action) {
     case ADD_HISTORY:
       return {
         ...state,
-        totalPay: action.payload
+        totalPay: action.payload,
+      };
+    case GET_SERIES_BY_NAME:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case GET_COLORS_BY_NAME:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case GET_SIZES_BY_NAME:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case GET_CATEGORIES_BY_NAME:
+      return {
+        ...state,
+        allProducts: action.payload,
       };
     default:
       return state;

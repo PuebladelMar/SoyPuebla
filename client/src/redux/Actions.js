@@ -42,6 +42,10 @@ import {
   PUT_SIZES,
   PUT_CATEGORIES,
   PUT_COLECCIONS,
+  GET_CATEGORIES_BY_NAME,
+  GET_SERIES_BY_NAME,
+  GET_COLORS_BY_NAME,
+  GET_SIZES_BY_NAME,
 } from './ActionsTypes';
 
 export function getProducts() {
@@ -422,14 +426,13 @@ export function getUserById(id) {
 }
 
 export function editUser(id, userRole, banUser) {
-
   return async function (dispatch) {
     try {
       const response = await axios.put(
         `http://localhost:3001/users/user/${id}`,
         {
           userRole: userRole,
-          banUser: banUser
+          banUser: banUser,
         }
       );
       dispatch({
@@ -749,4 +752,60 @@ export function deleteCategories(id) {
   };
 }
 
+export function getCategoriesByName(name) {
+  return async function (dispatch) {
+    try {
+      const response = await axios(`/products/category?name=${name}`);
+      dispatch({
+        type: GET_CATEGORIES_BY_NAME,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert('Error al obtener las colecciones');
+      console.error('Error al obtener las coincidencias:', error);
+    }
+  };
+}
 
+export function getSeriesByName(name) {
+  return async function (dispatch) {
+    try {
+      const response = await axios(`/products/series?name=${name}`);
+      dispatch({
+        type: GET_SERIES_BY_NAME,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert('Error al obtener las coincidencias');
+      console.error('Error al obtener las coincidencias:', error);
+    }
+  };
+}
+export function getColorByName(name) {
+  return async function (dispatch) {
+    try {
+      const response = await axios(`/all-colors?name=${name}`);
+      dispatch({
+        type: GET_COLORS_BY_NAME,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert('Error al obtener las coincidencias');
+      console.error('Error al obtener las coincidencias:', error);
+    }
+  };
+}
+export function getSizesByName(name) {
+  return async function (dispatch) {
+    try {
+      const response = await axios(`/all-sizes?name=${name}`);
+      dispatch({
+        type: GET_SIZES_BY_NAME,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert('Error al obtener las coincidencias');
+      console.error('Error al obtener las coincidencias:', error);
+    }
+  };
+}

@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editColors, getColor, deleteColor } from '../../../redux/Actions';
+import {
+  editColors,
+  getColor,
+  deleteColor,
+  getColorByName,
+} from '../../../redux/Actions';
 import './allColors.css';
 import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import CreateColor from '../../create/createColor/createColor';
+import SearchBar from '../../../componentes/searchBar/SearchBar';
 import Swal from 'sweetalert2';
 // import AllData from '../AllData';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -15,13 +21,19 @@ const AllColors = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState({});
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
-    async function fetchColors() {
-      await dispatch(getColor());
-    }
-    fetchColors();
-  }, [dispatch]);
+    const fetchData = async () => {
+      if (searchValue === '') {
+        await dispatch(getColor());
+      } else {
+        await dispatch(getColorByName(searchValue));
+      }
+    };
+
+    fetchData();
+  }, [dispatch, searchValue]);
 
   const handleCloseAlert = (event) => {
     setShowAlert({});
@@ -43,8 +55,21 @@ const AllColors = () => {
     setShowAlert({ color: true });
     event.preventDefault();
   };
+
+  const handlerEventSearch = (event) => {
+    event.preventDefault();
+    setSearchValue(event.target.value);
+  };
+
+  const handlerSubmitSearch = (event) => {
+    event.preventDefault();
+  };
   return (
     <div className='main-container'>
+      <SearchBar
+        handlerEventSearch={handlerEventSearch}
+        handlerSubmitSearch={handlerSubmitSearch}
+      />
       <div className='colors'>
         <div className='nav-dashboard'>
           <NavLink to='/all-data/all-products'>
