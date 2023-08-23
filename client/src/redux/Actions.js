@@ -49,7 +49,9 @@ import {
   PUT_PRODUCTS,
   DELETE_PRODUCT,
   PUT_HISTORY_STATES,
+
 } from "./ActionsTypes";
+
 
 export function getProducts() {
   return async function (dispatch) {
@@ -764,8 +766,10 @@ export function getCategoriesByName(name) {
         payload: response.data,
       });
     } catch (error) {
+
       alert("Error al obtener las colecciones");
       console.error("Error al obtener las coincidencias:", error);
+
     }
   };
 }
@@ -781,7 +785,9 @@ export function editProducts(
 ) {
   return async function (dispatch) {
     try {
+
       console.log("Datos que se envían en la solicitud PUT:", {
+
         name,
         price,
         sale,
@@ -842,7 +848,7 @@ export function getSeriesByName(name) {
 export function getColorByName(name) {
   return async function (dispatch) {
     try {
-      const response = await axios(`/all-colors?name=${name}`);
+      const response = await axios(`/products/color?name=${name}`);
       dispatch({
         type: GET_COLORS_BY_NAME,
         payload: response.data,
@@ -853,10 +859,11 @@ export function getColorByName(name) {
     }
   };
 }
+
 export function getSizesByName(name) {
   return async function (dispatch) {
     try {
-      const response = await axios(`/all-sizes?name=${name}`);
+      const response = await axios(`/products/size?name=${name}`);
       dispatch({
         type: GET_SIZES_BY_NAME,
         payload: response.data,

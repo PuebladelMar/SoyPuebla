@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getSeries,
-  deleteSeries,
-  putSeries,
-  getSeriesByName,
-} from '../../../redux/Actions';
+import { getSeries, deleteSeries, putSeries } from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { NavLink, useNavigate } from 'react-router-dom';
 import CreateSerie from '../../create/createSerie/CreateSerie';
-import SearchBar from '../../../componentes/searchBar/SearchBar';
+// import SearchBar from '../../../componentes/searchBar/SearchBar';
 
 import './AllColecciones.css';
 
@@ -19,19 +14,15 @@ const AllColecciones = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState({});
-  const [searchValue, setSearchValue] = useState('');
+  // const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
-      if (searchValue === '') {
-        await dispatch(getSeries());
-      } else {
-        await dispatch(getSeriesByName(searchValue));
-      }
+      await dispatch(getSeries());
     };
 
     fetchData();
-  }, [dispatch, searchValue]);
+  }, [dispatch]);
 
   const handleDeleteSeries = async (id) => {
     await dispatch(deleteSeries(id));
@@ -55,14 +46,14 @@ const AllColecciones = () => {
     setShowAlert({ serie: true });
     event.preventDefault();
   };
-  const handlerEventSearch = (event) => {
-    event.preventDefault();
-    setSearchValue(event.target.value);
-  };
+  // const handlerEventSearch = (event) => {
+  //   event.preventDefault();
+  //   setSearchValue(event.target.value);
+  // };
 
-  const handlerSubmitSearch = (event) => {
-    event.preventDefault();
-  };
+  // const handlerSubmitSearch = (event) => {
+  //   event.preventDefault();
+  // };
 
   return (
     <div
@@ -70,10 +61,10 @@ const AllColecciones = () => {
       name='series'
       value='name'
     >
-      <SearchBar
+      {/* <SearchBar
         handlerEventSearch={handlerEventSearch}
         handlerSubmitSearch={handlerSubmitSearch}
-      />
+      /> */}
       <div className='nav-dashboard'>
         <NavLink to='/all-data/all-products'>
           <button
