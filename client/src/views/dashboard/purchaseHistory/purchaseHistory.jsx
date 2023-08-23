@@ -260,7 +260,7 @@ const HistoryData = () => {
                 <td>{user.id}</td>
                 <td>{user.createdAt.split("T")[0]}</td>
                 <td>{user.state}
-                  {user.state === "pending" && (  // Verifica si el estado es "pending"
+                  {user.state === "pending" && (  
                     <button
                       className="edit-color"
                       onClick={() => handleEditState(user.id, user.state)}
