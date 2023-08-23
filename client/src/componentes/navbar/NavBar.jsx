@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
 import "../searchBar/SearchBar.css";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Modal from "@mui/material/Modal";
 import { getProducts, getProductsByName } from "../../redux/Actions";
 import { useLocation } from "react-router-dom";
