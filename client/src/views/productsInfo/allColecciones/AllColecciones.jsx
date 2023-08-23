@@ -5,6 +5,7 @@ import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { NavLink, useNavigate } from 'react-router-dom';
 import CreateSerie from '../../create/createSerie/CreateSerie';
+import Swal from 'sweetalert2';
 // import SearchBar from '../../../componentes/searchBar/SearchBar';
 
 import './AllColecciones.css';
@@ -25,8 +26,38 @@ const AllColecciones = () => {
   }, [dispatch]);
 
   const handleDeleteSeries = async (id) => {
-    await dispatch(deleteSeries(id));
-    await dispatch(getSeries());
+    const result = await Swal.fire({
+      title: '¿Estás segura?',
+      text: 'Una vez eliminado, se borrará automáticamente y afectará el funcionamiento de los productos.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#517f7f',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, elimínala',
+      cancelButtonText: 'Cancelar',
+    });
+
+    if (result.isConfirmed) {
+      // El usuario confirmó la eliminación
+      try {
+        await dispatch(deleteSeries(id));
+        await dispatch(getSeries());
+
+        Swal.fire({
+          title: 'Eliminado',
+          text: 'La serie ha sida eliminada.',
+          icon: 'success',
+          confirmButtonColor: '#517f7f',
+        });
+      } catch (error) {
+        console.error('Error al eliminar la serie:', error);
+        Swal.fire(
+          'Error',
+          'Ha ocurrido un error al eliminar la serie.',
+          'error'
+        );
+      }
+    }
   };
 
   const handleEditSeries = async (id, name, image) => {

@@ -127,8 +127,7 @@ const Detail = () => {
     quantity > 1 ? setQuantity(quantity - 1) : null;
   };
 
-  const handleAddToCart = () => {
-    dispatch(getUserCart(userId));
+  const handleAddToCart = async() => {
     if (!userId.length) {
       Swal.fire({
         icon: "warning",
@@ -153,10 +152,10 @@ const Detail = () => {
               timer: 1500,
             });
 
-            dispatch(
+            await dispatch(
               addToCar(userId, selectedCombination.stockId, Number(quantity))
             );
-
+            dispatch(getUserCart(userId));
             updatedProductDetails[productToUpdateIndex].stock -= quantity;
             setProductDetails(updatedProductDetails);
             setQuantity(1);

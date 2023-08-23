@@ -1,14 +1,15 @@
-const { EmailNotify } = require("../../db");
-const { sendRegisterMailNotify } = require("./controllerNodeMailer");
+const { StockNotifies, Stocks } = require("../../db");
+const cron = require('node-cron');
+const { sendRegisterMailNotify, sendStockNotification } = require("./controllerNodeMailer");
 
 const controllPostQueryNotify = async (req) => {
   try {
     const { user_email, stock_id } = req.body;
 
-    const [newQuery, created] = await EmailNotify.findOrCreate({
+    const [newQuery, created] = await StockNotifies.findOrCreate({
       where: {
-        user_email: user_email,
-        stock_id: stock_id,
+        email: user_email,
+        StockId: stock_id,
       },
     });
 
@@ -27,5 +28,24 @@ const controllPostQueryNotify = async (req) => {
     throw new Error(error.message);
   }
 };
+
+const checkAndNotifyStockChange = async () => {
+  try {
+    const stockNotifies = await StockNotifies.findAll({
+      include: [Stocks],
+    });
+
+    for (const notify of stockNotifies) {
+      if (notify.Stock.amount > 0) {
+        await sendStockNotification(notify.email);
+        await notify.destroy();
+      }
+    }
+  } catch (error) {
+    console.error('Error in cron job:', error);
+  }
+};
+
+cron.schedule('* * * * *', checkAndNotifyStockChange);
 
 module.exports = { controllPostQueryNotify };

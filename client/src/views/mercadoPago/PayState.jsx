@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
-import { addHistory, deleteCartUser, getUserById, sendStatusPurchaseMail, getAllInformation } from "../../redux/Actions";
+import { addHistory, deleteCartUser, getUserById, sendStatusPurchaseMail, getAllInformation, getUserCart } from "../../redux/Actions";
 import WhatsAppIcon from "../../assets/images/Whatsapp.png";
 import "./PayState.css";
 
@@ -24,6 +24,7 @@ function PayState() {
           await dispatch(addHistory(userId, "approved"));
           await dispatch(deleteCartUser(userId, true));
           await dispatch(getAllInformation());
+          dispatch(getUserCart(userId));
           const emailAddress = userById.user.emailAddress;
           let data = {
             emailsUsers: emailAddress,
@@ -39,6 +40,7 @@ function PayState() {
           await dispatch(addHistory(userId, "pending"));
           await dispatch(deleteCartUser(userId, true));
           await dispatch(getAllInformation());
+          dispatch(getUserCart(userId));
         }
       };
       asyncFunc();
