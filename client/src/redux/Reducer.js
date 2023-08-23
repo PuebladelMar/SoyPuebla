@@ -39,7 +39,8 @@ import {
   PUT_CATEGORIES,
   PUT_SIZES,
   PUT_COLECCIONS,
-  ADD_HISTORY
+  ADD_HISTORY,
+ 
 } from './ActionsTypes';
 
 let initialState = {
