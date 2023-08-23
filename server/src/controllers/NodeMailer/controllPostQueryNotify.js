@@ -36,7 +36,7 @@ const checkAndNotifyStockChange = async () => {
     });
 
     for (const notify of stockNotifies) {
-      if (notify.Stocks.amount > 0) {
+      if (notify.Stock.amount > 0) {
         await sendStockNotification(notify.email);
         await notify.destroy();
       }
