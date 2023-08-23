@@ -49,15 +49,15 @@
   justify-content: center;
   align-items: center;
   gap: 1.2rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .search-form-aside-modal h2 {
-  color: rgb(253, 249, 249);
+  color: rgb(22, 60, 65);
 }
 
 .search-form-aside-modal h3 {
-  color: rgb(253, 249, 249);
+  color: rgb(22, 60, 65);
 }
 
 .search-form-aside-modal h2 span {
@@ -274,6 +274,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: rgb(255, 249, 249);
+  border-radius: 15px;
 }
 
 .open-modal-span {

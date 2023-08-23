@@ -330,12 +330,12 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
           </button>
         </form>
       )}
-
       <Modal
         open={isModalOpen}
         onClose={handleCloseModal}
         style={{
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "transparent",
+          backdropFilter: "none",
           borderRadius: "10px",
           maxHeight: "80vh",
           width: "80%",
@@ -344,9 +344,8 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
             : isMatch2
             ? "5rem 3rem"
             : isMatch && "5rem 4rem",
-          padding: "1rem",
+          padding: "0",
           overflowY: "auto",
-          backdropFilter: "none",
         }}
       >
         <div className="modal-content">
