@@ -78,7 +78,6 @@ export default function NavBar({ links }) {
     });
   };
 
-  
   return (
     <AppBar
       sx={{
@@ -348,16 +347,16 @@ export default function NavBar({ links }) {
                       onClick={handleCartClick}
                     />
                   ) : (
-                  <Link to="/Cart">
-                    <FiShoppingCart
-                      style={{
-                        width: "1.8rem",
-                        height: "1.8rem",
-                        color: "white",
-                      }}
-                    />
-                  </Link>
-                   )}
+                    <Link to="/Cart">
+                      <FiShoppingCart
+                        style={{
+                          width: "1.8rem",
+                          height: "1.8rem",
+                          color: "white",
+                        }}
+                      />
+                    </Link>
+                  )}
                 </IconButton>
               )}
               {!isProducts && isMatch && (
@@ -371,15 +370,26 @@ export default function NavBar({ links }) {
                     height: "3.2rem",
                   }}
                 >
-                  <Link to="/Cart">
+                  {!userId.length ? (
                     <FiShoppingCart
                       style={{
                         width: "1.8rem",
                         height: "1.8rem",
                         color: "white",
                       }}
+                      onClick={handleCartClick}
                     />
-                  </Link>
+                  ) : (
+                    <Link to="/Cart">
+                      <FiShoppingCart
+                        style={{
+                          width: "1.8rem",
+                          height: "1.8rem",
+                          color: "white",
+                        }}
+                      />
+                    </Link>
+                  )}
                 </IconButton>
               )}
               {isMatchSearchBarIcon && searchBarVisible ? (
