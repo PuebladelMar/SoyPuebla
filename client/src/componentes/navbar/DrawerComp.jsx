@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import {
   Box,
   Drawer,
@@ -12,10 +12,30 @@ import {
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import PdM from "../.././assets/images/PdM.png";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function DrawerComp() {
   const [open, setOpen] = useState(false);
-  const user = useSelector(state => state.userById);
+  const user = useSelector((state) => state.userById);
+  const userId = useSelector((state) => state.userId);
+
+  const handleHeartClick = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "Por favor, inicia sesión",
+      text: "para ir a favoritos",
+      confirmButtonColor: "#517f7F",
+    });
+  };
+
+  const handleCartClick = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "Por favor, inicia sesión",
+      text: "para ir al carrito",
+      confirmButtonColor: "#517f7F",
+    });
+  };
 
   return (
     <>
@@ -154,98 +174,165 @@ function DrawerComp() {
                 </ListItemText>
               </ListItemIcon>
             </ListItemButton>
-            {user?.user?.userRole === 'administrator' || user?.user?.userRole === 'superadministrator' ? (
-            <ListItemButton
-              component={Link}
-              to="/dashboard"
-              sx={{
-                borderRadius: "10px",
-              }}
-            >
-              <ListItemIcon
+            {user?.user?.userRole === "administrator" ||
+            user?.user?.userRole === "superadministrator" ? (
+              <ListItemButton
+                component={Link}
+                to="/dashboard"
                 sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "10.8rem",
+                  borderRadius: "10px",
                 }}
               >
-                <ListItemText
+                <ListItemIcon
                   sx={{
-                    color: "#ededed",
-                    transform: "scale(1.3)",
-                    textAlign: "center",
-                    "&:hover": {
-                      color: "#baa199",
-                      cursor: "pointer",
-                    },
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "10.8rem",
                   }}
                 >
-                  Administrador
-                </ListItemText>
-              </ListItemIcon>
-            </ListItemButton>
-            ):(null)}
-            <ListItemButton
-              component={Link}
-              to="/fav"
-              sx={{
-                borderRadius: "10px",
-              }}
-            >
-              <ListItemIcon
+                  <ListItemText
+                    sx={{
+                      color: "#ededed",
+                      transform: "scale(1.3)",
+                      textAlign: "center",
+                      "&:hover": {
+                        color: "#baa199",
+                        cursor: "pointer",
+                      },
+                    }}
+                  >
+                    Administrador
+                  </ListItemText>
+                </ListItemIcon>
+              </ListItemButton>
+            ) : null}
+
+            {!userId.length ? (
+              <ListItemButton
+                onClick={handleHeartClick}
                 sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "10.8rem",
+                  borderRadius: "10px",
                 }}
               >
-                <ListItemText
+                <ListItemIcon
                   sx={{
-                    color: "#ededed",
-                    transform: "scale(1.3)",
-                    textAlign: "center",
-                    "&:hover": {
-                      color: "#baa199",
-                      cursor: "pointer",
-                    },
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "10.8rem",
                   }}
                 >
-                  Favoritos
-                </ListItemText>
-              </ListItemIcon>
-            </ListItemButton>
-            <ListItemButton
-              component={Link}
-              to="/cart"
-              sx={{
-                borderRadius: "10px",
-              }}
-            >
-              <ListItemIcon
+                  <ListItemText
+                    sx={{
+                      color: "#ededed",
+                      transform: "scale(1.3)",
+                      textAlign: "center",
+                      "&:hover": {
+                        color: "#baa199",
+                        cursor: "pointer",
+                      },
+                    }}
+                  >
+                    Favoritos
+                  </ListItemText>
+                </ListItemIcon>
+              </ListItemButton>
+            ) : (
+              <ListItemButton
+                component={Link}
+                to="/fav"
                 sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "10.8rem",
+                  borderRadius: "10px",
                 }}
               >
-                <ListItemText
+                <ListItemIcon
                   sx={{
-                    color: "#ededed",
-                    transform: "scale(1.3)",
-                    textAlign: "center",
-                    "&:hover": {
-                      color: "#baa199",
-                      cursor: "pointer",
-                    },
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "10.8rem",
                   }}
                 >
-                  Carrito
-                </ListItemText>
-              </ListItemIcon>
-            </ListItemButton>
+                  <ListItemText
+                    sx={{
+                      color: "#ededed",
+                      transform: "scale(1.3)",
+                      textAlign: "center",
+                      "&:hover": {
+                        color: "#baa199",
+                        cursor: "pointer",
+                      },
+                    }}
+                  >
+                    Favoritos
+                  </ListItemText>
+                </ListItemIcon>
+              </ListItemButton>
+            )}
+
+            {!userId.length ? (
+              <ListItemButton
+                onClick={handleCartClick}
+                sx={{
+                  borderRadius: "10px",
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "10.8rem",
+                  }}
+                >
+                  <ListItemText
+                    sx={{
+                      color: "#ededed",
+                      transform: "scale(1.3)",
+                      textAlign: "center",
+                      "&:hover": {
+                        color: "#baa199",
+                        cursor: "pointer",
+                      },
+                    }}
+                  >
+                    Carrito
+                  </ListItemText>
+                </ListItemIcon>
+              </ListItemButton>
+            ) : (
+              <ListItemButton
+                component={Link}
+                to="/cart"
+                sx={{
+                  borderRadius: "10px",
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "10.8rem",
+                  }}
+                >
+                  <ListItemText
+                    sx={{
+                      color: "#ededed",
+                      transform: "scale(1.3)",
+                      textAlign: "center",
+                      "&:hover": {
+                        color: "#baa199",
+                        cursor: "pointer",
+                      },
+                    }}
+                  >
+                    Carrito
+                  </ListItemText>
+                </ListItemIcon>
+              </ListItemButton>
+            )}
           </Box>
         </List>
       </Drawer>
