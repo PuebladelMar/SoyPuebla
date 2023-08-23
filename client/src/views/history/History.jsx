@@ -47,7 +47,7 @@ const History = () => {
                 </div>
               ))}
             </div>
-            <button className="buttonHistory"><Link to="/home">Inicio</Link></button>
+            <Link to="/home"><button className="buttonHistory">Inicio</button></Link>
         </div>
         ) : (
           <div className='loader-container'>
