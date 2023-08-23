@@ -14,7 +14,7 @@ function SeriesContainer() {
   return (
     <div>
       <h1 className="series-text">
-        SERIES<span className="series-text-underline"></span>
+        CATEGORIAS<span className="series-text-underline"></span>
       </h1>
       <br />
 
