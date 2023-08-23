@@ -172,6 +172,7 @@ const UsersData = () => {
                 <td>{user.id}</td>
                 <td>{user.fullName}</td>
                 <td>{user.emailAddress}</td>
+
                 <td>
                   {user.banUser.toString()}
                   <button
@@ -191,6 +192,7 @@ const UsersData = () => {
                   </button>
                 </td>
                 <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+
               </tr>
             ))}
           </tbody>
