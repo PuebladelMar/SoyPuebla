@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState, useLayoutEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCar, notifyStock } from "../../redux/Actions";
+import { addToCar, notifyStock, getUserCart } from "../../redux/Actions";
 import Reviews from "../../componentes/reviews/Reviews";
 import ReviewsForm from "../../componentes/reviews/ReviewsForm";
 import { getReviewById } from "../../redux/Actions";
@@ -16,6 +16,7 @@ import "./Detail.css";
 import Loader from "../../componentes/loader/Loader";
 import ImageGallery from "react-image-gallery";
 import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
+import Swal from "sweetalert2";
 
 const Detail = () => {
   const { id } = useParams();
@@ -29,10 +30,9 @@ const Detail = () => {
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [ImagesToRender, setImagesToRender] = useState([]);
-  const [showAlert, setShowAlert] = useState(false);
   const uniqueColor = obtenerColoresUnicos(productDetails);
   const [thumbnailPosition, setThumbnailPosition] = useState("left");
-  const sale = productDetails[0]?.sale
+  const sale = productDetails[0]?.sale;
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -44,7 +44,7 @@ const Detail = () => {
         const response = await axios.get(`/products/${id}`);
         setProductDetails(response.data);
         setIsReady(true);
-        
+
         const defaultColor = response.data[0]?.color;
         setSelectedColor(defaultColor);
 
@@ -63,7 +63,13 @@ const Detail = () => {
 
   const handleLoginClick = (event) => {
     event.preventDefault();
-    alert("Debes iniciar Sesion");
+    Swal.fire({
+      icon: "warning",
+      title: "Por favor, inicia sesión",
+      text: "para agregar un comentario",
+      confirmButtonColor: "#517f7F",
+    });
+
     dispatch(getReviewById(productDetails[0].id));
   };
 
@@ -113,20 +119,59 @@ const Detail = () => {
     return coloresUnicos;
   }
 
-  const handleCloseAlert = () => {
-    setShowAlert(false);
-  };
-
   const addProduct = () => {
     quantity < selectedCombination.stock ? setQuantity(quantity + 1) : null;
   };
+
   const removeProduct = () => {
     quantity > 1 ? setQuantity(quantity - 1) : null;
   };
 
   const handleAddToCart = () => {
-    setShowAlert(true);
-    dispatch(addToCar(userId, selectedCombination?.stockId, Number(quantity)));
+    dispatch(getUserCart(userId));
+    if (!userId.length) {
+      Swal.fire({
+        icon: "warning",
+        title: "Por favor, inicia sesión",
+        text: "para agregar al carrito",
+        confirmButtonColor: "#517f7F",
+      });
+    } else {
+      if (selectedCombination) {
+        const updatedProductDetails = [...productDetails];
+        const productToUpdateIndex = updatedProductDetails.findIndex(
+          (item) => item.color === selectedColor && item.size === selectedSize
+        );
+
+        if (productToUpdateIndex !== -1) {
+          if (selectedCombination.stock >= quantity) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Su producto se añadido correctamente",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            dispatch(
+              addToCar(userId, selectedCombination.stockId, Number(quantity))
+            );
+
+            updatedProductDetails[productToUpdateIndex].stock -= quantity;
+            setProductDetails(updatedProductDetails);
+            setQuantity(1);
+          } else {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "No hay suficiente stock disponible",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        }
+      }
+    }
   };
 
   const isValidEmail = (email) => {
@@ -136,7 +181,7 @@ const Detail = () => {
 
   const notifyStockByMail = () => {
     if (!isValidEmail(email)) {
-      alert("Ingresa un correo valido");
+      Swal.fire("Ingresa un correo valido");
       return;
     }
 
@@ -172,10 +217,9 @@ const Detail = () => {
   }, []);
 
   function formatNumber(number) {
-    const wholeNumber = Math.floor(number); 
-    return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const wholeNumber = Math.floor(number);
+    return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
-  
 
   return (
     <div className="container-detail">
@@ -193,10 +237,10 @@ const Detail = () => {
                     showPlayButton={false}
                   />
                   {sale == 0 ? (
-                <h3 className="saleBanner0"></h3>
-              ) : (
-                <h3 className="saleBanner">{sale}% off</h3>
-              )}
+                    <h3 className="saleBanner0"></h3>
+                  ) : (
+                    <h3 className="saleBanner">{sale}% off</h3>
+                  )}
                 </div>
               )}
             </div>
@@ -206,27 +250,31 @@ const Detail = () => {
                   {productDetails[0]?.name}{" "}
                   <span className="span-product-name"></span>{" "}
                 </h2>
-                
+
                 {sale == 0 ? (
-            <h3 className="saleBanner0"></h3>
-          ) : (
-            <h3 className="saleButton">SALE</h3>
-          )}
+                  <h3 className="saleBanner0"></h3>
+                ) : (
+                  <h3 className="saleButton">SALE</h3>
+                )}
 
-          {sale == 0 ? (
-              <h2 className="detailInfoPrecio">
-              $ {formatNumber(productDetails[0]?.price)}
-            </h2>
-            ) : (
-              <h3 className="precioDescuentoContainerDetail ">
-                <span className="originalPriceDetail"> $ {formatNumber(productDetails[0]?.price)} </span>
-                <span className="discountedPriceDetail">
-                  $ {formatNumber(Math.floor(productDetails[0]?.price * (1 - sale / 100)))}
-                </span>
-              </h3>
-            )
-           }
-
+                {sale == 0 ? (
+                  <h2 className="detailInfoPrecio">
+                    $ {formatNumber(productDetails[0]?.price)}
+                  </h2>
+                ) : (
+                  <h3 className="precioDescuentoContainerDetail ">
+                    <span className="originalPriceDetail">
+                      {" "}
+                      $ {formatNumber(productDetails[0]?.price)}{" "}
+                    </span>
+                    <span className="discountedPriceDetail">
+                      ${" "}
+                      {formatNumber(
+                        Math.floor(productDetails[0]?.price * (1 - sale / 100))
+                      )}
+                    </span>
+                  </h3>
+                )}
               </div>
               <div>
                 <h2 className="detailInfoSerie">
@@ -356,27 +404,13 @@ const Detail = () => {
                     onClick={() => {
                       handleAddToCart();
                     }}
-                    disabled={userId.length === 0 || !selectedCombination}
+                    disabled={!selectedCombination}
                   >
                     Añadir al carrito
                   </button>
                 </>
               )}
             </div>
-            {showAlert && (
-              <>
-                <div className="transparentBackground"></div>
-                <div className="alertContainer">
-                  <p className="alertText">El Producto se añadido a su carrito</p>
-                  <div className="alertButtons">
-                    <button onClick={handleCloseAlert}>Seguir comprando</button>
-                    <button>
-                      <Link to="/Cart">Ir al carrito</Link>
-                    </button>
-                  </div>
-                </div>
-              </>
-            )}
           </div>
           <div className="close-button">
             <Link to="/products">

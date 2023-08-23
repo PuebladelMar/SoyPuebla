@@ -4,23 +4,34 @@ import {
   deleteCategories,
   getCategories,
   putCategories,
+  getCategoriesByName,
 } from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { NavLink, useNavigate } from 'react-router-dom';
+import CreateCategory from '../../create/createCategory/CreateCategory';
+import { useState } from 'react';
+import SearchBar from '../../../componentes/searchBar/SearchBar';
 import './AllCategories.css';
 
 const AllCategories = () => {
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState({});
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
-    async function fetchCategories() {
-      await dispatch(getCategories());
-    }
-    fetchCategories();
-  }, [dispatch]);
+    const fetchData = async () => {
+      if (searchValue === '') {
+        await dispatch(getCategories());
+      } else {
+        await dispatch(getCategoriesByName(searchValue));
+      }
+    };
+
+    fetchData();
+  }, [dispatch, searchValue]);
 
   const handleDeleteCategories = async (id) => {
     await dispatch(deleteCategories(id));
@@ -34,12 +45,34 @@ const AllCategories = () => {
       dispatch(getCategories());
     }
   };
+  const handleOpenCategoryCreate = (event) => {
+    setShowAlert({ category: true });
+    event.preventDefault();
+  };
+  const handleCloseAlert = (event) => {
+    setShowAlert({});
+    event.preventDefault();
+  };
+
+  const handlerEventSearch = (event) => {
+    event.preventDefault();
+    setSearchValue(event.target.value);
+  };
+
+  const handlerSubmitSearch = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div
       className='categories-main'
       name='series'
       value='name'
     >
+      <SearchBar
+        handlerEventSearch={handlerEventSearch}
+        handlerSubmitSearch={handlerSubmitSearch}
+      />
       <div className='nav-dashboard'>
         <NavLink to='/all-data/all-products'>
           <button
@@ -105,6 +138,29 @@ const AllCategories = () => {
             </div>
           ))}
       </div>
+      {showAlert.category && (
+        <popups className='pop-ups'>
+          <>
+            <div className='transparentBackgroundY'></div>
+            <div className='alertContainerY'>
+              <p className='alertTextY'>Creador de categorías</p>
+              <CreateCategory />
+              <div className='alertButtonsY'>
+                <button onClick={handleCloseAlert}>X</button>
+              </div>
+            </div>
+          </>
+        </popups>
+      )}
+      <button
+        type='button'
+        onClick={() => {
+          handleOpenCategoryCreate();
+        }}
+        className='mainImage-upload-buttonY '
+      >
+        Crear categoría
+      </button>
     </div>
   );
 };

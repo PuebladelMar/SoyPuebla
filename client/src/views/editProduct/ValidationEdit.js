@@ -22,7 +22,7 @@ const validations = (createProduct) => {
   }
 
   if (!createProduct?.sale && createProduct.sale !== 0) {
-    errors.sale = "Sin oferta";
+    errors.sale = "Sin Descuento";
   } else if (!/^\d+(\.\d+)?$/.test(createProduct?.sale)) {
     errors.sale = "Debe ser un número válido";
   } else {

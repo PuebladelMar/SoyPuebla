@@ -1,6 +1,8 @@
-import "./Create.css";
+import "../create/Create.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   postProducts,
   getColor,
@@ -8,31 +10,86 @@ import {
   getCategories,
   getSeries,
 } from "../../redux/Actions";
-import validations from "./Validations";
+import validations from "./ValidationEdit";
 import UploadWidget from "../../componentes/imageUpload/imageUpload";
-import CreateDetail from "./createDetail/CreateDetail";
-import CreateColor from "./createColor/createColor";
-import CreateSerie from "./createSerie/CreateSerie";
-import CreateCategory from "./createCategory/CreateCategory";
-import CreateSize from "./createSize/createSize";
+import MutipleUploadWidget from "../../componentes/multipleImageUpload/multipleImageUpload";
+import CreateDetail from "../create/createDetail/CreateDetail";
+import CreateColor from "../create/createColor/createColor";
+import CreateSerie from "../create/createSerie/CreateSerie";
+import CreateCategory from "../create/createCategory/CreateCategory";
+import CreateSize from "../create/createSize/createSize";
+
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { red } from "@mui/material/colors";
+import { useParams } from "react-router-dom";
+import Loader from "../../componentes/loader/Loader";
 
-const Create = () => {
+const EditProduct = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isReady, setIsReady] = useState(false);
   const color = useSelector((state) => state.colorList);
   const size = useSelector((state) => state.sizesList);
   const categories = useSelector((state) => state.categories);
   const series = useSelector((state) => state.series);
   const [errors, setErrors] = useState({});
+  const [createProduct, setCreateProduct] = useState({
+    name: "",
+    price: "",
+    sale: 0,
+    colorImage: [],
+    description: "",
+    series: [],
+    category: [],
+  });
 
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  
   const [showAlert, setShowAlert] = useState({});
+  const { id } = useParams();
+
+  useEffect(() => {
+    const asyncFunction = async () => {
+      const { data } = await axios.get(`/products/${id}`);
+      setIsReady(true);
+      const transformedData = [];
+
+      data.forEach((detail) => {
+        const existingColor = transformedData.find((item) => item.color === detail.color);
+
+        if (existingColor) {
+          existingColor.stocks.push({
+            size: detail.size,
+            amount: detail.stock,
+          });
+        } else {
+          transformedData.push({
+            color: detail.color,
+            images: detail.colorImages,
+            stocks: [
+              {
+                size: detail.size,
+                amount: detail.stock,
+              },
+            ],
+          });
+        }
+      });
+
+      setCreateProduct({
+        name: data[0].name,
+        price: data[0].price,
+        sale: data[0].sale,
+        colorImage: transformedData,
+        description: data[0].description,
+        series: data[0].series.map((s) => s.name),
+        category: data[0].category.map((c) => c.name),
+      });
+    };
+    asyncFunction();
+  }, [id]);
 
   const handleCloseAlert = (event) => {
     setShowAlert({});
@@ -59,7 +116,6 @@ const Create = () => {
     event.preventDefault();
   };
 
-
   const [uploadedSecureUrl, setUploadedSecureUrl] = useState(null);
 
   const handleUpload = (url, actualColor) => {
@@ -80,17 +136,6 @@ const Create = () => {
       }
     });
   };
-
-  const [createProduct, setCreateProduct] = useState({
-    name: "",
-    price: "",
-    sale: 0,
-    colorImage: [],
-    description: "",
-    series: [],
-    category: [],
-    size: [],
-  });
 
   useEffect(() => {
     if (validations(createProduct)) {
@@ -142,7 +187,7 @@ const Create = () => {
     );
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
 
     if (
@@ -151,23 +196,19 @@ const Create = () => {
       !createProduct.price ||
       !createProduct.sale ||
       !createProduct.category.length === 0 ||
-      !createProduct.size.length === 0 ||
       !createProduct.series.length === 0 ||
       !createProduct.colorImage.length === 0
     ) {
       alert("Debes llenar todos los campos");
     } else {
-      dispatch(postProducts(createProduct));
-      setCreateProduct({
-        name: "",
-        price: "",
-        sale: 0,
-        colorImage: [],
-        description: "",
-        series: [],
-        category: [],
-        size: [],
-      });
+      try {
+        setIsReady(false);
+        await axios.put(`http://localhost:3001/products/${id}`, createProduct);
+        navigate(`/products/${id}`);
+      } catch (error) {
+        setIsReady(true);
+        alert(`El nombre ${createProduct.name} ya existe`);
+      };
     }
   };
 
@@ -332,6 +373,8 @@ const Create = () => {
 
   return (
     <div className="create-main-container">
+      {isReady ? (
+      <>
       {showAlert.category && (
         <popups className="pop-ups">
           <>
@@ -514,7 +557,6 @@ const Create = () => {
                     <div>
                       <label htmlFor="image">Imagenes </label>
                       <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
-                      <p className="error">{errors.images}</p>
                     </div>
 
                     <talle className="talle">
@@ -539,7 +581,6 @@ const Create = () => {
                     })}
                     </select>
                     </talle>
-                    <p className="error">{errors.size}</p>
 
                     <div >
                       {col.stocks.length > 0 ? (
@@ -575,7 +616,8 @@ const Create = () => {
               <p className="no-dietTypes"></p>
             )}
           </div>
-
+          <p className="error">{errors.images}</p>
+          <p className="error">{errors.size}</p>
 
           <label htmlFor="series">Colección <separator></separator> </label>
           <button
@@ -659,6 +701,7 @@ const Create = () => {
           </div>
           <label htmlFor="description"> Descripcion <separator></separator> </label>
           <textarea
+          value={createProduct?.description}
             type="text"
             name="description"
             placeholder="Descripcion"
@@ -676,7 +719,7 @@ const Create = () => {
             onClick={handleSubmit}
             disabled={Object.keys(errors).length === 0 ? false : true}
           >
-            Crear
+            Editar
           </button>
         </div>
       </div>
@@ -692,8 +735,14 @@ const Create = () => {
           sale={createProduct?.sale}
         />
       </div>
+      </>
+      ) : (
+        <div className="loader-container">
+          <Loader />
+        </div>
+      )}
     </div>
   );
 };
 
-export default Create;
+export default EditProduct;

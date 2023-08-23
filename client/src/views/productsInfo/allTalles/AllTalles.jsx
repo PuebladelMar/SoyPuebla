@@ -1,22 +1,31 @@
 import './AllTalles.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSizes, putSizes } from '../../../redux/Actions';
+import { getSizes, putSizes, getSizesByName } from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
 import { NavLink, useNavigate } from 'react-router-dom';
+import CreateSize from '../../create/createSize/createSize';
+import SearchBar from '../../../componentes/searchBar/SearchBar';
 // import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const AllTalles = () => {
   const sizesList = useSelector((state) => state.sizesList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState({});
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
-    async function fetchSizes() {
-      await dispatch(getSizes());
-    }
-    fetchSizes();
-  }, [dispatch]);
+    const fetchData = async () => {
+      if (searchValue === '') {
+        await dispatch(getSizes());
+      } else {
+        await dispatch(getSizesByName(searchValue));
+      }
+    };
+
+    fetchData();
+  }, [dispatch, searchValue]);
 
   const handleEditSizes = async (id, name) => {
     const updatedName = prompt('Enter new name', name);
@@ -26,12 +35,34 @@ const AllTalles = () => {
     }
   };
 
+  const handleCloseAlert = (event) => {
+    setShowAlert({});
+    event.preventDefault();
+  };
+
+  const handleOpenSizeCreate = (event) => {
+    setShowAlert({ size: true });
+    event.preventDefault();
+  };
+  const handlerEventSearch = (event) => {
+    event.preventDefault();
+    setSearchValue(event.target.value);
+  };
+
+  const handlerSubmitSearch = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div
       className='coleccion-main'
       name='series'
       value='name'
     >
+      <SearchBar
+        handlerEventSearch={handlerEventSearch}
+        handlerSubmitSearch={handlerSubmitSearch}
+      />
       <div className='nav-dashboard'>
         <NavLink to='/all-data/all-products'>
           <button
@@ -91,6 +122,30 @@ const AllTalles = () => {
             </div>
           ))}
       </div>
+      {showAlert.size && (
+        <popups className='pop-ups'>
+          <>
+            <div className='transparentBackgroundY'></div>
+
+            <div className='alertContainerY'>
+              <p className='alertTextY'>Creador de talle</p>
+              <CreateSize />
+              <div className='alertButtonsY'>
+                <button onClick={handleCloseAlert}>X</button>
+              </div>
+            </div>
+          </>
+        </popups>
+      )}
+      <button
+        type='button'
+        onClick={() => {
+          handleOpenSizeCreate();
+        }}
+        className='mainImage-upload-buttonY '
+      >
+        Crear Talle
+      </button>
     </div>
   );
 };

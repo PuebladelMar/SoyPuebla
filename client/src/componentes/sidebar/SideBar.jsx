@@ -3,7 +3,8 @@ import { useEffect, useState, useRef } from "react";
 import * as actions from "../../redux/Actions";
 import Modal from "@mui/material/Modal";
 import { useMediaQuery } from "@mui/material";
-import Filtro from "../../../src/assets/images/filtro.png";
+import { FiSliders, FiShoppingCart, FiRotateCcw } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import "./SideBAr.css";
 
 const initialState = {
@@ -26,7 +27,6 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
   const series = useSelector((state) => state.series);
   const categories = useSelector((state) => state.categories);
   const sizes = useSelector((state) => state.sizesList);
-  const [isOff, setIsOff] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isOpenCategory, setIsOpenCategory] = useState(false);
@@ -53,11 +53,6 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
   const handleSelectClick = (event, toggleFunction) => {
     event.stopPropagation();
     toggleFunction();
-  };
-
-  const handleSelectOff = () => {
-    setIsOff(!isOff);
-    console.log("hola");
   };
 
   const handleSelectToggleCategory = () => {
@@ -107,11 +102,6 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
     setIsModalOpen(false);
   };
 
-  const handleSelectOffAndEvent = () => {
-    handleSelectOff();
-    handlerEventSideBar();
-  };
-
   useEffect(() => {
     const handleWindowResize = () => {
       setWindowWidth(window.innerWidth);
@@ -135,10 +125,25 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
     <aside className="search-bar-aside">
       {windowWidth < 645 ? (
         <div className="filter-button">
+          <Link to="/Cart">
+          <button className="open-modal-button">
+            <span className="open-modal-span">Carrito</span>
+            <span className="open-modal-span">
+            <FiShoppingCart />
+            </span>
+            <span className="span-num-cart-sidebar">0</span>
+          </button>
+          </Link>
+          <button className="open-modal-button" onClick={handleResetFilters}>
+            <span className="open-modal-span">Deshacer</span>
+            <span className="open-modal-span">
+              <FiRotateCcw />
+            </span>
+          </button>
           <button className="open-modal-button" onClick={handleOpenModal}>
-            Filtros
-            <span>
-              <img src={Filtro} alt="filtro" className="img-filter" />
+            <span className="open-modal-span">Filtros</span>
+            <span className="open-modal-span">
+              <FiSliders />
             </span>
           </button>
         </div>
@@ -326,12 +331,12 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
           </button>
         </form>
       )}
-
       <Modal
         open={isModalOpen}
         onClose={handleCloseModal}
         style={{
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "transparent",
+          backdropFilter: "none",
           borderRadius: "10px",
           maxHeight: "80vh",
           width: "80%",
@@ -340,9 +345,8 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
             : isMatch2
             ? "5rem 3rem"
             : isMatch && "5rem 4rem",
-          padding: "1rem",
+          padding: "0",
           overflowY: "auto",
-          backdropFilter: "none",
         }}
       >
         <div className="modal-content">

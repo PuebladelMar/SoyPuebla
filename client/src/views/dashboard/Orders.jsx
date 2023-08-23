@@ -47,7 +47,13 @@ export default function Orders() {
               <TableCell>{history.attributes.fullName}</TableCell> 
               <TableCell>{history.attributes.emailAddress}</TableCell>
               <TableCell>{history.attributes.product}</TableCell>
-              <TableCell>{history.state}</TableCell>
+              <TableCell>{history.state === "approved"
+                    ? "Aprobado"
+                    : history.state === "rejected"
+                      ? "Desaprobado"
+                      : history.state === "pending"
+                        ? "Pendiente"
+                        : ""}</TableCell>
               <TableCell>{history.quantity}</TableCell>
               <TableCell>{history.unitPrice}</TableCell>
               <TableCell align="right">{`$${(

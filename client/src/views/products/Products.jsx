@@ -4,6 +4,7 @@ import { filterProducts } from "../../redux/Actions";
 import CardContainer from "../../componentes/cardContainer/CardContainer";
 import SideBar from "../../componentes/sidebar/SideBar";
 import "./Products.css";
+import Loader from "../../componentes/loader/Loader";
 
 function Products() {
   const dispatch = useDispatch();
@@ -20,15 +21,11 @@ function Products() {
     order: null,
     name: null,
   });
-
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
-
+  const itemsPerPage = 12;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
   const itemsToShow = allProducts.slice(indexOfFirstItem, indexOfLastItem);
-
   const totalPages = Math.ceil(allProducts.length / itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
@@ -51,6 +48,7 @@ function Products() {
 
   useEffect(() => {
     dispatch(filterProducts(filters));
+    setIsReady(true)
   }, [filters, dispatch]);
 
   const handleChange = (event) => {
@@ -71,8 +69,7 @@ function Products() {
     }
   };
 
-  const resetFilters = (event) => {
-    // event.preventDefault();
+  const resetFilters = () => {
     setFilters({
       color: null,
       size: null,
@@ -88,13 +85,18 @@ function Products() {
 
   return (
     <section className="products-section">
-      <div className="products-container">
-        <SideBar
-          handlerEventSideBar={handleChange}
-          resetFilters={resetFilters}
-        />
-        <div className="cards-container">
-          {isReady && (
+      {!isReady ? ( 
+        <div className="loader">
+        <Loader/>
+        </div>
+      ) : (
+        <div className="products-container">
+          <SideBar
+            handlerEventSideBar={handleChange}
+            resetFilters={resetFilters}
+          />
+
+          <div className="cards-container">
             <div className="cards-paginated-container">
               <CardContainer products={itemsToShow} />
               <div className="paginated-container">
@@ -109,22 +111,21 @@ function Products() {
                 >
                   &#10094;
                 </button>
-                {Array.from(
-                  { length: totalPages },
-                  (_, index) => index + 1
-                ).map((pageNumber) => (
-                  <button
-                    key={pageNumber}
-                    className={
-                      pageNumber === currentPage
-                        ? "activePaginationButton"
-                        : "paginationButton"
-                    }
-                    onClick={() => handlePageChange(pageNumber)}
-                  >
-                    {pageNumber}
-                  </button>
-                ))}
+                {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+                  (pageNumber) => (
+                    <button
+                      key={pageNumber}
+                      className={
+                        pageNumber === currentPage
+                          ? "activePaginationButton"
+                          : "paginationButton"
+                      }
+                      onClick={() => handlePageChange(pageNumber)}
+                    >
+                      {pageNumber}
+                    </button>
+                  )
+                )}
                 <button
                   className={
                     currentPage === totalPages
@@ -138,9 +139,9 @@ function Products() {
                 </button>
               </div>
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

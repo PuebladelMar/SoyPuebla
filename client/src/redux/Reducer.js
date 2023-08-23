@@ -39,7 +39,15 @@ import {
   PUT_CATEGORIES,
   PUT_SIZES,
   PUT_COLECCIONS,
-} from './ActionsTypes';
+  ADD_HISTORY,
+  GET_CATEGORIES_BY_NAME,
+  GET_SERIES_BY_NAME,
+  GET_COLORS_BY_NAME,
+  GET_SIZES_BY_NAME,
+  PUT_PRODUCTS,
+  DELETE_PRODUCT,
+  PUT_HISTORY_STATES,
+} from "./ActionsTypes";
 
 let initialState = {
   allProducts: [],
@@ -64,6 +72,7 @@ let initialState = {
   information: [],
   questions: [],
   pusrchaseStatusMail: [],
+  totalPay: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -120,7 +129,7 @@ function rootReducer(state = initialState, action) {
     case POST_USERS:
       return {
         ...state,
-        allUsers: action.payload,
+        userById: action.payload,
         userId: action.payload.user.id,
       };
     case POST_TO_CART:
@@ -211,7 +220,7 @@ function rootReducer(state = initialState, action) {
     case PUT_COLORS:
       return {
         ...state,
-        colorList: action.payload
+        colorList: action.payload,
       };
     case DELETE_SERIES:
       return {
@@ -243,11 +252,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         questions: action.payload,
       };
-      case DELETE_COLOR:
-        return {
-          ...state,
-          colorList: action.payload,
-        };
+    case DELETE_COLOR:
+      return {
+        ...state,
+        colorList: action.payload,
+      };
     case DELETE_SIZES:
       return {
         ...state,
@@ -273,6 +282,47 @@ function rootReducer(state = initialState, action) {
         ...state,
         categories: action.payload,
       };
+    case ADD_HISTORY:
+      return {
+        ...state,
+        totalPay: action.payload,
+      };
+    case GET_SERIES_BY_NAME:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case GET_COLORS_BY_NAME:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case GET_SIZES_BY_NAME:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case GET_CATEGORIES_BY_NAME:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case PUT_PRODUCTS:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
+    case PUT_HISTORY_STATES:
+      return {
+        ...state,
+        allHistory: action.payload,
+      };
+
     default:
       return state;
   }

@@ -1,21 +1,20 @@
 .newsletter2 {
   background-color: #ffffff;
-  max-width: 1200px;
   margin: 0px;
-  padding: 20px;
+  max-width: 80%;
+  height: 9rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   object-fit: cover;
-  margin-top: -20px;
+  gap: 2rem;
 }
 
 .newsletter2 h2 {
-  margin-right: 20px;
   border-color: #517f7f;
   color: #517f7f;
-  margin-bottom: 20px;
   text-align: center;
   font-weight: bold;
 }
@@ -24,6 +23,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   width: 100%;
 }
 
@@ -33,7 +33,13 @@
   margin-right: 10px;
   max-width: 400px;
   text-align: center;
+  border-radius: 5px;
   background-color: #dcaaa16d;
+}
+
+.newsletter2 input[type="email"]:focus {
+  outline: 1px solid #a0a0a0; 
+  border-color: #a0a0a0;
 }
 
 .newsletter2 button {
@@ -54,16 +60,33 @@
   background-color: rgb(255, 255, 255);
 }
 
-@media screen and (max-width: 600px) {
-  .newsletter2 input[type="email"],
-  .newsletter2 button {
-    margin-right: 0;
-    margin-bottom: 10px;
-    width: 100%;
-    max-width: 100%;
+@media (max-width: 496px) {
+  .newsletter2 {
+    max-width: 80%;
+    height: 7rem;
+    padding: 0;
   }
 
   .newsletter2 input[type="email"] {
-    padding: 10px;
+    flex: 1;
+    padding: 8px;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 483px) {
+  .newsletter2 {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .newsletter2 {
+    height: 12rem;
+    gap: 2rem;
+  }
+
+  .newsletter2 form {
+    gap: 1rem;
   }
 }

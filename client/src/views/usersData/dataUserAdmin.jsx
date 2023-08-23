@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsers } from "../../redux/Actions";
+import { getUsers, editUser } from "../../redux/Actions";
+import { FaPencilAlt } from 'react-icons/fa';
 import "./dataUserAdmin.css";
 
 const UsersData = () => {
   const allUsers = useSelector((state) => state.allUsers);
   const dispatch = useDispatch();
   const [filteredUsers, setFilteredUsers] = useState([]);
+
   const [filters, setFilters] = useState({
     createdAt: "",
     banUser: "",
@@ -22,33 +24,38 @@ const UsersData = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const filtered = allUsers.filter((user) => {
-      return (
-        (filters.createdAt === "" ||
-          user.createdAt.includes(filters.createdAt)) &&
-        (filters.fullName === "" || user.fullName.includes(filters.fullName)) &&
-        (filters.banUser === "" ||
-          user.banUser.toString() === filters.banUser) &&
-        (filters.id === "" || user.id.includes(filters.id)) &&
-        (filters.userRole === "" || user.userRole.includes(filters.userRole))
-      );
-    });
+    async function fetchUsers() {
+      const filtered = allUsers.filter((user) => {
+        return (
+          (filters.createdAt === "" ||
+            user.createdAt.includes(filters.createdAt)) &&
+          (filters.fullName === "" ||
+            user.fullName.toLowerCase().includes(filters.fullName)) &&
+          (filters.banUser === "" ||
+            user.banUser.toString() === filters.banUser) &&
+          (filters.id === "" || user.id.includes(filters.id)) &&
+          (filters.userRole === "" || user.userRole.includes(filters.userRole))
+        );
+      });
 
-    const sortedUsers = filtered.slice().sort((a, b) => {
-      if (sortOrder === "asc") {
-        return a.createdAt.localeCompare(b.createdAt);
-      } else {
-        return b.createdAt.localeCompare(a.createdAt);
-      }
-    });
+      const sortedUsers = filtered.slice().sort((a, b) => {
+        if (sortOrder === "asc") {
+          return a.createdAt.localeCompare(b.createdAt);
+        } else {
+          return b.createdAt.localeCompare(a.createdAt);
+        }
+      });
 
-    setFilteredUsers(sortedUsers);
+      setFilteredUsers(sortedUsers);
+    }
+
+    fetchUsers();
   }, [filters, allUsers, sortOrder]);
 
   const handleFilterChange = (field, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [field]: value,
+      [field]: value.toLowerCase(),
     }));
   };
 
@@ -60,6 +67,33 @@ const UsersData = () => {
   const setSortOrderDesc = () => {
     setSelectedButton("desc");
     setSortOrder("desc");
+  };
+
+  const handleEditBanUser = async (id, userRole, banUser) => {
+    const newBanUser = !banUser;
+    await dispatch(editUser(id, userRole, newBanUser));
+    dispatch(getUsers());
+  };
+
+
+  const handleEditUserRole = async (id, userRole) => {
+    const updatedRole = prompt(
+      "Selecciona el nuevo rol: 'user', 'administrator' o 'superadministrator'",
+      userRole
+    );
+
+    if (updatedRole) {
+      if (
+        updatedRole === "user" ||
+        updatedRole === "administrator" ||
+        updatedRole === "superadministrator"
+      ) {
+        await dispatch(editUser(id, updatedRole));
+        dispatch(getUsers());
+      } else {
+        alert("Rol no válido. Por favor, selecciona uno de los roles permitidos.");
+      }
+    }
   };
 
   return (
@@ -74,7 +108,7 @@ const UsersData = () => {
         <div className="filter">
           <input
             type="text"
-            placeholder="Fecha de creación"
+            placeholder="Fecha DD-MM-AA "
             value={filters.createdAt}
             onChange={(e) => handleFilterChange("createdAt", e.target.value)}
           />
@@ -87,9 +121,8 @@ const UsersData = () => {
             </button>
             <button
               onClick={setSortOrderDesc}
-              className={`button ${
-                selectedButton === "desc" ? "selected" : ""
-              }`}
+              className={`button ${selectedButton === "desc" ? "selected" : ""
+                }`}
             >
               Descendente
             </button>
@@ -139,9 +172,27 @@ const UsersData = () => {
                 <td>{user.id}</td>
                 <td>{user.fullName}</td>
                 <td>{user.emailAddress}</td>
-                <td>{user.banUser}</td>
-                <td>{user.userRole}</td>
-                <td>{user.createdAt}</td>
+
+                <td>
+                  {user.banUser === true ? "SI" : "NO"}
+                  <button
+                    className="edit-color"
+                    onClick={() => handleEditBanUser(user.id, user.userRole, user.banUser)}
+                  >
+                    <FaPencilAlt />
+                  </button>
+                </td>
+                <td>
+                  {user.userRole === "administrator" ? "Administrador" : user.userRole === "user" ? "Usuario" : "Super Administrador"}
+                  <button
+                    className="edit-color"
+                    onClick={() => handleEditUserRole(user.id, user.userRole)}
+                  >
+                    <FaPencilAlt />
+                  </button>
+                </td>
+                <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+
               </tr>
             ))}
           </tbody>

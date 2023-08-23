@@ -1,7 +1,7 @@
 const { Products, Colors, Sizes, Categories, Series, Stocks, ColorImages } = require("../../db");
 
 const controllPutProducts = async(req)=>{
-    const { name, price, sale, description, series, categories, colorImage } = req.body;
+    const { name, price, sale, description, series, category, colorImage } = req.body;
     const { id } = req.params;
 
     await Products.update(
@@ -15,10 +15,10 @@ const controllPutProducts = async(req)=>{
         await product.setCategories([]);
         await product.setSeries([]);
 
-        for (const categoryName of categories) {
-            const category = await Categories.findOne({ where: { name: categoryName } });
-            if (category) {
-                await product.addCategory(category);
+        for (const categoryName of category) {
+            const cate = await Categories.findOne({ where: { name: categoryName } });
+            if (cate) {
+                await product.addCategory(cate);
             };
         };
 
