@@ -31,7 +31,7 @@ const sendRegisterMailNotify = async (emailSubject, emailsUsers) => {
       from: '"SOY_PUEBLA" : puebladelmar2023@gmail.com',
       to: emailsUsers,
       subject: emailSubject,
-      html: "<b>Bienvenida a Soy Puebla</b> <p>Gracias por suscribirte en nuestra tienda virtual</p>",
+      html: "<b>Bienvenida a Soy Puebla</b> <p>Gracias por suscribirte en nuestra tienda virtual, te avisaremos cuando tu prenda este disponible</p>",
     });
     
     console.log(`Correo de registro enviado a ${emailsUsers}`);
