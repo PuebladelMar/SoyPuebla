@@ -6,8 +6,10 @@ import "./dataUserAdmin.css";
 
 const UsersData = () => {
   const allUsers = useSelector((state) => state.allUsers);
+  const user = useSelector((state)=> state.userById)
   const dispatch = useDispatch();
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const superAdmin=user.user.userRole;
 
   const [filters, setFilters] = useState({
     createdAt: "",
@@ -183,13 +185,15 @@ const UsersData = () => {
                   </button>
                 </td>
                 <td>
+                  
                   {user.userRole === "administrator" ? "Administrador" : user.userRole === "user" ? "Usuario" : "Super Administrador"}
-                  <button
+                  {superAdmin==="superadministrator"?   <button
                     className="edit-color"
                     onClick={() => handleEditUserRole(user.id, user.userRole)}
                   >
                     <FaPencilAlt />
-                  </button>
+                  </button> : null}
+                
                 </td>
                 <td>{new Date(user.createdAt).toLocaleDateString()}</td>
 
