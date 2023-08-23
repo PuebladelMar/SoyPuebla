@@ -14,6 +14,7 @@ import {
 } from "../../redux/Actions";
 import { Box, useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function Cardx({ product }) {
   const dispatch = useDispatch();
@@ -72,6 +73,16 @@ export default function Cardx({ product }) {
     const wholeNumber = Math.floor(number);
     return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
+
+
+  const handleHeartClick = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "Por favor, inicia sesión",
+      text: "para agregar favoritos",
+      confirmButtonColor: "#517f7F",
+    });
+  };
 
   return (
     <Card
@@ -278,7 +289,7 @@ export default function Cardx({ product }) {
                         height: selectedColor === col.id ? "1.55rem" : "1.5rem",
                         border:
                           selectedColor === col.id
-                            ? "2px solid #303030"
+                            ? "2px solid #797979"
                             : "1px solid #8b8b8b",
                       }}
                       onClick={() => {
@@ -288,6 +299,32 @@ export default function Cardx({ product }) {
                   </div>
                 ))}
               </Box>
+
+              {!userId.length ? (
+                <CardActions
+                style={{
+                  height: "3rem",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  position: "relative",
+                }}
+              >
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={handleHeartClick}
+                  style={{
+                    position: "absolute",
+                    bottom: "25.3rem",
+                  }}
+                >
+                  <FavoriteIcon color="inherit" />
+                </IconButton>
+              </CardActions>
+
+
+              ) : (
+
+
               <CardActions
                 style={{
                   height: "3rem",
@@ -307,6 +344,9 @@ export default function Cardx({ product }) {
                   <FavoriteIcon color={isFavorite ? "secondary" : "inherit"} />
                 </IconButton>
               </CardActions>
+              )}
+
+
             </Box>
           </Box>
         </Box>
@@ -539,6 +579,37 @@ export default function Cardx({ product }) {
                   </div>
                 ))}
               </Box>
+             
+              {!userId.length ? (
+                <CardActions
+                style={{
+                  height: "0rem",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  position: "relative",
+                }}
+              >
+                <IconButton
+                  aria-label="add to favorites"
+                  onClick={handleHeartClick}
+                  style={{
+                    position: "absolute",
+                    right: isMatchColor2
+                      ? "-5.8rem"
+                      : isMatchColor
+                      ? "-6.8rem"
+                      : isMatchCard
+                      ? "-7.8rem"
+                      : "18.8rem",
+                    bottom: isMatchCard ? "7rem" : "11.9rem",
+                  }}
+                >
+                  <FavoriteIcon color= "inherit" />
+                </IconButton>
+              </CardActions>
+
+              ) : (
+
               <CardActions
                 style={{
                   height: "0rem",
@@ -565,6 +636,9 @@ export default function Cardx({ product }) {
                   <FavoriteIcon color={isFavorite ? "secondary" : "inherit"} />
                 </IconButton>
               </CardActions>
+              )}
+
+
             </Box>
           </Box>
         </Card>

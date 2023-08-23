@@ -3,6 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 300px;
+  overflow: hidden;
 }
 
 .slider-wrapper {
@@ -21,17 +23,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  max-height: 100%;
-  height: auto;
+  height: 100%;
   overflow: hidden;
 }
 
 .img-slider img {
   max-height: 100%;
-  max-width: 100%;
-  height: auto;
-  width: auto;
-  transition: transform 0.3s;
+  min-width: 580px;
+  overflow: hidden;
+  transition: transform 0.8s;
+}
+
+.img-slider img:hover {
+  transform: scale(1.01);
 }
 
 .swiper-pagination {

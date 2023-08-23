@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllHistory } from "../../../redux/Actions";
+import { getAllHistory, putHistories } from "../../../redux/Actions";
+import { FaPencilAlt } from 'react-icons/fa';
 
 const HistoryData = () => {
   const allHistory = useSelector((state) => state.allHistory);
@@ -29,35 +30,50 @@ const HistoryData = () => {
 
   useEffect(() => {
     async function fetchHistory() {
+
       const filtered = allHistory.filter((user) => {
+
         return (
           (filters.createdAt === "" ||
             user.createdAt.includes(filters.createdAt)) &&
-          (filters.state === "" || user.state.includes(filters.state)) &&
+          (filters.state === "" ||
+            (user.state).toLowerCase().includes((filters.state).toLocaleLowerCase())) &&
           (filters.quantity === "" ||
             user.quantity.toString().includes(filters.quantity)) &&
           (filters.unitPrice === "" ||
             user.unitPrice.includes(filters.unitPrice)) &&
           (filters.deletedAt === "" ||
             user.deletedAt === null ||
-            user.deletedAt.includes(filters.deletedAt)) &&
+            user.deletedAt.toLowerCase().includes(filters.deletedAt)) &&
           (filters.updatedAt === "" ||
             user.updatedAt.includes(filters.updatedAt)) &&
           (filters.attributes === "" ||
             (user.attributes.product &&
-              user.attributes.product.includes(filters.attributes)) ||
+              user.attributes.product
+                .toLowerCase()
+                .includes(filters.attributes)) ||
             (user.attributes.color &&
-              user.attributes.color.includes(filters.attributes)) ||
+              user.attributes.color
+                .toLowerCase()
+                .includes(filters.attributes)) ||
             (user.attributes.fullName &&
-              user.attributes.fullName.includes(filters.attributes)) ||
+              user.attributes.fullName
+                .toLowerCase()
+                .includes(filters.attributes)) ||
             (user.attributes.banUser &&
-              user.attributes.banUser.includes(filters.attributes)) ||
+              user.attributes.banUser
+                .toLowerCase()
+                .includes(filters.attributes)) ||
             (user.attributes.userRole &&
-              user.attributes.userRole.includes(filters.attributes)) ||
+              user.attributes.userRole
+                .toLowerCase()
+                .includes(filters.attributes)) ||
             (user.attributes.emailAddress &&
-              user.attributes.emailAddress.includes(filters.attributes)) ||
+              user.attributes.emailAddress
+                .toLowerCase()
+                .includes(filters.attributes)) ||
             (user.attributes.size &&
-              user.attributes.size.includes(filters.attributes)))
+              user.attributes.size.toLowerCase().includes(filters.attributes)))
         );
       });
 
@@ -74,10 +90,11 @@ const HistoryData = () => {
     fetchHistory();
   }, [filters, allHistory, sortOrder]);
 
+
   const handleFilterChange = (field, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [field]: value,
+      [field]: value.toLowerCase(),
     }));
   };
 
@@ -89,6 +106,23 @@ const HistoryData = () => {
   const setSortOrderDesc = () => {
     setSelectedButton("desc");
     setSortOrder("desc");
+  };
+
+  const handleEditState = async (id, state) => {
+    const updatedState = prompt(
+      "Selecciona el nuevo estado: 'approved' o 'rejected'",
+      state
+    );
+    if (updatedState) {
+      if (
+        updatedState === 'approved' ||
+        updatedState === 'rejected') {
+        await dispatch(putHistories(id, updatedState));
+        dispatch(getAllHistory());
+      } else {
+        alert("Rol no válido. Por favor, selecciona uno de los roles permitidos.");
+      }
+    }
   };
 
   return (
@@ -108,7 +142,6 @@ const HistoryData = () => {
             value={filters.createdAt}
             onChange={(e) => handleFilterChange("createdAt", e.target.value)}
           />
-
           <div className="filters-history">
             <button
               onClick={setSortOrderAsc}
@@ -118,9 +151,8 @@ const HistoryData = () => {
             </button>
             <button
               onClick={setSortOrderDesc}
-              className={`button ${
-                selectedButton === "desc" ? "selected" : ""
-              }`}
+              className={`button ${selectedButton === "desc" ? "selected" : ""
+                }`}
             >
               Descendente
             </button>
@@ -129,7 +161,7 @@ const HistoryData = () => {
             type="text"
             placeholder="Estado de compra"
             value={filters.state}
-            onChange={(e) => handleFilterChange("createdAt", e.target.value)}
+            onChange={(e) => handleFilterChange("state", e.target.value)}
           />
           <input
             type="text"
@@ -143,55 +175,43 @@ const HistoryData = () => {
             value={filters.unitPrice}
             onChange={(e) => handleFilterChange("unitPrice", e.target.value)}
           />
+        
           <input
             type="text"
-            placeholder="Eliminado"
-            value={filters.deletedAt}
-            onChange={(e) => handleFilterChange("deletedAt", e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Actualizado"
+            placeholder="Actualizado DD-MM-AA"
             value={filters.updatedAt}
             onChange={(e) => handleFilterChange("updatedAt", e.target.value)}
           />
           <input
             type="text"
-            placeholder="Detalle"
-            value={filters.attributes}
+            placeholder="Producto"
+            value={filters.attributes.product}
             onChange={(e) => handleFilterChange("attributes", e.target.value)}
           />
           <input
             type="text"
-            placeholder="Mail"
-            value={filters.emailAddress}
-            onChange={(e) => handleFilterChange("emailAddress", e.target.value)}
+            placeholder="Color"
+            value={filters.attributes.color}
+            onChange={(e) => handleFilterChange("attributes", e.target.value)}
+          />{" "}
+          <input
+            type="text"
+            placeholder="Talla"
+            value={filters.attributes.size}
+            onChange={(e) => handleFilterChange("attributes", e.target.value)}
           />
           <input
             type="text"
             placeholder="Nombre"
-            value={filters.fullName}
-            onChange={(e) => handleFilterChange("fullName", e.target.value)}
+            value={filters.attributes.fullName}
+            onChange={(e) => handleFilterChange("attributes", e.target.value)}
           />
-          <select
-            value={filters.banUser}
-            onChange={(e) => handleFilterChange("banUser", e.target.value)}
-          >
-            <option value="">Bloqueado</option>
-            <option value="true">Sí</option>
-            <option value="false">No</option>
-          </select>
+
           <input
             type="text"
-            placeholder="ID"
-            value={filters.id}
-            onChange={(e) => handleFilterChange("id", e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Rol"
-            value={filters.userRole}
-            onChange={(e) => handleFilterChange("userRole", e.target.value)}
+            placeholder="E-mail"
+            value={filters.attributes.emailAddress}
+            onChange={(e) => handleFilterChange("attributes", e.target.value)}
           />
         </div>
 
@@ -199,34 +219,48 @@ const HistoryData = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Producto</th>
-              <th>Color</th>
-              <th>Size</th>
               <th>Fecha de Compra</th>
               <th>Estado de compra</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              <th>Actualizado</th>
+              <th>Producto</th>
+              <th>Color</th>
+              <th>Talla</th>
               <th>Nombre</th>
               <th>Email</th>
-              <th>Bloqueado</th>
-              <th>Rol</th>
-              <th>Eliminado</th>
-              <th>Actualizado</th>
             </tr>
           </thead>
           <tbody>
             {filteredHistory.map((user) => (
               <tr key={user.id}>
                 <td>{user.id}</td>
+                <td>{user.createdAt.split("T")[0]}</td>
+                <td>
+                  {user.state === "approved"
+                    ? "Aprobado"
+                    : user.state === "rejected"
+                      ? "Desaprobado"
+                      : user.state === "pending"
+                        ? "Pendiente"
+                        : ""}
+                  {user.state === "pending" && (
+                    <button
+                      className="edit-color"
+                      onClick={() => handleEditState(user.id, user.state)}
+                    >
+                      <FaPencilAlt />
+                    </button>
+                  )}
+                </td>
+                <td>{user.quantity}</td>
+                <td>{user.unitPrice}</td>
+                <td>{user.updatedAt.split("T")[0]}</td>
                 <td>{user.attributes.product}</td>
                 <td>{user.attributes.color}</td>
                 <td>{user.attributes.size}</td>
-                <td>{user.createdAt.split("T")[0]}</td>
-                <td>{user.state}</td>
                 <td>{user.attributes.fullName}</td>
                 <td>{user.attributes.emailAddress}</td>
-                <td>{user.attributes.banUser}</td>
-                <td>{user.attributes.userRole}</td>
-                <td>{user.deletedAt}</td>
-                <td>{user.updatedAt.split("T")[0]}</td>
               </tr>
             ))}
           </tbody>

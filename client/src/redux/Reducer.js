@@ -40,10 +40,17 @@ import {
   PUT_SIZES,
   PUT_COLECCIONS,
   ADD_HISTORY,
+
   GET_CATEGORIES_BY_NAME,
   GET_SERIES_BY_NAME,
   GET_COLORS_BY_NAME,
   GET_SIZES_BY_NAME,
+
+  PUT_PRODUCTS,
+  DELETE_PRODUCT,
+  PUT_HISTORY_STATES,
+
+
 } from './ActionsTypes';
 
 let initialState = {
@@ -304,6 +311,20 @@ function rootReducer(state = initialState, action) {
         ...state,
         allProducts: action.payload,
       };
+      case PUT_PRODUCTS:
+      return {
+        ...state,
+        allProducts: action.payload
+      };
+      case DELETE_PRODUCT:
+        return {
+          ...state,
+          allProducts: action.payload,
+      case PUT_HISTORY_STATES:
+        return {
+          ...state,
+          allHistory: action.payload
+        };
     default:
       return state;
   }

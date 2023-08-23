@@ -69,9 +69,9 @@ const UsersData = () => {
     setSortOrder("desc");
   };
 
-  const handleEditBanUser = async (id, userRole , banUser) => {
-    const newBanUser = !banUser; 
-    await dispatch(editUser(id, userRole ,newBanUser));
+  const handleEditBanUser = async (id, userRole, banUser) => {
+    const newBanUser = !banUser;
+    await dispatch(editUser(id, userRole, newBanUser));
     dispatch(getUsers());
   };
 
@@ -108,7 +108,7 @@ const UsersData = () => {
         <div className="filter">
           <input
             type="text"
-            placeholder="Fecha de creación "
+            placeholder="Fecha DD-MM-AA "
             value={filters.createdAt}
             onChange={(e) => handleFilterChange("createdAt", e.target.value)}
           />
@@ -174,16 +174,16 @@ const UsersData = () => {
                 <td>{user.emailAddress}</td>
 
                 <td>
-                  {user.banUser.toString()}
+                  {user.banUser === true ? "SI" : "NO"}
                   <button
                     className="edit-color"
-                    onClick={() => handleEditBanUser(user.id,user.userRole, user.banUser)}
+                    onClick={() => handleEditBanUser(user.id, user.userRole, user.banUser)}
                   >
                     <FaPencilAlt />
                   </button>
                 </td>
                 <td>
-                  {user.userRole}
+                  {user.userRole === "administrator" ? "Administrador" : user.userRole === "user" ? "Usuario" : "Super Administrador"}
                   <button
                     className="edit-color"
                     onClick={() => handleEditUserRole(user.id, user.userRole)}

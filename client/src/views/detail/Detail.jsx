@@ -63,7 +63,13 @@ const Detail = () => {
 
   const handleLoginClick = (event) => {
     event.preventDefault();
-    Swal.fire('Debes iniciar Sesion');
+    Swal.fire({
+      icon: 'warning',
+      title: 'Por favor, inicia sesión',
+      text: 'para agregar un comentario',
+      confirmButtonColor: '#517f7F',
+      });
+
     dispatch(getReviewById(productDetails[0].id));
   };
 
@@ -121,38 +127,59 @@ const Detail = () => {
   };
 
   const handleAddToCart = () => {
-    if (selectedCombination) {
-      const updatedProductDetails = [...productDetails];
-      const productToUpdateIndex = updatedProductDetails.findIndex(
-        (item) => item.color === selectedColor && item.size === selectedSize
-      );
-  
-      if (productToUpdateIndex !== -1) {
-        if (selectedCombination.stock >= quantity) {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Su producto se añadido correctamente',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-  
-          dispatch(addToCar(userId, selectedCombination.stockId, Number(quantity)));
-  
-          updatedProductDetails[productToUpdateIndex].stock -= quantity;
-          setProductDetails(updatedProductDetails);
-          setQuantity(1)
-        } else {
-          Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'No hay suficiente stock disponible',
-            showConfirmButton: false,
-            timer: 1500,
-          });
+
+if (!userId.length) {
+
+      Swal.fire({
+        icon: 'warning',
+        title: 'Por favor, inicia sesión',
+        text: 'para agregar al carrito',
+        confirmButtonColor: '#517f7F',
+
+        });
+        
+    } else {
+
+
+      if (selectedCombination) {
+        const updatedProductDetails = [...productDetails];
+        const productToUpdateIndex = updatedProductDetails.findIndex(
+          (item) => item.color === selectedColor && item.size === selectedSize
+        );
+    
+        if (productToUpdateIndex !== -1) {
+          if (selectedCombination.stock >= quantity) {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Su producto se añadido correctamente',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+    
+            dispatch(addToCar(userId, selectedCombination.stockId, Number(quantity)));
+    
+            updatedProductDetails[productToUpdateIndex].stock -= quantity;
+            setProductDetails(updatedProductDetails);
+            setQuantity(1)
+          } else {
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'No hay suficiente stock disponible',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
         }
       }
     }
+
+
+
+
+
+
   };
 
   const isValidEmail = (email) => {
@@ -385,7 +412,7 @@ const Detail = () => {
                     onClick={() => {
                       handleAddToCart();
                     }}
-                    disabled={userId.length === 0 || !selectedCombination}
+                    disabled={ !selectedCombination}
                   >
                     Añadir al carrito
                   </button>

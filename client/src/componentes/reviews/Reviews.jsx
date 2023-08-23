@@ -7,10 +7,8 @@ import "./Reviews.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
-
 import { getReviewById } from "../../redux/Actions";
-// import { postUsers } from '../../redux/Actions';
-// import ReviewsForm from './ReviewsForm'
+
 
 function Reviews({ productId }) {
   const getReviewById2 = useSelector((state) => state.getReviewById);
@@ -18,17 +16,7 @@ function Reviews({ productId }) {
   const [visibleReviews, setVisibleReviews] = useState(3);
   const [showAllReviews, setShowAllReviews] = useState(false);
 
-  // useEffect(() => {const handleChange = (event) => {
-  //   const { name, value } = event.target;
 
-  //   setUserComment((prevComment) => ({
-  //     ...prevComment,
-  //     [name]: value,
-  //     score: name === "score" ? parseInt(value) : prevComment.score,
-  //   }));
-  // };
-  //   dispatch(getReviewById(productId));
-  // }, [dispatch]);
 
   useEffect(() => {
     const fetchReview = async () => {
@@ -87,23 +75,6 @@ function Reviews({ productId }) {
         )}
       </div>
 
-      {/* <div className="btn-container">
-        <div className="btn-container2">
-          <NavLink to="/products/reviews">
-            <button>Dejanos tu comentario!</button>
-          </NavLink>
-        </div>
-        <div></div>
-        {userId.length === 0 ? (
-          <NavLink to='/create'>
-            <button>Debes Iniciar sesion</button>
-          </NavLink>
-        ) : (
-          <NavLink to='/review'>
-            <button>Enviar comentario</button>
-          </NavLink>
-        )}
-      </div> */}
     </div>
   );
 }

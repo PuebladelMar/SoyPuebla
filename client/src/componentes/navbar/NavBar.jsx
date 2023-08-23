@@ -14,6 +14,7 @@ import PdM from "../.././assets/images/PdM.png";
 import TortugaRosa from "../.././assets/images/TORTUGA_ROSA_SINFONDO.png";
 import DrawerComp from "./DrawerComp";
 import "./NavBar.css";
+import Swal from "sweetalert2";
 
 export default function NavBar({ links }) {
   const location = useLocation();
@@ -21,7 +22,9 @@ export default function NavBar({ links }) {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
   const [searchBarVisible, setSearchBarVisible] = useState(false);
-  const user = useSelector((state)=> state.userById)
+  const user = useSelector((state) => state.userById);
+  const userId = useSelector((state) => state.userId);
+
   const handleSearchIconClick = () => {
     setSearchBarVisible(!searchBarVisible);
     setIsModalOpen(true);
@@ -55,6 +58,24 @@ export default function NavBar({ links }) {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSearchBarVisible(!searchBarVisible);
+  };
+
+  const handleHeartClick = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "Por favor, inicia sesión",
+      text: "para ir a favoritos",
+      confirmButtonColor: "#517f7F",
+    });
+  };
+
+  const handleCartClick = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "Por favor, inicia sesión",
+      text: "para ir al carrito",
+      confirmButtonColor: "#517f7F",
+    });
   };
 
   return (
@@ -160,14 +181,12 @@ export default function NavBar({ links }) {
                     <li className="menu-item" style={{ margin: " 1rem" }}>
                       <Link to="/about">NOSOTRAS</Link>
                     </li>
-                    {user?.user?.userRole === 'administrator' || user?.user?.userRole === 'superadministrator' ? (
-                    <li
-                      className='menu-item'
-                      style={{ margin: ' 1rem' }}
-                    >
-                      <Link to='/dashboard'>ADMINISTRADOR</Link>
-                    </li>
-                    ) : ( null)}
+                    {user?.user?.userRole === "administrator" ||
+                    user?.user?.userRole === "superadministrator" ? (
+                      <li className="menu-item" style={{ margin: " 1rem" }}>
+                        <Link to="/dashboard">ADMINISTRADOR</Link>
+                      </li>
+                    ) : null}
                   </ul>
                 </Tabs>
               </Grid>
@@ -284,17 +303,29 @@ export default function NavBar({ links }) {
                     height: "3.2rem",
                   }}
                 >
-                  <Link to="/fav">
+                  {!userId.length ? (
                     <FiHeart
                       style={{
                         width: "1.8rem",
                         height: "1.8rem",
                         color: "white",
                       }}
+                      onClick={handleHeartClick}
                     />
-                  </Link>
+                  ) : (
+                    <Link to="/fav">
+                      <FiHeart
+                        style={{
+                          width: "1.8rem",
+                          height: "1.8rem",
+                          color: "white",
+                        }}
+                      />
+                    </Link>
+                  )}
                 </IconButton>
               )}
+
               {!isMatch && (
                 <IconButton
                   style={{
@@ -306,15 +337,32 @@ export default function NavBar({ links }) {
                     height: "3.2rem",
                   }}
                 >
-                  <Link to="/Cart">
-                    <FiShoppingCart
-                      style={{
-                        width: "1.8rem",
-                        height: "1.8rem",
-                        color: "white",
-                      }}
-                    />
-                  </Link>
+                  {!userId.length ? (
+                    <div className="cart-num-container">
+                      <span className="span-num-cart">0</span>
+                      <FiShoppingCart
+                        style={{
+                          width: "1.8rem",
+                          height: "1.8rem",
+                          color: "white",
+                        }}
+                        onClick={handleCartClick}
+                      />
+                    </div>
+                  ) : (
+                    <div className="cart-num-container">
+                      <span className="span-num-cart">0</span>
+                      <Link to="/Cart">
+                        <FiShoppingCart
+                          style={{
+                            width: "1.8rem",
+                            height: "1.8rem",
+                            color: "white",
+                          }}
+                        />
+                      </Link>
+                    </div>
+                  )}
                 </IconButton>
               )}
               {!isProducts && isMatch && (
@@ -328,15 +376,33 @@ export default function NavBar({ links }) {
                     height: "3.2rem",
                   }}
                 >
-                  <Link to="/Cart">
+                  
+                  {!userId.length ? (
+                    <div className="cart-num-container">
+                    <span className="span-num-cart">0</span>
                     <FiShoppingCart
                       style={{
                         width: "1.8rem",
                         height: "1.8rem",
                         color: "white",
                       }}
+                      onClick={handleCartClick}
                     />
-                  </Link>
+                    </div>
+                  ) : (
+                    <div className="cart-num-container">
+                    <span className="span-num-cart">0</span>
+                    <Link to="/Cart">
+                      <FiShoppingCart
+                        style={{
+                          width: "1.8rem",
+                          height: "1.8rem",
+                          color: "white",
+                        }}
+                      />
+                    </Link>
+                    </div>
+                  )}
                 </IconButton>
               )}
               {isMatchSearchBarIcon && searchBarVisible ? (
