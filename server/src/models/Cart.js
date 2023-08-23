@@ -14,6 +14,10 @@ module.exports = (sequelize) => {
       validate:{
         min: 0
       }
-    }
-  },{ timestamps: false });
+    },
+    expiresAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+  });
 };
