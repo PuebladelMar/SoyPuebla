@@ -10,6 +10,7 @@ import { initMercadoPago } from "@mercadopago/sdk-react";
 import { FiX } from "react-icons/fi";
 import { useMediaQuery } from "@mui/material";
 import "./Cart.css";
+import Swal from 'sweetalert2';
 
 const Cart = () => {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -22,16 +23,23 @@ const Cart = () => {
   initMercadoPago("TEST-617b343c-694c-44b2-a447-349bcd889b8b");
 
   useEffect(() => {
-    if (!userId.length) {
-      navigate("/home");
-      alert("debes iniciar sesión para ir al carrito");
-    } else {
+    // if (!userId.length) {
+    //   navigate("/home");
+    //   Swal.fire({
+    //     icon: 'warning',
+    //     title: 'Por favor, inicia sesión',
+    //     text: 'para ir al carrito',
+    //     confirmButtonColor: '#517f7F',
+
+    //     });
+        
+    // } else {
       const asyncFunction = async()=>{
         await dispatch(getUserCart(userId));
         setIsReady(true)
       }
       asyncFunction();
-    }
+    // }
   }, [dispatch]);
 
   const itemList = userCart.map((item) => {
