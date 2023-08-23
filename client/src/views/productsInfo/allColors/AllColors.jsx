@@ -5,6 +5,8 @@ import './allColors.css';
 import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import CreateColor from '../../create/createColor/createColor';
+import Swal from 'sweetalert2';
+
 // import SearchBar from '../../../componentes/searchBar/SearchBar';
 // import FolderIcon from '@mui/icons-material/Folder';
 // import Swal from 'sweetalert2';
@@ -40,8 +42,38 @@ const AllColors = () => {
     }
   };
   const handleDeleteColors = async (id) => {
-    await dispatch(deleteColor(id));
-    await dispatch(getColor());
+    const result = await Swal.fire({
+      title: '¿Estás segura?',
+      text: 'Una vez eliminado, se borrará automáticamente y afectará el funcionamiento de los productos.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#517f7f',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, elimínalo',
+      cancelButtonText: 'Cancelar',
+    });
+
+    if (result.isConfirmed) {
+      // El usuario confirmó la eliminación
+      try {
+        await dispatch(deleteColor(id));
+        await dispatch(getColor());
+
+        Swal.fire({
+          title: 'Eliminado',
+          text: 'El coor ha sido eliminado.',
+          icon: 'success',
+          confirmButtonColor: '#517f7f',
+        });
+      } catch (error) {
+        console.error('Error al eliminar el color:', error);
+        Swal.fire(
+          'Error',
+          'Ha ocurrido un error al eliminar el color.',
+          'error'
+        );
+      }
+    }
   };
   const handleOpenColorCreate = (event) => {
     setShowAlert({ color: true });

@@ -889,6 +889,7 @@ export function deleteReviews(id) {
       const response = await axios.delete(
         `http://localhost:3001/products/review/${id}`
       );
+
       dispatch({
         type: DELETE_REVIEWS,
         payload: response.data,
