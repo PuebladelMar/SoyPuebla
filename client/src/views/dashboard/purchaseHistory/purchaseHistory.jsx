@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllHistory, putHistories} from "../../../redux/Actions";
+import { getAllHistory, putHistories } from "../../../redux/Actions";
 import { FaPencilAlt } from 'react-icons/fa';
 
 const HistoryData = () => {
@@ -151,9 +151,8 @@ const HistoryData = () => {
             </button>
             <button
               onClick={setSortOrderDesc}
-              className={`button ${
-                selectedButton === "desc" ? "selected" : ""
-              }`}
+              className={`button ${selectedButton === "desc" ? "selected" : ""
+                }`}
             >
               Descendente
             </button>
@@ -261,12 +260,14 @@ const HistoryData = () => {
                 <td>{user.id}</td>
                 <td>{user.createdAt.split("T")[0]}</td>
                 <td>{user.state}
-                <button
-                    className="edit-color"
-                    onClick={() => handleEditState(user.id,user.state)}
-                  >
-                    <FaPencilAlt />
-                  </button></td>
+                  {user.state === "pending" && (  // Verifica si el estado es "pending"
+                    <button
+                      className="edit-color"
+                      onClick={() => handleEditState(user.id, user.state)}
+                    >
+                      <FaPencilAlt />
+                    </button>
+                  )}</td>
                 <td>{user.quantity}</td>
                 <td>{user.unitPrice}</td>
                 {/* <td>{user.deletedAt}</td> */}
