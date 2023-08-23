@@ -31,6 +31,8 @@ const Cart = () => {
       asyncFunction();
   }, [dispatch]);
 
+  console.log(userCart);
+
   const itemList = userCart.map((item) => {
     const priceWithDiscount = item.product.price * (1 - item.product.sale / 100);
     return {

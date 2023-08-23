@@ -48,6 +48,7 @@ const EditProduct = () => {
   });
 
   const [showAlert, setShowAlert] = useState({});
+  const [ dataImages, setDataImages ] = useState([])
   const { id } = useParams();
 
   useEffect(() => {
@@ -77,6 +78,8 @@ const EditProduct = () => {
           });
         }
       });
+
+      setDataImages(transformedData)
 
       setCreateProduct({
         name: data[0].name,
@@ -122,6 +125,12 @@ const EditProduct = () => {
     setUploadedSecureUrl(url);
     setCreateProduct((state) => {
       const updateImages = state.colorImage.map((item)=> {
+        if(dataImages.some(i=> i === item)){
+          return {
+            ...item,
+            images: [url]
+          }
+        }
         if(item.color === actualColor){
           return {
             ...item,
@@ -554,10 +563,24 @@ const EditProduct = () => {
                     <AccordionDetails>
                    
                    <div>
-                    <div>
+                   {(col.images.length === 0 || dataImages.find(image=>image.images === col.images)?.images === col.images) ? (
+                      <div>
+                        <label htmlFor="image">Imagenes </label>
+                        <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
+                      </div>
+                    ) : (
+                      <div>
                       <label htmlFor="image">Imagenes </label>
-                      <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
+                      <div>
+                        <button 
+                        type='button'
+                        className="mainImage-upload-button" 
+                        disabled= {true}>
+                          Imagen cargada
+                        </button>
+                      </div>
                     </div>
+                    )}
 
                     <talle className="talle">
                   

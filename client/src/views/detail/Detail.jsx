@@ -1,22 +1,22 @@
-import axios from 'axios';
-import { useEffect, useState, useLayoutEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCar, notifyStock } from '../../redux/Actions';
-import Reviews from '../../componentes/reviews/Reviews';
-import ReviewsForm from '../../componentes/reviews/ReviewsForm';
-import { getReviewById } from '../../redux/Actions';
-import { FiX, FiMinus, FiPlus } from 'react-icons/fi';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import './Detail.css';
-import Loader from '../../componentes/loader/Loader';
-import ImageGallery from 'react-image-gallery';
-import '../../../node_modules/react-image-gallery/styles/css/image-gallery.css';
-import Swal from 'sweetalert2';
+import axios from "axios";
+import { useEffect, useState, useLayoutEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCar, notifyStock, getUserCart } from "../../redux/Actions";
+import Reviews from "../../componentes/reviews/Reviews";
+import ReviewsForm from "../../componentes/reviews/ReviewsForm";
+import { getReviewById } from "../../redux/Actions";
+import { FiX, FiMinus, FiPlus } from "react-icons/fi";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import "./Detail.css";
+import Loader from "../../componentes/loader/Loader";
+import ImageGallery from "react-image-gallery";
+import "../../../node_modules/react-image-gallery/styles/css/image-gallery.css";
+import Swal from "sweetalert2";
 
 const Detail = () => {
   const { id } = useParams();
@@ -27,11 +27,11 @@ const Detail = () => {
   const [isReady, setIsReady] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [ImagesToRender, setImagesToRender] = useState([]);
   const uniqueColor = obtenerColoresUnicos(productDetails);
-  const [thumbnailPosition, setThumbnailPosition] = useState('left');
+  const [thumbnailPosition, setThumbnailPosition] = useState("left");
   const sale = productDetails[0]?.sale;
 
   useLayoutEffect(() => {
@@ -64,11 +64,11 @@ const Detail = () => {
   const handleLoginClick = (event) => {
     event.preventDefault();
     Swal.fire({
-      icon: 'warning',
-      title: 'Por favor, inicia sesión',
-      text: 'para agregar un comentario',
-      confirmButtonColor: '#517f7F',
-      });
+      icon: "warning",
+      title: "Por favor, inicia sesión",
+      text: "para agregar un comentario",
+      confirmButtonColor: "#517f7F",
+    });
 
     dispatch(getReviewById(productDetails[0].id));
   };
@@ -122,51 +122,49 @@ const Detail = () => {
   const addProduct = () => {
     quantity < selectedCombination.stock ? setQuantity(quantity + 1) : null;
   };
+
   const removeProduct = () => {
     quantity > 1 ? setQuantity(quantity - 1) : null;
   };
 
   const handleAddToCart = () => {
-
-if (!userId.length) {
-
+    dispatch(getUserCart(userId));
+    if (!userId.length) {
       Swal.fire({
-        icon: 'warning',
-        title: 'Por favor, inicia sesión',
-        text: 'para agregar al carrito',
-        confirmButtonColor: '#517f7F',
-
-        });
-        
+        icon: "warning",
+        title: "Por favor, inicia sesión",
+        text: "para agregar al carrito",
+        confirmButtonColor: "#517f7F",
+      });
     } else {
-
-
       if (selectedCombination) {
         const updatedProductDetails = [...productDetails];
         const productToUpdateIndex = updatedProductDetails.findIndex(
           (item) => item.color === selectedColor && item.size === selectedSize
         );
-    
+
         if (productToUpdateIndex !== -1) {
           if (selectedCombination.stock >= quantity) {
             Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Su producto se añadido correctamente',
+              position: "center",
+              icon: "success",
+              title: "Su producto se añadido correctamente",
               showConfirmButton: false,
               timer: 1500,
             });
-    
-            dispatch(addToCar(userId, selectedCombination.stockId, Number(quantity)));
-    
+
+            dispatch(
+              addToCar(userId, selectedCombination.stockId, Number(quantity))
+            );
+
             updatedProductDetails[productToUpdateIndex].stock -= quantity;
             setProductDetails(updatedProductDetails);
-            setQuantity(1)
+            setQuantity(1);
           } else {
             Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: 'No hay suficiente stock disponible',
+              position: "center",
+              icon: "error",
+              title: "No hay suficiente stock disponible",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -174,12 +172,6 @@ if (!userId.length) {
         }
       }
     }
-
-
-
-
-
-
   };
 
   const isValidEmail = (email) => {
@@ -189,7 +181,7 @@ if (!userId.length) {
 
   const notifyStockByMail = () => {
     if (!isValidEmail(email)) {
-      Swal.fire('Ingresa un correo valido');
+      Swal.fire("Ingresa un correo valido");
       return;
     }
 
@@ -204,79 +196,79 @@ if (!userId.length) {
 
   useEffect(() => {
     if (window.innerWidth < 1071) {
-      setThumbnailPosition('bottom');
+      setThumbnailPosition("bottom");
     } else {
-      setThumbnailPosition('left');
+      setThumbnailPosition("left");
     }
 
     const handleResize = () => {
       if (window.innerWidth < 1071) {
-        setThumbnailPosition('bottom');
+        setThumbnailPosition("bottom");
       } else {
-        setThumbnailPosition('left');
+        setThumbnailPosition("left");
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   function formatNumber(number) {
     const wholeNumber = Math.floor(number);
-    return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
   return (
-    <div className='container-detail'>
+    <div className="container-detail">
       {isReady ? (
-        <div className='containerDetail'>
-          <div className='secContainer'>
-            <div className='mainIMage-container'>
+        <div className="containerDetail">
+          <div className="secContainer">
+            <div className="mainIMage-container">
               {ImagesToRender && ImagesToRender.length > 0 && (
-                <div className='image-galery-containerDeatil'>
+                <div className="image-galery-containerDeatil">
                   <ImageGallery
                     items={ImagesToRender}
-                    className='image-gallery-icon'
+                    className="image-gallery-icon"
                     thumbnailPosition={thumbnailPosition}
                     showFullscreenButton={false}
                     showPlayButton={false}
                   />
                   {sale == 0 ? (
-                    <h3 className='saleBanner0'></h3>
+                    <h3 className="saleBanner0"></h3>
                   ) : (
-                    <h3 className='saleBanner'>{sale}% off</h3>
+                    <h3 className="saleBanner">{sale}% off</h3>
                   )}
                 </div>
               )}
             </div>
-            <div className='detail-container'>
-              <div className='detailInfo'>
-                <h2 className='detailName'>
-                  {productDetails[0]?.name}{' '}
-                  <span className='span-product-name'></span>{' '}
+            <div className="detail-container">
+              <div className="detailInfo">
+                <h2 className="detailName">
+                  {productDetails[0]?.name}{" "}
+                  <span className="span-product-name"></span>{" "}
                 </h2>
 
                 {sale == 0 ? (
-                  <h3 className='saleBanner0'></h3>
+                  <h3 className="saleBanner0"></h3>
                 ) : (
-                  <h3 className='saleButton'>SALE</h3>
+                  <h3 className="saleButton">SALE</h3>
                 )}
 
                 {sale == 0 ? (
-                  <h2 className='detailInfoPrecio'>
+                  <h2 className="detailInfoPrecio">
                     $ {formatNumber(productDetails[0]?.price)}
                   </h2>
                 ) : (
-                  <h3 className='precioDescuentoContainerDetail '>
-                    <span className='originalPriceDetail'>
-                      {' '}
-                      $ {formatNumber(productDetails[0]?.price)}{' '}
+                  <h3 className="precioDescuentoContainerDetail ">
+                    <span className="originalPriceDetail">
+                      {" "}
+                      $ {formatNumber(productDetails[0]?.price)}{" "}
                     </span>
-                    <span className='discountedPriceDetail'>
-                      ${' '}
+                    <span className="discountedPriceDetail">
+                      ${" "}
                       {formatNumber(
                         Math.floor(productDetails[0]?.price * (1 - sale / 100))
                       )}
@@ -285,20 +277,20 @@ if (!userId.length) {
                 )}
               </div>
               <div>
-                <h2 className='detailInfoSerie'>
+                <h2 className="detailInfoSerie">
                   Serie:
                   {productDetails[0]?.series.map((s, i) => (
                     <span key={i}> {s.name}. </span>
                   ))}
                 </h2>
               </div>
-              <div className='color-size-container'>
-                <p className='detailInfoColor'>Colores disponibles:</p>
-                <div className='color-container'>
+              <div className="color-size-container">
+                <p className="detailInfoColor">Colores disponibles:</p>
+                <div className="color-container">
                   {uniqueColor.map((item) => (
                     <button
                       className={`detailColorButton ${
-                        selectedColor === item.color ? 'selected' : ''
+                        selectedColor === item.color ? "selected" : ""
                       }`}
                       key={item.color}
                       onClick={() => {
@@ -307,25 +299,25 @@ if (!userId.length) {
                       }}
                       style={{
                         backgroundColor: item.codHex,
-                        width: '30px',
-                        height: '30px',
+                        width: "30px",
+                        height: "30px",
                       }}
                     ></button>
                   ))}
                 </div>
-                <div className='size-container'>
+                <div className="size-container">
                   {productDetails
                     .filter((item) => item.color === selectedColor)
                     .map((item) => (
                       <button
                         className={`detailSizeButton ${
-                          selectedSize === item.size ? 'selected' : ''
+                          selectedSize === item.size ? "selected" : ""
                         }`}
                         key={item.size}
                         onClick={() => handleSizeChange(item.size)}
                         style={{
-                          width: '40px',
-                          height: '30px',
+                          width: "40px",
+                          height: "30px",
                         }}
                       >
                         {item.size}
@@ -334,33 +326,33 @@ if (!userId.length) {
                 </div>
               </div>
               {selectedCombination ? (
-                <p className='detailSelection1'>
+                <p className="detailSelection1">
                   Stock disponible: {selectedCombination.stock}
                 </p>
               ) : (
-                <p className='detailSelection0'>
+                <p className="detailSelection0">
                   Seleccione un color y una talla
                 </p>
               )}
               {selectedCombination && selectedCombination.stock === 0 ? (
-                <div className='suscribe-container'>
-                  <p className='detailSelection1'>
+                <div className="suscribe-container">
+                  <p className="detailSelection1">
                     ¡Suscribete! Y sabras cuando esté disponible
                   </p>
-                  <div className='email-container'>
+                  <div className="email-container">
                     <input
                       style={{
-                        border: 'solid 2px',
-                        borderRadius: '4px',
-                        height: '2rem',
-                        fontSize: '0.95rem',
-                        borderColor: 'rgb(190, 190, 190)',
-                        color: 'black',
-                        width: '100%',
-                        padding: '0 1rem',
+                        border: "solid 2px",
+                        borderRadius: "4px",
+                        height: "2rem",
+                        fontSize: "0.95rem",
+                        borderColor: "rgb(190, 190, 190)",
+                        color: "black",
+                        width: "100%",
+                        padding: "0 1rem",
                       }}
-                      placeholder=' Ingresa aquí tu correo*'
-                      type='text'
+                      placeholder=" Ingresa aquí tu correo*"
+                      type="text"
                       onChange={(e) => setEmail(e.target.value)}
                       disabled={isSubscribed}
                     ></input>
@@ -368,35 +360,35 @@ if (!userId.length) {
                   {!isSubscribed ? (
                     <button
                       onClick={notifyStockByMail}
-                      className='notifyButton'
+                      className="notifyButton"
                     >
                       Suscribirte
                     </button>
                   ) : (
-                    <p className='detailSelection1'>
+                    <p className="detailSelection1">
                       ¡Gracias por suscribirte!
                     </p>
                   )}
                 </div>
               ) : (
                 <>
-                  <div className='quantity-container'>
+                  <div className="quantity-container">
                     <button
-                      className='detailAddCartButton'
+                      className="detailAddCartButton"
                       style={{
-                        width: '2rem',
-                        height: '2rem',
+                        width: "2rem",
+                        height: "2rem",
                       }}
                       onClick={removeProduct}
                     >
                       <FiMinus />
                     </button>
-                    <span className='quantity-span'>{quantity}</span>
+                    <span className="quantity-span">{quantity}</span>
                     <button
-                      className='detailAddCartButton'
+                      className="detailAddCartButton"
                       style={{
-                        width: '2rem',
-                        height: '2rem',
+                        width: "2rem",
+                        height: "2rem",
                       }}
                       onClick={addProduct}
                     >
@@ -404,65 +396,51 @@ if (!userId.length) {
                     </button>
                   </div>
                   <button
-                    className='addCartButton'
+                    className="addCartButton"
                     style={{
-                      width: '100%',
-                      height: '4rem',
+                      width: "100%",
+                      height: "4rem",
                     }}
                     onClick={() => {
                       handleAddToCart();
                     }}
-                    disabled={ !selectedCombination}
+                    disabled={!selectedCombination}
                   >
                     Añadir al carrito
                   </button>
                 </>
               )}
             </div>
-            {/* {showAlert && (
-              <>
-                <div className="transparentBackground"></div>
-                <div className="alertContainer">
-                  <p className="alertText">El Producto se añadido a su carrito</p>
-                  <div className="alertButtons">
-                    <button onClick={handleCloseAlert}>Seguir comprando</button>
-                    <button>
-                      <Link to="/Cart">Ir al carrito</Link>
-                    </button>
-                  </div>
-                </div>
-              </>
-            )} */}
           </div>
-          <div className='close-button'>
-            <Link to='/products'>
-              <FiX style={{ width: '2rem', height: '2rem' }} />
+          <div className="close-button">
+            <Link to="/products">
+              <FiX style={{ width: "2rem", height: "2rem" }} />
             </Link>
           </div>
         </div>
       ) : (
-        <div className='loader-container'>
+        <div className="loader-container">
           <Loader />
         </div>
       )}
       {isReady && (
-        <div className='description-container'>
+        <div className="description-container">
           <Accordion
-            className='accordion'
-            style={{ margin: '0', border: 'none' }}
+            className="accordion"
+            style={{ margin: "0", border: "none" }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
-              aria-controls='panel1a-content'
-              id='panel1a-header'
+              aria-controls="panel1a-content"
+              id="panel1a-header"
             >
               <Typography>
-                <h2 className='description-text'>Descripción</h2>
+                <h2 className="description-text">Descripción</h2>
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                <p className='detailDesciption'>
+                <p className="detailDesciption">
                   {productDetails[0]?.description}
                 </p>
               </Typography>
@@ -471,7 +449,7 @@ if (!userId.length) {
         </div>
       )}
       {isReady && (
-        <div className='reviews-container'>
+        <div className="reviews-container">
           <Reviews />
           {productDetails[0] && (
             <ReviewsForm
