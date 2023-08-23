@@ -21,7 +21,6 @@ export default function NavBar({ links }) {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
   const [searchBarVisible, setSearchBarVisible] = useState(false);
-  const userId = useSelector((state) => state.userId);
   const user = useSelector((state)=> state.userById)
   const handleSearchIconClick = () => {
     setSearchBarVisible(!searchBarVisible);

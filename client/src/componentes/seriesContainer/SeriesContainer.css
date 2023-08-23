@@ -1,7 +1,5 @@
 .seriesContainer {
   display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: repeat(4, minmax(300px, auto)); */
   gap: 1em;
   margin: 1em;
   align-items: stretch;
