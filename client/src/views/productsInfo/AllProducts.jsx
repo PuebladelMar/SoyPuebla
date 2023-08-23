@@ -4,6 +4,7 @@ import {
   filterProducts,
   getProducts,
   deleteProduct,
+  getUserCart
 } from '../../redux/Actions';
 import SideBar from '../../componentes/sidebar/SideBar';
 import { NavLink } from 'react-router-dom';
@@ -14,6 +15,7 @@ import Swal from 'sweetalert2';
 const AllProducts = () => {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
+  const userId = useSelector((state) => state.userId);
   const [filters, setFilters] = useState({
     color: null,
     size: null,
@@ -88,6 +90,7 @@ const AllProducts = () => {
       try {
         await dispatch(deleteProduct(id));
         await dispatch(getProducts());
+        dispatch(getUserCart(userId));
 
         Swal.fire({
           title: 'Eliminado',
