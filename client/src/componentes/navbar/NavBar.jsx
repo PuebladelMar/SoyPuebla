@@ -6,7 +6,11 @@ import "../searchBar/SearchBar.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "@mui/material/Modal";
-import { getProducts, getProductsByName } from "../../redux/Actions";
+import {
+  getProducts,
+  getProductsByName,
+  getUserCart,
+} from "../../redux/Actions";
 import { useLocation } from "react-router-dom";
 import { FiSearch, FiHeart, FiShoppingCart, FiX } from "react-icons/fi";
 import UserIcon from "../../views/login/UserIcon";
@@ -20,10 +24,20 @@ export default function NavBar({ links }) {
   const location = useLocation();
   const isProducts = location.pathname === "/products";
   const dispatch = useDispatch();
+  const userCart = useSelector((state) => state.userCart);
   const [searchValue, setSearchValue] = useState("");
   const [searchBarVisible, setSearchBarVisible] = useState(false);
   const user = useSelector((state) => state.userById);
   const userId = useSelector((state) => state.userId);
+
+  useEffect(() => {
+    if (userId) {
+      const asyncFunction = async () => {
+        await dispatch(getUserCart(userId));
+      };
+      asyncFunction();
+    }
+  }, [dispatch, userId]);
 
   const handleSearchIconClick = () => {
     setSearchBarVisible(!searchBarVisible);
@@ -351,7 +365,7 @@ export default function NavBar({ links }) {
                     </div>
                   ) : (
                     <div className="cart-num-container">
-                      <span className="span-num-cart">0</span>
+                      <span className="span-num-cart">{userCart.length}</span>
                       <Link to="/Cart">
                         <FiShoppingCart
                           style={{
@@ -376,31 +390,30 @@ export default function NavBar({ links }) {
                     height: "3.2rem",
                   }}
                 >
-                  
                   {!userId.length ? (
                     <div className="cart-num-container">
-                    <span className="span-num-cart">0</span>
-                    <FiShoppingCart
-                      style={{
-                        width: "1.8rem",
-                        height: "1.8rem",
-                        color: "white",
-                      }}
-                      onClick={handleCartClick}
-                    />
-                    </div>
-                  ) : (
-                    <div className="cart-num-container">
-                    <span className="span-num-cart">0</span>
-                    <Link to="/Cart">
+                      <span className="span-num-cart">0</span>
                       <FiShoppingCart
                         style={{
                           width: "1.8rem",
                           height: "1.8rem",
                           color: "white",
                         }}
+                        onClick={handleCartClick}
                       />
-                    </Link>
+                    </div>
+                  ) : (
+                    <div className="cart-num-container">
+                      <span className="span-num-cart">{userCart.length}</span>
+                      <Link to="/Cart">
+                        <FiShoppingCart
+                          style={{
+                            width: "1.8rem",
+                            height: "1.8rem",
+                            color: "white",
+                          }}
+                        />
+                      </Link>
                     </div>
                   )}
                 </IconButton>

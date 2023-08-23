@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import {
   Box,
   Drawer,
@@ -9,6 +10,7 @@ import {
   ListItemText,
   List,
 } from "@mui/material";
+import { getUserCart } from "../../redux/Actions";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import PdM from "../.././assets/images/PdM.png";
 import { Link } from "react-router-dom";
@@ -19,6 +21,17 @@ function DrawerComp() {
   const [open, setOpen] = useState(false);
   const user = useSelector((state) => state.userById);
   const userId = useSelector((state) => state.userId);
+  const userCart = useSelector((state) => state.userCart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userId) {
+      const asyncFunction = async () => {
+        await dispatch(getUserCart(userId));
+      };
+      asyncFunction();
+    }
+  }, [dispatch, userId]);
 
   const handleHeartClick = () => {
     Swal.fire({
@@ -332,7 +345,7 @@ function DrawerComp() {
                       },
                     }}
                   >
-                    Carrito <span className="span-cart-drawer">0</span>
+                    Carrito <span className="span-cart-drawer">{userCart.length}</span>
                   </ListItemText>
                 </ListItemIcon>
               </ListItemButton>
