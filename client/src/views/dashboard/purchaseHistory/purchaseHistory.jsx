@@ -175,15 +175,10 @@ const HistoryData = () => {
             value={filters.unitPrice}
             onChange={(e) => handleFilterChange("unitPrice", e.target.value)}
           />
+        
           <input
             type="text"
-            placeholder="Eliminado"
-            value={filters.deletedAt}
-            onChange={(e) => handleFilterChange("deletedAt", e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Actualizado"
+            placeholder="Actualizado DD-MM-AA"
             value={filters.updatedAt}
             onChange={(e) => handleFilterChange("updatedAt", e.target.value)}
           />

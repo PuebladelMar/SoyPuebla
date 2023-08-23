@@ -108,7 +108,7 @@ const UsersData = () => {
         <div className="filter">
           <input
             type="text"
-            placeholder="Fecha de creación "
+            placeholder="Fecha DD-MM-AA "
             value={filters.createdAt}
             onChange={(e) => handleFilterChange("createdAt", e.target.value)}
           />
