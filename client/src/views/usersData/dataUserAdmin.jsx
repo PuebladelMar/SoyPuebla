@@ -146,7 +146,7 @@ const UsersData = () => {
                 <td>{user.emailAddress}</td>
                 <td>{user.banUser}</td>
                 <td>{user.userRole}</td>
-                <td>{user.createdAt}</td>
+                <td>{user.createdAt.split("T")[0]}</td>
               </tr>
             ))}
           </tbody>
