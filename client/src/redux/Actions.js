@@ -214,9 +214,6 @@ export function addToCar(userId, stockId, quantity) {
         stockId,
         quantity,
       });
-
-      // alert('Se ha añadido el producto al carrito');
-
       return dispatch({
         type: POST_TO_CART,
       });
@@ -231,7 +228,6 @@ export const getUserCart = (userId) => {
     try {
       const response = await fetch(`http://localhost:3001/cart/${userId}`);
       const data = await response.json();
-
       dispatch({ type: GET_USER_CART, payload: data });
     } catch (error) {
       // alert(error.message);
@@ -326,7 +322,7 @@ export function getAllFav(userId) {
         payload: response.data,
       });
     } catch (error) {
-      console.error("Error al obtener favoritos:", error);
+      // console.error("Error al obtener favoritos:", error);
     }
   };
 }

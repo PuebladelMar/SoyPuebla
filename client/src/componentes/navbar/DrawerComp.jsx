@@ -78,7 +78,6 @@ function DrawerComp() {
             />
           </Link>
         </Box>
-
         <List
           sx={{
             display: "flex",
@@ -221,7 +220,6 @@ function DrawerComp() {
                 </ListItemIcon>
               </ListItemButton>
             ) : null}
-
             {!userId.length ? (
               <ListItemButton
                 onClick={handleHeartClick}
@@ -284,7 +282,6 @@ function DrawerComp() {
                 </ListItemIcon>
               </ListItemButton>
             )}
-
             {!userId.length ? (
               <ListItemButton
                 onClick={handleCartClick}
@@ -345,7 +342,12 @@ function DrawerComp() {
                       },
                     }}
                   >
-                    Carrito <span className="span-cart-drawer">{userCart.length}</span>
+                    Carrito
+                    {userCart.length > 0 && (
+                      <span className="span-cart-drawer">
+                        {userCart.length}
+                      </span>
+                    )}
                   </ListItemText>
                 </ListItemIcon>
               </ListItemButton>
