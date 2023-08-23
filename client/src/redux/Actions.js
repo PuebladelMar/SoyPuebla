@@ -42,6 +42,9 @@ import {
   PUT_SIZES,
   PUT_CATEGORIES,
   PUT_COLECCIONS,
+  PUT_PRODUCTS,
+  DELETE_PRODUCT,
+  
 } from './ActionsTypes';
 
 export function getProducts() {
@@ -749,4 +752,41 @@ export function deleteCategories(id) {
   };
 }
 
+export function editProducts(name, price, sale, description, series, category, colorImage) {
+  return async function (dispatch) {
+    try {
+      console.log('Datos que se envían en la solicitud PUT:', {
+        name, price, sale, description, series, category, colorImage
+      });
+      const response = await axios.put(
+        `http://localhost:3001/products/${id}`,
+        {
+          name, price, sale, description, series, category, colorImage
+        }
+      );
+      dispatch({
+        type: PUT_PRODUCTS,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+export function deleteProduct(id) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/products/${id}`
+      );
+      dispatch({
+        type: DELETE_PRODUCT,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
 
