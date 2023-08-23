@@ -1,4 +1,5 @@
 import "./SeriesContainer.css";
+import { useMediaQuery } from "@mui/material";
 import R1 from "../../assets/images/imagesSeries/R1 INDUSTRIA.png";
 import R2 from "../../assets/images/imagesSeries/R2 ESCAPE.png";
 import R3 from "../../assets/images/imagesSeries/R3 LIGHT.png";
@@ -11,6 +12,7 @@ import R10 from "../../assets/images/imagesSeries/R10 ZEN.png";
 import { Link } from "react-router-dom";
 
 function SeriesContainer() {
+  const isMatch = useMediaQuery("(max-width: 599px)");
   return (
     <div>
       <h1 className="series-text">
@@ -36,25 +38,26 @@ function SeriesContainer() {
             </Link>
           </div>
         </div>
-
-        <div className="s3">
-          <div className="image-container">
-            <Link to={`/products`}>
-              <img className="serie-image" src={R4} alt="SCRAPES" />
-              <div className="image-text">SCRAPES</div>
-            </Link>
+        {!isMatch && (
+          <div className="s3">
+            <div className="image-container">
+              <Link to={`/products`}>
+                <img className="serie-image" src={R4} alt="SCRAPES" />
+                <div className="image-text">SCRAPES</div>
+              </Link>
+            </div>
           </div>
-        </div>
-
-        <div className="s4">
-          <div className="image-container">
-            <Link to={`/products`}>
-              <img className="serie-image" src={R5} alt="BEACH" />
-              <div className="image-text">BEACH</div>
-            </Link>
+        )}
+        {!isMatch && (
+          <div className="s4">
+            <div className="image-container">
+              <Link to={`/products`}>
+                <img className="serie-image" src={R5} alt="BEACH" />
+                <div className="image-text">BEACH</div>
+              </Link>
+            </div>
           </div>
-        </div>
-
+        )}
         <div className="s5">
           <div className="image-container">
             <Link to={`/products`}>
