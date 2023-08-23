@@ -33,6 +33,10 @@ function Favorites() {
       }}
       className="cardsFavorite"
     >
+      <Container style={{
+        maxWidth: "90rem",
+      }}>
+
       {!isMatch ? (
         <Box
           style={{
@@ -44,7 +48,7 @@ function Favorites() {
             width: "100%",
             margin: "0 auto",
           }}
-        >
+          >
           {favorites?.map((product) => (
             <Grid
               item
@@ -54,27 +58,27 @@ function Favorites() {
               xl={3}
               key={product.id}
               style={{ margin: "1rem" }}
-            >
+              >
               <Cardx key={product.id} product={product} />
             </Grid>
           ))}
         </Box>
       ) : (
         <Box
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            padding: "1rem 0",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            margin: "0 auto",
-          }}
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          padding: "1rem 0",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          margin: "0 auto",
+        }}
         >
           {favorites?.map((product) => (
             <Grid
-              item
-              xs={12}
+            item
+            xs={12}
               md={5}
               lg={4}
               xl={3}
@@ -85,12 +89,13 @@ function Favorites() {
                 display: "flex",
                 justifyContent: "center",
               }}
-            >
+              >
               <Cardx key={product.id} product={product} />
             </Grid>
           ))}
         </Box>
       )}
+      </Container>
     </Container>
   );
 }
