@@ -21,7 +21,8 @@ export default function NavBar({ links }) {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
   const [searchBarVisible, setSearchBarVisible] = useState(false);
-
+  const userId = useSelector((state) => state.userId);
+  const user = useSelector((state)=> state.userById)
   const handleSearchIconClick = () => {
     setSearchBarVisible(!searchBarVisible);
     setIsModalOpen(true);
@@ -160,9 +161,14 @@ export default function NavBar({ links }) {
                     <li className="menu-item" style={{ margin: " 1rem" }}>
                       <Link to="/about">NOSOTRAS</Link>
                     </li>
-                    <li className="menu-item" style={{ margin: " 1rem" }}>
-                      <Link to="/dashboard">ADMINISTRADOR</Link>
+                    {user?.user?.userRole === 'administrator' || user?.user?.userRole === 'superadministrator' ? (
+                    <li
+                      className='menu-item'
+                      style={{ margin: ' 1rem' }}
+                    >
+                      <Link to='/dashboard'>ADMINISTRADOR</Link>
                     </li>
+                    ) : ( null)}
                   </ul>
                 </Tabs>
               </Grid>
