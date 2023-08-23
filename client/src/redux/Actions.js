@@ -423,13 +423,14 @@ export function getUserById(id) {
 }
 
 export function editUser(id, userRole, banUser) {
+
   return async function (dispatch) {
     try {
       const response = await axios.put(
-        `http://localhost:3001/users/user${id}`,
+        `http://localhost:3001/users/user/${id}`,
         {
           userRole: userRole,
-          banUser: banUser,
+          banUser: banUser
         }
       );
       dispatch({
@@ -748,3 +749,5 @@ export function deleteCategories(id) {
     }
   };
 }
+
+
