@@ -43,3 +43,23 @@
     align-items: center;
     justify-content: center;
   }
+
+  .cart-num-container {
+    position: relative;
+  }
+
+  .span-num-cart {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.1rem;
+    background-color: rgb(235, 0, 0);
+    border-radius: 50%;
+    top: -0.3rem;
+    right: -0.5rem;
+    height: 0.9rem;
+    width: 0.9rem;
+    font-size: 0.7rem;
+    color: rgb(243, 243, 243);
+  }

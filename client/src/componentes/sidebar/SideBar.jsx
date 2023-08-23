@@ -131,6 +131,7 @@ function SideBar({ handlerEventSideBar, resetFilters }) {
             <span className="open-modal-span">
             <FiShoppingCart />
             </span>
+            <span className="span-num-cart-sidebar">0</span>
           </button>
           </Link>
           <button className="open-modal-button" onClick={handleResetFilters}>

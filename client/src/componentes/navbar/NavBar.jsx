@@ -338,24 +338,30 @@ export default function NavBar({ links }) {
                   }}
                 >
                   {!userId.length ? (
-                    <FiShoppingCart
-                      style={{
-                        width: "1.8rem",
-                        height: "1.8rem",
-                        color: "white",
-                      }}
-                      onClick={handleCartClick}
-                    />
-                  ) : (
-                    <Link to="/Cart">
+                    <div className="cart-num-container">
+                      <span className="span-num-cart">0</span>
                       <FiShoppingCart
                         style={{
                           width: "1.8rem",
                           height: "1.8rem",
                           color: "white",
                         }}
+                        onClick={handleCartClick}
                       />
-                    </Link>
+                    </div>
+                  ) : (
+                    <div className="cart-num-container">
+                      <span className="span-num-cart">0</span>
+                      <Link to="/Cart">
+                        <FiShoppingCart
+                          style={{
+                            width: "1.8rem",
+                            height: "1.8rem",
+                            color: "white",
+                          }}
+                        />
+                      </Link>
+                    </div>
                   )}
                 </IconButton>
               )}
@@ -370,6 +376,8 @@ export default function NavBar({ links }) {
                     height: "3.2rem",
                   }}
                 >
+                  <div className="cart-num-container">
+                    <span className="span-num-cart">0</span>
                   {!userId.length ? (
                     <FiShoppingCart
                       style={{
@@ -389,6 +397,7 @@ export default function NavBar({ links }) {
                         }}
                       />
                     </Link>
+                  </div>
                   )}
                 </IconButton>
               )}

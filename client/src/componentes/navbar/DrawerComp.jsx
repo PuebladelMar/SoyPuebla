@@ -13,6 +13,7 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import PdM from "../.././assets/images/PdM.png";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import "./DrawerComp.css";
 
 function DrawerComp() {
   const [open, setOpen] = useState(false);
@@ -288,7 +289,9 @@ function DrawerComp() {
                 >
                   <ListItemText
                     sx={{
+                      position: "relative",
                       color: "#ededed",
+                      fontSize: "0.1rem",
                       transform: "scale(1.3)",
                       textAlign: "center",
                       "&:hover": {
@@ -297,7 +300,7 @@ function DrawerComp() {
                       },
                     }}
                   >
-                    Carrito
+                    Carrito <span className="span-cart-drawer">0</span>
                   </ListItemText>
                 </ListItemIcon>
               </ListItemButton>
@@ -319,6 +322,7 @@ function DrawerComp() {
                 >
                   <ListItemText
                     sx={{
+                      position: "relative",
                       color: "#ededed",
                       transform: "scale(1.3)",
                       textAlign: "center",
@@ -328,7 +332,7 @@ function DrawerComp() {
                       },
                     }}
                   >
-                    Carrito
+                    Carrito <span className="span-cart-drawer">0</span>
                   </ListItemText>
                 </ListItemIcon>
               </ListItemButton>
