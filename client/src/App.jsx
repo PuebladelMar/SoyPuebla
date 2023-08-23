@@ -21,7 +21,7 @@ import Create from "./views/create/Create";
 import Detail from "./views/detail/Detail";
 import EnProceso from "./views/mercadoPago/EnProceso/enProceso";
 import ErrorPage from "./views/errorPage/ErrorPage";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import Customer from "./componentes/footer/customer/customer";
@@ -41,14 +41,18 @@ import Information from "./views/dashboard/Information";
 import UsersData from "./views/usersData/dataUserAdmin";
 import HistoryData from "./views/dashboard/purchaseHistory/purchaseHistory";
 import AllCategories from "./views/productsInfo/categories/AllCategories";
+import BannedUserPage from "./views/ban/BannedUserPage"
+
 
 axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   const { pathname } = useLocation();
   const user = useSelector((state)=> state.userById)
+  const isUserBanned = user?.user?.banUser === true;
   return (
     <div>
+      
       {<NavBar />}
       <Routes>
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
@@ -56,42 +60,43 @@ function App() {
           path='/'
           element={<Landing />}
         />
+        
         <Route
           path='/home'
-          element={<Home />}
+          element={isUserBanned ? <BannedUserPage/> : <Home />}
         />
         <Route
           path='/fav'
-          element={<Favorites />}
+          element={isUserBanned ? <BannedUserPage/> : <Favorites />}
         />
         <Route
           path='/procesando'
-          element={<EnProceso />}
+          element={isUserBanned ? <BannedUserPage/> : <EnProceso />}
         />
         <Route
           path='/about'
-          element={<About />}
+          element={isUserBanned ? <BannedUserPage/> : <About />}
         />
         <Route
           path='/products'
-          element={<Products />}
+          element={isUserBanned ? <BannedUserPage/> : <Products />}
         />
         <Route
           path='/cart'
-          element={<Cart />}
+          element={isUserBanned ? <BannedUserPage/> : <Cart />}
         />
         <Route
           path='/create'
-          element={<Create />}
+          element={isUserBanned ? <BannedUserPage/> : <Create />}
         />
         {/*<Route path="/login" element={<Login />} />*/}
         <Route
           path='/products/:id'
-          element={<Detail />}
+          element={isUserBanned ? <BannedUserPage/> : <Detail />}
         />
         <Route
           path='*'
-          element={<ErrorPage />}
+          element={isUserBanned ? <BannedUserPage/> : <ErrorPage />}
         />
         <Route
           path='/frequent-questions'
@@ -99,80 +104,83 @@ function App() {
         />
         <Route
           path='/pay-state'
-          element={<PayState />}
+          element={isUserBanned ? <BannedUserPage/> : <PayState />}
         />
         <Route
           path='/payMethods'
-          element={<PaymentMethodsView />}
+          element={isUserBanned ? <BannedUserPage/> : <PaymentMethodsView />}
         />
         <Route
           path='/history'
-          element={<History />}
+          element={isUserBanned ? <BannedUserPage/> : <History />}
         />
         <Route
           path='/shipment'
-          element={<Shipment />}
+          element={isUserBanned ? <BannedUserPage/> : <Shipment />}
         />
         <Route
           path='/size-chart'
-          element={<SizeChart />}
+          element={isUserBanned ? <BannedUserPage/> : <SizeChart />}
         />
         <Route
           path='/products/reviews'
-          element={<ReviewsForm />}
+          element={isUserBanned ? <BannedUserPage/> : <ReviewsForm />}
         />
         {user?.user?.userRole === 'administrator' || user?.user?.userRole === 'superadministrator' ? (
         <>
         <Route
           path='/dashboard'
-          element={<Dashboard />}
+          element={isUserBanned ? <BannedUserPage/> : <Dashboard />}
         />
         <Route
           path='/info'
-          element={<Information />}
+          element={isUserBanned ? <BannedUserPage/> : <Information />}
         />
                 <Route
           path='/all-data'
-          element={<AllData />}
+          element={isUserBanned ? <BannedUserPage/> : <AllData />}
         />
         <Route
           path='/all-data/all-products'
-          element={<AllProducts />}
+          element={isUserBanned ? <BannedUserPage/> : <AllProducts />}
         />
         <Route
           path='/detail-admin/:id'
-          element={<DetailAdmin />}
+          element={isUserBanned ? <BannedUserPage/> : <DetailAdmin />}
         />
         <Route
           path='/all-data/all-colecciones'
-          element={<AllColecciones />}
+          element={isUserBanned ? <BannedUserPage/> : <AllColecciones />}
         />
         <Route
           path='/all-data/all-sizes'
-          element={<AllTalles />}
+          element={isUserBanned ? <BannedUserPage/> : <AllTalles />}
         />
         <Route
           path='/all-data/all-colors'
-          element={<AllColors />}
+          element={isUserBanned ? <BannedUserPage/> : <AllColors />}
         />
         <Route
           path='/dashboard/users'
-          element={<UsersData />}
+          element={isUserBanned ? <BannedUserPage/> : <UsersData />}
         />
         <Route
           path='/dashboard/history'
-          element={<HistoryData />}
+          element={isUserBanned ? <BannedUserPage/> : <HistoryData />}
         />
         <Route
           path='/all-data/all-categories'
-          element={<AllCategories />}
+          element={isUserBanned ? <BannedUserPage/> : <AllCategories />}
         />
         <Route
           path='/edit-products/:id'
-          element={<EditProduct />}
+          element={isUserBanned ? <BannedUserPage/> : <EditProduct />}
         />
         </>
         ):(null)}
+
+       
+
       </Routes>
       {pathname !== '/' && <Footer />}
     </div>
