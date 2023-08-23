@@ -47,9 +47,8 @@ import {
   PUT_PRODUCTS,
   DELETE_PRODUCT,
   PUT_HISTORY_STATES,
-
-} from "./ActionsTypes";
-
+  DELETE_REVIEWS,
+} from './ActionsTypes';
 
 let initialState = {
   allProducts: [],
@@ -323,6 +322,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allHistory: action.payload,
+      };
+    case DELETE_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
       };
 
     default:
