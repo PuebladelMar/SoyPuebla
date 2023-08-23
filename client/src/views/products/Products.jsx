@@ -22,7 +22,7 @@ function Products() {
     name: null,
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 12;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const itemsToShow = allProducts.slice(indexOfFirstItem, indexOfLastItem);
