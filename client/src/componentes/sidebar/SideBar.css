@@ -320,21 +320,6 @@
     padding: 0 1rem;
   }
 
-  .cart-button {
-    background-color: #517f7f;
-    width: 4rem;
-    height: 2.4rem;
-    padding: 0.2rem 0.8rem;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* .cart-button:hover {
-
-  } */
-
   .open-modal-button {
     background-color: #517f7f;
     padding: 0.2rem 0.8rem;
@@ -348,8 +333,7 @@
   }
 
   .open-modal-button:hover {
-    color: #e9faff;
-    transform: scale(1.01);
+    transform: scale(1.015);
   }
 
   .img-filter {
@@ -362,6 +346,20 @@
     width: 100%;
     margin: 0;
     position: relative;
+  }
+}
+
+@media screen and (max-width: 405px) {
+  .search-bar-aside {
+    width: 100%;
+    margin: 0;
+    position: relative;
+  }
+
+  .open-modal-button {
+    padding-bottom: 0.3rem;
+    font-size: 1.03rem;
+    gap: 0.5rem;
   }
 }
 
