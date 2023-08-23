@@ -11,6 +11,7 @@ import { FiX } from "react-icons/fi";
 import { useMediaQuery } from "@mui/material";
 import "./Cart.css";
 import Swal from 'sweetalert2';
+const INIT_MP = import.meta.env.INIT_MP;
 
 const Cart = () => {
   const [preferenceId, setPreferenceId] = useState(null);
@@ -20,31 +21,18 @@ const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isMatch = useMediaQuery("(max-width: 525px)");
-  initMercadoPago("TEST-617b343c-694c-44b2-a447-349bcd889b8b");
+  initMercadoPago(INIT_MP);
 
   useEffect(() => {
-    // if (!userId.length) {
-    //   navigate("/home");
-    //   Swal.fire({
-    //     icon: 'warning',
-    //     title: 'Por favor, inicia sesión',
-    //     text: 'para ir al carrito',
-    //     confirmButtonColor: '#517f7F',
-
-    //     });
-        
-    // } else {
       const asyncFunction = async()=>{
         await dispatch(getUserCart(userId));
         setIsReady(true)
       }
       asyncFunction();
-    // }
   }, [dispatch]);
 
   const itemList = userCart.map((item) => {
     const priceWithDiscount = item.product.price * (1 - item.product.sale / 100);
-  
     return {
       description: item.product.name,
       price: priceWithDiscount,
@@ -63,7 +51,7 @@ const Cart = () => {
   const createPreference = async () => {
     try {
       await axios
-        .post("http://localhost:3001/mp/create_preference", {
+        .post("/mp/create_preference", {
           products: itemList,
         })
         .then((response) => {
@@ -166,7 +154,7 @@ const Cart = () => {
             </NavLink>
           </div>
         )}
-        <NavLink to="/products" className="cart-link" styles={{}}>
+        <NavLink to="/products" className="cart-link">
           Volver
         </NavLink>
       </div>

@@ -9,30 +9,31 @@ import { useEffect } from "react";
 
 const FooterContact = () => {
   const information = useSelector((state) => state.information);
-  const dispatch=useDispatch()
-  
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         await dispatch(getAllInformation());
       } catch (error) {
-        
         console.error("Error al obtener la información:", error);
       }
     };
-  
-    fetchData(); 
-  }, [dispatch]);
 
- 
+    fetchData();
+  }, [dispatch]);
 
   return (
     <footer className="footerC">
       <div className="moving-background"></div>
       <div className="brand-info-contact">
         <h3 className="contact-us">Contactanos</h3>
-        <p>Email: {information.email}</p>
-        <p>Teléfono: {information.phone}</p>
+        {information.email ? <p>Email: {information.email}</p> : <p>Email: </p>}
+        {information.phone ? (
+          <p>Teléfono: {information.phone}</p>
+        ) : (
+          <p>Teléfono: </p>
+        )}
         <div className="social-icons">
           <a
             href={information.whatsapp}

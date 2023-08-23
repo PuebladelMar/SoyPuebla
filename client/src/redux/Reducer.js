@@ -42,6 +42,8 @@ import {
   ADD_HISTORY,
   PUT_PRODUCTS,
   DELETE_PRODUCT,
+  PUT_HISTORY_STATES,
+
  
 } from './ActionsTypes';
 
@@ -292,6 +294,10 @@ function rootReducer(state = initialState, action) {
         return {
           ...state,
           allProducts: action.payload,
+      case PUT_HISTORY_STATES:
+        return {
+          ...state,
+          allHistory: action.payload
         };
     default:
       return state;

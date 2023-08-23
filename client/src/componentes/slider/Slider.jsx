@@ -34,11 +34,6 @@ function Slider() {
             <img
               src={image1}
               alt="Imagen 1"
-              style={{
-                height: "100%",
-                transform: "scale(1)",
-                transition: "transform 0.8s",
-              }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = "scale(1.01)";
               }}
@@ -53,12 +48,6 @@ function Slider() {
             <img
               src={image2}
               alt="Imagen 2"
-              style={{
-                width: "auto",
-                height: "100%",
-                transform: "scale(1)",
-                transition: "transform 0.8s",
-              }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = "scale(1.01)";
               }}
@@ -73,12 +62,6 @@ function Slider() {
             <img
               src={image3}
               alt="Imagen 3"
-              style={{
-                width: "auto",
-                height: "100%",
-                transform: "scale(1)",
-                transition: "transform 0.8s",
-              }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = "scale(1.01)";
               }}
@@ -93,12 +76,6 @@ function Slider() {
             <img
               src={image4}
               alt="Imagen 4"
-              style={{
-                width: "auto",
-                height: "100%",
-                transform: "scale(1)",
-                transition: "transform 0.8s",
-              }}
               onMouseOver={(e) => {
                 e.currentTarget.style.transform = "scale(1.01)";
               }}

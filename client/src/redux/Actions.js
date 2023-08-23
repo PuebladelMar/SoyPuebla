@@ -42,9 +42,12 @@ import {
   PUT_SIZES,
   PUT_CATEGORIES,
   PUT_COLECCIONS,
+
   PUT_PRODUCTS,
   DELETE_PRODUCT,
-  
+ 
+  PUT_HISTORY_STATES,
+
 } from './ActionsTypes';
 
 export function getProducts() {
@@ -790,3 +793,23 @@ export function deleteProduct(id) {
   };
 }
 
+export function putHistories(id, state) {
+  return async function (dispatch) {
+    try {
+  
+      const response = await axios.put(
+        `http://localhost:3001/history`,
+        {
+         id,
+         state,
+        }
+      );
+      dispatch({
+        type: PUT_HISTORY_STATES,
+        payload: response.data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}

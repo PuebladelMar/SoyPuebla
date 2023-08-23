@@ -49,3 +49,17 @@
     margin-bottom: 10px;
     font-family: Asap;
   }
+
+  .payState-wpp {
+    font-size: 1.1rem;
+    font-family: Asap;
+    padding-bottom: 10px;
+    color: rgba(32, 32, 32, 0.766);
+  }
+
+  .payState-link {
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+  
