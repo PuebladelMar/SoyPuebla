@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 function ReviewsForm({ productId, handleLoginClick }) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userId);
+  const userById = useSelector((state) => state.userById);
   const allUsers = useSelector((state) => state.allUsers);
   const [userComment, setUserComment] = useState({
     score: "",
@@ -24,10 +25,10 @@ function ReviewsForm({ productId, handleLoginClick }) {
         ...prevUserComment,
         userId: userId,
         productId: productId,
-        fullName: allUsers.user.fullName,
+        fullName: userById?.user?.fullName,
       }));
     }
-  }, [dispatch, userId, productId, allUsers]);
+  }, [dispatch, userId, productId, userById]);
 
   const handleScoreChange = (score) => {
     console.log(score);
@@ -53,7 +54,7 @@ function ReviewsForm({ productId, handleLoginClick }) {
         userId: userId,
         description: "",
         productId: productId,
-        fullName: allUsers.user.fullName,
+        fullName: userById.user.fullName,
       });
       handleLoginClick();
     }

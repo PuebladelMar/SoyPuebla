@@ -39,7 +39,8 @@ import {
   PUT_CATEGORIES,
   PUT_SIZES,
   PUT_COLECCIONS,
-  ADD_HISTORY
+  ADD_HISTORY,
+ 
 } from './ActionsTypes';
 
 let initialState = {
@@ -122,7 +123,7 @@ function rootReducer(state = initialState, action) {
     case POST_USERS:
       return {
         ...state,
-        allUsers: action.payload,
+        userById: action.payload,
         userId: action.payload.user.id,
       };
     case POST_TO_CART:

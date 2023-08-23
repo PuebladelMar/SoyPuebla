@@ -14,7 +14,7 @@ function CardContainer(props) {
         backgroundColor: "#f0f0f0",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "flex-start",
         height: "100%",
         padding: "0",
       }}

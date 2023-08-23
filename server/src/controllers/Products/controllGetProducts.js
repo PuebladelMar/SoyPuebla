@@ -30,7 +30,7 @@ const controllGetProducts = async (req) => {
         (colorImage) => colorImage.ProductId === product.id
       );
       return {
-        ...product,
+        ...product.dataValues,
         colorImages: colorImages.map((colorImage) => colorImage)
       };
     });

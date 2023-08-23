@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Loader from "../../componentes/loader/Loader";
 import "./History.css";
 
 const History = () => {
@@ -11,6 +12,7 @@ const History = () => {
     const dispatch = useDispatch();
     const userId = useSelector((state) => state.userId);
     const [ userHistory, setUserHistory ] = useState();
+    const [isReady, setIsReady] = useState(false);
     useEffect(() => {
         if(!userId.length){
           navigate("/home");
@@ -19,6 +21,7 @@ const History = () => {
           const asyncFunction = async ()=>{
             const { data } = await axios.get(`/history/${userId}`);
             setUserHistory(data);
+            setIsReady(true)
           };
           asyncFunction();
         };
@@ -26,6 +29,7 @@ const History = () => {
     
     return(
       <div className="container-history">
+        {isReady ? (
         <div className="history-container">
           <h2 className="history-title">Historial:</h2>
             <div className="history-items">
@@ -45,6 +49,11 @@ const History = () => {
             </div>
             <button className="buttonHistory"><Link to="/home">Inicio</Link></button>
         </div>
+        ) : (
+          <div className='loader-container'>
+            <Loader />
+          </div>
+        )}
       </div>
     );
 };

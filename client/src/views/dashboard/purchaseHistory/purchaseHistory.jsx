@@ -30,6 +30,7 @@ const HistoryData = () => {
   }, [dispatch]);
 
   useEffect(() => {
+
     async function fetchHistory() {
       const filtered = allHistory.filter((user) => {
         return (
@@ -74,6 +75,7 @@ const HistoryData = () => {
       setFilteredHistory(sortedHistory);
     }
     fetchHistory();
+
   }, [filters, allHistory, sortOrder]);
 
   const handleFilterChange = (field, value) => {
@@ -97,7 +99,9 @@ const HistoryData = () => {
     <div className="userAdmin-methods-container">
       <div className="userAdmin-container">
         <div className="userAdmin-header">
+
           <h2 className="userAdmin-title">Historial de Compras</h2>
+
           <span className="userAdmin-text-underline"></span>
         </div>
       </div>

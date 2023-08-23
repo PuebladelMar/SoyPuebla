@@ -5,6 +5,7 @@ import { useState } from "react";
 import { getUserCart, deleteCart, deleteCartUser } from "../../redux/Actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../componentes/loader/Loader";
 import { initMercadoPago } from "@mercadopago/sdk-react";
 import { FiX } from "react-icons/fi";
 import { useMediaQuery } from "@mui/material";
@@ -12,6 +13,7 @@ import "./Cart.css";
 
 const Cart = () => {
   const [preferenceId, setPreferenceId] = useState(null);
+  const [isReady, setIsReady] = useState(false);
   const userCart = useSelector((state) => state.userCart);
   const userId = useSelector((state) => state.userId);
   const navigate = useNavigate();
@@ -24,7 +26,11 @@ const Cart = () => {
       navigate("/home");
       alert("debes iniciar sesión para ir al carrito");
     } else {
-      dispatch(getUserCart(userId));
+      const asyncFunction = async()=>{
+        await dispatch(getUserCart(userId));
+        setIsReady(true)
+      }
+      asyncFunction();
     }
   }, [dispatch]);
 
@@ -83,6 +89,7 @@ const Cart = () => {
 
   return (
     <div className="container-cart">
+      {isReady ? (
       <div className="cart-container">
         <h1 className="titleCart">Carrito de compras</h1>
         <h2 style={{ fontSize: "1.1rem", cursor: "default" }}>
@@ -155,6 +162,11 @@ const Cart = () => {
           Volver
         </NavLink>
       </div>
+      ) : (
+        <div className='loader-container'>
+        <Loader />
+        </div>
+      )}
     </div>
   );
 };

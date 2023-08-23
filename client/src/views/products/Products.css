@@ -103,6 +103,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-width: 100rem;
+  margin: auto;
+ 
 }
 .loader{
   margin-top: 5rem;
@@ -146,7 +149,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 405px) {
   .cards-container {
     width: 100%;
     margin-top: 0;
