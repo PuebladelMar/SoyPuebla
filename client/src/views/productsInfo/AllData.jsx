@@ -1,26 +1,65 @@
 import './AllData.css';
 import { NavLink } from 'react-router-dom';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import FolderIcon from '@mui/icons-material/Folder';
 
 const AllData = () => {
   return (
     <div className='alldata-btn-container'>
       <NavLink to='all-products'>
-        <button className='alldata-btn'>Productos</button>
+        <ListItemButton>
+          <ListItemIcon>
+            <FolderIcon />
+          </ListItemIcon>
+          <ListItemText primary='Productos' />
+        </ListItemButton>
       </NavLink>
       <NavLink to='all-colecciones'>
-        <button className='alldata-btn'>Colecciones</button>
+        <ListItemButton>
+          <ListItemIcon>
+            <FolderIcon />
+          </ListItemIcon>
+          <ListItemText primary='Series' />
+        </ListItemButton>
       </NavLink>
       <NavLink to='all-sizes'>
-        <button className='alldata-btn'>Talles</button>
+        <ListItemButton>
+          <ListItemIcon>
+            <FolderIcon />
+          </ListItemIcon>
+          <ListItemText primary='Talles' />
+        </ListItemButton>
       </NavLink>
       <NavLink to='all-colors'>
-        <button className='alldata-btn'>Colores</button>
+        <ListItemButton>
+          <ListItemIcon>
+            <FolderIcon />
+          </ListItemIcon>
+          <ListItemText primary='Colores' />
+        </ListItemButton>
       </NavLink>
       <NavLink to='all-categories'>
-        <button className='alldata-btn'>Categorias</button>
+        <ListItemButton>
+          <ListItemIcon>
+            <FolderIcon />
+          </ListItemIcon>
+          <ListItemText primary='Categorias' />
+        </ListItemButton>
       </NavLink>
     </div>
   );
 };
 
 export default AllData;
+
+// // <NavLink to="/info">
+// <ListItemButton>
+// <ListItemIcon>
+//   <DashboardIcon />
+// </ListItemIcon>
+// <ListItemText primary="Informacion" />
+// </ListItemButton>
+// </NavLink>
+// <NavLink to="/dashboard/history">

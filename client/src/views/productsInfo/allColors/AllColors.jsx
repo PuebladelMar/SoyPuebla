@@ -11,6 +11,7 @@ import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import CreateColor from '../../create/createColor/createColor';
 import SearchBar from '../../../componentes/searchBar/SearchBar';
+import FolderIcon from '@mui/icons-material/Folder';
 import Swal from 'sweetalert2';
 // import AllData from '../AllData';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -85,7 +86,8 @@ const AllColors = () => {
               className='nav-dashboard-btn'
               onClick={() => navigate('/all-data/all-colecciones')}
             >
-              Colecciones
+              {' '}
+              Series
             </button>
           </NavLink>
           <NavLink to='/all-data/all-sizes'>
