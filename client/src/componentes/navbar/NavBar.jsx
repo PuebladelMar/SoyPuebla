@@ -78,7 +78,6 @@ export default function NavBar({ links }) {
     });
   };
 
-  
   return (
     <AppBar
       sx={{
@@ -339,25 +338,31 @@ export default function NavBar({ links }) {
                   }}
                 >
                   {!userId.length ? (
-                    <FiShoppingCart
-                      style={{
-                        width: "1.8rem",
-                        height: "1.8rem",
-                        color: "white",
-                      }}
-                      onClick={handleCartClick}
-                    />
+                    <div className="cart-num-container">
+                      <span className="span-num-cart">0</span>
+                      <FiShoppingCart
+                        style={{
+                          width: "1.8rem",
+                          height: "1.8rem",
+                          color: "white",
+                        }}
+                        onClick={handleCartClick}
+                      />
+                    </div>
                   ) : (
-                  <Link to="/Cart">
-                    <FiShoppingCart
-                      style={{
-                        width: "1.8rem",
-                        height: "1.8rem",
-                        color: "white",
-                      }}
-                    />
-                  </Link>
-                   )}
+                    <div className="cart-num-container">
+                      <span className="span-num-cart">0</span>
+                      <Link to="/Cart">
+                        <FiShoppingCart
+                          style={{
+                            width: "1.8rem",
+                            height: "1.8rem",
+                            color: "white",
+                          }}
+                        />
+                      </Link>
+                    </div>
+                  )}
                 </IconButton>
               )}
               {!isProducts && isMatch && (
@@ -371,15 +376,18 @@ export default function NavBar({ links }) {
                     height: "3.2rem",
                   }}
                 >
-                  <Link to="/Cart">
-                    <FiShoppingCart
-                      style={{
-                        width: "1.8rem",
-                        height: "1.8rem",
-                        color: "white",
-                      }}
-                    />
-                  </Link>
+                  <div className="cart-num-container">
+                    <span className="span-num-cart">0</span>
+                    <Link to="/Cart">
+                      <FiShoppingCart
+                        style={{
+                          width: "1.8rem",
+                          height: "1.8rem",
+                          color: "white",
+                        }}
+                      />
+                    </Link>
+                  </div>
                 </IconButton>
               )}
               {isMatchSearchBarIcon && searchBarVisible ? (
