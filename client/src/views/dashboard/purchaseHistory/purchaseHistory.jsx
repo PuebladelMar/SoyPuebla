@@ -24,8 +24,6 @@ const HistoryData = () => {
   const [selectedButton, setSelectedButton] = useState("");
 
   useEffect(() => {
-    console.log(" history data...");
-
     dispatch(getAllHistory());
   }, [dispatch]);
 
@@ -59,9 +57,7 @@ const HistoryData = () => {
             (user.attributes.emailAddress &&
               user.attributes.emailAddress.includes(filters.attributes)) ||
             (user.attributes.size &&
-              user.attributes.size.includes(filters.attributes))) &&
-          (filters.id === "" || user.id.includes(filters.id)) &&
-          (filters.userRole === "" || user.userRole.includes(filters.userRole))
+              user.attributes.size.includes(filters.attributes)))
         );
       });
 
@@ -96,16 +92,16 @@ const HistoryData = () => {
   };
 
   return (
-    <div className="userAdmin-methods-container">
-      <div className="userAdmin-container">
-        <div className="userAdmin-header">
-          <h2 className="userAdmin-title">Historial de Compras</h2>
+    <div className="history-methods-container">
+      <div className="history-container">
+        <div className="history-header">
+          <h2 className="history-title">Historial de Compras</h2>
 
-          <span className="userAdmin-text-underline"></span>
+          <span className="history-text-underline"></span>
         </div>
       </div>
-      <div className="userAdmin-container">
-        <div className="filters">
+      <div className="history-container">
+        <div className="filters-history">
           <input
             type="text"
             placeholder="Fecha de creación"
@@ -113,7 +109,7 @@ const HistoryData = () => {
             onChange={(e) => handleFilterChange("createdAt", e.target.value)}
           />
 
-          <div className="filters">
+          <div className="filters-history">
             <button
               onClick={setSortOrderAsc}
               className={`button ${selectedButton === "asc" ? "selected" : ""}`}
@@ -199,7 +195,7 @@ const HistoryData = () => {
           />
         </div>
 
-        <table className="userAdmin-table">
+        <table className="history-table">
           <thead>
             <tr>
               <th>ID</th>
