@@ -174,7 +174,7 @@ const UsersData = () => {
                 <td>{user.emailAddress}</td>
 
                 <td>
-                  {user.banUser.toString()}
+                  {user.banUser.toString()===false ? "SI" : "NO"}
                   <button
                     className="edit-color"
                     onClick={() => handleEditBanUser(user.id,user.userRole, user.banUser)}
@@ -183,7 +183,7 @@ const UsersData = () => {
                   </button>
                 </td>
                 <td>
-                  {user.userRole}
+                  {user.userRole==="administrator"? "Administrador" : user.userRole=== "user"? "Usuario": "Super Administrador"}
                   <button
                     className="edit-color"
                     onClick={() => handleEditUserRole(user.id, user.userRole)}
