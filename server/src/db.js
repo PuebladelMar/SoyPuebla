@@ -29,7 +29,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Products, Colors, Sizes, Categories, Series, Stocks, Users, Reviews, EmailNotify, ColorImages, Informations, Questions } = sequelize.models;
+const { Products, Colors, Sizes, Categories, Series, Stocks, Users, Reviews, EmailNotify, ColorImages, Informations, Questions, StockNotifies } = sequelize.models;
 
 Products.hasMany(Stocks, { onDelete: 'CASCADE', hooks: true });
 Colors.hasMany(Stocks, { onDelete: 'CASCADE', hooks: true });
@@ -74,6 +74,11 @@ Colors.belongsToMany(Products, {
     onDelete: 'CASCADE', 
   },
   otherKey: "ProductId",
+});
+
+StockNotifies.belongsTo(Stocks, {
+  foreignKey: 'StockId',
+  allowNull: false,
 });
 
 module.exports = {
