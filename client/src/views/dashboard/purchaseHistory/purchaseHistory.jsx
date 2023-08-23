@@ -8,6 +8,7 @@ const HistoryData = () => {
   const [filteredHistory, setFilteredHistory] = useState([]);
   const [filters, setFilters] = useState({
     createdAt: "",
+    state: "",
     quantity: "",
     unitPrice: "",
     deletedAt: "",
@@ -34,6 +35,7 @@ const HistoryData = () => {
         return (
           (filters.createdAt === "" ||
             user.createdAt.includes(filters.createdAt)) &&
+          (filters.state === "" || user.state.includes(filters.state)) &&
           (filters.quantity === "" ||
             user.quantity.toString().includes(filters.quantity)) &&
           (filters.unitPrice === "" ||
@@ -107,6 +109,7 @@ const HistoryData = () => {
             value={filters.createdAt}
             onChange={(e) => handleFilterChange("createdAt", e.target.value)}
           />
+
           <div className="filters">
             <button
               onClick={setSortOrderAsc}
@@ -123,6 +126,12 @@ const HistoryData = () => {
               Descendente
             </button>
           </div>
+          <input
+            type="text"
+            placeholder="Estado de compra"
+            value={filters.state}
+            onChange={(e) => handleFilterChange("createdAt", e.target.value)}
+          />
           <input
             type="text"
             placeholder="Cantidad"
@@ -195,11 +204,11 @@ const HistoryData = () => {
               <th>Color</th>
               <th>Size</th>
               <th>Fecha de Compra</th>
+              <th>Estado de compra</th>
               <th>Nombre</th>
               <th>Email</th>
               <th>Bloqueado</th>
               <th>Rol</th>
-
               <th>Eliminado</th>
               <th>Actualizado</th>
             </tr>
@@ -212,6 +221,7 @@ const HistoryData = () => {
                 <td>{user.attributes.color}</td>
                 <td>{user.attributes.size}</td>
                 <td>{user.createdAt.split("T")[0]}</td>
+                <td>{user.state}</td>
                 <td>{user.fullName}</td>
                 <td>{user.emailAddress}</td>
                 <td>{user.banUser}</td>
