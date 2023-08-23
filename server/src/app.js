@@ -5,13 +5,14 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const router = require('./routes/index.js');
 const mercadopago = require("mercadopago");
+const { TOKEN_MP } = process.env;
 
 require('./db.js');
 
 const server = express();
 
 mercadopago.configure({
-	access_token: "TEST-5636166372425926-080815-a0093603a0ac2c361462f789a373dd94-1432158528",
+	access_token: TOKEN_MP,
 });
 
 server.name = 'API';
