@@ -11,6 +11,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import CreateCategory from '../../create/createCategory/CreateCategory';
 import { useState } from 'react';
 // import SearchBar from '../../../componentes/searchBar/SearchBar';
+import Swal from 'sweetalert2';
 import './AllCategories.css';
 
 const AllCategories = () => {
@@ -29,8 +30,38 @@ const AllCategories = () => {
   }, [dispatch]);
 
   const handleDeleteCategories = async (id) => {
-    await dispatch(deleteCategories(id));
-    await dispatch(getCategories());
+    const result = await Swal.fire({
+      title: '¿Estás segura?',
+      text: 'Una vez eliminado, se borrará automáticamente y afectará el funcionamiento de los productos.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#517f7f',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, elimínalo',
+      cancelButtonText: 'Cancelar',
+    });
+
+    if (result.isConfirmed) {
+      // El usuario confirmó la eliminación
+      try {
+        await dispatch(deleteCategories(id));
+        await dispatch(getCategories());
+
+        Swal.fire({
+          title: 'Eliminado',
+          text: 'La categoria ha sida eliminada.',
+          icon: 'success',
+          confirmButtonColor: '#517f7f',
+        });
+      } catch (error) {
+        console.error('Error al eliminar la categoria:', error);
+        Swal.fire(
+          'Error',
+          'Ha ocurrido un error al eliminar la categoria.',
+          'error'
+        );
+      }
+    }
   };
 
   const handleEditCategories = async (id, name) => {
