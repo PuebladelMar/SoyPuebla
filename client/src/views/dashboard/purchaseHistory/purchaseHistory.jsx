@@ -5,7 +5,7 @@ import { getAllHistory } from "../../../redux/Actions";
 const HistoryData = () => {
   const allHistory = useSelector((state) => state.allHistory);
   const dispatch = useDispatch();
-  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [filteredHistory, setFilteredHistory] = useState([]);
   const [filters, setFilters] = useState({
     createdAt: "",
     quantity: "",
@@ -23,42 +23,57 @@ const HistoryData = () => {
   const [selectedButton, setSelectedButton] = useState("");
 
   useEffect(() => {
+    console.log(" history data...");
+
     dispatch(getAllHistory());
   }, [dispatch]);
 
   useEffect(() => {
-    const filtered = allHistory.filter((user) => {
-      return (
-        (filters.createdAt === "" ||
-          user.createdAt.includes(filters.createdAt)) &&
-        (filters.quantity === "" || user.quantity.includes(filters.quantity)) &&
-        (filters.unitPrice === "" ||
-          user.unitPrice.includes(filters.unitPrice)) &&
-        (filters.deletedAt === "" ||
-          user.deletedAt.includes(filters.deletedAt)) &&
-        (filters.updatedAt === "" ||
-          user.updatedAt.includes(filters.updatedAt)) &&
-        (filters.attributes === "" ||
-          user.attributes.includes(filters.attributes)) &&
-        (filters.emailAddress === "" ||
-          useremailAddress.includes(filters.emailAddress)) &&
-        (filters.fullName === "" || user.fullName.includes(filters.fullName)) &&
-        (filters.banUser === "" ||
-          user.banUser.toString() === filters.banUser) &&
-        (filters.id === "" || user.id.includes(filters.id)) &&
-        (filters.userRole === "" || user.userRole.includes(filters.userRole))
-      );
-    });
 
-    const sortedUsers = filtered.slice().sort((a, b) => {
-      if (sortOrder === "asc") {
-        return a.createdAt.localeCompare(b.createdAt);
-      } else {
-        return b.createdAt.localeCompare(a.createdAt);
-      }
-    });
+    async function fetchHistory() {
+      const filtered = allHistory.filter((user) => {
+        return (
+          (filters.createdAt === "" ||
+            user.createdAt.includes(filters.createdAt)) &&
+          (filters.quantity === "" ||
+            user.quantity.toString().includes(filters.quantity)) &&
+          (filters.unitPrice === "" ||
+            user.unitPrice.includes(filters.unitPrice)) &&
+          (filters.deletedAt === "" ||
+            user.deletedAt === null ||
+            user.deletedAt.includes(filters.deletedAt)) &&
+          (filters.updatedAt === "" ||
+            user.updatedAt.includes(filters.updatedAt)) &&
+          (filters.attributes === "" ||
+            (user.attributes.product &&
+              user.attributes.product.includes(filters.attributes)) ||
+            (user.attributes.color &&
+              user.attributes.color.includes(filters.attributes)) ||
+            (user.attributes.size &&
+              user.attributes.size.includes(filters.attributes))) &&
+          (filters.emailAddress === "" ||
+            user.emailAddress.includes(filters.emailAddress)) &&
+          (filters.fullName === "" ||
+            user.fullName.includes(filters.fullName)) &&
+          (filters.banUser === "" ||
+            user.banUser.toString() === filters.banUser) &&
+          (filters.id === "" || user.id.includes(filters.id)) &&
+          (filters.userRole === "" || user.userRole.includes(filters.userRole))
+        );
+      });
 
-    setFilteredUsers(sortedUsers);
+      const sortedHistory = filtered.slice().sort((a, b) => {
+        if (sortOrder === "asc") {
+          return a.createdAt.localeCompare(b.createdAt);
+        } else {
+          return b.createdAt.localeCompare(a.createdAt);
+        }
+      });
+
+      setFilteredHistory(sortedHistory);
+    }
+    fetchHistory();
+
   }, [filters, allHistory, sortOrder]);
 
   const handleFilterChange = (field, value) => {
@@ -82,7 +97,9 @@ const HistoryData = () => {
     <div className="userAdmin-methods-container">
       <div className="userAdmin-container">
         <div className="userAdmin-header">
-          <h2 className="userAdmin-title">Información Usuarios</h2>
+
+          <h2 className="userAdmin-title">Historial de Compras</h2>
+
           <span className="userAdmin-text-underline"></span>
         </div>
       </div>
@@ -178,22 +195,33 @@ const HistoryData = () => {
           <thead>
             <tr>
               <th>ID</th>
+              <th>Producto</th>
+              <th>Color</th>
+              <th>Size</th>
+              <th>Fecha de Compra</th>
               <th>Nombre</th>
               <th>Email</th>
               <th>Bloqueado</th>
               <th>Rol</th>
-              <th>Creado</th>
+
+              <th>Eliminado</th>
+              <th>Actualizado</th>
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user) => (
+            {filteredHistory.map((user) => (
               <tr key={user.id}>
                 <td>{user.id}</td>
+                <td>{user.attributes.product}</td>
+                <td>{user.attributes.color}</td>
+                <td>{user.attributes.size}</td>
+                <td>{user.createdAt.split("T")[0]}</td>
                 <td>{user.fullName}</td>
                 <td>{user.emailAddress}</td>
                 <td>{user.banUser}</td>
                 <td>{user.userRole}</td>
-                <td>{user.createdAt}</td>
+                <td>{user.deletedAt}</td>
+                <td>{user.updatedAt.split("T")[0]}</td>
               </tr>
             ))}
           </tbody>
