@@ -234,7 +234,7 @@ export const getUserCart = (userId) => {
 
       dispatch({ type: GET_USER_CART, payload: data });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 };
