@@ -310,7 +310,7 @@ function DrawerComp() {
                       },
                     }}
                   >
-                    Carrito <span className="span-cart-drawer">0</span>
+                    Carrito
                   </ListItemText>
                 </ListItemIcon>
               </ListItemButton>

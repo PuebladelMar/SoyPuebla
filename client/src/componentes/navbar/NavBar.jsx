@@ -482,7 +482,6 @@ export default function NavBar({ links }) {
                 >
                   {!userId.length ? (
                     <div className="cart-num-container">
-                      <span className="span-num-cart">0</span>
                       <FiShoppingCart
                         style={{
                           width: "1.8rem",
@@ -523,7 +522,6 @@ export default function NavBar({ links }) {
                 >
                   {!userId.length ? (
                     <div className="cart-num-container">
-                      <span className="span-num-cart">0</span>
                       <FiShoppingCart
                         style={{
                           width: "1.8rem",
