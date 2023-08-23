@@ -63,7 +63,7 @@ const Cart = () => {
   const createPreference = async () => {
     try {
       await axios
-        .post("http://localhost:3001/mp/create_preference", {
+        .post("/mp/create_preference", {
           products: itemList,
         })
         .then((response) => {
