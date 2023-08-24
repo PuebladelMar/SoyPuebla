@@ -9,6 +9,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  max-width: 85rem;
+  margin-left: 2rem;
 }
 
 .userAdmin-table {
@@ -80,6 +82,10 @@
 }
 
 @media (max-width: 1330px) {
+  .user-Admin-Box {
+    margin-left: 0rem;
+  }
+
   .userAdmin-container {
     flex-direction: column;
   }
