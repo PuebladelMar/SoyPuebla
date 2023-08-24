@@ -3,8 +3,9 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  margin-top: 5rem;
+  /* margin-top: 5rem; */
   min-height: 100vh;
+
 }
 .talles-container-background{
   display: flex;
@@ -12,13 +13,14 @@
   justify-content: center;
   align-items: space-between;
   width: 70%;
-  gap: 2rem;
+  gap: 1rem;
   border-radius: 10px;
-  padding: 1rem 2rem 2rem 2rem;
+  padding: 3rem;
   border: 1px solid rgb(173, 173, 173);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
   border-radius: 3px;
+  max-width: 50rem;
 }
 
   
@@ -27,38 +29,18 @@
     padding: 20px;
   }
   
-  /* .talles-title {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    color: #747474;
-    font-weight: 500;
-  } */
+
   
   .talles-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ddd;
-    padding: 10px 0;
+    font-size: 1.1rem;
+    color: #8d8d8d;
   }
   
-  /* .icons-talles {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
-  }
-   */
-  /* .edit-talles,
-  .delete-talles {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    margin-left: 10px;
-  } */
+
   .btn-talle-amigo{
     background-color: red;
     padding: 5px 19px;
@@ -74,6 +56,23 @@
   .btn-talle-amigo:hover {
     background-color: #517f7f;
     color: rgb(255, 255, 255);
+  }
+
+
+  .contenedor-nombre-talle{
+
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    justify-content: space-between;
+  }
+
+  .talles-title-admin{
+  font-size: x-large;
+  color: #747474;
+  margin-bottom: 1rem;
+
+
   }
 
 

@@ -36,10 +36,23 @@ const AllTalles = () => {
     event.preventDefault();
   };
 
+
+
   return (
     <div className="talles-main-admin" name="series" value="name">
       <div className="talles-container-background">
-        <h2 className="talles-title-admin">Talles disponibles</h2>
+        <div className="contenedor-nombre-talle">
+          <h2 className="talles-title-admin">Talles disponibles</h2>
+          <button
+            type="button"
+            onClick={() => {
+              handleOpenSizeCreate();
+            }}
+            className="btn-talle-amigo "
+          >
+            Crear Talle
+          </button>
+        </div>
         {Array.isArray(sizesList) &&
           sizesList.map((el) => (
             <div key={el.id} className="talles-item">
@@ -67,15 +80,6 @@ const AllTalles = () => {
           </>
         </popups>
       )}
-      <button
-        type="button"
-        onClick={() => {
-          handleOpenSizeCreate();
-        }}
-        className="btn-talle-amigo "
-      >
-        Crear Talle
-      </button>
     </div>
   );
 };
