@@ -55,7 +55,7 @@ const Detail = () => {
           }))
         );
       } catch (error) {
-        window.alert(error);
+        // window.alert(error);
       }
     };
     fetchProductDetails();

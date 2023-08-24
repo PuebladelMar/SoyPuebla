@@ -3,12 +3,12 @@ import { NavLink } from "react-router-dom";
 import { sendMail } from "../../redux/Actions";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery } from "@mui/material";
 
 const NewsletterPop = () => {
   const dispatch = useDispatch();
   const mailConfirmation = useSelector((state) => state.mailConfirmation);
-  const isMatch = useMediaQuery('(max-width: 529px)');
+  const isMatch = useMediaQuery("(max-width: 529px)");
   const [emailValue, setEmailValue] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
 
@@ -39,9 +39,7 @@ const NewsletterPop = () => {
     }
     if (mailConfirmation === "Suscripcion exitosa") {
       setIsSubscribed(true);
-      alert("Suscripción exitosa");
     }
-    console.log("Valor de mailConfirmation:", mailConfirmation);
   }, [mailConfirmation]);
 
   return (
@@ -54,7 +52,9 @@ const NewsletterPop = () => {
         <input
           type="email"
           id="email-input"
-          placeholder= {isMatch ? "Ingresá tu correo" : "Ingresá tu correo electrónico"}
+          placeholder={
+            isMatch ? "Ingresá tu correo" : "Ingresá tu correo electrónico"
+          }
           required
           value={emailValue}
           onChange={handleEmailChange}

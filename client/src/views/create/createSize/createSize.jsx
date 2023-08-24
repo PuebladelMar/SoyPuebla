@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSizes } from '../../../redux/Actions';
-import axios from 'axios';
-import sizeValidations from './sizeValidations';
-import '../createColor/createColor.css';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getSizes } from "../../../redux/Actions";
+import axios from "axios";
+import sizeValidations from "./sizeValidations";
+import "../createColor/createColor.css";
 
 const CreateSize = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const CreateSize = () => {
   }, [count]);
 
   let [createSize, setCreateSize] = useState({
-    name: '',
+    name: "",
   });
   const [errors, setErrors] = useState({
     disableButton: true,
@@ -33,14 +33,14 @@ const CreateSize = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!createSize.name) {
-      alert('Debes llenar el nombre');
+      alert("Debes llenar el nombre");
     } else {
       try {
-        await axios.post('/products/size', createSize);
+        await axios.post("/products/size", createSize);
         setCount(count + 1);
 
         setCreateSize({
-          name: '',
+          name: "",
         });
         setErrors({
           disableButton: true,
@@ -52,33 +52,30 @@ const CreateSize = () => {
   };
 
   return (
-    <div className='create-main-containerX'>
-      <div className='create-containerX'>
-        <form
-          onSubmit={handleSubmit}
-          className='create-formX'
-        >
-          <label htmlFor='name'>Nombre:</label>
+    <div className="create-main-containerX">
+      <div className="create-containerX">
+        <form onSubmit={handleSubmit} className="create-formX">
+          <label htmlFor="name">Nombre:</label>
           <input
-            type='text'
-            name='name'
+            type="text"
+            name="name"
             value={createSize.name}
             required
-            placeholder='Nombre'
-            className='custom-inputX'
+            placeholder="Nombre"
+            className="custom-inputX"
             onChange={handleChange}
           />
-          <p className='error'>{errors.name}</p>
+          <p className="error">{errors.name}</p>
           <button
-            type='submit'
-            className='submit-buttonzX'
+            type="submit"
+            className="submit-buttonzX"
             disabled={Object.keys(errors).length === 0 ? false : true}
           >
             Crear
           </button>
-          <p className='error'>{errors.error}</p>
+          <p className="error">{errors.error}</p>
         </form>
-        <div className='createdElementsListContainer'>
+        <div className="createdElementsListContainer">
           <h2>Talles Creados:</h2>
           <ol>
             {talles.map((size) => (

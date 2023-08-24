@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import "./AdminAccount.css";
 
@@ -14,7 +13,7 @@ const AdminAccount = () => {
       setIsLoggedIn(true);
       
     } else {
-      alert("Inicio de sesión fallido. Verifica tus credenciales.");
+      // alert("Inicio de sesión fallido. Verifica tus credenciales.");
     }
   };
 

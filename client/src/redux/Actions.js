@@ -62,7 +62,7 @@ export function getProducts() {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los productos");
+      // alert("Error al obtener los productos");
     }
   };
 }
@@ -76,7 +76,7 @@ export function getCategories() {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los categorias");
+      // alert("Error al obtener los categorias");
     }
   };
 }
@@ -90,7 +90,7 @@ export function getSeries() {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener las series");
+      // alert("Error al obtener las series");
     }
   };
 }
@@ -104,7 +104,7 @@ export function getSizes() {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los talles");
+      // alert("Error al obtener los talles");
     }
   };
 }
@@ -118,7 +118,7 @@ export function getColor() {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los colores");
+      // alert("Error al obtener los colores");
     }
   };
 }
@@ -133,13 +133,12 @@ export function postProducts(createProduct) {
         icon: "success",
         title: "Su producto se ha creado correctamente",
         showConfirmButton: false,
-        timer: 1500,
       });
       return dispatch({
         type: POST_PRODUCTS,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -153,7 +152,6 @@ export function getProductsByName(name) {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener las coincidencias");
       console.error("Error al obtener las coincidencias:", error);
     }
   };
@@ -177,7 +175,6 @@ export function filterProducts(filters) {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al filtrar");
       console.error("Error al filtrar", error);
     }
   };
@@ -192,7 +189,7 @@ export function getUsers() {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener usuarios");
+      // alert("Error al obtener usuarios");
     }
   };
 }
@@ -210,7 +207,7 @@ export function postUsers(userClerkId, user, fullName) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -227,7 +224,7 @@ export function addToCar(userId, stockId, quantity) {
         type: POST_TO_CART,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -256,7 +253,7 @@ export function sendMail(data) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -270,7 +267,7 @@ export function deleteCart(id) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -286,7 +283,7 @@ export function deleteCartUser(id, sale) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -300,7 +297,7 @@ export function addHistory(userId, state) {
         payload: data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -317,7 +314,7 @@ export function addToFavorites(userId, productId) {
         payload: productId,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -350,7 +347,7 @@ export function removeFromFavorites(userId, productId) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -366,7 +363,7 @@ export function notifyStock(data) {
         type: NOTIFY_STOCK,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -375,14 +372,12 @@ export function postReviews(userComment) {
   return async function (dispatch) {
     try {
       await axios.post(`/products/review`, userComment);
-
-      alert("Su comentario se envió correctamente");
       return dispatch({
         type: POST_REVIEWS,
         payload: userComment,
       });
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   };
 }
@@ -396,7 +391,7 @@ export function getReviews() {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener los comentarios");
+      // alert("Error al obtener los comentarios");
     }
   };
 }
@@ -404,15 +399,13 @@ export function getReviews() {
 export function deleteUser(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(
-        `/users/user${id}`
-      );
+      const response = await axios.delete(`/users/user${id}`);
       dispatch({
         type: DELETE_USERS,
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -420,15 +413,13 @@ export function deleteUser(id) {
 export function getUserById(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.get(
-        `/users/user/${id}`
-      );
+      const response = await axios.get(`/users/user/${id}`);
       dispatch({
         type: GET_USER_BY_ID,
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -436,19 +427,16 @@ export function getUserById(id) {
 export function editUser(id, userRole, banUser) {
   return async function (dispatch) {
     try {
-      const response = await axios.put(
-        `/users/user/${id}`,
-        {
-          userRole: userRole,
-          banUser: banUser,
-        }
-      );
+      const response = await axios.put(`/users/user/${id}`, {
+        userRole: userRole,
+        banUser: banUser,
+      });
       dispatch({
         type: PUT_USERS,
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -462,7 +450,7 @@ export function getUserByName(name) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   };
 }
@@ -470,15 +458,13 @@ export function getUserByName(name) {
 export function getReviewById(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.get(
-        `/products/review/${id}`
-      );
+      const response = await axios.get(`/products/review/${id}`);
       dispatch({
         type: GET_REVIEW_BY_ID,
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -492,7 +478,7 @@ export function getAllHistory() {
         payload: response.data,
       });
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   };
 }
@@ -500,25 +486,17 @@ export function getAllHistory() {
 export function editColors(id, name, codHex) {
   return async function (dispatch) {
     try {
-      console.log("Datos que se envían en la solicitud PUT:", {
+      const response = await axios.put(`/products/color/${id}`, {
         id,
         name,
         codHex,
       });
-      const response = await axios.put(
-        `/products/color/${id}`,
-        {
-          id,
-          name,
-          codHex,
-        }
-      );
       dispatch({
         type: PUT_COLORS,
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -532,7 +510,7 @@ export function getAllInformation() {
         payload: response.data,
       });
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   };
 }
@@ -540,15 +518,13 @@ export function getAllInformation() {
 export function deleteSeries(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(
-        `/products/series/${id}`
-      );
+      const response = await axios.delete(`/products/series/${id}`);
       dispatch({
         type: DELETE_SERIES,
         payload: response.data,
       });
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   };
 }
@@ -575,7 +551,7 @@ export function postInformation({
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -589,7 +565,7 @@ export function getAllQuestions() {
         payload: response.data,
       });
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   };
 }
@@ -597,15 +573,13 @@ export function getAllQuestions() {
 export function deleteQuestions(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(
-        `/question/${id}`
-      );
+      const response = await axios.delete(`/question/${id}`);
       dispatch({
         type: DELETE_QUESTIONS,
         payload: response.data,
       });
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   };
 }
@@ -622,22 +596,20 @@ export function postQuestions({ questions, answers }) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
 export function deleteColor(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(
-        `/products/color/${id}`
-      );
+      const response = await axios.delete(`/products/color/${id}`);
       dispatch({
         type: DELETE_COLOR,
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -645,15 +617,13 @@ export function deleteColor(id) {
 export function deleteSizes(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(
-        `/products/size/${id}`
-      );
+      const response = await axios.delete(`/products/size/${id}`);
       dispatch({
         type: DELETE_SIZES,
         payload: response.data,
       });
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   };
 }
@@ -670,7 +640,7 @@ export function sendStatusPurchaseMail(data) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -678,10 +648,6 @@ export function sendStatusPurchaseMail(data) {
 export function putSizes(id, name) {
   return async function (dispatch) {
     try {
-      console.log("Datos que se envían en la solicitud PUT:", {
-        id,
-        name,
-      });
       const response = await axios.put(`/products/size`, {
         name,
         id,
@@ -691,55 +657,40 @@ export function putSizes(id, name) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
 export function putCategories(id, name) {
   return async function (dispatch) {
     try {
-      console.log("Datos que se envían en la solicitud PUT:", {
-        id,
+      const response = await axios.put(`/products/category`, {
         name,
+        id,
       });
-      const response = await axios.put(
-        `/products/category`,
-        {
-          name,
-          id,
-        }
-      );
       dispatch({
         type: PUT_CATEGORIES,
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
 export function putSeries(id, name, image) {
   return async function (dispatch) {
     try {
-      console.log("Datos que se envían en la solicitud PUT:", {
+      const response = await axios.put(`/products/series`, {
         id,
         name,
         image,
       });
-      const response = await axios.put(
-        `/products/series`,
-        {
-          id,
-          name,
-          image,
-        }
-      );
       dispatch({
         type: PUT_COLECCIONS,
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -747,15 +698,13 @@ export function putSeries(id, name, image) {
 export function deleteCategories(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(
-        `/products/category/${id}`
-      );
+      const response = await axios.delete(`/products/category/${id}`);
       dispatch({
         type: DELETE_CATEGORIES,
         payload: response.data,
       });
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   };
 }
@@ -769,7 +718,6 @@ export function getCategoriesByName(name) {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener las colecciones");
       console.error("Error al obtener las coincidencias:", error);
     }
   };
@@ -786,15 +734,6 @@ export function editProducts(
 ) {
   return async function (dispatch) {
     try {
-      console.log("Datos que se envían en la solicitud PUT:", {
-        name,
-        price,
-        sale,
-        description,
-        series,
-        category,
-        colorImage,
-      });
       const response = await axios.put(`/products/${id}`, {
         name,
         price,
@@ -809,7 +748,7 @@ export function editProducts(
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -817,15 +756,13 @@ export function editProducts(
 export function deleteProduct(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(
-        `/products/${id}`
-      );
+      const response = await axios.delete(`/products/${id}`);
       dispatch({
         type: DELETE_PRODUCT,
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -839,7 +776,6 @@ export function getSeriesByName(name) {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener las coincidencias");
       console.error("Error al obtener las coincidencias:", error);
     }
   };
@@ -853,7 +789,6 @@ export function getColorByName(name) {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener las coincidencias");
       console.error("Error al obtener las coincidencias:", error);
     }
   };
@@ -868,7 +803,6 @@ export function getSizesByName(name) {
         payload: response.data,
       });
     } catch (error) {
-      alert("Error al obtener las coincidencias");
       console.error("Error al obtener las coincidencias:", error);
     }
   };
@@ -886,7 +820,7 @@ export function putHistories(id, state) {
         payload: response.data,
       });
     } catch (error) {
-      alert(error.message);
+      // alert(error.message);
     }
   };
 }
@@ -894,16 +828,14 @@ export function putHistories(id, state) {
 export function deleteReviews(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.delete(
-        `/products/review/${id}`
-      );
+      const response = await axios.delete(`/products/review/${id}`);
 
       dispatch({
         type: DELETE_REVIEWS,
         payload: response.data,
       });
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
   };
 }
