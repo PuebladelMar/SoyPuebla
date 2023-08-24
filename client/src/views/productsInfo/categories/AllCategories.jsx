@@ -97,6 +97,15 @@ const AllCategories = () => {
         handlerEventSearch={handlerEventSearch}
         handlerSubmitSearch={handlerSubmitSearch}
       /> */}
+      <button
+        type='button'
+        onClick={() => {
+          handleOpenCategoryCreate();
+        }}
+        className='button-admin-category'
+      >
+        Crear categoría
+      </button>
       <div className='categories-admin'>
         <h2 className='categories-title'>Categorias disponibles</h2>
         {Array.isArray(categories) &&
@@ -134,15 +143,6 @@ const AllCategories = () => {
           </>
         </popups>
       )}
-      <button
-        type='button'
-        onClick={() => {
-          handleOpenCategoryCreate();
-        }}
-        className='button-admin-category'
-      >
-        Crear categoría
-      </button>
     </div>
   );
 };
