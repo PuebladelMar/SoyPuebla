@@ -177,12 +177,13 @@ const UsersData = () => {
 
                 <td>
                   {user.banUser === true ? "SI" : "NO"}
+                  {user.userRole === "superadministrator" ? null :
                   <button
                     className="edit-color"
                     onClick={() => handleEditBanUser(user.id, user.userRole, user.banUser)}
                   >
                     <FaPencilAlt />
-                  </button>
+                  </button> }
                 </td>
                 <td>
                   

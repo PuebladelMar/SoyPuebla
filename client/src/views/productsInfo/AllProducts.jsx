@@ -19,6 +19,7 @@ const AllProducts = () => {
   const navigate = useNavigate();
   const allProducts = useSelector((state) => state.allProducts);
   const [searchValue, setSearchValue] = useState("");
+
   const [filters, setFilters] = useState({
     color: null,
     size: null,
@@ -31,9 +32,6 @@ const AllProducts = () => {
     name: null,
   });
 
-  // useEffect(() => {
-  //   dispatch(filterProducts(filters));
-  // }, [filters, dispatch]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,6 +74,7 @@ const AllProducts = () => {
       try {
         await dispatch(deleteProduct(id));
         await dispatch(getProducts());
+        dispatch(getUserCart(userId));
 
         Swal.fire({
           title: "Eliminado",
