@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSizes, putSizes } from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
-import { NavLink, useNavigate } from 'react-router-dom';
+
 import CreateSize from '../../create/createSize/createSize';
 // import SearchBar from '../../../componentes/searchBar/SearchBar';
 // import { RiDeleteBin6Line } from 'react-icons/ri';
@@ -11,7 +11,7 @@ import CreateSize from '../../create/createSize/createSize';
 const AllTalles = () => {
   const sizesList = useSelector((state) => state.sizesList);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState({});
   // const [searchValue, setSearchValue] = useState('');
 
@@ -51,7 +51,7 @@ const AllTalles = () => {
 
   return (
     <div
-      className='coleccion-main'
+      className='talles-main-admin'
       name='series'
       value='name'
     >
@@ -59,50 +59,9 @@ const AllTalles = () => {
         handlerEventSearch={handlerEventSearch}
         handlerSubmitSearch={handlerSubmitSearch}
       /> */}
-      <div className='nav-dashboard'>
-        <NavLink to='/all-data/all-products'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-products')}
-          >
-            Productos{' '}
-          </button>
-        </NavLink>
-        <NavLink to='/all-data/all-colecciones'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-colecciones')}
-          >
-            Colecciones
-          </button>
-        </NavLink>
-        <NavLink to='/all-data/all-colors'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-colors')}
-          >
-            Colores
-          </button>
-        </NavLink>
-        <NavLink to='/all-data/all-categories'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-categories')}
-          >
-            Categorias
-          </button>
-        </NavLink>
-        <NavLink to='/dashboard'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/dashboard')}
-          >
-            Dashboard
-          </button>
-        </NavLink>
-      </div>
-      <div className='coleccion'>
-        <h2 className='coleccion-title'>Talles disponibles</h2>
+      
+      <div className='talles-container-background'>
+        <h2 className='talles-title-admin'>Talles disponibles</h2>
         {Array.isArray(sizesList) &&
           sizesList.map((el) => (
             <div
@@ -138,7 +97,7 @@ const AllTalles = () => {
         onClick={() => {
           handleOpenSizeCreate();
         }}
-        className='mainImage-upload-buttonY '
+        className='btn-talle-amigo '
       >
         Crear Talle
       </button>
