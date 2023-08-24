@@ -391,6 +391,8 @@ const Create = () => {
         </popups>
       )}
       <div className="create-container">
+
+        <h1 className="create-form-title"> Crea tu producto</h1>
         <form className="create-form">
           <label  htmlFor="name">Nombre <separator></separator></label>
           
