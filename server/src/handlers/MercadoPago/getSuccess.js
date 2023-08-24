@@ -1,7 +1,6 @@
 const getSuccess = async (req, res) => {
   const info = req.query;
   const infoJSON = JSON.stringify(info);
-  console.log(infoJSON);
   try {
     res
       .status(200)

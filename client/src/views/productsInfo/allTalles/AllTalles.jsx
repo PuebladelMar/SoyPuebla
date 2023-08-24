@@ -5,12 +5,10 @@ import { getSizes, putSizes } from "../../../redux/Actions";
 import { FaPencilAlt } from "react-icons/fa";
 import CreateSize from "../../create/createSize/createSize";
 
-
 const AllTalles = () => {
   const sizesList = useSelector((state) => state.sizesList);
   const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState({});
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,10 +37,9 @@ const AllTalles = () => {
   };
 
 
+
   return (
     <div className="talles-main-admin" name="series" value="name">
-    
-
       <div className="talles-container-background">
         <div className="contenedor-nombre-talle">
           <h2 className="talles-title-admin">Talles disponibles</h2>

@@ -31,7 +31,7 @@ const Create = () => {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   const [showAlert, setShowAlert] = useState({});
 
   const handleCloseAlert = (event) => {
@@ -40,44 +40,43 @@ const Create = () => {
   };
 
   const handleOpenColorCreate = (event) => {
-    setShowAlert({color: true});
+    setShowAlert({ color: true });
     event.preventDefault();
   };
 
-  const handleOpenSerieCreate = (event) =>{
-    setShowAlert({serie: true});
+  const handleOpenSerieCreate = (event) => {
+    setShowAlert({ serie: true });
     event.preventDefault();
   };
 
-  const handleOpenCategoryCreate = (event) =>{
-    setShowAlert({category: true});
+  const handleOpenCategoryCreate = (event) => {
+    setShowAlert({ category: true });
     event.preventDefault();
   };
 
-  const handleOpenSizeCreate = (event) =>{
-    setShowAlert({size: true});
+  const handleOpenSizeCreate = (event) => {
+    setShowAlert({ size: true });
     event.preventDefault();
   };
-
 
   const [uploadedSecureUrl, setUploadedSecureUrl] = useState(null);
 
   const handleUpload = (url, actualColor) => {
     setUploadedSecureUrl(url);
     setCreateProduct((state) => {
-      const updateImages = state.colorImage.map((item)=> {
-        if(item.color === actualColor){
+      const updateImages = state.colorImage.map((item) => {
+        if (item.color === actualColor) {
           return {
             ...item,
-            images:[...item.images, url]
-          }
+            images: [...item.images, url],
+          };
         }
-        return item
-      })
+        return item;
+      });
       return {
         ...state,
-        colorImage: updateImages
-      }
+        colorImage: updateImages,
+      };
     });
   };
 
@@ -174,8 +173,10 @@ const Create = () => {
     setCreateProduct((state) => {
       if (event.target.name === "color") {
         const selectedColor = event.target.value;
-        const existingColor = state.colorImage.find((item) => item.color === selectedColor);
-  
+        const existingColor = state.colorImage.find(
+          (item) => item.color === selectedColor
+        );
+
         if (!existingColor) {
           const updatedColorImage = [
             ...state.colorImage,
@@ -185,8 +186,8 @@ const Create = () => {
             ...state,
             colorImage: updatedColorImage,
           };
-        }else{
-          return state
+        } else {
+          return state;
         }
       }
     });
@@ -234,55 +235,58 @@ const Create = () => {
   const handleSelectSizeAndStockChange = (event, selectedColor) => {
     const name = event.target.name;
     const value = event.target.value;
-  
+
     setCreateProduct((state) => {
       if (name === "size") {
         const selectedSize = value;
-        const stockItem = state.colorImage.find(item => item.color === selectedColor)?.stocks.find(stock => stock.size === selectedSize);
+        const stockItem = state.colorImage
+          .find((item) => item.color === selectedColor)
+          ?.stocks.find((stock) => stock.size === selectedSize);
         const initialAmount = stockItem ? stockItem.amount : 0;
-        if(!stockItem){
+        if (!stockItem) {
           const updatedColorImage = state.colorImage.map((item) =>
-          item.color === selectedColor
-            ? {
-                ...item,
-                stocks: [...item.stocks, { size: selectedSize, amount: initialAmount }],
-              }
-            : item
+            item.color === selectedColor
+              ? {
+                  ...item,
+                  stocks: [
+                    ...item.stocks,
+                    { size: selectedSize, amount: initialAmount },
+                  ],
+                }
+              : item
           );
-          setErrors(
-            validations({ ...state, colorImage: updatedColorImage })
-          );
+          setErrors(validations({ ...state, colorImage: updatedColorImage }));
           return {
             ...state,
             colorImage: updatedColorImage,
           };
-        }else{
-          return state
+        } else {
+          return state;
         }
       } else {
         const color = selectedColor;
         const size = event.target.getAttribute("data-size");
         const newAmount = parseInt(value);
-        if(isNaN(newAmount) || newAmount >= 0){
+        if (isNaN(newAmount) || newAmount >= 0) {
           const updatedColorImage = state.colorImage.map((item) =>
-          item.color === color
-            ? {
-                ...item,
-                stocks: item.stocks.map((stock) =>
-                  stock.size === size ? { ...stock, amount: newAmount } : stock
-                ),
-              }
-            : item
+            item.color === color
+              ? {
+                  ...item,
+                  stocks: item.stocks.map((stock) =>
+                    stock.size === size
+                      ? { ...stock, amount: newAmount }
+                      : stock
+                  ),
+                }
+              : item
           );
-          setErrors(
-            validations({ ...state, colorImage: updatedColorImage })
-          );
+          setErrors(validations({ ...state, colorImage: updatedColorImage }));
           return {
             ...state,
             colorImage: updatedColorImage,
           };
-        }else{
-          return state
+        } else {
+          return state;
         }
       }
     });
@@ -291,7 +295,9 @@ const Create = () => {
   const handleDeleteColor = (event) => {
     setCreateProduct({
       ...createProduct,
-      colorImage: createProduct.colorImage.filter((item) => item.color !== event),
+      colorImage: createProduct.colorImage.filter(
+        (item) => item.color !== event
+      ),
     });
   };
 
@@ -299,7 +305,10 @@ const Create = () => {
     setCreateProduct((state) => {
       const updatedColorImage = state.colorImage.map((item) =>
         item.color === color
-          ? { ...item, stocks: item.stocks.filter((sizeObj) => sizeObj.size !== event) }
+          ? {
+              ...item,
+              stocks: item.stocks.filter((sizeObj) => sizeObj.size !== event),
+            }
           : item
       );
       return {
@@ -321,12 +330,6 @@ const Create = () => {
       ...createProduct,
       series: createProduct.series.filter((el) => el !== event),
     });
-  };
-
-  const getColorHexCodes = () => {
-    return color
-      .filter((col) => createProduct.colorImage.some(item => item.color === col.name))
-      .map((col) => col.codHex);
   };
 
   return (
@@ -391,11 +394,11 @@ const Create = () => {
         </popups>
       )}
       <div className="create-container">
-
         <h1 className="create-form-title"> Crea tu producto</h1>
         <form className="create-form">
-          <label  htmlFor="name">Nombre <separator></separator></label>
-          
+          <label htmlFor="name">
+            Nombre <separator></separator>
+          </label>
           <input
             type="string"
             name="name"
@@ -405,10 +408,9 @@ const Create = () => {
             onChange={(event) => handleChange(event)}
           />
           <p className="error">{errors.name}</p>
-         
-
-
-          <label htmlFor="price">Precio <separator></separator> </label>
+          <label htmlFor="price">
+            Precio <separator></separator>{" "}
+          </label>
           <input
             type="number"
             name="price"
@@ -418,7 +420,9 @@ const Create = () => {
             onChange={handleChange}
           />
           <p className="error">{errors.price}</p>
-          <label htmlFor="sale">Descuento %<separator></separator></label>
+          <label htmlFor="sale">
+            Descuento %<separator></separator>
+          </label>
           <input
             type="number"
             name="sale"
@@ -428,30 +432,29 @@ const Create = () => {
             onChange={handleChange}
           />
           <p className="error">{errors.sale}</p>
-          <label htmlFor="color">Color <separator></separator> </label>
-
-         <div className="buttons-align" >
-          <button
-            type="button"
-            onClick={() => {
-              handleOpenColorCreate();
-            }}
-            className="mainImage-upload-buttonY "
-          >
-            Crear color
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
-              handleOpenSizeCreate();
-            }}
-            className="mainImage-upload-buttonY "
+          <label htmlFor="color">
+            Color <separator></separator>{" "}
+          </label>
+          <div className="buttons-align">
+            <button
+              type="button"
+              onClick={() => {
+                handleOpenColorCreate();
+              }}
+              className="mainImage-upload-buttonY "
             >
-            Crear Talle
-          </button>
-            </div>
-        
+              Crear color
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                handleOpenSizeCreate();
+              }}
+              className="mainImage-upload-buttonY "
+            >
+              Crear Talle
+            </button>
+          </div>
           <select
             name="color"
             placeholder="Colores"
@@ -470,118 +473,151 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.color}</p>
-          <div >
+          <div>
             {createProduct?.colorImage.length > 0 ? (
               createProduct?.colorImage.map((col) => {
-                let hexCodex = color.find((c) => (c.name === col.color) )
+                let hexCodex = color.find((c) => c.name === col.color);
                 return (
-                    <div  >
-
-                  <div  key={col.color}>
-                  <Accordion style={{ boxShadow: "none", width: "400px", margin: "10px", border: '1px solid #aeaeae', backgroundColor: "#FBFBFB"}}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                      style={{display: 'flex', alignItems: "center"}}
-                    >
-                      <div className="containerBotonesSeleccion" style={{
-                        display: 'flex', 
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        width: '90%',
-                        gap: '25px',
-                        
-                        
-                        }} >
-                      <info>
-                        <sample
-                        className="detailColorButtonCreate"
+                  <div>
+                    <div key={col.color}>
+                      <Accordion
                         style={{
-                        backgroundColor: hexCodex?.codHex,
-                        width: "20px",
-                        height: "20px",
+                          boxShadow: "none",
+                          width: "400px",
+                          margin: "10px",
+                          border: "1px solid #aeaeae",
+                          backgroundColor: "#FBFBFB",
                         }}
-                      ></sample>
-                      <p>{col.color}</p>
-                      </info>
-                      <button type="button" onClick={() => handleDeleteColor(col.color)}>X</button>
-                    </div>
-                 
-                    </AccordionSummary>
-                    <AccordionDetails>
-                   
-                   <div>
-                    {col.images.length === 0 ? (
-                      <div>
-                        <label htmlFor="image">Imagenes </label>
-                        <UploadWidget onUpload={(urls)=> handleUpload(urls, col.color)} />
-                      </div>
-                    ) : (
-                      <div>
-                      <label htmlFor="image">Imagenes </label>
-                      <div>
-                        <button 
-                        type='button'
-                        className="mainImage-upload-button" 
-                        disabled= {true}>
-                          Imagen cargada
-                        </button>
-                      </div>
-                    </div>
-                    )}
-
-                    <talle className="talle">
-                  
-                    <label  htmlFor="size"> Talles </label>
-                    <select
-                    
-                    name="size"
-                    placeholder="Talles"
-                    defaultValue="def"
-                    onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
-                    >
-                    <option value="def" key="def" disabled>
-                    Selecciona talles
-                    </option>
-                    {size.map((el) => {
-                      return (
-                        <option value={el.name} key={el.id}>
-                        {el.name}
-                        </option>
-                      );
-                    })}
-                    </select>
-                    </talle>
-                    <div >
-                      {col.stocks.length > 0 ? (
-                        col.stocks.map((si) => {
-                          return(
-                            <div key={si.size} className="container-talle-stock">
-                            <p>{si.size}</p>
-                            <input
-                            name="amount"
-                            type="number"
-                            data-size={si.size}
-                            value={si.amount}
-                            onChange={(event) => handleSelectSizeAndStockChange(event, col.color)}
-                            />
-                            <button type="button" onClick={() => handleDeleteSize(si.size, col.color)}>X</button>
+                      >
+                        <AccordionSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls="panel1a-content"
+                          id="panel1a-header"
+                          style={{ display: "flex", alignItems: "center" }}
+                        >
+                          <div
+                            className="containerBotonesSeleccion"
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                              width: "90%",
+                              gap: "25px",
+                            }}
+                          >
+                            <info>
+                              <sample
+                                className="detailColorButtonCreate"
+                                style={{
+                                  backgroundColor: hexCodex?.codHex,
+                                  width: "20px",
+                                  height: "20px",
+                                }}
+                              ></sample>
+                              <p>{col.color}</p>
+                            </info>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteColor(col.color)}
+                            >
+                              X
+                            </button>
                           </div>
-                        ) 
-                      })
-                      )
-                      : (
-                      <p className="no-dietTypes"></p>
-                      )}
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <div>
+                            {col.images.length === 0 ? (
+                              <div>
+                                <label htmlFor="image">Imagenes </label>
+                                <UploadWidget
+                                  onUpload={(urls) =>
+                                    handleUpload(urls, col.color)
+                                  }
+                                />
+                              </div>
+                            ) : (
+                              <div>
+                                <label htmlFor="image">Imagenes </label>
+                                <div>
+                                  <button
+                                    type="button"
+                                    className="mainImage-upload-button"
+                                    disabled={true}
+                                  >
+                                    Imagen cargada
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+
+                            <talle className="talle">
+                              <label htmlFor="size"> Talles </label>
+                              <select
+                                name="size"
+                                placeholder="Talles"
+                                defaultValue="def"
+                                onChange={(event) =>
+                                  handleSelectSizeAndStockChange(
+                                    event,
+                                    col.color
+                                  )
+                                }
+                              >
+                                <option value="def" key="def" disabled>
+                                  Selecciona talles
+                                </option>
+                                {size.map((el) => {
+                                  return (
+                                    <option value={el.name} key={el.id}>
+                                      {el.name}
+                                    </option>
+                                  );
+                                })}
+                              </select>
+                            </talle>
+                            <div>
+                              {col.stocks.length > 0 ? (
+                                col.stocks.map((si) => {
+                                  return (
+                                    <div
+                                      key={si.size}
+                                      className="container-talle-stock"
+                                    >
+                                      <p>{si.size}</p>
+                                      <input
+                                        name="amount"
+                                        type="number"
+                                        data-size={si.size}
+                                        value={si.amount}
+                                        onChange={(event) =>
+                                          handleSelectSizeAndStockChange(
+                                            event,
+                                            col.color
+                                          )
+                                        }
+                                      />
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          handleDeleteSize(si.size, col.color)
+                                        }
+                                      >
+                                        X
+                                      </button>
+                                    </div>
+                                  );
+                                })
+                              ) : (
+                                <p className="no-dietTypes"></p>
+                              )}
+                            </div>
+                          </div>
+                        </AccordionDetails>
+                      </Accordion>
                     </div>
                   </div>
-                    </AccordionDetails>
-                  </Accordion>
-                </div>
-            </div>
-              )
-            })
+                );
+              })
             ) : (
               <p className="no-dietTypes"></p>
             )}
@@ -589,7 +625,9 @@ const Create = () => {
           <p className="error">{errors.size}</p>
           <p className="error">{errors.images}</p>
 
-          <label htmlFor="series">Colección <separator></separator> </label>
+          <label htmlFor="series">
+            Colección <separator></separator>{" "}
+          </label>
           <button
             type="button"
             onClick={() => {
@@ -617,7 +655,7 @@ const Create = () => {
             })}
           </select>
           <p className="error">{errors.series}</p>
-          <div className="container-coleccion" >
+          <div className="container-coleccion">
             {createProduct?.series.length > 0 ? (
               createProduct?.series.map((ser) => (
                 <coleccion key={ser}>
@@ -629,7 +667,9 @@ const Create = () => {
               <p></p>
             )}
           </div>
-          <label htmlFor="category">Categoría <separator></separator> </label>
+          <label htmlFor="category">
+            Categoría <separator></separator>{" "}
+          </label>
           <button
             type="button"
             onClick={() => {
@@ -669,7 +709,10 @@ const Create = () => {
               <p className="no-dietTypes"></p>
             )}
           </div>
-          <label htmlFor="description"> Descripcion <separator></separator> </label>
+          <label htmlFor="description">
+            {" "}
+            Descripcion <separator></separator>{" "}
+          </label>
           <textarea
             type="text"
             name="description"
@@ -678,7 +721,9 @@ const Create = () => {
             onChange={handleChange}
           />
           <p className="error">{errors.description} </p>
-          <label><separator></separator></label>
+          <label>
+            <separator></separator>
+          </label>
         </form>
         <separator></separator>
         <div className="div-button">
@@ -692,7 +737,6 @@ const Create = () => {
           </button>
         </div>
       </div>
-
       <div>
         <CreateDetail
           nombre={createProduct?.name}

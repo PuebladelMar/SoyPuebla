@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSeries } from '../../../redux/Actions';
 import axios from 'axios';
 import serieValidations from './serieValidations';
-// import Swal from 'sweetalert2';
 import '../createColor/createColor.css';
 
 const CreateSerie = () => {
@@ -40,13 +39,6 @@ const CreateSerie = () => {
       try {
         await axios.post('/products/series', createSerie);
         setCount(count + 1);
-        // Swal.fire({
-        //   position: 'center',
-        //   icon: 'success',
-        //   title: 'Su serie se ha creado exitosamente',
-        //   showConfirmButton: false,
-        //   timer: 1500,
-        // });
         setCreateSerie({
           name: '',
           image: 'image.png',

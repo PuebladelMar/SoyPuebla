@@ -35,7 +35,6 @@ const AllProducts = () => {
 
   const handlerEventSearch = (event) => {
     event.preventDefault();
-    console.log(allProducts);
     setSearchValue(event.target.value);
   };
 
@@ -59,8 +58,6 @@ const AllProducts = () => {
       try {
         await dispatch(deleteProduct(id));
         await dispatch(getProducts());
-        dispatch(getUserCart(userId));
-
         Swal.fire({
           title: "Eliminado",
           text: "El producto ha sido eliminado.",
