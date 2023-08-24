@@ -5,16 +5,15 @@ const {
 
 const postEmail = async (req, res) => {
   const { emailSubject, emailsUsers } = req.body;
- 
+
   try {
     const [user, created] = await EmailNotify.findOrCreate({
-      where: { user_email: emailsUsers }
+      where: { user_email: emailsUsers },
     });
-    
+
     if (created) {
       sendRegisterMailNotify(emailSubject, emailsUsers);
       res.status(201).send(`Suscripcion exitosa`);
-      console.log('Nuevo usuario creado');
     } else {
       res.status(201).json({ error: "Ya te encuentras suscrita" });
     }

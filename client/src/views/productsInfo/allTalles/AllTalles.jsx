@@ -1,34 +1,25 @@
-import './AllTalles.css';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSizes, putSizes, getSizesByName } from '../../../redux/Actions';
-import { FaPencilAlt } from 'react-icons/fa';
-import { NavLink, useNavigate } from 'react-router-dom';
-import CreateSize from '../../create/createSize/createSize';
-import SearchBar from '../../../componentes/searchBar/SearchBar';
-// import { RiDeleteBin6Line } from 'react-icons/ri';
+import "./AllTalles.css";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getSizes, putSizes } from "../../../redux/Actions";
+import { FaPencilAlt } from "react-icons/fa";
+import CreateSize from "../../create/createSize/createSize";
 
 const AllTalles = () => {
   const sizesList = useSelector((state) => state.sizesList);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState({});
-  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
-      if (searchValue === '') {
-        await dispatch(getSizes());
-      } else {
-        await dispatch(getSizesByName(searchValue));
-      }
+      await dispatch(getSizes());
     };
 
     fetchData();
-  }, [dispatch, searchValue]);
+  }, [dispatch]);
 
   const handleEditSizes = async (id, name) => {
-    const updatedName = prompt('Enter new name', name);
+    const updatedName = prompt("Enter new name", name);
     if (updatedName) {
       await dispatch(putSizes(id, updatedName));
       dispatch(getSizes());
@@ -44,77 +35,29 @@ const AllTalles = () => {
     setShowAlert({ size: true });
     event.preventDefault();
   };
-  const handlerEventSearch = (event) => {
-    event.preventDefault();
-    setSearchValue(event.target.value);
-  };
 
-  const handlerSubmitSearch = (event) => {
-    event.preventDefault();
-  };
+
 
   return (
-    <div
-      className='coleccion-main'
-      name='series'
-      value='name'
-    >
-      <SearchBar
-        handlerEventSearch={handlerEventSearch}
-        handlerSubmitSearch={handlerSubmitSearch}
-      />
-      <div className='nav-dashboard'>
-        <NavLink to='/all-data/all-products'>
+    <div className="talles-main-admin" name="series" value="name">
+      <div className="talles-container-background">
+        <div className="contenedor-nombre-talle">
+          <h2 className="talles-title-admin">Talles disponibles</h2>
           <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-products')}
+            type="button"
+            onClick={() => {
+              handleOpenSizeCreate();
+            }}
+            className="btn-talle-amigo "
           >
-            Productos{' '}
+            Crear Talle
           </button>
-        </NavLink>
-        <NavLink to='/all-data/all-colecciones'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-colecciones')}
-          >
-            Colecciones
-          </button>
-        </NavLink>
-        <NavLink to='/all-data/all-colors'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-colors')}
-          >
-            Colores
-          </button>
-        </NavLink>
-        <NavLink to='/all-data/all-categories'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-categories')}
-          >
-            Categorias
-          </button>
-        </NavLink>
-        <NavLink to='/dashboard'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/dashboard')}
-          >
-            Dashboard
-          </button>
-        </NavLink>
-      </div>
-      <div className='coleccion'>
-        <h2 className='coleccion-title'>Talles disponibles</h2>
+        </div>
         {Array.isArray(sizesList) &&
           sizesList.map((el) => (
-            <div
-              key={el.id}
-              className='talles-item'
-            >
+            <div key={el.id} className="talles-item">
               {el.name}
-              <div className='icons'>
+              <div className="icons">
                 <button onClick={() => handleEditSizes(el.id, el.name)}>
                   <FaPencilAlt />
                 </button>
@@ -123,29 +66,20 @@ const AllTalles = () => {
           ))}
       </div>
       {showAlert.size && (
-        <popups className='pop-ups'>
+        <popups className="pop-ups">
           <>
-            <div className='transparentBackgroundY'></div>
+            <div className="transparentBackgroundY"></div>
 
-            <div className='alertContainerY'>
-              <p className='alertTextY'>Creador de talle</p>
+            <div className="alertContainerY">
+              <p className="alertTextY">Creador de talle</p>
               <CreateSize />
-              <div className='alertButtonsY'>
+              <div className="alertButtonsY">
                 <button onClick={handleCloseAlert}>X</button>
               </div>
             </div>
           </>
         </popups>
       )}
-      <button
-        type='button'
-        onClick={() => {
-          handleOpenSizeCreate();
-        }}
-        className='mainImage-upload-buttonY '
-      >
-        Crear Talle
-      </button>
     </div>
   );
 };

@@ -29,6 +29,15 @@ export default function NavBar({ links }) {
   const [searchBarVisible, setSearchBarVisible] = useState(false);
   const user = useSelector((state) => state.userById);
   const userId = useSelector((state) => state.userId);
+  const isMatch = useMediaQuery("(max-width: 1039px)");
+  const isMatchSearchBar = useMediaQuery("(max-width: 1130px)");
+  const isMatchSearchBarIcon = useMediaQuery("(max-width: 610px)");
+  const isMatchSearchBarModal = useMediaQuery("(max-width: 644px)");
+  const isMatchSearchBarModal2 = useMediaQuery("(max-width: 599px)");
+  const [value, setValue] = useState(0);
+  const [results, setResults] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const allProducts = useSelector((state) => state.allProducts);
 
   useEffect(() => {
     if (userId) {
@@ -40,8 +49,17 @@ export default function NavBar({ links }) {
   }, [dispatch, userId]);
 
   const handleSearchIconClick = () => {
-    setSearchBarVisible(!searchBarVisible);
+    setSearchBarVisible(true);
     setIsModalOpen(true);
+  };
+
+  const handleSelectedProduct = (name) => {
+    dispatch(getProductsByName(name));
+    setIsModalOpen(false);
+  };
+
+  const handleOnFocus = () => {
+    setResults(!results);
   };
 
   useEffect(() => {
@@ -59,19 +77,12 @@ export default function NavBar({ links }) {
 
   const handlerSubmitSearch = (event) => {
     event.preventDefault();
+    setIsModalOpen(false);
   };
-
-  const isMatch = useMediaQuery("(max-width: 1039px)");
-  const isMatchSearchBar = useMediaQuery("(max-width: 1039px)");
-  const isMatchSearchBarIcon = useMediaQuery("(max-width: 610px)");
-  const isMatchSearchBarModal = useMediaQuery("(max-width: 644px)");
-  const isMatchSearchBarModal2 = useMediaQuery("(max-width: 599px)");
-  const [value, setValue] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSearchBarVisible(!searchBarVisible);
+    setSearchBarVisible(false);
   };
 
   const handleHeartClick = () => {
@@ -215,10 +226,50 @@ export default function NavBar({ links }) {
             gap={"10px"}
           >
             {isProducts && !isMatchSearchBar && (
-              <SearchBar
-                handlerEventSearch={handlerEventSearch}
-                handlerSubmitSearch={handlerSubmitSearch}
-              />
+              <Box
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "flex-end",
+                  width: "100%",
+                  borderRadius: "20px",
+                  position: "relative",
+                }}
+              >
+                <Box
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    width: "100%",
+                    backgroundColor: "#e5e4e4",
+                    borderRadius: "15px",
+                  }}
+                >
+                  <SearchBar
+                    handlerEventSearch={handlerEventSearch}
+                    handlerSubmitSearch={handlerSubmitSearch}
+                    handleOnFocus={handleOnFocus}
+                  />
+                </Box>
+                <Box
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    position: "absolute",
+                    alignItems: "center",
+                    top: "2.4rem",
+                    gap: "1rem",
+                    width: isMatchSearchBarModal ? "100%" : "100%",
+                    borderRadius: "15px",
+                    backgroundColor: "#e5e4e4",
+                    marginTop: "0.2rem",
+                  }}
+                >
+                </Box>
+              </Box>
             )}
             {isProducts && isMatchSearchBar && searchBarVisible && (
               <Modal
@@ -229,7 +280,11 @@ export default function NavBar({ links }) {
                   width: "100%",
                   padding: "0.85rem",
                   paddingTop: "1.1rem",
-                  paddingRight: isMatchSearchBarModal2 ? "2.2rem" : "2.7rem",
+                  paddingRight: isMatchSearchBarModal2
+                    ? "2.5rem"
+                    : isMatchSearchBarModal
+                    ? "4rem"
+                    : "7rem",
                   display: "flex",
                   justifyContent: "flex-end",
                   alignItems: "flex-start",
@@ -238,43 +293,95 @@ export default function NavBar({ links }) {
                 <Box
                   style={{
                     display: "flex",
-                    justifyContent: "flex-end",
-                    alignItems: "center",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "flex-end",
                     width: isMatchSearchBarModal ? "90%" : "55%",
-                    backgroundColor: "#e5e4e4",
                     borderRadius: "20px",
                   }}
                 >
-                  <SearchBar
-                    handlerEventSearch={handlerEventSearch}
-                    handlerSubmitSearch={handlerSubmitSearch}
-                  />
-                  <IconButton
+                  <Box
                     style={{
                       display: "flex",
-                      justifyContent: "center",
+                      justifyContent: "flex-end",
                       alignItems: "center",
-                      width: "2.6rem",
-                      height: "2.6rem",
-                      marginTop: "0.1rem",
+                      width: isMatchSearchBarModal ? "100%" : "100%",
                       backgroundColor: "#e5e4e4",
-                    }}
-                    onClick={handleSearchIconClick}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "#d1d0d0";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "#e5e4e4";
+                      borderRadius: "15px",
                     }}
                   >
-                    <FiX
-                      style={{
-                        width: "1.8rem",
-                        height: "1.8rem",
-                        color: "161616",
-                      }}
+                    <SearchBar
+                      handlerEventSearch={handlerEventSearch}
+                      handlerSubmitSearch={handlerSubmitSearch}
                     />
-                  </IconButton>
+                    <IconButton
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "2.6rem",
+                        height: "2.6rem",
+                        marginTop: "0.1rem",
+                        backgroundColor: "#e5e4e4",
+                      }}
+                      onClick={handleCloseModal}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = "#d1d0d0";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "#e5e4e4";
+                      }}
+                    >
+                      <FiX
+                        style={{
+                          width: "1.8rem",
+                          height: "1.8rem",
+                          color: "161616",
+                        }}
+                      />
+                    </IconButton>
+                  </Box>
+                  <Box
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "1rem",
+                      width: isMatchSearchBarModal ? "100%" : "100%",
+                      borderRadius: "15px",
+                      backgroundColor: "#e5e4e4",
+                      marginTop: "0.2rem",
+                    }}
+                  >
+                    {allProducts.length > 0 &&  (
+                      <ul
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "0.1rem",
+                          width: "100%",
+                          padding: "0.2rem 0",
+                          cursor: "pointer",
+                          border: "1px solid #666666",
+                          borderRadius: "15px",
+                          boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.2)",
+                        }}
+                      >
+                        {allProducts.slice(0, 5).map((result) => (
+                          <li
+                            className="li-products"
+                            key={result.id}
+                            onClick={() => handleSelectedProduct(result.name)}
+                          >
+                            {result.name}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </Box>
                 </Box>
               </Modal>
             )}
@@ -353,7 +460,6 @@ export default function NavBar({ links }) {
                 >
                   {!userId.length ? (
                     <div className="cart-num-container">
-                      <span className="span-num-cart">0</span>
                       <FiShoppingCart
                         style={{
                           width: "1.8rem",
@@ -365,7 +471,9 @@ export default function NavBar({ links }) {
                     </div>
                   ) : (
                     <div className="cart-num-container">
-                      <span className="span-num-cart">{userCart.length}</span>
+                      {userCart.length > 0 && (
+                        <span className="span-num-cart">{userCart.length}</span>
+                      )}
                       <Link to="/Cart">
                         <FiShoppingCart
                           style={{
@@ -392,7 +500,6 @@ export default function NavBar({ links }) {
                 >
                   {!userId.length ? (
                     <div className="cart-num-container">
-                      <span className="span-num-cart">0</span>
                       <FiShoppingCart
                         style={{
                           width: "1.8rem",
@@ -404,7 +511,9 @@ export default function NavBar({ links }) {
                     </div>
                   ) : (
                     <div className="cart-num-container">
-                      <span className="span-num-cart">{userCart.length}</span>
+                      {userCart.length > 0 && (
+                        <span className="span-num-cart">{userCart.length}</span>
+                      )}
                       <Link to="/Cart">
                         <FiShoppingCart
                           style={{

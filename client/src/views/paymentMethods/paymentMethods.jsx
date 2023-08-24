@@ -34,12 +34,8 @@ const PaymentMethodsView = () => {
             <img src={Transfer} alt="Transferencia Bancaria" />
           </div>
         </div>
-        <div className="payment-method">
-          <p>Tarjetas</p>
-          <div className="payment-img-container">
-            <img src={Card} alt="Tarjetas" />
-          </div>
-        </div>
+
+
       </div>
       <div className="additional-container">
         <div>
@@ -51,17 +47,6 @@ const PaymentMethodsView = () => {
           </p>
           <br />
           <ol>
-            <li>
-              <strong>Tarjetas de Crédito:</strong> Aceptamos las principales
-              tarjetas de crédito como Visa, MasterCard y American Express.
-            </li>
-            <br />
-            <li>
-              <strong>Tarjetas de Débito:</strong> También puedes utilizar tus
-              tarjetas de débito asociadas a redes locales e internacionales
-              para realizar tus compras.
-            </li>
-            <br />
             <li>
               <strong>MercadoPago:</strong> Te brindamos la opción de pagar a
               través de MercadoPago, una plataforma de pagos en línea muy
@@ -80,9 +65,7 @@ const PaymentMethodsView = () => {
             <li>
               <strong>Pagos en Efectivo:</strong> Si no tienes acceso a medios
               electrónicos, también puedes optar por la modalidad de pago en
-              efectivo. Generaremos un código de barras o un número de
-              referencia para que puedas abonar en locales autorizados, como
-              PagoFácil o Rapipago.
+              efectivo.
             </li>
           </ol>
         </div>

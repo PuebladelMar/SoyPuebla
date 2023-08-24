@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 const controllGetAllHistory = async () => {
   try {
-    const userHistory = await Histories.findAll();
+    const userHistory = await Histories.findAll({paranoid: false,});
 
     const stockIds = userHistory.map((user) => user.StockId);
 
@@ -13,6 +13,7 @@ const controllGetAllHistory = async () => {
           [Op.in]: stockIds,
         },
       },
+      paranoid: false,
       attributes: ['id', 'ProductId', 'ColorId', 'SizeId'],
     });
 
@@ -23,7 +24,8 @@ const controllGetAllHistory = async () => {
         where: {
           id: stock.ProductId,
         },
-        attributes: ['name']
+        attributes: ['name'],
+        paranoid: false,
       });
 
       const color = await Colors.findOne({
@@ -31,6 +33,7 @@ const controllGetAllHistory = async () => {
           id: stock.ColorId,
         },
         attributes: ['name'],
+        paranoid: false,
       });
 
       const size = await Sizes.findOne({
@@ -38,6 +41,7 @@ const controllGetAllHistory = async () => {
           id: stock.SizeId,
         },
         attributes: ['name'],
+        paranoid: false,
       });
 
       stockAttributesMap[stock.id] = {
@@ -55,6 +59,7 @@ const controllGetAllHistory = async () => {
           [Op.in]: userIds,
         },
       },
+      paranoid: false,
       attributes: ['id', 'emailAddress', 'userRole', 'banUser', 'fullName'],
     });
 

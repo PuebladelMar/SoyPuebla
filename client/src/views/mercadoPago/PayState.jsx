@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
-import { addHistory, deleteCartUser, getUserById, sendStatusPurchaseMail } from "../../redux/Actions";
+import { addHistory, deleteCartUser, getUserById, sendStatusPurchaseMail, getAllInformation, getUserCart } from "../../redux/Actions";
 import WhatsAppIcon from "../../assets/images/Whatsapp.png";
 import "./PayState.css";
 
@@ -24,7 +24,8 @@ function PayState() {
           await dispatch(addHistory(userId, "approved"));
           await dispatch(deleteCartUser(userId, true));
           await dispatch(getAllInformation());
-          const emailAddress =  userById.emailAddress;
+          dispatch(getUserCart(userId));
+          const emailAddress = userById.user.emailAddress;
           let data = {
             emailsUsers: emailAddress,
             emailSubject: "Tu compra ha sido aprobada❤️🤗",
@@ -39,6 +40,7 @@ function PayState() {
           await dispatch(addHistory(userId, "pending"));
           await dispatch(deleteCartUser(userId, true));
           await dispatch(getAllInformation());
+          dispatch(getUserCart(userId));
         }
       };
       asyncFunc();
@@ -47,7 +49,7 @@ function PayState() {
         if (userId.length) {
           await dispatch(addHistory(userId, "rejected"));
           dispatch(getUserById(userId));
-          const emailAddress =  userById.emailAddress;
+          const emailAddress = userById.user.emailAddress;
           let data = {
             emailsUsers: emailAddress,
             emailSubject: "Tu compra ha sido rechazada💔",
@@ -65,7 +67,7 @@ function PayState() {
         <div className="payContainer">
           <h3 className="payState-text">Su compra se realizo con exito</h3>
           <p className="payState-Id">Id de compra: {parsedData.payment_id}</p>
-          <p className="payState-total">Pago total: ${totalPay}</p>
+          <p className="payState-total">Pago total: ${Math.floor(totalPay)}</p>
           <p className="payState-wpp">Comunicate con nosotros para determinar la entrega</p>
           <div className="social-icons">
             <a

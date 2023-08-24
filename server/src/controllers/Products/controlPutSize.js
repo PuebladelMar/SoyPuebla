@@ -3,12 +3,11 @@ const { Op } = require("sequelize");
 
 const controllPutSize = async (id, name) => {
   const size = await Sizes.findByPk(id);
-  console.log(size);
   if (!size) {
     throw new Error("size not found");
   }
 
-  const existingSizeWithSameName = await  Sizes.findOne({
+  const existingSizeWithSameName = await Sizes.findOne({
     where: {
       id: { [Op.not]: id },
       [Op.or]: [{ name }],
@@ -22,4 +21,3 @@ const controllPutSize = async (id, name) => {
 };
 
 module.exports = controllPutSize;
-//

@@ -1,39 +1,105 @@
-.categories-main{
-    margin: 5rem;
-    padding: 20px;
+.categories-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
 }
 
-  
-  .categories {
-    border: 1px solid #ccc;
-    padding: 20px;
-  }
-  
-  .categories-title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .categories-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-  }
-  
-  .icons {
+.button-admin-category {
+  padding: 5px 19px;
+  border: 1px solid #b3b3b3;
+  border-radius: 4px;
+  color: black;
+  font-weight: 400;
+  cursor: pointer;
+  transition: 0.5s;
+}
 
-    display: flex;
-    align-items: center;
-    
-  }
-  
-  .edit-categories,
-  .delete-categories {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
+.categories-name-admin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #8d8d8d;
+}
+
+.button-admin-category:hover {
+  background-color: #517f7f;
+  color: rgb(255, 255, 255);
+}
+
+.categories-admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
+  gap: 1rem;
+  border-radius: 10px;
+  border: 1px solid rgb(173, 173, 173);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  border-radius: 3px;
+  padding: 3rem;
+  max-width: 50rem;
+  width: 70%;
+}
+
+.categories-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    font-size: x-large;
+  color: #747474;
+  margin-bottom: 1rem;
+}
+
+.categories-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  color: #8d8d8d;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+}
+
+.edit-categories,
+.delete-categories {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+
+
+
+.contenedor-nombre-categoria{
+
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  justify-content: space-between;
+}
+
+
+
+.categoria-create-button {
+  padding: 5px 19px;
+  border: 1px solid #b3b3b3; 
+  border-radius: 4px;
+  color: black;
+  font-weight: 400;
+  cursor: pointer;
+  transition: 0.5s;
+  margin-bottom: 2rem;
+}
+
+.categoria-create-button:hover {
+  background-color: #517f7f;
+  color: rgb(255, 255, 255);
+}

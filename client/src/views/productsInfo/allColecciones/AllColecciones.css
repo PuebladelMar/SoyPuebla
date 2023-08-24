@@ -1,67 +1,92 @@
-.coleccion-main{
-    margin: 5rem;
-    padding: 20px;
+.coleccion-main-admin {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 3rem;
 }
 
-  
-  .coleccion {
-    border: 1px solid #ccc;
-    padding: 20px;
-  }
-  
-  .coleccion-title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .coleccion-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-  }
-  
-  .icons {
+.coleccion-name-admin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #8d8d8d;
+}
 
-    display: flex;
-    align-items: center;
-    
-  }
-  
-  .edit-coleccion,
-  .delete-coleccion {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  .nav-dashboard{
-    margin-top: 1rem;
-    margin-bottom: 4rem;
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    width: 100%;
-    height: 3rem;
-  }
-  
-  .nav-dashboard-btn{
-    margin: 10px;
-      background-color: rgb(81, 127, 127);
-      color:  rgb(255, 255, 255);
-      padding: 8px 16px;
-      border: 1px solid  rgb(81, 127, 127);
-      border-radius: 4px;
-      width: 10rem;
-      height: 3rem;
-      cursor: pointer;
-  }
-  
-  /* .edit-color i {
-    color: blue;
-  }
-  
-  .delete-color {
-    color: red;
-  } */
+.button-coleccion-admin {
+  margin: 0;
+}
+
+.coleccion-admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
+  gap: 1rem;
+  border-radius: 10px;
+  border: 1px solid rgb(173, 173, 173);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  border-radius: 3px;
+  max-width: 50rem;
+  width: 70%;
+  padding: 3rem;
+}
+
+.coleccion-title-admin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #747474;
+  font-weight: 500;
+}
+
+.coleccion-item-admin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  color: #8d8d8d;
+}
+
+.delete-color-admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(207, 2, 2);
+}
+
+.icons-coleccion-admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.contenedor-nombre-coleccion{
+
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  justify-content: space-between;
+}
+
+
+.coleccion-create-button {
+  padding: 5px 19px;
+  border: 1px solid #b3b3b3; 
+  border-radius: 4px;
+  color: black;
+  font-weight: 400;
+  cursor: pointer;
+  transition: 0.5s;
+  margin-bottom: 2rem;
+}
+
+.coleccion-create-button:hover {
+  background-color: #517f7f;
+  color: rgb(255, 255, 255);
+}

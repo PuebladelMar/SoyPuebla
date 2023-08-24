@@ -1,10 +1,27 @@
 .userAdmin-methods-container {
+  min-height: 80vh;
+}
+
+.user-Admin-Box {
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
   display: flex;
+  align-items: center;
   flex-direction: column;
+  max-width: 85rem;
+  margin-left: 2rem;
 }
 
 .userAdmin-table {
-  width: 80%;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  height: 80vh;
+  background-color: #eeeeee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10%;
 }
 .userAdmin-header {
   display: flex;
@@ -15,58 +32,94 @@
 }
 
 .userAdmin-title {
-  font-size: 3.5rem;
-  color: rgb(220, 170, 161);
-  font-weight: 400;
-  margin-left: 0;
-  margin-top: 5%;
-}
-
-.userAdmin-text-underline {
-  height: 0.4rem;
-  width: 150%;
-  margin-left: 0;
-  background-color: rgb(220, 170, 161);
+  font-size: x-large;
+  color: #747474;
 }
 
 .userAdmin-container {
   display: flex;
-  align-items: center;
-  margin: 20px;
-  margin-top: 10px;
 }
 
-.button {
+.button-user-admin {
   background-color: #b2cebf;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  margin-right: 10px;
   cursor: pointer;
   width: 150px;
+  transition: 0.5s;
 }
 
-.selected {
+.selected-user-admin {
   background-color: #517f7f;
   width: 150px;
+  transition: 0.5s;
 }
 
-.filter {
+.filter-admin-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 20px;
+  align-items: center;
   width: 250px;
-  padding: 20px 30px 20px 30px;
-  background-color: #ece4e1;
+  height: 400px;
+  background-color: #ffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
 }
 
-.filter input[type="text"],
-.filter select {
+.filter-admin-user input[type="text"],
+.filter-admin-user select {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 150px;
 }
 
-.filter select {
-  width: 200px;
+.filter-admin-user select {
+  width: 150px;
+}
+
+@media (max-width: 1330px) {
+  .user-Admin-Box {
+    margin-left: 0rem;
+  }
+
+  .userAdmin-container {
+    flex-direction: column;
+  }
+
+  .filter-admin-user {
+    justify-content: center;
+    flex-direction: row;
+    width: 800px;
+    height: 100px;
+  }
+
+  .button-user-admin {
+    width: 100px;
+    font-size: 12px;
+  }
+
+  .selected-user-admin {
+    width: 100px;
+    font-size: 12px;
+  }
+
+  .filter-admin-user select {
+    width: 100px;
+    font-size: 12px;
+  }
+
+  .filter-admin-user input[type="text"],
+  .filter-admin-user select {
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100px;
+  }
 }
 
 @media (max-width: 768px) {

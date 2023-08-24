@@ -7,28 +7,24 @@ import "./Reviews.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
-import { getReviewById } from "../../redux/Actions";
-
+import { getReviewById, deleteReviews } from "../../redux/Actions";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 function Reviews({ productId }) {
   const getReviewById2 = useSelector((state) => state.getReviewById);
+  const userById = useSelector((state) => state.userById);
   const dispatch = useDispatch();
   const [visibleReviews, setVisibleReviews] = useState(3);
   const [showAllReviews, setShowAllReviews] = useState(false);
-
-
 
   useEffect(() => {
     const fetchReview = async () => {
       try {
         await dispatch(getReviewById(productId));
-        // console.log(productDetails[0].id);
       } catch (error) {
-        // Manejar el error aquí si es necesario
         console.error("Error fetching review:", error);
       }
     };
-
     fetchReview();
   }, [dispatch]);
 
@@ -42,6 +38,12 @@ function Reviews({ productId }) {
     setShowAllReviews(false);
   };
 
+  const handleDeleteReviews = async (id) => {
+    await dispatch(deleteReviews(id));
+    location.reload();
+    await dispatch(getReviewById(productId));
+  };
+
   return (
     <div className="review-container">
       <div className="review">
@@ -49,32 +51,40 @@ function Reviews({ productId }) {
           getReviewById2
             .slice(0, showAllReviews ? getReviewById2.length : visibleReviews)
             .map((re) => (
-              <ReviewCard
-                key={re.id}
-                title={re.title}
-                score={re.score}
-                fullName={re.fullName}
-                description={re.description}
-                productId={productId}
-              />
+              <div key={re.id} className="review-card">
+                <ReviewCard
+                  title={re.title}
+                  score={re.score}
+                  fullName={re.fullName}
+                  description={re.description}
+                  productId={productId}
+                />
+                {(userById?.user?.userRole === "administrator" ||
+                  userById?.user?.userRole === "superadministrator") && (
+                  <button
+                    className="delete-color"
+                    type="submit"
+                    onClick={() => handleDeleteReviews(re.id)}
+                  >
+                    <RiDeleteBin6Line />
+                  </button>
+                )}
+              </div>
             ))
         ) : (
           <p>No hay reseñas disponibles.</p>
         )}
-
         {getReviewById2.length > visibleReviews && !showAllReviews && (
           <button className="show-more-button" onClick={handleShowMoreReviews}>
             Ver más reseñas
           </button>
         )}
-
         {showAllReviews && (
           <button className="show-more-button" onClick={handleHideReviews}>
             Ocultar reseñas
           </button>
         )}
       </div>
-
     </div>
   );
 }

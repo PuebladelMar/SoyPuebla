@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { FaStar } from 'react-icons/fa';
+import { FaStar } from "react-icons/fa";
 import { postReviews, getProducts, getReviewById } from "../../redux/Actions";
 import "./ReviewsForm.css";
 import { useEffect, useState } from "react";
@@ -8,7 +8,6 @@ function ReviewsForm({ productId, handleLoginClick }) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.userId);
   const userById = useSelector((state) => state.userById);
-  const allUsers = useSelector((state) => state.allUsers);
   const [userComment, setUserComment] = useState({
     score: "",
     userId: "",
@@ -31,7 +30,6 @@ function ReviewsForm({ productId, handleLoginClick }) {
   }, [dispatch, userId, productId, userById]);
 
   const handleScoreChange = (score) => {
-    console.log(score);
     setUserComment({
       ...userComment,
       score: score,
@@ -84,7 +82,11 @@ function ReviewsForm({ productId, handleLoginClick }) {
               }`}
               onClick={() => handleScoreChange(value)}
             >
-              <FaStar size={25} color={userComment.score >= value ? 'gold' : 'gray'} style={{margin: '0'}} />
+              <FaStar
+                size={25}
+                color={userComment.score >= value ? "gold" : "gray"}
+                style={{ margin: "0" }}
+              />
             </button>
           ))}
         </div>

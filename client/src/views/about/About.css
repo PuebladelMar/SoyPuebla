@@ -63,3 +63,11 @@
   min-width: 600px;
   object-fit: cover;
 }
+
+
+
+.columnName a:hover {
+  text-decoration: underline; 
+}
+
+

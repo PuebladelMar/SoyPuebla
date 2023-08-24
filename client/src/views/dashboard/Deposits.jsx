@@ -58,7 +58,6 @@ export default function Deposits() {
     });
   } else if (selectedInterval === "semanal") {
     const currentDayIndex = currentDate.getDay();
-    const daysInWeek = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
     for (let day = currentDayIndex; day >= currentDayIndex - 6; day--) {
       const dayIndex = (day < 0 ? day + 7 : day) % 7;
       const currentDateOfWeek = new Date(

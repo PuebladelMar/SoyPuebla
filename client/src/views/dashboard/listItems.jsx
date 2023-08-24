@@ -1,87 +1,87 @@
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
+import BrushIcon from "@mui/icons-material/Brush";
+import StraightenIcon from '@mui/icons-material/Straighten';
+import CategoryIcon from '@mui/icons-material/Category';
+import DryCleaningIcon from '@mui/icons-material/DryCleaning';
 import CheckroomOutlinedIcon from "@mui/icons-material/CheckroomOutlined";
-import { NavLink } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 
-export const mainListItems = (
+export const mainListItems = ({ onSelectSection }) => (
   <>
-    <NavLink to="/info">
-      <ListItemButton>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Informacion" />
-      </ListItemButton>
-    </NavLink>
-    <NavLink to="/dashboard/history">
-      <ListItemButton>
-        <ListItemIcon>
-          <ShoppingCartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Historial de compras" />
-      </ListItemButton>
-    </NavLink>
-    <NavLink to="/dashboard/users">
-      <ListItemButton>
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Usuarios" />
-      </ListItemButton>
-    </NavLink>
-    {/* <ListItemButton>
+    <ListItemButton onClick={() => onSelectSection("Ventas")}>
       <ListItemIcon>
-        <BarChartIcon />
+        <AttachMoneyIcon />
       </ListItemIcon>
-      <ListItemText primary="Reportes" />
-    </ListItemButton> */}
-    <NavLink to="/all-data">
-      <ListItemButton>
-        <ListItemIcon>
-          <CheckroomOutlinedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Products" />
-      </ListItemButton>
-    </NavLink>
-
-    <NavLink to="/create">
-      <ListItemButton>
-        <ListItemIcon>
-          <AddIcon />
-        </ListItemIcon>
-        <ListItemText primary="Crear" />
-      </ListItemButton>
-    </NavLink>
-  </>
-);
-
-export const secondaryListItems = (
-  <>
-    {/* <ListSubheader component="div" inset>
-      Saved reports
-    </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
+      <ListItemText primary="Ventas" />
     </ListItemButton>
-    <ListItemButton>
+
+    <ListItemButton onClick={() => onSelectSection("Informacion")}>
       <ListItemIcon>
-        <AssignmentIcon />
+        <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Last quarter" />
+      <ListItemText primary="Informacion" />
     </ListItemButton>
-    <ListItemButton>
+
+    <ListItemButton onClick={() => onSelectSection("Historial de compras")}>
       <ListItemIcon>
-        <AssignmentIcon />
+        <ShoppingCartIcon />
       </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItemButton> */}
+      <ListItemText primary="Historial de compras" />
+    </ListItemButton>
+
+    <ListItemButton onClick={() => onSelectSection("Usuarios")}>
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <ListItemText primary="Usuarios" />
+    </ListItemButton>
+
+    <ListItemButton onClick={() => onSelectSection("Productos")}>
+      <ListItemIcon>
+        <CheckroomOutlinedIcon />
+      </ListItemIcon>
+      <ListItemText primary="Productos" />
+    </ListItemButton>
+
+    <ListItemButton onClick={() => onSelectSection("Colores")}>
+      <ListItemIcon>
+        <BrushIcon />
+      </ListItemIcon>
+      <ListItemText primary="Colores" />
+    </ListItemButton>
+
+    <ListItemButton onClick={() => onSelectSection("Talles")}>
+      <ListItemIcon>
+        <StraightenIcon />
+      </ListItemIcon>
+      <ListItemText primary="Talles" />
+    </ListItemButton>
+
+    <ListItemButton onClick={() => onSelectSection("Categorías")}>
+      <ListItemIcon>
+        <CategoryIcon />
+      </ListItemIcon>
+      <ListItemText primary="Categorías" />
+    </ListItemButton>
+
+    <ListItemButton onClick={() => onSelectSection("Colecciónes")}>
+      <ListItemIcon>
+        <DryCleaningIcon />
+      </ListItemIcon>
+      <ListItemText primary="Colecciónes" />
+    </ListItemButton>
+
+    <ListItemButton onClick={() => onSelectSection("Crear")}>
+      <ListItemIcon>
+        <AddIcon />
+      </ListItemIcon>
+      <ListItemText primary="Crear" />
+    </ListItemButton>
   </>
 );

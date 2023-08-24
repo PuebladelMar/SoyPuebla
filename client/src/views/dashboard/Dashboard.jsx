@@ -10,15 +10,23 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
+import { mainListItems } from "./listItems";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
+import Information from "./Information";
+import AllProducts from "../productsInfo/AllProducts";
+import HistoryData from "./purchaseHistory/purchaseHistory";
+import UsersData from "../usersData/dataUserAdmin";
+import AllColors from "../.././views/productsInfo/allColors/AllColors"
+import Create from "../create/Create";
+import AllCategories from "../.././views/productsInfo/categories/AllCategories";
+import AllTalles from "../.././views/productsInfo/allTalles/AllTalles";
+import AllColeciones from "../.././views/productsInfo/allColecciones/AllColecciones";
 
 const drawerWidth = 240;
 
@@ -38,7 +46,6 @@ const AppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-  
 }));
 
 const Drawer = styled(MuiDrawer, {
@@ -69,122 +76,358 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function Dashboard() {
   const [open, setOpen] = useState(true);
+  const [currentSection, setCurrentSection] = useState("Ventas");
+
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleSectionChange = (sectionName) => {
+    setCurrentSection(sectionName);
   };
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ display: "flex" }}>
-        <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: "24px",
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
+      <Box
+        width="100%"
+        height="100%"
+        backgroundColor="#E9E9E9"
+        justifyContent="left"
+        position="relative"
+        display="flex"
+      >
+        <Box
+          left="0"
+        >
+          <AppBar position="absolute" open={open}>
+            <Toolbar
               sx={{
-                marginRight: "36px",
-                ...(open && { display: "none" }),
+                pr: "24px",
               }}
             >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={toggleDrawer}
+                sx={{
+                  marginRight: "36px",
+                  ...(open && { display: "none" }),
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                sx={{ flexGrow: 1 }}
+              >
+                Dashboard
+              </Typography>
+              <IconButton color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer variant="permanent" open={open} sx={{
+                minHeight: "100%",
+                backgroundColor: "#FFFFFF",
+              }}>
+            <Toolbar
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                minHeight: "100%",
+                px: [1],
+              }}
             >
-              Dashboard
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              px: [1],
-            }}
+              <IconButton onClick={toggleDrawer}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </Toolbar>
+            <Divider />
+
+            <List component="nav">
+              {mainListItems({ onSelectSection: handleSectionChange })}
+              <Divider sx={{ my: 1, minHeight: "100%" }} />
+            </List>
+          </Drawer>
+        </Box>
+
+        {currentSection === "Ventas" && (
+          <Box
+            name="Ventas"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
           >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
-          </List>
-        </Drawer>
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: "125vh",
-          }}
-        >
-          <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={8} lg={9}>
+            <Container display="flex" flexWrap="wrap" width="100%">
+              <Container>
                 <Paper
                   sx={{
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-                    height: 240,
+                    height: "300px",
+                    marginBottom: "2rem",
+                    maxWidth: "80rem",
                   }}
                 >
                   <Chart />
                 </Paper>
-              </Grid>
-              <Grid item xs={12} md={4} lg={3}>
+
                 <Paper
                   sx={{
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-                    height: 240,
+                    minHeight: "300px",
+                    marginBottom: "2rem",
+                    maxWidth: "80rem",
                   }}
                 >
                   <Deposits />
                 </Paper>
-              </Grid>
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    maxWidth: "80rem",
+                  }}
+                >
                   <Orders />
                 </Paper>
-              </Grid>
-            </Grid>
-          </Container>
-        </Box>
+              </Container>
+            </Container>
+          </Box>
+        )}
+
+        {currentSection === "Informacion" && (
+          <Box
+            name="Informacion"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <Information />
+            </Box>
+          </Box>
+        )}
+
+        {currentSection === "Historial de compras" && (
+          <Box
+            name="Informacion"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <HistoryData />
+            </Box>
+          </Box>
+        )}
+
+        {currentSection === "Usuarios" && (
+          <Box
+            name="Informacion"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <UsersData />
+            </Box>
+          </Box>
+        )}
+
+        {currentSection === "Productos" && (
+          <Box
+            name="Productos"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <AllProducts />
+            </Box>
+          </Box>
+        )}
+
+        {currentSection === "Crear" && (
+          <Box
+            name="Informacion"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <Create />
+            </Box>
+          </Box>
+        )}
+
+        {currentSection === "Colecciónes" && (
+          <Box
+            name="Colecciónes"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <AllColeciones />
+            </Box>
+          </Box>
+        )}
+
+        {currentSection === "Colores" && (
+          <Box
+            name="Colores"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <AllColors />
+            </Box>
+          </Box>
+        )}
+
+        {currentSection === "Talles" && (
+          <Box
+            name="Talles"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <AllTalles />
+            </Box>
+          </Box>
+        )}
+
+        {currentSection === "Categorías" && (
+          <Box
+            name="Categorías"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <AllCategories />
+            </Box>
+          </Box>
+        )}
       </Box>
     </ThemeProvider>
   );
