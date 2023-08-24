@@ -7,6 +7,10 @@
   text-align: center;
 }
 
+.error-image-container {
+  max-width: 30rem;
+}
+
 .notFound-text {
   font-size: 1.5rem;
   font-family: Asap;
