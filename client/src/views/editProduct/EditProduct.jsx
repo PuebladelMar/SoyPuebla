@@ -381,7 +381,8 @@ const EditProduct = () => {
   };
 
   return (
-    <div className="create-main-container">
+    
+    <div className="edit-create-main-container">
       {isReady ? (
       <>
       {showAlert.category && (
