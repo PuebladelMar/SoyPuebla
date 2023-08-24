@@ -107,7 +107,7 @@ const UsersData = () => {
         </div>
       </div>
       <div className="userAdmin-container">
-        <div className="filter">
+        <div className="filter-admin-user">
           <input
             type="text"
             placeholder="Fecha DD-MM-AA "
@@ -134,13 +134,13 @@ const UsersData = () => {
           />
             <button
               onClick={setSortOrderAsc}
-              className={`button ${selectedButton === "asc" ? "selected" : ""}`}
+              className={`button-user-admin ${selectedButton === "asc" ? "selected-user-admin" : ""}`}
             >
               Ascendente
             </button>
             <button
               onClick={setSortOrderDesc}
-              className={`button ${selectedButton === "desc" ? "selected" : ""
+              className={`button-user-admin ${selectedButton === "desc" ? "selected-user-admin" : ""
                 }`}
             >
               Descendente

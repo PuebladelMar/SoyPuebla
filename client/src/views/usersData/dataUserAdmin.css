@@ -1,5 +1,5 @@
 .userAdmin-methods-container {
-  min-height: 90vh;
+  min-height: 80vh;
 }
 
 .user-Admin-Box {
@@ -38,7 +38,7 @@
   display: flex;
 }
 
-.button {
+.button-user-admin {
   background-color: #b2cebf;
   color: white;
   padding: 10px 20px;
@@ -46,14 +46,16 @@
   border-radius: 5px;
   cursor: pointer;
   width: 150px;
+  transition: 0.5s;
 }
 
-.selected {
+.selected-user-admin {
   background-color: #517f7f;
   width: 150px;
+  transition: 0.5s;
 }
 
-.filter {
+.filter-admin-user {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,15 +67,15 @@
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
 }
 
-.filter input[type="text"],
-.filter select {
+.filter-admin-user input[type="text"],
+.filter-admin-user select {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 150px;
 }
 
-.filter select {
+.filter-admin-user select {
   width: 150px;
 }
 
@@ -82,30 +84,30 @@
     flex-direction: column;
   }
 
-  .filter {
+  .filter-admin-user {
     justify-content: center;
     flex-direction: row;
     width: 800px;
     height: 100px;
   }
 
-  .button {
+  .button-user-admin {
     width: 100px;
     font-size: 12px;
   }
 
-  .selected {
+  .selected-user-admin {
     width: 100px;
     font-size: 12px;
   }
 
-  .filter select {
+  .filter-admin-user select {
     width: 100px;
     font-size: 12px;
   }
 
-  .filter input[type="text"],
-  .filter select {
+  .filter-admin-user input[type="text"],
+  .filter-admin-user select {
     font-size: 12px;
     padding: 10px;
     border: 1px solid #ccc;
