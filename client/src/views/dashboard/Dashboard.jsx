@@ -10,22 +10,23 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
+import { mainListItems } from "./listItems";
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Information from "./Information";
 import AllProducts from "../productsInfo/AllProducts";
-import HistoryData  from "./purchaseHistory/purchaseHistory";
+import HistoryData from "./purchaseHistory/purchaseHistory";
 import UsersData from "../usersData/dataUserAdmin";
-import AllData from "../productsInfo/AllData";
-import Create from "../create/Create"
-
+import AllColors from "../.././views/productsInfo/allColors/AllColors"
+import Create from "../create/Create";
+import AllCategories from "../.././views/productsInfo/categories/AllCategories";
+import AllTalles from "../.././views/productsInfo/allTalles/AllTalles";
+import AllColeciones from "../.././views/productsInfo/allColecciones/AllColecciones";
 
 const drawerWidth = 240;
 
@@ -97,21 +98,17 @@ export default function Dashboard() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box
-        // sx={{ display: "flex" }}
         width="100%"
         height="100%"
         backgroundColor="#E9E9E9"
         justifyContent="left"
         position="relative"
         display="flex"
-       
       >
         <Box
-        // position='fixed'
           left="0"
-          
         >
-          <AppBar position="absolute"  open={open}>
+          <AppBar position="absolute" open={open}>
             <Toolbar
               sx={{
                 pr: "24px",
@@ -145,13 +142,16 @@ export default function Dashboard() {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Drawer  variant="permanent" open={open}>
+          <Drawer variant="permanent" open={open} sx={{
+                minHeight: "100%",
+                backgroundColor: "#FFFFFF",
+              }}>
             <Toolbar
-            
               sx={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "flex-end",
+                minHeight: "100%",
                 px: [1],
               }}
             >
@@ -159,12 +159,11 @@ export default function Dashboard() {
                 <ChevronLeftIcon />
               </IconButton>
             </Toolbar>
-            <Divider  />
+            <Divider />
 
             <List component="nav">
               {mainListItems({ onSelectSection: handleSectionChange })}
-              <Divider sx={{ my: 1 }} />
-      
+              <Divider sx={{ my: 1, minHeight: "100%" }} />
             </List>
           </Drawer>
         </Box>
@@ -225,16 +224,17 @@ export default function Dashboard() {
         )}
 
         {currentSection === "Informacion" && (
-          <Box 
-          name="Informacion"
-          display="flex"
+          <Box
+            name="Informacion"
+            display="flex"
             flexWrap="wrap"
             marginTop="8rem"
             marginBottom="5rem"
             height="100%"
             width="100%"
             marginLeft="1rem"
-            marginRight="1rem">
+            marginRight="1rem"
+          >
             <Box
               width="100%"
               height="100%"
@@ -246,87 +246,87 @@ export default function Dashboard() {
           </Box>
         )}
 
-
-{currentSection === "Historial de compras" && (
-          <Box 
-          name="Informacion"
-          display="flex"
+        {currentSection === "Historial de compras" && (
+          <Box
+            name="Informacion"
+            display="flex"
             flexWrap="wrap"
             marginTop="8rem"
             marginBottom="5rem"
             height="100%"
             width="100%"
             marginLeft="1rem"
-            marginRight="1rem">
+            marginRight="1rem"
+          >
             <Box
               width="100%"
               height="100%"
               marginLeft="auto"
               marginRight="auto"
             >
-              <HistoryData  />
+              <HistoryData />
             </Box>
           </Box>
         )}
 
-
-{currentSection === "Usuarios" && (
-          <Box 
-          name="Informacion"
-          display="flex"
+        {currentSection === "Usuarios" && (
+          <Box
+            name="Informacion"
+            display="flex"
             flexWrap="wrap"
             marginTop="8rem"
             marginBottom="5rem"
             height="100%"
             width="100%"
             marginLeft="1rem"
-            marginRight="1rem">
+            marginRight="1rem"
+          >
             <Box
               width="100%"
               height="100%"
               marginLeft="auto"
               marginRight="auto"
             >
-              <UsersData   />
+              <UsersData />
             </Box>
           </Box>
         )}
 
-
-{currentSection === "Products" && (
-          <Box 
-          name="Informacion"
-          display="flex"
+        {currentSection === "Productos" && (
+          <Box
+            name="Productos"
+            display="flex"
             flexWrap="wrap"
             marginTop="8rem"
             marginBottom="5rem"
             height="100%"
             width="100%"
             marginLeft="1rem"
-            marginRight="1rem">
+            marginRight="1rem"
+          >
             <Box
               width="100%"
               height="100%"
               marginLeft="auto"
               marginRight="auto"
             >
-              <AllData  />
+              <AllProducts />
             </Box>
           </Box>
         )}
 
-
-{currentSection === "Crear" && (
-          <Box 
-          name="Informacion"
-          display="flex"
+        {currentSection === "Crear" && (
+          <Box
+            name="Informacion"
+            display="flex"
             flexWrap="wrap"
             marginTop="8rem"
             marginBottom="5rem"
             height="100%"
             width="100%"
             marginLeft="1rem"
-            marginRight="1rem">
+            marginRight="1rem"
+          >
             <Box
               width="100%"
               height="100%"
@@ -338,9 +338,97 @@ export default function Dashboard() {
           </Box>
         )}
 
+        {currentSection === "Colecciónes" && (
+          <Box
+            name="Colecciónes"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <AllColeciones />
+            </Box>
+          </Box>
+        )}
 
+        {currentSection === "Colores" && (
+          <Box
+            name="Colores"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <AllColors />
+            </Box>
+          </Box>
+        )}
 
+        {currentSection === "Talles" && (
+          <Box
+            name="Talles"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <AllTalles />
+            </Box>
+          </Box>
+        )}
 
+        {currentSection === "Categorías" && (
+          <Box
+            name="Categorías"
+            display="flex"
+            flexWrap="wrap"
+            marginTop="8rem"
+            marginBottom="5rem"
+            height="100%"
+            width="100%"
+            marginLeft="1rem"
+            marginRight="1rem"
+          >
+            <Box
+              width="100%"
+              height="100%"
+              marginLeft="auto"
+              marginRight="auto"
+            >
+              <AllCategories />
+            </Box>
+          </Box>
+        )}
       </Box>
     </ThemeProvider>
   );

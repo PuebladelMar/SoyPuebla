@@ -5,32 +5,17 @@ import {
   deleteProduct,
   getProductsByName,
 } from "../../redux/Actions";
-import SideBar from "../../componentes/sidebar/SideBar";
 import { NavLink } from "react-router-dom";
 import { FaPencilAlt } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 import SearchBar from "../../componentes/searchBar/SearchBar";
 import "./AllProducts.css";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const allProducts = useSelector((state) => state.allProducts);
   const [searchValue, setSearchValue] = useState("");
-
-  const [filters, setFilters] = useState({
-    color: null,
-    size: null,
-    category: null,
-    serie: null,
-    sale: null,
-    minPrice: null,
-    maxPrice: null,
-    order: null,
-    name: null,
-  });
 
   useEffect(() => {
     const fetchData = async () => {
