@@ -100,10 +100,10 @@ const UsersData = () => {
 
   return (
     <div className="userAdmin-methods-container">
+      <div className="user-Admin-Box">
       <div className="userAdmin-container">
         <div className="userAdmin-header">
-          <h2 className="userAdmin-title">Información Usuarios</h2>
-          <span className="userAdmin-text-underline"></span>
+          <h2 className="userAdmin-title">Información de Usuarios</h2>
         </div>
       </div>
       <div className="userAdmin-container">
@@ -114,7 +114,24 @@ const UsersData = () => {
             value={filters.createdAt}
             onChange={(e) => handleFilterChange("createdAt", e.target.value)}
           />
-          <div className="filter">
+          <input
+            type="text"
+            placeholder="Nombre"
+            value={filters.fullName}
+            onChange={(e) => handleFilterChange("fullName", e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="ID"
+            value={filters.id}
+            onChange={(e) => handleFilterChange("id", e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Rol"
+            value={filters.userRole}
+            onChange={(e) => handleFilterChange("userRole", e.target.value)}
+          />
             <button
               onClick={setSortOrderAsc}
               className={`button ${selectedButton === "asc" ? "selected" : ""}`}
@@ -128,33 +145,14 @@ const UsersData = () => {
             >
               Descendente
             </button>
-          </div>
-          <input
-            type="text"
-            placeholder="Nombre"
-            value={filters.fullName}
-            onChange={(e) => handleFilterChange("fullName", e.target.value)}
-          />
-          <select
+            <select
             value={filters.banUser}
             onChange={(e) => handleFilterChange("banUser", e.target.value)}
           >
             <option value="">Bloqueado</option>
             <option value="true">Sí</option>
             <option value="false">No</option>
-          </select>
-          <input
-            type="text"
-            placeholder="ID"
-            value={filters.id}
-            onChange={(e) => handleFilterChange("id", e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Rol"
-            value={filters.userRole}
-            onChange={(e) => handleFilterChange("userRole", e.target.value)}
-          />
+            </select>
         </div>
 
         <table className="userAdmin-table">
@@ -202,6 +200,7 @@ const UsersData = () => {
             ))}
           </tbody>
         </table>
+      </div>
       </div>
     </div>
   );
