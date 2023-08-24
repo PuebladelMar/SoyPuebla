@@ -125,13 +125,13 @@ const EditProduct = () => {
     setUploadedSecureUrl(url);
     setCreateProduct((state) => {
       const updateImages = state.colorImage.map((item)=> {
-        if(dataImages.some(i=> i === item)){
-          return {
-            ...item,
-            images: [url]
-          }
-        }
         if(item.color === actualColor){
+          if(dataImages.some(i=> i === item)){
+            return {
+              ...item,
+              images: [url]
+            }
+          }
           return {
             ...item,
             images:[...item.images, url]
