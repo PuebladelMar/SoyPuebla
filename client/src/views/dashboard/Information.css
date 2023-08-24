@@ -108,3 +108,13 @@ margin-bottom: 1rem;
   background-color: #f3f3f3;
 
 }
+
+
+
+.information-section-admin {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
