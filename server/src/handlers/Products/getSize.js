@@ -5,7 +5,6 @@ const getSize = async (req, res) => {
     const categories = await controllGetSize();
     res.status(200).json(categories);
   } catch (error) {
-    console.log(error);
     res.status(400).json({ error: error.message });
   }
 };

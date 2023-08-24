@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import { addToCar, sendMail, notifyStock } from '../../../redux/Actions';
-import { useSelector, useDispatch } from 'react-redux';
-import Reviews from '../../../componentes/reviews/Reviews';
-import ReviewsForm from '../../../componentes/reviews/ReviewsForm';
-import { getReviewById } from '../../../redux/Actions';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { addToCar, notifyStock } from "../../../redux/Actions";
+import { useSelector, useDispatch } from "react-redux";
+import Reviews from "../../../componentes/reviews/Reviews";
+import ReviewsForm from "../../../componentes/reviews/ReviewsForm";
+import { getReviewById } from "../../../redux/Actions";
 
 const DetailAdmin = () => {
   const { id } = useParams();
@@ -17,18 +17,15 @@ const DetailAdmin = () => {
   const [isReady, setIsReady] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
-  //Aplicar el Loading
 
   useEffect(() => {
     const fetchReview = async () => {
       try {
         await dispatch(getReviewById(productDetails[0].id));
-        // console.log(productDetails[0].id);
       } catch (error) {
-        // Manejar el error aquí si es necesario
-        console.error('Error fetching review:', error);
+        console.error("Error fetching review:", error);
       }
     };
 
@@ -37,7 +34,7 @@ const DetailAdmin = () => {
 
   const handleLoginClick = (event) => {
     event.preventDefault();
-    alert('Debes iniciar Sesion');
+    alert("Debes iniciar Sesion");
     dispatch(getReviewById(productDetails[0].id));
   };
 
@@ -48,7 +45,7 @@ const DetailAdmin = () => {
         setProductDetails(response.data);
         setIsReady(true);
       } catch (error) {
-        window.alert(error);
+        // window.alert(error);
       }
     };
     fetchProductDetails();
@@ -63,7 +60,6 @@ const DetailAdmin = () => {
     setSelectedSize(size);
   };
 
-  // Obtener los detalles del producto según la combinación seleccionada
   const selectedCombination =
     selectedColor && selectedSize
       ? productDetails.find(
@@ -86,7 +82,7 @@ const DetailAdmin = () => {
   }
 
   const uniqueColor = obtenerColoresUnicos(productDetails);
-  const [showAlert, setShowAlert] = useState(false); // Estado para controlar la visibilidad del alert
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleCloseAlert = () => {
     setShowAlert(false);
@@ -111,7 +107,7 @@ const DetailAdmin = () => {
 
   const notifyStockByMail = () => {
     if (!isValidEmail(email)) {
-      alert('Ingresa un correo valido');
+      alert("Ingresa un correo valido");
       return;
     }
 
@@ -125,54 +121,47 @@ const DetailAdmin = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='containerDetail'>
-        <div className='secContainer'>
+    <div className="container">
+      <div className="containerDetail">
+        <div className="secContainer">
           <div>
             <img
-              className='cardImgDetail'
+              className="cardImgDetail"
               src={productDetails[0]?.mainImage}
               alt={productDetails[0]?.name}
             />
           </div>
           <div>
-            <h2 className='detailName'>{productDetails[0]?.name}</h2>
-            <h2 className='detailInfo'>$ {productDetails[0]?.price}</h2>
+            <h2 className="detailName">{productDetails[0]?.name}</h2>
+            <h2 className="detailInfo">$ {productDetails[0]?.price}</h2>
             {productDetails[0]?.series.map((s, i) => (
-              <h2
-                className='detailInfo'
-                key={i}
-              >
+              <h2 className="detailInfo" key={i}>
                 Serie: {s.name}
               </h2>
             ))}
-            <p className='detailInfo'>
-              Selecciona uno de los colores disponibles:{' '}
+            <p className="detailInfo">
+              Selecciona uno de los colores disponibles:
             </p>
-            {/* <img src={image} alt="" />  */}
-
             <div>
               {uniqueColor.map((item) => (
                 <button
-                  className='detailColorButton'
+                  className="detailColorButton"
                   key={item.color}
                   onClick={() => {
                     if (selectedColor === item.color) {
-                      setSelectedColor(null); // Deseleccionar el color si ya estaba seleccionado
+                      setSelectedColor(null);
                     } else {
                       handleColorChange(item.color);
-                      setSelectedSize(null); // Resetear la selección de tamaño al cambiar de color
+                      setSelectedSize(null);
                     }
                   }}
                   style={{
                     backgroundColor: item.codHex,
-                    width: '30px',
-                    height: '30px',
-                    border: selectedColor === item.color ? null : 1, // Cambiar opacidad si está seleccionado
+                    width: "30px",
+                    height: "30px",
+                    border: selectedColor === item.color ? null : 1,
                   }}
-                >
-                  {/* {item.color} */}
-                </button>
+                ></button>
               ))}
             </div>
             <div>
@@ -180,13 +169,12 @@ const DetailAdmin = () => {
                 .filter((item) => item.color === selectedColor)
                 .map((item) => (
                   <button
-                    className='detailSizeButton'
+                    className="detailSizeButton"
                     key={item.size}
                     onClick={() => handleSizeChange(item.size)}
-                    // disabled={item.stock === 0}
                     style={{
-                      width: '40px',
-                      height: '30px',
+                      width: "40px",
+                      height: "30px",
                     }}
                   >
                     {item.size}
@@ -194,55 +182,52 @@ const DetailAdmin = () => {
                 ))}
             </div>
             {selectedCombination ? (
-              <p className='detailSelection1'>
+              <p className="detailSelection1">
                 Stock disponible: {selectedCombination.stock}
               </p>
             ) : (
-              <p className='detailSelection0'>
+              <p className="detailSelection0">
                 Seleccione un color y una talla
               </p>
             )}
             {selectedCombination && selectedCombination.stock === 0 ? (
               <>
-                <p className='detailSelection1'>
-                  Suscribete si deseas que te avisemos cuando esté disponible:{' '}
+                <p className="detailSelection1">
+                  Suscribete si deseas que te avisemos cuando esté disponible:
                 </p>
                 <div>
                   <input
                     style={{
-                      border: 'solid 2px',
-                      borderRadius: '4px',
-                      width: '17rem',
-                      height: '2rem',
-                      fontSize: '0.95rem',
-                      borderColor: 'rgb(190, 190, 190)',
-                      color: 'black',
+                      border: "solid 2px",
+                      borderRadius: "4px",
+                      width: "17rem",
+                      height: "2rem",
+                      fontSize: "0.95rem",
+                      borderColor: "rgb(190, 190, 190)",
+                      color: "black",
                     }}
-                    placeholder=' Ingresa aquí tu correo*'
-                    type='text'
+                    placeholder=" Ingresa aquí tu correo*"
+                    type="text"
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isSubscribed}
                   ></input>
                 </div>
                 {!isSubscribed ? (
-                  <button
-                    onClick={notifyStockByMail}
-                    className='notifyButton'
-                  >
+                  <button onClick={notifyStockByMail} className="notifyButton">
                     Suscribirte
                   </button>
                 ) : (
-                  <p className='detailSelection1'>¡Gracias por suscribirte!</p>
+                  <p className="detailSelection1">¡Gracias por suscribirte!</p>
                 )}
               </>
             ) : (
               <>
                 <button
-                  id='detailAddCartButton'
-                  className='detailAddCartButton'
+                  id="detailAddCartButton"
+                  className="detailAddCartButton"
                   style={{
-                    width: '2rem',
-                    height: '1.8rem',
+                    width: "2rem",
+                    height: "1.8rem",
                   }}
                   onClick={removeProduct}
                 >
@@ -250,44 +235,44 @@ const DetailAdmin = () => {
                 </button>
                 <span>{quantity}</span>
                 <button
-                  id='detailAddCartButton'
-                  className='detailAddCartButton'
+                  id="detailAddCartButton"
+                  className="detailAddCartButton"
                   style={{
-                    width: '2rem',
-                    height: '1.8rem',
-                    marginLeft: '0.5rem',
+                    width: "2rem",
+                    height: "1.8rem",
+                    marginLeft: "0.5rem",
                   }}
                   onClick={addProduct}
                 >
                   +
                 </button>
                 <button
-                  id='detailAddCartButton'
-                  className='detailAddCartButton'
+                  id="detailAddCartButton"
+                  className="detailAddCartButton"
                   style={{
-                    width: '150px',
-                    height: '30px',
+                    width: "150px",
+                    height: "30px",
                   }}
                   onClick={() => {
                     handleAddToCart();
                   }}
                   disabled={userId.length === 0 || !selectedCombination}
                 >
-                  Añadir al carrito{' '}
+                  Añadir al carrito
                 </button>
               </>
             )}
-            <p className='detailDesciption'>{productDetails[0]?.description}</p>
+            <p className="detailDesciption">{productDetails[0]?.description}</p>
           </div>
           {showAlert && (
             <>
-              <div className='transparentBackground'></div>
-              <div className='alertContainer'>
-                <p className='alertText'>Producto añadido al carrito</p>
-                <div className='alertButtons'>
+              <div className="transparentBackground"></div>
+              <div className="alertContainer">
+                <p className="alertText">Producto añadido al carrito</p>
+                <div className="alertButtons">
                   <button onClick={handleCloseAlert}>Seguir comprando</button>
                   <button>
-                    <Link to='/Cart'>Ir al carrito</Link>
+                    <Link to="/Cart">Ir al carrito</Link>
                   </button>
                 </div>
               </div>
@@ -295,13 +280,13 @@ const DetailAdmin = () => {
           )}
         </div>
         <div>
-          <Link to='/products'>
-            <button className='botonX'>X</button>
+          <Link to="/products">
+            <button className="botonX">X</button>
           </Link>
         </div>
       </div>
       {isReady && (
-        <div className='reviews-container'>
+        <div className="reviews-container">
           <Reviews />
           {console.log(productDetails)}
           {productDetails[0] && (

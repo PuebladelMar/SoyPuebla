@@ -7,7 +7,7 @@ import './Reviews.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import ReviewCard from './ReviewCard';
-import { getReviewById, deleteReviews, getReviews } from '../../redux/Actions';
+import { getReviewById, deleteReviews } from '../../redux/Actions';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
 function Reviews({ productId }) {
@@ -20,13 +20,10 @@ function Reviews({ productId }) {
     const fetchReview = async () => {
       try {
         await dispatch(getReviewById(productId));
-        // console.log(productDetails[0].id);
       } catch (error) {
-        // Manejar el error aquí si es necesario
         console.error('Error fetching review:', error);
       }
     };
-
     fetchReview();
   }, [dispatch]);
 
@@ -76,7 +73,6 @@ function Reviews({ productId }) {
         ) : (
           <p>No hay reseñas disponibles.</p>
         )}
-
         {getReviewById2.length > visibleReviews && !showAllReviews && (
           <button
             className='show-more-button'
@@ -85,7 +81,6 @@ function Reviews({ productId }) {
             Ver más reseñas
           </button>
         )}
-
         {showAllReviews && (
           <button
             className='show-more-button'

@@ -74,7 +74,6 @@ export default function Cardx({ product }) {
     return wholeNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
-
   const handleHeartClick = () => {
     Swal.fire({
       icon: "warning",
@@ -196,44 +195,44 @@ export default function Cardx({ product }) {
                     </Typography>
                   ) : (
                     <Box
-                    style={{
-                      marginTop: "-1.3rem",
-                    }}>
-                      <Box 
                       style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        gap: "1rem",
-                      }}>
-
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
+                        marginTop: "-1.3rem",
+                      }}
+                    >
+                      <Box
                         style={{
-                          fontSize: "0.9rem",
-                          cursor: "pointer",
-                          color: "#ff0000",
+                          display: "flex",
+                          flexDirection: "row",
+                          gap: "1rem",
                         }}
                       >
-                        $ {formatNumber(Math.floor(price * (1 - sale / 100)))}
-
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        style={{
-                          fontSize: "0.9rem",
-                          cursor: "pointer",
-                          color: "#ff0000",
-                          border: "1px solid #ff0000",
-                          padding: "0px 8px 0px 6px ",
-                          borderRadius: "3px",
-                          fontStyle: "italic",
-                        }}
-                      >
-                        SALE
-                      </Typography>
-                        </Box>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          style={{
+                            fontSize: "0.9rem",
+                            cursor: "pointer",
+                            color: "#ff0000",
+                          }}
+                        >
+                          $ {formatNumber(Math.floor(price * (1 - sale / 100)))}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          style={{
+                            fontSize: "0.9rem",
+                            cursor: "pointer",
+                            color: "#ff0000",
+                            border: "1px solid #ff0000",
+                            padding: "0px 8px 0px 6px ",
+                            borderRadius: "3px",
+                            fontStyle: "italic",
+                          }}
+                        >
+                          SALE
+                        </Typography>
+                      </Box>
 
                       <Typography
                         variant="body2"
@@ -299,54 +298,49 @@ export default function Cardx({ product }) {
                   </div>
                 ))}
               </Box>
-
               {!userId.length ? (
                 <CardActions
-                style={{
-                  height: "3rem",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  position: "relative",
-                }}
-              >
-                <IconButton
-                  aria-label="add to favorites"
-                  onClick={handleHeartClick}
                   style={{
-                    position: "absolute",
-                    bottom: "25.3rem",
+                    height: "3rem",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    position: "relative",
                   }}
                 >
-                  <FavoriteIcon color="inherit" />
-                </IconButton>
-              </CardActions>
-
-
+                  <IconButton
+                    aria-label="add to favorites"
+                    onClick={handleHeartClick}
+                    style={{
+                      position: "absolute",
+                      bottom: "25.3rem",
+                    }}
+                  >
+                    <FavoriteIcon color="inherit" />
+                  </IconButton>
+                </CardActions>
               ) : (
-
-
-              <CardActions
-                style={{
-                  height: "3rem",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  position: "relative",
-                }}
-              >
-                <IconButton
-                  aria-label="add to favorites"
-                  onClick={handleFavoriteClick}
+                <CardActions
                   style={{
-                    position: "absolute",
-                    bottom: "25.3rem",
+                    height: "3rem",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    position: "relative",
                   }}
                 >
-                  <FavoriteIcon color={isFavorite ? "secondary" : "inherit"} />
-                </IconButton>
-              </CardActions>
+                  <IconButton
+                    aria-label="add to favorites"
+                    onClick={handleFavoriteClick}
+                    style={{
+                      position: "absolute",
+                      bottom: "25.3rem",
+                    }}
+                  >
+                    <FavoriteIcon
+                      color={isFavorite ? "secondary" : "inherit"}
+                    />
+                  </IconButton>
+                </CardActions>
               )}
-
-
             </Box>
           </Box>
         </Box>
@@ -445,9 +439,12 @@ export default function Cardx({ product }) {
                   gap: isMatchCard ? "1rem" : "1.5rem",
                 }}
               >
-                <Link to={`/products/${id}`} style={{
-                      width: "80%"
-                    }}>
+                <Link
+                  to={`/products/${id}`}
+                  style={{
+                    width: "80%",
+                  }}
+                >
                   <Typography
                     variant="body2"
                     color="text.secondary"
@@ -461,55 +458,57 @@ export default function Cardx({ product }) {
                   </Typography>
                 </Link>
                 <Link to={`/products/${id}`}>
-                {sale == 0 ? (
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    style={{
-                      fontSize: "0.9rem",
-                      cursor: "pointer",
-                    }}
-                  >
-                    $ {formatNumber(price)}
-                  </Typography>
+                  {sale == 0 ? (
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      style={{
+                        fontSize: "0.9rem",
+                        cursor: "pointer",
+                      }}
+                    >
+                      $ {formatNumber(price)}
+                    </Typography>
                   ) : (
                     <Box
-                    style={{
-                      marginTop: "-1.3rem",
-                    }}>
-                      <Box 
                       style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        gap: "1rem",
-                      }}>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
+                        marginTop: "-1.3rem",
+                      }}
+                    >
+                      <Box
                         style={{
-                          fontSize: "0.9rem",
-                          cursor: "pointer",
-                          color: "#ff0000",
+                          display: "flex",
+                          flexDirection: "row",
+                          gap: "1rem",
                         }}
                       >
-                        $ {formatNumber(Math.floor(price * (1 - sale / 100)))}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        style={{
-                          fontSize: "0.9rem",
-                          cursor: "pointer",
-                          color: "#ff0000",
-                          border: "1px solid #ff0000",
-                          padding: "0px 8px 0px 6px ",
-                          borderRadius: "3px",
-                          fontStyle: "italic",
-                        }}
-                      >
-                        SALE
-                      </Typography>
-                        </Box>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          style={{
+                            fontSize: "0.9rem",
+                            cursor: "pointer",
+                            color: "#ff0000",
+                          }}
+                        >
+                          $ {formatNumber(Math.floor(price * (1 - sale / 100)))}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          style={{
+                            fontSize: "0.9rem",
+                            cursor: "pointer",
+                            color: "#ff0000",
+                            border: "1px solid #ff0000",
+                            padding: "0px 8px 0px 6px ",
+                            borderRadius: "3px",
+                            fontStyle: "italic",
+                          }}
+                        >
+                          SALE
+                        </Typography>
+                      </Box>
                       <Typography
                         variant="body2"
                         color="text.secondary"
@@ -579,66 +578,64 @@ export default function Cardx({ product }) {
                   </div>
                 ))}
               </Box>
-             
+
               {!userId.length ? (
                 <CardActions
-                style={{
-                  height: "0rem",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  position: "relative",
-                }}
-              >
-                <IconButton
-                  aria-label="add to favorites"
-                  onClick={handleHeartClick}
                   style={{
-                    position: "absolute",
-                    right: isMatchColor2
-                      ? "-5.8rem"
-                      : isMatchColor
-                      ? "-6.8rem"
-                      : isMatchCard
-                      ? "-7.8rem"
-                      : "18.8rem",
-                    bottom: isMatchCard ? "7rem" : "11.9rem",
+                    height: "0rem",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    position: "relative",
                   }}
                 >
-                  <FavoriteIcon color= "inherit" />
-                </IconButton>
-              </CardActions>
-
+                  <IconButton
+                    aria-label="add to favorites"
+                    onClick={handleHeartClick}
+                    style={{
+                      position: "absolute",
+                      right: isMatchColor2
+                        ? "-5.8rem"
+                        : isMatchColor
+                        ? "-6.8rem"
+                        : isMatchCard
+                        ? "-7.8rem"
+                        : "18.8rem",
+                      bottom: isMatchCard ? "7rem" : "11.9rem",
+                    }}
+                  >
+                    <FavoriteIcon color="inherit" />
+                  </IconButton>
+                </CardActions>
               ) : (
-
-              <CardActions
-                style={{
-                  height: "0rem",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  position: "relative",
-                }}
-              >
-                <IconButton
-                  aria-label="add to favorites"
-                  onClick={handleFavoriteClick}
+                <CardActions
                   style={{
-                    position: "absolute",
-                    right: isMatchColor2
-                      ? "-5.8rem"
-                      : isMatchColor
-                      ? "-6.8rem"
-                      : isMatchCard
-                      ? "-7.8rem"
-                      : "18.8rem",
-                    bottom: isMatchCard ? "7rem" : "11.9rem",
+                    height: "0rem",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    position: "relative",
                   }}
                 >
-                  <FavoriteIcon color={isFavorite ? "secondary" : "inherit"} />
-                </IconButton>
-              </CardActions>
+                  <IconButton
+                    aria-label="add to favorites"
+                    onClick={handleFavoriteClick}
+                    style={{
+                      position: "absolute",
+                      right: isMatchColor2
+                        ? "-5.8rem"
+                        : isMatchColor
+                        ? "-6.8rem"
+                        : isMatchCard
+                        ? "-7.8rem"
+                        : "18.8rem",
+                      bottom: isMatchCard ? "7rem" : "11.9rem",
+                    }}
+                  >
+                    <FavoriteIcon
+                      color={isFavorite ? "secondary" : "inherit"}
+                    />
+                  </IconButton>
+                </CardActions>
               )}
-
-
             </Box>
           </Box>
         </Card>
