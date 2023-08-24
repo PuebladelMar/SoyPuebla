@@ -47,6 +47,7 @@ const Information = () => {
   };
 
   return (
+    <section className="information-section-admin">
     <div className="containerInfo">
       <div className="form-containerInfo">
         <h2 className="vistaInfo">Información del footer</h2>
@@ -130,6 +131,7 @@ const Information = () => {
       </div>
       
     </div>
+    </section>
   );
 };
 
