@@ -80,77 +80,40 @@ const AllColors = () => {
     event.preventDefault();
   };
 
-  // const handlerEventSearch = (event) => {
-  //   event.preventDefault();
-  //   setSearchValue(event.target.value);
-  // };
 
-  // const handlerSubmitSearch = (event) => {
-  //   event.preventDefault();
-  // };
   return (
-    <div className='main-container'>
-      {/* <SearchBar
-        handlerEventSearch={handlerEventSearch}
-        handlerSubmitSearch={handlerSubmitSearch}
-      /> */}
-      <div className='colors'>
-        <div className='nav-dashboard'>
-          <NavLink to='/all-data/all-products'>
-            <button
-              className='nav-dashboard-btn'
-              onClick={() => navigate('/all-data/all-products')}
-            >
-              Productos{' '}
-            </button>
-          </NavLink>
-          <NavLink to='/all-data/all-colecciones'>
-            <button
-              className='nav-dashboard-btn'
-              onClick={() => navigate('/all-data/all-colecciones')}
-            >
-              {' '}
-              Series
-            </button>
-          </NavLink>
-          <NavLink to='/all-data/all-sizes'>
-            <button
-              className='nav-dashboard-btn'
-              onClick={() => navigate('/all-data/all-sizes')}
-            >
-              Talles
-            </button>
-          </NavLink>
-          <NavLink to='/all-data/all-categories'>
-            <button
-              className='nav-dashboard-btn'
-              onClick={() => navigate('/all-data/all-categories')}
-            >
-              Categorias
-            </button>
-          </NavLink>
-          <NavLink to='/dashboard'>
-            <button
-              className='nav-dashboard-btn'
-              onClick={() => navigate('/dashboard')}
-            >
-              Dashboard
-            </button>
-          </NavLink>
+    <div className='main-container-colores'>
+     
+      <div className='colors-colors'>
+       
+       <div className='contenedor-nombre-color'>
+
+        <h2 className='colores-title-colores'>Colores disponibles</h2>
+
+        <button
+        type='button'
+        onClick={() => {
+          handleOpenColorCreate();
+        }}
+        className='color-create-button-color '
+        >
+        Crear color
+      </button>
+
         </div>
-        <h2 className='colores-title'>Colores disponibles</h2>
+
         {Array.isArray(colors) &&
           colors.map((color) => (
             <div
               key={color.id}
               className='color-item'
             >
-              <div className='color-content'>
-                <p className='color-name'>{color.name}</p>
+              <div className='color-content-color'>
                 <div
-                  className='color-circle'
+                  className='color-circle-color'
                   style={{ backgroundColor: color.codHex }}
                 ></div>
+                <p className='color-name-color'>{color.name}</p>
               </div>
               <div className='icons'>
                 <button
@@ -186,15 +149,7 @@ const AllColors = () => {
           </>
         </popups>
       )}
-      <button
-        type='button'
-        onClick={() => {
-          handleOpenColorCreate();
-        }}
-        className='mainImage-upload-buttonY '
-      >
-        Crear color
-      </button>
+     
     </div>
   );
 };
