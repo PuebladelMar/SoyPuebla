@@ -1,6 +1,7 @@
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
@@ -8,55 +9,58 @@ import CheckroomOutlinedIcon from "@mui/icons-material/CheckroomOutlined";
 import { NavLink } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 
-export const mainListItems = (
+export const mainListItems = ({ onSelectSection }) => (
   <>
-    <NavLink to="/info">
-      <ListItemButton>
+   <ListItemButton onClick={() => onSelectSection("Ventas")}>
+        <ListItemIcon>
+          <AttachMoneyIcon />
+        </ListItemIcon>
+        <ListItemText primary="Ventas" />
+      </ListItemButton>
+    
+      <ListItemButton onClick={() => onSelectSection("Informacion")}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Informacion" />
       </ListItemButton>
-    </NavLink>
-    <NavLink to="/dashboard/history">
-      <ListItemButton>
+
+  
+    <ListItemButton onClick={() => onSelectSection("Historial de compras")}>
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
         <ListItemText primary="Historial de compras" />
       </ListItemButton>
-    </NavLink>
-    <NavLink to="/dashboard/users">
-      <ListItemButton>
+   
+
+ 
+    <ListItemButton onClick={() => onSelectSection("Usuarios")}>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary="Usuarios" />
       </ListItemButton>
-    </NavLink>
-    {/* <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reportes" />
-    </ListItemButton> */}
-    <NavLink to="/all-data">
-      <ListItemButton>
+
+   
+    <ListItemButton onClick={() => onSelectSection("Products")}>
         <ListItemIcon>
           <CheckroomOutlinedIcon />
         </ListItemIcon>
         <ListItemText primary="Products" />
       </ListItemButton>
-    </NavLink>
+   
 
-    <NavLink to="/create">
-      <ListItemButton>
+    
+    <ListItemButton onClick={() => onSelectSection("Crear")}>
         <ListItemIcon>
           <AddIcon />
         </ListItemIcon>
         <ListItemText primary="Crear" />
       </ListItemButton>
-    </NavLink>
+ 
+    
+
   </>
 );
 
