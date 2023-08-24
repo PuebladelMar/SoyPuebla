@@ -1,4 +1,4 @@
-const { Colors, Products, ColorImages } = require('../../db');
+const { Colors, Products, ColorImages, Stocks } = require('../../db');
 
 const controllDeleteColor = async (id) => {
   const color = await Colors.findByPk(id);
@@ -28,6 +28,12 @@ const controllDeleteColor = async (id) => {
       await product.destroy();
     }
   }
+
+  const stocks = await Stocks.findAll({where: {ColorId: color.id}});
+
+  await Promise.all(stocks.map(async (stock) => {
+    await stock.destroy();
+  }));
 
   await color.destroy();
 
