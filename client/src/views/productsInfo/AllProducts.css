@@ -1,3 +1,80 @@
-.container{
-    margin-top: 10rem;
+.prducts-section-admin {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5rem;
+  min-height: 100vh;
+}
+
+.container-products-admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  min-width: 70%;
+  margin-top: 3rem;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.products-title {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #747474;
+  font-weight: 500;
+}
+
+.color-content-admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-name-admin {
+  font-size: 1.1rem;
+  color: #353535;
+  font-weight: 500;
+}
+
+.edit-color-admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-color-admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(207, 2, 2);
+}
+
+.colores-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
+  width: 100%;
+  gap: 2rem;
+  border-radius: 10px;
+  padding: 1rem 2rem 2rem 2rem;
+  border: 1px solid rgb(173, 173, 173);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+}
+
+.color-item-admin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(173, 173, 173);
 }

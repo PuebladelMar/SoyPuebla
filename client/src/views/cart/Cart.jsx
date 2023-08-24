@@ -44,10 +44,10 @@ const Cart = () => {
   });
 
   const calculateTotal = () => {
-    return userCart.reduce(
+    return Math.floor(userCart.reduce(
       (total, item) => total + item.product.price * (1 - item.product.sale / 100) * item.quantity,
       0
-    );
+    ));
   };
 
   const createPreference = async () => {
@@ -82,7 +82,7 @@ const Cart = () => {
   };
 
   const CalculateSale = (price, sale) =>{
-    return price * (1 - sale / 100)
+    return Math.floor(price * (1 - sale / 100))
   }
 
   return (

@@ -51,6 +51,7 @@ import {
   PUT_HISTORY_STATES,
   DELETE_REVIEWS,
 } from './ActionsTypes';
+import Swal from 'sweetalert2';
 
 export function getProducts() {
   return async function (dispatch) {
@@ -126,7 +127,14 @@ export function postProducts(createProduct) {
   return async function (dispatch) {
     try {
       await axios.post(`/products/`, createProduct);
-      alert('Su producto se creo correctamente');
+      // alert('Su producto se creo correctamente');
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Su producto se ha creado correctamente',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return dispatch({
         type: POST_PRODUCTS,
       });

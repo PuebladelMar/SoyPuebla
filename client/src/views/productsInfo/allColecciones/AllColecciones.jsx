@@ -156,7 +156,7 @@ const AllColecciones = () => {
                 </button>
 
                 <button
-                  className='delete-coleccion'
+                  className='delete-color'
                   onClick={() => handleDeleteSeries(el.id)}
                 >
                   {<RiDeleteBin6Line />}
