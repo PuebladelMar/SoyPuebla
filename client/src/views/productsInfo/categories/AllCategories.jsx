@@ -7,7 +7,6 @@ import {
 } from '../../../redux/Actions';
 import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { NavLink, useNavigate } from 'react-router-dom';
 import CreateCategory from '../../create/createCategory/CreateCategory';
 import { useState } from 'react';
 // import SearchBar from '../../../componentes/searchBar/SearchBar';
@@ -17,7 +16,6 @@ import './AllCategories.css';
 const AllCategories = () => {
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState({});
   // const [searchValue, setSearchValue] = useState('');
 
@@ -99,49 +97,7 @@ const AllCategories = () => {
         handlerEventSearch={handlerEventSearch}
         handlerSubmitSearch={handlerSubmitSearch}
       /> */}
-      <div className='nav-dashboard'>
-        <NavLink to='/all-data/all-products'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-products')}
-          >
-            Productos{' '}
-          </button>
-        </NavLink>
-        <NavLink to='/all-data/all-colecciones'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-colecciones')}
-          >
-            Colecciones
-          </button>
-        </NavLink>
-        <NavLink to='/all-data/all-colors'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-colors')}
-          >
-            Colores
-          </button>
-        </NavLink>
-        <NavLink to='/all-data/all-sizes'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/all-data/all-sizes')}
-          >
-            Talles
-          </button>
-        </NavLink>
-        <NavLink to='/dashboard'>
-          <button
-            className='nav-dashboard-btn'
-            onClick={() => navigate('/dashboard')}
-          >
-            Dashboard
-          </button>
-        </NavLink>
-      </div>
-      <div className='categories'>
+      <div className='categories-admin'>
         <h2 className='categories-title'>Categorias disponibles</h2>
         {Array.isArray(categories) &&
           categories.map((el) => (
@@ -183,7 +139,7 @@ const AllCategories = () => {
         onClick={() => {
           handleOpenCategoryCreate();
         }}
-        className='mainImage-upload-buttonY '
+        className='button-admin-category'
       >
         Crear categoría
       </button>
