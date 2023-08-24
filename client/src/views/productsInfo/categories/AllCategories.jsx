@@ -155,7 +155,7 @@ const AllCategories = () => {
                   <FaPencilAlt />
                 </button>
                 <button
-                  className='delete-categories'
+                  className='delete-color'
                   onClick={() => handleDeleteCategories(el.id)}
                 >
                   {<RiDeleteBin6Line />}

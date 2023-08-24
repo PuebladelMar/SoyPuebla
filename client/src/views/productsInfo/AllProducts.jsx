@@ -1,21 +1,25 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import {
-  filterProducts,
   getProducts,
   deleteProduct,
-  getUserCart
-} from '../../redux/Actions';
-import SideBar from '../../componentes/sidebar/SideBar';
-import { NavLink } from 'react-router-dom';
-import { FaPencilAlt } from 'react-icons/fa';
-import { RiDeleteBin6Line } from 'react-icons/ri';
-import Swal from 'sweetalert2';
+  getProductsByName,
+} from "../../redux/Actions";
+import SideBar from "../../componentes/sidebar/SideBar";
+import { NavLink } from "react-router-dom";
+import { FaPencilAlt } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import SearchBar from "../../componentes/searchBar/SearchBar";
+import "./AllProducts.css";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const allProducts = useSelector((state) => state.allProducts);
-  const userId = useSelector((state) => state.userId);
+  const [searchValue, setSearchValue] = useState("");
+
   const [filters, setFilters] = useState({
     color: null,
     size: null,
@@ -29,158 +33,92 @@ const AllProducts = () => {
   });
 
   useEffect(() => {
-    dispatch(filterProducts(filters));
-  }, [filters, dispatch]);
+    const fetchData = async () => {
+      try {
+        if (searchValue === "") {
+          await dispatch(getProducts());
+        } else {
+          await dispatch(getProductsByName(searchValue));
+        }
+      } catch (error) {
+        // Manejar el error aquí si es necesario
+      }
+    };
 
-  useEffect(() => {
-    async function fetchProducts() {
-      await dispatch(getProducts());
-    }
-    fetchProducts();
-  }, [dispatch]);
+    fetchData();
+  }, [dispatch, searchValue]);
 
-  const handleChange = (event) => {
+  const handlerEventSearch = (event) => {
     event.preventDefault();
-    const { name, value } = event.target;
-    const nullOptions = [
-      'null',
-      'Todas las categorias',
-      'Todos los colores',
-      'Todos las tallas',
-      'Todos las series',
-    ];
-    if (name === 'sale') {
-      const newValue = filters.sale === true ? null : true;
-      setFilters({ ...filters, [name]: newValue });
-    } else {
-      const newValue = nullOptions.includes(value) ? null : value;
-      setFilters({ ...filters, [name]: newValue });
-    }
+    console.log(allProducts);
+    setSearchValue(event.target.value);
   };
 
-  const resetFilters = (event) => {
+  const handlerSubmitSearch = (event) => {
     event.preventDefault();
-    setFilters({
-      color: null,
-      size: null,
-      category: null,
-      serie: null,
-      sale: null,
-      minPrice: null,
-      maxPrice: null,
-      order: null,
-      name: null,
-    });
   };
 
   const handleDeleteProduct = async (id) => {
     const result = await Swal.fire({
-      title: '¿Estás segura?',
-      text: 'Una vez eliminado, se borrará automáticamente y afectará el funcionamiento de los productos.',
-      icon: 'warning',
+      title: "¿Estás segura?",
+      text: "Una vez eliminado, se borrará automáticamente y afectará el funcionamiento de los productos.",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#517f7f',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, elimínalo',
-      cancelButtonText: 'Cancelar',
+      confirmButtonColor: "#517f7f",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, elimínalo",
+      cancelButtonText: "Cancelar",
     });
 
     if (result.isConfirmed) {
-      // El usuario confirmó la eliminación
       try {
         await dispatch(deleteProduct(id));
         await dispatch(getProducts());
         dispatch(getUserCart(userId));
 
         Swal.fire({
-          title: 'Eliminado',
-          text: 'El producto ha sido eliminado.',
-          icon: 'success',
-          confirmButtonColor: '#517f7f',
+          title: "Eliminado",
+          text: "El producto ha sido eliminado.",
+          icon: "success",
+          confirmButtonColor: "#517f7f",
         });
       } catch (error) {
-        console.error('Error al eliminar el producto:', error);
+        console.error("Error al eliminar el producto:", error);
         Swal.fire(
-          'Error',
-          'Ha ocurrido un error al eliminar el producto.',
-          'error'
+          "Error",
+          "Ha ocurrido un error al eliminar el producto.",
+          "error"
         );
       }
     }
   };
 
   return (
-    <section className='products-section'>
-      <div className='products-container'>
-        <SideBar
-          handlerEventSideBar={handleChange}
-          resetFilters={resetFilters}
-        />
-        <div className='cards-container'>
-          <div className='nav-dashboard'>
-            <NavLink to='/all-data/all-products'>
-              <button
-                className='nav-dashboard-btn'
-                onClick={() => navigate('/all-data/all-products')}
-              >
-                Productos{' '}
-              </button>
-            </NavLink>
-            <NavLink to='/all-data/all-colecciones'>
-              <button
-                className='nav-dashboard-btn'
-                onClick={() => navigate('/all-data/all-colecciones')}
-              >
-                Colecciones
-              </button>
-            </NavLink>
-            <NavLink to='/all-data/all-sizes'>
-              <button
-                className='nav-dashboard-btn'
-                onClick={() => navigate('/all-data/all-sizes')}
-              >
-                Talles
-              </button>
-            </NavLink>
-            <NavLink to='/all-data/all-categories'>
-              <button
-                className='nav-dashboard-btn'
-                onClick={() => navigate('/all-data/all-categories')}
-              >
-                Categorias
-              </button>
-            </NavLink>
-            <NavLink to='/dashboard'>
-              <button
-                className='nav-dashboard-btn'
-                onClick={() => navigate('/dashboard')}
-              >
-                Dashboard
-              </button>
-            </NavLink>
-          </div>
-          <h2 className='colores-title'>Productos disponibles</h2>
+    <section className="prducts-section-admin">
+      <div className="container-products-admin">
+        <div className="div-container-searchbar">
+          <SearchBar
+            className="searchBar"
+            handlerEventSearch={handlerEventSearch}
+            handlerSubmitSearch={handlerSubmitSearch}
+          />
+        </div>
+        <div className="colores-container">
+          <h2 className="products-title">Productos disponibles</h2>
           {Array.isArray(allProducts) &&
             allProducts.map((product) => (
-              <div
-                key={product.id}
-                className='color-item'
-              >
-                <div className='color-content'>
-                  <p className='color-name'>{product.name}</p>
-                  <div className='color-circle'></div>
+              <div key={product.id} className="color-item-admin">
+                <div className="color-content-admin">
+                  <p className="color-name-admin">{product.name}</p>
                 </div>
-                <div className='icons'>
+                <div className="icons">
                   <NavLink to={`/edit-products/${product.id}`}>
-                    <button
-                      className='edit-color'
-                      // onClick={() => handleEditProducts(product.id)}
-                    >
+                    <button className="edit-color-admin">
                       <FaPencilAlt />
                     </button>
                   </NavLink>
                   <button
-                    className='delete-color'
+                    className="delete-color-admin"
                     onClick={() => handleDeleteProduct(product.id)}
                   >
                     <RiDeleteBin6Line />
