@@ -9,7 +9,6 @@ import { FaPencilAlt } from 'react-icons/fa';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import CreateCategory from '../../create/createCategory/CreateCategory';
 import { useState } from 'react';
-// import SearchBar from '../../../componentes/searchBar/SearchBar';
 import Swal from 'sweetalert2';
 import './AllCategories.css';
 
@@ -17,7 +16,6 @@ const AllCategories = () => {
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState({});
-  // const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +38,6 @@ const AllCategories = () => {
     });
 
     if (result.isConfirmed) {
-      // El usuario confirmó la eliminación
       try {
         await dispatch(deleteCategories(id));
         await dispatch(getCategories());
@@ -78,25 +75,12 @@ const AllCategories = () => {
     event.preventDefault();
   };
 
-  // const handlerEventSearch = (event) => {
-  //   event.preventDefault();
-  //   setSearchValue(event.target.value);
-  // };
-
-  // const handlerSubmitSearch = (event) => {
-  //   event.preventDefault();
-  // };
-
   return (
     <div
       className='categories-main'
       name='series'
       value='name'
     >
-      {/* <SearchBar
-        handlerEventSearch={handlerEventSearch}
-        handlerSubmitSearch={handlerSubmitSearch}
-      /> */}
       <button
         type='button'
         onClick={() => {
@@ -114,7 +98,7 @@ const AllCategories = () => {
               key={el.id}
               className='categories-item'
             >
-              {el.name}
+              <h2 className='categories-name-admin'>{el.name}</h2>
               <div className='icons'>
                 <button onClick={() => handleEditCategories(el.id, el.name)}>
                   <FaPencilAlt />

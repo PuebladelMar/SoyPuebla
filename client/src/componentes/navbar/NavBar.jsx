@@ -60,7 +60,7 @@ export default function NavBar({ links }) {
 
   const handleOnFocus = () => {
     setResults(!results);
-  }
+  };
 
   useEffect(() => {
     if (searchValue === "") {
@@ -268,31 +268,6 @@ export default function NavBar({ links }) {
                     marginTop: "0.2rem",
                   }}
                 >
-                  {allProducts.length > 0 && results && (
-                    <ul
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: "0.1rem",
-                        width: "100%",
-                        padding: "0.2rem 0",
-                        cursor: "pointer",
-                        transition: "0.3s ease",
-                      }}
-                    >
-                      {allProducts.slice(0, 5).map((result) => (
-                        <li
-                          className="li-products"
-                          key={result.id}
-                          onClick={() => handleSelectedProduct(result.name)}
-                        >
-                          {result.name}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
                 </Box>
               </Box>
             )}
@@ -379,7 +354,7 @@ export default function NavBar({ links }) {
                       marginTop: "0.2rem",
                     }}
                   >
-                    {allProducts.length > 0 && (
+                    {allProducts.length > 0 &&  (
                       <ul
                         style={{
                           display: "flex",
@@ -390,6 +365,9 @@ export default function NavBar({ links }) {
                           width: "100%",
                           padding: "0.2rem 0",
                           cursor: "pointer",
+                          border: "1px solid #666666",
+                          borderRadius: "15px",
+                          boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.2)",
                         }}
                       >
                         {allProducts.slice(0, 5).map((result) => (

@@ -1,10 +1,11 @@
-.categories-main{
-    margin: 5rem;
-    padding: 20px;
-    min-height: 58vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.categories-main {
+  margin: 5rem;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
 }
 
 .button-admin-category {
@@ -15,54 +16,60 @@
   font-weight: 400;
   cursor: pointer;
   transition: 0.5s;
-  margin-bottom: 15px;
+}
+
+.categories-name-admin {
+  font-size: 1.1rem;
+  color: #353535;
+  font-weight: 500;
 }
 
 .button-admin-category:hover {
   background-color: #517f7f;
   color: rgb(255, 255, 255);
 }
-  
-  .categories-admin {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: space-between;
-    width: 100%;
-    gap: 2rem;
-    border-radius: 10px;
-    padding: 1rem 2rem 2rem 2rem;
-    border: 1px solid rgb(173, 173, 173);
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
-    border-radius: 3px;
-  }
-  
-  .categories-title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .categories-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-  }
-  
-  .icons {
 
-    display: flex;
-    align-items: center;
-    
-  }
-  
-  .edit-categories,
-  .delete-categories {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
+.categories-admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
+  min-width: 80%;
+  gap: 2rem;
+  border-radius: 10px;
+  padding: 1rem 2rem 2rem 2rem;
+  border: 1px solid rgb(173, 173, 173);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  border-radius: 3px;
+}
+
+.categories-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #747474;
+  font-weight: 500;
+}
+
+.categories-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+}
+
+.edit-categories,
+.delete-categories {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}

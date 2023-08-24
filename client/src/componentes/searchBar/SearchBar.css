@@ -5,7 +5,6 @@
   padding: 20px 15px 21px 17px;
   border-radius: 20px;
   background-color: rgb(229, 228, 228);
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
 }
 
 .input-search:focus {
