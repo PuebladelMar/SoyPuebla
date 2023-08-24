@@ -80,7 +80,7 @@ const defaultTheme = createTheme();
 
 export default function Dashboard() {
   const [open, setOpen] = useState(true);
-  const [currentSection, setCurrentSection] = useState("General");
+  const [currentSection, setCurrentSection] = useState("Ventas");
 
   const toggleDrawer = () => {
     setOpen(!open);
