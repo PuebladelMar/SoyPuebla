@@ -47,66 +47,66 @@ const Information = () => {
   };
 
   return (
-    <div className="container">
-      <div className="form-container">
-        <h2 className="vista">Información del footer</h2>
-        <label className="label">Email:</label>
+    <div className="containerInfo">
+      <div className="form-containerInfo">
+        <h2 className="vistaInfo">Información del footer</h2>
+        <label className="labelInfo">Email:</label>
         <input
-          className="input"
+          className="inputInfo"
           type="text"
           name="email"
           value={info.email}
           onChange={handleInputChange}
         />
-        <label className="label">Teléfono:</label>
+        <label className="labelInfo">Teléfono:</label>
         <input
-          className="input"
+          className="inputInfo"
           type="text"
           name="phone"
           value={info.phone}
           onChange={handleInputChange}
         />
-        <label className="label">Instagram:</label>
+        <label className="labelInfo">Instagram:</label>
         <input
-          className="input"
+          className="inputInfo"
           type="text"
           name="instagram"
           value={info.instagram}
           onChange={handleInputChange}
         />
-        <label className="label">Facebook:</label>
+        <label className="labelInfo">Facebook:</label>
         <input
-          className="input"
+          className="inputInfo"
           type="text"
           name="facebook"
           value={info.facebook}
           onChange={handleInputChange}
         />
-        <label className="label">WhatsApp:</label>
+        <label className="labelInfo">WhatsApp:</label>
         <input
-          className="input"
+          className="inputInfo"
           type="text"
           name="whatsapp"
           value={info.whatsapp}
           onChange={handleInputChange}
         />
-        <label className="label">Imagen del footer:</label>
+        <label className="labelInfo">Imagen del footer:</label>
         <input
-          className="input"
+          className="inputInfo"
           type="text"
           name="image"
           value={info.image}
           onChange={handleInputChange}
         />
-        <button className="button" onClick={saveChanges}>
+        <button className="buttonInfo" onClick={saveChanges}>
           Guardar Cambios
         </button>
       </div>
-      <br />
-      <div className="form-container">
-        <h2 className="vista">Preguntas y Respuestas</h2>
+      
+      <div className="form-containerInfo">
+        <h2 className="vistaInfo">Preguntas y Respuestas</h2>
         <form onSubmit={handleQuestionSubmit}>
-        <label className="label">Preguntas:</label>
+        <label className="labelInfo">Preguntas:</label>
         <br />
           <textarea
             className="textarea"
@@ -115,7 +115,7 @@ const Information = () => {
             onChange={handleQuestionChange}
             rows="3" 
           /> <br />
-          <label className="label">Respuestas:</label><br />
+          <label className="labelInfo">Respuestas:</label><br />
           <textarea
             className="textarea"
             name="answers"
@@ -123,7 +123,7 @@ const Information = () => {
             onChange={handleQuestionChange}
             rows="3" 
           />
-          <button className="button" type="submit">
+          <button className="buttonInfo" type="submit">
             Enviar Pregunta y Respuesta
           </button>
         </form>
