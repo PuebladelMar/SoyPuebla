@@ -79,17 +79,20 @@ const AllColecciones = () => {
 
   return (
     <div className="coleccion-main-admin" name="series" value="name">
+      <div className="coleccion-admin">
+        <div className="contenedor-nombre-coleccion">
+       <h2 className="talles-title-admin">Colecciones disponibles</h2>
       <button
         type="button"
         onClick={() => {
           handleOpenSerieCreate();
         }}
-        className="mainImage-upload-buttonY"
-      >
+        className="coleccion-create-button"
+        >
         Crear colección
       </button>
-      <div className="coleccion-admin">
-        <h2 className="coleccion-title-admin">Colecciones disponibles</h2>
+        </div>
+        <h2 className="coleccion-title-admin"></h2>
         {Array.isArray(series) &&
           series.map((el) => (
             <div key={el.id} className="coleccion-item-admin">

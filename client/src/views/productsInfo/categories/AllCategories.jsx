@@ -76,22 +76,25 @@ const AllCategories = () => {
   };
 
   return (
+
     <div
       className='categories-main'
       name='series'
       value='name'
     >
-      <button
+      <div className='categories-admin'>
+        <div className="contenedor-nombre-categoria">
+        <h2 className='categories-title'>Categorias disponibles</h2>
+        <button
         type='button'
         onClick={() => {
           handleOpenCategoryCreate();
         }}
-        className='button-admin-category'
-      >
+        className='categoria-create-button'
+        >
         Crear categoría
       </button>
-      <div className='categories-admin'>
-        <h2 className='categories-title'>Categorias disponibles</h2>
+        </div>
         {Array.isArray(categories) &&
           categories.map((el) => (
             <div
