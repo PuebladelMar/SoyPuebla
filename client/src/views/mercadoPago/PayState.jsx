@@ -67,7 +67,7 @@ function PayState() {
         <div className="payContainer">
           <h3 className="payState-text">Su compra se realizo con exito</h3>
           <p className="payState-Id">Id de compra: {parsedData.payment_id}</p>
-          <p className="payState-total">Pago total: ${totalPay}</p>
+          <p className="payState-total">Pago total: ${Math.floor(totalPay)}</p>
           <p className="payState-wpp">Comunicate con nosotros para determinar la entrega</p>
           <div className="social-icons">
             <a
