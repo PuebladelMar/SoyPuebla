@@ -121,14 +121,14 @@ const EditProduct = () => {
   const handleUpload = (url, actualColor) => {
     setUploadedSecureUrl(url);
     setCreateProduct((state) => {
-      const updateImages = state.colorImage.map((item) => {
-        if (dataImages.some((i) => i === item)) {
-          return {
-            ...item,
-            images: [url],
-          };
-        }
-        if (item.color === actualColor) {
+      const updateImages = state.colorImage.map((item)=> {
+        if(item.color === actualColor){
+          if(dataImages.some(i=> i === item)){
+            return {
+              ...item,
+              images: [url]
+            }
+          }
           return {
             ...item,
             images: [...item.images, url],
@@ -200,7 +200,6 @@ const EditProduct = () => {
       !createProduct.name ||
       !createProduct.description ||
       !createProduct.price ||
-      !createProduct.sale ||
       !createProduct.category.length === 0 ||
       !createProduct.series.length === 0 ||
       !createProduct.colorImage.length === 0
@@ -213,8 +212,13 @@ const EditProduct = () => {
         navigate(`/products/${id}`);
       } catch (error) {
         setIsReady(true);
-        alert(`El nombre ${createProduct.name} ya existe`);
-      }
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Ya existe un producto con ese nombre",
+          showConfirmButton: false,
+        });
+      };
     }
   };
 
