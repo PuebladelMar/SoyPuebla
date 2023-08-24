@@ -1,0 +1,94 @@
+.review-form-container {
+  width: 100%;
+  max-width: 400px;
+  height: 28.8rem;
+  padding: 2rem;
+  background-color: #FFFFFF;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.review-form-container h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  color: rgba(32, 32, 32, 0.766);
+  cursor: default;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.review-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: rgb(46, 46, 46);
+}
+
+.review-form input,
+.review-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.review-form textarea {
+  resize: vertical;
+}
+
+.review-form input[type="number"] {
+  width: 50px;
+}
+
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 3rem;
+}
+
+.textarea {
+  height: 7.4rem;
+  font-size: 1rem;
+}
+
+.rating {
+  font-size: 1.4rem;
+}
+
+.rating-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.rating-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+}
+
+.btn-iniciar-sesion{
+  margin: 10px;
+  background-color: rgb(81, 127, 127);
+  color:  rgb(255, 255, 255);
+  padding: 8px 16px;
+  border: 1px solid  rgb(81, 127, 127);
+  border-radius: 4px;
+  width: 12rem;
+  cursor: pointer;
+}
+
+@media (max-width: 435px) {
+  .review-form-container h2 {
+    font-size: 1.2rem;
+  }
+}

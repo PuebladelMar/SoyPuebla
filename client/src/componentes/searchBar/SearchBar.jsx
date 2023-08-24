@@ -1,13 +1,16 @@
 import "./SearchBar.css";
 
-const SearchBar = ({ handlerEventSearch }) => {
+const SearchBar = ({ handlerEventSearch, handlerSubmitSearch, handleOnFocus }) => {
   return (
-    <div className="search-form">
-      <form onChange={handlerEventSearch}>
-        <input
-          className="input-search"
-          placeholder="¿Qué productos buscás?"
-        ></input>
+    <div className="search-container">
+      <form
+        onChange={handlerEventSearch}
+        onSubmit={handlerSubmitSearch}
+        onFocus={handleOnFocus}
+        onBlur={handleOnFocus}
+        className="search-container-form"
+      >
+        <input className="input-search" placeholder="¿Qué productos buscás?" />
       </form>
     </div>
   );

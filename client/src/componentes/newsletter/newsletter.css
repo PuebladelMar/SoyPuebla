@@ -1,56 +1,72 @@
 .newsletter {
   width: 100%;
-  margin: 0 auto;
-  padding: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 1.5rem;
 }
 
-.newsletter h2 {
-  margin-right: 20px;
+.newsletter-title {
   border-color: #517f7f;
   color: #517f7f;
 }
 
-.newsletter form {
+.newsletter-form {
   display: flex;
   align-items: center;
-  width: 35%;
+  justify-content: center;
+  gap: 1rem;
+  width: 40rem;
 }
 
-.newsletter input[type="email"] {
-  flex: 1;
-  padding: 8px;
-  margin-right: 10px;
+.input-newsletter {
+  font-size: 0.9rem;
+  height: 100%;
+  width: 15rem;
+  padding: 0.5rem 1rem;
 }
 
-.newsletter button {
+.newsletter-button {
   background-color: #517f7f;
   color: #fff;
   padding: 8px 16px;
   border: none;
+  height: 100%;
   border-radius: 4px;
   cursor: pointer;
+  transition: 0.3s ease;
 }
 
-.newsletter button:hover {
-  background-color: #b2cebf;
+.newsletter-button:hover {
+  transform: scale(1.05);
 }
 
-@media screen and (max-width: 768px) {
+.isSuscribed {
+  margin-left: 1rem;
+}
+
+@media (max-width: 768px) {
   .newsletter {
-      flex-direction: column; 
-      text-align: center; 
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
   }
 
-  .newsletter h2 {
-      margin-right: 0; 
-      margin-bottom: 10px; 
+  .newsletter-title {
+    margin: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .newsletter-form {
+    width: 100%;
   }
 
-  .newsletter input[type="email"],
-  .newsletter button {
-      width: 100%; 
+  .input-newsletter {
+    width: 10rem;
+  }
+
+  .newsletter-button {
+    height: 2.5rem;
   }
 }

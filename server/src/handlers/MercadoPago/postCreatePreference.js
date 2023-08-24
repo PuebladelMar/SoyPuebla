@@ -15,16 +15,14 @@ const postCreatePreference = async (req, res) => {
     back_urls: {
       success: "http://localhost:3001/mp/success",
       failure: "http://localhost:3001/mp/failure",
-      pending: "http://localhost:5173/procesando",
+      pending: "http://localhost:3001/mp/pending",
     },
     auto_return: "approved",
   };
 
   try {
     const response = await mercadopago.preferences.create(preference);
-    res.json({
-      id: response.body.id,
-    });
+    res.status(200).json({response});
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Ocurrió un error" });

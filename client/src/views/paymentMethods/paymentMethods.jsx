@@ -1,5 +1,8 @@
-import React from "react";
 import "./paymentMethods.css";
+import Cash from "../.././assets/payMethods/4.png";
+import MercadoPago from "../.././assets/payMethods/1.png";
+import Transfer from "../.././assets/payMethods/2.png";
+import Card from "../.././assets/payMethods/3.png";
 
 const PaymentMethodsView = () => {
   return (
@@ -15,25 +18,24 @@ const PaymentMethodsView = () => {
         <div className="payment-method">
           <p>Efectivo</p>
           <div className="payment-img-container">
-            <img src="src/assets/payMethods/4.png" alt="Efectivo" />
+            <img src={Cash} alt="Efectivo" />
           </div>
         </div>
         <div className="payment-method">
           <p>Mercado Pago</p>
           <div className="payment-img-container">
-            <img src="src/assets/payMethods/1.png" alt="Mercado Pago" />
+            <img src={MercadoPago} alt="Mercado Pago" />
           </div>
         </div>
 
         <div className="payment-method">
           <p>Transferencia</p>
           <div className="payment-img-container">
-            <img
-              src="src/assets/payMethods/2.png"
-              alt="Transferencia Bancaria"
-            />
+            <img src={Transfer} alt="Transferencia Bancaria" />
           </div>
         </div>
+
+
       </div>
       <div className="additional-container">
         <div>

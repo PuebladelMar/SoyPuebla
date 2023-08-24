@@ -1,0 +1,147 @@
+.historyP-methods-container {
+  min-height: 90vh;
+  margin-bottom: 80%;
+}
+
+.historyP-Admin-Box {
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.historyP-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  height: 80vh;
+  background-color: #eeeeee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10%;
+}
+.historyP-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+.historyP-title {
+  font-size: x-large;
+  color: #747474;
+}
+
+.historyP-container {
+  display: flex;
+}
+
+.button-historyP {
+  background-color: #b2cebf;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+}
+
+.selected-historyP {
+  background-color: #517f7f;
+  width: 150px;
+}
+
+.filter-historyP {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 20px;
+  align-items: center;
+  width: 250px;
+  height: 800px;
+  background-color: #ffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 2%;
+}
+
+.filter-historyP input[type="text"],
+.filter-historyP select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 150px;
+}
+
+.filter-historyP select {
+  width: 150px;
+}
+
+@media (max-width: 1330px) {
+  .historyP-container {
+    flex-direction: column;
+  }
+
+  .filter-historyP {
+    justify-content: center;
+    flex-direction: row;
+    width: 800px;
+    height: 100px;
+  }
+
+  .button-historyP {
+    width: 100px;
+    font-size: 12px;
+  }
+
+  .selected-historyP {
+    width: 100px;
+    font-size: 12px;
+  }
+
+  .filter-historyP select {
+    width: 100px;
+    font-size: 12px;
+  }
+
+  .filter-historyP input[type="text"],
+  .filter-historyP select {
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .historyP-img-container {
+    width: 150px;
+    height: 150px;
+  }
+
+  .historyP-method {
+    margin: 5%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .historyP-method p {
+    margin-top: 0;
+  }
+
+  .historyP-title {
+    font-size: 2rem;
+  }
+
+  .historyP-text-underline {
+    margin-left: 0;
+  }
+
+  .historyP-container {
+    flex-wrap: wrap;
+  }
+}

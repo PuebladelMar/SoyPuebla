@@ -25,14 +25,15 @@ const controllerNodeMailer = async (emailSubject, emailsUsers) => {
   }
 };
 
-const sendRegisterMailNotify = async (emailSubject, emailsUsers) => {
-  try {
+const sendRegisterMailNotify = async (emailSubject, emailsUsers) => { 
+  try {  
     await transporter.sendMail({
       from: '"SOY_PUEBLA" : puebladelmar2023@gmail.com',
       to: emailsUsers,
       subject: emailSubject,
-      html: "<b>Bienvenida a Soy Puebla</b> <p>Estás recibiendo este e-mail como verificación de registro en nuestra tienda virtual</p>",
+      html: "<b>Bienvenida a Soy Puebla</b> <p>Gracias por suscribirte en nuestra tienda virtual, te avisaremos cuando tu prenda este disponible</p>",
     });
+    
     console.log(`Correo de registro enviado a ${emailsUsers}`);
   } catch (error) {
     throw new Error("Error al enviar el correo electrónico de registro");
@@ -53,6 +54,18 @@ const sendStockNotification = async (emailsUsers) => {
   }
 };
 
+const sendMercadoPagoStatus = async (emailsUsers, emailSubject) => {
+  try {
+    await transporter.sendMail({
+      from: '"SOY_PUEBLA" : puebladelmar2023@gmail.com',
+      to: emailsUsers,
+      subject: emailSubject,
+      html: "<b>Bienvenida a Soy Puebla</b> <p>En Soy Puebla trabajamos para ti, por esto queremos informarte el estado de tu compra.</p> <p>Si deseas conocer más al respecto no dudes en contactarte a nuestra línea telefónica xxxxxx.</p>",
+    });
+  } catch (error) {
+    throw new Error("Error al enviar el correo electrónico de estado de compra");
+  }
+};
 
+module.exports = { controllerNodeMailer, sendRegisterMailNotify, sendStockNotification, sendMercadoPagoStatus };
 
-module.exports = { controllerNodeMailer, sendRegisterMailNotify, sendStockNotification };

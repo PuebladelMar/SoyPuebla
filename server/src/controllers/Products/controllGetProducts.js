@@ -1,4 +1,4 @@
-const { Products, Colors, Sizes, Categories, Series, Stocks } = require("../../db.js");
+const { Products, Colors, Sizes, Categories, Series, Stocks, ColorImages } = require("../../db.js");
 const { Op } = require("sequelize");
 
 const controllGetProducts = async (req) => {
@@ -23,7 +23,19 @@ const controllGetProducts = async (req) => {
       },
     });
 
-    return productByName;
+    const allColorImages = await ColorImages.findAll();
+
+    const productWithImages = productByName.map((product) => {
+      const colorImages = allColorImages.filter(
+        (colorImage) => colorImage.ProductId === product.id
+      );
+      return {
+        ...product.dataValues,
+        colorImages: colorImages.map((colorImage) => colorImage)
+      };
+    });
+  
+    return productWithImages;
   }
   const products = await Products.findAll({
     include: [
@@ -44,16 +56,28 @@ const controllGetProducts = async (req) => {
     ],
   });
 
+
   let filterProducts = products.map((product) => {
     return {
       id: product.id,
       name: product.name,
       price: product.price,
-      mainImage: product.mainImage,
       sale: product.sale,
       category: product.Categories,
       series: product.Series,
       stock: product.Stocks,
+    };
+  });
+
+  const allColorImages = await ColorImages.findAll();
+
+  filterProducts = filterProducts.map((product) => {
+    const colorImages = allColorImages.filter(
+      (colorImage) => colorImage.ProductId === product.id
+    );
+    return {
+      ...product,
+      colorImages: colorImages.map((colorImage) => colorImage)
     };
   });
 
@@ -106,7 +130,7 @@ const controllGetProducts = async (req) => {
   }
 
   if (sale === 'true') {
-    const response = filterProducts.filter((product) => product.sale === true);
+    const response = filterProducts.filter((product) => product.sale > 0);
     filterProducts = response;
   }
 

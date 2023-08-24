@@ -1,0 +1,38 @@
+.talles-main{
+    margin: 5rem;
+    padding: 20px;
+}
+
+  
+  .talles {
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  .talles-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .talles-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .icons {
+
+    display: flex;
+    align-items: center;
+    
+  }
+  
+  .edit-talles,
+  .delete-talles {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+  }

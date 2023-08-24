@@ -1,4 +1,4 @@
-const { Carts, Stocks, Products, Sizes, Colors } = require("../../db");
+const { Carts, Stocks, Products, Sizes, Colors, ColorImages } = require("../../db");
 
 const controllGetCart = async (userId) => {
   const userCarts = await Carts.findAll({
@@ -13,7 +13,7 @@ const controllGetCart = async (userId) => {
     const productId = userStock.ProductId;
 
     const product = await Products.findByPk(productId, {
-      attributes: ["name", "mainImage", "price"],
+      attributes: ["id", "name", "price", "sale"],
     });
 
     const sizeId = userStock.SizeId;
@@ -26,10 +26,13 @@ const controllGetCart = async (userId) => {
       attributes: ["codHex", "name"],
     });
 
+    const image = await ColorImages.findOne({where: {ColorId: colorId, ProductId: product.id}})
+
     const stockWithQuantity = {
       ...userStock.dataValues,
       quantity: cart.dataValues.quantity,
       product,
+      images: image.images,
       size,
       color,
       cartId: cart.id,

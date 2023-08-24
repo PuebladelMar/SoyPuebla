@@ -8,49 +8,75 @@ const getCategory = require('../handlers/Products/getCategory');
 const getSeries = require('../handlers/Products/getSeries');
 const postCategory = require('../handlers/Products/postCategory');
 const postSerie = require('../handlers/Products/postSerie');
-const deleteSeries=require("../handlers/Products/deleteSeries")
-const deleteCategory=require("../handlers/Products/deleteCategory")
-const deleteSize=require("../handlers/Products/deleteSize")
-const deleteProduct=require("../handlers/Products/deleteProduct.js");
+const deleteSeries = require('../handlers/Products/deleteSeries');
+const deleteCategory = require('../handlers/Products/deleteCategory');
+const deleteSize = require('../handlers/Products/deleteSize');
+const deleteProduct = require('../handlers/Products/deleteProduct.js');
 const getSize = require('../handlers/Products/getSize');
-const postReview = require("../handlers/Reviews/postReviews");
-const getReviewsById = require("../handlers/Reviews/getReviewsById");
+const postReview = require('../handlers/Reviews/postReviews');
+const getReviewsById = require('../handlers/Reviews/getReviewsById');
 const putProducts = require('../handlers/Products/putProducts');
+const getColor = require('../handlers/Products/getColor');
+const getReviews = require('../handlers/Reviews/getReviews');
+const putColor = require('../handlers/Products/putColor');
+const deleteColor = require('../handlers/Products/deleteColor');
+const putSize = require('../handlers/Products/putSize');
+const putSeries = require('../handlers/Products/putSeries');
+const putCategory = require('../handlers/Products/putCategory');
+const deleteReviews = require('../handlers/Reviews/deleteReviews');
 
 const productsRouter = Router();
 
-productsRouter.get("/", getProducts);
+productsRouter.get('/', getProducts);
 
-productsRouter.post("/", postProducts);
+productsRouter.post('/', postProducts);
 
-productsRouter.post("/size", postSize);
+productsRouter.post('/size', postSize);
 
-productsRouter.post("/color", postColor);
+productsRouter.get('/color', getColor);
 
-productsRouter.get("/category", getCategory);
+productsRouter.post('/color', postColor);
 
-productsRouter.get("/series", getSeries);
+productsRouter.get('/category', getCategory);
 
-productsRouter.get("/size", getSize);
+productsRouter.get('/series', getSeries);
 
-productsRouter.post("/category", postCategory);
+productsRouter.get('/size', getSize);
 
-productsRouter.post("/series", postSerie);
+productsRouter.post('/category', postCategory);
 
-productsRouter.post("/review", postReview);
+productsRouter.post('/series', postSerie);
 
-productsRouter.put("/:id", putProducts);
+productsRouter.get('/review', getReviews);
 
-productsRouter.delete("/:id", deleteProduct)
+productsRouter.post('/review', postReview);
 
-productsRouter.delete("/size/:id", deleteSize);
+productsRouter.put('/size/', putSize);
 
-productsRouter.delete("/category/:id", deleteCategory);
+productsRouter.put('/series/', putSeries);
 
-productsRouter.delete("/series/:id", deleteSeries);
+productsRouter.put('/category/', putCategory);
 
-productsRouter.get("/review/:id", getReviewsById);
+productsRouter.put('/:id', putProducts);
 
-productsRouter.get("/:id", getProductsById);
+productsRouter.delete('/:id', deleteProduct);
 
-module.exports = productsRouter
+productsRouter.delete('/size/:id', deleteSize);
+
+productsRouter.delete('/category/:id', deleteCategory);
+
+productsRouter.delete('/series/:id', deleteSeries);
+
+productsRouter.get('/review/:id', getReviewsById);
+
+productsRouter.get('/:id', getProductsById);
+
+productsRouter.put('/color/:id', putColor);
+
+productsRouter.delete('/color/:id', deleteColor);
+
+productsRouter.delete('/review/:id', deleteReviews);
+
+module.exports = productsRouter;
+
+//

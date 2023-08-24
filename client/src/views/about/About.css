@@ -2,22 +2,25 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 4.2rem;
+  margin-top: 5rem;
   align-items: center;
+  background-color: #F0F0F0;
+  padding-bottom: 5rem;
 }
 
 .about-content {
   max-width: 850px;
   text-align: center;
+  margin-bottom: 3rem;
 }
 
 .about-title {
-  font-size: 25px;
+  font-size: 28px;
   margin-bottom: 10px;
   margin-top: 2.5rem;
   text-align: center;
-  color: #517f7f;
-  text-shadow: 1px 1px 1px #517f7f;
+  color: #dcaaa1;
+  text-shadow: 1px 1px 1px #dcaaa1;
 }
 
 .about-text {
@@ -25,8 +28,8 @@
   line-height: 1.5;
   text-align: justify;
   justify-content: center;
-  margin: 2rem 2rem 2rem 2rem;
-  color: rgb(81, 81, 81);
+  margin: 2rem 4rem 2rem 4rem;
+  color: rgb(127 127 127);
 }
 
 @media screen and (max-width: 600px) {
@@ -35,10 +38,51 @@
   }
 
   .about-title {
-    font-size: 28px;
+    font-size: 25px;
   }
 
   .about-text {
     font-size: 16px;
   }
 }
+
+.img-About-Pdm{
+  scale: 30%;
+  margin-top: -5rem;
+  margin-bottom: -8rem;
+  min-height: 300px;
+  min-width: 600px;
+  object-fit: cover;
+}
+
+.img-About-Tortuga{
+  scale: 18%;
+  margin-top: -10rem;
+  margin-bottom: -13rem;
+  min-height: 300px;
+  min-width: 600px;
+  object-fit: cover;
+}
+
+.team-members {
+  display: grid;
+  grid-column: 1fr,1fr 1fr 1fr;
+  grid-gap: 20px;
+  font-size: 20px;
+  margin-top: 2.5rem;
+  text-align: center;
+  color: #000000;
+
+}
+
+.columnName {
+  text-decoration: none; 
+  color: #000000; 
+  margin: 5px 0; 
+}
+
+.columnName a:hover {
+  text-decoration: underline; 
+}
+
+

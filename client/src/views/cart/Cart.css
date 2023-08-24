@@ -1,128 +1,251 @@
+.container-cart {
+  width: 100%;
+  min-height: 85vh;
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .cart-container {
   display: flex;
-  max-width: 600px;
-  margin: 7rem;
-  padding: 4rem;
-  font-family: Asap;
-  background-color: #f7f7f7;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex-direction: column;
-  flex-wrap: wrap;
-  align-content: stretch;
+  align-items: center;
   justify-content: center;
+  min-width: 1000px;
+  max-width: 1000px;
+  padding: 2rem;
+  box-shadow: 0.5px 2px 4px 4px rgba(0, 0, 0, 0.1);
+  gap: 1rem;
 }
 
 .cart-items {
-  display: grid;
-  grid-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 38rem;
+}
+
+.product-name {
+  font-weight: 600;
 }
 
 .cart-item {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  padding: 10px;
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  background-color: #fcfcfc;
+  border-radius: 0.3rem;
+  gap: 2rem;
+  box-shadow: 0px 0px 0px 1px rgb(140 140 140 / 10%);
+  align-items: center;
+  height: 12rem;
+  width: 100%;
+  -webkit-box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0.5px 2px 0px rgba(0, 0, 0, 0.75);
 }
 
-.cart-item img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  margin-right: 10px;
+.img-cart {
+  width: 10rem;
+  height: 12rem;
+  object-fit: fill;
+  border-radius: 0.3rem 0 0 0.3rem;
 }
 
-.item-details {
+.item-detail {
   flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 80%;
+  gap: 0.25rem;
+  letter-spacing: 0.02rem;
+  cursor: default;
 }
 
 .cart-summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  width: 38rem;
+  height: 5rem;
 }
 
 .checkout-button {
-  padding: 10px 20px;
-  background-color: #ff66a4;
-  color: white;
-  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  width: 9rem;
+  height: 3rem;
+  background-color: rgb(81, 127, 127);
+  color: rgb(255, 255, 255);
+  padding: 2px 20px;
+  border: 1px solid rgb(81, 127, 127);
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all ease 0.3s;
 }
 
 .checkout-button:hover {
-  background-color: #ff3384;
+  transform: scale(1.05);
+  color: #f5e7e4;
 }
 
-@media screen and (max-width: 600px) {
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9em;
+  border: 0.1rem solid;
+  border-color: rgb(190, 190, 190);
+  cursor: pointer;
+  position: absolute;
+  left: 90%;
+  bottom: 83%;
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 0.2rem;
+  border-radius: 100%;
+  color: rgba(112, 112, 112, 0.766);
+  transition: 0.3s ease;
+}
+
+.closeButton:hover {
+  color: rgba(255, 252, 252, 0.766);
+  background-color: #DBABA1;
+  border-radius: 100%;
+}
+
+.cart-link {
+  font-size: 1.1rem;
+  -webkit-text-decoration: revert;
+  text-decoration: revert;
+  color: rgb(7, 7, 7);
+  cursor: pointer;
+  transition: all ease 0.3s;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  transition: 0.3s ease;
+}
+
+.cart-link:hover {
+  color: #DBABA1;
+}
+
+.titleCart {
+  font-size: 2rem;
+  color: rgba(32, 32, 32, 0.766);
+  cursor: default;
+}
+
+.buttons-cart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+}
+
+.checkout-button-big {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  width: 100%;
+  height: 3rem;
+  background-color: rgb(81, 127, 127);
+  color: rgb(255, 255, 255);
+  padding: 2px 20px;
+  border: 1px solid rgb(81, 127, 127);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+
+.checkout-button-big:hover {
+  transform: scale(1.05);
+  color: #f5e7e4;
+}
+
+@media screen and (max-width: 1020px) {
   .cart-container {
+    min-width: 100%;
     max-width: 100%;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 645px) {
+  .cart-container {
+    padding: 2rem 0;
+  }
+
+  .item-detail {
+    margin: 0;
+  }
+
+  .cart-items {
+    min-width: 100%;
+    max-width: 100%;
   }
 
   .cart-item {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 15px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  }
-
-  .cart-item img {
-    width: 100%;
-    height: auto;
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-
-  .item-details {
-    text-align: center;
-    margin-top: 10px;
+    border-radius: 0;
   }
 
   .cart-summary {
-    flex-direction: column;
+    width: 30rem;
+  }
+
+  .cart-link {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .cart-summary {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
+    width: 100%;
   }
 
   .checkout-button {
-    width: 100%;
-    margin-top: 10px;
+    width: 48%;
+  }
+
+  .closeButton {
+    left: 88%;
+  }
+
+  .img-cart {
+    width: 9rem;
+    height: 10rem;
+  }
+
+  .cart-item {
+    height: 10rem;
+    gap: 1.3rem;
+  }
+
+  .item-detail {
+    gap: 0;
   }
 }
-.cart-link {
-  padding: 10px 10px;
-  background-color: #ff66a461;
-  width: 4rem;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  position: relative;
-  left: 12rem;
-  top: 2rem;
+
+@media screen and (max-width: 440px) {
+  .item-detail {
+    font-size: 0.85rem;
+  }
 }
 
-.link-history {
-  text-align: center;
-  margin-top: 10px;
-  padding: 10px 10px;
-  background-color: #ff66a461;
-  width: 8rem;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  position: relative;
-  left: 10rem;
-  top: 2rem;
+@media screen and (max-width: 415px) {
+  .closeButton {
+    left: 85%;
+  }
 }

@@ -13,7 +13,7 @@
 }
 
 .button-container {
-  padding-top: 23px;
+  padding-top: 10px;
   padding-left: 10px;
   width: 50px;
   height: 50px;
@@ -23,7 +23,7 @@
   justify-content: center;
 }
 
-.button-container button {
+.button-container-button {
   box-sizing: border-box;
   width: fit-content;
   font-family: inherit;
@@ -32,7 +32,7 @@
 }
 
 .user-container {
-  padding-top: 15px;
+  padding-top: 2px;
   padding-left: 10px;
   width: 50px;
   height: 50px;

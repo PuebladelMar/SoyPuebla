@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import './imageUpload.css'
+
 
 const UploadWidget = ({ onUpload }) => {
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
-  const [secureUrl, setSecureUrl] = useState(null);
 
   useEffect(() => {
     cloudinaryRef.current = window.cloudinary;
@@ -14,24 +15,21 @@ const UploadWidget = ({ onUpload }) => {
       },
       function (error, result) {
         if (!error && result && result.event === 'success') {
-          setSecureUrl(result.info.secure_url);
-          if (onUpload) {
-            onUpload(result.info.secure_url);
-          }
+          onUpload(result.info.secure_url); 
         }
       }
     );
   }, [onUpload]);
-
+    
   return (
     <div>
-      <button onClick={() => widgetRef.current.open()}>Upload</button>
-      
+      <button 
+      type='button'
+      className="mainImage-upload-button" 
+      onClick={() => widgetRef.current.open()}>Cargar Imagenes</button>
     </div>
   );
 };
 
+
 export default UploadWidget;
-
-
-

@@ -11,18 +11,18 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5) url("src/assets/FooterContact.svg");
+  background: rgba(0, 0, 0, 0.5) url("../../assets/FooterContact.svg");
   background-size: cover;
   animation: moveBackground 20s linear infinite,
     zoomBackground 20s alternate infinite;
   animation-fill-mode: forwards;
 }
 
-.brand-info {
+.brand-info-contact {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-around;
   align-items: center;
   z-index: 1;
   width: 100%;
@@ -49,6 +49,11 @@
   height: 50px;
   margin-right: 0px;
 }
+
+.contact-us {
+  font-size: 1.5rem;
+}
+
 @media screen and (max-width: 768px) {
   .social-icons a,
   .footer-links a {
@@ -71,6 +76,15 @@
   }
 }
 
+@-webkit-keyframes moveBackground {
+  0% {
+    -webkit-transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+  }
+}
+
 @keyframes zoomBackground {
   0%,
   100% {
@@ -78,5 +92,15 @@
   }
   50% {
     transform: scale(1.1);
+  }
+}
+
+@-webkit-keyframes zoomBackground {
+  0%,
+  100% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
   }
 }

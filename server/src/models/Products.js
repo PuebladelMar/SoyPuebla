@@ -31,16 +31,13 @@ module.exports = (sequelize) => {
           min: 0,
         },
       },
-      mainImage: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      image: {
-        type: DataTypes.JSON,
-      },
       sale: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        validate: {
+          min: 0,
+          max: 100
+        },
       },
       description: {
         type: DataTypes.TEXT,

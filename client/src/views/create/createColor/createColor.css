@@ -1,0 +1,154 @@
+.create-main-containerX {
+  display: flex;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  /* flex-wrap: wrap;   */
+}
+
+.create-containerX {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #eeeeee;
+  color: #818181;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+
+.create-containerX button {
+  margin-top: 10px;
+  color: rgb(81, 127, 127);
+}
+
+.create-formX {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 400px;
+  color: #818181;
+}
+
+
+.create-formX input,
+.create-formX textarea,
+.create-formX select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #d9d9d9;
+  font-weight: 400;
+  color: #474747;
+}
+
+.custom-inputX::placeholder {
+  color: #959595;
+}
+
+
+
+  .listaColores {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    gap: 0.5rem;
+  }
+  
+  .colorItem {
+    flex-basis: calc(20% - 0.5rem); 
+    background-color: #f0f0f0; 
+    padding: 0.5rem; 
+  }
+  
+
+  .detailColorButtonX {
+    border: 2px solid;
+    border-color: rgb(190, 190, 190);
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    transform: translateZ(0);
+    transition: 300ms;
+    cursor: pointer;
+  }
+  
+  .detailColorButtonX:hover {
+    transform: scale(1.1);
+  }
+
+
+  .color-picker{
+
+padding-top: 1rem;
+padding-bottom: 1rem;
+
+  }
+
+
+  .submit-buttonzX {
+    padding: 5px 19px;
+    border: 2px solid rgb(81, 127, 127);
+    border-radius: 4px;
+    color: #818181;
+    background-color: #777373;
+    /* font-weight: 400; */
+    cursor: pointer;
+    transition: 0.5s;
+    margin-bottom: 10px;
+    
+  }
+  
+  .submit-buttonzX:hover {
+    background-color: rgb(81, 127, 127);
+    color: rgb(255, 255, 255);
+  }
+
+  .colorSelectorContainer{
+
+    display: flex;
+    flex-direction: row;
+  }
+
+  .colorPreview{
+
+    padding: 1rem;
+    margin-left: 1rem;
+  }
+
+  .buttons-align {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.createdElementsListContainer {
+
+  margin-top: 1rem;
+}
+
+.createdElementsListContainer h2 {
+
+  margin-bottom: .7rem;
+}
+
+.createdElementsListContainer ol {
+  max-width: 400px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.createdElementsListContainer li {
+
+  color: #a5a5a5;
+  border: 1px solid #a5a5a5;
+  border-radius: 3px;
+  padding: 2px 10px;
+}

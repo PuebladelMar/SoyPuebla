@@ -1,0 +1,146 @@
+.userAdmin-methods-container {
+  min-height: 80vh;
+}
+
+.user-Admin-Box {
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.userAdmin-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  height: 80vh;
+  background-color: #eeeeee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10%;
+}
+.userAdmin-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+.userAdmin-title {
+  font-size: x-large;
+  color: #747474;
+}
+
+.userAdmin-container {
+  display: flex;
+}
+
+.button-user-admin {
+  background-color: #b2cebf;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  transition: 0.5s;
+}
+
+.selected-user-admin {
+  background-color: #517f7f;
+  width: 150px;
+  transition: 0.5s;
+}
+
+.filter-admin-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 20px;
+  align-items: center;
+  width: 250px;
+  height: 400px;
+  background-color: #ffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+}
+
+.filter-admin-user input[type="text"],
+.filter-admin-user select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 150px;
+}
+
+.filter-admin-user select {
+  width: 150px;
+}
+
+@media (max-width: 1330px) {
+  .userAdmin-container {
+    flex-direction: column;
+  }
+
+  .filter-admin-user {
+    justify-content: center;
+    flex-direction: row;
+    width: 800px;
+    height: 100px;
+  }
+
+  .button-user-admin {
+    width: 100px;
+    font-size: 12px;
+  }
+
+  .selected-user-admin {
+    width: 100px;
+    font-size: 12px;
+  }
+
+  .filter-admin-user select {
+    width: 100px;
+    font-size: 12px;
+  }
+
+  .filter-admin-user input[type="text"],
+  .filter-admin-user select {
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .userAdmin-img-container {
+    width: 150px;
+    height: 150px;
+  }
+
+  .userAdmin-method {
+    margin: 5%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userAdmin-method p {
+    margin-top: 0;
+  }
+
+  .userAdmin-title {
+    font-size: 2rem;
+  }
+
+  .userAdmin-text-underline {
+    margin-left: 0;
+  }
+
+  .userAdmin-container {
+    flex-wrap: wrap;
+  }
+}

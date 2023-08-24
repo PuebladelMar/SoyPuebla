@@ -1,7 +1,8 @@
 footer {
   background-color: #517f7f;
   color: #f2d5cf;
-  padding: 15px;
+  padding: 1rem;
+  position: relative;
   text-align: center;
   cursor: default;
 }
@@ -34,4 +35,10 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 22px;
+}
+
+@media screen and (max-width: 768px) {
+  .brand-info {
+    gap: 1rem;
+  }
 }

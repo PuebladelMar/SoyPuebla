@@ -1,78 +1,100 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
-} from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import "swiper/css/autoplay";
-import "./Reviews.css";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/autoplay';
+import './Reviews.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import ReviewCard from './ReviewCard';
+import { getReviewById, deleteReviews, getReviews } from '../../redux/Actions';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
-function Reviews() {
+function Reviews({ productId }) {
+  const getReviewById2 = useSelector((state) => state.getReviewById);
+  const dispatch = useDispatch();
+  const [visibleReviews, setVisibleReviews] = useState(3);
+  const [showAllReviews, setShowAllReviews] = useState(false);
+
+  useEffect(() => {
+    const fetchReview = async () => {
+      try {
+        await dispatch(getReviewById(productId));
+        // console.log(productDetails[0].id);
+      } catch (error) {
+        // Manejar el error aquí si es necesario
+        console.error('Error fetching review:', error);
+      }
+    };
+
+    fetchReview();
+  }, [dispatch]);
+
+  const handleShowMoreReviews = () => {
+    setVisibleReviews((prevVisibleReviews) => prevVisibleReviews + 3);
+    setShowAllReviews(true);
+  };
+
+  const handleHideReviews = () => {
+    setVisibleReviews(3);
+    setShowAllReviews(false);
+  };
+
+  const handleDeleteReviews = async (id) => {
+    await dispatch(deleteReviews(id));
+    location.reload();
+    await dispatch(getReviewById(productId));
+  };
+
   return (
-    <div>
-      <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-        spaceBetween={50}
-        slidesPerView={1}
-        navigation
-        pagination={{ clickable: true }}
-        className="swiperFooter"
-        breakpoints={{
-          500: {
-            slidesPerView: 2,
-          },
-        }}
-      >
-        <SwiperSlide className="swiperSlide">
-          <img
-            className="imagen"
-            src="/src/assets/images/imagesReseñas/mujer.jpeg"
-            alt="Imagen 1"
-          />
-          <div className="review">
-            <h2 className="th3">Nombre:</h2>
-            <h3 className="th3">Producto 1</h3>
-            <p className="parrafo">Esta es una reseña sobre el producto 1.</p>
-            <div className="stars">⭐⭐⭐⭐⭐</div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="swiperSlide">
-          <img
-            className="imagen"
-            src="/src/assets/images/imagesReseñas/mujer2.png"
-            alt="Imagen 2"
-          />
-          <div className="review">
-            <h2 className="th3">Nombre:</h2>
-            <h3 className="th3">Producto 2</h3>
-            <p className="parrafo">
-              Lorem, ipsum dolor sit amet itecto ipsam impedit voluptatibus
-              atque vitae necessitatibus qui aliquid quae, eos eaque velit
-              eligendi pariatur?
-            </p>
-            <div className="stars">⭐⭐⭐⭐</div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="swiperSlide">
-          <img
-            className="imagen"
-            src="/src/assets/images/imagesReseñas/mujer3.jpeg"
-            alt="Imagen 3"
-          />
-          <div className="review">
-            <h2 className="th3">Nombre:</h2>
-            <h3 className="th3">Producto 3</h3>
-            <p className="parrafo">Esta es una reseña sobre el producto 3.</p>
-            <div className="stars">⭐⭐⭐</div>
-          </div>
-        </SwiperSlide>
-      </Swiper>
+    <div className='review-container'>
+      <div className='review'>
+        {getReviewById2.length > 0 ? (
+          getReviewById2
+            .slice(0, showAllReviews ? getReviewById2.length : visibleReviews)
+            .map((re) => (
+              <div
+                key={re.id}
+                className='review-card'
+              >
+                <ReviewCard
+                  title={re.title}
+                  score={re.score}
+                  fullName={re.fullName}
+                  description={re.description}
+                  productId={productId}
+                />
+                <button
+                  className='delete-color'
+                  type='submit'
+                  onClick={() => handleDeleteReviews(re.id)}
+                >
+                  <RiDeleteBin6Line />
+                </button>
+              </div>
+            ))
+        ) : (
+          <p>No hay reseñas disponibles.</p>
+        )}
+
+        {getReviewById2.length > visibleReviews && !showAllReviews && (
+          <button
+            className='show-more-button'
+            onClick={handleShowMoreReviews}
+          >
+            Ver más reseñas
+          </button>
+        )}
+
+        {showAllReviews && (
+          <button
+            className='show-more-button'
+            onClick={handleHideReviews}
+          >
+            Ocultar reseñas
+          </button>
+        )}
+      </div>
     </div>
   );
 }

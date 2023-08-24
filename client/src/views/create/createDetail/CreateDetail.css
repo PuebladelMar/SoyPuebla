@@ -1,3 +1,67 @@
+.image-gallery-content.image-gallery-thumbnails-left
+  .image-gallery-slide
+  .image-gallery-image,
+.image-gallery-content.image-gallery-thumbnails-right
+  .image-gallery-slide
+  .image-gallery-image {
+  max-height: 700px;
+  max-width: 500px;
+  height: 700px;
+  width: 500px;
+}
+
+.image-gallery-container {
+  position: relative;
+}
+
+.precioDescuentoContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  gap: 1.6rem;
+}
+
+.originalPrice {
+  font-size: 1.1rem;
+  color: rgba(157, 157, 157, 0.766);
+  text-decoration: line-through;
+}
+
+.discountedPrice {
+  font-size: 1.1rem;
+  color: #ff0000;
+}
+
+.saleBanner {
+  position: absolute;
+  bottom: 50px;
+  right: 0px;
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 7px 20px 7px 25px;
+  text-align: center;
+  font-weight: 500;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.saleBanner0 {
+  position: absolute;
+  bottom: 50px;
+  right: 0px;
+}
+
+.saleButton {
+  color: #ff0000;
+  padding: 3px;
+  border: 1px solid #ff0000;
+  width: 4rem;
+  text-align: center;
+  border-radius: 3px;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
 .nameDetailCreate {
   color: rgb(50, 50, 50);
   font-weight: bolder;
@@ -14,27 +78,46 @@
 }
 
 .containerDetailCreate {
-  background: rgba(250, 250, 250, 0.647);
+  background: #FFFFFF;
   padding: 3rem;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.201);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
   max-width: 100%;
   margin-left: 4rem;
   margin-right: 4rem;
-  margin-top: 3rem;
   margin-bottom: 3rem;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 3px
 }
+
+
+/* .inputInfo {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f3f3f3;
+} */
 
 .secContainerCreate {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 7rem;
+  justify-content: left;
+  gap: 3rem;
+}
+
+.secContainerCreate slideshow {
+  max-width: 600px;
+}
+
+.secContainerCreate info {
+  min-width: 300px;
+  max-width: 400px;
 }
 
 .botonXCreate {
@@ -54,17 +137,46 @@
 .detailNameCreate {
   font-size: 1.3rem;
   color: rgba(157, 157, 157, 0.766);
+  font-weight: 500;
   margin-bottom: 10px;
 }
 
 .detailInfoCreate {
   font-size: 1.1rem;
   color: rgba(157, 157, 157, 0.766);
-  margin-bottom: 5px;
+  margin: 10px 0;
 }
+
+.detailInfoStocks {
+  font-size: 1.1rem;
+  color: rgba(157, 157, 157, 0.766);
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 5px;
+  padding: 3px 12px;
+  margin: 5px;
+  width: fit-content;
+}
+
+.detailInfoDescription {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+  color: rgba(157, 157, 157, 0.766);
+  margin: 0px 10px;
+  font-style: italic;
+  text-align: justify;
+}
+
+.colores-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .detailColorButtonCreate {
   border: 2px solid;
-  border-color: rgb(190, 190, 190);
+  border-color: rgb(222, 222, 222);
   border-radius: 50%;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -75,7 +187,7 @@
 }
 
 .detailColorButtonCreate:hover {
-  transform: scale(1.1);
+  transform: scale(1.25);
 }
 
 .detailSizeButtonCreate {
@@ -180,4 +292,66 @@
   font-size: 1.1rem;
   color: rgba(91, 91, 91, 0.766);
   margin-left: 17px;
+}
+
+.detailNameCreate separator {
+  margin-top: 3px;
+  margin-bottom: 20px;
+  display: flex;
+  background-color: #c8c8c8;
+  height: 2px;
+  width: 60%;
+}
+
+.coleccionContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin: 10px 0px;
+}
+.coleccionContainerSec {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.coleccionContainer coleccion {
+  border-radius: 5px;
+  padding: 0px 10px;
+  font-style: italic;
+}
+
+.categoriaContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin: 10px 0px;
+}
+
+.categoriaContainerSec {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.categoriaContainer categoria {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  padding: 0px 10px;
+  font-style: italic;
+}
+
+.descripcionContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0px;
+}
+
+.stocksContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0px;
+  flex-wrap: wrap;
 }

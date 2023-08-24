@@ -1,0 +1,11 @@
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0;
+}
+
+.description {
+  font-size: 0.9rem;
+  word-wrap: break-word; /* Añade esta línea para ajustar el texto */
+}

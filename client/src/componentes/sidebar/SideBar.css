@@ -1,9 +1,20 @@
 .search-bar-aside {
-  width: 250px;
+  width: 300px;
   padding: 20px 30px 0 30px;
   background-color: #ece4e1;
   position: sticky;
   top: 0;
+  min-height: 100vh;
+}
+
+.search-form-aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  position: fixed;
+  margin-bottom: 10rem;
 }
 
 .filters {
@@ -11,6 +22,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 0;
   gap: 0.5rem;
 }
 
@@ -26,6 +38,30 @@
 
 .filters h2 span {
   background-color: black;
+  height: 0.01rem;
+  margin-right: 1rem;
+  width: 100%;
+}
+
+.search-form-aside-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.search-form-aside-modal h2 {
+  color: rgb(22, 60, 65);
+}
+
+.search-form-aside-modal h3 {
+  color: rgb(22, 60, 65);
+}
+
+.search-form-aside-modal h2 span {
+  background-color: rgb(253, 249, 249);
   height: 0.01rem;
   margin-right: 1rem;
   width: 100%;
@@ -47,8 +83,23 @@
   transition: all 0.25s ease;
 }
 
+.search-form-aside-modal select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 200px;
+  font-size: 15px;
+  border-radius: 15px;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(46, 79, 82);
+  color: rgb(46, 79, 82);
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
 .search-form-aside {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,10 +118,6 @@
 .dropdown-btn {
   padding: 8px;
   width: 100%;
-}
-
-li {
-  list-style: none;
 }
 
 .sale-input {
@@ -101,13 +148,13 @@ li {
   transform: rotate(45deg);
   width: 0.6rem;
   height: 1rem;
-  left: 0.35em;
-  top: 0.2em;
+  left: 0.32em;
+  top: 0.15em;
   opacity: 0;
   transition: 0.3s ease;
 }
 
-.sale-input:checked + .sale-span:after {
+.sale-span.off:after {
   opacity: 1;
 }
 
@@ -115,7 +162,7 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .sale-li h3 {
@@ -132,12 +179,31 @@ li {
   border-radius: 4px;
   cursor: pointer;
   padding: 10px 15px;
-  transition: background-color 0.3s ease;
+  transition: 0.3s ease;
   margin-bottom: 2rem;
 }
 
 .reloadButton:hover {
   background-color: #497171;
+  transform: scale(1.05);
+}
+
+.reloadButton-modal {
+  background-color: #517f7f;
+  color: white;
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.reloadButton-modal:hover {
+  background-color: #497171;
+  transform: scale(1.05);
 }
 
 .reloadButton:disabled {
@@ -175,12 +241,79 @@ li {
 }
 
 .custom-select option {
+  font-size: 1.2rem;
   background-color: #517f7f;
   color: rgb(255, 255, 255);
 }
 
 .select-container-filter.open .select-arrow {
   transform: translateY(-50%) rotate(180deg);
+}
+
+.button-close-modal {
+  background-color: #517f7f;
+  color: white;
+  font-size: 16px;
+  width: 30%;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.button-close-modal:hover {
+  background-color: #ece4e1;
+  color: #517f7f;
+  transform: scale(1.05);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 249, 249);
+  border-radius: 15px;
+}
+
+.open-modal-span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem;
+}
+
+.open-modal-button {
+  position: relative;
+}
+
+.span-num-cart-sidebar {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(235, 0, 0);
+  border-radius: 50%;
+  top: -0.3rem;
+  right: -0.3rem;
+  height: 0.9rem;
+  width: 0.9rem;
+  font-size: 0.7rem;
+  color: rgb(243, 243, 243);
+}
+
+@media screen and (max-width: 1475px) {
+  .search-bar-aside {
+    width: 320px;
+  }
+}
+
+@media screen and (max-width: 1065px) {
+  .search-bar-aside {
+    width: 340px;
+  }
 }
 
 @media screen and (max-width: 715px) {
@@ -192,17 +325,20 @@ li {
 @media screen and (max-width: 644px) {
   .search-bar-aside {
     background-color: #ece4e1;
-    position: relative;
+    position: fixed;
+    margin-top: 5rem;
+    min-height: 0;
     width: 100%;
     padding: 0.8rem 0;
+    z-index: 2;
   }
 
   .filter-button {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: end;
-    padding-right: 1rem;
+    justify-content: space-between;
+    padding: 0 1rem;
   }
 
   .open-modal-button {
@@ -213,7 +349,12 @@ li {
     font-weight: 500;
     color: #f8f7f7;
     display: flex;
+    transition: 0.3s ease;
     gap: 1rem;
+  }
+
+  .open-modal-button:hover {
+    transform: scale(1.015);
   }
 
   .img-filter {
@@ -224,6 +365,49 @@ li {
 @media screen and (max-width: 400px) {
   .search-bar-aside {
     width: 100%;
+    margin: 0;
     position: relative;
+  }
+}
+
+@media screen and (max-width: 405px) {
+  .search-bar-aside {
+    width: 100%;
+    margin: 0;
+    position: relative;
+  }
+
+  .open-modal-button {
+    padding-bottom: 0.3rem;
+    font-size: 1.03rem;
+    gap: 0.5rem;
+  }
+}
+
+@media screen and (max-height: 820px) {
+  .search-form-aside {
+    gap: 0.5rem;
+  }
+}
+
+@media screen and (max-height: 710px) {
+  .filters {
+    gap: 0.2rem;
+  }
+
+  .filters h2 {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-height: 675px) {
+  .search-bar-aside select {
+    padding: 0.2rem;
+  }
+}
+
+@media screen and (max-height: 640px) {
+  .reloadButton {
+    padding: 5px 10px;
   }
 }
