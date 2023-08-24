@@ -1,4 +1,4 @@
-const { Products, Stocks, Carts } = require('../../db.js');
+const { Products, Stocks, Carts, StockNotifies } = require('../../db.js');
 
 const deleteProductController = async (id) => {
     const product = await Products.findByPk(id);
@@ -9,6 +9,10 @@ const deleteProductController = async (id) => {
 
     await Promise.all(stocks.map(async (stock) => {
       await Carts.destroy({ where: { StockId: stock.id } });
+    }));
+
+    await Promise.all(stocks.map(async (stock) => {
+      await StockNotifies.destroy({ where: { StockId: stock.id } });
     }));
 
     await Promise.all(stocks.map(async (stock) => {
