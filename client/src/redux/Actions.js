@@ -138,7 +138,12 @@ export function postProducts(createProduct) {
         type: POST_PRODUCTS,
       });
     } catch (error) {
-      // alert(error.message);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Ya existe un producto con ese nombre",
+        showConfirmButton: true,
+      });
     }
   };
 }
