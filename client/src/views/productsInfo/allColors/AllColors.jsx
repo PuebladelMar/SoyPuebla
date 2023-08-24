@@ -7,19 +7,10 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import CreateColor from "../../create/createColor/createColor";
 import Swal from "sweetalert2";
 
-// import SearchBar from '../../../componentes/searchBar/SearchBar';
-// import FolderIcon from '@mui/icons-material/Folder';
-// import Swal from 'sweetalert2';
-// import AllData from '../AllData';
-import { NavLink, useNavigate } from "react-router-dom";
-
 const AllColors = () => {
   const colors = useSelector((state) => state.colorList);
-
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState({});
-  // const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +32,7 @@ const AllColors = () => {
       dispatch(getColor());
     }
   };
+
   const handleDeleteColors = async (id) => {
     const result = await Swal.fire({
       title: "¿Estás segura?",
@@ -54,7 +46,6 @@ const AllColors = () => {
     });
 
     if (result.isConfirmed) {
-      // El usuario confirmó la eliminación
       try {
         await dispatch(deleteColor(id));
         await dispatch(getColor());
@@ -109,24 +100,25 @@ const AllColors = () => {
                   <p className="color-name-color">{color.name}</p>
                 </div>
                 <div className="icons">
-                <button
-  className="edit-color"
-  onClick={() => {
-    Swal.fire({
-      title: 'Edit Color',
-      html: `<input type="text" id="edit-color-name" class="swal2-input" placeholder="Color Name" value="${color.name}">
+                  <button
+                    className="edit-color"
+                    onClick={() => {
+                      Swal.fire({
+                        title: "Edit Color",
+                        html: `<input type="text" id="edit-color-name" class="swal2-input" placeholder="Color Name" value="${color.name}">
             `,
-      showCancelButton: true,
-      confirmButtonText: 'Save',
-      preConfirm: () => {
-        const newName = document.getElementById('edit-color-name').value;
-        handleEditColors(color.id, newName, color.codHex);
-      },
-    });
-  }}
->
-  <FaPencilAlt />
-</button>
+                        showCancelButton: true,
+                        confirmButtonText: "Save",
+                        preConfirm: () => {
+                          const newName =
+                            document.getElementById("edit-color-name").value;
+                          handleEditColors(color.id, newName, color.codHex);
+                        },
+                      });
+                    }}
+                  >
+                    <FaPencilAlt />
+                  </button>
                   <button
                     className="delete-color"
                     onClick={() => handleDeleteColors(color.id)}

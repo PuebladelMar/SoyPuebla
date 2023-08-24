@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSeries, deleteSeries, putSeries } from "../../../redux/Actions";
 import { FaPencilAlt } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { NavLink, useNavigate } from "react-router-dom";
 import CreateSerie from "../../create/createSerie/CreateSerie";
 import Swal from "sweetalert2";
-// import SearchBar from '../../../componentes/searchBar/SearchBar';
 
 import "./AllColecciones.css";
 
 const AllColecciones = () => {
   const series = useSelector((state) => state.series);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [showAlert, setShowAlert] = useState({});
-  // const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,17 +75,20 @@ const AllColecciones = () => {
 
   return (
     <div className="coleccion-main-admin" name="series" value="name">
+      <div className="coleccion-admin">
+        <div className="contenedor-nombre-coleccion">
+       <h2 className="talles-title-admin">Colecciones disponibles</h2>
       <button
         type="button"
         onClick={() => {
           handleOpenSerieCreate();
         }}
-        className="mainImage-upload-buttonY"
-      >
+        className="coleccion-create-button"
+        >
         Crear colección
       </button>
-      <div className="coleccion-admin">
-        <h2 className="coleccion-title-admin">Colecciones disponibles</h2>
+        </div>
+        <h2 className="coleccion-title-admin"></h2>
         {Array.isArray(series) &&
           series.map((el) => (
             <div key={el.id} className="coleccion-item-admin">

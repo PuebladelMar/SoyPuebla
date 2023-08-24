@@ -35,7 +35,6 @@ const AllProducts = () => {
 
   const handlerEventSearch = (event) => {
     event.preventDefault();
-    console.log(allProducts);
     setSearchValue(event.target.value);
   };
 
@@ -59,8 +58,6 @@ const AllProducts = () => {
       try {
         await dispatch(deleteProduct(id));
         await dispatch(getProducts());
-        dispatch(getUserCart(userId));
-
         Swal.fire({
           title: "Eliminado",
           text: "El producto ha sido eliminado.",
@@ -81,15 +78,19 @@ const AllProducts = () => {
   return (
     <section className="prducts-section-admin">
       <div className="container-products-admin">
-        <div className="div-container-searchbar">
+       
+        <div className="products-container-admin">
+          <div className="contenedor-nombre-talle">
+
+          <h2 className="products-title">Productos disponibles</h2>
+          <div className="div-container-searchbar">
           <SearchBar
-            className="searchBar"
+            className="input-search-admin"
             handlerEventSearch={handlerEventSearch}
             handlerSubmitSearch={handlerSubmitSearch}
-          />
+            />
         </div>
-        <div className="products-container-admin">
-          <h2 className="products-title">Productos disponibles</h2>
+            </div>
           {Array.isArray(allProducts) &&
             allProducts.map((product) => (
               <div key={product.id} className="product-item-admin">

@@ -24,7 +24,6 @@ const HistoryData = () => {
   });
 
   const [sortOrder, setSortOrder] = useState("asc");
-  const [selectedButton, setSelectedButton] = useState("");
 
   useEffect(() => {
     dispatch(getAllHistory());
@@ -106,16 +105,6 @@ const HistoryData = () => {
     }));
   };
 
-  const setSortOrderAsc = () => {
-    setSelectedButton("asc");
-    setSortOrder("asc");
-  };
-
-  const setSortOrderDesc = () => {
-    setSelectedButton("desc");
-    setSortOrder("desc");
-  };
-
   const handleEditState = async (id, state) => {
     const updatedState = prompt(
       "Selecciona el nuevo estado: 'approved' o 'rejected'",
@@ -161,7 +150,6 @@ const HistoryData = () => {
               value={filters.state}
               onChange={(e) => handleFilterChange("state", e.target.value)}
             >
-              {" "}
               <option value="">Todos</option>
               <option value="approved">Aprobado</option>
               <option value="rejected">Desaprobado</option>
@@ -205,7 +193,7 @@ const HistoryData = () => {
                   {color}
                 </option>
               ))}
-            </select>{" "}
+            </select>
             <input
               type="text"
               placeholder="Talla"
