@@ -4,6 +4,12 @@
   margin-left: 1rem;
 }
 
+.edit-create-main-container{
+
+  display: flex;
+  margin-top: 6rem;
+  margin-left: 1rem;
+}
 
 
 .create-form-title {
