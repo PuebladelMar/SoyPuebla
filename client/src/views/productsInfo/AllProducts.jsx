@@ -88,22 +88,22 @@ const AllProducts = () => {
             handlerSubmitSearch={handlerSubmitSearch}
           />
         </div>
-        <div className="colores-container">
+        <div className="products-container-admin">
           <h2 className="products-title">Productos disponibles</h2>
           {Array.isArray(allProducts) &&
             allProducts.map((product) => (
-              <div key={product.id} className="color-item-admin">
-                <div className="color-content-admin">
-                  <p className="color-name-admin">{product.name}</p>
+              <div key={product.id} className="product-item-admin">
+                <div className="product-content-admin">
+                  <p className="product-name-admin">{product.name}</p>
                 </div>
                 <div className="icons">
                   <NavLink to={`/edit-products/${product.id}`}>
-                    <button className="edit-color-admin">
+                    <button className="edit-product-admin">
                       <FaPencilAlt />
                     </button>
                   </NavLink>
                   <button
-                    className="delete-color-admin"
+                    className="delete-product-admin"
                     onClick={() => handleDeleteProduct(product.id)}
                   >
                     <RiDeleteBin6Line />
