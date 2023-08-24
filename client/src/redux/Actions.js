@@ -133,7 +133,6 @@ export function postProducts(createProduct) {
         icon: "success",
         title: "Su producto se ha creado correctamente",
         showConfirmButton: false,
-        timer: 1500,
       });
       return dispatch({
         type: POST_PRODUCTS,
