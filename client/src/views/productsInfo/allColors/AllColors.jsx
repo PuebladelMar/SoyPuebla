@@ -35,7 +35,7 @@ const AllColors = () => {
   };
 
   const handleEditColors = async (id, name, codHex) => {
-    const updatedName = prompt("Enter new name", name);
+    const updatedName = name;
     if (updatedName) {
       await dispatch(editColors(id, updatedName, codHex));
       dispatch(getColor());
@@ -61,7 +61,7 @@ const AllColors = () => {
 
         Swal.fire({
           title: "Eliminado",
-          text: "El coor ha sido eliminado.",
+          text: "El color ha sido eliminado.",
           icon: "success",
           confirmButtonColor: "#517f7f",
         });
@@ -109,14 +109,24 @@ const AllColors = () => {
                   <p className="color-name-color">{color.name}</p>
                 </div>
                 <div className="icons">
-                  <button
-                    className="edit-color"
-                    onClick={() =>
-                      handleEditColors(color.id, color.name, color.codHex)
-                    }
-                  >
-                    <FaPencilAlt />
-                  </button>
+                <button
+  className="edit-color"
+  onClick={() => {
+    Swal.fire({
+      title: 'Edit Color',
+      html: `<input type="text" id="edit-color-name" class="swal2-input" placeholder="Color Name" value="${color.name}">
+            `,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      preConfirm: () => {
+        const newName = document.getElementById('edit-color-name').value;
+        handleEditColors(color.id, newName, color.codHex);
+      },
+    });
+  }}
+>
+  <FaPencilAlt />
+</button>
                   <button
                     className="delete-color"
                     onClick={() => handleDeleteColors(color.id)}
