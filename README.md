@@ -2,7 +2,7 @@
 Puebla E-Commerce: Tienda de Ropa Deportiva para Mujer
 ¡Bienvenido a Puebla E-Commerce!
 
-Descripción del Proyecto
+Descripción del Proyecto:
 Puebla E-Commerce es una emocionante plataforma de comercio electrónico especializada en la venta de ropa deportiva para mujeres. Este proyecto ha sido desarrollado por un equipo de 8 profesionales comprometidos y apasionados en el mundo del desarrollo web. Nuestra meta es proporcionar a nuestros clientes una experiencia de compra en línea excepcional, ofreciendo una amplia gama de productos de moda deportiva con autenticación de usuario, pasarela de pagos segura y funcionalidades intuitivas.
 
 Tecnologías Utilizadas
