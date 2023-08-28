@@ -24,7 +24,7 @@ Comunicación Fluida: Utilizamos Axios para realizar solicitudes HTTP eficientes
 
 Notificaciones Personalizadas: Integración de SweetAlert para notificaciones atractivas y personalizadas, mejorando la experiencia del usuario.
 
-Colaboradores
+Colaboradores:
 Este proyecto ha sido posible gracias a la colaboración y esfuerzo conjunto de 8 desarrolladores Full Stack comprometidos con la excelencia y la innovación. Aquí están nuestros nombres y enlaces a nuestros perfiles de LinkedIn:
 
 
@@ -40,7 +40,7 @@ Este proyecto ha sido posible gracias a la colaboración y esfuerzo conjunto de 
 
 Juntos, hemos creado una plataforma de comercio electrónico que busca destacar en el mercado y brindar valor a nuestros clientes.
 
-Próximos Pasos
+Próximos Pasos:
 Estamos emocionados por el futuro de Puebla E-Commerce. Continuaremos mejorando y ampliando la plataforma, incorporando nuevas características, optimizando el rendimiento y brindando una experiencia de compra inigualable.
 
 ¡Gracias por ser parte de nuestro viaje en la creación de Puebla E-Commerce! Siéntete libre de explorar la plataforma y brindarnos tus comentarios para continuar mejorando.
