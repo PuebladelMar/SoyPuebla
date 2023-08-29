@@ -1,20 +1,25 @@
-![Bienvenido a nuestro E-Commerce](https://cdn.discordapp.com/attachments/1135591422750375987/1136830616839659530/PdM.png)
+![](https://cdn.discordapp.com/attachments/1135591422750375987/1136830616839659530/PdM.png)
+
+Hemos creado un E-Commerce pensado especialmente para nuestras clientas que buscan una plataforma de comercio electrónico dedicada a la venta de ropa deportiva femenina. Nuestro equipo, compuesto por ocho apasionados profesionales del desarrollo web, ha dado vida a este proyecto. Nuestro objetivo primordial es brindar a nuestras clientes una experiencia de compra en línea excepcional.
+
+En este E-Commerce, ofrecemos una amplia selección de productos de moda deportiva, respaldados por funciones de autenticación de usuario, una pasarela de pagos segura y características intuitivas que mejoran la experiencia del usuario. Además, nos hemos esforzado por mantener la elegancia y el estilo de la empresa, asegurándonos de que la apariencia refleje la esencia de la marca.
+
+Nuestra dedicación no solo se centra en la funcionalidad, sino también en la estética y la experiencia general que brindamos a nuestras clientas. Estamos comprometidos en proporcionar una plataforma que no solo sea útil, sino también atractiva y en sintonía con la elegancia que representa la marca.
+
+![](https://cdn.discordapp.com/attachments/1135591422750375986/1145866187247452180/image.png)
+
+![](https://cdn.discordapp.com/attachments/1135591422750375986/1145866311868612698/image.png)
+
+![](https://cdn.discordapp.com/attachments/1135591422750375986/1145866644447576064/image.png)
+
+![](https://cdn.discordapp.com/attachments/1135591422750375986/1145867064041541652/image.png)
+
+![](https://cdn.discordapp.com/attachments/1135591422750375986/1145867617656115240/image.png)
+
+![](https://cdn.discordapp.com/attachments/1135591422750375986/1145867751840301177/image.png)
 
 
-
-
-Puebla E-Commerce: Tienda de Ropa Deportiva para Mujer
-Descripción del Proyecto:
-Puebla E-Commerce es una emocionante plataforma de comercio electrónico especializada en la venta de ropa deportiva para mujeres. Este proyecto ha sido desarrollado por un equipo de 8 profesionales comprometidos y apasionados en el mundo del desarrollo web. Nuestra meta es proporcionar a nuestros clientes una experiencia de compra en línea excepcional, ofreciendo una amplia gama de productos de moda deportiva con autenticación de usuario, pasarela de pagos segura y funcionalidades intuitivas.
-
-Tecnologías Utilizadas
-Frontend: React, Redux, Vite, Material-UI (MUI), Axios, Redux Thunk, SweetAlert.
-Backend: Express.js, PostgreSQL, Sequelize.
-Autenticación: Clerck para autenticación segura.
-Pasarela de Pagos: Integración de Mercado Pago para transacciones confiables.
-Notificaciones: NodeMailer para el envío de correos electrónicos.
-Características Principales
-Autenticación Segura: Utilizamos Clerck para asegurar la autenticación de los usuarios, garantizando un acceso seguro a sus cuentas y datos personales.
+**<span style="color: blue; font-weight: bold;">¿Cómo trabajamos?</span>**
 
 Pasarela de Pagos Confiable: Implementamos Mercado Pago como nuestra solución de pasarela de pagos, brindando a los clientes opciones de pago seguras y convenientes.
 
@@ -25,6 +30,15 @@ Gestión Eficiente de Estado: Empleamos Redux y Redux Thunk para una gestión av
 Comunicación Fluida: Utilizamos Axios para realizar solicitudes HTTP eficientes entre el frontend y el backend, garantizando una comunicación fluida y rápida.
 
 Notificaciones Personalizadas: Integración de SweetAlert para notificaciones atractivas y personalizadas, mejorando la experiencia del usuario.
+
+Tecnologías Utilizadas
+Frontend: React, Redux, Vite, Material-UI (MUI), Axios, Redux Thunk, SweetAlert.
+Backend: Express.js, PostgreSQL, Sequelize.
+Autenticación: Clerck para autenticación segura.
+Pasarela de Pagos: Integración de Mercado Pago para transacciones confiables.
+Notificaciones: NodeMailer para el envío de correos electrónicos.
+Características Principales
+Autenticación Segura: Utilizamos Clerck para asegurar la autenticación de los usuarios, garantizando un acceso seguro a sus cuentas y datos personales.
 
 Colaboradores:
 Este proyecto ha sido posible gracias a la colaboración y esfuerzo conjunto de 8 desarrolladores Full Stack comprometidos con la excelencia y la innovación. Aquí están nuestros nombres y enlaces a nuestros perfiles de LinkedIn:
