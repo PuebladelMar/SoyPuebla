@@ -1,7 +1,9 @@
 
-Puebla E-Commerce: Tienda de Ropa Deportiva para Mujer
-¡Bienvenido a Puebla E-Commerce!
+![¡Bienvenido a Puebla Del Mar E-Commerce!o]([URL_de_la_imagen](https://cdn.discordapp.com/attachments/1135591422750375987/1136830616839659530/PdM.png))
 
+<h1 style="font-size: 24px"><h1>
+
+Puebla E-Commerce: Tienda de Ropa Deportiva para Mujer
 Descripción del Proyecto:
 Puebla E-Commerce es una emocionante plataforma de comercio electrónico especializada en la venta de ropa deportiva para mujeres. Este proyecto ha sido desarrollado por un equipo de 8 profesionales comprometidos y apasionados en el mundo del desarrollo web. Nuestra meta es proporcionar a nuestros clientes una experiencia de compra en línea excepcional, ofreciendo una amplia gama de productos de moda deportiva con autenticación de usuario, pasarela de pagos segura y funcionalidades intuitivas.
 
