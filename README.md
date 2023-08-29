@@ -1,7 +1,7 @@
+![Bienvenido a nuestro E-Commerce](https://cdn.discordapp.com/attachments/1135591422750375987/1136830616839659530/PdM.png)
 
-![¡Bienvenido a Puebla Del Mar E-Commerce!o]([URL_de_la_imagen](https://cdn.discordapp.com/attachments/1135591422750375987/1136830616839659530/PdM.png))
 
-<h1 style="font-size: 24px"><h1>
+
 
 Puebla E-Commerce: Tienda de Ropa Deportiva para Mujer
 Descripción del Proyecto:
