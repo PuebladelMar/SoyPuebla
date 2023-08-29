@@ -19,28 +19,34 @@ Nuestra dedicación no solo se centra en la funcionalidad, sino también en la e
 ![](https://cdn.discordapp.com/attachments/1135591422750375986/1145867751840301177/image.png)
 
 
-**<span style="color: blue; font-weight: bold;">¿Cómo trabajamos?</span>**
+**¿Cómo trabajamos?**
 
-Pasarela de Pagos Confiable: Implementamos Mercado Pago como nuestra solución de pasarela de pagos, brindando a los clientes opciones de pago seguras y convenientes.
+Diseñamos una interfaz de usuario amigable y atractiva utilizando Material-UI (MUI), brindando una experiencia de compra en línea fluida y agradable.
 
-Interfaz de Usuario Intuitiva: Diseñamos una interfaz de usuario amigable y atractiva utilizando Material-UI (MUI), brindando una experiencia de compra en línea fluida y agradable.
+Implementamos Mercado Pago como nuestra solución de pasarela de pagos, brindando a los clientes opciones de pago seguras y convenientes.
 
-Gestión Eficiente de Estado: Empleamos Redux y Redux Thunk para una gestión avanzada del estado de la aplicación, permitiendo una navegación sin problemas y una experiencia coherente.
+Empleamos Redux y Redux Thunk para una gestión avanzada del estado de la aplicación, permitiendo una navegación sin problemas y una experiencia coherente.
 
-Comunicación Fluida: Utilizamos Axios para realizar solicitudes HTTP eficientes entre el frontend y el backend, garantizando una comunicación fluida y rápida.
+Utilizamos Axios para realizar solicitudes HTTP eficientes entre el frontend y el backend, garantizando una comunicación fluida y rápida.
 
-Notificaciones Personalizadas: Integración de SweetAlert para notificaciones atractivas y personalizadas, mejorando la experiencia del usuario.
+Integración de SweetAlert para notificaciones atractivas y personalizadas, mejorando la experiencia del usuario.
 
-Tecnologías Utilizadas
-Frontend: React, Redux, Vite, Material-UI (MUI), Axios, Redux Thunk, SweetAlert.
-Backend: Express.js, PostgreSQL, Sequelize.
-Autenticación: Clerck para autenticación segura.
-Pasarela de Pagos: Integración de Mercado Pago para transacciones confiables.
-Notificaciones: NodeMailer para el envío de correos electrónicos.
-Características Principales
-Autenticación Segura: Utilizamos Clerck para asegurar la autenticación de los usuarios, garantizando un acceso seguro a sus cuentas y datos personales.
+**Tecnologías Utilizadas**
 
-Colaboradores:
+**Frontend:** React, Redux, Vite, Material-UI (MUI), Axios, Redux Thunk, SweetAlert.
+
+**Backend:** Express.js, PostgreSQL, Sequelize.
+
+**Autenticación:** Clerck para autenticación segura.
+
+**Pasarela de Pagos:** Integración de Mercado Pago para transacciones confiables.
+
+**Notificaciones:** NodeMailer para el envío de correos electrónicos.
+
+**Autenticación Segura:** Utilizamos Clerck para asegurar la autenticación de los usuarios, garantizando un acceso seguro a sus cuentas y datos personales.
+
+**Colaboradores:**
+
 Este proyecto ha sido posible gracias a la colaboración y esfuerzo conjunto de 8 desarrolladores Full Stack comprometidos con la excelencia y la innovación. Aquí están nuestros nombres y enlaces a nuestros perfiles de LinkedIn:
 
 
@@ -57,6 +63,6 @@ Este proyecto ha sido posible gracias a la colaboración y esfuerzo conjunto de 
 Juntos, hemos creado una plataforma de comercio electrónico que busca destacar en el mercado y brindar valor a nuestros clientes.
 
 Próximos Pasos:
-Estamos emocionados por el futuro de Puebla E-Commerce. Continuaremos mejorando y ampliando la plataforma, incorporando nuevas características, optimizando el rendimiento y brindando una experiencia de compra inigualable.
+Estamos emocionados por el futuro de Puebla del Mar E-Commerce. Continuaremos mejorando y ampliando la plataforma, incorporando nuevas características, optimizando el rendimiento y brindando una experiencia de compra inigualable.
 
-¡Gracias por ser parte de nuestro viaje en la creación de Puebla E-Commerce! Siéntete libre de explorar la plataforma y brindarnos tus comentarios para continuar mejorando.
+Siéntete libre de explorar la plataforma y brindarnos tus comentarios para continuar mejorando.
